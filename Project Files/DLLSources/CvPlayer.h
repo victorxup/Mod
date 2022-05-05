@@ -13,6 +13,7 @@
 #include "CvTalkingHeadMessage.h"
 #include "CvTradeRouteGroup.h" //R&R mod, vetiarvind, trade groups
 
+#define	UNIT_BIRTHMARK_TEMP_UNIT	20000
 
 class CvDiploParameters;
 class CvPlayerAI;
@@ -1235,6 +1236,11 @@ protected:
 	void testOOSanDoEvent(EventTypes eEvent, bool bSuccess) const;
 	void testOOSanDoGoody(GoodyTypes eGoody, int iUnitID, bool bSuccess) const;
 
+	// Temp unit which is used to generate paths for hypothetical units.
+	// Kept around rather than created each usage to avoid chewing through the ID space.
+	CvUnit* m_pTempUnit;
+
+	// transport feeder - start - Nightinggale
 public:
 	int getIDSecondPlayerFrenchNativeWar() const;//WTP, ray, Colonial Intervention In Native War - START
 	// transport feeder - start - Nightinggale
@@ -1245,6 +1251,14 @@ public:
 
 	// Clean this up
 	std::vector<ProfessionTypes> m_validCityJobProfessions;
+
+	CvUnit* getTempUnit(UnitTypes eUnit, int iX, int iY);
+	void releaseTempUnit();
+
+	inline bool isTempUnit(const CvUnit* pUnit) const
+	{
+		return (pUnit == m_pTempUnit || pUnit->AI_getBirthmark() == UNIT_BIRTHMARK_TEMP_UNIT);
+	}
 };
 
 // cache CvPlayer::getYieldEquipmentAmount - start - Nightinggale
