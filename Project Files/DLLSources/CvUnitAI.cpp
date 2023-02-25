@@ -4766,7 +4766,11 @@ void CvUnitAI::AI_transportSeaMove()
 		// If we happen to be in a city we own, attempt to load as many goods as possible
 		if (pCity != NULL && pCity->getOwner() == getOwner())
 		{
-			AI_collectGoods();
+			// Be a bit more picky about the amount of yields in case we have multiple cities
+			if (kOwner.getNumCities() > 1)
+				AI_collectGoods(GC.getGameINLINE().getCargoYieldCapacity() / 2);
+			else
+				AI_collectGoods(GC.getGameINLINE().getCargoYieldCapacity() / 10);
 		}
 
 		if (kOwner.AI_totalUnitAIs(UNITAI_TREASURE) > 0)
@@ -7007,7 +7011,7 @@ bool CvUnitAI::AI_travelToPort(int iMinPercent, int iMaxPath)
 	return false;
 }
 
-bool CvUnitAI::AI_collectGoods()
+bool CvUnitAI::AI_collectGoods(int iMinAmountThreshold)
 {
 	bool bLoaded = false;
 	CvCity* pCity = plot()->getPlotCity();
@@ -7055,17 +7059,17 @@ bool CvUnitAI::AI_collectGoods()
 				if (kOwner.AI_isYieldForSale(eYield))
 				{
 					int iStored = getMaxLoadYieldAmount(eYield);
-					if (iStored > (GC.getGameINLINE().getCargoYieldCapacity() / 10))
+					if (iStored >= iMinAmountThreshold)
 					{
 						int iYieldValue = iStored * kEuropePlayer.getYieldBuyPrice(eYield);
 						if (iYieldValue > iBestYieldValue)
 						{
 							iBestYieldValue =iYieldValue;
-						eBestYield = eYield;
+							eBestYield = eYield;
+						}
 					}
 				}
 			}
-		}
 		}
 		
 		if (eBestYield == NO_YIELD)
