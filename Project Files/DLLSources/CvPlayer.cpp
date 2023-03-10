@@ -37,6 +37,7 @@
 
 #include "CvSavegame.h"
 #include "BetterBTSAI.h"
+#include "tbb/mutex.h"
 
 
 // Public Functions...
@@ -24581,6 +24582,11 @@ namespace
 void CvPlayer::sortEuropeUnits()
 {
 	std::sort(m_aEuropeUnits.begin(), m_aEuropeUnits.end(), compareUnitValue);
+}
+
+tbb::mutex& CvPlayer::getMutex()
+{
+	return m_mutex;
 }
 
 void CvPlayer::writeDesyncLog(FILE *f) const

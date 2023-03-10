@@ -165,7 +165,6 @@ void CvCityAI::AI_doTurn()
 //	}
 //};
 
-tbb::mutex jobMutex;
 
 void CvCityAI::AI_assignWorkingPlots()
 {
@@ -183,7 +182,7 @@ void CvCityAI::AI_assignWorkingPlots()
 
 	AI_assignCityPlot();
 
-	jobMutex.lock();
+	GET_PLAYER(getOwnerINLINE()).getMutex().lock();
 
 	// No need to call this here, once per turn should be enough
 	//GET_PLAYER(getOwnerINLINE()).AI_manageEconomy();
@@ -192,7 +191,7 @@ void CvCityAI::AI_assignWorkingPlots()
 
 	//remove non-city people
 	removeNonCityPopulationUnits();
-	jobMutex.unlock();
+	GET_PLAYER(getOwnerINLINE()).getMutex().unlock();
 
 
 	/*
@@ -267,9 +266,9 @@ void CvCityAI::AI_assignWorkingPlots()
 		CvPlot* pWorkedPlot =  getPlotWorkedByUnit(pUnit);
 		if (pWorkedPlot != NULL)
 		{
-			jobMutex.lock();
+			GET_PLAYER(getOwnerINLINE()).getMutex().lock();
 			clearUnitWorkingPlot(pWorkedPlot);
-			jobMutex.unlock();
+			GET_PLAYER(getOwnerINLINE()).getMutex().unlock();
 		}
 
 #define PARALLEL
@@ -328,9 +327,9 @@ void CvCityAI::AI_assignWorkingPlots()
 
 	if ((getOwnerINLINE() == GC.getGameINLINE().getActivePlayer()) && isCitySelected())
 	{   // TODO: defer to main thread
-		jobMutex.lock();
+		GET_PLAYER(getOwnerINLINE()).getMutex().lock();
 		gDLL->getInterfaceIFace()->setDirty(CitizenButtons_DIRTY_BIT, true);
-		jobMutex.unlock();
+		GET_PLAYER(getOwnerINLINE()).getMutex().unlock();
 	}
 }
 
@@ -3421,7 +3420,7 @@ CvUnit* CvCityAI::AI_parallelAssignToBestJob(CvUnit& kUnit, bool bIndoorOnly)
 
 	// Do the regular serial code here
 
-	jobMutex.lock();
+	GET_PLAYER(getOwnerINLINE()).getMutex().lock();
 
 	if (eBestProfession == NO_PROFESSION)
 	{
@@ -3430,7 +3429,7 @@ CvUnit* CvCityAI::AI_parallelAssignToBestJob(CvUnit& kUnit, bool bIndoorOnly)
 			bool bSuccess = removePopulationUnit(&kUnit, false, (ProfessionTypes)GC.getCivilizationInfo(getCivilizationType()).getDefaultProfession());
 			FAssertMsg(bSuccess, "Failed to remove useless citizen");
 		}
-		jobMutex.unlock();
+		GET_PLAYER(getOwnerINLINE()).getMutex().unlock();
 		return NULL;
 	}
 
@@ -3503,7 +3502,7 @@ CvUnit* CvCityAI::AI_parallelAssignToBestJob(CvUnit& kUnit, bool bIndoorOnly)
 	FAssert(iBestPlot != -1 || !GC.getProfessionInfo(eBestProfession).isWorkPlot());
 	FAssert(iBestPlot == -1 || isUnitWorkingAnyPlot(&kUnit));
 
-	jobMutex.unlock();
+	GET_PLAYER(getOwnerINLINE()).getMutex().unlock();
 
 	return pDisplacedUnit;
 

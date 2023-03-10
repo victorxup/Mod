@@ -12,6 +12,7 @@
 #include "CvIdVector.h"
 #include "CvTalkingHeadMessage.h"
 #include "CvTradeRouteGroup.h" //R&R mod, vetiarvind, trade groups
+#include "tbb/mutex.h"
 
 #define LOCATION_FLAGS_NONE						0x0000
 #define LOCATION_FLAGS_COASTAL				0x0001
@@ -1183,6 +1184,9 @@ protected:
 	std::vector<int> m_aiTradeMessageCommissions;
 	// TAC - Trade Messages - koma13 - END
 
+	tbb::mutex m_mutex;
+		
+
 	void doGold();
 	void doBells();
 	void doCrosses();
@@ -1238,6 +1242,8 @@ public:
 	void updateTransportThreshold(YieldTypes eYield);
 	// transport feeder - end - Nightinggale
 	void sortEuropeUnits();
+	tbb::mutex& getMutex();
+
 
 	// Clean this up
 	std::vector<ProfessionTypes> m_validCityJobProfessions;
