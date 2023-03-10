@@ -430,6 +430,7 @@ public:
 	CvUnit* getUnitWorkingPlot(int iPlotIndex) const;
 	bool isUnitWorkingPlot(int iPlotIndex) const;
 	bool isUnitWorkingAnyPlot(const CvUnit* pUnit) const;
+	CityPlotTypes getUnitWorkingPlotType(const CvUnit& kUnit) const;
 	CvUnit* getUnitWorkingPlot(const CvPlot* pPlot) const;
 	bool isUnitWorkingPlot(const CvPlot* pPlot) const;
 	void clearUnitWorkingPlot(int iPlotIndex);
@@ -990,6 +991,8 @@ public:
 	int getSlaveWorkerProductionBonus() const;
 	//WTP, ray, Slave Hunter and Slave Master
 	void updateSlaveWorkerProductionBonus(int iBonus = 0);
+
+	unsigned int getCitizenHash() const;
 
 protected:
 	// traderoute popup arrays
