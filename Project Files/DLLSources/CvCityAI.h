@@ -180,7 +180,7 @@ public:
 	void AI_doSettlerProfessionCheat();
 
 	void AI_doHurry(bool bForce = false);
-	bool canHaveCitizenProfession(const CvUnit& kUnit, ProfessionTypes eProfession, bool bBumpOther) const;
+	bool canHaveCitizenProfession(const CvUnit& kUnit, ProfessionTypes eProfession, bool bBumpOther = false) const;
 
 protected:
 

@@ -3256,7 +3256,7 @@ BestJob AI_findBestJob(const CvCityAI& kCity, ProfessionTypes eProfession, const
 
 	// TODO: Get this out of the parallel loop so we don't launch taks with almost nothing to do
 	// We can accomplish this by having a "pre-filtered" list of valid citizen professions
-	if (kCity.canHaveCitizenProfession(kUnit, eProfession, true))
+	if (kCity.canHaveCitizenProfession(kUnit, eProfession)) // Disallow bump due to concurrency 
 	{
 		if (GC.getProfessionInfo(eProfession).isWorkPlot() && !bIndoorOnly)
 		{
@@ -3304,7 +3304,7 @@ BestJob AI_findBestJob(const CvCityAI& kCity, ProfessionTypes eProfession, const
 		{
 			int iValue = kCity.AI_professionValue(eProfession, &kUnit, NULL, NULL);
 			bool bValid = true;
-			if (!kCity.canHaveCitizenProfession(kUnit, eProfession, false))
+			if (!kCity.canHaveCitizenProfession(kUnit, eProfession))
 			{
 				CvUnit* pWorstUnit = kCity.AI_getWorstProfessionUnit(eProfession);
 				// R&R, ray, removed unnecessary Assert from developing feature
@@ -3521,7 +3521,7 @@ CvUnit* CvCityAI::AI_assignToBestJob(CvUnit* pUnit, bool bIndoorOnly)
 		ProfessionTypes eLoopProfession = (ProfessionTypes)i;
 		if (GC.getCivilizationInfo(getCivilizationType()).isValidProfession(eLoopProfession) && GC.getProfessionInfo(eLoopProfession).isCitizen())
 		{
-			if (pUnit->canHaveProfession(eLoopProfession, true))
+			if (pUnit->canHaveProfession(eLoopProfession, false))
 			{
 				if (GC.getProfessionInfo(eLoopProfession).isWorkPlot() && !bIndoorOnly)
 				{
@@ -3688,7 +3688,8 @@ CvUnit* CvCityAI::AI_juggleColonist(CvUnit* pUnit)
 				CvPlot* pLoopPlot = getPlotWorkedByUnit(pLoopUnit);
 				ProfessionTypes eLoopProfession = pLoopUnit->getProfession();
 
-				if (pLoopUnit->canHaveProfession(eProfession, true, pPlot) && pUnit->canHaveProfession(eLoopProfession, true, pLoopPlot))
+				// Allow bBumpOther to be true since this code is not concurrent with respect to slot assignments
+				if (canHaveCitizenProfession(*pLoopUnit, eProfession, true) && canHaveCitizenProfession(*pUnit, eLoopProfession, true))
 				{
 					int iValueA1 = AI_professionValue(eProfession, pUnit, pPlot, pLoopUnit);
 					int iValueB1 = AI_professionValue(eLoopProfession, pLoopUnit, pLoopPlot, pUnit);
