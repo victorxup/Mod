@@ -306,18 +306,22 @@ void CvCityAI::AI_assignWorkingPlots()
 		return;
 	}
 
-
 	//Now see if swapping citizens will help.
 	for (uint i = 0; i < m_aPopulationUnits.size(); ++i)
 	{
-		CvUnit* pUnit = m_aPopulationUnits[i];
+		CvUnit* const pUnit = m_aPopulationUnits[i];
 		if (pUnit != NULL)
 		{
 			if (!pUnit->isColonistLocked())
 			{
 				if (pUnit->getProfession() != NO_PROFESSION)
 				{
-					AI_juggleColonist(pUnit);
+					CvUnit* const pJuggledUnit = AI_juggleColonist(*pUnit);
+				
+					if (pJuggledUnit != NULL)
+					{
+						AI_swapUnits(pUnit, pJuggledUnit);
+					}
 				}
 			}
 		}
@@ -3663,63 +3667,50 @@ CvUnit* CvCityAI::AI_assignToBestJob(CvUnit* pUnit, bool bIndoorOnly)
 	return pDisplacedUnit;
 }
 
-//iValueA1 - Value of passed unit with original profession.
-//iValueA2 - Value of passed unit with loop profession.
-//iValueB1  - Value of loop unit with original profession.
-//iValueB2 - Value of loop unit with loop profession.
-
-CvUnit* CvCityAI::AI_juggleColonist(CvUnit* pUnit)
+CvUnit* CvCityAI::AI_juggleColonist(const CvUnit& kUnit) const
 {
-	ProfessionTypes eProfession = pUnit->getProfession();
-	CvPlot* pPlot = getPlotWorkedByUnit(pUnit);
+	ProfessionTypes eProfession = kUnit.getProfession();
+	CvPlot* pPlot = getPlotWorkedByUnit(&kUnit);
 
 	CvUnit* pBestUnit = NULL;
 	int iBestValue = 0;
 
-	//AI_setWorkforceHack(true);
-
 	for (uint i = 0; i < m_aPopulationUnits.size(); ++i)
 	{
-		CvUnit* pLoopUnit = m_aPopulationUnits[i];
-		if ((pLoopUnit != NULL) && (pUnit != pLoopUnit))
+		CvUnit* const pLoopUnit = m_aPopulationUnits[i];
+		if ((pLoopUnit != NULL) && (&kUnit != pLoopUnit))
 		{
 			if (!pLoopUnit->isColonistLocked())
 			{
-				CvPlot* pLoopPlot = getPlotWorkedByUnit(pLoopUnit);
-				ProfessionTypes eLoopProfession = pLoopUnit->getProfession();
+				CvPlot const* pLoopPlot = getPlotWorkedByUnit(pLoopUnit);
+				const ProfessionTypes eLoopProfession = pLoopUnit->getProfession();
 
 				// Allow bBumpOther to be true since this code is not concurrent with respect to slot assignments
-				if (canHaveCitizenProfession(*pLoopUnit, eProfession, true) && canHaveCitizenProfession(*pUnit, eLoopProfession, true))
+				if (canHaveCitizenProfession(*pLoopUnit, eProfession, true) && canHaveCitizenProfession(kUnit, eLoopProfession, true))
 				{
-					int iValueA1 = AI_professionValue(eProfession, pUnit, pPlot, pLoopUnit);
-					int iValueB1 = AI_professionValue(eLoopProfession, pLoopUnit, pLoopPlot, pUnit);
+					//iValueA1 - Value of passed unit with original profession.
+					const int iValueA1 = AI_professionValue(eProfession, &kUnit, pPlot, pLoopUnit);
+					//iValueA2 - Value of passed unit with loop profession.
+					const int iValueA2 = AI_professionValue(eLoopProfession, &kUnit, pLoopPlot, pLoopUnit);
 
-					int iValueA2 = AI_professionValue(eLoopProfession, pUnit, pLoopPlot, pLoopUnit);
-					int iValueB2 = AI_professionValue(eProfession, pLoopUnit, pPlot, pUnit);
+					//iValueB1  - Value of loop unit with original profession.
+					const int iValueB1 = AI_professionValue(eLoopProfession, pLoopUnit, pLoopPlot, &kUnit);
+					//iValueB2 - Value of loop unit with loop profession.
+					const int iValueB2 = AI_professionValue(eProfession, pLoopUnit, pPlot, &kUnit);
 
-					//if ((iValueA2 > iValueA1 && iValueB2 >= iValueB1) || (iValueA2 >= iValueA1 && iValueB2 > iValueB1))
+					// Check if gain value by swapping these units
+					const int iValue = (iValueA2 - iValueA1) + (iValueB2 - iValueB1);
+					if (iValue > iBestValue)
 					{
-						int iValue = (iValueA2 - iValueA1) + (iValueB2 - iValueB1);
-						if (iValue > iBestValue)
-						{
-							iBestValue = iValue;
-							pBestUnit = pLoopUnit;
-						}
+						iBestValue = iValue;
+						pBestUnit = pLoopUnit;
 					}
 				}
 			}
 		}
 	}
 
-	//AI_setWorkforceHack(false);
-
-	if (pBestUnit != NULL)
-	{
-		AI_swapUnits(pUnit, pBestUnit);
-	}
-
 	return pBestUnit;
-
 }
 
 void CvCityAI::AI_swapUnits(CvUnit* pUnitA, CvUnit* pUnitB)

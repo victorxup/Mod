@@ -258,7 +258,7 @@ protected:
 	CvUnit* AI_assignToBestJob(CvUnit* pUnit, bool bIndoorOnly = false);
 	CvUnit* AI_parallelAssignToBestJob(CvUnit& kUnit, bool bIndoorOnly = false);
 
-	CvUnit* AI_juggleColonist(CvUnit* pUnit);
+	CvUnit* AI_juggleColonist(const CvUnit& kUnit) const;
 
 	void AI_swapUnits(CvUnit* pUnitA, CvUnit* pUnitB);
 
