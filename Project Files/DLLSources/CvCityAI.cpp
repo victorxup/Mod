@@ -3678,7 +3678,7 @@ CvUnit* CvCityAI::AI_juggleColonist(const CvUnit& kUnit) const
 	for (uint i = 0; i < m_aPopulationUnits.size(); ++i)
 	{
 		CvUnit* const pLoopUnit = m_aPopulationUnits[i];
-		if ((pLoopUnit != NULL) && (&kUnit != pLoopUnit))
+		if ((pLoopUnit != NULL) && (&kUnit != pLoopUnit) && pLoopUnit->getProfession() != NO_PROFESSION)
 		{
 			if (!pLoopUnit->isColonistLocked())
 			{
