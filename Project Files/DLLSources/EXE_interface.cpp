@@ -39,6 +39,12 @@
 #include "CyArgsList.h"
 #include "CyPlot.h"
 
+// Re-export standard library functions expected to be incorrectly mangled by MSVC
+#pragma comment(linker, "/EXPORT:?clear@@YAXAAV?$basic_string@GU?$char_traits@G@std@@V?$allocator@G@2@@std@@@Z=?clear@@YAXAAV?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@@Z")
+#pragma comment(linker, "/EXPORT:?clear@@YAXPAG@Z=?clear@@YAXPA_W@Z")
+#pragma comment(linker, "/EXPORT:?isEmpty@@YA_NABV?$basic_string@GU?$char_traits@G@std@@V?$allocator@G@2@@std@@@Z=?isEmpty@@YA_NABV?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@@Z")
+#pragma comment(linker, "/EXPORT:?isEmpty@@YA_NPBG@Z=?isEmpty@@YA_NPB_W@Z")
+#pragma comment(linker, "/EXPORT:?safecpy@@YAXPAGPBGH@Z=?safecpy@@YAXPA_WPB_WH@Z")
 
 class EXE_CvActionInfo : public CvActionInfo
 {
@@ -157,6 +163,7 @@ BOOST_STATIC_ASSERT(sizeof(EXE_CvArtFileMgr) == sizeof(CvArtFileMgr));
 class EXE_CvArtInfoAsset : public CvArtInfoAsset
 {
 public:
+	#pragma comment(linker, "/EXPORT:?getNIF@CvArtInfoAsset@@QBEPBDXZ=?getNIF@EXE_CvArtInfoAsset@@QBEPBDXZ")
 	DllExport const char* getNIF() const
 	{
 		if (GLOBAL_DEFINE_USE_NIF_LOGGING)
@@ -169,6 +176,7 @@ public:
 		return CvArtInfoAsset::getNIF();
 	}
 
+	#pragma comment(linker, "/EXPORT:?getKFM@CvArtInfoAsset@@QBEPBDXZ=?getKFM@EXE_CvArtInfoAsset@@QBEPBDXZ")
 	DllExport const char* getKFM() const
 	{
 		return CvArtInfoAsset::getKFM();
@@ -558,10 +566,12 @@ public:
 
 		getName
 			?getName@CvCity@@QBE?BVCvWString@@I@Z=?getName@EXE_CvCity@@QBE?BVCvWString@@I@Z
+	*/
+	// getNameKey (incorrectly mangled)
+	//   ?getNameKey@CvCity@@QBEPBGXZ=?getNameKey@EXE_CvCity@@QBEPBGXZ
+	#pragma comment(linker, "/EXPORT:?getNameKey@CvCity@@QBEPBGXZ=?getNameKey@CvCity@@QBEPB_WXZ")
 
-		getNameKey
-			?getNameKey@CvCity@@QBEPBGXZ=?getNameKey@EXE_CvCity@@QBEPBGXZ
-
+	/*
 		getOwner
 			?getOwner@CvCity@@QBE?AW4PlayerTypes@@XZ=?getOwner@EXE_CvCity@@QBE?AW4PlayerTypes@@XZ
 
@@ -628,10 +638,12 @@ public:
 		plot
 			?plot@CvCity@@QBEPAVCvPlot@@XZ=?plot@EXE_CvCity@@QBEPAVCvPlot@@XZ
 			*/
+	#pragma comment(linker, "/EXPORT:?pushOrder@CvCity@@QAEXW4OrderTypes@@HH_N111@Z=?pushOrder@EXE_CvCity@@QAEXW4OrderTypes@@HH_N111@Z")
 	DllExport void pushOrder(OrderTypes eOrder, int iData1, int iData2, bool bSave, bool bPop, bool bAppend, bool bForce = false)
 	{
 		CvCity::pushOrder(eOrder, iData1, iData2, bSave, bPop, bAppend, bForce);
 	}
+	#pragma comment(linker, "/EXPORT:?popOrder@CvCity@@QAEXH_N0@Z=?popOrder@EXE_CvCity@@QAEXH_N0@Z")
 	DllExport void popOrder(int iNum, bool bFinish = false, bool bChoose = false)
 	{
 		CvCity::popOrder(iNum, bFinish, bChoose);
@@ -654,10 +666,11 @@ BOOST_STATIC_ASSERT(sizeof(EXE_CvCity) == sizeof(CvCity));
 class EXE_CvCivilizationInfo : public CvCivilizationInfo
 {
 public:
-	/*
-		getAdjective
-			?getAdjective@CvCivilizationInfo@@QAEPBGI@Z=?getAdjective@EXE_CvCivilizationInfo@@QAEPBGI@Z
+	// getAdjective (incorrectly mangled)
+	//   ?getAdjective@CvCivilizationInfo@@QAEPBGI@Z=?getAdjective@EXE_CvCivilizationInfo@@QAEPBGI@Z
+	#pragma comment(linker, "/EXPORT:?getAdjective@CvCivilizationInfo@@QAEPBGI@Z=?getAdjective@CvCivilizationInfo@@QAEPB_WI@Z")
 
+	/*
 		getArtInfo
 			?getArtInfo@CvCivilizationInfo@@QBEPBVCvArtInfoCivilization@@XZ=?getArtInfo@EXE_CvCivilizationInfo@@QBEPBVCvArtInfoCivilization@@XZ
 
@@ -681,10 +694,12 @@ public:
 
 		getSelectionSoundScriptId
 			?getSelectionSoundScriptId@CvCivilizationInfo@@QBEHXZ=?getSelectionSoundScriptId@EXE_CvCivilizationInfo@@QBEHXZ
+	*/
+	// getShortDescription (incorrectly mangled)
+	//   ?getShortDescription@CvCivilizationInfo@@QAEPBGI@Z=?getShortDescription@EXE_CvCivilizationInfo@@QAEPBGI@Z
+	#pragma comment(linker, "/EXPORT:?getShortDescription@CvCivilizationInfo@@QAEPBGI@Z=?getShortDescription@CvCivilizationInfo@@QAEPB_WI@Z")
 
-		getShortDescription
-			?getShortDescription@CvCivilizationInfo@@QAEPBGI@Z=?getShortDescription@EXE_CvCivilizationInfo@@QAEPBGI@Z
-
+	/*
 		isAIPlayable
 			?isAIPlayable@CvCivilizationInfo@@QBE_NXZ=?isAIPlayable@EXE_CvCivilizationInfo@@QBE_NXZ
 
@@ -864,13 +879,18 @@ BOOST_STATIC_ASSERT(sizeof(EXE_CvDeal) == sizeof(CvDeal));
 class EXE_CvDiploParameters : public CvDiploParameters
 {
 public:
+	// addDiploCommentVariable (incorrectly mangled)
+	#pragma comment(linker, "/EXPORT:?addDiploCommentVariable@CvDiploParameters@@QAEXPBG@Z=?addDiploCommentVariable@CvDiploParameters@@QAEXPB_W@Z")
+
 	/*
 		getAIContact
 			?getAIContact@CvDiploParameters@@QBE_NXZ=?getAIContact@EXE_CvDiploParameters@@QBE_NXZ
+	*/
+	// getChatText (incorrectly mangled)
+	//   ?getChatText@CvDiploParameters@@QBEPBGXZ=?getChatText@EXE_CvDiploParameters@@QBEPBGXZ
+	#pragma comment(linker, "/EXPORT:?getChatText@CvDiploParameters@@QBEPBGXZ=?getChatText@CvDiploParameters@@QBEPB_WXZ")
 
-		getChatText
-			?getChatText@CvDiploParameters@@QBEPBGXZ=?getChatText@EXE_CvDiploParameters@@QBEPBGXZ
-
+	/*
 		getCity
 			?getCity@CvDiploParameters@@QBEABUIDInfo@@XZ=?getCity@EXE_CvDiploParameters@@QBEABUIDInfo@@XZ
 
@@ -909,10 +929,12 @@ public:
 
 		read
 			?read@CvDiploParameters@@QAEXAAVFDataStreamBase@@@Z=?read@EXE_CvDiploParameters@@QAEXAAVFDataStreamBase@@@Z
+	*/
+	// setChatText (incorrectly mangled)
+	//   ?setChatText@CvDiploParameters@@QAEXPBG@Z=?setChatText@EXE_CvDiploParameters@@QAEXPBG@Z
+	#pragma comment(linker, "/EXPORT:?setChatText@CvDiploParameters@@QAEXPBG@Z=?setChatText@CvDiploParameters@@QAEXPB_W@Z")
 
-		setChatText
-			?setChatText@CvDiploParameters@@QAEXPBG@Z=?setChatText@EXE_CvDiploParameters@@QAEXPBG@Z
-
+	/*
 		setHumanDiplo
 			?setHumanDiplo@CvDiploParameters@@QAEX_N@Z=?setHumanDiplo@EXE_CvDiploParameters@@QAEX_N@Z
 
@@ -1362,7 +1384,11 @@ public:
 
 		parseLeaderTraits
 			?parseLeaderTraits@CvGameTextMgr@@QAEXAAVCvWStringBuffer@@W4LeaderHeadTypes@@W4CivilizationTypes@@_N3@Z=?parseLeaderTraits@EXE_CvGameTextMgr@@QAEXAAVCvWStringBuffer@@W4LeaderHeadTypes@@W4CivilizationTypes@@_N3@Z
+	*/
+	// parsePromotionHelp (incorrectly mangled)
+	#pragma comment(linker, "/EXPORT:?parsePromotionHelp@CvGameTextMgr@@QAEXAAVCvWStringBuffer@@W4PromotionTypes@@PBG@Z=?parsePromotionHelp@CvGameTextMgr@@QAEXAAVCvWStringBuffer@@W4PromotionTypes@@PB_W@Z")
 
+	/*
 		setBonusHelp
 			?setBonusHelp@CvGameTextMgr@@QAEXAAVCvWStringBuffer@@W4BonusTypes@@_N@Z=?setBonusHelp@EXE_CvGameTextMgr@@QAEXAAVCvWStringBuffer@@W4BonusTypes@@_N@Z
 
@@ -1465,6 +1491,7 @@ public:
 		getBuildInfo
 			?getBuildInfo@CvGlobals@@QAEAAVCvBuildInfo@@W4BuildTypes@@@Z=?getBuildInfo@EXE_CvGlobals@@QAEAAVCvBuildInfo@@W4BuildTypes@@@Z
 */
+	#pragma comment(linker, "/EXPORT:?getBuildingInfo@CvGlobals@@QAEAAV?$vector@PAVCvBuildingInfo@@V?$allocator@PAVCvBuildingInfo@@@std@@@std@@XZ=?getBuildingInfo@EXE_CvGlobals@@QAEAAV?$vector@PAVCvBuildingInfo@@V?$allocator@PAVCvBuildingInfo@@@std@@@std@@XZ")
 	DllExport std::vector<CvBuildingInfo*>& getBuildingInfo()
 	{
 		static std::vector<CvBuildingInfo*> vector;
@@ -1480,6 +1507,7 @@ public:
 		return vector;
 	}
 
+	#pragma comment(linker, "/EXPORT:?getBuildingInfo@CvGlobals@@QAEAAVCvBuildingInfo@@W4BuildingTypes@@@Z=?getBuildingInfo@EXE_CvGlobals@@QAEAAVCvBuildingInfo@@W4BuildingTypes@@@Z")
 	DllExport CvBuildingInfo& getBuildingInfo(BuildingTypes eBuildingNum)
 	{
 		if (eBuildingNum < NUM_BUILDING_TYPES)
@@ -1696,6 +1724,7 @@ public:
 		getMainMenus
 			?getMainMenus@CvGlobals@@QAEAAVCvMainMenuInfo@@H@Z=?getMainMenus@EXE_CvGlobals@@QAEAAVCvMainMenuInfo@@H@Z
 	*/
+	#pragma comment(linker, "/EXPORT:?getMap@CvGlobals@@QAEAAVCvMap@@XZ=?getMap@EXE_CvGlobals@@QAEAAVCvMap@@XZ")
 	DllExport CvMap& getMap()
 	{
 		return CvGlobals::getMap();
@@ -1738,6 +1767,7 @@ public:
 			?getNUM_LEADERANIM_TYPES@CvGlobals@@QBEHXZ=?getNUM_LEADERANIM_TYPES@EXE_CvGlobals@@QBEHXZ
 		*/
 
+	#pragma comment(linker, "/EXPORT:?getNUM_YIELD_TYPES@CvGlobals@@QBEHXZ=?getNUM_YIELD_TYPES@EXE_CvGlobals@@QBEHXZ")
 	DllExport int getNUM_YIELD_TYPES() const
 	{
 		return NUM_YIELD_TYPES;
@@ -1761,6 +1791,7 @@ public:
 			?getNumBuildingClassInfos@CvGlobals@@QAEHXZ=?getNumBuildingClassInfos@EXE_CvGlobals@@QAEHXZ
 			*/
 
+	#pragma comment(linker, "/EXPORT:?getNumBuildingInfos@CvGlobals@@QAEHXZ=?getNumBuildingInfos@EXE_CvGlobals@@QAEHXZ")
 	DllExport int getNumBuildingInfos()
 	{
 		// show the exe an arbitrarily high number of building types because that somehow affects savegame padding
@@ -1907,6 +1938,7 @@ public:
 			?getNumUnitFormationInfos@CvGlobals@@QAEHXZ=?getNumUnitFormationInfos@EXE_CvGlobals@@QAEHXZ
 			*/
 
+	#pragma comment(linker, "/EXPORT:?getNumUnitInfos@CvGlobals@@QAEHXZ=?getNumUnitInfos@EXE_CvGlobals@@QAEHXZ")
 	DllExport int getNumUnitInfos()
 	{
 		// show the exe an arbitrarily high number of unit types because that somehow affects savegame padding
@@ -2054,6 +2086,7 @@ public:
 			*/
 
 	// this one might not be necessary
+	#pragma comment(linker, "/EXPORT:?getUnitInfo@CvGlobals@@QAEAAV?$vector@PAVCvUnitInfo@@V?$allocator@PAVCvUnitInfo@@@std@@@std@@XZ=?getUnitInfo@EXE_CvGlobals@@QAEAAV?$vector@PAVCvUnitInfo@@V?$allocator@PAVCvUnitInfo@@@std@@@std@@XZ")
 	DllExport std::vector<CvUnitInfo*>& getUnitInfo()
 	{
 		static std::vector<CvUnitInfo*> vector;
@@ -2070,6 +2103,7 @@ public:
 	}
 
 	// this is probably the relevant one
+	#pragma comment(linker, "/EXPORT:?getUnitInfo@CvGlobals@@QAEAAVCvUnitInfo@@W4UnitTypes@@@Z=?getUnitInfo@EXE_CvGlobals@@QAEAAVCvUnitInfo@@W4UnitTypes@@@Z")
 	DllExport	CvUnitInfo& getUnitInfo(UnitTypes eUnitNum)
 	{
 		if (eUnitNum < NUM_UNIT_TYPES)
@@ -2220,19 +2254,23 @@ BOOST_STATIC_ASSERT(sizeof(EXE_CvImprovementInfo) == sizeof(CvImprovementInfo));
 class EXE_CvInfoBase : public CvInfoBase
 {
 public:
+
+	// getDescription (incorrectly mangled)
+	//   ?getDescription@CvInfoBase@@QBEPBGI@Z=?getDescription@EXE_CvInfoBase@@QBEPBGI@Z
+	#pragma comment(linker, "/EXPORT:?getDescription@CvInfoBase@@QBEPBGI@Z=?getDescription@CvInfoBase@@QBEPB_WI@Z")
+	// getHelp (incorrectly mangled)
+	//   ?getHelp@CvInfoBase@@QBEPBGXZ=?getHelp@EXE_CvInfoBase@@QBEPBGXZ
+	#pragma comment(linker, "/EXPORT:?getHelp@CvInfoBase@@QBEPBGXZ=?getHelp@CvInfoBase@@QBEPB_WXZ")
+
+	// getText (incorrectly mangled)
+	//   ?getText@CvInfoBase@@QBEPBGXZ=?getText@EXE_CvInfoBase@@QBEPBGXZ
+	#pragma comment(linker, "/EXPORT:?getText@CvInfoBase@@QBEPBGXZ=?getText@CvInfoBase@@QBEPB_WXZ")
+
+	// getTextKeyWide (incorrectly mangled)
+	//   ?getTextKeyWide@CvInfoBase@@QBEPBGXZ=?getTextKeyWide@EXE_CvInfoBase@@QBEPBGXZ
+	#pragma comment(linker, "/EXPORT:?getTextKeyWide@CvInfoBase@@QBEPBGXZ=?getTextKeyWide@CvInfoBase@@QBEPB_WXZ")
+
 	/*
-		getDescription
-			?getDescription@CvInfoBase@@QBEPBGI@Z=?getDescription@EXE_CvInfoBase@@QBEPBGI@Z
-
-		getHelp
-			?getHelp@CvInfoBase@@QBEPBGXZ=?getHelp@EXE_CvInfoBase@@QBEPBGXZ
-
-		getText
-			?getText@CvInfoBase@@QBEPBGXZ=?getText@EXE_CvInfoBase@@QBEPBGXZ
-
-		getTextKeyWide
-			?getTextKeyWide@CvInfoBase@@QBEPBGXZ=?getTextKeyWide@EXE_CvInfoBase@@QBEPBGXZ
-
 		getType
 			?getType@CvInfoBase@@QBEPBDXZ=?getType@EXE_CvInfoBase@@QBEPBDXZ
 
@@ -2922,16 +2960,20 @@ public:
 
 		getCity
 			?getCity@CvPlayer@@QBEPAVCvCity@@H@Z=?getCity@EXE_CvPlayer@@QBEPAVCvCity@@H@Z
+	*/
+	// getCivilizationAdjective (incorrectly mangled)
+	//   ?getCivilizationAdjective@CvPlayer@@QBEPBGI@Z=?getCivilizationAdjective@EXE_CvPlayer@@QBEPBGI@Z
+	#pragma comment(linker, "/EXPORT:?getCivilizationAdjective@CvPlayer@@QBEPBGI@Z=?getCivilizationAdjective@CvPlayer@@QBEPB_WI@Z")
 
-		getCivilizationAdjective
-			?getCivilizationAdjective@CvPlayer@@QBEPBGI@Z=?getCivilizationAdjective@EXE_CvPlayer@@QBEPBGI@Z
+	// getCivilizationDescription (incorrectly mangled)
+	//   ?getCivilizationDescription@CvPlayer@@QBEPBGI@Z=?getCivilizationDescription@EXE_CvPlayer@@QBEPBGI@Z
+	#pragma comment(linker, "/EXPORT:?getCivilizationDescription@CvPlayer@@QBEPBGI@Z=?getCivilizationDescription@CvPlayer@@QBEPB_WI@Z")
 
-		getCivilizationDescription
-			?getCivilizationDescription@CvPlayer@@QBEPBGI@Z=?getCivilizationDescription@EXE_CvPlayer@@QBEPBGI@Z
+	// getCivilizationShortDescription (incorrectly mangled)
+	//   ?getCivilizationShortDescription@CvPlayer@@QBEPBGI@Z=?getCivilizationShortDescription@EXE_CvPlayer@@QBEPBGI@Z
+	#pragma comment(linker, "/EXPORT:?getCivilizationShortDescription@CvPlayer@@QBEPBGI@Z=?getCivilizationShortDescription@CvPlayer@@QBEPB_WI@Z")
 
-		getCivilizationShortDescription
-			?getCivilizationShortDescription@CvPlayer@@QBEPBGI@Z=?getCivilizationShortDescription@EXE_CvPlayer@@QBEPBGI@Z
-
+	/*
 		getCivilizationType
 			?getCivilizationType@CvPlayer@@QBE?AW4CivilizationTypes@@XZ=?getCivilizationType@EXE_CvPlayer@@QBE?AW4CivilizationTypes@@XZ
 
@@ -2970,13 +3012,16 @@ public:
 
 		getMaxGoldTrade
 			?getMaxGoldTrade@CvPlayer@@QBEHW4PlayerTypes@@ABUIDInfo@@@Z=?getMaxGoldTrade@EXE_CvPlayer@@QBEHW4PlayerTypes@@ABUIDInfo@@@Z
+	*/
+	// getName (incorrectly mangled)
+	//   ?getName@CvPlayer@@QBEPBGI@Z=?getName@EXE_CvPlayer@@QBEPBGI@Z
+	#pragma comment(linker, "/EXPORT:?getName@CvPlayer@@QBEPBGI@Z=?getName@CvPlayer@@QBEPB_WI@Z")
 
-		getName
-			?getName@CvPlayer@@QBEPBGI@Z=?getName@EXE_CvPlayer@@QBEPBGI@Z
+	// getNameKey (incorrectly mangled)
+	//   ?getNameKey@CvPlayer@@QBEPBGXZ=?getNameKey@EXE_CvPlayer@@QBEPBGXZ
+	#pragma comment(linker, "/EXPORT:?getNameKey@CvPlayer@@QBEPBGXZ=?getNameKey@CvPlayer@@QBEPB_WXZ")
 
-		getNameKey
-			?getNameKey@CvPlayer@@QBEPBGXZ=?getNameKey@EXE_CvPlayer@@QBEPBGXZ
-
+	/*
 		getNetID
 			?getNetID@CvPlayer@@QBEHXZ=?getNetID@EXE_CvPlayer@@QBEHXZ
 
@@ -3023,6 +3068,7 @@ public:
 			?getUnit@CvPlayer@@QBEPAVCvUnit@@H@Z=?getUnit@EXE_CvPlayer@@QBEPAVCvUnit@@H@Z
 */
 
+	#pragma comment(linker, "/EXPORT:?getUnitButton@CvPlayer@@QBEPBDW4UnitTypes@@@Z=?getUnitButton@EXE_CvPlayer@@QBEPBDW4UnitTypes@@@Z")
 	DllExport char const* getUnitButton(UnitTypes eUnit) const
 	{
 		if (eUnit <= UNIT_PLACEHOLDER)
@@ -3348,10 +3394,12 @@ BOOST_STATIC_ASSERT(sizeof(EXE_CvPlot) == sizeof(CvPlot));
 class EXE_CvPopupInfo : public CvPopupInfo
 {
 public:
-	/*
-		addPythonButton
-			?addPythonButton@CvPopupInfo@@QAEXPBGPBD@Z=?addPythonButton@EXE_CvPopupInfo@@QAEXPBGPBD@Z
 
+	// addPythonButton (incorrectly mangled)
+	//   ?addPythonButton@CvPopupInfo@@QAEXPBGPBD@Z=?addPythonButton@EXE_CvPopupInfo@@QAEXPBGPBD@Z
+	#pragma comment(linker, "/EXPORT:?addPythonButton@CvPopupInfo@@QAEXPBGPBD@Z=?addPythonButton@CvPopupInfo@@QAEXPB_WPBD@Z")
+
+	/*
 		getButtonPopupType
 			?getButtonPopupType@CvPopupInfo@@QBE?AW4ButtonPopupTypes@@XZ=?getButtonPopupType@EXE_CvPopupInfo@@QBE?AW4ButtonPopupTypes@@XZ
 
@@ -3432,10 +3480,13 @@ public:
 
 		setPythonModule
 			?setPythonModule@CvPopupInfo@@QAEXPBD@Z=?setPythonModule@EXE_CvPopupInfo@@QAEXPBD@Z
+	*/
 
-		setText
-			?setText@CvPopupInfo@@QAEXPBG@Z=?setText@EXE_CvPopupInfo@@QAEXPBG@Z
+	// setText (incorrectly mangled)
+	//   ?setText@CvPopupInfo@@QAEXPBG@Z=?setText@EXE_CvPopupInfo@@QAEXPBG@Z
+	#pragma comment(linker, "/EXPORT:?setText@CvPopupInfo@@QAEXPBG@Z=?setText@CvPopupInfo@@QAEXPB_W@Z")
 
+	/*
 		write
 			?write@CvPopupInfo@@QBEXAAVFDataStreamBase@@@Z=?write@EXE_CvPopupInfo@@QBEXAAVFDataStreamBase@@@Z
 
@@ -3693,10 +3744,14 @@ BOOST_STATIC_ASSERT(sizeof(EXE_CvSpecialBuildingInfo) == sizeof(CvSpecialBuildin
 class EXE_CvTalkingHeadMessage : public CvTalkingHeadMessage
 {
 public:
-	/*
-		getDescription
-			?getDescription@CvTalkingHeadMessage@@QBEPBGXZ=?getDescription@EXE_CvTalkingHeadMessage@@QBEPBGXZ
+	// CvTalkingHeadMessage (incorrectly mangled)
+	#pragma comment(linker, "/EXPORT:??0CvTalkingHeadMessage@@QAE@HHPBGPBDW4InterfaceMessageTypes@@1W4ColorTypes@@HH_N4@Z=??0CvTalkingHeadMessage@@QAE@HHPB_WPBDW4InterfaceMessageTypes@@1W4ColorTypes@@HH_N4@Z")
 
+	// getDescription (incorrectly mangled)
+	//   ?getDescription@CvTalkingHeadMessage@@QBEPBGXZ=?getDescription@EXE_CvTalkingHeadMessage@@QBEPBGXZ
+	#pragma comment(linker, "/EXPORT:?getDescription@CvTalkingHeadMessage@@QBEPBGXZ=?getDescription@CvTalkingHeadMessage@@QBEPB_WXZ")
+
+	/*
 		getFlashColor
 			?getFlashColor@CvTalkingHeadMessage@@QBE?AW4ColorTypes@@XZ=?getFlashColor@EXE_CvTalkingHeadMessage@@QBE?AW4ColorTypes@@XZ
 
@@ -3902,6 +3957,7 @@ public:
 			?doCommand@CvUnit@@QAEXW4CommandTypes@@HH@Z=?doCommand@EXE_CvUnit@@QAEXW4CommandTypes@@HH@Z
 */
 
+	#pragma comment(linker, "/EXPORT:?getArtInfo@CvUnit@@QBEPBVCvArtInfoUnit@@H@Z=?getArtInfo@EXE_CvUnit@@QBEPBVCvArtInfoUnit@@H@Z")
 	DllExport const CvArtInfoUnit* getArtInfo(int i) const
 	{
 		return CvUnit::getArtInfo(i);
@@ -4084,16 +4140,19 @@ class EXE_CvUnitInfo : public CvUnitInfo
 {
 public:
 
+	#pragma comment(linker, "/EXPORT:?getArtInfo@CvUnitInfo@@QBEPBVCvArtInfoUnit@@HH@Z=?getArtInfo@EXE_CvUnitInfo@@QBEPBVCvArtInfoUnit@@HH@Z")
 	DllExport const CvArtInfoUnit* getArtInfo(int i, int iProfession) const
 	{
 		return CvUnitInfo::getArtInfo(i, iProfession);
 	}
 
+	#pragma comment(linker, "/EXPORT:?getDefaultProfession@CvUnitInfo@@QBEHXZ=?getDefaultProfession@EXE_CvUnitInfo@@QBEHXZ")
 	DllExport int getDefaultProfession() const
 	{
 		return CvUnitInfo::getDefaultProfession();
 	}
 
+	#pragma comment(linker, "/EXPORT:?getDomainType@CvUnitInfo@@QBEHXZ=?getDomainType@EXE_CvUnitInfo@@QBEHXZ")
 	DllExport int getDomainType() const
 	{
 		return CvUnitInfo::getDomainType();
@@ -4109,6 +4168,7 @@ public:
 		getGroupSize
 			?getGroupSize@CvUnitInfo@@QBEHH@Z=?getGroupSize@EXE_CvUnitInfo@@QBEHH@Z
 */
+	#pragma comment(linker, "/EXPORT:?getUnitClassType@CvUnitInfo@@QBEHXZ=?getUnitClassType@EXE_CvUnitInfo@@QBEHXZ")
 	DllExport int getUnitClassType() const
 	{
 		return CvUnitInfo::getUnitClassType();
@@ -4330,10 +4390,12 @@ public:
 
 		add
 			?add@CyArgsList@@QAEXPBDH@Z=?add@EXE_CyArgsList@@QAEXPBDH@Z
+	*/
+	// add (incorrectly mangled)
+	//   ?add@CyArgsList@@QAEXPBG@Z=?add@EXE_CyArgsList@@QAEXPBG@Z
+	#pragma comment(linker, "/EXPORT:?add@CyArgsList@@QAEXPBG@Z=?add@CyArgsList@@QAEXPB_W@Z")
 
-		add
-			?add@CyArgsList@@QAEXPBG@Z=?add@EXE_CyArgsList@@QAEXPBG@Z
-
+	/*
 		add
 			?add@CyArgsList@@QAEXPBHH@Z=?add@EXE_CyArgsList@@QAEXPBHH@Z
 
@@ -4357,6 +4419,39 @@ public:
 BOOST_STATIC_ASSERT(sizeof(EXE_CyPlot) == sizeof(CyPlot));
 
 
+class EXE_PBGameSetupData : public PBGameSetupData
+{
+public:
+	// getMapName (incorrectly mangled)
+	#pragma comment(linker, "/EXPORT:?getMapName@PBGameSetupData@@QAE?AV?$basic_string@GU?$char_traits@G@std@@V?$allocator@G@2@@std@@XZ=?getMapName@PBGameSetupData@@QAE?AV?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@XZ")
+};
+BOOST_STATIC_ASSERT(sizeof(EXE_PBGameSetupData) == sizeof(PBGameSetupData));
+
+
+class EXE_PBPlayerAdminData : public PBPlayerAdminData
+{
+public:
+	// getName (incorrectly mangled)
+	#pragma comment(linker, "/EXPORT:?getName@PBPlayerAdminData@@QAE?AV?$basic_string@GU?$char_traits@G@std@@V?$allocator@G@2@@std@@XZ=?getName@PBPlayerAdminData@@QAE?AV?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@XZ")
+
+	// getPing (incorrectly mangled)
+	#pragma comment(linker, "/EXPORT:?getPing@PBPlayerAdminData@@QAE?AV?$basic_string@GU?$char_traits@G@std@@V?$allocator@G@2@@std@@XZ=?getPing@PBPlayerAdminData@@QAE?AV?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@XZ")
+
+	// getScore (incorrectly mangled)
+	#pragma comment(linker, "/EXPORT:?getScore@PBPlayerAdminData@@QAE?AV?$basic_string@GU?$char_traits@G@std@@V?$allocator@G@2@@std@@XZ=?getScore@PBPlayerAdminData@@QAE?AV?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@XZ")
+};
+BOOST_STATIC_ASSERT(sizeof(EXE_PBPlayerAdminData) == sizeof(PBPlayerAdminData));
+
+
+class EXE_PBPlayerSetupData : public PBPlayerSetupData
+{
+public:
+	// getStatusText (incorrectly mangled)
+	#pragma comment(linker, "/EXPORT:?getStatusText@PBPlayerSetupData@@QAE?AV?$basic_string@GU?$char_traits@G@std@@V?$allocator@G@2@@std@@XZ=?getStatusText@PBPlayerSetupData@@QAE?AV?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@XZ")
+};
+BOOST_STATIC_ASSERT(sizeof(EXE_PBPlayerSetupData) == sizeof(PBPlayerSetupData));
+
+
 class EXE_PopupReturn : public PopupReturn
 {
 public:
@@ -4369,10 +4464,12 @@ public:
 
 		getCurrentSpinBoxValue
 			?getCurrentSpinBoxValue@PopupReturn@@QBEHH@Z=?getCurrentSpinBoxValue@EXE_PopupReturn@@QBEHH@Z
+	*/
+	// getEditBoxString (incorrectly mangled)
+	//   ?getEditBoxString@PopupReturn@@QBEPBGH@Z=?getEditBoxString@EXE_PopupReturn@@QBEPBGH@Z
+	#pragma comment(linker, "/EXPORT:?getEditBoxString@PopupReturn@@QBEPBGH@Z=?getEditBoxString@PopupReturn@@QBEPB_WH@Z")
 
-		getEditBoxString
-			?getEditBoxString@PopupReturn@@QBEPBGH@Z=?getEditBoxString@EXE_PopupReturn@@QBEPBGH@Z
-
+	/*
 		getSelectedListBoxValue
 			?getSelectedListBoxValue@PopupReturn@@QBEHH@Z=?getSelectedListBoxValue@EXE_PopupReturn@@QBEHH@Z
 
@@ -4396,10 +4493,12 @@ public:
 
 		setCurrentSpinBoxValue
 			?setCurrentSpinBoxValue@PopupReturn@@QAEXHH@Z=?setCurrentSpinBoxValue@EXE_PopupReturn@@QAEXHH@Z
+	*/
+	// setEditBoxString (incorrectly mangled)
+	//   ?setEditBoxString@PopupReturn@@QAEXPBGH@Z=?setEditBoxString@EXE_PopupReturn@@QAEXPBGH@Z
+	#pragma comment(linker, "/EXPORT:?setEditBoxString@PopupReturn@@QAEXPBGH@Z=?setEditBoxString@PopupReturn@@QAEXPB_WH@Z")
 
-		setEditBoxString
-			?setEditBoxString@PopupReturn@@QAEXPBGH@Z=?setEditBoxString@EXE_PopupReturn@@QAEXPBGH@Z
-
+	/*
 		setSelectedListBoxValue
 			?setSelectedListBoxValue@PopupReturn@@QAEXHH@Z=?setSelectedListBoxValue@EXE_PopupReturn@@QAEXHH@Z
 
