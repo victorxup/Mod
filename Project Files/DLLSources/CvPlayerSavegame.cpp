@@ -718,7 +718,7 @@ void CvPlayer::resetSavedData(PlayerTypes eID, bool bConstructorCall)
 
 }
 
-void CvPlayer::read(CvSavegameReader reader)
+void CvPlayer::read(CvSavegameReader& reader)
 {
 	reader.AssignClassType(SAVEGAME_CLASS_PLAYER);
 
@@ -957,7 +957,7 @@ void CvPlayer::read(CvSavegameReader reader)
 	}
 }
 
-void CvPlayer::write(CvSavegameWriter writer)
+void CvPlayer::write(CvSavegameWriter& writer) const
 {
 	writer.AssignClassType(SAVEGAME_CLASS_PLAYER);
 
@@ -1140,8 +1140,7 @@ void CvPlayer::write(CvSavegameWriter writer)
 		if(iSize>0){
 			writer.Write(PlayerSave_listPopups);
 			writer.Write(iSize);
-			CvPopupQueue::iterator it;
-			for (it = currentPopups.begin(); it != currentPopups.end(); ++it)
+			for (auto it = currentPopups.begin(); it != currentPopups.end(); ++it)
 			{
 				CvPopupInfo* pInfo = *it;
 				if (pInfo != nullptr)
@@ -1149,7 +1148,7 @@ void CvPlayer::write(CvSavegameWriter writer)
 					writer.Write(*pInfo);
 				}
 			}
-			for (it = m_listPopups.begin(); it != m_listPopups.end(); ++it)
+			for (auto it = m_listPopups.begin(); it != m_listPopups.end(); ++it)
 			{
 				CvPopupInfo* pInfo = *it;
 				if (pInfo != nullptr)

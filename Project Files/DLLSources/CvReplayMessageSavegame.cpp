@@ -60,7 +60,7 @@ void CvReplayMessage::resetSavedData()
 	m_eColor = defaultColor;
 }
 
-void CvReplayMessage::read(CvSavegameReader reader)
+void CvReplayMessage::read(CvSavegameReader& reader)
 {
 	reader.AssignClassType(SAVEGAME_CLASS_REPLAYMESSAGE);
 
@@ -96,7 +96,7 @@ void CvReplayMessage::read(CvSavegameReader reader)
 	
 }
 
-void CvReplayMessage::write(CvSavegameWriter writer) const
+void CvReplayMessage::write(CvSavegameWriter& writer) const
 {
 	writer.AssignClassType(SAVEGAME_CLASS_REPLAYMESSAGE);
 

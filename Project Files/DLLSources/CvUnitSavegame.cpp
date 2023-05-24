@@ -264,7 +264,7 @@ void CvUnit::resetSavedData(int iID, UnitTypes eUnit, PlayerTypes eOwner, bool b
 
 }
 
-void CvUnit::read(CvSavegameReader reader)
+void CvUnit::read(CvSavegameReader& reader)
 {
 	reader.AssignClassType(SAVEGAME_CLASS_UNIT);
 
@@ -376,7 +376,7 @@ void CvUnit::read(CvSavegameReader reader)
 
 }
 
-void CvUnit::write(CvSavegameWriter writer)
+void CvUnit::write(CvSavegameWriter& writer) const
 {
 	writer.AssignClassType(SAVEGAME_CLASS_UNIT);
 

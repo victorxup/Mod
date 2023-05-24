@@ -83,7 +83,7 @@ void CvTeamAI::AI_resetSavedData()
 	m_eWorstEnemy=defaultWorstEnemy;
 }
 
-void CvTeamAI::read(CvSavegameReader reader)
+void CvTeamAI::read(CvSavegameReader& reader)
 {
 	reader.AssignClassType(SAVEGAME_CLASS_TEAM_AI);
 
@@ -128,7 +128,7 @@ void CvTeamAI::read(CvSavegameReader reader)
 	
 }
 
-void CvTeamAI::write(CvSavegameWriter writer)
+void CvTeamAI::write(CvSavegameWriter& writer) const
 {
 	writer.AssignClassType(SAVEGAME_CLASS_TEAM_AI);
 

@@ -82,7 +82,7 @@ void CvPopupInfo::resetSavedData()
 	m_aPythonButtons.clear();
 }
 
-void CvPopupInfo::read(CvSavegameReader reader)
+void CvPopupInfo::read(CvSavegameReader& reader)
 {
 	reader.AssignClassType(SAVEGAME_CLASS_POPUPINFO);
 
@@ -122,7 +122,7 @@ void CvPopupInfo::read(CvSavegameReader reader)
 	
 }
 
-void CvPopupInfo::write(CvSavegameWriter writer) const
+void CvPopupInfo::write(CvSavegameWriter& writer) const
 {
 	writer.AssignClassType(SAVEGAME_CLASS_POPUPINFO);
 
@@ -150,12 +150,12 @@ void CvPopupInfo::write(CvSavegameWriter writer) const
 	writer.Write(PopupInfoSave_END);
 }
 
-	void CvPopupButtonPython::read(CvSavegameReader reader)
+	void CvPopupButtonPython::read(CvSavegameReader& reader)
 	{
 		reader.Read(szText);
 		reader.Read(szArt);
 	}
-	void CvPopupButtonPython::write(CvSavegameWriter writer)
+	void CvPopupButtonPython::write(CvSavegameWriter& writer) const
 	{
 		writer.Write(szText);
 		writer.Write(szArt);

@@ -29,8 +29,8 @@ public:
 
 	bool checkValid(PlayerTypes ePlayer) const;
 
-	void read(CvSavegameReader reader);
-	void write(CvSavegameWriter writer);
+	void read(CvSavegameReader& reader);
+	void write(CvSavegameWriter& writer) const;
 
 	void resetSavedData();
 

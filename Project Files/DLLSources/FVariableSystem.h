@@ -59,11 +59,11 @@ class FVariable
 
 		const FVariable& operator=( const FVariable& varSrc ) { CopyFrom(varSrc); return *this; }
 		void CopyFrom(const FVariable& varSrc);
-		void Read(FDataStreamBase *);
-		void Write(FDataStreamBase *);
-		
-		void read(CvSavegameReader);
-		void write(CvSavegameWriter);
+		void Read(FDataStreamBase* pStream);
+		void Write(FDataStreamBase* pStream) const;
+
+		void read(CvSavegameReader& reader);
+		void write(CvSavegameWriter& writer) const;
 
 		union
 		{
@@ -140,8 +140,8 @@ class FVariableSystem
 		std::string GetFirstVariableName( );
 		std::string GetNextVariableName( );
 
-		void Read(FDataStreamBase *);
-		void Write(FDataStreamBase *) const;
+		void Read(FDataStreamBase *reader);
+		void Write(FDataStreamBase *writer) const;
 
 protected:
 

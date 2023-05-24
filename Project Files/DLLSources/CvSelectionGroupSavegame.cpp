@@ -64,7 +64,7 @@ void CvSelectionGroup::resetSavedData(int iID, PlayerTypes eOwner)
 	m_eAutomateType = defaultAutomateType;
 }
 
-void CvSelectionGroup::read(CvSavegameReader reader)
+void CvSelectionGroup::read(CvSavegameReader& reader)
 {
 	reader.AssignClassType(SAVEGAME_CLASS_SELECTIONGROUP);
 
@@ -107,7 +107,7 @@ void CvSelectionGroup::read(CvSavegameReader reader)
 	
 }
 
-void CvSelectionGroup::write(CvSavegameWriter writer)
+void CvSelectionGroup::write(CvSavegameWriter& writer) const
 {
 	writer.AssignClassType(SAVEGAME_CLASS_SELECTIONGROUP);
 
@@ -129,7 +129,7 @@ void CvSelectionGroup::write(CvSavegameWriter writer)
 	{
 		writer.Write(SelectionGroupSave_TradeRoutes);
 		writer.Write(iSize);
-		for(std::set<int>::iterator it = m_aTradeRoutes.begin(); it != m_aTradeRoutes.end(); ++it)
+		for(auto it = m_aTradeRoutes.begin(); it != m_aTradeRoutes.end(); ++it)
 		{
 			writer.Write(*it);
 		}

@@ -82,7 +82,7 @@ void CvDiploParameters::resetSavedData()
 	m_kCity.reset();
 }
 
-void CvDiploParameters::read(CvSavegameReader reader)
+void CvDiploParameters::read(CvSavegameReader& reader)
 {
 	reader.AssignClassType(SAVEGAME_CLASS_DIPLOPARAMETERS);
 
@@ -124,7 +124,7 @@ void CvDiploParameters::read(CvSavegameReader reader)
 	
 }
 
-void CvDiploParameters::write(CvSavegameWriter writer) const
+void CvDiploParameters::write(CvSavegameWriter& writer) const
 {
 	writer.AssignClassType(SAVEGAME_CLASS_DIPLOPARAMETERS);
 

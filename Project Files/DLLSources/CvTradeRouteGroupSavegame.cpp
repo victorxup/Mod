@@ -43,7 +43,7 @@ void CvTradeRouteGroup::resetSavedData()
 	m_Routes.clear();
 }
 
-void CvTradeRouteGroup::read(CvSavegameReader reader)
+void CvTradeRouteGroup::read(CvSavegameReader& reader)
 {
 	reader.AssignClassType(SAVEGAME_CLASS_TRADEROUTEGROUP);
 
@@ -72,7 +72,7 @@ void CvTradeRouteGroup::read(CvSavegameReader reader)
 	
 }
 
-void CvTradeRouteGroup::write(CvSavegameWriter writer)
+void CvTradeRouteGroup::write(CvSavegameWriter& writer) const
 {
 	writer.AssignClassType(SAVEGAME_CLASS_TRADEROUTEGROUP);
 

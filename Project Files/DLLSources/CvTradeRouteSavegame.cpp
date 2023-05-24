@@ -46,7 +46,7 @@ void CvTradeRoute::resetSavedData()
 	m_eYield = defaultYield;
 }
 
-void CvTradeRoute::read(CvSavegameReader reader)
+void CvTradeRoute::read(CvSavegameReader& reader)
 {
 	reader.AssignClassType(SAVEGAME_CLASS_TRADEROUTE);
 
@@ -76,7 +76,7 @@ void CvTradeRoute::read(CvSavegameReader reader)
 	
 }
 
-void CvTradeRoute::write(CvSavegameWriter writer)
+void CvTradeRoute::write(CvSavegameWriter& writer) const
 {
 	writer.AssignClassType(SAVEGAME_CLASS_TRADEROUTE);
 

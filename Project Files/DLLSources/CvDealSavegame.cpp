@@ -52,7 +52,7 @@ void CvDeal::resetSavedData(int iID, PlayerTypes eFirstPlayer, PlayerTypes eSeco
 	m_eSecondPlayer = eSecondPlayer;
 }
 
-void CvDeal::read(CvSavegameReader reader)
+void CvDeal::read(CvSavegameReader& reader)
 {
 	reader.AssignClassType(SAVEGAME_CLASS_DEAL);
 
@@ -87,7 +87,7 @@ void CvDeal::read(CvSavegameReader reader)
 	
 }
 
-void CvDeal::write(CvSavegameWriter writer)
+void CvDeal::write(CvSavegameWriter& writer) const
 {
 	writer.AssignClassType(SAVEGAME_CLASS_DEAL);
 

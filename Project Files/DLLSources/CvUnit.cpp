@@ -16639,7 +16639,7 @@ void CvUnit::read(FDataStreamBase* pStream)
 	read(reader);
 }
 
-void CvUnit::write(FDataStreamBase* pStream)
+void CvUnit::write(FDataStreamBase* pStream) const
 {
 	CvSavegameWriterBase writerbase(pStream);
 	CvSavegameWriter writer(writerbase);

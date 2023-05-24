@@ -85,7 +85,7 @@ void CvTalkingHeadMessage::resetSavedData()
 	m_bShown = defaultShown;
 }
 
-void CvTalkingHeadMessage::read(CvSavegameReader reader)
+void CvTalkingHeadMessage::read(CvSavegameReader& reader)
 {
 	reader.AssignClassType(SAVEGAME_CLASS_TALKINGHEADMESSAGE);
 
@@ -125,7 +125,7 @@ void CvTalkingHeadMessage::read(CvSavegameReader reader)
 	
 }
 
-void CvTalkingHeadMessage::write(CvSavegameWriter writer)
+void CvTalkingHeadMessage::write(CvSavegameWriter& writer) const
 {
 	writer.AssignClassType(SAVEGAME_CLASS_TALKINGHEADMESSAGE);
 

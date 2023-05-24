@@ -262,6 +262,10 @@ void CvSavegameReader::Read(char& variable)
 	Read((byte*)&variable, sizeof(char));
 }
 
+void CvSavegameReader::Read(wchar& variable)
+{
+	Read((byte*)&variable, sizeof(wchar));
+}
 
 void CvSavegameReader::Read(unsigned int& variable)
 {
@@ -645,7 +649,7 @@ void CvSavegameWriter::Write(SavegameVariableTypes eType, const CvTurnScoreMap& 
 	if(iSize>0){
 		Write(eType);
 		Write(iSize);
-		for (CvTurnScoreMap::const_iterator it = Map.begin(); it != Map.end(); ++it)
+		for (auto it = Map.begin(); it != Map.end(); ++it)
 		{
 			Write(it->first);
 			Write(it->second);
@@ -653,13 +657,13 @@ void CvSavegameWriter::Write(SavegameVariableTypes eType, const CvTurnScoreMap& 
 	}
 }
 
-void CvSavegameWriter::Write(SavegameVariableTypes eType, CvEventMap& Map)
+void CvSavegameWriter::Write(SavegameVariableTypes eType, CvEventMap const& Map)
 {
 	int iSize=Map.size();
 	if(iSize>0){
 		Write(eType);
 		Write(iSize);
-		for (CvEventMap::iterator it = Map.begin(); it != Map.end(); ++it)
+		for (auto it = Map.begin(); it != Map.end(); ++it)
 		{
 			Write(it->first);
 			Write(it->second);
@@ -667,7 +671,7 @@ void CvSavegameWriter::Write(SavegameVariableTypes eType, CvEventMap& Map)
 	}
 }
 
-void CvSavegameWriter::Write(SavegameVariableTypes eType, CvRandom& rand)
+void CvSavegameWriter::Write(SavegameVariableTypes eType, CvRandom const& rand)
 {
 	Write(eType);
 	Write(rand);
@@ -774,18 +778,18 @@ void CvSavegameWriter::WriteXmlEnum(int iVariable, JITarrayTypes eType)
 	}
 }
 
-void CvSavegameWriter::Write(const Coordinates &variable)
+void CvSavegameWriter::Write(Coordinates const& variable)
 {
 	Write(variable.m_iX);
 	Write(variable.m_iY);
 }
 
-void CvSavegameWriter::Write(FVariable            &variable) { variable.write(*this); }
-void CvSavegameWriter::Write(CvDiploParameters    &variable) { variable.write(*this); }
-void CvSavegameWriter::Write(CvPopupButtonPython  &variable) { variable.write(*this); }
-void CvSavegameWriter::Write(CvPopupInfo          &variable) { variable.write(*this); }
-void CvSavegameWriter::Write(CvTalkingHeadMessage &variable) { variable.write(*this); }
-void CvSavegameWriter::Write(CvTradeRouteGroup    &variable) { variable.write(*this); }
+void CvSavegameWriter::Write(FVariable            const& variable) { variable.write(*this); }
+void CvSavegameWriter::Write(CvDiploParameters    const& variable) { variable.write(*this); }
+void CvSavegameWriter::Write(CvPopupButtonPython  const& variable) { variable.write(*this); }
+void CvSavegameWriter::Write(CvPopupInfo          const& variable) { variable.write(*this); }
+void CvSavegameWriter::Write(CvTalkingHeadMessage const& variable) { variable.write(*this); }
+void CvSavegameWriter::Write(CvTradeRouteGroup    const& variable) { variable.write(*this); }
 
 
 ///
@@ -1053,7 +1057,7 @@ void CvSavegameWriterBase::WriteTableString(const char *szString)
 }
 
 
-inline void FVariable::read(CvSavegameReader reader)
+inline void FVariable::read(CvSavegameReader& reader)
 {
 	reader.Read(m_eType);
 	if (m_eType==FVARTYPE_STRING)
@@ -1065,7 +1069,7 @@ inline void FVariable::read(CvSavegameReader reader)
 		reader.Read(m_dValue);		// read the maximum size of the union
 }
 
-inline void FVariable::write(CvSavegameWriter writer)
+inline void FVariable::write(CvSavegameWriter& writer) const
 {
 	writer.Write(m_eType);
 	if (m_eType==FVARTYPE_STRING)

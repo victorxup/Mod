@@ -63,7 +63,7 @@ void CvUnitAI::AI_resetSavedData()
 	m_iAutomatedAbortTurn =  defaultAutomatedAbortTurn;
 }
 
-void CvUnitAI::read(CvSavegameReader reader)
+void CvUnitAI::read(CvSavegameReader& reader)
 {
 	reader.AssignClassType(SAVEGAME_CLASS_UNIT_AI);
 
@@ -99,7 +99,7 @@ void CvUnitAI::read(CvSavegameReader reader)
 
 }
 
-void CvUnitAI::write(CvSavegameWriter writer)
+void CvUnitAI::write(CvSavegameWriter& writer) const
 {
 	writer.AssignClassType(SAVEGAME_CLASS_UNIT_AI);
 

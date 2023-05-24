@@ -250,7 +250,7 @@ void CvGame::resetSavedData(HandicapTypes eHandicap, bool bConstructorCall)
 	m_eCultureVictoryCultureLevel = defaultCultureVictoryCultureLevel;
 }
 
-void CvGame::read(CvSavegameReader reader)
+void CvGame::read(CvSavegameReader& reader)
 {
 	reader.AssignClassType(SAVEGAME_CLASS_GAME);
 
@@ -361,7 +361,7 @@ void CvGame::read(CvSavegameReader reader)
 	}
 }
 
-void CvGame::write(CvSavegameWriter writer)
+void CvGame::write(CvSavegameWriter& writer) const
 {
 	writer.AssignClassType(SAVEGAME_CLASS_GAME);
 

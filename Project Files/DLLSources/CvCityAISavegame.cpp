@@ -136,7 +136,7 @@ m_em_eBestBuild.reset();
 
 }
 
-void CvCityAI::read(CvSavegameReader reader)
+void CvCityAI::read(CvSavegameReader& reader)
 {
 	reader.AssignClassType(SAVEGAME_CLASS_CITY_AI);
 
@@ -199,7 +199,7 @@ void CvCityAI::read(CvSavegameReader reader)
 
 }
 
-void CvCityAI::write(CvSavegameWriter writer)
+void CvCityAI::write(CvSavegameWriter& writer) const
 {
 	writer.AssignClassType(SAVEGAME_CLASS_CITY_AI);
 

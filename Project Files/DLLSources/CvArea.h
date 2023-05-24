@@ -99,8 +99,8 @@ protected:
 	EnumMap<BonusTypes, int> m_em_iNumBonuses;
 	EnumMap<ImprovementTypes, int> m_em_iNumImprovements;
 public:
-	void read(CvSavegameReader reader);
-	void write(CvSavegameWriter writer);
+	void read(CvSavegameReader& reader);
+	void write(CvSavegameWriter& writer) const;
 };
 
 inline int  CvArea :: getID()                                   const { return m_iID; }

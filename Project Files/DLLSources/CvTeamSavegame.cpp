@@ -133,7 +133,7 @@ void CvTeam::resetSavedData(TeamTypes eID)
 		m_aeRevealedBonuses.clear();
 }
 
-void CvTeam::read(CvSavegameReader reader)
+void CvTeam::read(CvSavegameReader& reader)
 {
 	reader.AssignClassType(SAVEGAME_CLASS_TEAM);
 
@@ -187,7 +187,7 @@ void CvTeam::read(CvSavegameReader reader)
 	
 }
 
-void CvTeam::write(CvSavegameWriter writer)
+void CvTeam::write(CvSavegameWriter& writer) const
 {
 	writer.AssignClassType(SAVEGAME_CLASS_TEAM);
 

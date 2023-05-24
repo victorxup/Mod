@@ -456,7 +456,7 @@ void CvCity::resetSavedData(int iID, PlayerTypes eOwner, Coordinates resetCoord,
 	m_iOppressometerGrowthModifier = defaultOppressometerGrowthModifier;
 }
 
-void CvCity::read(CvSavegameReader reader)
+void CvCity::read(CvSavegameReader& reader)
 {
 	reader.AssignClassType(SAVEGAME_CLASS_CITY);
 
@@ -628,7 +628,7 @@ void CvCity::read(CvSavegameReader reader)
 
 }
 
-void CvCity::write(CvSavegameWriter writer)
+void CvCity::write(CvSavegameWriter& writer) const
 {
 	writer.AssignClassType(SAVEGAME_CLASS_CITY);
 

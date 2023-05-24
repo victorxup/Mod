@@ -77,7 +77,7 @@ void CvArea::reset()
 	}
 }
 
-void CvArea::read(CvSavegameReader reader)
+void CvArea::read(CvSavegameReader& reader)
 {
 	reader.AssignClassType(SAVEGAME_CLASS_AREA);
 
@@ -137,7 +137,7 @@ void CvArea::read(CvSavegameReader reader)
 
 }
 
-void CvArea::write(CvSavegameWriter writer)
+void CvArea::write(CvSavegameWriter& writer) const
 {
 	writer.AssignClassType(SAVEGAME_CLASS_AREA);
 

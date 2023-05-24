@@ -63,7 +63,7 @@ void CvSelectionGroupAI::AI_resetSavedData()
 	m_iGroupAttackY = defaultGroupAttackY;
 }
 
-void CvSelectionGroupAI::read(CvSavegameReader reader)
+void CvSelectionGroupAI::read(CvSavegameReader& reader)
 {
 	reader.AssignClassType(SAVEGAME_CLASS_SELECTIONGROUP_AI);
 
@@ -97,7 +97,7 @@ void CvSelectionGroupAI::read(CvSavegameReader reader)
 	
 }
 
-void CvSelectionGroupAI::write(CvSavegameWriter writer)
+void CvSelectionGroupAI::write(CvSavegameWriter& writer) const
 {
 	writer.AssignClassType(SAVEGAME_CLASS_SELECTIONGROUP_AI);
 

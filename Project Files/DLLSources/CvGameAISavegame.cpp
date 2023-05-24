@@ -37,7 +37,7 @@ void CvGameAI::AI_resetSavedData()
 	m_iPad = defaultPad;
 }
 
-void CvGameAI::read(CvSavegameReader reader)
+void CvGameAI::read(CvSavegameReader& reader)
 {
 	reader.AssignClassType(SAVEGAME_CLASS_GAME_AI);
 	// Init data before load
@@ -64,7 +64,7 @@ void CvGameAI::read(CvSavegameReader reader)
 
 }
 
-void CvGameAI::write(CvSavegameWriter writer)
+void CvGameAI::write(CvSavegameWriter& writer) const
 {
 	writer.AssignClassType(SAVEGAME_CLASS_GAME_AI);
 

@@ -230,7 +230,7 @@ void CvPlot::resetSavedData()
 	m_aeRevealedImprovementRouteTypes.reset();
 }
 
-void CvPlot::read(CvSavegameReader reader)
+void CvPlot::read(CvSavegameReader& reader)
 {
 	reader.AssignClassType(SAVEGAME_CLASS_PLOT);
 
@@ -369,7 +369,7 @@ void CvPlot::read(CvSavegameReader reader)
 	setUnitVisibilityBonusCache();
 }
 
-void CvPlot::write(CvSavegameWriter writer)
+void CvPlot::write(CvSavegameWriter& writer) const
 {
 	writer.AssignClassType(SAVEGAME_CLASS_PLOT);
 

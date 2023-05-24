@@ -6722,7 +6722,7 @@ void CvGame::read(FDataStreamBase* pStream)
 	read(reader);
 }
 
-void CvGame::write(FDataStreamBase* pStream)
+void CvGame::write(FDataStreamBase* pStream) const
 {
 	CvSavegameWriterBase writerbase(pStream);
 	CvSavegameWriter writer(writerbase);

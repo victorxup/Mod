@@ -212,7 +212,7 @@ void CvPlayerAI::AI_resetSavedData()
 
 }
 
-void CvPlayerAI::read(CvSavegameReader reader)
+void CvPlayerAI::read(CvSavegameReader& reader)
 {
 	reader.AssignClassType(SAVEGAME_CLASS_PLAYER_AI);
 
@@ -293,7 +293,7 @@ void CvPlayerAI::read(CvSavegameReader reader)
 
 }
 
-void CvPlayerAI::write(CvSavegameWriter writer)
+void CvPlayerAI::write(CvSavegameWriter& writer) const
 {
 	writer.AssignClassType(SAVEGAME_CLASS_PLAYER_AI);
 
