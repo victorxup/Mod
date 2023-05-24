@@ -68,9 +68,7 @@ enum ResourceLayerOptions
 	RESOURCE_LAYER_NATIVE_TRAIN,
 	RESOURCE_LAYER_RESOURCES,
 
-#ifdef _USRDLL
 	NUM_RESOURCE_LAYERS,
-#endif
 };
 
 enum UnitLayerOptionTypes
@@ -81,9 +79,7 @@ enum UnitLayerOptionTypes
 	SHOW_ENEMIES,
 	SHOW_PLAYER_DOMESTICS,
 
-#ifdef _USRDLL
 	NUM_UNIT_LAYER_OPTION_TYPES
-#endif
 };
 
 
@@ -110,9 +106,7 @@ enum DirectionTypes
 	DIRECTION_WEST,
 	DIRECTION_NORTHWEST,
 
-#ifdef _USRDLL
 	NUM_DIRECTION_TYPES,
-#endif
 
 	DIRECTION_NORTH_MASK = 1 << DIRECTION_NORTH,
 	DIRECTION_NORTHEAST_MASK = 1 << DIRECTION_NORTHEAST,
@@ -135,9 +129,7 @@ enum CardinalDirectionTypes
 	CARDINALDIRECTION_SOUTH,
 	CARDINALDIRECTION_WEST,
 
-#ifdef _USRDLL
 	NUM_CARDINALDIRECTION_TYPES
-#endif
 };
 
 enum RotationTypes
@@ -182,9 +174,7 @@ enum WrapDirection
 	WRAP_UP,
 	WRAP_DOWN,
 
-#ifdef _USRDLL
 	NUM_WRAP_DIRECTIONS,
-#endif
 
 	WRAP_LEFT_MASK = 1 << WRAP_LEFT,
 	WRAP_RIGHT_MASK = 1 << WRAP_RIGHT,
@@ -269,9 +259,7 @@ enum InterfaceMessageTypes
 	MESSAGE_TYPE_QUEST,
 	MESSAGE_TYPE_TUTORIAL,
 
-#ifdef _USRDLL
 	NUM_INTERFACE_MESSAGE_TYPES
-#endif
 };
 
 enum FlyoutTypes
@@ -299,9 +287,7 @@ enum MinimapModeTypes
 	MINIMAPMODE_REPLAY,
 	MINIMAPMODE_MILITARY,
 
-#ifdef _USRDLL
 	NUM_MINIMAPMODE_TYPES
-#endif
 };
 
 enum EngineDirtyBits
@@ -311,9 +297,7 @@ enum EngineDirtyBits
 	MinimapTexture_DIRTY_BIT,
 	CultureBorders_DIRTY_BIT,
 
-#ifdef _USRDLL
 	NUM_ENGINE_DIRTY_BITS
-#endif
 };
 
 enum InterfaceDirtyBits
@@ -355,9 +339,7 @@ enum InterfaceDirtyBits
 	AfricaScreen_DIRTY_BIT, /***TRIANGLETRADE 10/23/08 by DPII ***/
 	PortRoyalScreen_DIRTY_BIT, // R&R, ray, Port Royal
 
-#ifdef _USRDLL
 	NUM_INTERFACE_DIRTY_BITS
-#endif
 };
 enum WidgetTypes
 {
@@ -504,9 +486,7 @@ enum WidgetTypes
 	WIDGET_HELP_HARBOUR_SYSTEM, // WTP, ray, Widgets for Harbour System and Barracks System - START
 	WIDGET_HELP_BARRACKS_SYSTEM, // WTP, ray, Widgets for Harbour System and Barracks System - START
 
-#ifdef _USRDLL
 	NUM_WIDGET_TYPES
-#endif
 };
 
 enum HelpTextTypes
@@ -581,9 +561,7 @@ enum ButtonPopupTypes
 	BUTTONPOPUP_DESYNC_LOG_COMPLETE, // desync log
 	BUTTONPOPUP_NETWORK_OOS_MENU,
 
-#ifdef _USRDLL
 	NUM_BUTTONPOPUP_TYPES
-#endif
 };
 
 enum CustomMapOptionTypes
@@ -668,9 +646,8 @@ enum GameOptionTypes
 	GAMEOPTION_NO_WILD_SEA_ANIMALS, // < JAnimals Mod Start >
 	GAMEOPTION_REDUCED_CITY_DISTANCE, /// reduced city distance - Nightinggale
 	GAMEOPTION_ONLY_ONE_COLONIST_PER_VILLAGE, // WTP, ray, Game Option only 1 Colonist living in Village - START
-#ifdef _USRDLL
+
 	NUM_GAMEOPTION_TYPES
-#endif
 };
 */
 
@@ -680,9 +657,7 @@ enum SpecialOptionTypes
 
 	SPECIALOPTION_REPORT_STATS,
 
-#ifdef _USRDLL
 	NUM_SPECIALOPTION_TYPES
-#endif
 };
 
 enum TileArtTypes
@@ -730,9 +705,7 @@ enum CitySizeTypes
 	CITYSIZE_MEDIUM,
 	CITYSIZE_LARGE,
 
-#ifdef _USRDLL
 	NUM_CITYSIZE_TYPES
-#endif
 };
 
 enum FootstepAudioTypes
@@ -760,9 +733,7 @@ enum VoiceTargetTypes
 	VOICETARGET_TEAM,
 	VOICETARGET_ALL,
 
-#ifdef _USRDLL
 	NUM_VOICETARGETS
-#endif
 };
 
 enum TeamTypes
@@ -791,9 +762,7 @@ enum OrderTypes
 	ORDER_CONSTRUCT,
 	ORDER_CONVINCE,
 
-#ifdef _USRDLL
 	NUM_ORDER_TYPES
-#endif
 };
 
 enum TaskTypes
@@ -835,9 +804,7 @@ enum TaskTypes
 	TASK_AUTO_TRADEROUTE, // auto traderoute - Nightinggale
 	TASK_CHOOSE_CITY_PLOT_YIELD,
 
-#ifdef _USRDLL
 	NUM_TASK_TYPES
-#endif
 };
 
 enum PlayerActionTypes
@@ -878,9 +845,7 @@ enum PlayerActionTypes
 	PLAYER_ACTION_NETWORK_canDoEvent,
 	PLAYER_ACTION_NETWORK_canDoGoody,
 
-#ifdef _USRDLL
 	NUM_PLAYER_ACTION_TYPES
-#endif
 };
 
 enum AxisTypes
@@ -898,9 +863,7 @@ enum InfoBarTypes
 	INFOBAR_RATE_EXTRA,
 	INFOBAR_EMPTY,
 
-#ifdef _USRDLL
 	NUM_INFOBAR_TYPES
-#endif
 };
 
 enum HealthBarTypes
@@ -909,9 +872,7 @@ enum HealthBarTypes
 	HEALTHBAR_ALIVE_DEFEND,
 	HEALTHBAR_DEAD,
 
-#ifdef _USRDLL
 	NUM_HEALTHBAR_TYPES
-#endif
 };
 
 
@@ -945,9 +906,7 @@ enum UnitAITypes
 	UNITAI_ESCORT_SEA, // TAC - AI Assault Sea - koma13
 	UNITAI_TRANSPORT_COAST,
 
-#ifdef _USRDLL
 	NUM_UNITAI_TYPES
-#endif
 };
 
 enum InvisibleTypes
@@ -955,9 +914,7 @@ enum InvisibleTypes
 	NO_INVISIBLE = -1,
 	INVISIBLE_RANGER, // R&R, ray, Rangers
 
-#ifdef _USRDLL
 	NUM_INVISIBLE_TYPES
-#endif
 };
 */
 
@@ -969,9 +926,7 @@ enum ProbabilityTypes
 	PROBABILITY_REAL,
 	PROBABILITY_HIGH,
 
-#ifdef _USRDLL
 	NUM_PROBABILITY_TYPES
-#endif
 };
 
 enum ActivityTypes
@@ -985,9 +940,7 @@ enum ActivityTypes
 	ACTIVITY_SENTRY,
 	ACTIVITY_MISSION,
 
-#ifdef _USRDLL
 	NUM_ACTIVITY_TYPES
-#endif
 };
 
 /*
@@ -1006,9 +959,7 @@ enum AutomateTypes
 	AUTOMATE_WORKER_SEA, //TAC Whaling, ray
 	AUTOMATE_FULL,
 
-#ifdef _USRDLL
 	NUM_AUTOMATE_TYPES
-#endif
 };
 
 // any additions need to be reflected in GlobalTypes.xml
@@ -1043,9 +994,7 @@ enum MissionTypes
 	MISSION_WHALING, //TAC Whaling, ray
 	MISSION_FISHING, // R&R, ray, High Sea Fishing
 
-#ifdef _USRDLL
 	NUM_MISSION_TYPES
-#endif
 };
 */
 
@@ -1084,9 +1033,7 @@ enum MissionAITypes
 	MISSIONAI_SAIL_TO_PORT_ROYAL,
 	MISSIONAI_SAIL_FROM_PORT_ROYAL,
 
-#ifdef _USRDLL
 	NUM_MISSIONAI_TYPES
-#endif
 };
 
 /*
@@ -1136,9 +1083,7 @@ enum CommandTypes
 	COMMAND_MERGE_TREASURES, // WTP, merge treasures, of Raubwuerger
 	COMMAND_ESTABLISH_TRADE_POST, // WTP, ray, Native Trade Posts - START
 
-#ifdef _USRDLL
 	NUM_COMMAND_TYPES
-#endif
 };
 */
 
@@ -1238,9 +1183,7 @@ enum ControlTypes
 	CONTROL_AFRICA_SCREEN, /*** TRIANGLETRADE 10/31/08 by DPII ***
 	CONTROL_PORT_ROYAL_SCREEN, // R&R, ray, Port Royal
 
-#ifdef _USRDLL
 	NUM_CONTROL_TYPES
-#endif
 };
 */
 
@@ -1257,9 +1200,7 @@ enum WarPlanTypes
 	WARPLAN_DOGPILE,
 	WARPLAN_EXTORTION,
 
-#ifdef _USRDLL
 	NUM_WARPLAN_TYPES,
-#endif
 	COMPILE_TIME_NUM_WARPLAN_TYPES = NUM_WARPLAN_TYPES,
 };
 
@@ -1275,9 +1216,7 @@ enum AreaAITypes
 	AREAAI_ASSAULT_MASSING,
 	AREAAI_NEUTRAL,
 
-#ifdef _USRDLL
 	NUM_AREAAI_TYPES,
-#endif
 	COMPILE_TIME_NUM_AREAAI_TYPES = NUM_AREAAI_TYPES,
 };
 
@@ -1291,9 +1230,7 @@ enum EmotionTypes
 	EMOTION_ANXIETY,
 	EMOTION_SUBMISSION,
 
-#ifdef _USRDLL
 	NUM_EMOTION_TYPES,
-#endif
 	COMPILE_TIME_NUM_EMOTION_TYPES = NUM_EMOTION_TYPES,
 };
 
@@ -1316,9 +1253,8 @@ enum StrategyTypes
 	STRATEGY_REVOLUTION_PREPARING,
 	STRATEGY_REVOLUTION_DECLARING,
 	STRATEGY_REVOLUTION,
-#ifdef _USRDLL
+
 	NUM_STRATEGY_TYPES,
-#endif
 	COMPILE_TIME_NUM_STRATEGY_TYPES = NUM_STRATEGY_TYPES,
 
 };
@@ -1329,9 +1265,7 @@ enum EndTurnButtonStates
 	END_TURN_OVER_HIGHLIGHT,
 	END_TURN_OVER_DARK,
 
-#ifdef _USRDLL
 	NUM_END_TURN_STATES
-#endif
 };
 
 enum FogOfWarModeTypes
@@ -1340,9 +1274,7 @@ enum FogOfWarModeTypes
 	FOGOFWARMODE_UNEXPLORED,
 	FOGOFWARMODE_NOVIS,
 
-#ifdef _USRDLL
 	NUM_FOGOFWARMODE_TYPES
-#endif
 };
 
 enum FogTypes
@@ -1469,9 +1401,7 @@ enum FunctionTypes
 	FUNC_EULERKEY,	// = NiAnimationKey::EULERKEY,
 	FUNC_STEPKEY,	// = NiAnimationKey::STEPKEY,
 
-#ifdef _USRDLL
 	NUM_FUNC_TYPES	// = NiAnimationKey::NUMKEYTYPES
-#endif
 };
 
 enum TradeableItems
@@ -1485,22 +1415,17 @@ enum TradeableItems
 	TRADE_PERMANENT_ALLIANCE,
 	TRADE_PEACE_TREATY,
 
-#ifdef _USRDLL
 	NUM_BASIC_ITEMS,
 	TRADE_YIELD = NUM_BASIC_ITEMS,
-#else
-	TRADE_YIELD,
-#endif
+
 	TRADE_CITIES,
 	TRADE_PEACE,
 	TRADE_WAR,
 	TRADE_EMBARGO,
 
-#ifdef _USRDLL
 	NUM_TRADEABLE_HEADINGS,
 
 	NUM_TRADEABLE_ITEMS = NUM_TRADEABLE_HEADINGS,
-#endif
 };
 
 enum DiploEventTypes
@@ -1562,9 +1487,7 @@ enum DiploEventTypes
 	DIPLOEVENT_NATIVE_TRADE, // R&R, ray, Natives Trading
 	DIPLOEVENT_FOUND_CITY_CHECK_NATIVES,
 
-#ifdef _USRDLL
 	NUM_DIPLOEVENT_TYPES
-#endif
 };
 
 enum DiploCommentTypes
@@ -1572,9 +1495,7 @@ enum DiploCommentTypes
 	NO_DIPLOCOMMENT = -1,
 	//DiploCommentTypes is used as DiplomacyTypes, but cant be changed because of the exe.
 	//For the Savegame to write the right size the variables force the enum to have the right width
-	#ifdef _USRDLL
 	NUM_DIPLOCOMMENT_TYPES = COMPILE_TIME_NUM_DIPLOMACY_TYPES,
-	#endif
 
 	COMPILE_TIME_NUM_DIPLOCOMMENT_TYPES = NUM_DIPLOCOMMENT_TYPES
 };
@@ -1587,9 +1508,7 @@ enum NetContactTypes
 	NETCONTACT_ESTABLISHED,
 	NETCONTACT_BUSY,
 
-#ifdef _USRDLL
 	NUM_NETCONTACT_TYPES
-#endif
 };
 
 enum ContactTypes
@@ -1609,9 +1528,7 @@ enum ContactTypes
 	CONTACT_NATIVE_RAID,
 	// R&R, ray, Natives raiding party - END
 
-#ifdef _USRDLL
 	NUM_CONTACT_TYPES,
-#endif
 
 	COMPILE_TIME_NUM_CONTACT_TYPES = NUM_CONTACT_TYPES,
 
@@ -1635,9 +1552,7 @@ enum LeaderheadAction
 	LEADERANIM_PINKY_ACCEPT,
 	LEADERANIM_PINKY_REJECT,
 
-#ifdef _USRDLL
 	NUM_LEADERANIM_TYPES			//!< The number of leaderhead event types
-#endif
 };
 
 enum DiplomacyPowerTypes
@@ -1647,9 +1562,7 @@ enum DiplomacyPowerTypes
 	DIPLOMACYPOWER_EQUAL,
 	DIPLOMACYPOWER_STRONGER,
 
-#ifdef _USRDLL
 	NUM_DIPLOMACYPOWER_TYPES
-#endif
 };
 
 enum FeatTypes
@@ -1665,9 +1578,7 @@ enum FeatTypes
 	FEAT_CITY_SCREEN,
 	FEAT_PAD,
 
-#ifdef _USRDLL
 	NUM_FEAT_TYPES,
-#endif
 
 	COMPILE_TIME_NUM_FEAT_TYPES = NUM_FEAT_TYPES
 
@@ -1687,9 +1598,7 @@ enum SaveGameTypes
 	SAVEGAME_PBEM,
 	SAVEGAME_REPLAY,
 
-#ifdef _USRDLL
 	NUM_SAVEGAME_TYPES
-#endif
 };
 
 enum InitializationStates
@@ -1697,9 +1606,7 @@ enum InitializationStates
 	INIT_OK,
 	INIT_FAILED,
 
-#ifdef _USRDLL
 	NUM_INIT_STATES
-#endif
 };
 
 enum GameType
@@ -1720,9 +1627,7 @@ enum GameType
 	GAME_PBEM_LOAD,
 	GAME_REPLAY,
 
-#ifdef _USRDLL
 	NUM_GAMETYPES
-#endif
 };
 
 enum GameMode
@@ -1732,9 +1637,7 @@ enum GameMode
 	GAMEMODE_NORMAL,
 	GAMEMODE_PITBOSS,
 
-#ifdef _USRDLL
 	NUM_GAMEMODES
-#endif
 };
 
 enum GamePwdTypes
@@ -1745,9 +1648,7 @@ enum GamePwdTypes
 	PWD_SCENARIO,
 	PWD_JOINGAME,
 
-#ifdef _USRDLL
 	NUM_PWDTYPES
-#endif
 };
 
 enum SlotClaim
@@ -1756,9 +1657,7 @@ enum SlotClaim
 	SLOTCLAIM_RESERVED,
 	SLOTCLAIM_ASSIGNED,
 
-#ifdef _USRDLL
 	NUM_SLOTCLAIMS
-#endif
 };
 
 enum SlotStatus
@@ -1852,9 +1751,7 @@ enum WorldBuilderPopupTypes
 	WBPOPUP_IMPROVEMENT,
 	WBPOPUP_GAME,
 
-#ifdef _USRDLL
 	NUM_WBPOPUP
-#endif
 };
 
 enum EventType
@@ -2062,9 +1959,7 @@ enum TabGroupTypes
 	TABGROUP_AUDIO,
 	TABGROUP_CLOCK,
 
-#ifdef _USRDLL
 	NUM_TABGROUPS
-#endif
 };
 
 enum ReplayMessageTypes
@@ -2075,9 +1970,7 @@ enum ReplayMessageTypes
 	REPLAY_MESSAGE_CITY_FOUNDED,
 	REPLAY_MESSAGE_PLOT_OWNER_CHANGE,
 
-#ifdef _USRDLL
 	NUM_REPLAY_MESSAGE_TYPES
-#endif
 };
 
 /*------------------------------------------------------------------------------------
@@ -2119,9 +2012,7 @@ enum CivilopediaPageTypes
 	CIVILOPEDIA_PAGE_CONCEPT,
 	CIVILOPEDIA_PAGE_HINTS,
 
-#ifdef _USRDLL
 	NUM_CIVILOPEDIA_PAGE_TYPES
-#endif
 };
 
 enum ActionSubTypes
@@ -2137,9 +2028,7 @@ enum ActionSubTypes
 	ACTIONSUBTYPE_AUTOMATE,
 	ACTIONSUBTYPE_MISSION,
 
-#ifdef _USRDLL
 	NUM_ACTIONSUBTYPES
-#endif
 };
 
 enum GameMessageTypes
@@ -2296,9 +2185,7 @@ enum GraphicLevelTypes
 	GRAPHICLEVEL_CURRENT,
 	GRAPHICLEVEL_BELOW_SPEC,
 
-#ifdef _USRDLL
 	NUM_GRAPHICLEVELS
-#endif
 };
 
 enum AdvancedStartActionTypes
@@ -2316,9 +2203,7 @@ enum AdvancedStartActionTypes
 	ADVANCEDSTARTACTION_VISIBILITY,
 	ADVANCEDSTARTACTION_AUTOMATE,
 
-#ifdef _USRDLL
 	NUM_ADVANCEDSTARTACTIONS
-#endif
 };
 
 enum UnitTravelStates
@@ -2340,9 +2225,7 @@ enum UnitTravelStates
 	UNIT_TRAVEL_STATE_IN_PORT_ROYAL,
 	UNIT_TRAVEL_STATE_FROM_PORT_ROYAL,
 
-#ifdef _USRDLL
 	NUM_UNIT_TRAVEL_STATES
-#endif
 };
 
 enum UnitAIStates
