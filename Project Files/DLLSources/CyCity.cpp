@@ -910,7 +910,7 @@ std::wstring CyCity::getNameKey()
 	return m_pCity ? m_pCity->getNameKey() : L"";
 }
 
-void CyCity::setName(std::wstring szNewValue, bool bFound)
+void CyCity::setName(char const* szNewValue, bool bFound)
 {
 	if (m_pCity)
 		m_pCity->setName(CvWString(szNewValue), bFound);

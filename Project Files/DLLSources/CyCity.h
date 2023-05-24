@@ -220,7 +220,7 @@ public:
 	std::wstring getName();
 	std::wstring getNameForm(int iForm);
 	std::wstring getNameKey();
-	void setName(std::wstring szNewValue, bool bFound);
+	void setName(char const* szNewValue, bool bFound);
 	int getBuildingProduction(int /*BuildingTypes*/ iIndex);
 	void setBuildingProduction(int /*BuildingTypes*/ iIndex, int iNewValue);
 	void changeBuildingProduction(int /*BuildingTypes*/ iIndex, int iChange);
