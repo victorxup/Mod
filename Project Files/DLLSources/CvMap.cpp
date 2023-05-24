@@ -258,7 +258,7 @@ void CvMap::uninit()
 
 	m_areas.uninit();
 
-	FAStar* coastalRouteFinder = &GC.getCoastalRouteFinder();
+	FAStar* coastalRouteFinder = GC.getCoastalRouteFinder();
 	gDLL->getFAStarIFace()->destroy(coastalRouteFinder);
 }
 
@@ -360,7 +360,7 @@ void CvMap::setup()
 	FAStar* coastalRouteFinder = gDLL->getFAStarIFace()->create();
 	FAssert(coastalRouteFinder);
 	GC.setCoastalRouteFinder(coastalRouteFinder);
-	kAStar.Initialize(&GC.getCoastalRouteFinder(), getGridWidthINLINE(), getGridHeightINLINE(), isWrapXINLINE(), isWrapYINLINE(), nullptr, stepHeuristic, stepCost, coastalRouteValid, nullptr, nullptr, nullptr);
+	kAStar.Initialize(GC.getCoastalRouteFinder(), getGridWidthINLINE(), getGridHeightINLINE(), isWrapXINLINE(), isWrapYINLINE(), nullptr, stepHeuristic, stepCost, coastalRouteValid, nullptr, nullptr, nullptr);
 }
 
 

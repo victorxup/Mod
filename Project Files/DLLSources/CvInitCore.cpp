@@ -62,6 +62,7 @@ CvInitCore::CvInitCore()
 	m_aeCustomMapOptions = nullptr;
 	m_abVictories = nullptr;
 
+	m_eMode = NUM_GAMEMODES;
 	reset(NO_GAMEMODE);
 }
 

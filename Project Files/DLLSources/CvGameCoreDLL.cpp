@@ -8,9 +8,16 @@
 #include "FProfiler.h"
 #include "CvDLLInterfaceIFaceBase.h"
 
+// Our version of MSVCPRT is too old to provide this, so we need to shim it.
+extern "C" void __std_terminate() {
+	__builtin_trap();
+}
+
 //
 // operator global new and delete override for gamecore DLL
 //
+// TODO(zig): Re-enable these allocator overrides. Currently, MSVCPRT's symbols collide with ours.
+/*
 void *__cdecl operator new(size_t size)
 {
 	if (gDLL)
@@ -81,6 +88,7 @@ unsigned int memSize(void* a)
 {
 	return gDLL->memSize(a);
 }
+*/
 
 BOOL APIENTRY DllMain(HANDLE hModule,
 					  DWORD  ul_reason_for_call,

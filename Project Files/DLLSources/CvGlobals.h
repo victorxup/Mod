@@ -1537,7 +1537,7 @@ protected:
 		// Erik: Support for coastal route path finding
 		void setCoastalRouteFinder(FAStar* pVal);
 		FAStar* m_coastalRouteFinder;
-		FAStar& getCoastalRouteFinder();
+		FAStar* getCoastalRouteFinder();
 
 		// Erik: These are from K-Mod
 		// more reliable versions of the 'gDLL->xxxKey' functions:

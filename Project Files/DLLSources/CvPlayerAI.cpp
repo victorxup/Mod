@@ -39,7 +39,6 @@
 
 #define DANGER_RANGE				(4)
 #define GREATER_FOUND_RANGE			(5)
-#define CIVIC_CHANGE_DELAY			(25)
 
 // statics
 
@@ -47,10 +46,10 @@ CvPlayerAI* CvPlayerAI::m_aPlayers = nullptr;
 
 void CvPlayerAI::initStatics()
 {
-	m_aPlayers = new CvPlayerAI[MAX_PLAYERS];
-	for (int iI = 0; iI < MAX_PLAYERS; iI++)
+	m_aPlayers = new CvPlayerAI[MAX_PLAYERS]();
+	for (PlayerTypes ePlayer = FIRST_PLAYER; ePlayer < NUM_PLAYER_TYPES; ++ePlayer)
 	{
-		m_aPlayers[iI].m_eID = ((PlayerTypes)iI);
+		m_aPlayers[ePlayer].m_eID = ePlayer;
 	}
 }
 

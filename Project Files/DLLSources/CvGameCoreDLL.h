@@ -8,13 +8,14 @@
 // Author - Mustafa Thamer
 //
 
-//
-// WINDOWS
-//
-#pragma warning( disable: 4530 )	// C++ exception handler used, but unwind semantics are not enabled
+// TODO: Clean up #defines
+#undef _MSC_VER
+#define _MSC_VER 1310
 
-// enable extra warnings
-#pragma warning( 3: 4701 ) // local variable used without being initialized
+#undef _DEBUG
+#undef DEBUG
+#undef NDEBUG
+#define NDEBUG 1
 
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
@@ -34,13 +35,6 @@
 #include <deque>
 
 #define DllExport   __declspec( dllexport )
-
-// The makefile use version 1310 to compile
-// VC use never versions for IntelliSense
-// Used to avoid IntelliSense spamming bogus errors
-#if _MSC_VER == 1310
-# define MakefileCompilation
-#endif
 
 
 //
@@ -72,28 +66,28 @@ public:
 	NiPoint3() {}
 	NiPoint3(float fx, float fy, float fz) : x(fx),y(fy),z(fz) {}
 
-	bool NiPoint3::operator== (const NiPoint3& pt) const
+	bool operator== (const NiPoint3& pt) const
 	{	return (x == pt.x && y == pt.y && z == pt.z);	}
 
-	inline NiPoint3 NiPoint3::operator+ (const NiPoint3& pt) const
+	inline NiPoint3 operator+ (const NiPoint3& pt) const
 	{	return NiPoint3(x+pt.x,y+pt.y,z+pt.z);	}
 
-	inline NiPoint3 NiPoint3::operator- (const NiPoint3& pt) const
+	inline NiPoint3 operator- (const NiPoint3& pt) const
 	{	return NiPoint3(x-pt.x,y-pt.y,z-pt.z);	}
 
-	inline float NiPoint3::operator* (const NiPoint3& pt) const
+	inline float operator* (const NiPoint3& pt) const
 	{	return x*pt.x+y*pt.y+z*pt.z;	}
 
-	inline NiPoint3 NiPoint3::operator* (float fScalar) const
+	inline NiPoint3 operator* (float fScalar) const
 	{	return NiPoint3(fScalar*x,fScalar*y,fScalar*z);	}
 
-	inline NiPoint3 NiPoint3::operator/ (float fScalar) const
+	inline NiPoint3 operator/ (float fScalar) const
 	{
 		float fInvScalar = 1.0f/fScalar;
 		return NiPoint3(fInvScalar*x,fInvScalar*y,fInvScalar*z);
 	}
 
-	inline NiPoint3 NiPoint3::operator- () const
+	inline NiPoint3 operator- () const
 	{	return NiPoint3(-x,-y,-z);	}
 
 	inline float Length() const
@@ -128,7 +122,7 @@ namespace NiAnimationKey
 		STEPKEY,
 		NUMKEYTYPES
 	};
-};
+}
 
 typedef unsigned char    byte;
 typedef unsigned short   word;
@@ -234,7 +228,7 @@ static inline T SetBits(T &x, const int iIndex, const int iNumBits, const T iVal
 //
 // Boost Python
 //
-#ifdef MakefileCompilation
+#pragma push_macro("DEBUG")
 # include <boost/python/list.hpp>
 # include <boost/python/tuple.hpp>
 # include <boost/python/class.hpp>
@@ -242,43 +236,12 @@ static inline T SetBits(T &x, const int iIndex, const int iNumBits, const T iVal
 # include <boost/python/return_value_policy.hpp>
 # include <boost/python/object.hpp>
 # include <boost/python/def.hpp>
+#pragma pop_macro("DEBUG")
+
+#undef BOOST_STATIC_ASSERT
+#define BOOST_STATIC_ASSERT(x) static_assert(x, "BOOST_STATIC_ASSERT")
 
 namespace python = boost::python;
-
-#else
-
-// write some garbage code to kill IntelliSense errors
-// the makefile compiler will never see this
-
-#define BOOST_STATIC_ASSERT(x)
-namespace python
-{
-	class tuple;
-}
-class PyObject;
-
-namespace boost
-{
-	class noncopyable {};
-
-	namespace detail
-	{
-		template< typename T1 >
-		struct is_same_part_1
-		{
-			template<typename T2>  struct part_2 { enum { value = false }; };
-			template<>             struct part_2<T1> { enum { value = true }; };
-		};
-	}
-
-	template< typename T1, typename T2 >
-	struct is_same
-	{
-		enum { value = detail::is_same_part_1<T1>::template part_2<T2>::value };
-	};
-}
-
-#endif // IntelliSense workaround
 
 // setting this to false will provide the path to the exe dir instead
 // this is usually not needed as it's the working directory

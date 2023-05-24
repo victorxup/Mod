@@ -846,7 +846,7 @@ BuildingTypes CvCityAI::AI_bestBuilding(int iFocusFlags, int iMaxTurns, bool bAs
 /// <summary>Determine if there's a coastal route to another city. Both cities must be in different areas (cannot share continent/island)</summary>
 bool CvCityAI::AI_hasCoastalRoute() const
 {
-	gDLL->getFAStarIFace()->ForceReset(&GC.getCoastalRouteFinder());
+	gDLL->getFAStarIFace()->ForceReset(GC.getCoastalRouteFinder());
 
 	// Erik: determine if it makes sense to build a coastal transport
 	CvPlayerAI& kOwner = CvPlayerAI::getPlayer(getOwnerINLINE());
@@ -860,7 +860,7 @@ bool CvCityAI::AI_hasCoastalRoute() const
 			if (waterArea() == pLoopCity->waterArea())
 			{
 				// Check if there's a coastal / cultural route between the cities
-				if (gDLL->getFAStarIFace()->GeneratePath(&GC.getCoastalRouteFinder(), getX_INLINE(), getY_INLINE(), pLoopCity->getX_INLINE(), pLoopCity->getY_INLINE(), false, getOwnerINLINE(), true))
+				if (gDLL->getFAStarIFace()->GeneratePath(GC.getCoastalRouteFinder(), getX_INLINE(), getY_INLINE(), pLoopCity->getX_INLINE(), pLoopCity->getY_INLINE(), false, getOwnerINLINE(), true))
 				{
 					// We found a valid path
 					return true;

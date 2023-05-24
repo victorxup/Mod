@@ -521,16 +521,16 @@ void CvGlobals::init()
 
 	FAssertMsg(gDLL != nullptr, "Civ app needs to set gDLL");
 
-	m_VarSystem = new FVariableSystem;
-	m_asyncRand = new CvRandom;
-	m_initCore = new CvInitCore;
-	m_loadedInitCore = new CvInitCore;
-	m_iniInitCore = new CvInitCore;
+	m_VarSystem = new FVariableSystem();
+	m_asyncRand = new CvRandom();
+	m_initCore = new CvInitCore();
+	m_loadedInitCore = new CvInitCore();
+	m_iniInitCore = new CvInitCore();
 
 	gDLL->initGlobals();	// some globals need to be allocated outside the dll
 
-	m_game = new CvGameAI;
-	m_map = new CvMap;
+	m_game = new CvGameAI();
+	m_map = new CvMap();
 
 	CvPlayerAI::initStatics();
 	CvTeamAI::initStatics();
@@ -734,9 +734,9 @@ FAStar& CvGlobals::getRouteFinder()
 	return *m_routeFinder;
 }
 
-FAStar& CvGlobals::getCoastalRouteFinder()
+FAStar* CvGlobals::getCoastalRouteFinder()
 {
-	return *m_coastalRouteFinder;
+	return m_coastalRouteFinder;
 }
 
 FAStar& CvGlobals::getBorderFinder()
