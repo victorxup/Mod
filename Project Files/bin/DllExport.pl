@@ -39,7 +39,7 @@ my $next_file = shift @txt_lines;
 
 opendir(DIR, $dir) or die $!;
 
-while (my $file = readdir(DIR))
+foreach my $file (sort {uc($a) cmp uc($b)} readdir(DIR))
 {
 	next unless (-f "$dir/$file");
 	next unless ($file =~ m/\.h$/);
@@ -68,7 +68,7 @@ sub processfile
 		$next_line = shift @txt_lines;
 	}
 
-	open my $handle, '<', $path or die "Failed to open file $file";
+	open my $handle, '<:crlf', $path or die "Failed to open file $file";
 	chomp(my @lines = <$handle>);
 	close $handle;
 
@@ -149,7 +149,7 @@ sub getFirstWord
 
 sub readCPP
 {
-	my $file = 'DLLsources/EXE_interface.cpp';
+	my $file = 'DLLSources/EXE_interface.cpp';
 	open my $info, $file or die "Could not open $file: $!";
 
 	my $class;
@@ -179,7 +179,7 @@ sub readCPP
 		elsif (index($line, "DllExport") != -1)
 		{
 			next if (substr($line, 0, 2) eq "//"); # no need to scan for DllExport in comments
-			die "\nDLLsources/EXE_interface.cpp(" . $i . "): DllExport has wrong indentation\n\n";
+			die "\nDLLSources/EXE_interface.cpp(" . $i . "): DllExport has wrong indentation\n\n";
 		}
 	}
 
@@ -194,7 +194,7 @@ sub testAllFunctionsFound
 		{
 			if ($classes{$class}{$func} != 0)
 			{
-				die "\nDLLsources/EXE_interface.cpp(" . $classes{$class}{$func} . "): DllExport function present, which isn't listed in the vanilla interface\n\n";
+				die "\nDLLSources/EXE_interface.cpp(" . $classes{$class}{$func} . "): DllExport function present, which isn't listed in the vanilla interface\n\n";
 			}
 		}
 	}
@@ -202,7 +202,7 @@ sub testAllFunctionsFound
 
 sub testDEF
 {
-	my $file = 'DLLsources/CvGameCoreDLL.def';
+	my $file = 'DLLSources/CvGameCoreDLL.def';
 	open my $info, $file or die "Could not open $file: $!";
 
 	my $i = 0;
@@ -227,12 +227,12 @@ sub testDEF
 				{
 				# disabled for now as it will complain for redirects of overloaded functions (if multiple overloads are redirected)
 				# @TODO: improve the check to allow overloads
-				#	die "\nDLLsources/CvGameCoreDLL.def(" . $i . "): " . $class . "::" . $func . " is redirected more than once\n\n";
+				#	die "\nDLLSources/CvGameCoreDLL.def(" . $i . "): " . $class . "::" . $func . " is redirected more than once\n\n";
 				}
 			}
 			else
 			{
-				die "\nDLLsources/CvGameCoreDLL.def(" . $i . "): " . $class . "::" . $func . " redirected, but isn't present in EXE_interface.cpp\n\n";
+				die "\nDLLSources/CvGameCoreDLL.def(" . $i . "): " . $class . "::" . $func . " redirected, but isn't present in EXE_interface.cpp\n\n";
 			}
 		}
 	}
@@ -245,7 +245,7 @@ sub testDEF
 		{
 			if ($function_names{$class}{$func} == 1)
 			{
-				die "\nDLLsources/CvGameCoreDLL.def(1): " . $class . "::" . $func . " isn't present, but must be redirected due to being present in EXE_interface.cpp\n\n";
+				die "\nDLLSources/CvGameCoreDLL.def(1): " . $class . "::" . $func . " isn't present, but must be redirected due to being present in EXE_interface.cpp\n\n";
 			}
 		}
 	}
