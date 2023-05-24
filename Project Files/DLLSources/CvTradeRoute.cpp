@@ -166,7 +166,7 @@ void CvTradeRoute::setYield(YieldTypes eYield)
 
 bool CvTradeRoute::checkValid(PlayerTypes ePlayer) const
 {
-	CvPlayer& kPlayer = GET_PLAYER(ePlayer);
+	CvPlayer& kPlayer = CvPlayerAI::getPlayer(ePlayer);
 
 	if (!kPlayer.canLoadYield(getSourceCity().eOwner))
 	{
@@ -205,6 +205,6 @@ void CvTradeRoute::setActiveDirty()
 // Custom_House_Mod Start
 int CvTradeRoute::getBestPortCityID(PlayerTypes ePlayer) const
 {
-	return (GET_PLAYER(ePlayer).AI_findBestPort()->getIDInfo().iID);
+	return (CvPlayerAI::getPlayer(ePlayer).AI_findBestPort()->getIDInfo().iID);
 }
 // Custom_House_Mod End

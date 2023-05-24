@@ -173,8 +173,8 @@ bool FAssertDlg(const char* szExpr, const char* szMsg, const char* szFile, unsig
 	case ASSERT_DLG_STOP:
 		bIgnoreAlways = true;
 		GC.getGameINLINE().setAIAutoPlay(0);
-		GET_PLAYER(GC.getGameINLINE().getActivePlayer()).setDisableHuman(false);
-		GET_PLAYER(GC.getGameINLINE().getActivePlayer()).updateHuman();
+		CvPlayerAI::getPlayer(GC.getGameINLINE().getActivePlayer()).setDisableHuman(false);
+		CvPlayerAI::getPlayer(GC.getGameINLINE().getActivePlayer()).updateHuman();
 		return false;
 
 	case ASSERT_DLG_EXIT:

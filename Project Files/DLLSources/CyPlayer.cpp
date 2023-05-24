@@ -557,7 +557,7 @@ WidgetTypes CyPlayer::getWikiWidget() const
 }
 int CyPlayer::getChar() const
 {
-	return m_pPlayer ? GC.getCivilizationInfo(GET_PLAYER(m_pPlayer->getID()).getCivilizationType()).getMissionaryChar() : -1;
+	return m_pPlayer ? GC.getCivilizationInfo(CvPlayerAI::getPlayer(m_pPlayer->getID()).getCivilizationType()).getMissionaryChar() : -1;
 }
 int /* HandicapTypes */ CyPlayer::getHandicapType()
 {

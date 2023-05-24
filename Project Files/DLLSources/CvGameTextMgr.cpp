@@ -257,21 +257,21 @@ void CvGameTextMgr::setInterfaceTime(CvWString& szString, PlayerTypes ePlayer)
 
 void CvGameTextMgr::setGoldStr(CvWString& szString, PlayerTypes ePlayer)
 {
-	if (GET_PLAYER(ePlayer).getGold() < 0)
+	if (CvPlayerAI::getPlayer(ePlayer).getGold() < 0)
 	{
-		szString.Format(SETCOLR L"%d" SETCOLR, TEXT_COLOR("COLOR_NEGATIVE_TEXT"), GET_PLAYER(ePlayer).getGold());
+		szString.Format(SETCOLR L"%d" SETCOLR, TEXT_COLOR("COLOR_NEGATIVE_TEXT"), CvPlayerAI::getPlayer(ePlayer).getGold());
 	}
 	else
 	{
-		szString.Format(L"%d", GET_PLAYER(ePlayer).getGold());
+		szString.Format(L"%d", CvPlayerAI::getPlayer(ePlayer).getGold());
 	}
 }
 
 void CvGameTextMgr::setOOSSeeds(CvWString& szString, PlayerTypes ePlayer)
 {
-	if (GET_PLAYER(ePlayer).isHuman())
+	if (CvPlayerAI::getPlayer(ePlayer).isHuman())
 	{
-		int iNetID = GET_PLAYER(ePlayer).getNetID();
+		int iNetID = CvPlayerAI::getPlayer(ePlayer).getNetID();
 		if (gDLL->isConnected(iNetID))
 		{
 			szString = gDLL->getText("TXT_KEY_PLAYER_OOS", gDLL->GetSyncOOS(iNetID), gDLL->GetOptionsOOS(iNetID));
@@ -283,11 +283,11 @@ void CvGameTextMgr::setNetStats(CvWString& szString, PlayerTypes ePlayer)
 {
 	if (ePlayer != GC.getGameINLINE().getActivePlayer())
 	{
-		if (GET_PLAYER(ePlayer).isHuman())
+		if (CvPlayerAI::getPlayer(ePlayer).isHuman())
 		{
 			if (gDLL->getInterfaceIFace()->isNetStatsVisible())
 			{
-				int iNetID = GET_PLAYER(ePlayer).getNetID();
+				int iNetID = CvPlayerAI::getPlayer(ePlayer).getNetID();
 				if (gDLL->isConnected(iNetID))
 				{
 					szString = gDLL->getText("TXT_KEY_MISC_NUM_MS", gDLL->GetLastPing(iNetID));
@@ -312,7 +312,7 @@ void CvGameTextMgr::setMinimizePopupHelp(CvWString& szString, const CvPopupInfo 
 	{
 	case BUTTONPOPUP_CHOOSEPRODUCTION:
 		{
-			CvCity* pCity = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCity(info.getData1());
+			CvCity* pCity = CvPlayerAI::getPlayer(GC.getGameINLINE().getActivePlayer()).getCity(info.getData1());
 			if (pCity != nullptr)
 			{
 				UnitTypes eTrainUnit = NO_UNIT;
@@ -347,7 +347,7 @@ void CvGameTextMgr::setMinimizePopupHelp(CvWString& szString, const CvPopupInfo 
 		break;
 	case BUTTONPOPUP_CHOOSE_EDUCATION:
 		{
-			CvPlayer& kPlayer = GET_PLAYER(GC.getGameINLINE().getActivePlayer());
+			CvPlayer& kPlayer = CvPlayerAI::getPlayer(GC.getGameINLINE().getActivePlayer());
 			CvCity* pCity = kPlayer.getCity(info.getData1());
 			CvUnit* pUnit = kPlayer.getUnit(info.getData2());
 			if (pCity != nullptr && pUnit != nullptr)
@@ -363,7 +363,7 @@ void CvGameTextMgr::setMinimizePopupHelp(CvWString& szString, const CvPopupInfo 
 		break;
 	case BUTTONPOPUP_CHOOSE_YIELD_BUILD:
 		{
-			CvPlayer& kPlayer = GET_PLAYER(GC.getGameINLINE().getActivePlayer());
+			CvPlayer& kPlayer = CvPlayerAI::getPlayer(GC.getGameINLINE().getActivePlayer());
 			CvCity* pCity = kPlayer.getCity(info.getData1());
 			if (pCity != nullptr)
 			{
@@ -443,7 +443,7 @@ void CvGameTextMgr::setUnitHelp(CvWStringBuffer &szString, const CvUnit* pUnit, 
 		szString.append(gDLL->getText("TXT_KEY_EUROPE_PRICE_HELP")); // new line to old code
 		szTempBuffer.Format(L"%d%c", pUnit->getYieldStored(), GC.getYieldInfo(pUnit->getYield()).getChar());
 		szString.append(szTempBuffer);
-		int iValue = GET_PLAYER(pUnit->getOwnerINLINE()).getSellToEuropeProfit(pUnit->getYield(), pUnit->getYieldStored());
+		int iValue = CvPlayerAI::getPlayer(pUnit->getOwnerINLINE()).getSellToEuropeProfit(pUnit->getYield(), pUnit->getYieldStored());
 		if (iValue > 0)
 		{
 			szTempBuffer.Format(L" (%d%c)", iValue, GC.getSymbolID(GOLD_CHAR));
@@ -454,7 +454,7 @@ void CvGameTextMgr::setUnitHelp(CvWStringBuffer &szString, const CvUnit* pUnit, 
 		szString.append(gDLL->getText("TXT_KEY_AFRICA_PRICE_HELP")); // new line
 		szTempBuffer.Format(L"%d%c", pUnit->getYieldStored(), GC.getYieldInfo(pUnit->getYield()).getChar());
 		szString.append(szTempBuffer);
-		int iValueAfrica = GET_PLAYER(pUnit->getOwnerINLINE()).getSellToAfricaProfit(pUnit->getYield(), pUnit->getYieldStored());
+		int iValueAfrica = CvPlayerAI::getPlayer(pUnit->getOwnerINLINE()).getSellToAfricaProfit(pUnit->getYield(), pUnit->getYieldStored());
 		if (iValueAfrica > 0)
 		{
 			szTempBuffer.Format(L" (%d%c)", iValueAfrica, GC.getSymbolID(GOLD_CHAR));
@@ -466,7 +466,7 @@ void CvGameTextMgr::setUnitHelp(CvWStringBuffer &szString, const CvUnit* pUnit, 
 		szString.append(gDLL->getText("TXT_KEY_PORT_ROYAL_PRICE_HELP")); // new line
 		szTempBuffer.Format(L"%d%c", pUnit->getYieldStored(), GC.getYieldInfo(pUnit->getYield()).getChar());
 		szString.append(szTempBuffer);
-		int iValuePortRoyal = GET_PLAYER(pUnit->getOwnerINLINE()).getSellToPortRoyalProfit(pUnit->getYield(), pUnit->getYieldStored());
+		int iValuePortRoyal = CvPlayerAI::getPlayer(pUnit->getOwnerINLINE()).getSellToPortRoyalProfit(pUnit->getYield(), pUnit->getYieldStored());
 		if (iValuePortRoyal > 0)
 		{
 			szTempBuffer.Format(L" (%d%c)", iValuePortRoyal, GC.getSymbolID(GOLD_CHAR));
@@ -508,7 +508,7 @@ void CvGameTextMgr::setUnitHelp(CvWStringBuffer &szString, const CvUnit* pUnit, 
 	if (pUnit->getOwnerINLINE() != GC.getGameINLINE().getActivePlayer() && !pUnit->getUnitInfo().isHiddenNationality() && pUnit->getOwnerINLINE() != GC.getGameINLINE().getBarbarianPlayer())
 	{
 		szString.append(L", ");
-		szTempBuffer.Format(SETCOLR L"%s" ENDCOLR, GET_PLAYER(pUnit->getOwnerINLINE()).getPlayerTextColorR(), GET_PLAYER(pUnit->getOwnerINLINE()).getPlayerTextColorG(), GET_PLAYER(pUnit->getOwnerINLINE()).getPlayerTextColorB(), GET_PLAYER(pUnit->getOwnerINLINE()).getPlayerTextColorA(), GET_PLAYER(pUnit->getOwnerINLINE()).getName());
+		szTempBuffer.Format(SETCOLR L"%s" ENDCOLR, CvPlayerAI::getPlayer(pUnit->getOwnerINLINE()).getPlayerTextColorR(), CvPlayerAI::getPlayer(pUnit->getOwnerINLINE()).getPlayerTextColorG(), CvPlayerAI::getPlayer(pUnit->getOwnerINLINE()).getPlayerTextColorB(), CvPlayerAI::getPlayer(pUnit->getOwnerINLINE()).getPlayerTextColorA(), CvPlayerAI::getPlayer(pUnit->getOwnerINLINE()).getName());
 		szString.append(szTempBuffer);
 	}
 
@@ -523,7 +523,7 @@ void CvGameTextMgr::setUnitHelp(CvWStringBuffer &szString, const CvUnit* pUnit, 
 		if(bCanBecomeExpert && lastProfession != NO_PROFESSION && GC.getProfessionInfo(lastProfession).LbD_isUsed() && iLbDRoundsWorked >0)
 		{
 			const int expert = GC.getProfessionInfo(lastProfession).LbD_getExpert();
-			const UnitTypes expertUnitType = (UnitTypes)GC.getCivilizationInfo(GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCivilizationType()).getCivilizationUnits(expert);
+			const UnitTypes expertUnitType = (UnitTypes)GC.getCivilizationInfo(CvPlayerAI::getPlayer(GC.getGameINLINE().getActivePlayer()).getCivilizationType()).getCivilizationUnits(expert);
 			// We need this check Since the current player (e.g. natives) may not have this expert type. (I observed that expertUnitType was -1 when changing to a native player in debug mode
 			// which caused an AV)
 			if (expertUnitType != NO_UNIT)
@@ -547,7 +547,7 @@ void CvGameTextMgr::setUnitHelp(CvWStringBuffer &szString, const CvUnit* pUnit, 
 		if(bCanBecomeExpert && lastProfessionBefore != NO_PROFESSION && GC.getProfessionInfo(lastProfessionBefore).LbD_isUsed() && iLbDRoundsWorkedBefore >0)
 		{
 			const int expertBefore = GC.getProfessionInfo(lastProfessionBefore).LbD_getExpert();
-			const UnitTypes expertUnitTypeBefore = (UnitTypes)GC.getCivilizationInfo(GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCivilizationType()).getCivilizationUnits(expertBefore);
+			const UnitTypes expertUnitTypeBefore = (UnitTypes)GC.getCivilizationInfo(CvPlayerAI::getPlayer(GC.getGameINLINE().getActivePlayer()).getCivilizationType()).getCivilizationUnits(expertBefore);
 			if (expertUnitTypeBefore != NO_UNIT)
 			{
 				szString.append(NEWLINE);
@@ -1012,7 +1012,7 @@ void CvGameTextMgr::setUnitHelp(CvWStringBuffer &szString, const CvUnit* pUnit, 
 		{
 			// hide the colony name if the unit is foreign and has hidden nationality.
 			// If a ship can escape to Jamestown, we know it's English even if it has hidden nationality, hence leaking hidden information.
-			bool bSameTeam = pUnit->getTeam() == GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getTeam();
+			bool bSameTeam = pUnit->getTeam() == CvPlayerAI::getPlayer(GC.getGameINLINE().getActivePlayer()).getTeam();
 			bool bHidden = !bSameTeam && pUnit->getUnitInfo().isHiddenNationality();
 			bool bKnownCity = pEvasionCity->isRevealed(pUnit->getTeam(), true);
 			bool bNoVariablesHidden = GC.getGameINLINE().isOption(GAMEOPTION_NO_MORE_VARIABLES_HIDDEN);
@@ -1352,7 +1352,7 @@ void CvGameTextMgr::setProfessionHelp(CvWStringBuffer &szBuffer, ProfessionTypes
 		int iCombatChange = kProfession.getCombatChange();
 		if (GC.getGameINLINE().getActivePlayer() != NO_PLAYER)
 		{
-			iCombatChange += GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getProfessionCombatChange(eProfession);
+			iCombatChange += CvPlayerAI::getPlayer(GC.getGameINLINE().getActivePlayer()).getProfessionCombatChange(eProfession);
 		}
 		int iMovesChange = kProfession.getMovesChange();
 
@@ -1455,7 +1455,7 @@ void CvGameTextMgr::setProfessionHelp(CvWStringBuffer &szBuffer, ProfessionTypes
 
 	for (int iYield = 0; iYield < NUM_YIELD_TYPES; iYield++)
 	{
-		int iYieldAmount = GC.getGameINLINE().getActivePlayer() != NO_PLAYER ? GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getYieldEquipmentAmount(eProfession, (YieldTypes) iYield) : kProfession.getYieldEquipmentAmount((YieldTypes) iYield);
+		int iYieldAmount = GC.getGameINLINE().getActivePlayer() != NO_PLAYER ? CvPlayerAI::getPlayer(GC.getGameINLINE().getActivePlayer()).getYieldEquipmentAmount(eProfession, (YieldTypes) iYield) : kProfession.getYieldEquipmentAmount((YieldTypes) iYield);
 		if (iYieldAmount != 0)
 		{
 			szTempBuffer.Format(gDLL->getText("TXT_KEY_UNIT_REQUIRES_YIELD_QUANTITY_STRING", iYieldAmount, GC.getYieldInfo((YieldTypes) iYield).getChar()));
@@ -1499,7 +1499,7 @@ void CvGameTextMgr::setPlotListHelp(CvWStringBuffer &szString, const CvPlot* pPl
 					szString.append(CvWString::format(SETCOLR L"%s" ENDCOLR, 255,190,0,255, pHeadUnit->getName().GetCString()));
 					szString.append(CvWString::format(L" (%d)", shortenID(pHeadUnit->getID())));
 					getUnitAIString(szTempString, pHeadUnit->AI_getUnitAIType());
-					szString.append(CvWString::format(SETCOLR L" %s " ENDCOLR, GET_PLAYER(pHeadUnit->getOwnerINLINE()).getPlayerTextColorR(), GET_PLAYER(pHeadUnit->getOwnerINLINE()).getPlayerTextColorG(), GET_PLAYER(pHeadUnit->getOwnerINLINE()).getPlayerTextColorB(), GET_PLAYER(pHeadUnit->getOwnerINLINE()).getPlayerTextColorA(), szTempString.GetCString()));
+					szString.append(CvWString::format(SETCOLR L" %s " ENDCOLR, CvPlayerAI::getPlayer(pHeadUnit->getOwnerINLINE()).getPlayerTextColorR(), CvPlayerAI::getPlayer(pHeadUnit->getOwnerINLINE()).getPlayerTextColorG(), CvPlayerAI::getPlayer(pHeadUnit->getOwnerINLINE()).getPlayerTextColorB(), CvPlayerAI::getPlayer(pHeadUnit->getOwnerINLINE()).getPlayerTextColorA(), szTempString.GetCString()));
 
 					// promotion icons
 					for (int iPromotionIndex = 0; iPromotionIndex < numPromotionInfos; iPromotionIndex++)
@@ -1557,10 +1557,10 @@ void CvGameTextMgr::setPlotListHelp(CvWStringBuffer &szString, const CvPlot* pPl
 					{
 						// mission unit
 						szString.append(L"\n to ");
-						szString.append(CvWString::format(SETCOLR L"%s" ENDCOLR, GET_PLAYER(pMissionUnit->getOwnerINLINE()).getPlayerTextColorR(), GET_PLAYER(pMissionUnit->getOwnerINLINE()).getPlayerTextColorG(), GET_PLAYER(pMissionUnit->getOwnerINLINE()).getPlayerTextColorB(), GET_PLAYER(pMissionUnit->getOwnerINLINE()).getPlayerTextColorA(), pMissionUnit->getName().GetCString()));
+						szString.append(CvWString::format(SETCOLR L"%s" ENDCOLR, CvPlayerAI::getPlayer(pMissionUnit->getOwnerINLINE()).getPlayerTextColorR(), CvPlayerAI::getPlayer(pMissionUnit->getOwnerINLINE()).getPlayerTextColorG(), CvPlayerAI::getPlayer(pMissionUnit->getOwnerINLINE()).getPlayerTextColorB(), CvPlayerAI::getPlayer(pMissionUnit->getOwnerINLINE()).getPlayerTextColorA(), pMissionUnit->getName().GetCString()));
 						szString.append(CvWString::format(L"(%d) G:%d", shortenID(pMissionUnit->getID()), shortenID(pMissionUnit->getGroupID())));
 						getUnitAIString(szTempString, pMissionUnit->AI_getUnitAIType());
-						szString.append(CvWString::format(SETCOLR L" %s" ENDCOLR, GET_PLAYER(pMissionUnit->getOwnerINLINE()).getPlayerTextColorR(), GET_PLAYER(pMissionUnit->getOwnerINLINE()).getPlayerTextColorG(), GET_PLAYER(pMissionUnit->getOwnerINLINE()).getPlayerTextColorB(), GET_PLAYER(pMissionUnit->getOwnerINLINE()).getPlayerTextColorA(), szTempString.GetCString()));
+						szString.append(CvWString::format(SETCOLR L" %s" ENDCOLR, CvPlayerAI::getPlayer(pMissionUnit->getOwnerINLINE()).getPlayerTextColorR(), CvPlayerAI::getPlayer(pMissionUnit->getOwnerINLINE()).getPlayerTextColorG(), CvPlayerAI::getPlayer(pMissionUnit->getOwnerINLINE()).getPlayerTextColorB(), CvPlayerAI::getPlayer(pMissionUnit->getOwnerINLINE()).getPlayerTextColorA(), szTempString.GetCString()));
 					}
 
 					// mission plot
@@ -1607,7 +1607,7 @@ void CvGameTextMgr::setPlotListHelp(CvWStringBuffer &szString, const CvPlot* pPl
 									szString.append(CvWString::format(L"%s of ", szTempString.GetCString()));
 								}
 
-								szString.append(CvWString::format(SETCOLR L"%s" ENDCOLR L")", GET_PLAYER(pCity->getOwnerINLINE()).getPlayerTextColorR(), GET_PLAYER(pCity->getOwnerINLINE()).getPlayerTextColorG(), GET_PLAYER(pCity->getOwnerINLINE()).getPlayerTextColorB(), GET_PLAYER(pCity->getOwnerINLINE()).getPlayerTextColorA(), pCity->getName().GetCString()));
+								szString.append(CvWString::format(SETCOLR L"%s" ENDCOLR L")", CvPlayerAI::getPlayer(pCity->getOwnerINLINE()).getPlayerTextColorR(), CvPlayerAI::getPlayer(pCity->getOwnerINLINE()).getPlayerTextColorG(), CvPlayerAI::getPlayer(pCity->getOwnerINLINE()).getPlayerTextColorB(), CvPlayerAI::getPlayer(pCity->getOwnerINLINE()).getPlayerTextColorA(), pCity->getName().GetCString()));
 							}
 							else
 							{
@@ -1622,7 +1622,7 @@ void CvGameTextMgr::setPlotListHelp(CvWStringBuffer &szString, const CvPlot* pPl
 								PlayerTypes eMissionPlotOwner = pMissionPlot->getOwnerINLINE();
 								if (eMissionPlotOwner != NO_PLAYER)
 								{
-									szString.append(CvWString::format(L", " SETCOLR L"%s" ENDCOLR, GET_PLAYER(eMissionPlotOwner).getPlayerTextColorR(), GET_PLAYER(eMissionPlotOwner).getPlayerTextColorG(), GET_PLAYER(eMissionPlotOwner).getPlayerTextColorB(), GET_PLAYER(eMissionPlotOwner).getPlayerTextColorA(), GET_PLAYER(eMissionPlotOwner).getName()));
+									szString.append(CvWString::format(L", " SETCOLR L"%s" ENDCOLR, CvPlayerAI::getPlayer(eMissionPlotOwner).getPlayerTextColorR(), CvPlayerAI::getPlayer(eMissionPlotOwner).getPlayerTextColorG(), CvPlayerAI::getPlayer(eMissionPlotOwner).getPlayerTextColorB(), CvPlayerAI::getPlayer(eMissionPlotOwner).getPlayerTextColorA(), CvPlayerAI::getPlayer(eMissionPlotOwner).getName()));
 								}
 							}
 						}
@@ -1645,7 +1645,7 @@ void CvGameTextMgr::setPlotListHelp(CvWStringBuffer &szString, const CvPlot* pPl
 								szString.append(CvWString::format(SETCOLR L"\n %s" ENDCOLR, TEXT_COLOR("COLOR_ALT_HIGHLIGHT_TEXT"), pCargoUnit->getName().GetCString()));
 								szString.append(CvWString::format(L"(%d)", shortenID(pCargoUnit->getID())));
 								getUnitAIString(szTempString, pCargoUnit->AI_getUnitAIType());
-								szString.append(CvWString::format(SETCOLR L" %s " ENDCOLR, GET_PLAYER(pCargoUnit->getOwnerINLINE()).getPlayerTextColorR(), GET_PLAYER(pCargoUnit->getOwnerINLINE()).getPlayerTextColorG(), GET_PLAYER(pCargoUnit->getOwnerINLINE()).getPlayerTextColorB(), GET_PLAYER(pCargoUnit->getOwnerINLINE()).getPlayerTextColorA(), szTempString.GetCString()));
+								szString.append(CvWString::format(SETCOLR L" %s " ENDCOLR, CvPlayerAI::getPlayer(pCargoUnit->getOwnerINLINE()).getPlayerTextColorR(), CvPlayerAI::getPlayer(pCargoUnit->getOwnerINLINE()).getPlayerTextColorG(), CvPlayerAI::getPlayer(pCargoUnit->getOwnerINLINE()).getPlayerTextColorB(), CvPlayerAI::getPlayer(pCargoUnit->getOwnerINLINE()).getPlayerTextColorA(), szTempString.GetCString()));
 
 								// promotion icons
 								for (int iPromotionIndex = 0; iPromotionIndex < numPromotionInfos; iPromotionIndex++)
@@ -1675,7 +1675,7 @@ void CvGameTextMgr::setPlotListHelp(CvWStringBuffer &szString, const CvPlot* pPl
 							szString.append(CvWString::format(SETCOLR L"\n-%s" ENDCOLR, TEXT_COLOR("COLOR_UNIT_TEXT"), pUnit->getName().GetCString()));
 							szString.append(CvWString::format(L" (%d)", shortenID(pUnit->getID())));
 							getUnitAIString(szTempString, pUnit->AI_getUnitAIType());
-							szString.append(CvWString::format(SETCOLR L" %s " ENDCOLR, GET_PLAYER(pUnit->getOwnerINLINE()).getPlayerTextColorR(), GET_PLAYER(pUnit->getOwnerINLINE()).getPlayerTextColorG(), GET_PLAYER(pUnit->getOwnerINLINE()).getPlayerTextColorB(), GET_PLAYER(pUnit->getOwnerINLINE()).getPlayerTextColorA(), szTempString.GetCString()));
+							szString.append(CvWString::format(SETCOLR L" %s " ENDCOLR, CvPlayerAI::getPlayer(pUnit->getOwnerINLINE()).getPlayerTextColorR(), CvPlayerAI::getPlayer(pUnit->getOwnerINLINE()).getPlayerTextColorG(), CvPlayerAI::getPlayer(pUnit->getOwnerINLINE()).getPlayerTextColorB(), CvPlayerAI::getPlayer(pUnit->getOwnerINLINE()).getPlayerTextColorA(), szTempString.GetCString()));
 
 							// promotion icons
 							for (int iPromotionIndex = 0; iPromotionIndex < numPromotionInfos; iPromotionIndex++)
@@ -1704,7 +1704,7 @@ void CvGameTextMgr::setPlotListHelp(CvWStringBuffer &szString, const CvPlot* pPl
 										szString.append(CvWString::format(SETCOLR L"\n %s" ENDCOLR, TEXT_COLOR("COLOR_ALT_HIGHLIGHT_TEXT"), pCargoUnit->getName().GetCString()));
 										szString.append(CvWString::format(L"(%d)", shortenID(pCargoUnit->getID())));
 										getUnitAIString(szTempString, pCargoUnit->AI_getUnitAIType());
-										szString.append(CvWString::format(SETCOLR L" %s " ENDCOLR, GET_PLAYER(pCargoUnit->getOwnerINLINE()).getPlayerTextColorR(), GET_PLAYER(pCargoUnit->getOwnerINLINE()).getPlayerTextColorG(), GET_PLAYER(pCargoUnit->getOwnerINLINE()).getPlayerTextColorB(), GET_PLAYER(pCargoUnit->getOwnerINLINE()).getPlayerTextColorA(), szTempString.GetCString()));
+										szString.append(CvWString::format(SETCOLR L" %s " ENDCOLR, CvPlayerAI::getPlayer(pCargoUnit->getOwnerINLINE()).getPlayerTextColorR(), CvPlayerAI::getPlayer(pCargoUnit->getOwnerINLINE()).getPlayerTextColorG(), CvPlayerAI::getPlayer(pCargoUnit->getOwnerINLINE()).getPlayerTextColorB(), CvPlayerAI::getPlayer(pCargoUnit->getOwnerINLINE()).getPlayerTextColorA(), szTempString.GetCString()));
 
 										// promotion icons
 										for (int iPromotionIndex = 0; iPromotionIndex < numPromotionInfos; iPromotionIndex++)
@@ -1732,7 +1732,7 @@ void CvGameTextMgr::setPlotListHelp(CvWStringBuffer &szString, const CvPlot* pPl
 							CvCity* pTargetCity = pPlot->area()->getTargetCity(pHeadGroup->getOwner());
 							if (pTargetCity != nullptr)
 							{
-								szString.append(CvWString::format(L"\nTarget City: %s (%s)", pTargetCity->getName().c_str(), GET_PLAYER(pTargetCity->getOwner()).getName()));
+								szString.append(CvWString::format(L"\nTarget City: %s (%s)", pTargetCity->getName().c_str(), CvPlayerAI::getPlayer(pTargetCity->getOwner()).getName()));
 							}
 							else
 							{
@@ -1925,7 +1925,7 @@ void CvGameTextMgr::setPlotListHelp(CvWStringBuffer &szString, const CvPlot* pPl
 						if (iJ != GC.getGameINLINE().getActivePlayer() && !GC.getUnitInfo((UnitTypes)iI).isHiddenNationality())
 						{
 							szString.append(L", ");
-							szString.append(CvWString::format(SETCOLR L"%s" ENDCOLR, GET_PLAYER((PlayerTypes)iJ).getPlayerTextColorR(), GET_PLAYER((PlayerTypes)iJ).getPlayerTextColorG(), GET_PLAYER((PlayerTypes)iJ).getPlayerTextColorB(), GET_PLAYER((PlayerTypes)iJ).getPlayerTextColorA(), GET_PLAYER((PlayerTypes)iJ).getName()));
+							szString.append(CvWString::format(SETCOLR L"%s" ENDCOLR, CvPlayerAI::getPlayer((PlayerTypes)iJ).getPlayerTextColorR(), CvPlayerAI::getPlayer((PlayerTypes)iJ).getPlayerTextColorG(), CvPlayerAI::getPlayer((PlayerTypes)iJ).getPlayerTextColorB(), CvPlayerAI::getPlayer((PlayerTypes)iJ).getPlayerTextColorA(), CvPlayerAI::getPlayer((PlayerTypes)iJ).getName()));
 						}
 					}
 				}
@@ -2268,7 +2268,7 @@ bool CvGameTextMgr::setCombatPlotHelp(CvWStringBuffer &szString, CvPlot* pPlot)
 
 			if (pDefender->isNative())
 			{
-				iModifier = GET_PLAYER(pAttacker->getOwnerINLINE()).getNativeCombatModifier();
+				iModifier = CvPlayerAI::getPlayer(pAttacker->getOwnerINLINE()).getNativeCombatModifier();
 
 				if (iModifier != 0)
 				{
@@ -2436,7 +2436,7 @@ bool CvGameTextMgr::setCombatPlotHelp(CvWStringBuffer &szString, CvPlot* pPlot)
 
 			if (pAttacker->isNative())
 			{
-				iModifier = GET_PLAYER(pDefender->getOwnerINLINE()).getNativeCombatModifier();
+				iModifier = CvPlayerAI::getPlayer(pDefender->getOwnerINLINE()).getNativeCombatModifier();
 
 				if (iModifier != 0)
 				{
@@ -2457,12 +2457,12 @@ bool CvGameTextMgr::setCombatPlotHelp(CvWStringBuffer &szString, CvPlot* pPlot)
 					gDLL->getInterfaceIFace()->getSelectionList()->AI_compareStacks(pPlot, false));
 				szString.append(szTempBuffer);
 
-				int iOurStrengthDefense = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).AI_getOurPlotStrength(pPlot, 1, true, false);
-				int iOurStrengthOffense = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).AI_getOurPlotStrength(pPlot, 1, false, false);
+				int iOurStrengthDefense = CvPlayerAI::getPlayer(GC.getGameINLINE().getActivePlayer()).AI_getOurPlotStrength(pPlot, 1, true, false);
+				int iOurStrengthOffense = CvPlayerAI::getPlayer(GC.getGameINLINE().getActivePlayer()).AI_getOurPlotStrength(pPlot, 1, false, false);
 				szTempBuffer.Format(L"\nPlot Strength(Ours)= d%d, o%d", iOurStrengthDefense, iOurStrengthOffense);
 				szString.append(szTempBuffer);
-				int iEnemyStrengthDefense = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).AI_getEnemyPlotStrength(pPlot, 1, true, false);
-				int iEnemyStrengthOffense = GET_PLAYER(GC.getGameINLINE().getActivePlayer()).AI_getEnemyPlotStrength(pPlot, 1, false, false);
+				int iEnemyStrengthDefense = CvPlayerAI::getPlayer(GC.getGameINLINE().getActivePlayer()).AI_getEnemyPlotStrength(pPlot, 1, true, false);
+				int iEnemyStrengthOffense = CvPlayerAI::getPlayer(GC.getGameINLINE().getActivePlayer()).AI_getEnemyPlotStrength(pPlot, 1, false, false);
 				szTempBuffer.Format(L"\nPlot Strength(Enemy)= d%d, o%d", iEnemyStrengthDefense, iEnemyStrengthOffense);
 				szString.append(szTempBuffer);
 			}
@@ -2590,17 +2590,17 @@ void CvGameTextMgr::setPlotHelp(CvWStringBuffer& szString, CvPlot* pPlot)
 
 		for (iI = 0; iI < MAX_PLAYERS; ++iI)
 		{
-			if (GET_PLAYER((PlayerTypes)iI).isAlive())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 			{
 				if (pPlot->getCulture((PlayerTypes)iI) > 0)
 				{
-					szTempBuffer.Format(L"\n%s Culture: %d", GET_PLAYER((PlayerTypes)iI).getName(), pPlot->getCulture((PlayerTypes)iI));
+					szTempBuffer.Format(L"\n%s Culture: %d", CvPlayerAI::getPlayer((PlayerTypes)iI).getName(), pPlot->getCulture((PlayerTypes)iI));
 					szString.append(szTempBuffer);
 				}
 				// TAC - AI Improved Navel AI - koma13 - START
 				if (pPlot->getDangerMap((PlayerTypes)iI) > 0)
 				{
-					szTempBuffer.Format(L"\n%s Danger Map: %d", GET_PLAYER((PlayerTypes)iI).getName(), pPlot->getDangerMap((PlayerTypes)iI));
+					szTempBuffer.Format(L"\n%s Danger Map: %d", CvPlayerAI::getPlayer((PlayerTypes)iI).getName(), pPlot->getDangerMap((PlayerTypes)iI));
 					szString.append(szTempBuffer);
 				}
 				// TAC - AI Improved Navel AI - koma13 - END
@@ -2609,8 +2609,8 @@ void CvGameTextMgr::setPlotHelp(CvWStringBuffer& szString, CvPlot* pPlot)
 
 		PlayerTypes eActivePlayer = GC.getGameINLINE().getActivePlayer();
 		int iActualFoundValue = pPlot->getFoundValue(eActivePlayer);
-		int iCalcFoundValue = GET_PLAYER(eActivePlayer).AI_foundValue(pPlot->getX_INLINE(), pPlot->getY_INLINE(), -1, false);
-		int iStartingFoundValue = GET_PLAYER(eActivePlayer).AI_foundValue(pPlot->getX_INLINE(), pPlot->getY_INLINE(), -1, true);
+		int iCalcFoundValue = CvPlayerAI::getPlayer(eActivePlayer).AI_foundValue(pPlot->getX_INLINE(), pPlot->getY_INLINE(), -1, false);
+		int iStartingFoundValue = CvPlayerAI::getPlayer(eActivePlayer).AI_foundValue(pPlot->getX_INLINE(), pPlot->getY_INLINE(), -1, true);
 
 		szTempBuffer.Format(L"\nFound Value: %d, (%d, %d)", iActualFoundValue, iCalcFoundValue, iStartingFoundValue);
 		szString.append(szTempBuffer);
@@ -2667,7 +2667,7 @@ void CvGameTextMgr::setPlotHelp(CvWStringBuffer& szString, CvPlot* pPlot)
 		//Distances to various things.
 		if (pPlot->isOwned())
 		{
-			CvPlayerAI& kPlayer = GET_PLAYER(pPlot->getOwnerINLINE());
+			CvPlayerAI& kPlayer = CvPlayerAI::getPlayer(pPlot->getOwnerINLINE());
 			CvTeamAI& kTeam = GET_TEAM(kPlayer.getTeam());
 
 			szString.append(CvWString::format(L"\n FriendDist = %d, ECityDist = %d, EUnitDist = %d", kPlayer.AI_cityDistance(pPlot), kTeam.AI_enemyCityDistance(pPlot), kTeam.AI_enemyUnitDistance(pPlot)));
@@ -2678,7 +2678,7 @@ void CvGameTextMgr::setPlotHelp(CvWStringBuffer& szString, CvPlot* pPlot)
 		szString.append(CvWString::format(L"\nFound Values"));
 		for (int i = 0; i < MAX_PLAYERS; ++i)
 		{
-			CvPlayerAI& kLoopPlayer = GET_PLAYER((PlayerTypes)i);
+			CvPlayerAI& kLoopPlayer = CvPlayerAI::getPlayer((PlayerTypes)i);
 			if (kLoopPlayer.isAlive() && !kLoopPlayer.isNative())
 			{
 				int iFoundValue = kLoopPlayer.AI_foundValue(pPlot->getX_INLINE(), pPlot->getY_INLINE());
@@ -2825,7 +2825,7 @@ void CvGameTextMgr::setPlotHelp(CvWStringBuffer& szString, CvPlot* pPlot)
 		{
 			if (pPlot->isActiveVisible(true))
 			{
-				szTempBuffer.Format(L"%d%% " SETCOLR L"%s" ENDCOLR, pPlot->calculateCulturePercent(eRevealOwner), GET_PLAYER(eRevealOwner).getPlayerTextColorR(), GET_PLAYER(eRevealOwner).getPlayerTextColorG(), GET_PLAYER(eRevealOwner).getPlayerTextColorB(), GET_PLAYER(eRevealOwner).getPlayerTextColorA(), GET_PLAYER(eRevealOwner).getCivilizationAdjective());
+				szTempBuffer.Format(L"%d%% " SETCOLR L"%s" ENDCOLR, pPlot->calculateCulturePercent(eRevealOwner), CvPlayerAI::getPlayer(eRevealOwner).getPlayerTextColorR(), CvPlayerAI::getPlayer(eRevealOwner).getPlayerTextColorG(), CvPlayerAI::getPlayer(eRevealOwner).getPlayerTextColorB(), CvPlayerAI::getPlayer(eRevealOwner).getPlayerTextColorA(), CvPlayerAI::getPlayer(eRevealOwner).getCivilizationAdjective());
 				szString.append(szTempBuffer);
 				szString.append(NEWLINE);
 
@@ -2833,7 +2833,7 @@ void CvGameTextMgr::setPlotHelp(CvWStringBuffer& szString, CvPlot* pPlot)
 				{
 					if (iPlayer != eRevealOwner)
 					{
-						CvPlayer& kPlayer = GET_PLAYER((PlayerTypes)iPlayer);
+						CvPlayer& kPlayer = CvPlayerAI::getPlayer((PlayerTypes)iPlayer);
 						if (kPlayer.isAlive() && pPlot->getCulture((PlayerTypes)iPlayer) > 0)
 						{
 							szTempBuffer.Format(L"%d%% " SETCOLR L"%s" ENDCOLR, pPlot->calculateCulturePercent((PlayerTypes)iPlayer), kPlayer.getPlayerTextColorR(), kPlayer.getPlayerTextColorG(), kPlayer.getPlayerTextColorB(), kPlayer.getPlayerTextColorA(), kPlayer.getCivilizationAdjective());
@@ -2846,13 +2846,13 @@ void CvGameTextMgr::setPlotHelp(CvWStringBuffer& szString, CvPlot* pPlot)
 			}
 			else
 			{
-				szTempBuffer.Format(SETCOLR L"%s" ENDCOLR, GET_PLAYER(eRevealOwner).getPlayerTextColorR(), GET_PLAYER(eRevealOwner).getPlayerTextColorG(), GET_PLAYER(eRevealOwner).getPlayerTextColorB(), GET_PLAYER(eRevealOwner).getPlayerTextColorA(), GET_PLAYER(eRevealOwner).getCivilizationDescription());
+				szTempBuffer.Format(SETCOLR L"%s" ENDCOLR, CvPlayerAI::getPlayer(eRevealOwner).getPlayerTextColorR(), CvPlayerAI::getPlayer(eRevealOwner).getPlayerTextColorG(), CvPlayerAI::getPlayer(eRevealOwner).getPlayerTextColorB(), CvPlayerAI::getPlayer(eRevealOwner).getPlayerTextColorA(), CvPlayerAI::getPlayer(eRevealOwner).getCivilizationDescription());
 				szString.append(szTempBuffer);
 				szString.append(NEWLINE);
 			}
 		}
 
-		iDefenseModifier = pPlot->defenseModifier((eRevealOwner != NO_PLAYER ? GET_PLAYER(eRevealOwner).getTeam() : NO_TEAM), true);
+		iDefenseModifier = pPlot->defenseModifier((eRevealOwner != NO_PLAYER ? CvPlayerAI::getPlayer(eRevealOwner).getTeam() : NO_TEAM), true);
 
 		if (iDefenseModifier != 0)
 		{
@@ -6283,7 +6283,7 @@ void CvGameTextMgr::setUnitHelp(CvWStringBuffer &szBuffer, UnitTypes eUnit, bool
 			}
 			else
 			{
-				eBuilding = (BuildingTypes) GC.getCivilizationInfo(GET_PLAYER(ePlayer).getCivilizationType()).getCivilizationBuildings(GC.getUnitInfo(eUnit).getPrereqBuilding());
+				eBuilding = (BuildingTypes) GC.getCivilizationInfo(CvPlayerAI::getPlayer(ePlayer).getCivilizationType()).getCivilizationBuildings(GC.getUnitInfo(eUnit).getPrereqBuilding());
 			}
 			if(eBuilding != NO_BUILDING)
 			{
@@ -6306,7 +6306,7 @@ void CvGameTextMgr::setUnitHelp(CvWStringBuffer &szBuffer, UnitTypes eUnit, bool
 				BuildingTypes eBuilding = (BuildingTypes) GC.getBuildingClassInfo((BuildingClassTypes) iBuildingClass).getDefaultBuildingIndex();
 				if (ePlayer != NO_PLAYER)
 				{
-					eBuilding = (BuildingTypes) GC.getCivilizationInfo(GET_PLAYER(ePlayer).getCivilizationType()).getCivilizationBuildings(iBuildingClass);
+					eBuilding = (BuildingTypes) GC.getCivilizationInfo(CvPlayerAI::getPlayer(ePlayer).getCivilizationType()).getCivilizationBuildings(iBuildingClass);
 				}
 
 				if (NO_BUILDING != eBuilding)
@@ -6342,7 +6342,7 @@ void CvGameTextMgr::setUnitHelp(CvWStringBuffer &szBuffer, UnitTypes eUnit, bool
 				{
 					if (GC.getYieldInfo(eYield).isCargo())
 					{
-						int iCost = (ePlayer == NO_PLAYER ? GC.getUnitInfo(eUnit).getYieldCost(eYield) : GET_PLAYER(ePlayer).getYieldProductionNeeded(eUnit, eYield));
+						int iCost = (ePlayer == NO_PLAYER ? GC.getUnitInfo(eUnit).getYieldCost(eYield) : CvPlayerAI::getPlayer(ePlayer).getYieldProductionNeeded(eUnit, eYield));
 						if (pCity == nullptr || pCity->getYieldStored(eYield) + pCity->getYieldRushed(eYield) < iCost)
 						{
 							szBuffer.append(NEWLINE);
@@ -6358,7 +6358,7 @@ void CvGameTextMgr::setUnitHelp(CvWStringBuffer &szBuffer, UnitTypes eUnit, bool
 	{
 		if (pCity == nullptr)
 		{
-			int iCost = GET_PLAYER(ePlayer).getYieldProductionNeeded(eUnit, YIELD_HAMMERS);
+			int iCost = CvPlayerAI::getPlayer(ePlayer).getYieldProductionNeeded(eUnit, YIELD_HAMMERS);
 			if (iCost > 0)
 			{
 				szTempBuffer.Format(L"%s%d%c", NEWLINE, iCost, GC.getYieldInfo(YIELD_HAMMERS).getChar());
@@ -6389,7 +6389,7 @@ void CvGameTextMgr::setUnitHelp(CvWStringBuffer &szBuffer, UnitTypes eUnit, bool
 				{
 					if (GC.getYieldInfo(eYield).isCargo())
 					{
-						int iCost = GET_PLAYER(pCity->getOwnerINLINE()).getYieldProductionNeeded(eUnit, eYield);
+						int iCost = CvPlayerAI::getPlayer(pCity->getOwnerINLINE()).getYieldProductionNeeded(eUnit, eYield);
 						if (iCost > 0)
 						{
 							szTempBuffer.Format(L" - %d/%d%c", pCity->getYieldStored(eYield) + pCity->getYieldRushed(eYield), iCost, GC.getYieldInfo(eYield).getChar());
@@ -6405,7 +6405,7 @@ void CvGameTextMgr::setUnitHelp(CvWStringBuffer &szBuffer, UnitTypes eUnit, bool
 	{
 		if (!isEmpty(GC.getUnitInfo(eUnit).getStrategy()))
 		{
-			if ((ePlayer == NO_PLAYER) || GET_PLAYER(ePlayer).isOption(PLAYEROPTION_ADVISOR_HELP))
+			if ((ePlayer == NO_PLAYER) || CvPlayerAI::getPlayer(ePlayer).isOption(PLAYEROPTION_ADVISOR_HELP))
 			{
 				szBuffer.append(SEPARATOR);
 				szBuffer.append(NEWLINE);
@@ -6444,7 +6444,7 @@ void CvGameTextMgr::setUnitHelp(CvWStringBuffer &szBuffer, UnitTypes eUnit, bool
 			szBuffer.append(NEWLINE);
 			for (int iUnitAI = 0; iUnitAI < NUM_UNITAI_TYPES; iUnitAI++)
 			{
-				int iTempValue = GET_PLAYER(pCity->getOwner()).AI_unitValue(eUnit, (UnitAITypes)iUnitAI, pCity->area());
+				int iTempValue = CvPlayerAI::getPlayer(pCity->getOwner()).AI_unitValue(eUnit, (UnitAITypes)iUnitAI, pCity->area());
 				if (iTempValue != 0)
 				{
 					CvWString szTempString;
@@ -6499,7 +6499,7 @@ void CvGameTextMgr::setBuildingHelp(CvWStringBuffer &szBuffer, BuildingTypes eBu
 				// R&R, ray , fix conflict MYCP and MYPB
 				std::vector<YieldTypes> eBuildingYieldsConversion;
 
-				if (ePlayer == NO_PLAYER || GC.getCivilizationInfo(GET_PLAYER(ePlayer).getCivilizationType()).isValidProfession(iI))
+				if (ePlayer == NO_PLAYER || GC.getCivilizationInfo(CvPlayerAI::getPlayer(ePlayer).getCivilizationType()).isValidProfession(iI))
 				{
 					CvProfessionInfo& kProfession = GC.getProfessionInfo((ProfessionTypes) iI);
 					if (kProfession.getSpecialBuilding() == kBuilding.getSpecialBuildingType())
@@ -6556,7 +6556,7 @@ void CvGameTextMgr::setBuildingHelp(CvWStringBuffer &szBuffer, BuildingTypes eBu
 
 			if (ePlayer != NO_PLAYER)
 			{
-				aiYields[iI] += GET_PLAYER(ePlayer).getBuildingYieldChange((BuildingClassTypes)kBuilding.getBuildingClassType(), (YieldTypes)iI);
+				aiYields[iI] += CvPlayerAI::getPlayer(ePlayer).getBuildingYieldChange((BuildingClassTypes)kBuilding.getBuildingClassType(), (YieldTypes)iI);
 			}
 		}
 		setYieldChangeHelp(szBuffer, L", ", L"", L"", aiYields, false, false);
@@ -6798,7 +6798,7 @@ void CvGameTextMgr::setBuildingHelp(CvWStringBuffer &szBuffer, BuildingTypes eBu
 	{
 		if (ePlayer != NO_PLAYER)
 		{
-			eLoopBuilding = ((BuildingTypes)(GC.getCivilizationInfo(GET_PLAYER(ePlayer).getCivilizationType()).getCivilizationBuildings(iI)));
+			eLoopBuilding = ((BuildingTypes)(GC.getCivilizationInfo(CvPlayerAI::getPlayer(ePlayer).getCivilizationType()).getCivilizationBuildings(iI)));
 		}
 		else
 		{
@@ -6868,7 +6868,7 @@ void CvGameTextMgr::setBuildingHelp(CvWStringBuffer &szBuffer, BuildingTypes eBu
 					YieldTypes eYield = (YieldTypes) iYield;
 					if (kBuilding.getYieldCost(eYield) > 0)
 					{
-						szTempBuffer.Format(L"\n%d%c", (ePlayer != NO_PLAYER ? GET_PLAYER(ePlayer).getYieldProductionNeeded(eBuilding, eYield) : kBuilding.getYieldCost(eYield)), GC.getYieldInfo(eYield).getChar());
+						szTempBuffer.Format(L"\n%d%c", (ePlayer != NO_PLAYER ? CvPlayerAI::getPlayer(ePlayer).getYieldProductionNeeded(eBuilding, eYield) : kBuilding.getYieldCost(eYield)), GC.getYieldInfo(eYield).getChar());
 						szBuffer.append(szTempBuffer);
 					}
 				}
@@ -6899,7 +6899,7 @@ void CvGameTextMgr::setBuildingHelp(CvWStringBuffer &szBuffer, BuildingTypes eBu
 						YieldTypes eYield = (YieldTypes) iYield;
 						if (GC.getYieldInfo(eYield).isCargo())
 						{
-							int iCost = GET_PLAYER(pCity->getOwnerINLINE()).getYieldProductionNeeded(eBuilding, eYield);
+							int iCost = CvPlayerAI::getPlayer(pCity->getOwnerINLINE()).getYieldProductionNeeded(eBuilding, eYield);
 							if (iCost > 0)
 							{
 								szTempBuffer.Format(L" - %d/%d%c", pCity->getYieldStored(eYield) + pCity->getYieldRushed(eYield), iCost, GC.getYieldInfo(eYield).getChar());
@@ -6922,7 +6922,7 @@ void CvGameTextMgr::setBuildingHelp(CvWStringBuffer &szBuffer, BuildingTypes eBu
 	{
 		if (!isEmpty(kBuilding.getStrategy()))
 		{
-			if ((ePlayer == NO_PLAYER) || GET_PLAYER(ePlayer).isOption(PLAYEROPTION_ADVISOR_HELP))
+			if ((ePlayer == NO_PLAYER) || CvPlayerAI::getPlayer(ePlayer).isOption(PLAYEROPTION_ADVISOR_HELP))
 			{
 				szBuffer.append(SEPARATOR);
 				szBuffer.append(NEWLINE);
@@ -6969,21 +6969,21 @@ void CvGameTextMgr::buildBuildingRequiresString(CvWStringBuffer& szBuffer, Build
 
 				szBuffer.append(szTempBuffer);
 			}
-			else if (ePlayer != NO_PLAYER && GET_PLAYER(ePlayer).getBuildingClassPrereqBuilding(eBuilding, ((BuildingClassTypes)iI)) > 0)
+			else if (ePlayer != NO_PLAYER && CvPlayerAI::getPlayer(ePlayer).getBuildingClassPrereqBuilding(eBuilding, ((BuildingClassTypes)iI)) > 0)
 			{
-				if (pCity == nullptr || GET_PLAYER(ePlayer).getBuildingClassCount((BuildingClassTypes)iI) < GET_PLAYER(ePlayer).getBuildingClassPrereqBuilding(eBuilding, ((BuildingClassTypes)iI)))
+				if (pCity == nullptr || CvPlayerAI::getPlayer(ePlayer).getBuildingClassCount((BuildingClassTypes)iI) < CvPlayerAI::getPlayer(ePlayer).getBuildingClassPrereqBuilding(eBuilding, ((BuildingClassTypes)iI)))
 				{
-					eLoopBuilding = ((BuildingTypes)(GC.getCivilizationInfo(GET_PLAYER(ePlayer).getCivilizationType()).getCivilizationBuildings(iI)));
+					eLoopBuilding = ((BuildingTypes)(GC.getCivilizationInfo(CvPlayerAI::getPlayer(ePlayer).getCivilizationType()).getCivilizationBuildings(iI)));
 
 					if (eLoopBuilding != NO_BUILDING)
 					{
 						if (pCity != nullptr)
 						{
-							szTempBuffer.Format(L"%s%s", NEWLINE, gDLL->getText("TXT_KEY_BUILDING_REQUIRES_NUM_SPECIAL_BUILDINGS", GC.getBuildingInfo(eLoopBuilding).getTextKeyWide(), GET_PLAYER(ePlayer).getBuildingClassCount((BuildingClassTypes)iI), GET_PLAYER(ePlayer).getBuildingClassPrereqBuilding(eBuilding, ((BuildingClassTypes)iI))).c_str());
+							szTempBuffer.Format(L"%s%s", NEWLINE, gDLL->getText("TXT_KEY_BUILDING_REQUIRES_NUM_SPECIAL_BUILDINGS", GC.getBuildingInfo(eLoopBuilding).getTextKeyWide(), CvPlayerAI::getPlayer(ePlayer).getBuildingClassCount((BuildingClassTypes)iI), CvPlayerAI::getPlayer(ePlayer).getBuildingClassPrereqBuilding(eBuilding, ((BuildingClassTypes)iI))).c_str());
 						}
 						else
 						{
-							szTempBuffer.Format(L"%s%s", NEWLINE, gDLL->getText("TXT_KEY_BUILDING_REQUIRES_NUM_SPECIAL_BUILDINGS_NO_CITY", GC.getBuildingInfo(eLoopBuilding).getTextKeyWide(), GET_PLAYER(ePlayer).getBuildingClassPrereqBuilding(eBuilding, ((BuildingClassTypes)iI))).c_str());
+							szTempBuffer.Format(L"%s%s", NEWLINE, gDLL->getText("TXT_KEY_BUILDING_REQUIRES_NUM_SPECIAL_BUILDINGS_NO_CITY", GC.getBuildingInfo(eLoopBuilding).getTextKeyWide(), CvPlayerAI::getPlayer(ePlayer).getBuildingClassPrereqBuilding(eBuilding, ((BuildingClassTypes)iI))).c_str());
 						}
 
 						szBuffer.append(szTempBuffer);
@@ -6994,7 +6994,7 @@ void CvGameTextMgr::buildBuildingRequiresString(CvWStringBuffer& szBuffer, Build
 			{
 				if (NO_PLAYER != ePlayer)
 				{
-					eLoopBuilding = ((BuildingTypes)(GC.getCivilizationInfo(GET_PLAYER(ePlayer).getCivilizationType()).getCivilizationBuildings(iI)));
+					eLoopBuilding = ((BuildingTypes)(GC.getCivilizationInfo(CvPlayerAI::getPlayer(ePlayer).getCivilizationType()).getCivilizationBuildings(iI)));
 				}
 				else
 				{
@@ -7014,7 +7014,7 @@ void CvGameTextMgr::buildBuildingRequiresString(CvWStringBuffer& szBuffer, Build
 
 		if (kBuilding.getNumCitiesPrereq() > 0)
 		{
-			if (NO_PLAYER == ePlayer || GET_PLAYER(ePlayer).getNumCities() < kBuilding.getNumCitiesPrereq())
+			if (NO_PLAYER == ePlayer || CvPlayerAI::getPlayer(ePlayer).getNumCities() < kBuilding.getNumCitiesPrereq())
 			{
 				szBuffer.append(NEWLINE);
 				szBuffer.append(gDLL->getText("TXT_KEY_BUILDING_REQUIRES_NUM_CITIES", kBuilding.getNumCitiesPrereq()));
@@ -7023,7 +7023,7 @@ void CvGameTextMgr::buildBuildingRequiresString(CvWStringBuffer& szBuffer, Build
 
 		if (kBuilding.getUnitLevelPrereq() > 0)
 		{
-			if (NO_PLAYER == ePlayer || GET_PLAYER(ePlayer).getHighestUnitLevel() < kBuilding.getUnitLevelPrereq())
+			if (NO_PLAYER == ePlayer || CvPlayerAI::getPlayer(ePlayer).getHighestUnitLevel() < kBuilding.getUnitLevelPrereq())
 			{
 				szBuffer.append(NEWLINE);
 				szBuffer.append(gDLL->getText("TXT_KEY_BUILDING_REQUIRES_UNIT_LEVEL", kBuilding.getUnitLevelPrereq()));
@@ -7066,7 +7066,7 @@ void CvGameTextMgr::buildBuildingRequiresString(CvWStringBuffer& szBuffer, Build
 					YieldTypes eYield = (YieldTypes) iYield;
 					if (GC.getYieldInfo(eYield).isCargo())
 					{
-						int iCost = (NO_PLAYER == ePlayer ? GC.getBuildingInfo(eBuilding).getYieldCost(iYield) : GET_PLAYER(ePlayer).getYieldProductionNeeded(eBuilding, eYield));
+						int iCost = (NO_PLAYER == ePlayer ? GC.getBuildingInfo(eBuilding).getYieldCost(iYield) : CvPlayerAI::getPlayer(ePlayer).getYieldProductionNeeded(eBuilding, eYield));
 						if (pCity == nullptr || pCity->getYieldStored(eYield) + pCity->getYieldRushed(eYield) < iCost)
 						{
 							szBuffer.append(NEWLINE);
@@ -7680,30 +7680,30 @@ void CvGameTextMgr::getDealString(CvWStringBuffer& szBuffer, PlayerTypes ePlayer
 		{
 			if (ePlayerPerspective == ePlayer1)
 			{
-				szBuffer.append(gDLL->getText("TXT_KEY_MISC_OUR_DEAL", szDealOne.getCString(), GET_PLAYER(ePlayer2).getNameKey(), szDealTwo.getCString()));
+				szBuffer.append(gDLL->getText("TXT_KEY_MISC_OUR_DEAL", szDealOne.getCString(), CvPlayerAI::getPlayer(ePlayer2).getNameKey(), szDealTwo.getCString()));
 			}
 			else if (ePlayerPerspective == ePlayer2)
 			{
-				szBuffer.append(gDLL->getText("TXT_KEY_MISC_OUR_DEAL", szDealTwo.getCString(), GET_PLAYER(ePlayer1).getNameKey(), szDealOne.getCString()));
+				szBuffer.append(gDLL->getText("TXT_KEY_MISC_OUR_DEAL", szDealTwo.getCString(), CvPlayerAI::getPlayer(ePlayer1).getNameKey(), szDealOne.getCString()));
 			}
 			else
 			{
-				szBuffer.append(gDLL->getText("TXT_KEY_MISC_DEAL", GET_PLAYER(ePlayer1).getNameKey(), szDealOne.getCString(), GET_PLAYER(ePlayer2).getNameKey(), szDealTwo.getCString()));
+				szBuffer.append(gDLL->getText("TXT_KEY_MISC_DEAL", CvPlayerAI::getPlayer(ePlayer1).getNameKey(), szDealOne.getCString(), CvPlayerAI::getPlayer(ePlayer2).getNameKey(), szDealTwo.getCString()));
 			}
 		}
 		else
 		{
 			if (ePlayerPerspective == ePlayer1)
 			{
-				szBuffer.append(gDLL->getText("TXT_KEY_MISC_DEAL_ONESIDED_OURS", szDealOne.getCString(), GET_PLAYER(ePlayer2).getNameKey()));
+				szBuffer.append(gDLL->getText("TXT_KEY_MISC_DEAL_ONESIDED_OURS", szDealOne.getCString(), CvPlayerAI::getPlayer(ePlayer2).getNameKey()));
 			}
 			else if (ePlayerPerspective == ePlayer2)
 			{
-				szBuffer.append(gDLL->getText("TXT_KEY_MISC_DEAL_ONESIDED_THEIRS", szDealOne.getCString(), GET_PLAYER(ePlayer1).getNameKey()));
+				szBuffer.append(gDLL->getText("TXT_KEY_MISC_DEAL_ONESIDED_THEIRS", szDealOne.getCString(), CvPlayerAI::getPlayer(ePlayer1).getNameKey()));
 			}
 			else
 			{
-				szBuffer.append(gDLL->getText("TXT_KEY_MISC_DEAL_ONESIDED", GET_PLAYER(ePlayer1).getNameKey(), szDealOne.getCString(), GET_PLAYER(ePlayer2).getNameKey()));
+				szBuffer.append(gDLL->getText("TXT_KEY_MISC_DEAL_ONESIDED", CvPlayerAI::getPlayer(ePlayer1).getNameKey(), szDealOne.getCString(), CvPlayerAI::getPlayer(ePlayer2).getNameKey()));
 			}
 		}
 	}
@@ -7711,15 +7711,15 @@ void CvGameTextMgr::getDealString(CvWStringBuffer& szBuffer, PlayerTypes ePlayer
 	{
 		if (ePlayerPerspective == ePlayer1)
 		{
-			szBuffer.append(gDLL->getText("TXT_KEY_MISC_DEAL_ONESIDED_THEIRS", szDealTwo.getCString(), GET_PLAYER(ePlayer2).getNameKey()));
+			szBuffer.append(gDLL->getText("TXT_KEY_MISC_DEAL_ONESIDED_THEIRS", szDealTwo.getCString(), CvPlayerAI::getPlayer(ePlayer2).getNameKey()));
 		}
 		else if (ePlayerPerspective == ePlayer2)
 		{
-			szBuffer.append(gDLL->getText("TXT_KEY_MISC_DEAL_ONESIDED_OURS", szDealTwo.getCString(), GET_PLAYER(ePlayer1).getNameKey()));
+			szBuffer.append(gDLL->getText("TXT_KEY_MISC_DEAL_ONESIDED_OURS", szDealTwo.getCString(), CvPlayerAI::getPlayer(ePlayer1).getNameKey()));
 		}
 		else
 		{
-			szBuffer.append(gDLL->getText("TXT_KEY_MISC_DEAL_ONESIDED", GET_PLAYER(ePlayer2).getNameKey(), szDealTwo.getCString(), GET_PLAYER(ePlayer1).getNameKey()));
+			szBuffer.append(gDLL->getText("TXT_KEY_MISC_DEAL_ONESIDED", CvPlayerAI::getPlayer(ePlayer2).getNameKey(), szDealTwo.getCString(), CvPlayerAI::getPlayer(ePlayer1).getNameKey()));
 		}
 	}
 }
@@ -7747,11 +7747,11 @@ void CvGameTextMgr::getAttitudeString(CvWStringBuffer& szBuffer, PlayerTypes ePl
 	int iAttitudeChange;
 	int iPass;
 	int iI;
-	CvPlayerAI& kPlayer = GET_PLAYER(ePlayer);
+	CvPlayerAI& kPlayer = CvPlayerAI::getPlayer(ePlayer);
 	TeamTypes eTeam = (TeamTypes) kPlayer.getTeam();
 	CvTeamAI& kTeam = GET_TEAM(eTeam);
 
-	szBuffer.append(gDLL->getText("TXT_KEY_ATTITUDE_TOWARDS", GC.getAttitudeInfo(GET_PLAYER(ePlayer).AI_getAttitude(eTargetPlayer)).getTextKeyWide(), GET_PLAYER(eTargetPlayer).getNameKey()));
+	szBuffer.append(gDLL->getText("TXT_KEY_ATTITUDE_TOWARDS", GC.getAttitudeInfo(CvPlayerAI::getPlayer(ePlayer).AI_getAttitude(eTargetPlayer)).getTextKeyWide(), CvPlayerAI::getPlayer(eTargetPlayer).getNameKey()));
 
     // R&R, Robert Surcouf, No More Variables Hidden game option START
     if (GC.getGameINLINE().isOption(GAMEOPTION_NO_MORE_VARIABLES_HIDDEN))
@@ -7770,7 +7770,7 @@ void CvGameTextMgr::getAttitudeString(CvWStringBuffer& szBuffer, PlayerTypes ePl
         szBuffer.append(szTempBuffer);
 
         // Attitude from Handicap, difficulty level, team-members
-        iAttitudeChange = GC.getHandicapInfo(GET_PLAYER(eTargetPlayer).getHandicapType()).getAttitudeChange();
+        iAttitudeChange = GC.getHandicapInfo(CvPlayerAI::getPlayer(eTargetPlayer).getHandicapType()).getAttitudeChange();
         if (iAttitudeChange ==0 )
         {
             szTempBuffer.Format(SETCOLR L"%s" ENDCOLR, TEXT_COLOR("COLOR_PLAYER_BLUE_TEXT"), gDLL->getText("TXT_KEY_MISC_ATTITUDE_FROM_HANDICAP", iAttitudeChange).GetCString());
@@ -7782,7 +7782,7 @@ void CvGameTextMgr::getAttitudeString(CvWStringBuffer& szBuffer, PlayerTypes ePl
         szBuffer.append(NEWLINE);
         szBuffer.append(szTempBuffer);
 
-        if (kPlayer.getTeam() == GET_PLAYER(eTargetPlayer).getTeam() )
+        if (kPlayer.getTeam() == CvPlayerAI::getPlayer(eTargetPlayer).getTeam() )
         {
             iAttitudeChange = 999;
             szTempBuffer.Format(SETCOLR L"%s" ENDCOLR, TEXT_COLOR("COLOR_POSITIVE_TEXT"), gDLL->getText("TXT_KEY_MISC_ATTITUDE_SAME_TEAM", iAttitudeChange).GetCString());
@@ -7792,7 +7792,7 @@ void CvGameTextMgr::getAttitudeString(CvWStringBuffer& szBuffer, PlayerTypes ePl
 
         // Native Attitude
         iAttitudeChange = GC.getLeaderHeadInfo(kPlayer.getPersonalityType()).getNativeAttitude();
-        if (GET_PLAYER(eTargetPlayer).isNative())
+        if (CvPlayerAI::getPlayer(eTargetPlayer).isNative())
         {
             if (iAttitudeChange ==0 )
             {
@@ -7905,7 +7905,7 @@ void CvGameTextMgr::getAttitudeString(CvWStringBuffer& szBuffer, PlayerTypes ePl
 			szBuffer.append(szTempBuffer);
 		}
 
-		iAttitudeChange = GET_PLAYER(ePlayer).AI_getAttitudeExtra(eTargetPlayer);
+		iAttitudeChange = CvPlayerAI::getPlayer(ePlayer).AI_getAttitudeExtra(eTargetPlayer);
 		if ((iPass == 0) ? (iAttitudeChange > 0) : (iAttitudeChange < 0))
 		{
 			szTempBuffer.Format(SETCOLR L"%s" ENDCOLR, TEXT_COLOR((iAttitudeChange > 0) ? "COLOR_POSITIVE_TEXT" : "COLOR_NEGATIVE_TEXT"), gDLL->getText(((iAttitudeChange > 0) ? "TXT_KEY_MISC_ATTITUDE_EXTRA_GOOD" : "TXT_KEY_MISC_ATTITUDE_EXTRA_BAD"), iAttitudeChange).GetCString());
@@ -7917,7 +7917,7 @@ void CvGameTextMgr::getAttitudeString(CvWStringBuffer& szBuffer, PlayerTypes ePl
         if (GC.getGameINLINE().isOption(GAMEOPTION_NO_MORE_VARIABLES_HIDDEN))
         {
             iAttitudeChange = GC.getLeaderHeadInfo(kPlayer.getPersonalityType()).getLostWarAttitudeChange();
-            if (GET_TEAM(GET_PLAYER(eTargetPlayer).getTeam()).AI_getWarSuccess(kPlayer.getTeam()) > GET_TEAM(kPlayer.getTeam()).AI_getWarSuccess(GET_PLAYER(eTargetPlayer).getTeam()))
+            if (GET_TEAM(CvPlayerAI::getPlayer(eTargetPlayer).getTeam()).AI_getWarSuccess(kPlayer.getTeam()) > GET_TEAM(kPlayer.getTeam()).AI_getWarSuccess(CvPlayerAI::getPlayer(eTargetPlayer).getTeam()))
             {
                 if ((iPass == 0) ? (iAttitudeChange > 0) : (iAttitudeChange < 0))
                 {
@@ -7927,7 +7927,7 @@ void CvGameTextMgr::getAttitudeString(CvWStringBuffer& szBuffer, PlayerTypes ePl
                 }
             }
 
-            iAttitudeChange = - std::max(0, (GET_TEAM(GET_PLAYER(eTargetPlayer).getTeam()).getNumMembers() - GET_TEAM(kPlayer.getTeam()).getNumMembers()));
+            iAttitudeChange = - std::max(0, (GET_TEAM(CvPlayerAI::getPlayer(eTargetPlayer).getTeam()).getNumMembers() - GET_TEAM(kPlayer.getTeam()).getNumMembers()));
             if ((iPass == 0) ? (iAttitudeChange > 0) : (iAttitudeChange < 0))
             {
                 szTempBuffer.Format(SETCOLR L"%s" ENDCOLR, TEXT_COLOR((iAttitudeChange > 0) ? "COLOR_POSITIVE_TEXT" : "COLOR_NEGATIVE_TEXT"), gDLL->getText(((iAttitudeChange > 0) ? "TXT_KEY_MISC_TEAMSIZE_ATTITUDE" : "TXT_KEY_MISC_TEAMSIZE_ATTITUDE"), iAttitudeChange).GetCString());
@@ -7994,7 +7994,7 @@ void CvGameTextMgr::getTradeString(CvWStringBuffer& szBuffer, const TradeData& t
 		szBuffer.append(gDLL->getText("TXT_KEY_MISC_PEACE_TREATY", GC.getDefineINT("PEACE_TREATY_LENGTH")));
 		break;
 	case TRADE_CITIES:
-		szBuffer.assign(CvWString::format(L"%s", GET_PLAYER(ePlayer1).getCity(tradeData.m_iData1)->getName().GetCString()));
+		szBuffer.assign(CvWString::format(L"%s", CvPlayerAI::getPlayer(ePlayer1).getCity(tradeData.m_iData1)->getName().GetCString()));
 		break;
 	case TRADE_PEACE:
 	case TRADE_WAR:
@@ -8193,7 +8193,7 @@ void CvGameTextMgr::setProductionHelp(CvWStringBuffer &szBuffer, CvCity& city)
 		// Military
 		if (unit.isMilitaryProduction())
 		{
-			int iMilitaryMod = city.getMilitaryProductionModifier() + GET_PLAYER(city.getOwnerINLINE()).getMilitaryProductionModifier();
+			int iMilitaryMod = city.getMilitaryProductionModifier() + CvPlayerAI::getPlayer(city.getOwnerINLINE()).getMilitaryProductionModifier();
 			if (0 != iMilitaryMod)
 			{
 				szBuffer.append(NEWLINE);
@@ -8266,8 +8266,8 @@ void CvGameTextMgr::setProductionHelp(CvWStringBuffer &szBuffer, CvCity& city)
 
 void CvGameTextMgr::parsePlayerTraits(CvWStringBuffer &szBuffer, PlayerTypes ePlayer)
 {
-	CvCivilizationInfo& kCiv = GC.getCivilizationInfo(GET_PLAYER(ePlayer).getCivilizationType());
-	CvLeaderHeadInfo& kLeader = GC.getLeaderHeadInfo(GET_PLAYER(ePlayer).getLeaderType());
+	CvCivilizationInfo& kCiv = GC.getCivilizationInfo(CvPlayerAI::getPlayer(ePlayer).getCivilizationType());
+	CvLeaderHeadInfo& kLeader = GC.getLeaderHeadInfo(CvPlayerAI::getPlayer(ePlayer).getLeaderType());
 	bool bFirst = true;
 
 	for (int iTrait = 0; iTrait < GC.getNumTraitInfos(); ++iTrait)
@@ -8301,7 +8301,7 @@ void CvGameTextMgr::parseLeaderHeadHelp(CvWStringBuffer &szBuffer, PlayerTypes e
 		return;
 	}
 
-	szBuffer.append(CvWString::format(L"%s", GET_PLAYER(eThisPlayer).getName()));
+	szBuffer.append(CvWString::format(L"%s", CvPlayerAI::getPlayer(eThisPlayer).getName()));
 
 	parsePlayerTraits(szBuffer, eThisPlayer);
 
@@ -8309,8 +8309,8 @@ void CvGameTextMgr::parseLeaderHeadHelp(CvWStringBuffer &szBuffer, PlayerTypes e
 
 	if (eOtherPlayer != NO_PLAYER)
 	{
-		CvTeam& kThisTeam = GET_TEAM(GET_PLAYER(eThisPlayer).getTeam());
-		if (eOtherPlayer != eThisPlayer && kThisTeam.isHasMet(GET_PLAYER(eOtherPlayer).getTeam()))
+		CvTeam& kThisTeam = GET_TEAM(CvPlayerAI::getPlayer(eThisPlayer).getTeam());
+		if (eOtherPlayer != eThisPlayer && kThisTeam.isHasMet(CvPlayerAI::getPlayer(eOtherPlayer).getTeam()))
 		{
 			getAttitudeString(szBuffer, eThisPlayer, eOtherPlayer);
 
@@ -8326,8 +8326,8 @@ void CvGameTextMgr::parseLeaderLineHelp(CvWStringBuffer &szBuffer, PlayerTypes e
 	{
 		return;
 	}
-	CvTeam& thisTeam = GET_TEAM(GET_PLAYER(eThisPlayer).getTeam());
-	CvTeam& otherTeam = GET_TEAM(GET_PLAYER(eOtherPlayer).getTeam());
+	CvTeam& thisTeam = GET_TEAM(CvPlayerAI::getPlayer(eThisPlayer).getTeam());
+	CvTeam& otherTeam = GET_TEAM(CvPlayerAI::getPlayer(eOtherPlayer).getTeam());
 
 	if (thisTeam.getID() == otherTeam.getID())
 	{
@@ -8385,19 +8385,19 @@ void CvGameTextMgr::buildHintsList(CvWStringBuffer& szBuffer)
 void CvGameTextMgr::setYieldPriceHelp(CvWStringBuffer &szBuffer, PlayerTypes ePlayer, YieldTypes eYield)
 {
 	CvYieldInfo& info = GC.getYieldInfo(eYield);
-	CvPlayer& kPlayer = GET_PLAYER(ePlayer);
+	CvPlayer& kPlayer = CvPlayerAI::getPlayer(ePlayer);
 
 	szBuffer.append(CvWString::format(SETCOLR L"%s" ENDCOLR, TEXT_COLOR("COLOR_HIGHLIGHT_TEXT"), info.getDescription()));
 	if (info.isCargo() && kPlayer.isYieldEuropeTradable(eYield))
 	{
-		CvPlayer& kParent = GET_PLAYER(kPlayer.getParent());
+		CvPlayer& kParent = CvPlayerAI::getPlayer(kPlayer.getParent());
 		szBuffer.append(NEWLINE);
 		szBuffer.append(gDLL->getText("TXT_KEY_BUY_AND_SELL_YIELD", kParent.getYieldBuyPrice(eYield), kParent.getYieldSellPrice(eYield)));
 	}
 	// R&R, ray, Africa
 	if (info.isCargo() && kPlayer.isYieldAfricaTradable(eYield))
 	{
-		CvPlayer& kParent = GET_PLAYER(kPlayer.getParent());
+		CvPlayer& kParent = CvPlayerAI::getPlayer(kPlayer.getParent());
 		szBuffer.append(NEWLINE);
 		szBuffer.append(gDLL->getText("TXT_KEY_BUY_AND_SELL_YIELD_AFRICA", kParent.getYieldAfricaBuyPrice(eYield), kParent.getYieldAfricaSellPrice(eYield)));
 	}
@@ -8405,7 +8405,7 @@ void CvGameTextMgr::setYieldPriceHelp(CvWStringBuffer &szBuffer, PlayerTypes ePl
 	// R&R, ray, Port Royal
 	if (info.isCargo() && kPlayer.isYieldPortRoyalTradable(eYield))
 	{
-		CvPlayer& kParent = GET_PLAYER(kPlayer.getParent());
+		CvPlayer& kParent = CvPlayerAI::getPlayer(kPlayer.getParent());
 		szBuffer.append(NEWLINE);
 		szBuffer.append(gDLL->getText("TXT_KEY_BUY_AND_SELL_YIELD_PORT_ROYAL", kParent.getYieldPortRoyalBuyPrice(eYield), kParent.getYieldPortRoyalSellPrice(eYield)));
 	}
@@ -8427,7 +8427,7 @@ void CvGameTextMgr::setYieldHelp(CvWStringBuffer &szBuffer, CvCity& city, YieldT
 	{
 		return;
 	}
-	CvPlayerAI& owner = GET_PLAYER(city.getOwnerINLINE());
+	CvPlayerAI& owner = CvPlayerAI::getPlayer(city.getOwnerINLINE());
 
 	setYieldPriceHelp(szBuffer, city.getOwnerINLINE(), eYieldType);
 
@@ -8441,7 +8441,7 @@ void CvGameTextMgr::setYieldHelp(CvWStringBuffer &szBuffer, CvCity& city, YieldT
 	// WTP, ray, correction of Yield Demand Display according to Happiness - END
 
 	// WTP, ray, Domestic Market Profit Modifier - START
-	int iDomesticMarketProfitModifierInPercent = GET_PLAYER(city.getOwnerINLINE()).getTotalPlayerDomesticMarketProfitModifierInPercent();
+	int iDomesticMarketProfitModifierInPercent = CvPlayerAI::getPlayer(city.getOwnerINLINE()).getTotalPlayerDomesticMarketProfitModifierInPercent();
 	iYieldDomesticPrice = iYieldDomesticPrice * (100 + iDomesticMarketProfitModifierInPercent) / 100;
 	// WTP, ray, Domestic Market Profit Modifier - END
 
@@ -9056,13 +9056,13 @@ void CvGameTextMgr::setYieldHelp(CvWStringBuffer &szBuffer, CvCity& city, YieldT
 
 		for (int iI = 0; iI < MAX_PLAYERS; iI++)
 		{
-			if (GET_PLAYER((PlayerTypes)iI).isAlive())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 			{
 				int iCulturePercent = city.plot()->calculateCulturePercent((PlayerTypes)iI);
 				if (iCulturePercent > 0)
 				{
 					CvWString szTempBuffer;
-					szTempBuffer.Format(L"\n%d%% " SETCOLR L"%s" ENDCOLR, iCulturePercent, GET_PLAYER((PlayerTypes)iI).getPlayerTextColorR(), GET_PLAYER((PlayerTypes)iI).getPlayerTextColorG(), GET_PLAYER((PlayerTypes)iI).getPlayerTextColorB(), GET_PLAYER((PlayerTypes)iI).getPlayerTextColorA(), GET_PLAYER((PlayerTypes)iI).getCivilizationAdjective());
+					szTempBuffer.Format(L"\n%d%% " SETCOLR L"%s" ENDCOLR, iCulturePercent, CvPlayerAI::getPlayer((PlayerTypes)iI).getPlayerTextColorR(), CvPlayerAI::getPlayer((PlayerTypes)iI).getPlayerTextColorG(), CvPlayerAI::getPlayer((PlayerTypes)iI).getPlayerTextColorB(), CvPlayerAI::getPlayer((PlayerTypes)iI).getPlayerTextColorA(), CvPlayerAI::getPlayer((PlayerTypes)iI).getCivilizationAdjective());
 					szBuffer.append(szTempBuffer);
 				}
 			}
@@ -9073,7 +9073,7 @@ void CvGameTextMgr::setYieldHelp(CvWStringBuffer &szBuffer, CvCity& city, YieldT
 
 	if (gDLL->shiftKey() && (gDLL->getChtLvl() > 0))
 	{
-		szBuffer.append(CvWString::format(L"\nValue : %d", GET_PLAYER(city.getOwnerINLINE()).AI_yieldValue(eYieldType)));
+		szBuffer.append(CvWString::format(L"\nValue : %d", CvPlayerAI::getPlayer(city.getOwnerINLINE()).AI_yieldValue(eYieldType)));
 		szBuffer.append(CvWString::format(L"\nLevel: %d", city.getMaintainLevel(eYieldType)));
 		szBuffer.append(CvWString::format(L"\nTrade: %d", city.AI_getTradeBalance(eYieldType)));
 		szBuffer.append(CvWString::format(L"\nAdvant: %d", city.AI_getYieldAdvantage(eYieldType)));
@@ -9083,7 +9083,7 @@ void CvGameTextMgr::setYieldHelp(CvWStringBuffer &szBuffer, CvCity& city, YieldT
 int CvGameTextMgr::setCityYieldModifierString(CvWStringBuffer& szBuffer, YieldTypes eYieldType, const CvCity& kCity)
 {
 	CvYieldInfo& info = GC.getYieldInfo(eYieldType);
-	CvPlayer& kOwner = GET_PLAYER(kCity.getOwnerINLINE());
+	CvPlayer& kOwner = CvPlayerAI::getPlayer(kCity.getOwnerINLINE());
 
 	int iBaseModifier = 100;
 
@@ -9140,7 +9140,7 @@ int CvGameTextMgr::setCityYieldModifierString(CvWStringBuffer& szBuffer, YieldTy
 	// Founding Fathers
 	for (int i = 0; i < GC.getNumTraitInfos(); i++)
 	{
-		if (GET_PLAYER(kCity.getOwnerINLINE()).hasTrait((TraitTypes) i))
+		if (CvPlayerAI::getPlayer(kCity.getOwnerINLINE()).hasTrait((TraitTypes) i))
 		{
 			CvTraitInfo& kTraitInfo = GC.getTraitInfo((TraitTypes) i);
 
@@ -9258,19 +9258,19 @@ void CvGameTextMgr::buildCityBillboardIconString( CvWStringBuffer& szBuffer, CvC
 
 	if (pCity->getMissionaryPlayer() != NO_PLAYER)
 	{
-		szBuffer.append(CvWString::format(L" %c", GC.getCivilizationInfo(GET_PLAYER(pCity->getMissionaryPlayer()).getCivilizationType()).getMissionaryChar()));
+		szBuffer.append(CvWString::format(L" %c", GC.getCivilizationInfo(CvPlayerAI::getPlayer(pCity->getMissionaryPlayer()).getCivilizationType()).getMissionaryChar()));
 	}
 
 	// WTP, ray, Native Trade Posts - START
 	if (pCity->getTradePostPlayer() != NO_PLAYER)
 	{
-		szBuffer.append(CvWString::format(L" %c", GC.getCivilizationInfo(GET_PLAYER(pCity->getTradePostPlayer()).getCivilizationType()).getTradingPostChar()));
+		szBuffer.append(CvWString::format(L" %c", GC.getCivilizationInfo(CvPlayerAI::getPlayer(pCity->getTradePostPlayer()).getCivilizationType()).getTradingPostChar()));
 	}
 	// WTP, ray, Native Trade Posts - END
 
 
 	// WTP, ray, improvement Native Trade Indicator, issue #85 - START
-	CvPlayer& cityOwnerPlayer =	GET_PLAYER(pCity->getOwnerINLINE());
+	CvPlayer& cityOwnerPlayer =	CvPlayerAI::getPlayer(pCity->getOwnerINLINE());
 	if (cityOwnerPlayer.isNative())
 	{
 		int timeNoTrade= cityOwnerPlayer.getTimeNoTrade();
@@ -9384,7 +9384,7 @@ void CvGameTextMgr::buildCityBillboardIconString( CvWStringBuffer& szBuffer, CvC
 				for(int iYield=0;iYield<NUM_YIELD_TYPES;iYield++)
 				{
 					YieldTypes eYield = (YieldTypes) iYield;
-					int iYieldEquipment = GET_PLAYER(pCity->getOwnerINLINE()).getYieldEquipmentAmount(eProfession, eYield);
+					int iYieldEquipment = CvPlayerAI::getPlayer(pCity->getOwnerINLINE()).getYieldEquipmentAmount(eProfession, eYield);
 					if (iYieldEquipment > 0 && pCity->getYieldStored(eYield) >= iYieldEquipment)
 					{
 						if (aYieldShown[iYield] == 0)
@@ -9446,7 +9446,7 @@ void CvGameTextMgr::buildCityBillboardProductionString( CvWStringBuffer& szBuffe
 		UnitClassTypes eUnitClass = pCity->getTeachUnitClass();
 		if (eUnitClass != NO_UNITCLASS)
 		{
-			UnitTypes eUnit = (UnitTypes) GC.getCivilizationInfo(GET_PLAYER(ePlayer).getCivilizationType()).getCivilizationUnits(eUnitClass);
+			UnitTypes eUnit = (UnitTypes) GC.getCivilizationInfo(CvPlayerAI::getPlayer(ePlayer).getCivilizationType()).getCivilizationUnits(eUnitClass);
 			if (eUnit != NO_UNIT)
 			{
 				szBuffer.append(GC.getUnitInfo(eUnit).getDescription());
@@ -9471,7 +9471,7 @@ void CvGameTextMgr::setScoreHelp(CvWStringBuffer &szString, PlayerTypes ePlayer)
 {
 	if (NO_PLAYER != ePlayer)
 	{
-		CvPlayer& player = GET_PLAYER(ePlayer);
+		CvPlayer& player = CvPlayerAI::getPlayer(ePlayer);
 
 		int iPopScore = 0;
 		int iPop = player.getPopScore();
@@ -9682,7 +9682,7 @@ void CvGameTextMgr::setCitizenHelp(CvWStringBuffer &szString, const CvCity& kCit
 	if(bCanBecomeExpert && lastProfession != NO_PROFESSION && GC.getProfessionInfo(lastProfession).LbD_isUsed() && iLbDRoundsWorked >0)
 	{
 		int expert = GC.getProfessionInfo(lastProfession).LbD_getExpert();
-		UnitTypes expertUnitType = (UnitTypes)GC.getCivilizationInfo(GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCivilizationType()).getCivilizationUnits(expert);
+		UnitTypes expertUnitType = (UnitTypes)GC.getCivilizationInfo(CvPlayerAI::getPlayer(GC.getGameINLINE().getActivePlayer()).getCivilizationType()).getCivilizationUnits(expert);
 		szString.append(NEWLINE);
 		szString.append(gDLL->getText("TXT_KEY_MISC_HELP_LBD_BECOME_EXPPERT_TURNS_WORKED", iLbDRoundsWorked, GC.getUnitInfo(expertUnitType).getDescription()));
 		szString.append(SEPARATOR);
@@ -9696,7 +9696,7 @@ void CvGameTextMgr::setCitizenHelp(CvWStringBuffer &szString, const CvCity& kCit
 	if(bCanBecomeExpert && lastProfessionBefore != NO_PROFESSION && GC.getProfessionInfo(lastProfessionBefore).LbD_isUsed() && iLbDRoundsWorkedBefore >0)
 	{
 		int expertBefore = GC.getProfessionInfo(lastProfessionBefore).LbD_getExpert();
-		UnitTypes expertUnitTypeBefore = (UnitTypes)GC.getCivilizationInfo(GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCivilizationType()).getCivilizationUnits(expertBefore);
+		UnitTypes expertUnitTypeBefore = (UnitTypes)GC.getCivilizationInfo(CvPlayerAI::getPlayer(GC.getGameINLINE().getActivePlayer()).getCivilizationType()).getCivilizationUnits(expertBefore);
 		szString.append(NEWLINE);
 		szString.append(gDLL->getText("TXT_KEY_MISC_HELP_LBD_BECOME_EXPPERT_TURNS_WORKED", iLbDRoundsWorkedBefore, GC.getUnitInfo(expertUnitTypeBefore).getDescription()));
 		szString.append(SEPARATOR);
@@ -9777,7 +9777,7 @@ void CvGameTextMgr::setCitizenHelp(CvWStringBuffer &szString, const CvCity& kCit
 
 	if ((gDLL->getChtLvl() > 0) && gDLL->shiftKey())
 	{
-		CvPlayer& kOwner = GET_PLAYER(kCity.getOwnerINLINE());
+		CvPlayer& kOwner = CvPlayerAI::getPlayer(kCity.getOwnerINLINE());
 		szString.append(CvWString::format(L"\nID = %d Count = %d", kUnit.getID(), kOwner.getUnitClassCount(kUnit.getUnitClassType())));
 		for (int iI = 0; iI < GC.getNumProfessionInfos(); iI++)
 		{
@@ -9785,7 +9785,7 @@ void CvGameTextMgr::setCitizenHelp(CvWStringBuffer &szString, const CvCity& kCit
 			if (GC.getCivilizationInfo(kCity.getCivilizationType()).isValidProfession(eLoopProfession))
 			{
 				int iValue = kCity.AI_professionValue(eLoopProfession, &kUnit, GC.getProfessionInfo(eLoopProfession).isWorkPlot() ? kCity.getPlotWorkedByUnit(&kUnit) : nullptr, nullptr);
-				int iViability = GET_PLAYER(kUnit.getOwnerINLINE()).AI_professionSuitability(&kUnit, eLoopProfession, GC.getProfessionInfo(eLoopProfession).isWorkPlot() ? kCity.getPlotWorkedByUnit(&kUnit) : kCity.plot());
+				int iViability = CvPlayerAI::getPlayer(kUnit.getOwnerINLINE()).AI_professionSuitability(&kUnit, eLoopProfession, GC.getProfessionInfo(eLoopProfession).isWorkPlot() ? kCity.getPlotWorkedByUnit(&kUnit) : kCity.plot());
 
 				if (iValue > 0)
 				{
@@ -9817,7 +9817,7 @@ void CvGameTextMgr::setCitizenHelp(CvWStringBuffer &szString, const CvCity& kCit
 void CvGameTextMgr::setEuropeYieldSoldHelp(CvWStringBuffer &szString, const CvPlayer& kPlayer, YieldTypes eYield, int iAmount, int iCommission)
 {
 	FAssert(kPlayer.getParent() != NO_PLAYER);
-	CvPlayer& kPlayerEurope = GET_PLAYER(kPlayer.getParent());
+	CvPlayer& kPlayerEurope = CvPlayerAI::getPlayer(kPlayer.getParent());
 
 	int iGross = iAmount;
 	if (eYield != NO_YIELD)
@@ -9867,7 +9867,7 @@ void CvGameTextMgr::setEuropeYieldSoldHelp(CvWStringBuffer &szString, const CvPl
 void CvGameTextMgr::setEuropeYieldBoughtHelp(CvWStringBuffer &szString, const CvPlayer& kPlayer, YieldTypes eYield, int iAmount)
 {
 	FAssert(kPlayer.getParent() != NO_PLAYER);
-	CvPlayer& kPlayerEurope = GET_PLAYER(kPlayer.getParent());
+	CvPlayer& kPlayerEurope = CvPlayerAI::getPlayer(kPlayer.getParent());
 	int iGross = kPlayerEurope.getYieldSellPrice(eYield) * iAmount;
 	szString.append(gDLL->getText("TXT_KEY_YIELD_BOUGHT", iAmount, GC.getYieldInfo(eYield).getChar(), kPlayerEurope.getYieldSellPrice(eYield), iGross));
 }
@@ -9877,7 +9877,7 @@ void CvGameTextMgr::setEuropeYieldBoughtHelp(CvWStringBuffer &szString, const Cv
 void CvGameTextMgr::setAfricaYieldSoldHelp(CvWStringBuffer &szString, const CvPlayer& kPlayer, YieldTypes eYield, int iAmount, int iCommission)
 {
 	FAssert(kPlayer.getParent() != NO_PLAYER);
-	CvPlayer& kPlayerEurope = GET_PLAYER(kPlayer.getParent());
+	CvPlayer& kPlayerEurope = CvPlayerAI::getPlayer(kPlayer.getParent());
 
 	int iGross = iAmount;
 	if (eYield != NO_YIELD)
@@ -9927,7 +9927,7 @@ void CvGameTextMgr::setAfricaYieldSoldHelp(CvWStringBuffer &szString, const CvPl
 void CvGameTextMgr::setPortRoyalYieldSoldHelp(CvWStringBuffer &szString, const CvPlayer& kPlayer, YieldTypes eYield, int iAmount, int iCommission)
 {
 	FAssert(kPlayer.getParent() != NO_PLAYER);
-	CvPlayer& kPlayerEurope = GET_PLAYER(kPlayer.getParent());
+	CvPlayer& kPlayerEurope = CvPlayerAI::getPlayer(kPlayer.getParent());
 
 	int iGross = iAmount;
 	if (eYield != NO_YIELD)
@@ -9983,7 +9983,7 @@ void CvGameTextMgr::setEventHelp(CvWStringBuffer& szBuffer, EventTypes eEvent, i
 	}
 
 	CvEventInfo& kEvent = GC.getEventInfo(eEvent);
-	CvPlayer& kActivePlayer = GET_PLAYER(ePlayer);
+	CvPlayer& kActivePlayer = CvPlayerAI::getPlayer(ePlayer);
 	EventTriggeredData* pTriggeredData = kActivePlayer.getEventTriggered(iEventTriggeredId);
 
 	if (pTriggeredData == nullptr)
@@ -9998,7 +9998,7 @@ void CvGameTextMgr::setEventHelp(CvWStringBuffer& szBuffer, EventTypes eEvent, i
 
 	if (NO_PLAYER != pTriggeredData->m_eOtherPlayer)
 	{
-		pOtherPlayerCity = GET_PLAYER(pTriggeredData->m_eOtherPlayer).getCity(pTriggeredData->m_iOtherPlayerCityId);
+		pOtherPlayerCity = CvPlayerAI::getPlayer(pTriggeredData->m_eOtherPlayer).getCity(pTriggeredData->m_iOtherPlayerCityId);
 	}
 
 	CvWString szCity = gDLL->getText("TXT_KEY_EVENT_THE_CITY");
@@ -10323,18 +10323,18 @@ void CvGameTextMgr::setEventHelp(CvWStringBuffer& szBuffer, EventTypes eEvent, i
 		if (kEvent.getAttitudeModifier() > 0)
 		{
 			szBuffer.append(NEWLINE);
-			szBuffer.append(gDLL->getText("TXT_KEY_EVENT_ATTITUDE_GOOD", kEvent.getAttitudeModifier(), GET_PLAYER(pTriggeredData->m_eOtherPlayer).getNameKey()));
+			szBuffer.append(gDLL->getText("TXT_KEY_EVENT_ATTITUDE_GOOD", kEvent.getAttitudeModifier(), CvPlayerAI::getPlayer(pTriggeredData->m_eOtherPlayer).getNameKey()));
 		}
 		else if (kEvent.getAttitudeModifier() < 0)
 		{
 			szBuffer.append(NEWLINE);
-			szBuffer.append(gDLL->getText("TXT_KEY_EVENT_ATTITUDE_BAD", kEvent.getAttitudeModifier(), GET_PLAYER(pTriggeredData->m_eOtherPlayer).getNameKey()));
+			szBuffer.append(gDLL->getText("TXT_KEY_EVENT_ATTITUDE_BAD", kEvent.getAttitudeModifier(), CvPlayerAI::getPlayer(pTriggeredData->m_eOtherPlayer).getNameKey()));
 		}
 	}
 
 	if (NO_PLAYER != pTriggeredData->m_eOtherPlayer)
 	{
-		TeamTypes eWorstEnemy = GET_TEAM(GET_PLAYER(pTriggeredData->m_eOtherPlayer).getTeam()).AI_getWorstEnemy();
+		TeamTypes eWorstEnemy = GET_TEAM(CvPlayerAI::getPlayer(pTriggeredData->m_eOtherPlayer).getTeam()).AI_getWorstEnemy();
 		if (NO_TEAM != eWorstEnemy)
 		{
 			if (kEvent.getTheirEnemyAttitudeModifier() > 0)
@@ -10353,7 +10353,7 @@ void CvGameTextMgr::setEventHelp(CvWStringBuffer& szBuffer, EventTypes eEvent, i
 	if (kEvent.isDeclareWar())
 	{
 		szBuffer.append(NEWLINE);
-		szBuffer.append(gDLL->getText("TXT_KEY_EVENT_DECLARE_WAR", GET_PLAYER(pTriggeredData->m_eOtherPlayer).getCivilizationAdjectiveKey()));
+		szBuffer.append(gDLL->getText("TXT_KEY_EVENT_DECLARE_WAR", CvPlayerAI::getPlayer(pTriggeredData->m_eOtherPlayer).getCivilizationAdjectiveKey()));
 	}
 
 	if (kEvent.getUnitImmobileTurns() > 0)
@@ -10382,7 +10382,7 @@ void CvGameTextMgr::setEventHelp(CvWStringBuffer& szBuffer, EventTypes eEvent, i
 		{
 			if (kEvent.getAdditionalEventChance(i) > 0)
 			{
-				if (GET_PLAYER(GC.getGameINLINE().getActivePlayer()).canDoEvent((EventTypes)i, *pTriggeredData))
+				if (CvPlayerAI::getPlayer(GC.getGameINLINE().getActivePlayer()).canDoEvent((EventTypes)i, *pTriggeredData))
 				{
 					szTemp.clear();
 					setEventHelp(szTemp, (EventTypes)i, iEventTriggeredId, ePlayer);
@@ -10446,7 +10446,7 @@ void CvGameTextMgr::setEventHelp(CvWStringBuffer& szBuffer, EventTypes eEvent, i
 void CvGameTextMgr::eventGoldHelp(CvWStringBuffer& szBuffer, EventTypes eEvent, PlayerTypes ePlayer, PlayerTypes eOtherPlayer)
 {
 	CvEventInfo& kEvent = GC.getEventInfo(eEvent);
-	CvPlayer& kPlayer = GET_PLAYER(ePlayer);
+	CvPlayer& kPlayer = CvPlayerAI::getPlayer(ePlayer);
 
 	int iGold1 = kPlayer.getEventCost(eEvent, eOtherPlayer, false);
 	int iGold2 = kPlayer.getEventCost(eEvent, eOtherPlayer, true);
@@ -10460,12 +10460,12 @@ void CvGameTextMgr::eventGoldHelp(CvWStringBuffer& szBuffer, EventTypes eEvent, 
 				if (iGold1 > 0)
 				{
 					szBuffer.append(NEWLINE);
-					szBuffer.append(gDLL->getText("TXT_KEY_EVENT_GOLD_FROM_PLAYER", iGold1, GET_PLAYER(eOtherPlayer).getNameKey()));
+					szBuffer.append(gDLL->getText("TXT_KEY_EVENT_GOLD_FROM_PLAYER", iGold1, CvPlayerAI::getPlayer(eOtherPlayer).getNameKey()));
 				}
 				else
 				{
 					szBuffer.append(NEWLINE);
-					szBuffer.append(gDLL->getText("TXT_KEY_EVENT_GOLD_TO_PLAYER", -iGold1, GET_PLAYER(eOtherPlayer).getNameKey()));
+					szBuffer.append(gDLL->getText("TXT_KEY_EVENT_GOLD_TO_PLAYER", -iGold1, CvPlayerAI::getPlayer(eOtherPlayer).getNameKey()));
 				}
 			}
 			else
@@ -10489,12 +10489,12 @@ void CvGameTextMgr::eventGoldHelp(CvWStringBuffer& szBuffer, EventTypes eEvent, 
 				if (iGold1 > 0)
 				{
 					szBuffer.append(NEWLINE);
-					szBuffer.append(gDLL->getText("TXT_KEY_EVENT_GOLD_RANGE_FROM_PLAYER", iGold1, iGold2, GET_PLAYER(eOtherPlayer).getNameKey()));
+					szBuffer.append(gDLL->getText("TXT_KEY_EVENT_GOLD_RANGE_FROM_PLAYER", iGold1, iGold2, CvPlayerAI::getPlayer(eOtherPlayer).getNameKey()));
 				}
 				else
 				{
 					szBuffer.append(NEWLINE);
-					szBuffer.append(gDLL->getText("TXT_KEY_EVENT_GOLD_RANGE_TO_PLAYER", -iGold1, -iGold2, GET_PLAYER(eOtherPlayer).getNameKey()));
+					szBuffer.append(gDLL->getText("TXT_KEY_EVENT_GOLD_RANGE_TO_PLAYER", -iGold1, -iGold2, CvPlayerAI::getPlayer(eOtherPlayer).getNameKey()));
 				}
 			}
 			else
@@ -10571,7 +10571,7 @@ void CvGameTextMgr::setFatherHelp(CvWStringBuffer &szBuffer, FatherTypes eFather
 
 		if (ePlayer != NO_PLAYER)
 		{
-			eUnit = (UnitTypes) GC.getCivilizationInfo(GET_PLAYER(ePlayer).getCivilizationType()).getCivilizationUnits(iUnitClass);
+			eUnit = (UnitTypes) GC.getCivilizationInfo(CvPlayerAI::getPlayer(ePlayer).getCivilizationType()).getCivilizationUnits(iUnitClass);
 		}
 
 		if (eUnit != NO_UNIT)
@@ -10590,7 +10590,7 @@ void CvGameTextMgr::setFatherHelp(CvWStringBuffer &szBuffer, FatherTypes eFather
 		CivilizationTypes eCivilization = NO_CIVILIZATION;
 		if (ePlayer != NO_PLAYER)
 		{
-			eCivilization = GET_PLAYER(ePlayer).getCivilizationType();
+			eCivilization = CvPlayerAI::getPlayer(ePlayer).getCivilizationType();
 		}
 
 		parseTraits(szBuffer, (TraitTypes) kFatherInfo.getTrait(), eCivilization, false, false);
@@ -10641,7 +10641,7 @@ void CvGameTextMgr::parseCivEffects(CvWStringBuffer &szHelpString, CivEffectType
 
 void CvGameTextMgr::getTradeScreenTitleIcon(CvString& szButton, CvWidgetDataStruct& widgetData, PlayerTypes ePlayer)
 {
-	szButton = GC.getCivilizationInfo(GET_PLAYER(ePlayer).getCivilizationType()).getButton();
+	szButton = GC.getCivilizationInfo(CvPlayerAI::getPlayer(ePlayer).getCivilizationType()).getButton();
 }
 
 void CvGameTextMgr::getTradeScreenIcons(std::vector< std::pair<CvString, CvWidgetDataStruct> >& aIconInfos, PlayerTypes ePlayer)
@@ -10651,7 +10651,7 @@ void CvGameTextMgr::getTradeScreenIcons(std::vector< std::pair<CvString, CvWidge
 
 void CvGameTextMgr::getTradeScreenHeader(CvWString& szHeader, PlayerTypes ePlayer, PlayerTypes eOtherPlayer, bool bAttitude, CvCity* pCity)
 {
-	CvPlayer& kPlayer = GET_PLAYER(ePlayer);
+	CvPlayer& kPlayer = CvPlayerAI::getPlayer(ePlayer);
 	if (pCity == nullptr || !kPlayer.isNative())
 	{
 		szHeader.Format(L"%s - %s", kPlayer.getName(), kPlayer.getCivilizationDescription());

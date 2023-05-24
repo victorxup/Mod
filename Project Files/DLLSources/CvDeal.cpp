@@ -69,7 +69,7 @@ void CvDeal::kill(bool bKillTeam, TeamTypes eKillingTeam)
 		CvWStringBuffer szDealString;
 		CvWString szCancelString = gDLL->getText("TXT_KEY_POPUP_DEAL_CANCEL");
 
-		if (GET_TEAM(GET_PLAYER(getFirstPlayer()).getTeam()).isHasMet(GET_PLAYER(getSecondPlayer()).getTeam()))
+		if (GET_TEAM(CvPlayerAI::getPlayer(getFirstPlayer()).getTeam()).isHasMet(CvPlayerAI::getPlayer(getSecondPlayer()).getTeam()))
 		{
 			szDealString.clear();
 			GAMETEXT.getDealString(szDealString, *this, getFirstPlayer());
@@ -77,7 +77,7 @@ void CvDeal::kill(bool bKillTeam, TeamTypes eKillingTeam)
 			gDLL->UI().addPlayerMessage((PlayerTypes)getFirstPlayer(), true, GC.getEVENT_MESSAGE_TIME(), szString, "AS2D_DEAL_CANCELLED");
 		}
 
-		if (GET_TEAM(GET_PLAYER(getSecondPlayer()).getTeam()).isHasMet(GET_PLAYER(getFirstPlayer()).getTeam()))
+		if (GET_TEAM(CvPlayerAI::getPlayer(getSecondPlayer()).getTeam()).isHasMet(CvPlayerAI::getPlayer(getFirstPlayer()).getTeam()))
 		{
 			szDealString.clear();
 			GAMETEXT.getDealString(szDealString, *this, getSecondPlayer());
@@ -115,7 +115,7 @@ void CvDeal::addTrades(CLinkList<TradeData>* pFirstList, CLinkList<TradeData>* p
 		{
 			if (bCheckAllowed)
 			{
-				if (!(GET_PLAYER(getFirstPlayer()).canTradeItem(getSecondPlayer(), pNode->m_data)))
+				if (!(CvPlayerAI::getPlayer(getFirstPlayer()).canTradeItem(getSecondPlayer(), pNode->m_data)))
 				{
 					return;
 				}
@@ -127,16 +127,16 @@ void CvDeal::addTrades(CLinkList<TradeData>* pFirstList, CLinkList<TradeData>* p
 	{
 		for (pNode = pSecondList->head(); pNode; pNode = pSecondList->next(pNode))
 		{
-			if (bCheckAllowed && !(GET_PLAYER(getSecondPlayer()).canTradeItem(getFirstPlayer(), pNode->m_data)))
+			if (bCheckAllowed && !(CvPlayerAI::getPlayer(getSecondPlayer()).canTradeItem(getFirstPlayer(), pNode->m_data)))
 			{
 				return;
 			}
 		}
 	}
 
-	if (atWar(GET_PLAYER(getFirstPlayer()).getTeam(), GET_PLAYER(getSecondPlayer()).getTeam()))
+	if (atWar(CvPlayerAI::getPlayer(getFirstPlayer()).getTeam(), CvPlayerAI::getPlayer(getSecondPlayer()).getTeam()))
 	{
-		GET_TEAM(GET_PLAYER(getFirstPlayer()).getTeam()).makePeace(GET_PLAYER(getSecondPlayer()).getTeam(), true);
+		GET_TEAM(CvPlayerAI::getPlayer(getFirstPlayer()).getTeam()).makePeace(CvPlayerAI::getPlayer(getSecondPlayer()).getTeam(), true);
 	}
 	else
 	{
@@ -144,28 +144,28 @@ void CvDeal::addTrades(CLinkList<TradeData>* pFirstList, CLinkList<TradeData>* p
 		{
 			if (pSecondList != nullptr && pSecondList->getLength() > 0)
 			{
-				iValue = GET_PLAYER(getFirstPlayer()).AI_dealVal(getSecondPlayer(), pSecondList, true);
+				iValue = CvPlayerAI::getPlayer(getFirstPlayer()).AI_dealVal(getSecondPlayer(), pSecondList, true);
 
 				if (pFirstList != nullptr && pFirstList->getLength() > 0)
 				{
-					GET_PLAYER(getFirstPlayer()).AI_changePeacetimeTradeValue(getSecondPlayer(), iValue);
+					CvPlayerAI::getPlayer(getFirstPlayer()).AI_changePeacetimeTradeValue(getSecondPlayer(), iValue);
 				}
 				else
 				{
-					GET_PLAYER(getFirstPlayer()).AI_changePeacetimeGrantValue(getSecondPlayer(), iValue);
+					CvPlayerAI::getPlayer(getFirstPlayer()).AI_changePeacetimeGrantValue(getSecondPlayer(), iValue);
 				}
 			}
 			if (pFirstList != nullptr && pFirstList->getLength() > 0)
 			{
-				iValue = GET_PLAYER(getSecondPlayer()).AI_dealVal(getFirstPlayer(), pFirstList, true);
+				iValue = CvPlayerAI::getPlayer(getSecondPlayer()).AI_dealVal(getFirstPlayer(), pFirstList, true);
 
 				if (pSecondList != nullptr && pSecondList->getLength() > 0)
 				{
-					GET_PLAYER(getSecondPlayer()).AI_changePeacetimeTradeValue(getFirstPlayer(), iValue);
+					CvPlayerAI::getPlayer(getSecondPlayer()).AI_changePeacetimeTradeValue(getFirstPlayer(), iValue);
 				}
 				else
 				{
-					GET_PLAYER(getSecondPlayer()).AI_changePeacetimeGrantValue(getFirstPlayer(), iValue);
+					CvPlayerAI::getPlayer(getSecondPlayer()).AI_changePeacetimeGrantValue(getFirstPlayer(), iValue);
 				}
 			}
 		}
@@ -223,13 +223,13 @@ void CvDeal::addTrades(CLinkList<TradeData>* pFirstList, CLinkList<TradeData>* p
 
 	if (bAlliance)
 	{
-		if (GET_PLAYER(getFirstPlayer()).getTeam() < GET_PLAYER(getSecondPlayer()).getTeam())
+		if (CvPlayerAI::getPlayer(getFirstPlayer()).getTeam() < CvPlayerAI::getPlayer(getSecondPlayer()).getTeam())
 		{
-			GET_TEAM(GET_PLAYER(getFirstPlayer()).getTeam()).addTeam(GET_PLAYER(getSecondPlayer()).getTeam());
+			GET_TEAM(CvPlayerAI::getPlayer(getFirstPlayer()).getTeam()).addTeam(CvPlayerAI::getPlayer(getSecondPlayer()).getTeam());
 		}
-		else if (GET_PLAYER(getSecondPlayer()).getTeam() < GET_PLAYER(getFirstPlayer()).getTeam())
+		else if (CvPlayerAI::getPlayer(getSecondPlayer()).getTeam() < CvPlayerAI::getPlayer(getFirstPlayer()).getTeam())
 		{
-			GET_TEAM(GET_PLAYER(getSecondPlayer()).getTeam()).addTeam(GET_PLAYER(getFirstPlayer()).getTeam());
+			GET_TEAM(CvPlayerAI::getPlayer(getSecondPlayer()).getTeam()).addTeam(CvPlayerAI::getPlayer(getFirstPlayer()).getTeam());
 		}
 	}
 }
@@ -243,29 +243,29 @@ void CvDeal::doTurn()
 	{
 		if (getLengthSecondTrades() > 0)
 		{
-			iValue = (GET_PLAYER(getFirstPlayer()).AI_dealVal(getSecondPlayer(), getSecondTrades()) / GC.getDefineINT("PEACE_TREATY_LENGTH"));
+			iValue = (CvPlayerAI::getPlayer(getFirstPlayer()).AI_dealVal(getSecondPlayer(), getSecondTrades()) / GC.getDefineINT("PEACE_TREATY_LENGTH"));
 
 			if (getLengthFirstTrades() > 0)
 			{
-				GET_PLAYER(getFirstPlayer()).AI_changePeacetimeTradeValue(getSecondPlayer(), iValue);
+				CvPlayerAI::getPlayer(getFirstPlayer()).AI_changePeacetimeTradeValue(getSecondPlayer(), iValue);
 			}
 			else
 			{
-				GET_PLAYER(getFirstPlayer()).AI_changePeacetimeGrantValue(getSecondPlayer(), iValue);
+				CvPlayerAI::getPlayer(getFirstPlayer()).AI_changePeacetimeGrantValue(getSecondPlayer(), iValue);
 			}
 		}
 
 		if (getLengthFirstTrades() > 0)
 		{
-			iValue = (GET_PLAYER(getSecondPlayer()).AI_dealVal(getFirstPlayer(), getFirstTrades()) / GC.getDefineINT("PEACE_TREATY_LENGTH"));
+			iValue = (CvPlayerAI::getPlayer(getSecondPlayer()).AI_dealVal(getFirstPlayer(), getFirstTrades()) / GC.getDefineINT("PEACE_TREATY_LENGTH"));
 
 			if (getLengthSecondTrades() > 0)
 			{
-				GET_PLAYER(getSecondPlayer()).AI_changePeacetimeTradeValue(getFirstPlayer(), iValue);
+				CvPlayerAI::getPlayer(getSecondPlayer()).AI_changePeacetimeTradeValue(getFirstPlayer(), iValue);
 			}
 			else
 			{
-				GET_PLAYER(getSecondPlayer()).AI_changePeacetimeGrantValue(getFirstPlayer(), iValue);
+				CvPlayerAI::getPlayer(getSecondPlayer()).AI_changePeacetimeGrantValue(getFirstPlayer(), iValue);
 			}
 		}
 	}
@@ -473,7 +473,7 @@ bool CvDeal::startTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eT
 	switch (trade.m_eItemType)
 	{
 	case TRADE_CITIES:
-		pCity = GET_PLAYER(eFromPlayer).getCity(trade.m_iData1);
+		pCity = CvPlayerAI::getPlayer(eFromPlayer).getCity(trade.m_iData1);
 		if (pCity != nullptr)
 		{
 			if (pCity->getLiberationPlayer(false) == eToPlayer)
@@ -491,21 +491,21 @@ bool CvDeal::startTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eT
 		{
 			int iGold = trade.m_iData1;
 			OOS_LOG("deal move gold", iGold);
-			GET_PLAYER(eFromPlayer).changeGold(-iGold);
-			GET_PLAYER(eToPlayer).changeGold(iGold * GET_PLAYER(eToPlayer).getExtraTradeMultiplier(eFromPlayer) / 100);
-			GET_PLAYER(eFromPlayer).AI_changeGoldTradedTo(eToPlayer, iGold);
+			CvPlayerAI::getPlayer(eFromPlayer).changeGold(-iGold);
+			CvPlayerAI::getPlayer(eToPlayer).changeGold(iGold * CvPlayerAI::getPlayer(eToPlayer).getExtraTradeMultiplier(eFromPlayer) / 100);
+			CvPlayerAI::getPlayer(eFromPlayer).AI_changeGoldTradedTo(eToPlayer, iGold);
 
 			for (int i = 0; i < GC.getNumFatherPointInfos(); ++i)
 			{
 				FatherPointTypes ePointType = (FatherPointTypes) i;
 
-				if (GET_PLAYER(eFromPlayer).isNative())
+				if (CvPlayerAI::getPlayer(eFromPlayer).isNative())
 				{
-					GET_PLAYER(eToPlayer).changeFatherPoints(ePointType, iGold * GC.getFatherPointInfo(ePointType).getNativeTradeGoldPointPercent() / 100);
+					CvPlayerAI::getPlayer(eToPlayer).changeFatherPoints(ePointType, iGold * GC.getFatherPointInfo(ePointType).getNativeTradeGoldPointPercent() / 100);
 				}
-				else if (GET_PLAYER(eToPlayer).getParent() == eFromPlayer)
+				else if (CvPlayerAI::getPlayer(eToPlayer).getParent() == eFromPlayer)
 				{
-					GET_PLAYER(eToPlayer).changeFatherPoints(ePointType, iGold * GC.getFatherPointInfo(ePointType).getEuropeTradeGoldPointPercent() / 100);
+					CvPlayerAI::getPlayer(eToPlayer).changeFatherPoints(ePointType, iGold * GC.getFatherPointInfo(ePointType).getEuropeTradeGoldPointPercent() / 100);
 				}
 			}
 
@@ -561,16 +561,16 @@ bool CvDeal::startTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eT
 
 					if (iAmount > 0)
 					{
-						GET_PLAYER(eFromPlayer).changeYieldTradedTotal(eYield, iAmount);
-						GET_PLAYER(eToPlayer).changeYieldTradedTotal(eYield, iAmount);
-						GC.getGameINLINE().changeYieldBoughtTotal(GET_PLAYER(eToPlayer).getID(), eYield, -iAmount);
+						CvPlayerAI::getPlayer(eFromPlayer).changeYieldTradedTotal(eYield, iAmount);
+						CvPlayerAI::getPlayer(eToPlayer).changeYieldTradedTotal(eYield, iAmount);
+						GC.getGameINLINE().changeYieldBoughtTotal(CvPlayerAI::getPlayer(eToPlayer).getID(), eYield, -iAmount);
 
 						int iNativeHappy = GC.getYieldInfo(eYield).getNativeHappy();
 						if (iNativeHappy != 0)
 						{
 							//Native Happy acts like gifting the AI gold, in terms of their interactions.
-							CvPlayerAI& kFrom = GET_PLAYER(eFromPlayer);
-							CvPlayerAI& kTo = GET_PLAYER(eToPlayer);
+							CvPlayerAI& kFrom = CvPlayerAI::getPlayer(eFromPlayer);
+							CvPlayerAI& kTo = CvPlayerAI::getPlayer(eToPlayer);
 							if (kFrom.isNative())
 							{
 								if (iNativeHappy > 0)
@@ -583,7 +583,7 @@ bool CvDeal::startTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eT
 								}
 							}
 
-							if (GET_PLAYER(eToPlayer).isNative())
+							if (CvPlayerAI::getPlayer(eToPlayer).isNative())
 							{
 								if (iNativeHappy > 0)
 								{
@@ -607,42 +607,42 @@ bool CvDeal::startTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eT
 		{
 			pLoopPlot = GC.getMap().plotByIndexINLINE(iI);
 
-			if (pLoopPlot->isRevealed(GET_PLAYER(eFromPlayer).getTeam(), false))
+			if (pLoopPlot->isRevealed(CvPlayerAI::getPlayer(eFromPlayer).getTeam(), false))
 			{
-				pLoopPlot->setRevealed(GET_PLAYER(eToPlayer).getTeam(), true, false, GET_PLAYER(eFromPlayer).getTeam());
+				pLoopPlot->setRevealed(CvPlayerAI::getPlayer(eToPlayer).getTeam(), true, false, CvPlayerAI::getPlayer(eFromPlayer).getTeam());
 			}
 		}
 		break;
 
 	case TRADE_PEACE:
-		GET_TEAM(GET_PLAYER(eFromPlayer).getTeam()).makePeace((TeamTypes)trade.m_iData1);
+		GET_TEAM(CvPlayerAI::getPlayer(eFromPlayer).getTeam()).makePeace((TeamTypes)trade.m_iData1);
 		break;
 
 	case TRADE_WAR:
-		GET_TEAM(GET_PLAYER(eFromPlayer).getTeam()).declareWar(((TeamTypes)trade.m_iData1), true, NO_WARPLAN);
+		GET_TEAM(CvPlayerAI::getPlayer(eFromPlayer).getTeam()).declareWar(((TeamTypes)trade.m_iData1), true, NO_WARPLAN);
 
 		for (iI = 0; iI < MAX_PLAYERS; iI++)
 		{
-			if (GET_PLAYER((PlayerTypes)iI).isAlive())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 			{
-				if (GET_PLAYER((PlayerTypes)iI).getTeam() == ((TeamTypes)trade.m_iData1))
+				if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == ((TeamTypes)trade.m_iData1))
 				{
-					GET_PLAYER((PlayerTypes)iI).AI_changeMemoryCount(eToPlayer, MEMORY_HIRED_WAR_ALLY, 1);
+					CvPlayerAI::getPlayer((PlayerTypes)iI).AI_changeMemoryCount(eToPlayer, MEMORY_HIRED_WAR_ALLY, 1);
 				}
 			}
 		}
 		break;
 
 	case TRADE_EMBARGO:
-		GET_PLAYER(eFromPlayer).stopTradingWithTeam((TeamTypes)trade.m_iData1);
+		CvPlayerAI::getPlayer(eFromPlayer).stopTradingWithTeam((TeamTypes)trade.m_iData1);
 
 		for (iI = 0; iI < MAX_PLAYERS; iI++)
 		{
-			if (GET_PLAYER((PlayerTypes)iI).isAlive())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 			{
-				if (GET_PLAYER((PlayerTypes)iI).getTeam() == ((TeamTypes)trade.m_iData1))
+				if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == ((TeamTypes)trade.m_iData1))
 				{
-					GET_PLAYER((PlayerTypes)iI).AI_changeMemoryCount(eToPlayer, MEMORY_HIRED_TRADE_EMBARGO, 1);
+					CvPlayerAI::getPlayer((PlayerTypes)iI).AI_changeMemoryCount(eToPlayer, MEMORY_HIRED_TRADE_EMBARGO, 1);
 				}
 			}
 		}
@@ -651,8 +651,8 @@ bool CvDeal::startTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eT
 	case TRADE_OPEN_BORDERS:
 		if (trade.m_iData1 == 0)
 		{
-			startTeamTrade(TRADE_OPEN_BORDERS, GET_PLAYER(eFromPlayer).getTeam(), GET_PLAYER(eToPlayer).getTeam(), true, trade.m_kTransport);
-			GET_TEAM(GET_PLAYER(eFromPlayer).getTeam()).setOpenBorders(((TeamTypes)(GET_PLAYER(eToPlayer).getTeam())), true);
+			startTeamTrade(TRADE_OPEN_BORDERS, CvPlayerAI::getPlayer(eFromPlayer).getTeam(), CvPlayerAI::getPlayer(eToPlayer).getTeam(), true, trade.m_kTransport);
+			GET_TEAM(CvPlayerAI::getPlayer(eFromPlayer).getTeam()).setOpenBorders(((TeamTypes)(CvPlayerAI::getPlayer(eToPlayer).getTeam())), true);
 		}
 		else
 		{
@@ -663,8 +663,8 @@ bool CvDeal::startTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eT
 	case TRADE_DEFENSIVE_PACT:
 		if (trade.m_iData1 == 0)
 		{
-			startTeamTrade(TRADE_DEFENSIVE_PACT, GET_PLAYER(eFromPlayer).getTeam(), GET_PLAYER(eToPlayer).getTeam(), true, trade.m_kTransport);
-			GET_TEAM(GET_PLAYER(eFromPlayer).getTeam()).setDefensivePact(((TeamTypes)(GET_PLAYER(eToPlayer).getTeam())), true);
+			startTeamTrade(TRADE_DEFENSIVE_PACT, CvPlayerAI::getPlayer(eFromPlayer).getTeam(), CvPlayerAI::getPlayer(eToPlayer).getTeam(), true, trade.m_kTransport);
+			GET_TEAM(CvPlayerAI::getPlayer(eFromPlayer).getTeam()).setDefensivePact(((TeamTypes)(CvPlayerAI::getPlayer(eToPlayer).getTeam())), true);
 		}
 		else
 		{
@@ -676,7 +676,7 @@ bool CvDeal::startTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eT
 		break;
 
 	case TRADE_PEACE_TREATY:
-		GET_TEAM(GET_PLAYER(eFromPlayer).getTeam()).setForcePeace(((TeamTypes)(GET_PLAYER(eToPlayer).getTeam())), true);
+		GET_TEAM(CvPlayerAI::getPlayer(eFromPlayer).getTeam()).setForcePeace(((TeamTypes)(CvPlayerAI::getPlayer(eToPlayer).getTeam())), true);
 		bSave = true;
 		break;
 
@@ -709,27 +709,27 @@ void CvDeal::endTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eToP
 		break;
 
 	case TRADE_OPEN_BORDERS:
-		GET_TEAM(GET_PLAYER(eFromPlayer).getTeam()).setOpenBorders(((TeamTypes)(GET_PLAYER(eToPlayer).getTeam())), false);
+		GET_TEAM(CvPlayerAI::getPlayer(eFromPlayer).getTeam()).setOpenBorders(((TeamTypes)(CvPlayerAI::getPlayer(eToPlayer).getTeam())), false);
 		if (bTeam)
 		{
-			endTeamTrade(TRADE_OPEN_BORDERS, GET_PLAYER(eFromPlayer).getTeam(), GET_PLAYER(eToPlayer).getTeam(), eEndingTeam);
+			endTeamTrade(TRADE_OPEN_BORDERS, CvPlayerAI::getPlayer(eFromPlayer).getTeam(), CvPlayerAI::getPlayer(eToPlayer).getTeam(), eEndingTeam);
 		}
 
-		if (eEndingTeam == GET_PLAYER(eFromPlayer).getTeam())
+		if (eEndingTeam == CvPlayerAI::getPlayer(eFromPlayer).getTeam())
 		{
 			for (iI = 0; iI < MAX_PLAYERS; iI++)
 			{
-				if (GET_PLAYER((PlayerTypes)iI).isAlive())
+				if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 				{
-					if (GET_PLAYER((PlayerTypes)iI).getTeam() == GET_PLAYER(eToPlayer).getTeam())
+					if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == CvPlayerAI::getPlayer(eToPlayer).getTeam())
 					{
 						for (iJ = 0; iJ < MAX_PLAYERS; iJ++)
 						{
-							if (GET_PLAYER((PlayerTypes)iJ).isAlive())
+							if (CvPlayerAI::getPlayer((PlayerTypes)iJ).isAlive())
 							{
-								if (GET_PLAYER((PlayerTypes)iJ).getTeam() == GET_PLAYER(eFromPlayer).getTeam())
+								if (CvPlayerAI::getPlayer((PlayerTypes)iJ).getTeam() == CvPlayerAI::getPlayer(eFromPlayer).getTeam())
 								{
-									GET_PLAYER((PlayerTypes)iI).AI_changeMemoryCount(((PlayerTypes)iJ), MEMORY_CANCELLED_OPEN_BORDERS, 1);
+									CvPlayerAI::getPlayer((PlayerTypes)iI).AI_changeMemoryCount(((PlayerTypes)iJ), MEMORY_CANCELLED_OPEN_BORDERS, 1);
 								}
 							}
 						}
@@ -740,10 +740,10 @@ void CvDeal::endTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eToP
 		break;
 
 	case TRADE_DEFENSIVE_PACT:
-		GET_TEAM(GET_PLAYER(eFromPlayer).getTeam()).setDefensivePact(((TeamTypes)(GET_PLAYER(eToPlayer).getTeam())), false);
+		GET_TEAM(CvPlayerAI::getPlayer(eFromPlayer).getTeam()).setDefensivePact(((TeamTypes)(CvPlayerAI::getPlayer(eToPlayer).getTeam())), false);
 		if (bTeam)
 		{
-			endTeamTrade(TRADE_DEFENSIVE_PACT, GET_PLAYER(eFromPlayer).getTeam(), GET_PLAYER(eToPlayer).getTeam(), eEndingTeam);
+			endTeamTrade(TRADE_DEFENSIVE_PACT, CvPlayerAI::getPlayer(eFromPlayer).getTeam(), CvPlayerAI::getPlayer(eToPlayer).getTeam(), eEndingTeam);
 		}
 		break;
 
@@ -752,7 +752,7 @@ void CvDeal::endTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eToP
 		break;
 
 	case TRADE_PEACE_TREATY:
-		GET_TEAM(GET_PLAYER(eFromPlayer).getTeam()).setForcePeace(((TeamTypes)(GET_PLAYER(eToPlayer).getTeam())), false);
+		GET_TEAM(CvPlayerAI::getPlayer(eFromPlayer).getTeam()).setForcePeace(((TeamTypes)(CvPlayerAI::getPlayer(eToPlayer).getTeam())), false);
 		break;
 
 	default:
@@ -765,14 +765,14 @@ void CvDeal::startTeamTrade(TradeableItems eItem, TeamTypes eFromTeam, TeamTypes
 {
 	for (int iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		CvPlayer& kLoopFromPlayer = GET_PLAYER((PlayerTypes)iI);
+		CvPlayer& kLoopFromPlayer = CvPlayerAI::getPlayer((PlayerTypes)iI);
 		if (kLoopFromPlayer.isAlive() )
 		{
 			if (kLoopFromPlayer.getTeam() == eFromTeam)
 			{
 				for (int iJ = 0; iJ < MAX_PLAYERS; iJ++)
 				{
-					CvPlayer& kLoopToPlayer = GET_PLAYER((PlayerTypes)iJ);
+					CvPlayer& kLoopToPlayer = CvPlayerAI::getPlayer((PlayerTypes)iJ);
 					if (kLoopToPlayer.isAlive())
 					{
 						if (kLoopToPlayer.getTeam() == eToTeam)
@@ -807,7 +807,7 @@ void CvDeal::endTeamTrade(TradeableItems eItem, TeamTypes eFromTeam, TeamTypes e
 		{
 			bool bValid = true;
 
-			if (GET_PLAYER(pLoopDeal->getFirstPlayer()).getTeam() == eFromTeam && GET_PLAYER(pLoopDeal->getSecondPlayer()).getTeam() == eToTeam)
+			if (CvPlayerAI::getPlayer(pLoopDeal->getFirstPlayer()).getTeam() == eFromTeam && CvPlayerAI::getPlayer(pLoopDeal->getSecondPlayer()).getTeam() == eToTeam)
 			{
 				if (pLoopDeal->getFirstTrades())
 				{
@@ -821,7 +821,7 @@ void CvDeal::endTeamTrade(TradeableItems eItem, TeamTypes eFromTeam, TeamTypes e
 				}
 			}
 
-			if (bValid && GET_PLAYER(pLoopDeal->getFirstPlayer()).getTeam() == eToTeam && GET_PLAYER(pLoopDeal->getSecondPlayer()).getTeam() == eFromTeam)
+			if (bValid && CvPlayerAI::getPlayer(pLoopDeal->getFirstPlayer()).getTeam() == eToTeam && CvPlayerAI::getPlayer(pLoopDeal->getSecondPlayer()).getTeam() == eFromTeam)
 			{
 				if (pLoopDeal->getSecondTrades() != nullptr)
 				{

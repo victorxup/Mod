@@ -3587,7 +3587,7 @@ const CvArtInfoUnit* CvUnitInfo::getArtInfo(int index, int iProfession) const
 	UnitArtStyleTypes eStyle = NO_UNIT_ARTSTYLE;
 	if (GC.getGameINLINE().isFinalInitialized())
 	{
-		eStyle = (UnitArtStyleTypes) GC.getCivilizationInfo(GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCivilizationType()).getUnitArtStyleType();
+		eStyle = (UnitArtStyleTypes) GC.getCivilizationInfo(CvPlayerAI::getPlayer(GC.getGameINLINE().getActivePlayer()).getCivilizationType()).getUnitArtStyleType();
 	}
 	return ARTFILEMGR.getUnitArtInfo(getArtDefineTag(index, iProfession, eStyle));
 	//Androrc End

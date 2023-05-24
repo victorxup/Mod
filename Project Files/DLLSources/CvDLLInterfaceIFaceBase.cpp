@@ -29,7 +29,7 @@ void CvDLLInterfaceIFaceBase::addAllPlayersMessage(bool bForce, int iLength, CvW
 {
 	for (PlayerTypes ePlayer = FIRST_PLAYER; ePlayer < NUM_PLAYER_TYPES; ++ePlayer)
 	{
-		CvPlayer& kLoopPlayer = GET_PLAYER(ePlayer);
+		CvPlayer& kLoopPlayer = CvPlayerAI::getPlayer(ePlayer);
 		if (kLoopPlayer.isAlive())
 		{
 			if (coord.plot()->isRevealed(kLoopPlayer.getTeam(), false))
@@ -48,7 +48,7 @@ void CvDLLInterfaceIFaceBase::addOtherPlayersMessage(PlayerTypes eExcludePlayer,
 {
 	for (PlayerTypes ePlayer = FIRST_PLAYER; ePlayer < NUM_PLAYER_TYPES; ++ePlayer)
 	{
-		CvPlayer& kLoopPlayer = GET_PLAYER(ePlayer);
+		CvPlayer& kLoopPlayer = CvPlayerAI::getPlayer(ePlayer);
 		if (ePlayer != eExcludePlayer && kLoopPlayer.isAlive())
 		{
 			if (coord.plot()->isRevealed(kLoopPlayer.getTeam(), false))

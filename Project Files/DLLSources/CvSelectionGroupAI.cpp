@@ -174,7 +174,7 @@ bool CvSelectionGroupAI::AI_update()
 		AI_cancelGroupAttack();
 	}
 
-	FAssert(!(GET_PLAYER(getOwnerINLINE()).isAutoMoves()));
+	FAssert(!(CvPlayerAI::getPlayer(getOwnerINLINE()).isAutoMoves()));
 
 	int iTempHack = 0; // XXX
 
@@ -195,7 +195,7 @@ bool CvSelectionGroupAI::AI_update()
 					char szOut[1024];
 					CvWString szTempString;
 					getUnitAIString(szTempString, pHeadUnit->AI_getUnitAIType());
-					sprintf(szOut, "Unit stuck in loop: %S(%S)[%d, %d] (%S)", pHeadUnit->getName().GetCString(), GET_PLAYER(pHeadUnit->getOwnerINLINE()).getName(),
+					sprintf(szOut, "Unit stuck in loop: %S(%S)[%d, %d] (%S)", pHeadUnit->getName().GetCString(), CvPlayerAI::getPlayer(pHeadUnit->getOwnerINLINE()).getName(),
 						pHeadUnit->getX_INLINE(), pHeadUnit->getY_INLINE(), szTempString.GetCString());
 					gDLL->messageControlLog(szOut);
 				}
@@ -365,7 +365,7 @@ CvUnit* CvSelectionGroupAI::AI_getBestGroupAttacker(const CvPlot* pPlot, bool bP
 
 	pUnitNode = headUnitNode();
 
-	bool bIsHuman = pUnitNode != nullptr ? GET_PLAYER(::getUnit(pUnitNode->m_data)->getOwnerINLINE()).isHuman() : true;
+	bool bIsHuman = pUnitNode != nullptr ? CvPlayerAI::getPlayer(::getUnit(pUnitNode->m_data)->getOwnerINLINE()).isHuman() : true;
 
 	while (pUnitNode != nullptr)
 	{
@@ -899,7 +899,7 @@ bool CvSelectionGroupAI::AI_tradeRoutes()
 	const IDInfo kEurope(getOwnerINLINE(), CvTradeRoute::EUROPE_CITY_ID);
 
 	CvCity* pPlotCity = plot()->getPlotCity();
-	CvPlayerAI& kOwner = GET_PLAYER(getOwnerINLINE());
+	CvPlayerAI& kOwner = CvPlayerAI::getPlayer(getOwnerINLINE());
 	std::set<int>::iterator it;
 
 	std::map<IDInfo, int> cityValues;

@@ -55,7 +55,7 @@ void CvReplayInfo::createInfo(PlayerTypes ePlayer)
 	}
 	if (NO_PLAYER != ePlayer)
 	{
-		CvPlayer& player = GET_PLAYER(ePlayer);
+		CvPlayer& player = CvPlayerAI::getPlayer(ePlayer);
 
 		m_eDifficulty = player.getHandicapType();
 		m_szLeaderName = player.getName();
@@ -116,7 +116,7 @@ void CvReplayInfo::createInfo(PlayerTypes ePlayer)
 	int iPlayerIndex = 0;
 	for (int iPlayer = 0; iPlayer < MAX_PLAYERS; iPlayer++)
 	{
-		CvPlayer& player = GET_PLAYER((PlayerTypes)iPlayer);
+		CvPlayer& player = CvPlayerAI::getPlayer((PlayerTypes)iPlayer);
 		if (player.isEverAlive())
 		{
 			mapPlayers[(PlayerTypes)iPlayer] = iPlayerIndex;

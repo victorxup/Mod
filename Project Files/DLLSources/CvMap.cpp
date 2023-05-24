@@ -552,7 +552,7 @@ void CvMap::updateMinOriginalStartDist(CvArea* pArea)
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		pStartingPlot = GET_PLAYER((PlayerTypes)iI).getStartingPlot();
+		pStartingPlot = CvPlayerAI::getPlayer((PlayerTypes)iI).getStartingPlot();
 
 		if (pStartingPlot != nullptr)
 		{
@@ -750,20 +750,20 @@ CvCity* CvMap::findCity(Coordinates coord, PlayerTypes eOwner, TeamTypes eTeam, 
 
 	for (int iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
 			if ((eOwner == NO_PLAYER) || (iI == eOwner))
 			{
-				if ((eTeam == NO_TEAM) || (GET_PLAYER((PlayerTypes)iI).getTeam() == eTeam))
+				if ((eTeam == NO_TEAM) || (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == eTeam))
 				{
 					int iLoop;
-					for (CvCity* pLoopCity = GET_PLAYER((PlayerTypes)iI).firstCity(&iLoop); pLoopCity != nullptr; pLoopCity = GET_PLAYER((PlayerTypes)iI).nextCity(&iLoop))
+					for (CvCity* pLoopCity = CvPlayerAI::getPlayer((PlayerTypes)iI).firstCity(&iLoop); pLoopCity != nullptr; pLoopCity = CvPlayerAI::getPlayer((PlayerTypes)iI).nextCity(&iLoop))
 					{
 						if (!bSameArea || (pLoopCity->area() == coord.plot()->area()) || (bCoastalOnly && (pLoopCity->waterArea() == coord.plot()->area())))
 						{
 							if (!bCoastalOnly || pLoopCity->isCoastal(GC.getMIN_WATER_SIZE_FOR_OCEAN()))
 							{
-								if ((eTeamAtWarWith == NO_TEAM) || atWar(GET_PLAYER((PlayerTypes)iI).getTeam(), eTeamAtWarWith))
+								if ((eTeamAtWarWith == NO_TEAM) || atWar(CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam(), eTeamAtWarWith))
 								{
 									if ((eDirection == NO_DIRECTION) || (estimateDirection(dxWrap(pLoopCity->getX_INLINE() - coord.x()), dyWrap(pLoopCity->getY_INLINE() - coord.y())) == eDirection))
 									{
@@ -798,12 +798,12 @@ CvSelectionGroup* CvMap::findSelectionGroup(int iX, int iY, PlayerTypes eOwner, 
 
 	for (int iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
 			if ((eOwner == NO_PLAYER) || (iI == eOwner))
 			{
 				int iLoop;
-				for (CvSelectionGroup* pLoopSelectionGroup = GET_PLAYER((PlayerTypes)iI).firstSelectionGroup(&iLoop); pLoopSelectionGroup != nullptr; pLoopSelectionGroup = GET_PLAYER((PlayerTypes)iI).nextSelectionGroup(&iLoop))
+				for (CvSelectionGroup* pLoopSelectionGroup = CvPlayerAI::getPlayer((PlayerTypes)iI).firstSelectionGroup(&iLoop); pLoopSelectionGroup != nullptr; pLoopSelectionGroup = CvPlayerAI::getPlayer((PlayerTypes)iI).nextSelectionGroup(&iLoop))
 				{
 					if (!bReadyToSelect || pLoopSelectionGroup->readyToSelect())
 					{

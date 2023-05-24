@@ -330,11 +330,11 @@ void CvArea::changeYieldRateModifier(PlayerTypes eIndex1, YieldTypes eIndex2, in
 	{
 		m_em2_iYieldRateModifier[eIndex1].add(eIndex2, iChange);
 
-		GET_PLAYER(eIndex1).invalidateYieldRankCache(eIndex2);
+		CvPlayerAI::getPlayer(eIndex1).invalidateYieldRankCache(eIndex2);
 
-		GET_PLAYER(eIndex1).AI_makeAssignWorkDirty();
+		CvPlayerAI::getPlayer(eIndex1).AI_makeAssignWorkDirty();
 
-		if (GET_PLAYER(eIndex1).getTeam() == GC.getGameINLINE().getActiveTeam())
+		if (CvPlayerAI::getPlayer(eIndex1).getTeam() == GC.getGameINLINE().getActiveTeam())
 		{
 			gDLL->getInterfaceIFace()->setDirty(CityInfo_DIRTY_BIT, true);
 		}
@@ -441,7 +441,7 @@ bool CvArea::isEuropePlayer() const
 
 	for (int iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		CvPlayerAI& kLoopPlayer = GET_PLAYER((PlayerTypes)iI);
+		CvPlayerAI& kLoopPlayer = CvPlayerAI::getPlayer((PlayerTypes)iI);
 		if (kLoopPlayer.isAlive() && !kLoopPlayer.isNative())
 		{
 			if (this->getCitiesPerPlayer((PlayerTypes)iI) > 0)

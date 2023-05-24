@@ -41,7 +41,7 @@ const int defaultNumSessions = 1;
 const int defaultNumCultureVictoryCities = 0;
 const int defaultCultureVictoryCultureLevel = NO_CULTURELEVEL;
 
-// 
+//
 enum SavegameVariableTypes
 {
 	GameSave_END,
@@ -331,20 +331,20 @@ void CvGame::read(CvSavegameReader reader)
 		case GameSave_NumCultureVictoryCities: reader.Read(m_iNumCultureVictoryCities); break;
 		case GameSave_CultureVictoryCultureLevel: reader.Read(m_eCultureVictoryCultureLevel); break;
 		}
-		
+
 	}
 
 	if (!isNetworkMultiPlayer())
 	{
 		++m_iNumSessions;
-	} 
+	}
 	// Get the active player information from the initialization structure
 	if (!isGameMultiPlayer())
 	{
 		int iI;
 		for (iI = 0; iI < MAX_PLAYERS; iI++)
 		{
-			if (GET_PLAYER((PlayerTypes)iI).isHuman())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).isHuman())
 			{
 				setActivePlayer((PlayerTypes)iI);
 				break;

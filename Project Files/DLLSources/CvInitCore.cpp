@@ -431,10 +431,10 @@ void CvInitCore::reassignPlayer(PlayerTypes eOldID, PlayerTypes eNewID)
 
 		if(CvPlayerAI::areStaticsInitialized())
 		{
-			GET_PLAYER(eOldID).updateTeamType();
-			GET_PLAYER(eNewID).updateTeamType();
-			GET_PLAYER(eOldID).updateHuman();
-			GET_PLAYER(eNewID).updateHuman();
+			CvPlayerAI::getPlayer(eOldID).updateTeamType();
+			CvPlayerAI::getPlayer(eNewID).updateTeamType();
+			CvPlayerAI::getPlayer(eOldID).updateHuman();
+			CvPlayerAI::getPlayer(eNewID).updateHuman();
 		}
 	}
 }
@@ -680,8 +680,8 @@ void CvInitCore::resetPlayer(PlayerTypes eID)
 
 		if(CvPlayerAI::areStaticsInitialized())
 		{
-			GET_PLAYER(eID).updateTeamType();
-			GET_PLAYER(eID).updateHuman();
+			CvPlayerAI::getPlayer(eID).updateTeamType();
+			CvPlayerAI::getPlayer(eID).updateHuman();
 		}
 	}
 }
@@ -1173,7 +1173,7 @@ void CvInitCore::setType(GameType eType)
 		{
 			for (int i = 0; i < MAX_PLAYERS; ++i)
 			{
-				GET_PLAYER((PlayerTypes)i).updateHuman();
+				CvPlayerAI::getPlayer((PlayerTypes)i).updateHuman();
 			}
 		}
 	}
@@ -1206,7 +1206,7 @@ void CvInitCore::setMode(GameMode eMode)
 		{
 			for (int i = 0; i < MAX_PLAYERS; ++i)
 			{
-				GET_PLAYER((PlayerTypes)i).updateHuman();
+				CvPlayerAI::getPlayer((PlayerTypes)i).updateHuman();
 			}
 		}
 	}
@@ -1529,7 +1529,7 @@ void CvInitCore::setTeam(PlayerTypes eID, TeamTypes eTeam)
 
 			if(CvPlayerAI::areStaticsInitialized())
 			{
-				GET_PLAYER(eID).updateTeamType();
+				CvPlayerAI::getPlayer(eID).updateTeamType();
 			}
 		}
 	}
@@ -1626,7 +1626,7 @@ void CvInitCore::setSlotStatus(PlayerTypes eID, SlotStatus eSlotStatus)
 
 			if(CvPlayerAI::areStaticsInitialized())
 			{
-				GET_PLAYER(eID).updateHuman();
+				CvPlayerAI::getPlayer(eID).updateHuman();
 			}
 		}
 	}
@@ -2013,8 +2013,8 @@ void CvInitCore::read(FDataStreamBase* pStream)
 	{
 		for (int i=0;i<MAX_PLAYERS;i++)
 		{
-			GET_PLAYER((PlayerTypes)i).updateHuman();
-			GET_PLAYER((PlayerTypes) i).updateTeamType();
+			CvPlayerAI::getPlayer((PlayerTypes)i).updateHuman();
+			CvPlayerAI::getPlayer((PlayerTypes) i).updateTeamType();
 		}
 	}
 

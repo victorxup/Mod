@@ -51,9 +51,9 @@ void CvGameAI::AI_makeAssignWorkDirty()
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
-			GET_PLAYER((PlayerTypes)iI).AI_makeAssignWorkDirty();
+			CvPlayerAI::getPlayer((PlayerTypes)iI).AI_makeAssignWorkDirty();
 		}
 	}
 }
@@ -63,7 +63,7 @@ void CvGameAI::AI_updateAssignWork()
 {
 	for (int iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		CvPlayer& kLoopPlayer = GET_PLAYER((PlayerTypes)iI);
+		CvPlayer& kLoopPlayer = CvPlayerAI::getPlayer((PlayerTypes)iI);
 		if (GET_TEAM(kLoopPlayer.getTeam()).isHuman() && kLoopPlayer.isAlive())
 		{
 			kLoopPlayer.AI_updateAssignWork();
@@ -91,9 +91,9 @@ int CvGameAI::AI_adjustedTurn(int iTurn)
 	iModifier += GC.getGameSpeedInfo(getGameSpeedType()).getTrainPercent() - 100;
 	iModifier += GC.getGameSpeedInfo(getGameSpeedType()).getConstructPercent() - 100;
 	iModifier /= 3;
-	
+
 	return (iTurn * (100 + iModifier)) / 100;
-	
+
 }
 
 
@@ -136,9 +136,9 @@ void CvGameAI::read(FDataStreamBase* pStream)
 void CvGameAI::write(FDataStreamBase* pStream)
 {
 	CvSavegameWriterBase writerbase(pStream);
-	CvSavegameWriter writer(writerbase); 
-	write(writer); 
-	writerbase.WriteFile(); 
+	CvSavegameWriter writer(writerbase);
+	write(writer);
+	writerbase.WriteFile();
 }
 
 // Protected Functions...

@@ -107,11 +107,11 @@ void CvTeamAI::AI_makeAssignWorkDirty()
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
-			if (GET_PLAYER((PlayerTypes)iI).getTeam() == getID())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == getID())
 			{
-				GET_PLAYER((PlayerTypes)iI).AI_makeAssignWorkDirty();
+				CvPlayerAI::getPlayer((PlayerTypes)iI).AI_makeAssignWorkDirty();
 			}
 		}
 	}
@@ -126,11 +126,11 @@ int CvTeamAI::AI_getOurPlotStrength(CvPlot* pPlot, int iRange, bool bDefensiveBo
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
-			if (GET_PLAYER((PlayerTypes)iI).getTeam() == getID())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == getID())
 			{
-				iPlotStrength += GET_PLAYER((PlayerTypes)iI).AI_getOurPlotStrength(pPlot,iRange,bDefensiveBonuses,bTestMoves);
+				iPlotStrength += CvPlayerAI::getPlayer((PlayerTypes)iI).AI_getOurPlotStrength(pPlot,iRange,bDefensiveBonuses,bTestMoves);
 			}
 		}
 	}
@@ -167,11 +167,11 @@ void CvTeamAI::AI_updateAreaTargets()
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
-			if (GET_PLAYER((PlayerTypes)iI).getTeam() == getID())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == getID())
 			{
-				GET_PLAYER((PlayerTypes)iI).AI_updateAreaTargets();
+				CvPlayerAI::getPlayer((PlayerTypes)iI).AI_updateAreaTargets();
 			}
 		}
 	}
@@ -186,11 +186,11 @@ int CvTeamAI::AI_countMilitaryWeight(CvArea* pArea) const
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
-			if (GET_PLAYER((PlayerTypes)iI).getTeam() == getID())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == getID())
 			{
-				iCount += GET_PLAYER((PlayerTypes)iI).AI_militaryWeight(pArea);
+				iCount += CvPlayerAI::getPlayer((PlayerTypes)iI).AI_militaryWeight(pArea);
 			}
 		}
 	}
@@ -205,11 +205,11 @@ bool CvTeamAI::AI_isAnyCapitalAreaAlone() const
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
-			if (GET_PLAYER((PlayerTypes)iI).getTeam() == getID())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == getID())
 			{
-				if (GET_PLAYER((PlayerTypes)iI).AI_isCapitalAreaAlone())
+				if (CvPlayerAI::getPlayer((PlayerTypes)iI).AI_isCapitalAreaAlone())
 				{
 					return true;
 				}
@@ -227,11 +227,11 @@ bool CvTeamAI::AI_isPrimaryArea(CvArea* pArea) const
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
-			if (GET_PLAYER((PlayerTypes)iI).getTeam() == getID())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == getID())
 			{
-				if (GET_PLAYER((PlayerTypes)iI).AI_isPrimaryArea(pArea))
+				if (CvPlayerAI::getPlayer((PlayerTypes)iI).AI_isPrimaryArea(pArea))
 				{
 					return true;
 				}
@@ -538,26 +538,26 @@ int CvTeamAI::AI_calculateCapitalProximity(TeamTypes eTeam) const
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
-			if (GET_PLAYER((PlayerTypes)iI).getTeam() == getID())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == getID())
 			{
-				pOurCapitalCity = GET_PLAYER((PlayerTypes)iI).getPrimaryCity();
+				pOurCapitalCity = CvPlayerAI::getPlayer((PlayerTypes)iI).getPrimaryCity();
 
 				if (pOurCapitalCity != nullptr)
 				{
 					for (iJ = 0; iJ < MAX_PLAYERS; iJ++)
 					{
-						if (GET_PLAYER((PlayerTypes)iJ).isAlive())
+						if (CvPlayerAI::getPlayer((PlayerTypes)iJ).isAlive())
 						{
-							if (GET_PLAYER((PlayerTypes)iJ).getTeam() != getID())
+							if (CvPlayerAI::getPlayer((PlayerTypes)iJ).getTeam() != getID())
 							{
-								pTheirCapitalCity = GET_PLAYER((PlayerTypes)iJ).getPrimaryCity();
+								pTheirCapitalCity = CvPlayerAI::getPlayer((PlayerTypes)iJ).getPrimaryCity();
 
 								if (pTheirCapitalCity != nullptr)
 								{
 									int iDistance = (plotDistance(pOurCapitalCity->getX_INLINE(), pOurCapitalCity->getY_INLINE(), pTheirCapitalCity->getX_INLINE(), pTheirCapitalCity->getY_INLINE()) * (pOurCapitalCity->area() != pTheirCapitalCity->area() ? 3 : 2));
-									if (GET_PLAYER((PlayerTypes)iJ).getTeam() == eTeam)
+									if (CvPlayerAI::getPlayer((PlayerTypes)iJ).getTeam() == eTeam)
 									{
 										iTotalDistance += iDistance;
 										iCount++;
@@ -633,7 +633,7 @@ bool CvTeamAI::AI_shareWar(TeamTypes eTeam) const
 				if (isAtWar((TeamTypes)iI) && GET_TEAM(eTeam).isAtWar((TeamTypes)iI))
 				{
 					// R&R, ray, fix for improved Attitude through shared war with Animals
-					if(iI != GET_PLAYER(GC.getGameINLINE().getBarbarianPlayer()).getTeam())
+					if(iI != CvPlayerAI::getPlayer(GC.getGameINLINE().getBarbarianPlayer()).getTeam())
 					{
 						return true;
 					}
@@ -665,18 +665,18 @@ AttitudeTypes CvTeamAI::AI_getAttitude(TeamTypes eTeam, bool bForced) const
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
-			if (GET_PLAYER((PlayerTypes)iI).getTeam() == getID())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == getID())
 			{
 				for (iJ = 0; iJ < MAX_PLAYERS; iJ++)
 				{
-					if (GET_PLAYER((PlayerTypes)iJ).isAlive() && iI != iJ)
+					if (CvPlayerAI::getPlayer((PlayerTypes)iJ).isAlive() && iI != iJ)
 					{
-						TeamTypes eTeamLoop = GET_PLAYER((PlayerTypes)iJ).getTeam();
+						TeamTypes eTeamLoop = CvPlayerAI::getPlayer((PlayerTypes)iJ).getTeam();
 						if (eTeamLoop == eTeam)
 						{
-							iAttitude += GET_PLAYER((PlayerTypes)iI).AI_getAttitude((PlayerTypes)iJ, bForced);
+							iAttitude += CvPlayerAI::getPlayer((PlayerTypes)iI).AI_getAttitude((PlayerTypes)iJ, bForced);
 							iCount++;
 						}
 					}
@@ -707,17 +707,17 @@ int CvTeamAI::AI_getAttitudeVal(TeamTypes eTeam, bool bForced) const
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
-			if (GET_PLAYER((PlayerTypes)iI).getTeam() == getID())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == getID())
 			{
 				for (iJ = 0; iJ < MAX_PLAYERS; iJ++)
 				{
-					if (GET_PLAYER((PlayerTypes)iJ).isAlive())
+					if (CvPlayerAI::getPlayer((PlayerTypes)iJ).isAlive())
 					{
-						if (GET_PLAYER((PlayerTypes)iJ).getTeam() == eTeam)
+						if (CvPlayerAI::getPlayer((PlayerTypes)iJ).getTeam() == eTeam)
 						{
-							iAttitudeVal += GET_PLAYER((PlayerTypes)iI).AI_getAttitudeVal((PlayerTypes)iJ, bForced);
+							iAttitudeVal += CvPlayerAI::getPlayer((PlayerTypes)iI).AI_getAttitudeVal((PlayerTypes)iJ, bForced);
 							iCount++;
 						}
 					}
@@ -748,17 +748,17 @@ int CvTeamAI::AI_getMemoryCount(TeamTypes eTeam, MemoryTypes eMemory) const
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
-			if (GET_PLAYER((PlayerTypes)iI).getTeam() == getID())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == getID())
 			{
 				for (iJ = 0; iJ < MAX_PLAYERS; iJ++)
 				{
-					if (GET_PLAYER((PlayerTypes)iJ).isAlive())
+					if (CvPlayerAI::getPlayer((PlayerTypes)iJ).isAlive())
 					{
-						if (GET_PLAYER((PlayerTypes)iJ).getTeam() == eTeam)
+						if (CvPlayerAI::getPlayer((PlayerTypes)iJ).getTeam() == eTeam)
 						{
-							iMemoryCount += GET_PLAYER((PlayerTypes)iI).AI_getMemoryCount(((PlayerTypes)iJ), eMemory);
+							iMemoryCount += CvPlayerAI::getPlayer((PlayerTypes)iI).AI_getMemoryCount(((PlayerTypes)iJ), eMemory);
 							iCount++;
 						}
 					}
@@ -1021,11 +1021,11 @@ DenialTypes CvTeamAI::AI_mapTrade(TeamTypes eTeam) const
 
 	for (int iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
-			if (GET_PLAYER((PlayerTypes)iI).getTeam() == getID())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == getID())
 			{
-				if (eAttitude <= GC.getLeaderHeadInfo(GET_PLAYER((PlayerTypes)iI).getPersonalityType()).getMapRefuseAttitudeThreshold())
+				if (eAttitude <= GC.getLeaderHeadInfo(CvPlayerAI::getPlayer((PlayerTypes)iI).getPersonalityType()).getMapRefuseAttitudeThreshold())
 				{
 					return DENIAL_ATTITUDE;
 				}
@@ -1367,11 +1367,11 @@ DenialTypes CvTeamAI::AI_declareWarTrade(TeamTypes eWarTeam, TeamTypes eTeam, bo
 
 		for (iI = 0; iI < MAX_PLAYERS; iI++)
 		{
-			if (GET_PLAYER((PlayerTypes)iI).isAlive())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 			{
-				if (GET_PLAYER((PlayerTypes)iI).getTeam() == getID())
+				if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == getID())
 				{
-					if (eAttitude <= GC.getLeaderHeadInfo(GET_PLAYER((PlayerTypes)iI).getPersonalityType()).getDeclareWarRefuseAttitudeThreshold())
+					if (eAttitude <= GC.getLeaderHeadInfo(CvPlayerAI::getPlayer((PlayerTypes)iI).getPersonalityType()).getDeclareWarRefuseAttitudeThreshold())
 					{
 						return DENIAL_ATTITUDE;
 					}
@@ -1386,11 +1386,11 @@ DenialTypes CvTeamAI::AI_declareWarTrade(TeamTypes eWarTeam, TeamTypes eTeam, bo
 
 		for (iI = 0; iI < MAX_PLAYERS; iI++)
 		{
-			if (GET_PLAYER((PlayerTypes)iI).isAlive())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 			{
-				if (GET_PLAYER((PlayerTypes)iI).getTeam() == getID())
+				if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == getID())
 				{
-					if (eAttitudeThem > GC.getLeaderHeadInfo(GET_PLAYER((PlayerTypes)iI).getPersonalityType()).getDeclareWarThemRefuseAttitudeThreshold())
+					if (eAttitudeThem > GC.getLeaderHeadInfo(CvPlayerAI::getPlayer((PlayerTypes)iI).getPersonalityType()).getDeclareWarThemRefuseAttitudeThreshold())
 					{
 						return DENIAL_ATTITUDE_THEM;
 					}
@@ -1442,11 +1442,11 @@ DenialTypes CvTeamAI::AI_openBordersTrade(TeamTypes eTeam) const
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
-			if (GET_PLAYER((PlayerTypes)iI).getTeam() == getID())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == getID())
 			{
-				if (eAttitude <= GC.getLeaderHeadInfo(GET_PLAYER((PlayerTypes)iI).getPersonalityType()).getOpenBordersRefuseAttitudeThreshold())
+				if (eAttitude <= GC.getLeaderHeadInfo(CvPlayerAI::getPlayer((PlayerTypes)iI).getPersonalityType()).getOpenBordersRefuseAttitudeThreshold())
 				{
 					return DENIAL_ATTITUDE;
 				}
@@ -1492,11 +1492,11 @@ DenialTypes CvTeamAI::AI_defensivePactTrade(TeamTypes eTeam) const
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
-			if (GET_PLAYER((PlayerTypes)iI).getTeam() == getID())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == getID())
 			{
-				if (eAttitude <= GC.getLeaderHeadInfo(GET_PLAYER((PlayerTypes)iI).getPersonalityType()).getDefensivePactRefuseAttitudeThreshold())
+				if (eAttitude <= GC.getLeaderHeadInfo(CvPlayerAI::getPlayer((PlayerTypes)iI).getPersonalityType()).getDefensivePactRefuseAttitudeThreshold())
 				{
 					return DENIAL_ATTITUDE;
 				}
@@ -1548,11 +1548,11 @@ DenialTypes CvTeamAI::AI_permanentAllianceTrade(TeamTypes eTeam) const
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
-			if (GET_PLAYER((PlayerTypes)iI).getTeam() == getID())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == getID())
 			{
-				if (eAttitude <= GC.getLeaderHeadInfo(GET_PLAYER((PlayerTypes)iI).getPersonalityType()).getPermanentAllianceRefuseAttitudeThreshold())
+				if (eAttitude <= GC.getLeaderHeadInfo(CvPlayerAI::getPlayer((PlayerTypes)iI).getPersonalityType()).getPermanentAllianceRefuseAttitudeThreshold())
 				{
 					return DENIAL_ATTITUDE;
 				}
@@ -1592,7 +1592,7 @@ void CvTeamAI::AI_updateWorstEnemy()
 		if (GET_TEAM((TeamTypes)iI).isAlive())
 		{
 			// R&R, ray, fix for Wild Animals not to be considered as Worst Enemy
-			if (iI != getID() && (TeamTypes)iI != GET_PLAYER(GC.getGameINLINE().getBarbarianPlayer()).getTeam())
+			if (iI != getID() && (TeamTypes)iI != CvPlayerAI::getPlayer(GC.getGameINLINE().getBarbarianPlayer()).getTeam())
 			{
 				if (isHasMet((TeamTypes)iI))
 				{
@@ -1878,7 +1878,7 @@ void CvTeamAI::AI_doDamages(TeamTypes eTeam, bool bPeace)
 	for (int iI = 0; iI < MAX_PLAYERS; iI++)
 	{
 		PlayerTypes ePlayer = (PlayerTypes)iI;
-		CvPlayerAI& kPlayer = GET_PLAYER(ePlayer);
+		CvPlayerAI& kPlayer = CvPlayerAI::getPlayer(ePlayer);
 		if (kPlayer.isAlive())
 		{
 			if (kPlayer.getTeam() == getID())
@@ -1986,7 +1986,7 @@ void CvTeamAI::AI_setWarPlan(TeamTypes eIndex, WarPlanTypes eNewValue, bool bWar
 			{
 				CvWStringBuffer buf;
 				GAMETEXT.getWarplanString(buf, eNewValue);
-				logBBAI("Team %d (%S) CvTeamAI::AI_setWarPlan (%S) against team %d (%S)", getID(), GET_PLAYER(getLeaderID()).getCivilizationDescription(0), buf.getCString(), eIndex, GET_PLAYER(GET_TEAM(eIndex).getLeaderID()).getCivilizationDescription(0));
+				logBBAI("Team %d (%S) CvTeamAI::AI_setWarPlan (%S) against team %d (%S)", getID(), CvPlayerAI::getPlayer(getLeaderID()).getCivilizationDescription(0), buf.getCString(), eIndex, CvPlayerAI::getPlayer(GET_TEAM(eIndex).getLeaderID()).getCivilizationDescription(0));
 			}
 			AI_setWarPlanStateCounter(eIndex, 0);
 
@@ -1994,16 +1994,16 @@ void CvTeamAI::AI_setWarPlan(TeamTypes eIndex, WarPlanTypes eNewValue, bool bWar
 
 			for (iI = 0; iI < MAX_PLAYERS; iI++)
 			{
-				if (GET_PLAYER((PlayerTypes)iI).isAlive())
+				if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 				{
-					if (GET_PLAYER((PlayerTypes)iI).getTeam() == getID())
+					if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == getID())
 					{
-						if (!(GET_PLAYER((PlayerTypes)iI).isHuman()))
+						if (!(CvPlayerAI::getPlayer((PlayerTypes)iI).isHuman()))
 						{
-							GET_PLAYER((PlayerTypes)iI).AI_makeProductionDirty();
-							if (GET_PLAYER((PlayerTypes)iI).isNative())
+							CvPlayerAI::getPlayer((PlayerTypes)iI).AI_makeProductionDirty();
+							if (CvPlayerAI::getPlayer((PlayerTypes)iI).isNative())
 							{
-								GET_PLAYER((PlayerTypes)iI).AI_doNativeArmy(eIndex);
+								CvPlayerAI::getPlayer((PlayerTypes)iI).AI_doNativeArmy(eIndex);
 							}
 						}
 					}
@@ -2030,17 +2030,17 @@ int CvTeamAI::AI_teamCloseness(TeamTypes eIndex, int iMaxDistance) const
 	int iValue = 0;
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
-			if (GET_PLAYER((PlayerTypes)iI).getTeam() == getID())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == getID())
 			{
 				for (iJ = 0; iJ < MAX_PLAYERS; iJ++)
 				{
-					if (GET_PLAYER((PlayerTypes)iJ).isAlive())
+					if (CvPlayerAI::getPlayer((PlayerTypes)iJ).isAlive())
 					{
-						if (GET_PLAYER((PlayerTypes)iJ).getTeam() == eIndex)
+						if (CvPlayerAI::getPlayer((PlayerTypes)iJ).getTeam() == eIndex)
 						{
-							iValue += GET_PLAYER((PlayerTypes)iI).AI_playerCloseness((PlayerTypes)iJ, iMaxDistance);
+							iValue += CvPlayerAI::getPlayer((PlayerTypes)iI).AI_playerCloseness((PlayerTypes)iJ, iMaxDistance);
 						}
 					}
 				}
@@ -2061,17 +2061,17 @@ int CvTeamAI::AI_targetValidity(TeamTypes eTeam) const
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
-			if (GET_PLAYER((PlayerTypes)iI).getTeam() == getID())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == getID())
 			{
 				for (iJ = 0; iJ < MAX_PLAYERS; iJ++)
 				{
-					if (GET_PLAYER((PlayerTypes)iJ).isAlive())
+					if (CvPlayerAI::getPlayer((PlayerTypes)iJ).isAlive())
 					{
-						if (GET_PLAYER((PlayerTypes)iJ).getTeam() == eTeam)
+						if (CvPlayerAI::getPlayer((PlayerTypes)iJ).getTeam() == eTeam)
 						{
-							iValue = std::max(iValue, GET_PLAYER((PlayerTypes)iI).AI_targetValidity((PlayerTypes)iJ));
+							iValue = std::max(iValue, CvPlayerAI::getPlayer((PlayerTypes)iI).AI_targetValidity((PlayerTypes)iJ));
 						}
 					}
 				}
@@ -2126,7 +2126,7 @@ int CvTeamAI::AI_maxWarRand() const
 
 	for (int iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		CvPlayerAI& kPlayer = GET_PLAYER((PlayerTypes)iI);
+		CvPlayerAI& kPlayer = CvPlayerAI::getPlayer((PlayerTypes)iI);
 		if (kPlayer.isAlive())
 		{
 			if (kPlayer.getTeam() == getID())
@@ -2175,7 +2175,7 @@ int CvTeamAI::AI_maxWarNearbyPowerRatio() const
 
 	for (int iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		CvPlayer& kPlayer = GET_PLAYER((PlayerTypes)iI);
+		CvPlayer& kPlayer = CvPlayerAI::getPlayer((PlayerTypes)iI);
 		if (kPlayer.isAlive())
 		{
 			if (kPlayer.getTeam() == getID())
@@ -2206,11 +2206,11 @@ int CvTeamAI::AI_maxWarDistantPowerRatio() const
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
-			if (GET_PLAYER((PlayerTypes)iI).getTeam() == getID())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == getID())
 			{
-				iRand += GC.getLeaderHeadInfo(GET_PLAYER((PlayerTypes)iI).getPersonalityType()).getMaxWarDistantPowerRatio();
+				iRand += GC.getLeaderHeadInfo(CvPlayerAI::getPlayer((PlayerTypes)iI).getPersonalityType()).getMaxWarDistantPowerRatio();
 				iCount++;
 			}
 		}
@@ -2232,11 +2232,11 @@ int CvTeamAI::AI_maxWarMinAdjacentLandPercent() const
 
 	for (int iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
-			if (GET_PLAYER((PlayerTypes)iI).getTeam() == getID())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == getID())
 			{
-				iRand += GC.getLeaderHeadInfo(GET_PLAYER((PlayerTypes)iI).getPersonalityType()).getMaxWarMinAdjacentLandPercent();
+				iRand += GC.getLeaderHeadInfo(CvPlayerAI::getPlayer((PlayerTypes)iI).getPersonalityType()).getMaxWarMinAdjacentLandPercent();
 				iCount++;
 			}
 		}
@@ -2262,11 +2262,11 @@ int CvTeamAI::AI_limitedWarRand() const
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
-			if (GET_PLAYER((PlayerTypes)iI).getTeam() == getID())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == getID())
 			{
-				iRand += GC.getLeaderHeadInfo(GET_PLAYER((PlayerTypes)iI).getPersonalityType()).getLimitedWarRand();
+				iRand += GC.getLeaderHeadInfo(CvPlayerAI::getPlayer((PlayerTypes)iI).getPersonalityType()).getLimitedWarRand();
 				iCount++;
 			}
 		}
@@ -2292,11 +2292,11 @@ int CvTeamAI::AI_limitedWarPowerRatio() const
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
-			if (GET_PLAYER((PlayerTypes)iI).getTeam() == getID())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == getID())
 			{
-				iRand += GC.getLeaderHeadInfo(GET_PLAYER((PlayerTypes)iI).getPersonalityType()).getLimitedWarPowerRatio();
+				iRand += GC.getLeaderHeadInfo(CvPlayerAI::getPlayer((PlayerTypes)iI).getPersonalityType()).getLimitedWarPowerRatio();
 				iCount++;
 			}
 		}
@@ -2322,11 +2322,11 @@ int CvTeamAI::AI_dogpileWarRand() const
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
-			if (GET_PLAYER((PlayerTypes)iI).getTeam() == getID())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == getID())
 			{
-				iRand += GC.getLeaderHeadInfo(GET_PLAYER((PlayerTypes)iI).getPersonalityType()).getDogpileWarRand();
+				iRand += GC.getLeaderHeadInfo(CvPlayerAI::getPlayer((PlayerTypes)iI).getPersonalityType()).getDogpileWarRand();
 				iCount++;
 			}
 		}
@@ -2348,11 +2348,11 @@ int CvTeamAI::AI_makePeaceRand() const
 
 	for (int iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
-			if (GET_PLAYER((PlayerTypes)iI).getTeam() == getID())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == getID())
 			{
-				iRand += GC.getLeaderHeadInfo(GET_PLAYER((PlayerTypes)iI).getPersonalityType()).getMakePeaceRand();
+				iRand += GC.getLeaderHeadInfo(CvPlayerAI::getPlayer((PlayerTypes)iI).getPersonalityType()).getMakePeaceRand();
 				iCount++;
 			}
 		}
@@ -2378,11 +2378,11 @@ int CvTeamAI::AI_noWarAttitudeProb(AttitudeTypes eAttitude) const
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
-			if (GET_PLAYER((PlayerTypes)iI).getTeam() == getID())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == getID())
 			{
-				iProb += GC.getLeaderHeadInfo(GET_PLAYER((PlayerTypes)iI).getPersonalityType()).getNoWarAttitudeProb(eAttitude);
+				iProb += GC.getLeaderHeadInfo(CvPlayerAI::getPlayer((PlayerTypes)iI).getPersonalityType()).getNoWarAttitudeProb(eAttitude);
 				iCount++;
 			}
 		}
@@ -2586,11 +2586,11 @@ void CvTeamAI::AI_doWar()
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
-			if (GET_PLAYER((PlayerTypes)iI).getTeam() == getID())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == getID())
 			{
-				GET_PLAYER((PlayerTypes)iI).AI_doPeace();
+				CvPlayerAI::getPlayer((PlayerTypes)iI).AI_doPeace();
 			}
 		}
 	}
@@ -2951,7 +2951,7 @@ bool CvTeamAI::AI_isWaterAreaRelevant(CvArea* pArea)
 
 	for (int iPlayer = 0; iPlayer < MAX_PLAYERS; iPlayer++)
 	{
-		CvPlayerAI& kPlayer = GET_PLAYER((PlayerTypes)iPlayer);
+		CvPlayerAI& kPlayer = CvPlayerAI::getPlayer((PlayerTypes)iPlayer);
 
 		if ((iTeamCities < 2 && (kPlayer.getTeam() == getID())) || (iOtherTeamCities < 2 && (kPlayer.getTeam() != getID())))
 		{
@@ -3084,7 +3084,7 @@ void CvTeamAI::AI_doTactics()
 		CvPlot* pLoopPlot = kMap.plotByIndexINLINE(iI);
 
 		if ((pLoopPlot->isCity() && (AI_getWarPlan(pLoopPlot->getTeam()) != NO_WARPLAN))
-			&& !(GET_PLAYER(pLoopPlot->getOwnerINLINE()).isNative() && AI_isKing()))
+			&& !(CvPlayerAI::getPlayer(pLoopPlot->getOwnerINLINE()).isNative() && AI_isKing()))
 		{
 				m_aiEnemyCityDistance[iI] = 0;
 				plotQueue.push_back(iI);
@@ -3300,9 +3300,9 @@ bool CvTeamAI::AI_isNative() const
 {
 	for (int iI = 0; iI < MAX_PLAYERS; ++iI)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive() && (GET_PLAYER((PlayerTypes)iI).getTeam() == getID()))
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive() && (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == getID()))
 		{
-			if (!GET_PLAYER((PlayerTypes)iI).isNative())
+			if (!CvPlayerAI::getPlayer((PlayerTypes)iI).isNative())
 			{
 				return false;
 			}

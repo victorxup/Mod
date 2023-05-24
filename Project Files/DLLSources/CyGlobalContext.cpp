@@ -60,7 +60,7 @@ CyPlayer* CyGlobalContext::getCyPlayer(int idx)
 	{
 		int i;
 		for(i=0;i<MAX_PLAYERS;i++)
-			cyPlayers[i]=CyPlayer(&GET_PLAYER((PlayerTypes)i));
+			cyPlayers[i]=CyPlayer(&CvPlayerAI::getPlayer((PlayerTypes)i));
 		bInit=true;
 	}
 	FAssert(idx>=0);
@@ -497,7 +497,7 @@ void CyGlobalContext::setGameFontDebug(int iChar)
 		iGameFontDebugChar = iChar;
 		for (int iPlayer = 0; iPlayer < MAX_PLAYERS; ++iPlayer)
 		{
-			CvPlayer &kPlayer = GET_PLAYER(static_cast<PlayerTypes>(iPlayer));
+			CvPlayer &kPlayer = CvPlayerAI::getPlayer(static_cast<PlayerTypes>(iPlayer));
 			CvCity* pLoopCity;
 			int iLoop;
 			for (pLoopCity = kPlayer.firstCity(&iLoop); pLoopCity != nullptr; pLoopCity = kPlayer.nextCity(&iLoop))

@@ -138,7 +138,7 @@ int CvCityYields::getBaseRawYieldProducedBuildings(YieldTypes eYieldType) const
 	}
 
 	int iBuildingYieldProduced = 0;
-	const CvPlayer& owner = GET_PLAYER(m_city.getOwnerINLINE());
+	const CvPlayer& owner = CvPlayerAI::getPlayer(m_city.getOwnerINLINE());
 	const CvCivilizationInfo& civilizationInfo = GC.getCivilizationInfo(owner.getCivilizationType());
 
 	for (BuildingClassTypes eBuildingClass = FIRST_BUILDINGCLASS; eBuildingClass < NUM_BUILDINGCLASS_TYPES; ++eBuildingClass)
@@ -158,5 +158,5 @@ int CvCityYields::getBaseRawYieldProducedBuildings(YieldTypes eYieldType) const
 
 int CvCityYields::getBaseRawYieldProducedLeader(YieldTypes eYieldType) const
 {
-	return GET_PLAYER(m_city.getOwnerINLINE()).getCityExtraYield(eYieldType);
+	return CvPlayerAI::getPlayer(m_city.getOwnerINLINE()).getCityExtraYield(eYieldType);
 }

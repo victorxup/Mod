@@ -209,7 +209,7 @@ CvCity* getCity(const IDInfo& city)
 {
 	if ((city.eOwner >= 0) && city.eOwner < MAX_PLAYERS)
 	{
-		return (GET_PLAYER((PlayerTypes)city.eOwner).getCity(city.iID));
+		return (CvPlayerAI::getPlayer((PlayerTypes)city.eOwner).getCity(city.iID));
 	}
 
 	return nullptr;
@@ -219,7 +219,7 @@ CvUnit* getUnit(const IDInfo& unit)
 {
 	if ((unit.eOwner >= 0) && unit.eOwner < MAX_PLAYERS)
 	{
-		return (GET_PLAYER((PlayerTypes)unit.eOwner).getUnit(unit.iID));
+		return (CvPlayerAI::getPlayer((PlayerTypes)unit.eOwner).getUnit(unit.iID));
 	}
 
 	return nullptr;
@@ -676,7 +676,7 @@ bool PUF_isVisualTeam(const CvUnit* pUnit, int iData1, int iData2)
 	{
 		return false;
 	}
-	return (GET_PLAYER(eOwner).getTeam() == iData1);
+	return (CvPlayerAI::getPlayer(eOwner).getTeam() == iData1);
 }
 
 bool PUF_isCombatTeam(const CvUnit* pUnit, int iData1, int iData2)
@@ -690,7 +690,7 @@ bool PUF_isCombatTeam(const CvUnit* pUnit, int iData1, int iData2)
 bool PUF_isOtherTeam(const CvUnit* pUnit, int iData1, int iData2)
 {
 	FAssertMsg(iData1 != -1, "Invalid data argument, should be >= 0");
-	TeamTypes eTeam = GET_PLAYER((PlayerTypes)iData1).getTeam();
+	TeamTypes eTeam = CvPlayerAI::getPlayer((PlayerTypes)iData1).getTeam();
 	if (pUnit->canCoexistWithEnemyUnit(eTeam))
 	{
 		return false;
@@ -704,7 +704,7 @@ bool PUF_isEnemy(const CvUnit* pUnit, int iData1, int iData2)
 	FAssertMsg(iData1 != -1, "Invalid data argument, should be >= 0");
 	FAssertMsg(iData2 != -1, "Invalid data argument, should be >= 0");
 
-	TeamTypes eOtherTeam = GET_PLAYER((PlayerTypes)iData1).getTeam();
+	TeamTypes eOtherTeam = CvPlayerAI::getPlayer((PlayerTypes)iData1).getTeam();
 	TeamTypes eOurTeam = pUnit->getCombatTeam(eOtherTeam, pUnit->plot());
 
 	if (pUnit->canCoexistWithEnemyUnit(eOtherTeam))
@@ -718,19 +718,19 @@ bool PUF_isEnemy(const CvUnit* pUnit, int iData1, int iData2)
 bool PUF_isVisible(const CvUnit* pUnit, int iData1, int iData2)
 {
 	FAssertMsg(iData1 != -1, "Invalid data argument, should be >= 0");
-	return !(pUnit->isInvisible(GET_PLAYER((PlayerTypes)iData1).getTeam(), false));
+	return !(pUnit->isInvisible(CvPlayerAI::getPlayer((PlayerTypes)iData1).getTeam(), false));
 }
 
 bool PUF_isVisibleDebug(const CvUnit* pUnit, int iData1, int iData2)
 {
 	FAssertMsg(iData1 != -1, "Invalid data argument, should be >= 0");
-	return !(pUnit->isInvisible(GET_PLAYER((PlayerTypes)iData1).getTeam(), true));
+	return !(pUnit->isInvisible(CvPlayerAI::getPlayer((PlayerTypes)iData1).getTeam(), true));
 }
 
 bool PUF_canSiege(const CvUnit* pUnit, int iData1, int iData2)
 {
 	FAssertMsg(iData1 != -1, "Invalid data argument, should be >= 0");
-	return pUnit->canSiege(GET_PLAYER((PlayerTypes)iData1).getTeam());
+	return pUnit->canSiege(CvPlayerAI::getPlayer((PlayerTypes)iData1).getTeam());
 }
 
 bool PUF_isPotentialEnemy(const CvUnit* pUnit, int iData1, int iData2)
@@ -738,7 +738,7 @@ bool PUF_isPotentialEnemy(const CvUnit* pUnit, int iData1, int iData2)
 	FAssertMsg(iData1 != -1, "Invalid data argument, should be >= 0");
 	FAssertMsg(iData2 != -1, "Invalid data argument, should be >= 0");
 
-	TeamTypes eOtherTeam = GET_PLAYER((PlayerTypes)iData1).getTeam();
+	TeamTypes eOtherTeam = CvPlayerAI::getPlayer((PlayerTypes)iData1).getTeam();
 	TeamTypes eOurTeam = pUnit->getCombatTeam(eOtherTeam, pUnit->plot());
 
 	if (pUnit->canCoexistWithEnemyUnit(eOtherTeam))
@@ -753,7 +753,7 @@ bool PUF_canDeclareWar( const CvUnit* pUnit, int iData1, int iData2)
 	FAssertMsg(iData1 != -1, "Invalid data argument, should be >= 0");
 	FAssertMsg(iData2 != -1, "Invalid data argument, should be >= 0");
 
-	TeamTypes eOtherTeam = GET_PLAYER((PlayerTypes)iData1).getTeam();
+	TeamTypes eOtherTeam = CvPlayerAI::getPlayer((PlayerTypes)iData1).getTeam();
 	TeamTypes eOurTeam = pUnit->getCombatTeam(eOtherTeam, pUnit->plot());
 
 	if (pUnit->canCoexistWithEnemyUnit(eOtherTeam))
@@ -868,7 +868,7 @@ namespace
 	// Returns true if no enemy was found near the kGroup's potential target plot x,y. False otherwise
 	bool isPlotSafe(CvSelectionGroup& kGroup, int x, int y)
 	{
-		const CvPlayerAI& kPlayer = GET_PLAYER(kGroup.getHeadOwner());
+		const CvPlayerAI& kPlayer = CvPlayerAI::getPlayer(kGroup.getHeadOwner());
 
 		// in WTP (almost) all units can fight since they have non-zero combat strength.
 		// Thus we need a different criteria for evaluating danger based on the unit role rather than
@@ -1430,7 +1430,7 @@ int pathCost(FAStarNode* parent, FAStarNode* node, int data, const void* pointer
 			CvUnit* pUnit = kToPlot.getUnitByIndex(0);
 			if (pUnit != nullptr && !pUnit->isAnimal()) // </advc.001>
 			{
-				iEnemyDefence = GET_PLAYER(pSelectionGroup->getOwner()).
+				iEnemyDefence = CvPlayerAI::getPlayer(pSelectionGroup->getOwner()).
 					AI_localDefenceStrength(&kToPlot, NO_TEAM,
 						pSelectionGroup->getDomainType(), 0, true, false,
 						pSelectionGroup->isHuman());
@@ -1652,7 +1652,7 @@ int pathValid_source(FAStarNode* parent, CvSelectionGroup* pSelectionGroup, int 
 			!pSelectionGroup->isHuman())
 		{
 			PlayerTypes eOwner = kFromPlot.getOwner();
-			if (eOwner != NO_PLAYER && GET_PLAYER(eOwner).isHuman())
+			if (eOwner != NO_PLAYER && CvPlayerAI::getPlayer(eOwner).isHuman())
 				return FALSE;
 		}
 	} // </advc.049>
@@ -1706,7 +1706,7 @@ int pathValid_source(FAStarNode* parent, CvSelectionGroup* pSelectionGroup, int 
 		int iEnemyDefence;
 		if (kFromPlot.isVisible(pSelectionGroup->getHeadTeam(), false))
 		{
-			iEnemyDefence = GET_PLAYER(pSelectionGroup->getOwner()).AI_localDefenceStrength(pToPlot, NO_TEAM, pSelectionGroup->getDomainType(), 0, true, false, pSelectionGroup->isHuman());
+			iEnemyDefence = CvPlayerAI::getPlayer(pSelectionGroup->getOwner()).AI_localDefenceStrength(pToPlot, NO_TEAM, pSelectionGroup->getDomainType(), 0, true, false, pSelectionGroup->isHuman());
 		}
 		else
 		{
@@ -2030,9 +2030,9 @@ int routeValid(FAStarNode* parent, FAStarNode* node, int data, const void* point
 
 	ePlayer = ((PlayerTypes)(gDLL->getFAStarIFace()->GetInfo(finder)));
 
-	if (!(pNewPlot->isOwned()) || (pNewPlot->getTeam() == GET_PLAYER(ePlayer).getTeam()))
+	if (!(pNewPlot->isOwned()) || (pNewPlot->getTeam() == CvPlayerAI::getPlayer(ePlayer).getTeam()))
 	{
-		if (pNewPlot->getRouteType() == GET_PLAYER(ePlayer).getBestRoute(pNewPlot))
+		if (pNewPlot->getRouteType() == CvPlayerAI::getPlayer(ePlayer).getBestRoute(pNewPlot))
 		{
 			return TRUE;
 		}
@@ -2068,7 +2068,7 @@ int coastalRouteValid(FAStarNode* parent, FAStarNode* node, int data, const void
 	}
 	// WTP, ray, Canal - END
 
-	const TeamTypes eTeam = GET_PLAYER(ePlayer).getTeam();
+	const TeamTypes eTeam = CvPlayerAI::getPlayer(ePlayer).getTeam();
 
 	if (pNewPlot->isWater() && pNewPlot->isRevealed(eTeam, false) && !pNewPlot->isImpassable())
 	{
@@ -2112,7 +2112,7 @@ int borderValid(FAStarNode* parent, FAStarNode* node, int data, const void* poin
 
 	ePlayer = ((PlayerTypes)(gDLL->getFAStarIFace()->GetInfo(finder)));
 
-	if (pNewPlot->getTeam() == GET_PLAYER(ePlayer).getTeam())
+	if (pNewPlot->getTeam() == CvPlayerAI::getPlayer(ePlayer).getTeam())
 	{
 		return TRUE;
 	}
@@ -2475,12 +2475,12 @@ void postLoadGameFixes()
 		// deal with each players' cities
 
 		int iLoop;
-		for (CvCity* pLoopCity = GET_PLAYER(ePlayer).firstCity(&iLoop); pLoopCity != nullptr; pLoopCity = GET_PLAYER(ePlayer).nextCity(&iLoop))
+		for (CvCity* pLoopCity = CvPlayerAI::getPlayer(ePlayer).firstCity(&iLoop); pLoopCity != nullptr; pLoopCity = CvPlayerAI::getPlayer(ePlayer).nextCity(&iLoop))
 		{
 			pLoopCity->updateSlaveWorkerProductionBonus();
 		}
 
-		CvPlayer& kPlayer = GET_PLAYER(ePlayer);
+		CvPlayer& kPlayer = CvPlayerAI::getPlayer(ePlayer);
 
 		kPlayer.postLoadFixes();
 	}

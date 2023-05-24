@@ -67,7 +67,7 @@ void CvCityAI::AI_init()
 
 	//--------------------------------
 
-	GET_PLAYER(getOwnerINLINE()).AI_manageEconomy();
+	CvPlayerAI::getPlayer(getOwnerINLINE()).AI_manageEconomy();
 
 	// Init other game data
 	AI_assignWorkingPlots();
@@ -189,7 +189,7 @@ void CvCityAI::AI_assignWorkingPlots()
 	jobMutex.lock();
 
 	// No need to call this here, once per turn should be enough
-	//GET_PLAYER(getOwnerINLINE()).AI_manageEconomy();
+	//CvPlayerAI::getPlayer(getOwnerINLINE()).AI_manageEconomy();
 
 	AI_updateNeededYields();
 
@@ -342,7 +342,7 @@ void CvCityAI::AI_updateAssignWork()
 {
 	if (AI_isAssignWorkDirty())
 	{
-		GET_PLAYER(getOwnerINLINE()).AI_manageEconomy();
+		CvPlayerAI::getPlayer(getOwnerINLINE()).AI_manageEconomy();
 
 		AI_assignWorkingPlots();
 	}
@@ -402,7 +402,7 @@ void CvCityAI::AI_chooseProduction()
 
 	CvArea* pWaterArea;
 
-	CvPlayerAI& kPlayer = GET_PLAYER(getOwnerINLINE());
+	CvPlayerAI& kPlayer = CvPlayerAI::getPlayer(getOwnerINLINE());
 
 	if (isProduction())
 	{
@@ -480,7 +480,7 @@ void CvCityAI::AI_chooseProduction()
 			// Erik: Only consider building a coastal transport if at least one other city is coastally reachable and the water area is valid
 			if (pWaterArea != nullptr && AI_hasCoastalRoute())
 			{
-				if ((GET_PLAYER(getOwnerINLINE()).AI_totalWaterAreaUnitAIs(pWaterArea, UNITAI_TRANSPORT_COAST)) < kPlayer.countNumCoastalCities() / 2)
+				if ((CvPlayerAI::getPlayer(getOwnerINLINE()).AI_totalWaterAreaUnitAIs(pWaterArea, UNITAI_TRANSPORT_COAST)) < kPlayer.countNumCoastalCities() / 2)
 				{
 					if (AI_chooseUnit(UNITAI_TRANSPORT_COAST))
 					{
@@ -588,13 +588,13 @@ UnitTypes CvCityAI::AI_bestUnit(bool bAsync, UnitAITypes* peBestUnitAI, bool bPi
 
 		if (!bPickAny)
 		{
-			aiUnitAIVal[iI] *= GET_PLAYER(getOwnerINLINE()).AI_unitAIValueMultipler((UnitAITypes)iI);
+			aiUnitAIVal[iI] *= CvPlayerAI::getPlayer(getOwnerINLINE()).AI_unitAIValueMultipler((UnitAITypes)iI);
 			aiUnitAIVal[iI] /= 100;
 		}
 	}
 
 	// TAC - AI Training - koma13 - START
-	if (GET_PLAYER(getOwnerINLINE()).getParent() != NO_PLAYER)
+	if (CvPlayerAI::getPlayer(getOwnerINLINE()).getParent() != NO_PLAYER)
 	{
 		for (iI = 0; iI < NUM_UNITAI_TYPES; iI++)
 		{
@@ -609,7 +609,7 @@ UnitTypes CvCityAI::AI_bestUnit(bool bAsync, UnitAITypes* peBestUnitAI, bool bPi
 					}
 					else
 					{
-						aiUnitAIVal[iI] = GET_PLAYER(getOwnerINLINE()).AI_unitAIValueMultipler((UnitAITypes)iI);
+						aiUnitAIVal[iI] = CvPlayerAI::getPlayer(getOwnerINLINE()).AI_unitAIValueMultipler((UnitAITypes)iI);
 					}
 				}
 				break;
@@ -623,9 +623,9 @@ UnitTypes CvCityAI::AI_bestUnit(bool bAsync, UnitAITypes* peBestUnitAI, bool bPi
 					if (pWaterArea != nullptr && AI_hasCoastalRoute())
 					{
 						const int iAreaCities = area()->getCitiesPerPlayer(getOwnerINLINE());
-						if (GET_PLAYER(getOwnerINLINE()).AI_totalWaterAreaUnitAIs(pWaterArea, UNITAI_TRANSPORT_COAST) <= iAreaCities / 2)
+						if (CvPlayerAI::getPlayer(getOwnerINLINE()).AI_totalWaterAreaUnitAIs(pWaterArea, UNITAI_TRANSPORT_COAST) <= iAreaCities / 2)
 						{
-							iValue = GET_PLAYER(getOwnerINLINE()).AI_unitAIValueMultipler((UnitAITypes)iI);
+							iValue = CvPlayerAI::getPlayer(getOwnerINLINE()).AI_unitAIValueMultipler((UnitAITypes)iI);
 						}
 					}
 					aiUnitAIVal[iI] = iValue;
@@ -633,7 +633,7 @@ UnitTypes CvCityAI::AI_bestUnit(bool bAsync, UnitAITypes* peBestUnitAI, bool bPi
 				break;
 
 			case UNITAI_DEFENSIVE:
-				if (GET_PLAYER(getOwnerINLINE()).AI_totalDefendersNeeded(nullptr, area(), true) <= 0)
+				if (CvPlayerAI::getPlayer(getOwnerINLINE()).AI_totalDefendersNeeded(nullptr, area(), true) <= 0)
 				{
 					aiUnitAIVal[iI] = 0;
 				}
@@ -641,7 +641,7 @@ UnitTypes CvCityAI::AI_bestUnit(bool bAsync, UnitAITypes* peBestUnitAI, bool bPi
 
 			case UNITAI_ASSAULT_SEA:
 			case UNITAI_ESCORT_SEA:
-				if (!GET_PLAYER(getOwnerINLINE()).AI_prepareAssaultSea())
+				if (!CvPlayerAI::getPlayer(getOwnerINLINE()).AI_prepareAssaultSea())
 				{
 					aiUnitAIVal[iI] = 0;
 				}
@@ -650,7 +650,7 @@ UnitTypes CvCityAI::AI_bestUnit(bool bAsync, UnitAITypes* peBestUnitAI, bool bPi
 			case UNITAI_WORKER_SEA:
 			case UNITAI_TRANSPORT_SEA:
 			case UNITAI_PIRATE_SEA:
-				if (GET_PLAYER(getOwnerINLINE()).AI_unitAIValueMultipler((UnitAITypes)iI) == 0)
+				if (CvPlayerAI::getPlayer(getOwnerINLINE()).AI_unitAIValueMultipler((UnitAITypes)iI) == 0)
 				{
 					aiUnitAIVal[iI] = 0;
 				}
@@ -710,7 +710,7 @@ UnitTypes CvCityAI::AI_bestUnitAI(UnitAITypes eUnitAI, bool bAsync) const
 			{
 				if (canTrain(eLoopUnit))
 				{
-					iOriginalValue = GET_PLAYER(getOwnerINLINE()).AI_unitValue(eLoopUnit, eUnitAI, area());
+					iOriginalValue = CvPlayerAI::getPlayer(getOwnerINLINE()).AI_unitValue(eLoopUnit, eUnitAI, area());
 
 					// Avoid picking the same unit that we recently stopped building due to missing
 					// non-hammer yields
@@ -740,7 +740,7 @@ UnitTypes CvCityAI::AI_bestUnitAI(UnitAITypes eUnitAI, bool bAsync) const
 			{
 				if (canTrain(eLoopUnit))
 				{
-					iValue = GET_PLAYER(getOwnerINLINE()).AI_unitValue(eLoopUnit, eUnitAI, area());
+					iValue = CvPlayerAI::getPlayer(getOwnerINLINE()).AI_unitValue(eLoopUnit, eUnitAI, area());
 
 					// Avoid picking the same unit that we recently stopped building due to missing
 					// non-hammer yields
@@ -813,8 +813,8 @@ UnitTypes CvCityAI::AI_bestUnitAI(UnitAITypes eUnitAI, bool bAsync) const
 						}
 
 
-						iValue *= (GET_PLAYER(getOwnerINLINE()).getNumCities() * 2);
-						iValue /= (GET_PLAYER(getOwnerINLINE()).getUnitClassCountPlusMaking((UnitClassTypes)iI) + GET_PLAYER(getOwnerINLINE()).getNumCities() + 1);
+						iValue *= (CvPlayerAI::getPlayer(getOwnerINLINE()).getNumCities() * 2);
+						iValue /= (CvPlayerAI::getPlayer(getOwnerINLINE()).getUnitClassCountPlusMaking((UnitClassTypes)iI) + CvPlayerAI::getPlayer(getOwnerINLINE()).getNumCities() + 1);
 
 						FAssert((MAX_INT / 1000) > iValue);
 						iValue *= 1000;
@@ -849,7 +849,7 @@ bool CvCityAI::AI_hasCoastalRoute() const
 	gDLL->getFAStarIFace()->ForceReset(&GC.getCoastalRouteFinder());
 
 	// Erik: determine if it makes sense to build a coastal transport
-	CvPlayerAI& kOwner = GET_PLAYER(getOwnerINLINE());
+	CvPlayerAI& kOwner = CvPlayerAI::getPlayer(getOwnerINLINE());
 
 	int iLoop;
 	for (CvCity* pLoopCity = kOwner.firstCity(&iLoop); pLoopCity != nullptr; pLoopCity = kOwner.nextCity(&iLoop))
@@ -875,7 +875,7 @@ bool CvCityAI::AI_hasCoastalRoute() const
 
 BuildingTypes CvCityAI::AI_bestBuildingThreshold(int iFocusFlags, int iMaxTurns, int iMinThreshold, bool bAsync) const
 {
-	const bool bAreaAlone = GET_PLAYER(getOwnerINLINE()).AI_isAreaAlone(area());
+	const bool bAreaAlone = CvPlayerAI::getPlayer(getOwnerINLINE()).AI_isAreaAlone(area());
 
 	const int iProductionRank = findYieldRateRank(YIELD_HAMMERS);
 
@@ -984,14 +984,14 @@ bool CvCityAI::AI_isProductionBuilding(BuildingTypes eBuilding, bool bMajorCity)
 	CvBuildingInfo& kBuildingInfo = GC.getBuildingInfo(eBuilding);
 	BuildingClassTypes eBuildingClass = (BuildingClassTypes)kBuildingInfo.getBuildingClassType();
 
-	CvPlayerAI& kOwner = GET_PLAYER(getOwnerINLINE());
+	CvPlayerAI& kOwner = CvPlayerAI::getPlayer(getOwnerINLINE());
 
 	int iBestValue = -1;
 	BuildingTypes eBestExisting = NO_BUILDING;
 
 	for (int iBuildingClass = 0; iBuildingClass < GC.getNumBuildingClassInfos(); ++iBuildingClass)
 	{
-		BuildingTypes eLoopBuilding = (BuildingTypes) GC.getCivilizationInfo(GET_PLAYER(getOwnerINLINE()).getCivilizationType()).getCivilizationBuildings(iBuildingClass);
+		BuildingTypes eLoopBuilding = (BuildingTypes) GC.getCivilizationInfo(CvPlayerAI::getPlayer(getOwnerINLINE()).getCivilizationType()).getCivilizationBuildings(iBuildingClass);
 		if ((NO_BUILDING != eLoopBuilding) && (eLoopBuilding != eBuilding))
 		{
 			CvBuildingInfo& kLoopBuilding = GC.getBuildingInfo(eLoopBuilding);
@@ -1078,7 +1078,7 @@ bool CvCityAI::AI_isProductionBuilding(BuildingTypes eBuilding, bool bMajorCity)
 
 				for (int iBuildingClass = 0; iBuildingClass < GC.getNumBuildingClassInfos(); ++iBuildingClass)
 				{
-					BuildingTypes eLoopBuilding = (BuildingTypes) GC.getCivilizationInfo(GET_PLAYER(getOwnerINLINE()).getCivilizationType()).getCivilizationBuildings(iBuildingClass);
+					BuildingTypes eLoopBuilding = (BuildingTypes) GC.getCivilizationInfo(CvPlayerAI::getPlayer(getOwnerINLINE()).getCivilizationType()).getCivilizationBuildings(iBuildingClass);
 					if (NO_BUILDING != eLoopBuilding)
 					{
 						CvBuildingInfo& kLoopBuilding = GC.getBuildingInfo(eLoopBuilding);
@@ -1152,7 +1152,7 @@ int CvCityAI::AI_buildingValue(BuildingTypes eBuilding, int iFocusFlags) const
 
 	CvBuildingInfo& kBuildingInfo = GC.getBuildingInfo(eBuilding);
 	BuildingClassTypes eBuildingClass = (BuildingClassTypes)kBuildingInfo.getBuildingClassType();
-	CvPlayerAI& kOwner = GET_PLAYER(getOwnerINLINE());
+	CvPlayerAI& kOwner = CvPlayerAI::getPlayer(getOwnerINLINE());
 
 	bool bIsMilitary = false;
 
@@ -1638,7 +1638,7 @@ int CvCityAI::AI_buildingValue(BuildingTypes eBuilding, int iFocusFlags) const
 			BuildingTypes eBestExisting = NO_BUILDING;
 			for (int iBuildingClass = 0; iBuildingClass < GC.getNumBuildingClassInfos(); ++iBuildingClass)
 			{
-				BuildingTypes eLoopBuilding = (BuildingTypes) GC.getCivilizationInfo(GET_PLAYER(getOwnerINLINE()).getCivilizationType()).getCivilizationBuildings(iBuildingClass);
+				BuildingTypes eLoopBuilding = (BuildingTypes) GC.getCivilizationInfo(CvPlayerAI::getPlayer(getOwnerINLINE()).getCivilizationType()).getCivilizationBuildings(iBuildingClass);
 				if ((NO_BUILDING != eLoopBuilding) && (eLoopBuilding != eBuilding))
 				{
 					CvBuildingInfo& kLoopBuilding = GC.getBuildingInfo(eLoopBuilding);
@@ -1778,7 +1778,7 @@ int CvCityAI::AI_neededDefenders() const
 		return iNeeded;
 	}
 
-	if (GET_PLAYER(getOwnerINLINE()).AI_isKing())
+	if (CvPlayerAI::getPlayer(getOwnerINLINE()).AI_isKing())
 	{
 		return 2 + getHighestPopulation() / 2;
 	}
@@ -1795,12 +1795,12 @@ int CvCityAI::AI_neededDefenders() const
 
 	// TAC - AI City Defense - koma13 - START
 	/*
-	if (GET_PLAYER(getOwnerINLINE()).AI_isStrategy(STRATEGY_REVOLUTION_PREPARING))
+	if (CvPlayerAI::getPlayer(getOwnerINLINE()).AI_isStrategy(STRATEGY_REVOLUTION_PREPARING))
 	{
 		if (plot()->getNearestEurope() != NO_EUROPE)
 		{
 			iDefenders += 2;
-			if (GET_PLAYER(getOwnerINLINE()).AI_isStrategy(STRATEGY_REVOLUTION_DECLARING))
+			if (CvPlayerAI::getPlayer(getOwnerINLINE()).AI_isStrategy(STRATEGY_REVOLUTION_DECLARING))
 			{
 				iDefenders += 3;
 			}
@@ -1810,12 +1810,12 @@ int CvCityAI::AI_neededDefenders() const
 	iDefenders += getPopulation() / 2;
 	*/
 
-	if (GET_PLAYER(getOwnerINLINE()).AI_isStrategy(STRATEGY_REVOLUTION_PREPARING))
+	if (CvPlayerAI::getPlayer(getOwnerINLINE()).AI_isStrategy(STRATEGY_REVOLUTION_PREPARING))
 	{
 		if (plot()->getNearestEurope() != NO_EUROPE)
 		{
 			iDefenders += 1;
-			if (GET_PLAYER(getOwnerINLINE()).AI_isStrategy(STRATEGY_REVOLUTION_DECLARING))
+			if (CvPlayerAI::getPlayer(getOwnerINLINE()).AI_isStrategy(STRATEGY_REVOLUTION_DECLARING))
 			{
 				iDefenders += 2;
 			}
@@ -1834,7 +1834,7 @@ int CvCityAI::AI_neededDefenders() const
 	// TAC - AI City Defense - koma13 - END
 
 	// R&R, improvements for AI defense
-	if (GET_PLAYER(getOwnerINLINE()).AI_getPlotDanger(plot(), 2, false) > 0)
+	if (CvPlayerAI::getPlayer(getOwnerINLINE()).AI_getPlotDanger(plot(), 2, false) > 0)
 	{
 		iDefenders++;
 	}
@@ -1853,7 +1853,7 @@ int CvCityAI::AI_numDefenders(bool bDefenseOnly, bool bIncludePotential) const
 
 int CvCityAI::AI_numPotentialDefenders() const
 {
-	CvPlayerAI& kOwner = GET_PLAYER(getOwnerINLINE());
+	CvPlayerAI& kOwner = CvPlayerAI::getPlayer(getOwnerINLINE());
 	int iMaxEquipable = 0;
 	for (int i = 0; i < GC.getNumProfessionInfos(); ++i)
 	{
@@ -1897,7 +1897,7 @@ int CvCityAI::AI_minDefenders() const
 {
 	int iDefenders = 1;
 
-	int iEra = GET_PLAYER(getOwnerINLINE()).getCurrentEra();
+	int iEra = CvPlayerAI::getPlayer(getOwnerINLINE()).getCurrentEra();
 	if (iEra > 0)
 	{
 		iDefenders++;
@@ -1921,9 +1921,9 @@ int CvCityAI::AI_neededFloatingDefenders()
 
 void CvCityAI::AI_updateNeededFloatingDefenders()
 {
-	int iFloatingDefenders = GET_PLAYER(getOwnerINLINE()).AI_getTotalFloatingDefendersNeeded(area());
+	int iFloatingDefenders = CvPlayerAI::getPlayer(getOwnerINLINE()).AI_getTotalFloatingDefendersNeeded(area());
 
-	int iTotalThreat = std::max(1, GET_PLAYER(getOwnerINLINE()).AI_getTotalAreaCityThreat(area()));
+	int iTotalThreat = std::max(1, CvPlayerAI::getPlayer(getOwnerINLINE()).AI_getTotalAreaCityThreat(area()));
 
 	iFloatingDefenders -= area()->getCitiesPerPlayer(getOwnerINLINE());
 
@@ -1937,7 +1937,7 @@ void CvCityAI::AI_updateNeededFloatingDefenders()
 
 bool CvCityAI::AI_isDanger() const
 {
-	return GET_PLAYER(getOwnerINLINE()).AI_getPlotDanger(plot(), 2, false);
+	return CvPlayerAI::getPlayer(getOwnerINLINE()).AI_getPlotDanger(plot(), 2, false);
 }
 
 
@@ -1999,9 +1999,9 @@ void CvCityAI::AI_updateRouteToCity()
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).getTeam() == getTeam())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == getTeam())
 		{
-			for (pLoopCity = GET_PLAYER((PlayerTypes)iI).firstCity(&iLoop); pLoopCity != nullptr; pLoopCity = GET_PLAYER((PlayerTypes)iI).nextCity(&iLoop))
+			for (pLoopCity = CvPlayerAI::getPlayer((PlayerTypes)iI).firstCity(&iLoop); pLoopCity != nullptr; pLoopCity = CvPlayerAI::getPlayer((PlayerTypes)iI).nextCity(&iLoop))
 			{
 				if (pLoopCity != this)
 				{
@@ -2121,7 +2121,7 @@ int CvCityAI::AI_totalBestBuildValue(CvArea* pArea) const
 			{
 				if (pLoopPlot->area() == pArea)
 				{
-					if ((pLoopPlot->getImprovementType() == NO_IMPROVEMENT) || !(GET_PLAYER(getOwnerINLINE()).isOption(PLAYEROPTION_SAFE_AUTOMATION) && !(pLoopPlot->getImprovementType() == (GC.getDefineINT("RUINS_IMPROVEMENT")))))
+					if ((pLoopPlot->getImprovementType() == NO_IMPROVEMENT) || !(CvPlayerAI::getPlayer(getOwnerINLINE()).isOption(PLAYEROPTION_SAFE_AUTOMATION) && !(pLoopPlot->getImprovementType() == (GC.getDefineINT("RUINS_IMPROVEMENT")))))
 					{
 						iTotalValue += AI_getBestBuildValue(iI);
 					}
@@ -2170,7 +2170,7 @@ int CvCityAI::AI_clearFeatureValue(int iIndex) const
 			}
 		}
 
-		if (GET_PLAYER(getOwnerINLINE()).getAdvancedStartPoints() >= 0)
+		if (CvPlayerAI::getPlayer(getOwnerINLINE()).getAdvancedStartPoints() >= 0)
 		{
 			iValue += 400;
 		}
@@ -2324,7 +2324,7 @@ void CvCityAI::AI_doHurry(bool bForce)
 
 				if (gCityLogLevel >= 2)
 				{
-					logBBAI(" Player %S City %S restoring (no hurry) production of %S", GET_PLAYER(getOwnerINLINE()).getCivilizationDescription(),
+					logBBAI(" Player %S City %S restoring (no hurry) production of %S", CvPlayerAI::getPlayer(getOwnerINLINE()).getCivilizationDescription(),
 						getName().GetCString(), GC.getBuildingInfo(eCurrentBuilding).getDescription());
 				}
 			}
@@ -2380,7 +2380,7 @@ void CvCityAI::AI_doHurry(bool bForce)
 
 				if (gCityLogLevel >= 2)
 				{
-					logBBAI(" Player %S City %S restoring (no hurry) production of %S", GET_PLAYER(getOwnerINLINE()).getCivilizationDescription(),
+					logBBAI(" Player %S City %S restoring (no hurry) production of %S", CvPlayerAI::getPlayer(getOwnerINLINE()).getCivilizationDescription(),
 						getName().GetCString(), GC.getUnitInfo(eCurrentUnit).getDescription());
 				}
 			}
@@ -2450,7 +2450,7 @@ void CvCityAI::AI_doNativeTrade()
 	int iBestCityValue = 0;
 
 	CvYieldInfo& kBestYield = GC.getYieldInfo(eBestYield);
-	CvPlayer& kOwner = GET_PLAYER(getOwner());
+	CvPlayer& kOwner = CvPlayerAI::getPlayer(getOwner());
 	int iLoop;
 	CvCity* pLoopCity;
 	for (pLoopCity = kOwner.firstCity(&iLoop); pLoopCity != nullptr; pLoopCity = kOwner.nextCity(&iLoop))
@@ -2521,7 +2521,7 @@ void CvCityAI::AI_doNative()
 	AI_doNativeTrade();
 
 	FAssert(isNative());
-	CvPlayer& kPlayer = GET_PLAYER(getOwner());
+	CvPlayer& kPlayer = CvPlayerAI::getPlayer(getOwner());
 	for (int iI = 0; iI < NUM_YIELD_TYPES; iI++)
 	{
 		YieldTypes eYield = (YieldTypes)iI;
@@ -2587,7 +2587,7 @@ void CvCityAI::AI_doNative()
 //
 //		if (getPopulation() > iLowestPopulation)
 //		{
-//			ProfessionTypes eBraveProfession = GET_PLAYER(getOwnerINLINE()).AI_idealProfessionForUnitAIType(UNITAI_DEFENSIVE, this);
+//			ProfessionTypes eBraveProfession = CvPlayerAI::getPlayer(getOwnerINLINE()).AI_idealProfessionForUnitAIType(UNITAI_DEFENSIVE, this);
 //			if (eBraveProfession != NO_PROFESSION)
 //			{
 //				for (int i = 0; i < getPopulation(); ++i)
@@ -2654,7 +2654,7 @@ bool CvCityAI::AI_chooseBuild()
 	UnitTypes eBestUnit = NO_UNIT;
 	int iFocusFlags = 0;
 
-	CvPlayer& kOwner = GET_PLAYER(getOwnerINLINE());
+	CvPlayer& kOwner = CvPlayerAI::getPlayer(getOwnerINLINE());
 	for (int iI = 0; iI < GC.getNumBuildingClassInfos(); iI++)
 	{
 		BuildingTypes eLoopBuilding = ((BuildingTypes)(GC.getCivilizationInfo(getCivilizationType()).getCivilizationBuildings(iI)));
@@ -2701,13 +2701,13 @@ bool CvCityAI::AI_chooseBuild()
 			if (canTrain(eLoopUnit))
 			{
 				UnitAITypes eUnitAI = NO_UNITAI;
-				int iValue = GET_PLAYER(getOwnerINLINE()).AI_unitEconomicValue(eLoopUnit, &eUnitAI, this);
+				int iValue = CvPlayerAI::getPlayer(getOwnerINLINE()).AI_unitEconomicValue(eLoopUnit, &eUnitAI, this);
 
 				iValue *= (GC.getGameINLINE().getSorenRandNum(25, "AI Best Unit") + 100);
 				iValue /= 100;
 
-//				iValue *= (GET_PLAYER(getOwnerINLINE()).getNumCities() * 2);
-//				iValue /= (GET_PLAYER(getOwnerINLINE()).getUnitClassCountPlusMaking((UnitClassTypes)iI) + GET_PLAYER(getOwnerINLINE()).getNumCities() + 1);
+//				iValue *= (CvPlayerAI::getPlayer(getOwnerINLINE()).getNumCities() * 2);
+//				iValue /= (CvPlayerAI::getPlayer(getOwnerINLINE()).getUnitClassCountPlusMaking((UnitClassTypes)iI) + CvPlayerAI::getPlayer(getOwnerINLINE()).getNumCities() + 1);
 
 				FAssert((MAX_INT / 1000) > iValue);
 				iValue *= 1000;
@@ -2810,7 +2810,7 @@ bool CvCityAI::AI_chooseLeastRepresentedUnit(UnitTypeWeightArray &allowedTypes)
 	{
 		iValue = (*it).second;
 		iValue *= 750 + GC.getGameINLINE().getSorenRandNum(250, "AI choose least represented unit");
-		iValue /= 1 + GET_PLAYER(getOwnerINLINE()).AI_totalAreaUnitAIs(area(), (*it).first);
+		iValue /= 1 + CvPlayerAI::getPlayer(getOwnerINLINE()).AI_totalAreaUnitAIs(area(), (*it).first);
 		bestTypes.insert(std::make_pair(iValue, (*it).first));
 	}
 
@@ -2826,7 +2826,7 @@ bool CvCityAI::AI_chooseLeastRepresentedUnit(UnitTypeWeightArray &allowedTypes)
 
 bool CvCityAI::AI_bestSpreadUnit(bool bMissionary, int iBaseChance, UnitTypes* eBestSpreadUnit, int* iBestSpreadUnitValue) const
 {
-	CvPlayerAI& kPlayer = GET_PLAYER(getOwnerINLINE());
+	CvPlayerAI& kPlayer = CvPlayerAI::getPlayer(getOwnerINLINE());
 	CvTeamAI& kTeam = GET_TEAM(getTeam());
 	CvGame& kGame = GC.getGame();
 
@@ -2853,7 +2853,7 @@ bool CvCityAI::AI_chooseBuilding(int iFocusFlags, int iMaxTurns, int iMinThresho
 //TAC - AI produces FF Points - koma13 - START
 bool CvCityAI::AI_chooseConvince()
 {
-	if (GET_PLAYER(getOwnerINLINE()).getParent() == NO_PLAYER)
+	if (CvPlayerAI::getPlayer(getOwnerINLINE()).getParent() == NO_PLAYER)
 	{
 		return false;
 	}
@@ -3104,7 +3104,7 @@ bool CvCityAI::AI_removeWorstPopulationUnit(bool bDelete)
 
 CvUnit* CvCityAI::AI_bestPopulationUnit(UnitAITypes eUnitAI, ProfessionTypes eProfession)
 {
-	CvPlayerAI& kOwner = GET_PLAYER(getOwnerINLINE());
+	CvPlayerAI& kOwner = CvPlayerAI::getPlayer(getOwnerINLINE());
 	if (eProfession == NO_PROFESSION)
 	{
 		eProfession = kOwner.AI_idealProfessionForUnitAIType(eUnitAI, this);
@@ -3400,9 +3400,9 @@ private:
 
 CvUnit* CvCityAI::AI_parallelAssignToBestJob(CvUnit& kUnit, bool bIndoorOnly)
 {
-	const std::vector<ProfessionTypes>& kValidCityJobs = GET_PLAYER(getOwnerINLINE()).m_validCityJobProfessions;
+	const std::vector<ProfessionTypes>& kValidCityJobs = CvPlayerAI::getPlayer(getOwnerINLINE()).m_validCityJobProfessions;
 
-	FindBestJob fbj(GET_PLAYER(getOwnerINLINE()).m_validCityJobProfessions, *this, kUnit, bIndoorOnly);
+	FindBestJob fbj(CvPlayerAI::getPlayer(getOwnerINLINE()).m_validCityJobProfessions, *this, kUnit, bIndoorOnly);
 
 	// Get the rng state prior to starting a concurrent operation
 	unsigned long rngStatePrior = GC.getGameConst().getSorenRand().peek();
@@ -3990,7 +3990,7 @@ int CvCityAI::AI_professionValue(ProfessionTypes eProfession, const CvUnit* pUni
 
 		int iOutputValue = 0;
 		int iInputValue = 0;
-		CvPlayerAI& kOwner = GET_PLAYER(getOwnerINLINE());
+		CvPlayerAI& kOwner = CvPlayerAI::getPlayer(getOwnerINLINE());
 
 		if (!kProfessionInfo.isWorkPlot() && (eYieldProducedType != YIELD_EDUCATION))
 		{
@@ -4569,7 +4569,7 @@ int CvCityAI::AI_unitJoinCityValue(CvUnit* pUnit, ProfessionTypes* peNewProfessi
 int CvCityAI::AI_unitJoinReplaceValue(CvUnit* pUnit, CvUnit** pReplaceUnit) const
 {
 	int iBestValue = 0;
-	CvPlayerAI& kOwner = GET_PLAYER(getOwnerINLINE());
+	CvPlayerAI& kOwner = CvPlayerAI::getPlayer(getOwnerINLINE());
 	for (int i = 0; i < getPopulation(); ++i)
 	{
 		CvUnit* pLoopUnit = getPopulationUnitByIndex(i);
@@ -4722,7 +4722,7 @@ void CvCityAI::AI_changeTradeTimer(int iChange)
 
 int CvCityAI::AI_maxGoldTrade(PlayerTypes ePlayer) const
 {
-	CvPlayerAI& kOwner = GET_PLAYER(getOwnerINLINE());
+	CvPlayerAI& kOwner = CvPlayerAI::getPlayer(getOwnerINLINE());
 		return kOwner.AI_maxGoldTrade(ePlayer);
 	}
 
@@ -4731,7 +4731,7 @@ int CvCityAI::AI_calculateAlarm(PlayerTypes eIndex) const
 	FAssertMsg(eIndex >= 0, "eIndex expected to be >= 0");
 	FAssertMsg(eIndex < MAX_PLAYERS, "eIndex expected to be < MAX_PLAYERS");
 
-	AlarmTypes eAlarm = (AlarmTypes) GC.getLeaderHeadInfo(GET_PLAYER(getOwnerINLINE()).getLeaderType()).getAlarmType();
+	AlarmTypes eAlarm = (AlarmTypes) GC.getLeaderHeadInfo(CvPlayerAI::getPlayer(getOwnerINLINE()).getLeaderType()).getAlarmType();
 	if (eAlarm == NO_ALARM)
 	{
 		return 0;
@@ -4775,15 +4775,15 @@ int CvCityAI::AI_calculateAlarm(PlayerTypes eIndex) const
 	//Religion
 	if (getMissionaryPlayer() != NO_PLAYER)
 	{
-		if (GET_PLAYER(getMissionaryPlayer()).getCivilizationType() == GET_PLAYER(eIndex).getCivilizationType())
+		if (CvPlayerAI::getPlayer(getMissionaryPlayer()).getCivilizationType() == CvPlayerAI::getPlayer(eIndex).getCivilizationType())
 		{
-			int iModifier = 100 + GET_PLAYER(eIndex).getMissionaryRateModifier() + GET_PLAYER(getOwnerINLINE()).getMissionaryRateModifier();
+			int iModifier = 100 + CvPlayerAI::getPlayer(eIndex).getMissionaryRateModifier() + CvPlayerAI::getPlayer(getOwnerINLINE()).getMissionaryRateModifier();
 			iNegativeAlarm += getMissionaryRate() * kAlarm.getMissionary() * iModifier / 100;
 		}
 	}
 
 	int iModifier = 100;
-	iModifier += GET_PLAYER(eIndex).getNativeAngerModifier();
+	iModifier += CvPlayerAI::getPlayer(eIndex).getNativeAngerModifier();
 	iModifier = std::max(0, iModifier);
 
 	iPositiveAlarm *= iModifier;
@@ -4800,7 +4800,7 @@ const int YIELD_TOOLS_BASE_VALUE = 10;
 
 int CvCityAI::AI_estimateYieldValue(YieldTypes eYield, int iAmount) const
 {
-	int iValue = iAmount * GET_PLAYER(getOwnerINLINE()).AI_yieldValue(eYield);
+	int iValue = iAmount * CvPlayerAI::getPlayer(getOwnerINLINE()).AI_yieldValue(eYield);
 
 	switch (eYield)
 	{
@@ -4893,11 +4893,11 @@ int CvCityAI::AI_estimateYieldValue(YieldTypes eYield, int iAmount) const
 		case YIELD_WHALE_BLUBBER:
 		case YIELD_VALUABLE_WOOD:
 			{
-				PlayerTypes eParent = GET_PLAYER(getOwnerINLINE()).getParent();
+				PlayerTypes eParent = CvPlayerAI::getPlayer(getOwnerINLINE()).getParent();
 
 				if (eParent != NO_PLAYER)
 				{
-					CvPlayer& kParent = GET_PLAYER(eParent);
+					CvPlayer& kParent = CvPlayerAI::getPlayer(eParent);
 
 					// We value the yield by what we would have had to pay for it in
 					// a port as long as we only have a small amount of it
@@ -5127,10 +5127,10 @@ void CvCityAI::AI_assignDesiredYield()
 
 		if (eBestYield != NO_YIELD)
 		{
-			CvWString szMessage = gDLL->getText("TXT_KEY_DESIRED_YIELD_CHANGE", GET_PLAYER(getOwnerINLINE()).getCivilizationAdjectiveKey(), getNameKey(), GC.getYieldInfo(eBestYield).getTextKeyWide());
+			CvWString szMessage = gDLL->getText("TXT_KEY_DESIRED_YIELD_CHANGE", CvPlayerAI::getPlayer(getOwnerINLINE()).getCivilizationAdjectiveKey(), getNameKey(), GC.getYieldInfo(eBestYield).getTextKeyWide());
 			for (int iPlayer = 0; iPlayer < MAX_PLAYERS; ++iPlayer)
 			{
-				CvPlayer& kPlayer = GET_PLAYER((PlayerTypes) iPlayer);
+				CvPlayer& kPlayer = CvPlayerAI::getPlayer((PlayerTypes) iPlayer);
 				if (kPlayer.isAlive() && kPlayer.getID() != getOwnerINLINE())
 				{
 					if (isScoutVisited(kPlayer.getTeam()))
@@ -5238,20 +5238,20 @@ bool CvCityAI::AI_shouldImportYield(YieldTypes eYield) const
 
 bool CvCityAI::AI_shouldExportYield(YieldTypes eYield) const
 {
-	if (GET_PLAYER(getOwnerINLINE()).AI_isYieldFinalProduct(eYield))
+	if (CvPlayerAI::getPlayer(getOwnerINLINE()).AI_isYieldFinalProduct(eYield))
 	{
 		return true;
 	}
 
 	// TAC - AI Economy - koma13 - START
-	if (GET_PLAYER(getOwnerINLINE()).AI_isYieldForSale(eYield))
+	if (CvPlayerAI::getPlayer(getOwnerINLINE()).AI_isYieldForSale(eYield))
 	{
 		return true;
 	}
 	// TAC - AI Economy - koma13 - END
 
 	// WTP, ray small correction to not hardcode Lumber, Stone and Hardwood
-	if ((GET_PLAYER(getOwnerINLINE()).AI_shouldBuyFromEurope(eYield)) || GC.getYieldInfo(eYield).isIgnoredForStorageCapacity())
+	if ((CvPlayerAI::getPlayer(getOwnerINLINE()).AI_shouldBuyFromEurope(eYield)) || GC.getYieldInfo(eYield).isIgnoredForStorageCapacity())
 	{
 		return false;
 	}
@@ -5277,7 +5277,7 @@ int CvCityAI::AI_getTransitYield(YieldTypes eYield) const
 {
 	//This could(should?) be cached.
 	int iTotal = 0;
-	CvPlayer& kOwner = GET_PLAYER(getOwnerINLINE());
+	CvPlayer& kOwner = CvPlayerAI::getPlayer(getOwnerINLINE());
 	CvUnit* pLoopUnit;
 	int iLoop;
 	for (pLoopUnit = kOwner.firstUnit(&iLoop); pLoopUnit != nullptr; pLoopUnit = kOwner.nextUnit(&iLoop))
@@ -5412,7 +5412,7 @@ void CvCityAI::AI_updateRequiredYieldLevels()
 	{
 		aiLevels[iI] = 0;
 	}
-	CvPlayerAI& kPlayer = GET_PLAYER(getOwner());
+	CvPlayerAI& kPlayer = CvPlayerAI::getPlayer(getOwner());
 
 	// TAC - AI Economy - koma13 - START
 	/*
@@ -5438,7 +5438,7 @@ void CvCityAI::AI_updateRequiredYieldLevels()
 				{
 					YieldTypes eYield = (YieldTypes)iI;
 
-					int iRequired = GET_PLAYER(getOwnerINLINE()).getYieldEquipmentAmount(eLoopProfession, eYield);
+					int iRequired = CvPlayerAI::getPlayer(getOwnerINLINE()).getYieldEquipmentAmount(eLoopProfession, eYield);
 					int iPercent = 0;
 
 					if (kPlayer.AI_isStrategy(STRATEGY_REVOLUTION_PREPARING))
@@ -5471,7 +5471,7 @@ void CvCityAI::AI_updateRequiredYieldLevels()
 		{
 			YieldTypes eYield = (YieldTypes)iI;
 
-			int iRequired = GET_PLAYER(getOwnerINLINE()).getYieldEquipmentAmount(eBestProfession, eYield);
+			int iRequired = CvPlayerAI::getPlayer(getOwnerINLINE()).getYieldEquipmentAmount(eBestProfession, eYield);
 
 			aiLevels[eYield] = std::max(aiLevels[eYield], iRequired * iNeeded);
 		}
@@ -5721,7 +5721,7 @@ int CvCityAI::AI_plotYieldValue(const CvPlot* pPlot, int* piYields) const
 
 	int iBestValue = 0;
 
-	CvPlayerAI& kOwner = GET_PLAYER(getOwnerINLINE());
+	CvPlayerAI& kOwner = CvPlayerAI::getPlayer(getOwnerINLINE());
 	for (int iJ = 0; iJ < NUM_YIELD_TYPES; iJ++)
 	{
 		YieldTypes eYield = (YieldTypes)iJ;
@@ -5757,7 +5757,7 @@ int CvCityAI::AI_plotYieldValue(const CvPlot* pPlot, int* piYields) const
 void CvCityAI::AI_bestPlotBuild(const CvPlot* pPlot, int* piBestValue, BuildTypes* peBestBuild) const
 {
 	PROFILE_FUNC();
-	CvPlayerAI& kOwner = GET_PLAYER(getOwnerINLINE());
+	CvPlayerAI& kOwner = CvPlayerAI::getPlayer(getOwnerINLINE());
 
 	if (piBestValue != nullptr)
 	{
@@ -5893,7 +5893,7 @@ void CvCityAI::AI_bestPlotBuild(const CvPlot* pPlot, int* piBestValue, BuildType
 		BuildTypes eBuild = (BuildTypes)iI;
 
 		CvBuildInfo& kBuild = GC.getBuildInfo(eBuild);
-		bool bValid = GET_PLAYER(getOwnerINLINE()).canBuild(pPlot, eBuild, true, true);
+		bool bValid = CvPlayerAI::getPlayer(getOwnerINLINE()).canBuild(pPlot, eBuild, true, true);
 
 		if (bValid && eForcedBuild != NO_BUILD && eForcedBuild != eBuild)
 		{
@@ -6455,7 +6455,7 @@ int CvCityAI::AI_countNumBonuses(BonusTypes eBonus, bool bIncludeOurs, bool bInc
 
 int CvCityAI::AI_playerCloseness(PlayerTypes eIndex, int iMaxDistance) const
 {
-	FAssert(GET_PLAYER(eIndex).isAlive());
+	FAssert(CvPlayerAI::getPlayer(eIndex).isAlive());
 	FAssert(eIndex != getID());
 
 	if ((m_iCachePlayerClosenessTurn != GC.getGame().getGameTurn())
@@ -6479,12 +6479,12 @@ void CvCityAI::AI_cachePlayerCloseness(int iMaxDistance) const
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive() &&
-			((GET_TEAM(getTeam()).isHasMet(GET_PLAYER((PlayerTypes)iI).getTeam()))))
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive() &&
+			((GET_TEAM(getTeam()).isHasMet(CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam()))))
 		{
 			iValue = 0;
 			iBestValue = 0;
-			for (pLoopCity = GET_PLAYER((PlayerTypes)iI).firstCity(&iLoop); pLoopCity != nullptr; pLoopCity = GET_PLAYER((PlayerTypes)iI).nextCity(&iLoop))
+			for (pLoopCity = CvPlayerAI::getPlayer((PlayerTypes)iI).firstCity(&iLoop); pLoopCity != nullptr; pLoopCity = CvPlayerAI::getPlayer((PlayerTypes)iI).nextCity(&iLoop))
 			{
 				int iDistance = stepDistance(getX_INLINE(), getY_INLINE(), pLoopCity->getX_INLINE(), pLoopCity->getY_INLINE());
 				if (area() != pLoopCity->area())
@@ -6546,14 +6546,14 @@ int CvCityAI::AI_cityThreat(bool bDangerPercent) const
 
 	for (int iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if ((iI != getOwner()) && GET_PLAYER((PlayerTypes)iI).isAlive())
+		if ((iI != getOwner()) && CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
 			int iTempValue = AI_playerCloseness((PlayerTypes)iI, 5);
 
 			// TAC - AI City Defense - koma13 - START
 			if (iTempValue > 0)
 			{
-				if (atWar(getTeam(), GET_PLAYER((PlayerTypes)iI).getTeam()))
+				if (atWar(getTeam(), CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam()))
 				{
 					iTempValue *= 300;
 				}
@@ -6563,12 +6563,12 @@ int CvCityAI::AI_cityThreat(bool bDangerPercent) const
 /* War tactics AI                                                                               */
 /************************************************************************************************/
 				// Beef up border security before starting war, but not too much
-				else if ( GET_TEAM(getTeam()).AI_getWarPlan(GET_PLAYER((PlayerTypes)iI).getTeam()) != NO_WARPLAN )
+				else if ( GET_TEAM(getTeam()).AI_getWarPlan(CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam()) != NO_WARPLAN )
 				{
 					iTempValue *= 180;
 				}
 				// Extra trust of Vassals, regardless of relations
-//				else if ( GET_TEAM(GET_PLAYER((PlayerTypes)iI).getTeam()).isVassal(getTeam()) )
+//				else if ( GET_TEAM(CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam()).isVassal(getTeam()) )
 //				{
 //					iTempValue *= 30;
 //				}
@@ -6577,7 +6577,7 @@ int CvCityAI::AI_cityThreat(bool bDangerPercent) const
 /************************************************************************************************/
 				else
 				{
-					switch (GET_PLAYER(getOwnerINLINE()).AI_getAttitude((PlayerTypes)iI))
+					switch (CvPlayerAI::getPlayer(getOwnerINLINE()).AI_getAttitude((PlayerTypes)iI))
 					{
 					case ATTITUDE_FURIOUS:
 						iTempValue *= 180;
@@ -6617,7 +6617,7 @@ int CvCityAI::AI_cityThreat(bool bDangerPercent) const
 		iValue += 6;
 	}
 
-	iValue += 2 * GET_PLAYER(getOwnerINLINE()).AI_getPlotDanger(plot(), 3, false);
+	iValue += 2 * CvPlayerAI::getPlayer(getOwnerINLINE()).AI_getPlotDanger(plot(), 3, false);
 
 	return iValue;
 }
@@ -6702,13 +6702,13 @@ BuildingTypes CvCityAI::AI_bestAdvancedStartBuilding(int iPass) const
 
 void CvCityAI::AI_educateStudent(int iUnitId)
 {
-	CvPlayerAI& kOwner = GET_PLAYER(getOwnerINLINE());
+	CvPlayerAI& kOwner = CvPlayerAI::getPlayer(getOwnerINLINE());
 	UnitTypes eBestUnit = NO_UNIT;
 	int iBestValue = 0;
 	for (UnitTypes eLoopUnit = FIRST_UNIT; eLoopUnit < NUM_UNIT_TYPES; ++eLoopUnit)
 	{
 		int iTuition = getSpecialistTuition(eLoopUnit);
-		if (GET_PLAYER(getOwnerINLINE()).getGold() >= iTuition && iTuition >= 0)
+		if (CvPlayerAI::getPlayer(getOwnerINLINE()).getGold() >= iTuition && iTuition >= 0)
 		{
 			const CvUnitInfo& kUnit = GC.getUnitInfo(eLoopUnit);
 
@@ -6791,7 +6791,7 @@ bool CvCityAI::AI_isMajorCity() const
 		}
 	}
 
-	CvPlayer& kOwner = GET_PLAYER(getOwnerINLINE());
+	CvPlayer& kOwner = CvPlayerAI::getPlayer(getOwnerINLINE());
 	int iHigherPopulationCount = 0;
 
 	int iLoop;
@@ -6840,7 +6840,7 @@ void CvCityAI::AI_assignCityPlot()
 	int iBestValue = 0;
 	YieldTypes eBestYield = NO_YIELD;
 
-	const CvPlayerAI& kPlayer = GET_PLAYER(getOwnerINLINE());
+	const CvPlayerAI& kPlayer = CvPlayerAI::getPlayer(getOwnerINLINE());
 
 	for (YieldTypes eYield = FIRST_YIELD; eYield < NUM_YIELD_TYPES; ++eYield)
 	{
@@ -6887,7 +6887,7 @@ void CvCityAI::write(FDataStreamBase* pStream)
 
 void CvCityAI::AI_doSettlerProfessionCheat()
 {
-	CvPlayer& kOwner = GET_PLAYER(getOwnerINLINE());
+	CvPlayer& kOwner = CvPlayerAI::getPlayer(getOwnerINLINE());
 
 	if (!(!kOwner.isHuman() && !kOwner.isNative() && !GC.getGameINLINE().isBarbarianPlayer(kOwner.getID()) && !kOwner.isEurope() && getPopulation() > 3))
 		return;
@@ -6954,7 +6954,7 @@ bool CvCityAI::canHaveCitizenProfession(const CvUnit& kUnit, ProfessionTypes ePr
 		return false;
 	}
 
-	const CvPlayer& kOwner = GET_PLAYER(getOwnerINLINE());
+	const CvPlayer& kOwner = CvPlayerAI::getPlayer(getOwnerINLINE());
 
 	if (!kOwner.isProfessionValid(eProfession, kUnit.getUnitType()))
 	{

@@ -1195,7 +1195,7 @@ int CyCity::getTeachUnit() const
 	{
 		return NO_UNIT;
 	}
-	return GC.getCivilizationInfo(GET_PLAYER(ePlayer).getCivilizationType()).getCivilizationUnits(eClassType);
+	return GC.getCivilizationInfo(CvPlayerAI::getPlayer(ePlayer).getCivilizationType()).getCivilizationUnits(eClassType);
 }
 // native advisor update - end - Nightinggale
 

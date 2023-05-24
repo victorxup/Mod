@@ -253,22 +253,22 @@ void CvPlayerAI::AI_doPeace()
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
 			if (iI != getID())
 			{
 				if (canContact((PlayerTypes)iI) && AI_isWillingToTalk((PlayerTypes)iI))
 				{
-					if (!(GET_TEAM(getTeam()).isHuman()) && (GET_PLAYER((PlayerTypes)iI).isHuman() || !(GET_TEAM(GET_PLAYER((PlayerTypes)iI).getTeam()).isHuman())))
+					if (!(GET_TEAM(getTeam()).isHuman()) && (CvPlayerAI::getPlayer((PlayerTypes)iI).isHuman() || !(GET_TEAM(CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam()).isHuman())))
 					{
-						if (GET_TEAM(getTeam()).isAtWar(GET_PLAYER((PlayerTypes)iI).getTeam()))
+						if (GET_TEAM(getTeam()).isAtWar(CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam()))
 						{
-							if (!(GET_PLAYER((PlayerTypes)iI).isHuman()) || (GET_TEAM(getTeam()).getLeaderID() == getID()))
+							if (!(CvPlayerAI::getPlayer((PlayerTypes)iI).isHuman()) || (GET_TEAM(getTeam()).getLeaderID() == getID()))
 							{
 								FAssertMsg(iI != getID(), "iI is not expected to be equal with getID()");
-								FAssert(GET_PLAYER((PlayerTypes)iI).getTeam() != getTeam());
+								FAssert(CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() != getTeam());
 
-								if (GET_TEAM(getTeam()).AI_getAtWarCounter(GET_PLAYER((PlayerTypes)iI).getTeam()) > 10)
+								if (GET_TEAM(getTeam()).AI_getAtWarCounter(CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam()) > 10)
 								{
 									if (AI_getContactTimer(((PlayerTypes)iI), CONTACT_PEACE_TREATY) == 0)
 									{
@@ -279,10 +279,10 @@ void CvPlayerAI::AI_doPeace()
 											{
 												setTradeItem(&item, TRADE_PEACE_TREATY, 0, nullptr);
 
-												if (canTradeItem(((PlayerTypes)iI), item, true) && GET_PLAYER((PlayerTypes)iI).canTradeItem(getID(), item, true))
+												if (canTradeItem(((PlayerTypes)iI), item, true) && CvPlayerAI::getPlayer((PlayerTypes)iI).canTradeItem(getID(), item, true))
 												{
-													iOurValue = GET_TEAM(getTeam()).AI_endWarVal(GET_PLAYER((PlayerTypes)iI).getTeam());
-													iTheirValue = GET_TEAM(GET_PLAYER((PlayerTypes)iI).getTeam()).AI_endWarVal(getTeam());
+													iOurValue = GET_TEAM(getTeam()).AI_endWarVal(CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam());
+													iTheirValue = GET_TEAM(CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam()).AI_endWarVal(getTeam());
 													iReceiveGold = 0;
 													iGiveGold = 0;
 
@@ -296,13 +296,13 @@ void CvPlayerAI::AI_doPeace()
 															iBestValue = 0;
 														}
 
-														iGold = std::min((iTheirValue - iOurValue), GET_PLAYER((PlayerTypes)iI).AI_maxGoldTrade(getID()));
+														iGold = std::min((iTheirValue - iOurValue), CvPlayerAI::getPlayer((PlayerTypes)iI).AI_maxGoldTrade(getID()));
 
 														if (iGold > 0)
 														{
 															setTradeItem(&item, TRADE_GOLD, iGold, nullptr);
 
-															if (GET_PLAYER((PlayerTypes)iI).canTradeItem(getID(), item, true))
+															if (CvPlayerAI::getPlayer((PlayerTypes)iI).canTradeItem(getID(), item, true))
 															{
 																iReceiveGold = iGold;
 																iOurValue += iGold;
@@ -313,11 +313,11 @@ void CvPlayerAI::AI_doPeace()
 														{
 															iBestValue = 0;
 
-															for (pLoopCity = GET_PLAYER((PlayerTypes)iI).firstCity(&iLoop); pLoopCity != nullptr; pLoopCity = GET_PLAYER((PlayerTypes)iI).nextCity(&iLoop))
+															for (pLoopCity = CvPlayerAI::getPlayer((PlayerTypes)iI).firstCity(&iLoop); pLoopCity != nullptr; pLoopCity = CvPlayerAI::getPlayer((PlayerTypes)iI).nextCity(&iLoop))
 															{
 																setTradeItem(&item, TRADE_CITIES, pLoopCity->getID(), nullptr);
 
-																if (GET_PLAYER((PlayerTypes)iI).canTradeItem(getID(), item, true))
+																if (CvPlayerAI::getPlayer((PlayerTypes)iI).canTradeItem(getID(), item, true))
 																{
 																	iValue = pLoopCity->plot()->calculateCulturePercent(getID());
 
@@ -359,7 +359,7 @@ void CvPlayerAI::AI_doPeace()
 
 															if (canTradeItem(((PlayerTypes)iI), item, true))
 															{
-																if (GET_PLAYER((PlayerTypes)iI).AI_cityTradeVal(pLoopCity) <= (iOurValue - iTheirValue))
+																if (CvPlayerAI::getPlayer((PlayerTypes)iI).AI_cityTradeVal(pLoopCity) <= (iOurValue - iTheirValue))
 																{
 																	iValue = pLoopCity->plot()->calculateCulturePercent((PlayerTypes)iI);
 
@@ -374,11 +374,11 @@ void CvPlayerAI::AI_doPeace()
 
 														if (pBestGiveCity != nullptr)
 														{
-															iTheirValue += GET_PLAYER((PlayerTypes)iI).AI_cityTradeVal(pBestGiveCity);
+															iTheirValue += CvPlayerAI::getPlayer((PlayerTypes)iI).AI_cityTradeVal(pBestGiveCity);
 														}
 													}
 
-													if ((GET_PLAYER((PlayerTypes)iI).isHuman()) ? (iOurValue >= iTheirValue) : ((iOurValue > ((iTheirValue * 3) / 5)) && (iTheirValue > ((iOurValue * 3) / 5))))
+													if ((CvPlayerAI::getPlayer((PlayerTypes)iI).isHuman()) ? (iOurValue >= iTheirValue) : ((iOurValue > ((iTheirValue * 3) / 5)) && (iTheirValue > ((iOurValue * 3) / 5))))
 													{
 														ourList.clear();
 														theirList.clear();
@@ -411,9 +411,9 @@ void CvPlayerAI::AI_doPeace()
 															theirList.insertAtEnd(item);
 														}
 
-														if (GET_PLAYER((PlayerTypes)iI).isHuman())
+														if (CvPlayerAI::getPlayer((PlayerTypes)iI).isHuman())
 														{
-															if (!(abContacted[GET_PLAYER((PlayerTypes)iI).getTeam()]))
+															if (!(abContacted[CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam()]))
 															{
 																AI_changeContactTimer(((PlayerTypes)iI), CONTACT_PEACE_TREATY, GC.getLeaderHeadInfo(getPersonalityType()).getContactDelay(CONTACT_PEACE_TREATY));
 																pDiplo = new CvDiploParameters(getID());
@@ -423,7 +423,7 @@ void CvPlayerAI::AI_doPeace()
 																pDiplo->setOurOfferList(theirList);
 																pDiplo->setTheirOfferList(ourList);
 																gDLL->beginDiplomacy(pDiplo, (PlayerTypes)iI);
-																abContacted[GET_PLAYER((PlayerTypes)iI).getTeam()] = true;
+																abContacted[CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam()] = true;
 															}
 														}
 														else
@@ -1011,7 +1011,7 @@ void CvPlayerAI::AI_conquerCity(CvCity* pCity)
 					{
 						if (pCity->getPreviousOwner() != NO_PLAYER)
 						{
-							if (GET_TEAM(GET_PLAYER(pCity->getPreviousOwner()).getTeam()).countNumCitiesByArea(pCity->area()) > 3)
+							if (GET_TEAM(CvPlayerAI::getPlayer(pCity->getPreviousOwner()).getTeam()).countNumCitiesByArea(pCity->area()) > 3)
 							{
 								iRazeValue += 30;
 							}
@@ -1043,7 +1043,7 @@ void CvPlayerAI::AI_conquerCity(CvCity* pCity)
 					}
 
 					// TAC - AI Attack City - koma13 - START
-					if (GET_PLAYER(pCity->getPreviousOwner()).isHuman())
+					if (CvPlayerAI::getPlayer(pCity->getPreviousOwner()).isHuman())
 					{
 						int iChance = GC.getDefineINT("AI_CHANCE_FOR_RAZING_CITY");
 
@@ -1233,7 +1233,7 @@ int CvPlayerAI::AI_estimatedColonistIncome(CvPlot* pPlot, CvUnit* pColonist)
 	//Calculate the income from the city tile plus the most profitable plot.
 	int iTotal = 0;
 
-	CvPlayer& kPlayerEurope = GET_PLAYER(getParent());
+	CvPlayer& kPlayerEurope = CvPlayerAI::getPlayer(getParent());
 
 	if (bFound)
 	{
@@ -1455,7 +1455,7 @@ int CvPlayerAI::AI_foundValue(int iX, int iY, int iMinRivalRange, bool bStarting
 		{
 			iOwnedTiles++;
 		}
-		else if (pLoopPlot->isOwned() && !GET_PLAYER(pLoopPlot->getOwnerINLINE()).isNative())
+		else if (pLoopPlot->isOwned() && !CvPlayerAI::getPlayer(pLoopPlot->getOwnerINLINE()).isNative())
         {
             if (pLoopPlot->getTeam() != getTeam())
             {
@@ -1492,7 +1492,7 @@ int CvPlayerAI::AI_foundValue(int iX, int iY, int iMinRivalRange, bool bStarting
 						iBadTile += 2;
 					}
 				}
-				else if (!pLoopPlot->isOwned() || GET_PLAYER(pLoopPlot->getOwnerINLINE()).isNative())
+				else if (!pLoopPlot->isOwned() || CvPlayerAI::getPlayer(pLoopPlot->getOwnerINLINE()).isNative())
 				{
 					if (!pLoopPlot->isHills() && !pLoopPlot->isWater())
 					{
@@ -1510,11 +1510,11 @@ int CvPlayerAI::AI_foundValue(int iX, int iY, int iMinRivalRange, bool bStarting
 			}
 			if (pLoopPlot->isOwned())
 			{
-				if (GET_PLAYER(pLoopPlot->getOwnerINLINE()).isNative())
+				if (CvPlayerAI::getPlayer(pLoopPlot->getOwnerINLINE()).isNative())
 				{
 					iNativeTile++;
 				}
-				else if (GET_PLAYER(pLoopPlot->getOwnerINLINE()).getParent() != NO_PLAYER)
+				else if (CvPlayerAI::getPlayer(pLoopPlot->getOwnerINLINE()).getParent() != NO_PLAYER)
 				{
 					iColonialTile += pLoopPlot->getCityRadiusCount();
 					if (pLoopPlot->getTeam() == getTeam())
@@ -1601,7 +1601,7 @@ int CvPlayerAI::AI_foundValue(int iX, int iY, int iMinRivalRange, bool bStarting
 				}
 			}
 
-			if (!pLoopPlot->isCityRadius() || (pLoopPlot->isOwned() && GET_PLAYER(pLoopPlot->getOwnerINLINE()).isNative()))
+			if (!pLoopPlot->isCityRadius() || (pLoopPlot->isOwned() && CvPlayerAI::getPlayer(pLoopPlot->getOwnerINLINE()).isNative()))
 			{
 				int iBestBonusAmount = 0;
 				YieldTypes eBestBonusYield = NO_YIELD;
@@ -1880,11 +1880,11 @@ int CvPlayerAI::AI_foundValue(int iX, int iY, int iMinRivalRange, bool bStarting
 			iValue *= 100;
 			for (int iJ = 0; iJ < MAX_PLAYERS; iJ++)
 			{
-				if (GET_PLAYER((PlayerTypes)iJ).isAlive())
+				if (CvPlayerAI::getPlayer((PlayerTypes)iJ).isAlive())
 				{
 					if (iJ != getID())
 					{
-						int iClosenessFactor = GET_PLAYER((PlayerTypes)iJ).startingPlotDistanceFactor(pPlot, getID(), iMinRange);
+						int iClosenessFactor = CvPlayerAI::getPlayer((PlayerTypes)iJ).startingPlotDistanceFactor(pPlot, getID(), iMinRange);
 						iMinDistanceFactor = std::min(iClosenessFactor, iMinDistanceFactor);
 
 						if (iClosenessFactor < 1000)
@@ -1971,7 +1971,7 @@ int CvPlayerAI::AI_foundValue(int iX, int iY, int iMinRivalRange, bool bStarting
 				{
 					for (int iPlayer = 0; iPlayer < MAX_PLAYERS; ++iPlayer)
 					{
-						CvPlayer& kLoopPlayer = GET_PLAYER((PlayerTypes)iPlayer);
+						CvPlayer& kLoopPlayer = CvPlayerAI::getPlayer((PlayerTypes)iPlayer);
 						if (kLoopPlayer.isAlive() && !kLoopPlayer.isNative())
 						{
 							if (pArea->getCitiesPerPlayer((PlayerTypes)iPlayer) > 0)
@@ -2458,12 +2458,12 @@ CvCity* CvPlayerAI::AI_findTargetCity(CvArea* pArea)
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
 			// R&R, ray, Natives raiding party - START
-			if ((isPotentialEnemy(getTeam(), GET_PLAYER((PlayerTypes)iI).getTeam())) || (AI_isPotentialRaidTarget((PlayerTypes)iI)))
+			if ((isPotentialEnemy(getTeam(), CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam())) || (AI_isPotentialRaidTarget((PlayerTypes)iI)))
 			{
-				for (pLoopCity = GET_PLAYER((PlayerTypes)iI).firstCity(&iLoop); pLoopCity != nullptr; pLoopCity = GET_PLAYER((PlayerTypes)iI).nextCity(&iLoop))
+				for (pLoopCity = CvPlayerAI::getPlayer((PlayerTypes)iI).firstCity(&iLoop); pLoopCity != nullptr; pLoopCity = CvPlayerAI::getPlayer((PlayerTypes)iI).nextCity(&iLoop))
 				{
 					if (pLoopCity->area() == pArea)
 					{
@@ -2796,12 +2796,12 @@ DiploCommentTypes CvPlayerAI::AI_getGreeting(PlayerTypes ePlayer)
 {
 	TeamTypes eWorstEnemy;
 
-	if (GET_PLAYER(ePlayer).getTeam() != getTeam())
+	if (CvPlayerAI::getPlayer(ePlayer).getTeam() != getTeam())
 	{
 		eWorstEnemy = GET_TEAM(getTeam()).AI_getWorstEnemy();
-		if ((eWorstEnemy != NO_TEAM) && (eWorstEnemy != GET_PLAYER(ePlayer).getTeam()) && GET_TEAM(GET_PLAYER(ePlayer).getTeam()).isHasMet(eWorstEnemy) && (GC.getASyncRand().get(4) == 0))
+		if ((eWorstEnemy != NO_TEAM) && (eWorstEnemy != CvPlayerAI::getPlayer(ePlayer).getTeam()) && GET_TEAM(CvPlayerAI::getPlayer(ePlayer).getTeam()).isHasMet(eWorstEnemy) && (GC.getASyncRand().get(4) == 0))
 		{
-			if (GET_PLAYER(ePlayer).AI_hasTradedWithTeam(eWorstEnemy) && !atWar(GET_PLAYER(ePlayer).getTeam(), eWorstEnemy))
+			if (CvPlayerAI::getPlayer(ePlayer).AI_hasTradedWithTeam(eWorstEnemy) && !atWar(CvPlayerAI::getPlayer(ePlayer).getTeam(), eWorstEnemy))
 			{
 				return (DiploCommentTypes)GC.getInfoTypeForString("AI_DIPLOCOMMENT_WORST_ENEMY_TRADING");
 			}
@@ -2821,7 +2821,7 @@ bool CvPlayerAI::AI_isWillingToTalk(PlayerTypes ePlayer)
 	FAssertMsg(getPersonalityType() != NO_LEADER, "getPersonalityType() is not expected to be equal with NO_LEADER");
 	FAssertMsg(ePlayer != getID(), "shouldn't call this function on ourselves");
 
-	if (GET_PLAYER(ePlayer).getTeam() == getTeam())
+	if (CvPlayerAI::getPlayer(ePlayer).getTeam() == getTeam())
 	{
 		return true;
 	}
@@ -2831,16 +2831,16 @@ bool CvPlayerAI::AI_isWillingToTalk(PlayerTypes ePlayer)
 		return false;
 	}
 
-	if (atWar(getTeam(), GET_PLAYER(ePlayer).getTeam()))
+	if (atWar(getTeam(), CvPlayerAI::getPlayer(ePlayer).getTeam()))
 	{
-		if (GET_TEAM(getTeam()).isParentOf(GET_PLAYER(ePlayer).getTeam()))
+		if (GET_TEAM(getTeam()).isParentOf(CvPlayerAI::getPlayer(ePlayer).getTeam()))
 		{
 			return false;
 		}
 
 		int iRefuseDuration = (GC.getLeaderHeadInfo(getPersonalityType()).getRefuseToTalkWarThreshold());
 
-		if  (GET_TEAM(getTeam()).AI_isChosenWar(GET_PLAYER(ePlayer).getTeam()))
+		if  (GET_TEAM(getTeam()).AI_isChosenWar(CvPlayerAI::getPlayer(ePlayer).getTeam()))
 		{
 			if (!isNative())
 			{
@@ -2855,8 +2855,8 @@ bool CvPlayerAI::AI_isWillingToTalk(PlayerTypes ePlayer)
 			}
 		}
 
-		int iOurSuccess = 1 + GET_TEAM(getTeam()).AI_getWarSuccess(GET_PLAYER(ePlayer).getTeam());
-		int iTheirSuccess = 1 + GET_TEAM(GET_PLAYER(ePlayer).getTeam()).AI_getWarSuccess(getTeam());
+		int iOurSuccess = 1 + GET_TEAM(getTeam()).AI_getWarSuccess(CvPlayerAI::getPlayer(ePlayer).getTeam());
+		int iTheirSuccess = 1 + GET_TEAM(CvPlayerAI::getPlayer(ePlayer).getTeam()).AI_getWarSuccess(getTeam());
 		if (iTheirSuccess > iOurSuccess * 2)
 		{
 			iRefuseDuration *= 50 + ((50 * iOurSuccess * 2) / iTheirSuccess);
@@ -2869,7 +2869,7 @@ bool CvPlayerAI::AI_isWillingToTalk(PlayerTypes ePlayer)
 			int iGameTurns = GC.getGameINLINE().getEstimateEndTurn();
 			int iCurrentTurn = GC.getGameINLINE().getGameTurn();
 
-			if (!GET_TEAM(getTeam()).AI_isChosenWar((GET_PLAYER(ePlayer).getTeam())))
+			if (!GET_TEAM(getTeam()).AI_isChosenWar((CvPlayerAI::getPlayer(ePlayer).getTeam())))
 			{
 				iCurrentTurn += iGameTurns / 2;
 			}
@@ -2878,7 +2878,7 @@ bool CvPlayerAI::AI_isWillingToTalk(PlayerTypes ePlayer)
 			iRefuseDuration /= iGameTurns;
 		}
 
-		if (GET_TEAM(getTeam()).AI_getAtWarCounter(GET_PLAYER(ePlayer).getTeam()) < iRefuseDuration)
+		if (GET_TEAM(getTeam()).AI_getAtWarCounter(CvPlayerAI::getPlayer(ePlayer).getTeam()) < iRefuseDuration)
 		{
 			return false;
 		}
@@ -2906,7 +2906,7 @@ bool CvPlayerAI::AI_demandRebukedSneak(PlayerTypes ePlayer)
 
 	if (GC.getGameINLINE().getSorenRandNum(100, "AI Demand Rebuked") < GC.getLeaderHeadInfo(getPersonalityType()).getDemandRebukedSneakProb())
 	{
-		if (GET_TEAM(getTeam()).getPower() > GET_TEAM(GET_PLAYER(ePlayer).getTeam()).getDefensivePower())
+		if (GET_TEAM(getTeam()).getPower() > GET_TEAM(CvPlayerAI::getPlayer(ePlayer).getTeam()).getDefensivePower())
 		{
 			return true;
 		}
@@ -2928,9 +2928,9 @@ bool CvPlayerAI::AI_demandRebukedWar(PlayerTypes ePlayer)
 	// needs to be async because it only happens on the computer of the player who is in diplomacy...
 	if (GC.getASyncRand().get(100, "AI Demand Rebuked ASYNC") < GC.getLeaderHeadInfo(getPersonalityType()).getDemandRebukedWarProb())
 	{
-		if (GET_TEAM(getTeam()).getPower() > GET_TEAM(GET_PLAYER(ePlayer).getTeam()).getDefensivePower())
+		if (GET_TEAM(getTeam()).getPower() > GET_TEAM(CvPlayerAI::getPlayer(ePlayer).getTeam()).getDefensivePower())
 		{
-			if (GET_TEAM(getTeam()).AI_isAllyLandTarget(GET_PLAYER(ePlayer).getTeam()))
+			if (GET_TEAM(getTeam()).AI_isAllyLandTarget(CvPlayerAI::getPlayer(ePlayer).getTeam()))
 			{
 				return true;
 			}
@@ -2948,9 +2948,9 @@ bool CvPlayerAI::AI_hasTradedWithTeam(TeamTypes eTeam)
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
-			if (GET_PLAYER((PlayerTypes)iI).getTeam() == eTeam)
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == eTeam)
 			{
 				if ((AI_getPeacetimeGrantValue((PlayerTypes)iI) + AI_getPeacetimeTradeValue((PlayerTypes)iI)) > 0)
 				{
@@ -3006,7 +3006,7 @@ int CvPlayerAI::AI_getAttitudeVal(PlayerTypes ePlayer, bool bForced)
 
 	if (bForced)
 	{
-		if (getTeam() == GET_PLAYER(ePlayer).getTeam())
+		if (getTeam() == CvPlayerAI::getPlayer(ePlayer).getTeam())
 		{
 			return 100;
 		}
@@ -3014,16 +3014,16 @@ int CvPlayerAI::AI_getAttitudeVal(PlayerTypes ePlayer, bool bForced)
 
 	int iAttitude = GC.getLeaderHeadInfo(getPersonalityType()).getBaseAttitude();
 
-	if (GET_PLAYER(ePlayer).isNative())
+	if (CvPlayerAI::getPlayer(ePlayer).isNative())
 	{
 		iAttitude += GC.getLeaderHeadInfo(getPersonalityType()).getNativeAttitude();
 	}
 
-	iAttitude += GC.getHandicapInfo(GET_PLAYER(ePlayer).getHandicapType()).getAttitudeChange();
+	iAttitude += GC.getHandicapInfo(CvPlayerAI::getPlayer(ePlayer).getHandicapType()).getAttitudeChange();
 
-	iAttitude -= std::max(0, (GET_TEAM(GET_PLAYER(ePlayer).getTeam()).getNumMembers() - GET_TEAM(getTeam()).getNumMembers()));
+	iAttitude -= std::max(0, (GET_TEAM(CvPlayerAI::getPlayer(ePlayer).getTeam()).getNumMembers() - GET_TEAM(getTeam()).getNumMembers()));
 
-	if (GET_TEAM(GET_PLAYER(ePlayer).getTeam()).AI_getWarSuccess(getTeam()) > GET_TEAM(getTeam()).AI_getWarSuccess(GET_PLAYER(ePlayer).getTeam()))
+	if (GET_TEAM(CvPlayerAI::getPlayer(ePlayer).getTeam()).AI_getWarSuccess(getTeam()) > GET_TEAM(getTeam()).AI_getWarSuccess(CvPlayerAI::getPlayer(ePlayer).getTeam()))
 	{
 		iAttitude += GC.getLeaderHeadInfo(getPersonalityType()).getLostWarAttitudeChange();
 	}
@@ -3090,14 +3090,14 @@ int CvPlayerAI::AI_getCloseBordersAttitude(PlayerTypes ePlayer)
 			return 0;
 		}
 
-		if (getTeam() == GET_PLAYER(ePlayer).getTeam())
+		if (getTeam() == CvPlayerAI::getPlayer(ePlayer).getTeam())
 		{
 			return 0;
 		}
 
 		int iPercent = std::min(60, (AI_calculateStolenCityRadiusPlots(ePlayer) * 3));
 
-		if (GET_TEAM(getTeam()).AI_isLandTarget(GET_PLAYER(ePlayer).getTeam()))
+		if (GET_TEAM(getTeam()).AI_isLandTarget(CvPlayerAI::getPlayer(ePlayer).getTeam()))
 		{
 			iPercent += 40;
 		}
@@ -3113,7 +3113,7 @@ int CvPlayerAI::AI_getStolenPlotsAttitude(PlayerTypes ePlayer)
 {
 	if (m_em_iStolenPlotsAttitudeCache.get(ePlayer) == MAX_INT)
 	{
-		if (getTeam() == GET_PLAYER(ePlayer).getTeam())
+		if (getTeam() == CvPlayerAI::getPlayer(ePlayer).getTeam())
 		{
 			return 0;
 		}
@@ -3143,7 +3143,7 @@ int CvPlayerAI::AI_getStolenPlotsAttitude(PlayerTypes ePlayer)
 
 int CvPlayerAI::AI_getAlarmAttitude(PlayerTypes ePlayer)
 {
-	if (getTeam() == GET_PLAYER(ePlayer).getTeam())
+	if (getTeam() == CvPlayerAI::getPlayer(ePlayer).getTeam())
 	{
 		return 0;
 	}
@@ -3154,8 +3154,8 @@ int CvPlayerAI::AI_getAlarmAttitude(PlayerTypes ePlayer)
 		return 0;
 	}
 
-	int iAlarm = GET_PLAYER(ePlayer).getNumCities() * GC.getAlarmInfo(eAlarm).getNumColonies();
-	iAlarm *= std::max(0, 100 + GET_PLAYER(ePlayer).getNativeAngerModifier());
+	int iAlarm = CvPlayerAI::getPlayer(ePlayer).getNumCities() * GC.getAlarmInfo(eAlarm).getNumColonies();
+	iAlarm *= std::max(0, 100 + CvPlayerAI::getPlayer(ePlayer).getNativeAngerModifier());
 	iAlarm /= 100;
 
 	int iLoop;
@@ -3172,7 +3172,7 @@ int CvPlayerAI::AI_getAlarmAttitude(PlayerTypes ePlayer)
 
 int CvPlayerAI::AI_getRebelAttitude(PlayerTypes ePlayer)
 {
-	if (GET_PLAYER(ePlayer).getParent() != getID())
+	if (CvPlayerAI::getPlayer(ePlayer).getParent() != getID())
 	{
 		return 0;
 	}
@@ -3182,7 +3182,7 @@ int CvPlayerAI::AI_getRebelAttitude(PlayerTypes ePlayer)
 		return 0;
 	}
 
-	int iBells = GET_PLAYER(ePlayer).getBellsStored();
+	int iBells = CvPlayerAI::getPlayer(ePlayer).getBellsStored();
 
 	iBells *= 100;
 	iBells /= std::max(1, GC.getGameSpeedInfo(GC.getGameINLINE().getGameSpeedType()).getGrowthPercent());
@@ -3191,7 +3191,7 @@ int CvPlayerAI::AI_getRebelAttitude(PlayerTypes ePlayer)
 	// Erik: Negative attitude from bells now scale with the rebel sentiment.
 	// This effectively disables the exploit that allows players to request discounted
 	// units from their king as long as the king is at least cautious
-	const int iRebelPercent = GET_TEAM(GET_PLAYER(ePlayer).getTeam()).getRebelPercent();
+	const int iRebelPercent = GET_TEAM(CvPlayerAI::getPlayer(ePlayer).getTeam()).getRebelPercent();
 	// TODO: The maximum should be a XML parameter
 	const int iCappedBells = static_cast<int>(std::max(-20.0, iBells * ((100 - iRebelPercent) / 100.0)));
 
@@ -3202,14 +3202,14 @@ int CvPlayerAI::AI_getWarAttitude(PlayerTypes ePlayer)
 {
 	int iAttitude = 0;
 
-	if (atWar(getTeam(), GET_PLAYER(ePlayer).getTeam()))
+	if (atWar(getTeam(), CvPlayerAI::getPlayer(ePlayer).getTeam()))
 	{
 		iAttitude -= 3;
 	}
 
 	if (GC.getLeaderHeadInfo(getPersonalityType()).getAtWarAttitudeDivisor() != 0)
 	{
-		int iAttitudeChange = (GET_TEAM(getTeam()).AI_getAtWarCounter(GET_PLAYER(ePlayer).getTeam()) / GC.getLeaderHeadInfo(getPersonalityType()).getAtWarAttitudeDivisor());
+		int iAttitudeChange = (GET_TEAM(getTeam()).AI_getAtWarCounter(CvPlayerAI::getPlayer(ePlayer).getTeam()) / GC.getLeaderHeadInfo(getPersonalityType()).getAtWarAttitudeDivisor());
 		iAttitude += range(iAttitudeChange, -(abs(GC.getLeaderHeadInfo(getPersonalityType()).getAtWarAttitudeChangeLimit())), abs(GC.getLeaderHeadInfo(getPersonalityType()).getAtWarAttitudeChangeLimit()));
 	}
 
@@ -3221,7 +3221,7 @@ int CvPlayerAI::AI_getPeaceAttitude(PlayerTypes ePlayer)
 {
 	if (GC.getLeaderHeadInfo(getPersonalityType()).getAtPeaceAttitudeDivisor() != 0)
 	{
-		int iAttitudeChange = (GET_TEAM(getTeam()).AI_getAtPeaceCounter(GET_PLAYER(ePlayer).getTeam()) / GC.getLeaderHeadInfo(getPersonalityType()).getAtPeaceAttitudeDivisor());
+		int iAttitudeChange = (GET_TEAM(getTeam()).AI_getAtPeaceCounter(CvPlayerAI::getPlayer(ePlayer).getTeam()) / GC.getLeaderHeadInfo(getPersonalityType()).getAtPeaceAttitudeDivisor());
 		return range(iAttitudeChange, -(abs(GC.getLeaderHeadInfo(getPersonalityType()).getAtPeaceAttitudeChangeLimit())), abs(GC.getLeaderHeadInfo(getPersonalityType()).getAtPeaceAttitudeChangeLimit()));
 	}
 
@@ -3231,11 +3231,11 @@ int CvPlayerAI::AI_getPeaceAttitude(PlayerTypes ePlayer)
 
 int CvPlayerAI::AI_getOpenBordersAttitude(PlayerTypes ePlayer)
 {
-	if (!atWar(getTeam(), GET_PLAYER(ePlayer).getTeam()))
+	if (!atWar(getTeam(), CvPlayerAI::getPlayer(ePlayer).getTeam()))
 	{
 		if (GC.getLeaderHeadInfo(getPersonalityType()).getOpenBordersAttitudeDivisor() != 0)
 		{
-			int iAttitudeChange = (GET_TEAM(getTeam()).AI_getOpenBordersCounter(GET_PLAYER(ePlayer).getTeam()) / GC.getLeaderHeadInfo(getPersonalityType()).getOpenBordersAttitudeDivisor());
+			int iAttitudeChange = (GET_TEAM(getTeam()).AI_getOpenBordersCounter(CvPlayerAI::getPlayer(ePlayer).getTeam()) / GC.getLeaderHeadInfo(getPersonalityType()).getOpenBordersAttitudeDivisor());
 			return range(iAttitudeChange, -(abs(GC.getLeaderHeadInfo(getPersonalityType()).getOpenBordersAttitudeChangeLimit())), abs(GC.getLeaderHeadInfo(getPersonalityType()).getOpenBordersAttitudeChangeLimit()));
 		}
 	}
@@ -3246,11 +3246,11 @@ int CvPlayerAI::AI_getOpenBordersAttitude(PlayerTypes ePlayer)
 
 int CvPlayerAI::AI_getDefensivePactAttitude(PlayerTypes ePlayer)
 {
-	if (!atWar(getTeam(), GET_PLAYER(ePlayer).getTeam()))
+	if (!atWar(getTeam(), CvPlayerAI::getPlayer(ePlayer).getTeam()))
 	{
 		if (GC.getLeaderHeadInfo(getPersonalityType()).getDefensivePactAttitudeDivisor() != 0)
 		{
-			int iAttitudeChange = (GET_TEAM(getTeam()).AI_getDefensivePactCounter(GET_PLAYER(ePlayer).getTeam()) / GC.getLeaderHeadInfo(getPersonalityType()).getDefensivePactAttitudeDivisor());
+			int iAttitudeChange = (GET_TEAM(getTeam()).AI_getDefensivePactCounter(CvPlayerAI::getPlayer(ePlayer).getTeam()) / GC.getLeaderHeadInfo(getPersonalityType()).getDefensivePactAttitudeDivisor());
 			return range(iAttitudeChange, -(abs(GC.getLeaderHeadInfo(getPersonalityType()).getDefensivePactAttitudeChangeLimit())), abs(GC.getLeaderHeadInfo(getPersonalityType()).getDefensivePactAttitudeChangeLimit()));
 		}
 	}
@@ -3263,14 +3263,14 @@ int CvPlayerAI::AI_getRivalDefensivePactAttitude(PlayerTypes ePlayer)
 {
 	int iAttitude = 0;
 
-	if (getTeam() == GET_PLAYER(ePlayer).getTeam())
+	if (getTeam() == CvPlayerAI::getPlayer(ePlayer).getTeam())
 	{
 		return iAttitude;
 	}
 
-	if (!(GET_TEAM(getTeam()).isDefensivePact(GET_PLAYER(ePlayer).getTeam())))
+	if (!(GET_TEAM(getTeam()).isDefensivePact(CvPlayerAI::getPlayer(ePlayer).getTeam())))
 	{
-		iAttitude -= ((4 * GET_TEAM(GET_PLAYER(ePlayer).getTeam()).getDefensivePactCount(GET_PLAYER(ePlayer).getTeam())) / std::max(1, (GC.getGameINLINE().countCivTeamsAlive() - 2)));
+		iAttitude -= ((4 * GET_TEAM(CvPlayerAI::getPlayer(ePlayer).getTeam()).getDefensivePactCount(CvPlayerAI::getPlayer(ePlayer).getTeam())) / std::max(1, (GC.getGameINLINE().countCivTeamsAlive() - 2)));
 	}
 
 	return iAttitude;
@@ -3284,16 +3284,16 @@ int CvPlayerAI::AI_getShareWarAttitude(PlayerTypes ePlayer)
 
 	iAttitude = 0;
 
-	if (!atWar(getTeam(), GET_PLAYER(ePlayer).getTeam()))
+	if (!atWar(getTeam(), CvPlayerAI::getPlayer(ePlayer).getTeam()))
 	{
-		if (GET_TEAM(getTeam()).AI_shareWar(GET_PLAYER(ePlayer).getTeam()))
+		if (GET_TEAM(getTeam()).AI_shareWar(CvPlayerAI::getPlayer(ePlayer).getTeam()))
 		{
 			iAttitude += GC.getLeaderHeadInfo(getPersonalityType()).getShareWarAttitudeChange();
 		}
 
 		if (GC.getLeaderHeadInfo(getPersonalityType()).getShareWarAttitudeDivisor() != 0)
 		{
-			iAttitudeChange = (GET_TEAM(getTeam()).AI_getShareWarCounter(GET_PLAYER(ePlayer).getTeam()) / GC.getLeaderHeadInfo(getPersonalityType()).getShareWarAttitudeDivisor());
+			iAttitudeChange = (GET_TEAM(getTeam()).AI_getShareWarCounter(CvPlayerAI::getPlayer(ePlayer).getTeam()) / GC.getLeaderHeadInfo(getPersonalityType()).getShareWarAttitudeDivisor());
 			iAttitude += range(iAttitudeChange, -(abs(GC.getLeaderHeadInfo(getPersonalityType()).getShareWarAttitudeChangeLimit())), abs(GC.getLeaderHeadInfo(getPersonalityType()).getShareWarAttitudeChangeLimit()));
 		}
 	}
@@ -3304,13 +3304,13 @@ int CvPlayerAI::AI_getShareWarAttitude(PlayerTypes ePlayer)
 int CvPlayerAI::AI_getTradeAttitude(PlayerTypes ePlayer)
 {
 	// XXX human only?
-	return range(((AI_getPeacetimeGrantValue(ePlayer) + std::max(0, (AI_getPeacetimeTradeValue(ePlayer) - GET_PLAYER(ePlayer).AI_getPeacetimeTradeValue(getID())))) / ((GET_TEAM(getTeam()).AI_getHasMetCounter(GET_PLAYER(ePlayer).getTeam()) + 1) * 5)), 0, 4);
+	return range(((AI_getPeacetimeGrantValue(ePlayer) + std::max(0, (AI_getPeacetimeTradeValue(ePlayer) - CvPlayerAI::getPlayer(ePlayer).AI_getPeacetimeTradeValue(getID())))) / ((GET_TEAM(getTeam()).AI_getHasMetCounter(CvPlayerAI::getPlayer(ePlayer).getTeam()) + 1) * 5)), 0, 4);
 }
 
 int CvPlayerAI::AI_getRivalTradeAttitude(PlayerTypes ePlayer)
 {
 	// XXX human only?
-	return -(range(((GET_TEAM(getTeam()).AI_getEnemyPeacetimeGrantValue(GET_PLAYER(ePlayer).getTeam()) + (GET_TEAM(getTeam()).AI_getEnemyPeacetimeTradeValue(GET_PLAYER(ePlayer).getTeam()) / 3)) / ((GET_TEAM(getTeam()).AI_getHasMetCounter(GET_PLAYER(ePlayer).getTeam()) + 1) * 10)), 0, 4));
+	return -(range(((GET_TEAM(getTeam()).AI_getEnemyPeacetimeGrantValue(CvPlayerAI::getPlayer(ePlayer).getTeam()) + (GET_TEAM(getTeam()).AI_getEnemyPeacetimeTradeValue(CvPlayerAI::getPlayer(ePlayer).getTeam()) / 3)) / ((GET_TEAM(getTeam()).AI_getHasMetCounter(CvPlayerAI::getPlayer(ePlayer).getTeam()) + 1) * 10)), 0, 4));
 }
 
 
@@ -3325,9 +3325,9 @@ int CvPlayerAI::AI_dealVal(PlayerTypes ePlayer, const CLinkList<TradeData>* pLis
 
 	FAssertMsg(ePlayer != getID(), "shouldn't call this function on ourselves");
 
-	if (atWar(getTeam(), GET_PLAYER(ePlayer).getTeam()))
+	if (atWar(getTeam(), CvPlayerAI::getPlayer(ePlayer).getTeam()))
 	{
-		iValue += GET_TEAM(getTeam()).AI_endWarVal(GET_PLAYER(ePlayer).getTeam());
+		iValue += GET_TEAM(getTeam()).AI_endWarVal(CvPlayerAI::getPlayer(ePlayer).getTeam());
 	}
 
 	for (CLLNode<TradeData>* pNode = pList->head(); pNode; pNode = pList->next(pNode))
@@ -3337,7 +3337,7 @@ int CvPlayerAI::AI_dealVal(PlayerTypes ePlayer, const CLinkList<TradeData>* pLis
 		switch (pNode->m_data.m_eItemType)
 		{
 		case TRADE_CITIES:
-			iValue += AI_cityTradeVal(GET_PLAYER(ePlayer).getCity(pNode->m_data.m_iData1));
+			iValue += AI_cityTradeVal(CvPlayerAI::getPlayer(ePlayer).getCity(pNode->m_data.m_iData1));
 			break;
 		case TRADE_GOLD:
 			iValue += (pNode->m_data.m_iData1 * AI_goldTradeValuePercent()) / 100;
@@ -3346,19 +3346,19 @@ int CvPlayerAI::AI_dealVal(PlayerTypes ePlayer, const CLinkList<TradeData>* pLis
 			iValue += AI_yieldTradeVal((YieldTypes) pNode->m_data.m_iData1, pNode->m_data.m_kTransport, ePlayer);
 			break;
 		case TRADE_MAPS:
-			iValue += GET_TEAM(getTeam()).AI_mapTradeVal(GET_PLAYER(ePlayer).getTeam());
+			iValue += GET_TEAM(getTeam()).AI_mapTradeVal(CvPlayerAI::getPlayer(ePlayer).getTeam());
 			break;
 		case TRADE_OPEN_BORDERS:
-			iValue += GET_TEAM(getTeam()).AI_openBordersTradeVal(GET_PLAYER(ePlayer).getTeam());
+			iValue += GET_TEAM(getTeam()).AI_openBordersTradeVal(CvPlayerAI::getPlayer(ePlayer).getTeam());
 			break;
 		case TRADE_DEFENSIVE_PACT:
-			iValue += GET_TEAM(getTeam()).AI_defensivePactTradeVal(GET_PLAYER(ePlayer).getTeam());
+			iValue += GET_TEAM(getTeam()).AI_defensivePactTradeVal(CvPlayerAI::getPlayer(ePlayer).getTeam());
 			break;
 		case TRADE_PEACE:
-			iValue += GET_TEAM(getTeam()).AI_makePeaceTradeVal(((TeamTypes)(pNode->m_data.m_iData1)), GET_PLAYER(ePlayer).getTeam());
+			iValue += GET_TEAM(getTeam()).AI_makePeaceTradeVal(((TeamTypes)(pNode->m_data.m_iData1)), CvPlayerAI::getPlayer(ePlayer).getTeam());
 			break;
 		case TRADE_WAR:
-			iValue += GET_TEAM(getTeam()).AI_declareWarTradeVal(((TeamTypes)(pNode->m_data.m_iData1)), GET_PLAYER(ePlayer).getTeam());
+			iValue += GET_TEAM(getTeam()).AI_declareWarTradeVal(((TeamTypes)(pNode->m_data.m_iData1)), CvPlayerAI::getPlayer(ePlayer).getTeam());
 			break;
 		case TRADE_EMBARGO:
 			iValue += AI_stopTradingTradeVal(((TeamTypes)(pNode->m_data.m_iData1)), ePlayer);
@@ -3413,7 +3413,7 @@ bool CvPlayerAI::AI_considerOffer(PlayerTypes ePlayer, const CLinkList<TradeData
 		}
 	}
 
-	if (GET_PLAYER(ePlayer).getTeam() == getTeam())
+	if (CvPlayerAI::getPlayer(ePlayer).getTeam() == getTeam())
 	{
 		return true;
 	}
@@ -3423,14 +3423,14 @@ bool CvPlayerAI::AI_considerOffer(PlayerTypes ePlayer, const CLinkList<TradeData
 		return true;
 	}
 
-	int iOurValue = GET_PLAYER(ePlayer).AI_dealVal(getID(), pOurList, false, iChange);
+	int iOurValue = CvPlayerAI::getPlayer(ePlayer).AI_dealVal(getID(), pOurList, false, iChange);
 	int iTheirValue = AI_dealVal(ePlayer, pTheirList, false, iChange);
 
 	if (iOurValue > 0 && 0 == pTheirList->getLength() && 0 == iTheirValue)
 	{
 		if (AI_getAttitude(ePlayer) < ATTITUDE_PLEASED)
 		{
-			if (GET_TEAM(getTeam()).getPower() > ((GET_TEAM(GET_PLAYER(ePlayer).getTeam()).getPower() * 4) / 3))
+			if (GET_TEAM(getTeam()).getPower() > ((GET_TEAM(CvPlayerAI::getPlayer(ePlayer).getTeam()).getPower() * 4) / 3))
 			{
 				return false;
 			}
@@ -3441,19 +3441,19 @@ bool CvPlayerAI::AI_considerOffer(PlayerTypes ePlayer, const CLinkList<TradeData
 			return false;
 		}
 
-		iThreshold = (GET_TEAM(getTeam()).AI_getHasMetCounter(GET_PLAYER(ePlayer).getTeam()) + 50);
+		iThreshold = (GET_TEAM(getTeam()).AI_getHasMetCounter(CvPlayerAI::getPlayer(ePlayer).getTeam()) + 50);
 
 		iThreshold *= 2;
 
-		if (GET_TEAM(GET_PLAYER(ePlayer).getTeam()).AI_isLandTarget(getTeam()))
+		if (GET_TEAM(CvPlayerAI::getPlayer(ePlayer).getTeam()).AI_isLandTarget(getTeam()))
 		{
 			iThreshold *= 3;
 		}
 
-		iThreshold *= (GET_TEAM(GET_PLAYER(ePlayer).getTeam()).getPower() + 100);
+		iThreshold *= (GET_TEAM(CvPlayerAI::getPlayer(ePlayer).getTeam()).getPower() + 100);
 		iThreshold /= (GET_TEAM(getTeam()).getPower() + 100);
 
-		iThreshold -= GET_PLAYER(ePlayer).AI_getPeacetimeGrantValue(getID());
+		iThreshold -= CvPlayerAI::getPlayer(ePlayer).AI_getPeacetimeGrantValue(getID());
 
 		return (iOurValue < iThreshold);
 	}
@@ -3468,7 +3468,7 @@ bool CvPlayerAI::AI_considerOffer(PlayerTypes ePlayer, const CLinkList<TradeData
 
 int CvPlayerAI::AI_militaryHelp(PlayerTypes ePlayer, int& iNumUnits, UnitTypes& eUnit, ProfessionTypes& eProfession)
 {
-	FAssert(GET_PLAYER(ePlayer).getParent() == getID());
+	FAssert(CvPlayerAI::getPlayer(ePlayer).getParent() == getID());
 
 	iNumUnits = 0;
 	eUnit = NO_UNIT;
@@ -3479,7 +3479,7 @@ int CvPlayerAI::AI_militaryHelp(PlayerTypes ePlayer, int& iNumUnits, UnitTypes& 
 		return -1;
 	}
 
-	CvPlayer& kPlayer = GET_PLAYER(ePlayer);
+	CvPlayer& kPlayer = CvPlayerAI::getPlayer(ePlayer);
 	int iBestValue = MAX_INT;
 	for (int i = 0; i < GC.getNumUnitClassInfos(); ++i)
 	{
@@ -3566,7 +3566,7 @@ bool CvPlayerAI::AI_counterPropose(PlayerTypes ePlayer, const CLinkList<TradeDat
 
 
 	// R&R, ray, Bargaining - START
-	bool acceptsBargaining = GET_PLAYER(getID()).isWillingToBargain();
+	bool acceptsBargaining = CvPlayerAI::getPlayer(getID()).isWillingToBargain();
 
 	if(acceptsBargaining)
 	{
@@ -3585,10 +3585,10 @@ bool CvPlayerAI::AI_counterPropose(PlayerTypes ePlayer, const CLinkList<TradeDat
 				int newPrice = oldPrice * (1000 + randomPriceChange) / 1000;
 
 				// R&R, ray, change for Trait Trader
-				newPrice = newPrice * (100 + GET_PLAYER(getID()).getNativeTradeModifier()) / 100;
+				newPrice = newPrice * (100 + CvPlayerAI::getPlayer(getID()).getNativeTradeModifier()) / 100;
 
 				// R&R, ray, small correction to stop at max gold of player
-				int iGoldAvailable = GET_PLAYER(getID()).AI_maxGoldTrade(ePlayer);
+				int iGoldAvailable = CvPlayerAI::getPlayer(getID()).AI_maxGoldTrade(ePlayer);
 				if (newPrice >= iGoldAvailable)
 				{
 					newPrice = iGoldAvailable;
@@ -3617,7 +3617,7 @@ bool CvPlayerAI::AI_counterPropose(PlayerTypes ePlayer, const CLinkList<TradeDat
 				int newPrice = oldPrice * (1000 - randomPriceChange) / 1000;
 
 				// R&R, ray, change for Trait Trader
-				newPrice = newPrice * (100 - GET_PLAYER(getID()).getNativeTradeModifier()) / 100;
+				newPrice = newPrice * (100 - CvPlayerAI::getPlayer(getID()).getNativeTradeModifier()) / 100;
 
 				//setting value to new price
 				pTheirCounter->clear();
@@ -3628,7 +3628,7 @@ bool CvPlayerAI::AI_counterPropose(PlayerTypes ePlayer, const CLinkList<TradeDat
 		}
 
 		//at the end reset value for Bargaining
-		GET_PLAYER(getID()).setWillingToBargain(false);
+		CvPlayerAI::getPlayer(getID()).setWillingToBargain(false);
 		return true;
 	}
 	// R&R, ray, Bargaining - END
@@ -3641,7 +3641,7 @@ bool CvPlayerAI::AI_counterPropose(PlayerTypes ePlayer, const CLinkList<TradeDat
 	pGoldNode = nullptr;
 
 	iHumanDealWeight = AI_dealVal(ePlayer, pTheirList);
-	iAIDealWeight = GET_PLAYER(ePlayer).AI_dealVal(getID(), pOurList);
+	iAIDealWeight = CvPlayerAI::getPlayer(ePlayer).AI_dealVal(getID(), pOurList);
 
 	int iGoldValuePercent = AI_goldTradeValuePercent();
 
@@ -3650,7 +3650,7 @@ bool CvPlayerAI::AI_counterPropose(PlayerTypes ePlayer, const CLinkList<TradeDat
 
 	if (iAIDealWeight > iHumanDealWeight)
 	{
-		if (atWar(getTeam(), GET_PLAYER(ePlayer).getTeam()))
+		if (atWar(getTeam(), CvPlayerAI::getPlayer(ePlayer).getTeam()))
 		{
 			iBestValue = 0;
 			iBestWeight = 0;
@@ -3662,11 +3662,11 @@ bool CvPlayerAI::AI_counterPropose(PlayerTypes ePlayer, const CLinkList<TradeDat
 				{
 					if (pNode->m_data.m_eItemType == TRADE_CITIES)
 					{
-						FAssert(GET_PLAYER(ePlayer).canTradeItem(getID(), pNode->m_data));
+						FAssert(CvPlayerAI::getPlayer(ePlayer).canTradeItem(getID(), pNode->m_data));
 
-						if (GET_PLAYER(ePlayer).getTradeDenial(getID(), pNode->m_data) == NO_DENIAL)
+						if (CvPlayerAI::getPlayer(ePlayer).getTradeDenial(getID(), pNode->m_data) == NO_DENIAL)
 						{
-							pCity = GET_PLAYER(ePlayer).getCity(pNode->m_data.m_iData1);
+							pCity = CvPlayerAI::getPlayer(ePlayer).getCity(pNode->m_data.m_iData1);
 
 							if (pCity != nullptr)
 							{
@@ -3700,9 +3700,9 @@ bool CvPlayerAI::AI_counterPropose(PlayerTypes ePlayer, const CLinkList<TradeDat
 		{
 			if (!pNode->m_data.m_bOffering && !pNode->m_data.m_bHidden)
 			{
-				FAssert(GET_PLAYER(ePlayer).canTradeItem(getID(), pNode->m_data));
+				FAssert(CvPlayerAI::getPlayer(ePlayer).canTradeItem(getID(), pNode->m_data));
 
-				if (GET_PLAYER(ePlayer).getTradeDenial(getID(), pNode->m_data) == NO_DENIAL)
+				if (CvPlayerAI::getPlayer(ePlayer).getTradeDenial(getID(), pNode->m_data) == NO_DENIAL)
 				{
 					switch (pNode->m_data.m_eItemType)
 					{
@@ -3729,7 +3729,7 @@ bool CvPlayerAI::AI_counterPropose(PlayerTypes ePlayer, const CLinkList<TradeDat
 				{
 					iGoldData++;
 				}
-				if (GET_PLAYER(ePlayer).getMaxGoldTrade(getID(), kTransport) >= iGoldData)
+				if (CvPlayerAI::getPlayer(ePlayer).getMaxGoldTrade(getID(), kTransport) >= iGoldData)
 				{
 					pGoldNode->m_data.m_iData1 = iGoldData;
 					iHumanDealWeight += (iGoldData * iGoldValuePercent) / 100;
@@ -3745,11 +3745,11 @@ bool CvPlayerAI::AI_counterPropose(PlayerTypes ePlayer, const CLinkList<TradeDat
 			{
 				if (pNode->m_data.m_eItemType == TRADE_MAPS)
 				{
-					FAssert(GET_PLAYER(ePlayer).canTradeItem(getID(), pNode->m_data));
+					FAssert(CvPlayerAI::getPlayer(ePlayer).canTradeItem(getID(), pNode->m_data));
 
-					if (GET_PLAYER(ePlayer).getTradeDenial(getID(), pNode->m_data) == NO_DENIAL)
+					if (CvPlayerAI::getPlayer(ePlayer).getTradeDenial(getID(), pNode->m_data) == NO_DENIAL)
 					{
-						iWeight = GET_TEAM(getTeam()).AI_mapTradeVal(GET_PLAYER(ePlayer).getTeam());
+						iWeight = GET_TEAM(getTeam()).AI_mapTradeVal(CvPlayerAI::getPlayer(ePlayer).getTeam());
 
 						if (iWeight > 0)
 						{
@@ -3775,7 +3775,7 @@ bool CvPlayerAI::AI_counterPropose(PlayerTypes ePlayer, const CLinkList<TradeDat
 					iGoldData++;
 				}
 
-				iGoldData = std::min(iGoldData, GET_PLAYER(ePlayer).getMaxGoldTrade(getID(), kTransport));
+				iGoldData = std::min(iGoldData, CvPlayerAI::getPlayer(ePlayer).getMaxGoldTrade(getID(), kTransport));
 
 				if (iGoldData > 0)
 				{
@@ -3789,7 +3789,7 @@ bool CvPlayerAI::AI_counterPropose(PlayerTypes ePlayer, const CLinkList<TradeDat
 	}
 	else if (iHumanDealWeight > iAIDealWeight)
 	{
-		if (atWar(getTeam(), GET_PLAYER(ePlayer).getTeam()))
+		if (atWar(getTeam(), CvPlayerAI::getPlayer(ePlayer).getTeam()))
 		{
 				for (pNode = pOurInventory->head(); pNode; pNode = pOurInventory->next(pNode))
 				{
@@ -3821,11 +3821,11 @@ bool CvPlayerAI::AI_counterPropose(PlayerTypes ePlayer, const CLinkList<TradeDat
 
 							if (pCity != nullptr)
 							{
-								iWeight = GET_PLAYER(ePlayer).AI_cityTradeVal(pCity);
+								iWeight = CvPlayerAI::getPlayer(ePlayer).AI_cityTradeVal(pCity);
 
 								if (iWeight > 0)
 								{
-									const int iValue = GET_PLAYER(ePlayer).AI_targetCityValue(pCity, false);
+									const int iValue = CvPlayerAI::getPlayer(ePlayer).AI_targetCityValue(pCity, false);
 
 									if (iValue > iBestValue)
 									{
@@ -3900,7 +3900,7 @@ bool CvPlayerAI::AI_counterPropose(PlayerTypes ePlayer, const CLinkList<TradeDat
 
 					if (getTradeDenial(ePlayer, pNode->m_data) == NO_DENIAL)
 					{
-						iWeight = GET_TEAM(GET_PLAYER(ePlayer).getTeam()).AI_mapTradeVal(getTeam());
+						iWeight = GET_TEAM(CvPlayerAI::getPlayer(ePlayer).getTeam()).AI_mapTradeVal(getTeam());
 
 						if (iWeight > 0)
 						{
@@ -3946,7 +3946,7 @@ int CvPlayerAI::AI_maxGoldTrade(PlayerTypes ePlayer) const
 
 	FAssert(ePlayer != getID());
 
-	if (isHuman() || (GET_PLAYER(ePlayer).getTeam() == getTeam()))
+	if (isHuman() || (CvPlayerAI::getPlayer(ePlayer).getTeam() == getTeam()))
 	{
 		iMaxGold = getGold();
 	}
@@ -3954,13 +3954,13 @@ int CvPlayerAI::AI_maxGoldTrade(PlayerTypes ePlayer) const
 	{
 		iMaxGold = getTotalPopulation() * 10;
 
-		iMaxGold *= (GET_TEAM(getTeam()).AI_getHasMetCounter(GET_PLAYER(ePlayer).getTeam()) + 10);
+		iMaxGold *= (GET_TEAM(getTeam()).AI_getHasMetCounter(CvPlayerAI::getPlayer(ePlayer).getTeam()) + 10);
 
 		iMaxGold *= GC.getLeaderHeadInfo(getPersonalityType()).getMaxGoldTradePercent();
 		iMaxGold /= 100;
 
 		iMaxGold -= AI_getGoldTradedTo(ePlayer);
-		iMaxGold += GET_PLAYER(ePlayer).AI_getGoldTradedTo(getID());
+		iMaxGold += CvPlayerAI::getPlayer(ePlayer).AI_getGoldTradedTo(getID());
 
 		iMaxGold = std::min(iMaxGold, getGold());
 
@@ -4017,11 +4017,11 @@ DenialTypes CvPlayerAI::AI_cityTrade(CvCity* pCity, PlayerTypes ePlayer) const
 		return NO_DENIAL;
 	}
 
-	if (!(GET_PLAYER(ePlayer).isHuman()))
+	if (!(CvPlayerAI::getPlayer(ePlayer).isHuman()))
 	{
-		if (GET_PLAYER(ePlayer).getTeam() != getTeam())
+		if (CvPlayerAI::getPlayer(ePlayer).getTeam() != getTeam())
 		{
-			if ((pCity->plot()->calculateCulturePercent(ePlayer) == 0) && !(pCity->isEverOwned(ePlayer)) && (GET_PLAYER(ePlayer).getNumCities() > 3))
+			if ((pCity->plot()->calculateCulturePercent(ePlayer) == 0) && !(pCity->isEverOwned(ePlayer)) && (CvPlayerAI::getPlayer(ePlayer).getNumCities() > 3))
 			{
 				CvCity* pNearestCity = GC.getMap().findCity(pCity->getX_INLINE(), pCity->getY_INLINE(), ePlayer, NO_TEAM, true, false, NO_TEAM, NO_DIRECTION, pCity);
 				if (pNearestCity == nullptr || plotDistance(pCity->getX_INLINE(), pCity->getY_INLINE(), pNearestCity->getX_INLINE(), pNearestCity->getY_INLINE()) > 9)
@@ -4037,17 +4037,17 @@ DenialTypes CvPlayerAI::AI_cityTrade(CvCity* pCity, PlayerTypes ePlayer) const
 		return NO_DENIAL;
 	}
 
-	if (atWar(getTeam(), GET_PLAYER(ePlayer).getTeam()))
+	if (atWar(getTeam(), CvPlayerAI::getPlayer(ePlayer).getTeam()))
 	{
 		return NO_DENIAL;
 	}
 
-	if (isNative() && !GET_PLAYER(ePlayer).isNative())
+	if (isNative() && !CvPlayerAI::getPlayer(ePlayer).isNative())
 	{
 		return NO_DENIAL;
 	}
 
-	if (GET_PLAYER(ePlayer).getTeam() != getTeam())
+	if (CvPlayerAI::getPlayer(ePlayer).getTeam() != getTeam())
 	{
 		return DENIAL_NEVER;
 	}
@@ -4069,17 +4069,17 @@ int CvPlayerAI::AI_stopTradingTradeVal(TeamTypes eTradeTeam, PlayerTypes ePlayer
 	int iLoop;
 
 	FAssertMsg(ePlayer != getID(), "shouldn't call this function on ourselves");
-	FAssertMsg(GET_PLAYER(ePlayer).getTeam() != getTeam(), "shouldn't call this function on ourselves");
+	FAssertMsg(CvPlayerAI::getPlayer(ePlayer).getTeam() != getTeam(), "shouldn't call this function on ourselves");
 	FAssertMsg(eTradeTeam != getTeam(), "shouldn't call this function on ourselves");
 	FAssertMsg(GET_TEAM(eTradeTeam).isAlive(), "GET_TEAM(eWarTeam).isAlive is expected to be true");
-	FAssertMsg(!atWar(eTradeTeam, GET_PLAYER(ePlayer).getTeam()), "eTeam should be at peace with eWarTeam");
+	FAssertMsg(!atWar(eTradeTeam, CvPlayerAI::getPlayer(ePlayer).getTeam()), "eTeam should be at peace with eWarTeam");
 
 	iValue = (50 + (GC.getGameINLINE().getGameTurn() / 2));
 	iValue += (GET_TEAM(eTradeTeam).getNumCities() * 5);
 
 	iModifier = 0;
 
-	switch (GET_TEAM(GET_PLAYER(ePlayer).getTeam()).AI_getAttitude(eTradeTeam))
+	switch (GET_TEAM(CvPlayerAI::getPlayer(ePlayer).getTeam()).AI_getAttitude(eTradeTeam))
 	{
 	case ATTITUDE_FURIOUS:
 		break;
@@ -4108,12 +4108,12 @@ int CvPlayerAI::AI_stopTradingTradeVal(TeamTypes eTradeTeam, PlayerTypes ePlayer
 	iValue *= std::max(0, (iModifier + 100));
 	iValue /= 100;
 
-	if (GET_TEAM(GET_PLAYER(ePlayer).getTeam()).isOpenBorders(eTradeTeam))
+	if (GET_TEAM(CvPlayerAI::getPlayer(ePlayer).getTeam()).isOpenBorders(eTradeTeam))
 	{
 		iValue *= 2;
 	}
 
-	if (GET_TEAM(GET_PLAYER(ePlayer).getTeam()).isDefensivePact(eTradeTeam))
+	if (GET_TEAM(CvPlayerAI::getPlayer(ePlayer).getTeam()).isDefensivePact(eTradeTeam))
 	{
 		iValue *= 3;
 	}
@@ -4122,19 +4122,19 @@ int CvPlayerAI::AI_stopTradingTradeVal(TeamTypes eTradeTeam, PlayerTypes ePlayer
 	{
 		if (pLoopDeal->isCancelable(getID()) && !(pLoopDeal->isPeaceDeal()))
 		{
-			if (GET_PLAYER(pLoopDeal->getFirstPlayer()).getTeam() == GET_PLAYER(ePlayer).getTeam())
+			if (CvPlayerAI::getPlayer(pLoopDeal->getFirstPlayer()).getTeam() == CvPlayerAI::getPlayer(ePlayer).getTeam())
 			{
 				if (pLoopDeal->getLengthSecondTrades() > 0)
 				{
-					iValue += (GET_PLAYER(pLoopDeal->getFirstPlayer()).AI_dealVal(pLoopDeal->getSecondPlayer(), pLoopDeal->getSecondTrades()) * ((pLoopDeal->getLengthFirstTrades() == 0) ? 2 : 1));
+					iValue += (CvPlayerAI::getPlayer(pLoopDeal->getFirstPlayer()).AI_dealVal(pLoopDeal->getSecondPlayer(), pLoopDeal->getSecondTrades()) * ((pLoopDeal->getLengthFirstTrades() == 0) ? 2 : 1));
 				}
 			}
 
-			if (GET_PLAYER(pLoopDeal->getSecondPlayer()).getTeam() == GET_PLAYER(ePlayer).getTeam())
+			if (CvPlayerAI::getPlayer(pLoopDeal->getSecondPlayer()).getTeam() == CvPlayerAI::getPlayer(ePlayer).getTeam())
 			{
 				if (pLoopDeal->getLengthFirstTrades() > 0)
 				{
-					iValue += (GET_PLAYER(pLoopDeal->getSecondPlayer()).AI_dealVal(pLoopDeal->getFirstPlayer(), pLoopDeal->getFirstTrades()) * ((pLoopDeal->getLengthSecondTrades() == 0) ? 2 : 1));
+					iValue += (CvPlayerAI::getPlayer(pLoopDeal->getSecondPlayer()).AI_dealVal(pLoopDeal->getFirstPlayer(), pLoopDeal->getFirstTrades()) * ((pLoopDeal->getLengthSecondTrades() == 0) ? 2 : 1));
 				}
 			}
 		}
@@ -4160,7 +4160,7 @@ DenialTypes CvPlayerAI::AI_stopTradingTrade(TeamTypes eTradeTeam, PlayerTypes eP
 	int iI;
 
 	FAssertMsg(ePlayer != getID(), "shouldn't call this function on ourselves");
-	FAssertMsg(GET_PLAYER(ePlayer).getTeam() != getTeam(), "shouldn't call this function on ourselves");
+	FAssertMsg(CvPlayerAI::getPlayer(ePlayer).getTeam() != getTeam(), "shouldn't call this function on ourselves");
 	FAssertMsg(eTradeTeam != getTeam(), "shouldn't call this function on ourselves");
 	FAssertMsg(GET_TEAM(eTradeTeam).isAlive(), "GET_TEAM(eTradeTeam).isAlive is expected to be true");
 	FAssertMsg(!atWar(getTeam(), eTradeTeam), "should be at peace with eTradeTeam");
@@ -4170,15 +4170,15 @@ DenialTypes CvPlayerAI::AI_stopTradingTrade(TeamTypes eTradeTeam, PlayerTypes eP
 		return NO_DENIAL;
 	}
 
-	eAttitude = GET_TEAM(getTeam()).AI_getAttitude(GET_PLAYER(ePlayer).getTeam());
+	eAttitude = GET_TEAM(getTeam()).AI_getAttitude(CvPlayerAI::getPlayer(ePlayer).getTeam());
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
-			if (GET_PLAYER((PlayerTypes)iI).getTeam() == getTeam())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == getTeam())
 			{
-				if (eAttitude <= GC.getLeaderHeadInfo(GET_PLAYER((PlayerTypes)iI).getPersonalityType()).getStopTradingRefuseAttitudeThreshold())
+				if (eAttitude <= GC.getLeaderHeadInfo(CvPlayerAI::getPlayer((PlayerTypes)iI).getPersonalityType()).getStopTradingRefuseAttitudeThreshold())
 				{
 					return DENIAL_ATTITUDE;
 				}
@@ -4190,11 +4190,11 @@ DenialTypes CvPlayerAI::AI_stopTradingTrade(TeamTypes eTradeTeam, PlayerTypes eP
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
-			if (GET_PLAYER((PlayerTypes)iI).getTeam() == getTeam())
+			if (CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam() == getTeam())
 			{
-				if (eAttitudeThem > GC.getLeaderHeadInfo(GET_PLAYER((PlayerTypes)iI).getPersonalityType()).getStopTradingThemRefuseAttitudeThreshold())
+				if (eAttitudeThem > GC.getLeaderHeadInfo(CvPlayerAI::getPlayer((PlayerTypes)iI).getPersonalityType()).getStopTradingThemRefuseAttitudeThreshold())
 				{
 					return DENIAL_ATTITUDE_THEM;
 				}
@@ -4208,7 +4208,7 @@ DenialTypes CvPlayerAI::AI_stopTradingTrade(TeamTypes eTradeTeam, PlayerTypes eP
 int CvPlayerAI::AI_yieldTradeVal(YieldTypes eYield, const IDInfo& kTransport, PlayerTypes ePlayer)
 {
 	int iValue = 0;
-	CvPlayerAI& kTradePlayer = GET_PLAYER(ePlayer);
+	CvPlayerAI& kTradePlayer = CvPlayerAI::getPlayer(ePlayer);
 	CvUnit* pTransport = ::getUnit(kTransport);
 	if (pTransport != nullptr)
 	{
@@ -4331,7 +4331,7 @@ DenialTypes CvPlayerAI::AI_yieldTrade(YieldTypes eYield, const IDInfo& kTranspor
 	CvCity* pCity = pTransport->plot()->getPlotCity();
 	if (pCity != nullptr)
 	{
-		CvPlayer& kPlayer = GET_PLAYER(pCity->getOwnerINLINE());
+		CvPlayer& kPlayer = CvPlayerAI::getPlayer(pCity->getOwnerINLINE());
 		if (kPlayer.isNative())
 		{
 			if (getID() == pCity->getOwnerINLINE())
@@ -4406,7 +4406,7 @@ int CvPlayerAI::AI_calculateDamages(TeamTypes eTeam)
 	for (int iI = 0; iI < MAX_PLAYERS; ++iI)
 	{
 		PlayerTypes ePlayer = (PlayerTypes)iI;
-		CvPlayer& kPlayer = GET_PLAYER(ePlayer);
+		CvPlayer& kPlayer = CvPlayerAI::getPlayer(ePlayer);
 		if (kPlayer.isAlive())
 		{
 			if (kPlayer.getTeam() == eTeam)
@@ -5220,9 +5220,9 @@ int CvPlayerAI::AI_totalWaterAreaUnitAIs(CvArea* pArea, UnitAITypes eUnitAI)
 
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
-			for (pLoopCity = GET_PLAYER((PlayerTypes)iI).firstCity(&iLoop); pLoopCity != nullptr; pLoopCity = GET_PLAYER((PlayerTypes)iI).nextCity(&iLoop))
+			for (pLoopCity = CvPlayerAI::getPlayer((PlayerTypes)iI).firstCity(&iLoop); pLoopCity != nullptr; pLoopCity = CvPlayerAI::getPlayer((PlayerTypes)iI).nextCity(&iLoop))
 			{
 				if (pLoopCity->waterArea() == pArea)
 				{
@@ -5289,7 +5289,7 @@ int CvPlayerAI::AI_neededExplorers(CvArea* pArea)
 				{
 					for (int iPlayer = 0; iPlayer < MAX_PLAYERS; iPlayer++)
 					{
-						CvPlayerAI& kPlayer = GET_PLAYER((PlayerTypes)iPlayer);
+						CvPlayerAI& kPlayer = CvPlayerAI::getPlayer((PlayerTypes)iPlayer);
 						if (kPlayer.isAlive() && kPlayer.getTeam() != getTeam())
 						{
 							if (!GET_TEAM(getTeam()).isHasMet(kPlayer.getTeam()))
@@ -6004,7 +6004,7 @@ CvCity* CvPlayerAI::AI_findBestPort(CvArea* pArea, CvCity* pNoAccessCity) const
 			if (pLoopCity->plot()->getNearestEurope() != NO_EUROPE)
 			{
 				// TAC - AI Economy - koma13 - START
-				CvPlayerAI& kPlayer = GET_PLAYER(getID());
+				CvPlayerAI& kPlayer = CvPlayerAI::getPlayer(getID());
 
 				if (pNoAccessCity == nullptr || kPlayer.AI_isTradeRouteConnection(pNoAccessCity, pLoopCity))
 				{
@@ -6071,7 +6071,7 @@ void CvPlayerAI::AI_updateBestPortCities()
 
 				if (pBestAreaPort != pLoopCity)
 				{
-					CvPlayerAI& kPlayer = GET_PLAYER(getID());
+					CvPlayerAI& kPlayer = CvPlayerAI::getPlayer(getID());
 
 					if (!kPlayer.AI_isTradeRouteConnection(pLoopCity, pBestAreaPort))
 					{
@@ -6209,7 +6209,7 @@ void CvPlayerAI::AI_changePeacetimeTradeValue(PlayerTypes eIndex, int iChange)
 
 		if (iChange > 0)
 		{
-			if (GET_PLAYER(eIndex).getTeam() != getTeam())
+			if (CvPlayerAI::getPlayer(eIndex).getTeam() != getTeam())
 			{
 				for (iI = 0; iI < MAX_TEAMS; iI++)
 				{
@@ -6217,7 +6217,7 @@ void CvPlayerAI::AI_changePeacetimeTradeValue(PlayerTypes eIndex, int iChange)
 					{
 						if (GET_TEAM((TeamTypes)iI).AI_getWorstEnemy() == getTeam())
 						{
-							GET_TEAM((TeamTypes)iI).AI_changeEnemyPeacetimeTradeValue(GET_PLAYER(eIndex).getTeam(), iChange);
+							GET_TEAM((TeamTypes)iI).AI_changeEnemyPeacetimeTradeValue(CvPlayerAI::getPlayer(eIndex).getTeam(), iChange);
 						}
 					}
 				}
@@ -6253,7 +6253,7 @@ void CvPlayerAI::AI_changePeacetimeGrantValue(PlayerTypes eIndex, int iChange)
 
 		if (iChange > 0)
 		{
-			if (GET_PLAYER(eIndex).getTeam() != getTeam())
+			if (CvPlayerAI::getPlayer(eIndex).getTeam() != getTeam())
 			{
 				for (iI = 0; iI < MAX_TEAMS; iI++)
 				{
@@ -6261,7 +6261,7 @@ void CvPlayerAI::AI_changePeacetimeGrantValue(PlayerTypes eIndex, int iChange)
 					{
 						if (GET_TEAM((TeamTypes)iI).AI_getWorstEnemy() == getTeam())
 						{
-							GET_TEAM((TeamTypes)iI).AI_changeEnemyPeacetimeGrantValue(GET_PLAYER(eIndex).getTeam(), iChange);
+							GET_TEAM((TeamTypes)iI).AI_changeEnemyPeacetimeGrantValue(CvPlayerAI::getPlayer(eIndex).getTeam(), iChange);
 						}
 					}
 				}
@@ -6602,7 +6602,7 @@ void CvPlayerAI::AI_doCounter()
 	// R&R, ray, small code change from Commander Bello, united 2 for loops - START
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive())
 		{
 			for (iJ = 0; iJ < NUM_CONTACT_TYPES; iJ++)
 			{
@@ -6694,7 +6694,7 @@ void CvPlayerAI::AI_doDiplo()
 		for (int iI = 0; iI < MAX_PLAYERS; iI++)
 		{
 			PlayerTypes ePlayer = (PlayerTypes) iI;
-			CvPlayer& kPlayer = GET_PLAYER(ePlayer);
+			CvPlayer& kPlayer = CvPlayerAI::getPlayer(ePlayer);
 			if (kPlayer.isAlive() && ePlayer != getID())
 			{
 
@@ -6892,7 +6892,7 @@ void CvPlayerAI::AI_doDiplo()
 
 bool CvPlayerAI::AI_doDiploCancelDeals(PlayerTypes ePlayer)
 {
-	CvPlayer& kPlayer = GET_PLAYER(ePlayer);
+	CvPlayer& kPlayer = CvPlayerAI::getPlayer(ePlayer);
 
 	if (kPlayer.getTeam() == getTeam())
 	{
@@ -7009,7 +7009,7 @@ bool CvPlayerAI::AI_doDiploCancelDeals(PlayerTypes ePlayer)
 
 bool CvPlayerAI::AI_doDiploOfferCity(PlayerTypes ePlayer)
 {
-	CvPlayer& kPlayer = GET_PLAYER(ePlayer);
+	CvPlayer& kPlayer = CvPlayerAI::getPlayer(ePlayer);
 
 	if (AI_getAttitude(ePlayer) < ATTITUDE_CAUTIOUS)
 	{
@@ -7077,7 +7077,7 @@ bool CvPlayerAI::AI_doDiploOfferCity(PlayerTypes ePlayer)
 
 bool CvPlayerAI::AI_doDiploOfferAlliance(PlayerTypes ePlayer)
 {
-	CvPlayer& kPlayer = GET_PLAYER(ePlayer);
+	CvPlayer& kPlayer = CvPlayerAI::getPlayer(ePlayer);
 
 	if (GET_TEAM(getTeam()).getLeaderID() != getID())
 	{
@@ -7135,7 +7135,7 @@ bool CvPlayerAI::AI_doDiploOfferAlliance(PlayerTypes ePlayer)
 
 bool CvPlayerAI::AI_doDiploAskJoinWar(PlayerTypes ePlayer)
 {
-	CvPlayer& kPlayer = GET_PLAYER(ePlayer);
+	CvPlayer& kPlayer = CvPlayerAI::getPlayer(ePlayer);
 
 	if (!kPlayer.isHuman())
 	{
@@ -7197,7 +7197,7 @@ bool CvPlayerAI::AI_doDiploAskJoinWar(PlayerTypes ePlayer)
 	AI_changeContactTimer(ePlayer, CONTACT_JOIN_WAR, GC.getLeaderHeadInfo(getPersonalityType()).getContactDelay(CONTACT_JOIN_WAR));
 	CvDiploParameters* pDiplo = new CvDiploParameters(getID());
 	pDiplo->setDiploComment((DiploCommentTypes)GC.getInfoTypeForString("AI_DIPLOCOMMENT_JOIN_WAR"));
-	pDiplo->addDiploCommentVariable(GET_PLAYER(GET_TEAM(eBestTeam).getLeaderID()).getCivilizationAdjectiveKey());
+	pDiplo->addDiploCommentVariable(CvPlayerAI::getPlayer(GET_TEAM(eBestTeam).getLeaderID()).getCivilizationAdjectiveKey());
 	pDiplo->setAIContact(true);
 	pDiplo->setData(eBestTeam);
 	gDLL->beginDiplomacy(pDiplo, ePlayer);
@@ -7207,7 +7207,7 @@ bool CvPlayerAI::AI_doDiploAskJoinWar(PlayerTypes ePlayer)
 
 bool CvPlayerAI::AI_doDiploAskStopTrading(PlayerTypes ePlayer)
 {
-	CvPlayer& kPlayer = GET_PLAYER(ePlayer);
+	CvPlayer& kPlayer = CvPlayerAI::getPlayer(ePlayer);
 
 	if (!kPlayer.isHuman())
 	{
@@ -7256,7 +7256,7 @@ bool CvPlayerAI::AI_doDiploAskStopTrading(PlayerTypes ePlayer)
 	AI_changeContactTimer(ePlayer, CONTACT_STOP_TRADING, GC.getLeaderHeadInfo(getPersonalityType()).getContactDelay(CONTACT_STOP_TRADING));
 	CvDiploParameters* pDiplo = new CvDiploParameters(getID());
 	pDiplo->setDiploComment((DiploCommentTypes)GC.getInfoTypeForString("AI_DIPLOCOMMENT_STOP_TRADING"));
-	pDiplo->addDiploCommentVariable(GET_PLAYER(GET_TEAM(eBestTeam).getLeaderID()).getCivilizationAdjectiveKey());
+	pDiplo->addDiploCommentVariable(CvPlayerAI::getPlayer(GET_TEAM(eBestTeam).getLeaderID()).getCivilizationAdjectiveKey());
 	pDiplo->setAIContact(true);
 	pDiplo->setData(eBestTeam);
 	gDLL->beginDiplomacy(pDiplo, ePlayer);
@@ -7266,7 +7266,7 @@ bool CvPlayerAI::AI_doDiploAskStopTrading(PlayerTypes ePlayer)
 
 bool CvPlayerAI::AI_doDiploGiveHelp(PlayerTypes ePlayer)
 									{
-	CvPlayer& kPlayer = GET_PLAYER(ePlayer);
+	CvPlayer& kPlayer = CvPlayerAI::getPlayer(ePlayer);
 
 	if (!kPlayer.isHuman())
 	{
@@ -7332,7 +7332,7 @@ bool CvPlayerAI::AI_doDiploGiveHelp(PlayerTypes ePlayer)
 
 bool CvPlayerAI::AI_doDiploAskForHelp(PlayerTypes ePlayer)
 {
-	CvPlayer& kPlayer = GET_PLAYER(ePlayer);
+	CvPlayer& kPlayer = CvPlayerAI::getPlayer(ePlayer);
 
 	if (!kPlayer.isHuman())
 	{
@@ -7388,7 +7388,7 @@ bool CvPlayerAI::AI_doDiploAskForHelp(PlayerTypes ePlayer)
 
 bool CvPlayerAI::AI_doDiploDemandTribute(PlayerTypes ePlayer)
 {
-	CvPlayerAI& kPlayer = GET_PLAYER(ePlayer);
+	CvPlayerAI& kPlayer = CvPlayerAI::getPlayer(ePlayer);
 
 	if (!kPlayer.isHuman())
 	{
@@ -7465,10 +7465,10 @@ bool CvPlayerAI::AI_doDiploDemandTribute(PlayerTypes ePlayer)
 int CvPlayerAI::NBMOD_GetGoldAsk(PlayerTypes ePlayer) const
 {
 	// get current gold of player, needed for safety check
-	int iMaxGoldPlayerHas = GET_PLAYER(ePlayer).getGold();
+	int iMaxGoldPlayerHas = CvPlayerAI::getPlayer(ePlayer).getGold();
 
 	// first get the population and Attitude
-	int iPopulation = GET_PLAYER(ePlayer).getTotalPopulation();
+	int iPopulation = CvPlayerAI::getPlayer(ePlayer).getTotalPopulation();
 	int kingAttitude = AI_getAttitude(ePlayer);
 
 	// now we factor in GameSpeed, HandyCap and XML balancing values
@@ -7520,7 +7520,7 @@ int CvPlayerAI::NBMOD_GetGoldAsk(PlayerTypes ePlayer) const
 
 bool CvPlayerAI::AI_doDiploKissPinky(PlayerTypes ePlayer)
 {
-	CvPlayerAI& kPlayer = GET_PLAYER(ePlayer);
+	CvPlayerAI& kPlayer = CvPlayerAI::getPlayer(ePlayer);
 
 	if (!kPlayer.isHuman())
 	{
@@ -7586,7 +7586,7 @@ bool CvPlayerAI::AI_doDiploKissPinky(PlayerTypes ePlayer)
 
 bool CvPlayerAI::AI_doDiploOpenBorders(PlayerTypes ePlayer)
 {
-	CvPlayer& kPlayer = GET_PLAYER(ePlayer);
+	CvPlayer& kPlayer = CvPlayerAI::getPlayer(ePlayer);
 
 	if (GET_TEAM(getTeam()).getLeaderID() != getID())
 	{
@@ -7646,7 +7646,7 @@ bool CvPlayerAI::AI_doDiploOpenBorders(PlayerTypes ePlayer)
 
 bool CvPlayerAI::AI_doDiploDefensivePact(PlayerTypes ePlayer)
 {
-	CvPlayer& kPlayer = GET_PLAYER(ePlayer);
+	CvPlayer& kPlayer = CvPlayerAI::getPlayer(ePlayer);
 
 	if (GET_TEAM(getTeam()).getLeaderID() != getID())
 	{
@@ -7706,7 +7706,7 @@ bool CvPlayerAI::AI_doDiploDefensivePact(PlayerTypes ePlayer)
 
 bool CvPlayerAI::AI_doDiploTradeMap(PlayerTypes ePlayer)
 {
-	CvPlayer& kPlayer = GET_PLAYER(ePlayer);
+	CvPlayer& kPlayer = CvPlayerAI::getPlayer(ePlayer);
 
 	if (AI_getContactTimer(ePlayer, CONTACT_TRADE_MAP) > 0)
 	{
@@ -7761,7 +7761,7 @@ bool CvPlayerAI::AI_doDiploTradeMap(PlayerTypes ePlayer)
 
 bool CvPlayerAI::AI_doDiploDeclareWar(PlayerTypes ePlayer)
 {
-	CvPlayer& kPlayer = GET_PLAYER(ePlayer);
+	CvPlayer& kPlayer = CvPlayerAI::getPlayer(ePlayer);
 
 	int iDeclareWarTradeRand = GC.getLeaderHeadInfo(getPersonalityType()).getDeclareWarTradeRand();
 	int iMinAtWarCounter = MAX_INT;
@@ -8362,11 +8362,11 @@ void CvPlayerAI::AI_doEurope()
 			ProfessionTypes eBestProfession = NO_PROFESSION;
 			if (GC.getGameINLINE().getSorenRandNum(100, "") < 50)
 			{
-				eBestProfession = GET_PLAYER(pUnit->getOwnerINLINE()).AI_idealProfessionForUnitAIType(UNITAI_DEFENSIVE);
+				eBestProfession = CvPlayerAI::getPlayer(pUnit->getOwnerINLINE()).AI_idealProfessionForUnitAIType(UNITAI_DEFENSIVE);
 			}
 			else
 			{
-				eBestProfession = GET_PLAYER(pUnit->getOwnerINLINE()).AI_idealProfessionForUnitAIType(UNITAI_COUNTER);
+				eBestProfession = CvPlayerAI::getPlayer(pUnit->getOwnerINLINE()).AI_idealProfessionForUnitAIType(UNITAI_COUNTER);
 			}
 
 			if (eBestProfession != NO_PROFESSION && pUnit->canHaveProfession(eBestProfession, false))
@@ -8394,7 +8394,7 @@ void CvPlayerAI::AI_doEurope()
 			eBuyUnit = AI_nextBuyUnit(&eBuyUnitAI, &iBuyUnitValue);
 			if (eBuyUnit != NO_UNIT)
 			{
-				ProfessionTypes eProfession = GET_PLAYER(pUnit->getOwnerINLINE()).AI_idealProfessionForUnitAIType(eBuyUnitAI);
+				ProfessionTypes eProfession = CvPlayerAI::getPlayer(pUnit->getOwnerINLINE()).AI_idealProfessionForUnitAIType(eBuyUnitAI);
 				if (eProfession != NO_PROFESSION && pUnit->canHaveProfession(eProfession, false))
 				{
 					int iInitialPrice = getEuropeUnitBuyPrice(eBuyUnit, false);
@@ -8423,7 +8423,7 @@ void CvPlayerAI::AI_doEurope()
 			{
 				if (AI_neededWorkers(nullptr) > 0)
 				{
-					ProfessionTypes eProfession = GET_PLAYER(pUnit->getOwnerINLINE()).AI_idealProfessionForUnitAIType(UNITAI_WORKER);
+					ProfessionTypes eProfession = CvPlayerAI::getPlayer(pUnit->getOwnerINLINE()).AI_idealProfessionForUnitAIType(UNITAI_WORKER);
 					if (eProfession != NO_PROFESSION && pUnit->canHaveProfession(eProfession, false))
 					{
 						changeProfessionEurope(pUnit->getID(), eProfession);
@@ -8435,7 +8435,7 @@ void CvPlayerAI::AI_doEurope()
 					{
 						if (AI_totalUnitAIs(UNITAI_COUNTER) < getNumCities())
 						{
-							ProfessionTypes eProfession = GET_PLAYER(pUnit->getOwnerINLINE()).AI_idealProfessionForUnitAIType(UNITAI_COUNTER);
+							ProfessionTypes eProfession = CvPlayerAI::getPlayer(pUnit->getOwnerINLINE()).AI_idealProfessionForUnitAIType(UNITAI_COUNTER);
 							if (eProfession != NO_PROFESSION && pUnit->canHaveProfession(eProfession, false))
 							{
 								changeProfessionEurope(pUnit->getID(), eProfession);
@@ -8516,7 +8516,7 @@ void CvPlayerAI::AI_nativeYieldGift(CvUnit* pUnit)
 			//AI_changeContactTimer(pOtherCity->getOwnerINLINE(), CONTACT_YIELD_GIFT, GC.getLeaderHeadInfo(getPersonalityType()).getContactDelay(CONTACT_YIELD_GIFT));
 
 			//popup dialog
-			CvPlayer& kOtherPlayer = GET_PLAYER(pOtherCity->getOwnerINLINE());
+			CvPlayer& kOtherPlayer = CvPlayerAI::getPlayer(pOtherCity->getOwnerINLINE());
 			if(kOtherPlayer.isHuman())
 			{
 				CvDiploParameters* pDiplo = new CvDiploParameters(getID());
@@ -8593,7 +8593,7 @@ void CvPlayerAI::AI_nativeTrade(CvUnit* pUnit)
 		iYieldAmount = std::max(iYieldAmount, 0);
 		if(iYieldAmount > 0)
 		{
-			CvPlayer& kOtherPlayer = GET_PLAYER(pOtherCity->getOwnerINLINE());
+			CvPlayer& kOtherPlayer = CvPlayerAI::getPlayer(pOtherCity->getOwnerINLINE());
 			int priceToPay = GC.getYieldInfo(eBestYield).getNativeSellPrice() * iYieldAmount;
 
 			// simple case for AI
@@ -8610,7 +8610,7 @@ void CvPlayerAI::AI_nativeTrade(CvUnit* pUnit)
 						pOtherCity->changeYieldStored(eBestYield, iYieldAmount);
 						kOtherPlayer.changeGold(-priceToPay);
 						pHomeCity->changeYieldStored(eBestYield, -iYieldAmount);
-						GET_PLAYER(pHomeCity->getOwnerINLINE()).changeGold(priceToPay);
+						CvPlayerAI::getPlayer(pHomeCity->getOwnerINLINE()).changeGold(priceToPay);
 					}
 				}
 			}
@@ -9463,7 +9463,7 @@ void CvPlayerAI::AI_updateYieldValues()
 		eParent = getID();
 	}
 
-	CvPlayer& kParent = GET_PLAYER(eParent);
+	CvPlayer& kParent = CvPlayerAI::getPlayer(eParent);
 	for (int i = 0; i < NUM_YIELD_TYPES; ++i)
 	{
 		YieldTypes eYield = (YieldTypes)i;
@@ -10319,7 +10319,7 @@ CvPlot* CvPlayerAI::AI_getImperialShipSpawnPlot()
 	bool bNoneAllowable = true;
 	for (int iI = 0; iI < MAX_PLAYERS; ++iI)
 	{
-		CvPlayer& kPlayer = GET_PLAYER((PlayerTypes)iI);
+		CvPlayer& kPlayer = CvPlayerAI::getPlayer((PlayerTypes)iI);
 		if (kPlayer.isAlive() && (kPlayer.getParent() == getID()))
 		{
 			if (kPlayer.getStartingPlot() != nullptr)
@@ -12107,7 +12107,7 @@ int CvPlayerAI::AI_eventValue(EventTypes eEvent, const EventTriggeredData& kTrig
 			case ATTITUDE_FURIOUS:
 			case ATTITUDE_ANNOYED:
 			case ATTITUDE_CAUTIOUS:
-				if (GET_TEAM(getTeam()).getDefensivePower() < GET_TEAM(GET_PLAYER(kTriggeredData.m_eOtherPlayer).getTeam()).getPower())
+				if (GET_TEAM(getTeam()).getDefensivePower() < GET_TEAM(CvPlayerAI::getPlayer(kTriggeredData.m_eOtherPlayer).getTeam()).getPower())
 				{
 					return -MAX_INT + 1;
 				}
@@ -12337,17 +12337,17 @@ int CvPlayerAI::AI_eventValue(EventTypes eEvent, const EventTriggeredData& kTrig
 
 	if (NO_PLAYER != kTriggeredData.m_eOtherPlayer)
 	{
-		CvPlayerAI& kOtherPlayer = GET_PLAYER(kTriggeredData.m_eOtherPlayer);
+		CvPlayerAI& kOtherPlayer = CvPlayerAI::getPlayer(kTriggeredData.m_eOtherPlayer);
 
 		int iDiploValue = 0;
 		//if we like this player then value positive attitude, if however we really hate them then
 		//actually value negative attitude.
-		iDiploValue += ((iOtherPlayerAttitudeWeight + 50) * kEvent.getAttitudeModifier() * GET_PLAYER(kTriggeredData.m_eOtherPlayer).getPower()) / std::max(1, getPower());
+		iDiploValue += ((iOtherPlayerAttitudeWeight + 50) * kEvent.getAttitudeModifier() * CvPlayerAI::getPlayer(kTriggeredData.m_eOtherPlayer).getPower()) / std::max(1, getPower());
 
 		if (kEvent.getTheirEnemyAttitudeModifier() != 0)
 		{
 			//Oh wow this sure is mildly complicated.
-			TeamTypes eWorstEnemy = GET_TEAM(GET_PLAYER(kTriggeredData.m_eOtherPlayer).getTeam()).AI_getWorstEnemy();
+			TeamTypes eWorstEnemy = GET_TEAM(CvPlayerAI::getPlayer(kTriggeredData.m_eOtherPlayer).getTeam()).AI_getWorstEnemy();
 
 			if (NO_TEAM != eWorstEnemy && eWorstEnemy != getTeam())
 			{
@@ -12396,7 +12396,7 @@ int CvPlayerAI::AI_eventValue(EventTypes eEvent, const EventTriggeredData& kTrig
 
 		if (kEvent.isDeclareWar())
 		{
-			int iWarValue = (GET_TEAM(getTeam()).getDefensivePower() - GET_TEAM(GET_PLAYER(kTriggeredData.m_eOtherPlayer).getTeam()).getPower());// / std::max(1, GET_TEAM(getTeam()).getDefensivePower());
+			int iWarValue = (GET_TEAM(getTeam()).getDefensivePower() - GET_TEAM(CvPlayerAI::getPlayer(kTriggeredData.m_eOtherPlayer).getTeam()).getPower());// / std::max(1, GET_TEAM(getTeam()).getDefensivePower());
 			iWarValue -= 30 * AI_getAttitudeVal(kTriggeredData.m_eOtherPlayer);
 		}
 
@@ -12676,7 +12676,7 @@ bool CvPlayerAI::AI_isPotentialRaidTarget(PlayerTypes ePlayer)
 		return false;
 	}
 
-	if (GET_PLAYER(ePlayer).isNative())
+	if (CvPlayerAI::getPlayer(ePlayer).isNative())
 	{
 		return false;
 	}
@@ -12710,7 +12710,7 @@ int CvPlayerAI::AI_getNumPotentialRaids()
 	{
 		for (int iPlayer = 0; iPlayer < MAX_PLAYERS; ++iPlayer)
 		{
-			CvPlayer& kLoopPlayer = GET_PLAYER((PlayerTypes)iPlayer);
+			CvPlayer& kLoopPlayer = CvPlayerAI::getPlayer((PlayerTypes)iPlayer);
 			if (AI_isPotentialRaidTarget(kLoopPlayer.getID()))
 			{
 				if (!kLoopPlayer.isNative())
@@ -12750,7 +12750,7 @@ void CvPlayerAI::AI_doMilitaryStrategy()
 	CvTeamAI& kTeam = GET_TEAM(getTeam());
 	for (int iPlayer = 0; iPlayer < MAX_PLAYERS; ++iPlayer)
 	{
-		CvPlayer& kLoopPlayer = GET_PLAYER((PlayerTypes)iPlayer);
+		CvPlayer& kLoopPlayer = CvPlayerAI::getPlayer((PlayerTypes)iPlayer);
 		WarPlanTypes eWarPlan = kTeam.AI_getWarPlan(kLoopPlayer.getTeam());
 		if (kLoopPlayer.isAlive() && (kLoopPlayer.getTeam() != getTeam()) && (eWarPlan != NO_WARPLAN))
 		{
@@ -12796,7 +12796,7 @@ void CvPlayerAI::AI_doSuppressRevolution()
 	PlayerTypes eColony = NO_PLAYER;
 	for (int iPlayer = 0; iPlayer < MAX_PLAYERS; ++iPlayer)
 	{
-		CvPlayer& kLoopPlayer = GET_PLAYER((PlayerTypes)iPlayer);
+		CvPlayer& kLoopPlayer = CvPlayerAI::getPlayer((PlayerTypes)iPlayer);
 		if (kLoopPlayer.isAlive())
 		{
 			if (GET_TEAM(getTeam()).isParentOf(kLoopPlayer.getTeam()))
@@ -12816,7 +12816,7 @@ void CvPlayerAI::AI_doSuppressRevolution()
 		return;
 	}
 
-	CvPlayerAI& kColony = GET_PLAYER(eColony);
+	CvPlayerAI& kColony = CvPlayerAI::getPlayer(eColony);
 
 	if (!AI_isAnyStrategy())
 	{
@@ -13410,9 +13410,9 @@ void CvPlayerAI::AI_doStrategy()
 			for (int i = 0; i < MAX_PLAYERS; ++i)
 			{
 				PlayerTypes eLoopPlayer = (PlayerTypes)i;
-				if (GET_PLAYER(eLoopPlayer).isAlive())
+				if (CvPlayerAI::getPlayer(eLoopPlayer).isAlive())
 				{
-					TeamTypes eLoopTeam = GET_PLAYER(eLoopPlayer).getTeam();
+					TeamTypes eLoopTeam = CvPlayerAI::getPlayer(eLoopPlayer).getTeam();
 					if (kTeam.isAtWar((TeamTypes)i))
 					{
 						WarPlanTypes eWarPlan = kTeam.AI_getWarPlan(eLoopTeam);
@@ -13745,11 +13745,11 @@ int CvPlayerAI::AI_playerCloseness(PlayerTypes eIndex, int iMaxDistance)
 	int iLoop;
 	int iValue;
 
-	FAssert(GET_PLAYER(eIndex).isAlive());
+	FAssert(CvPlayerAI::getPlayer(eIndex).isAlive());
 	FAssert(eIndex != getID());
 
 	iValue = 0;
-	for (pLoopCity = GET_PLAYER(eIndex).firstCity(&iLoop); pLoopCity != nullptr; pLoopCity = GET_PLAYER(eIndex).nextCity(&iLoop))
+	for (pLoopCity = CvPlayerAI::getPlayer(eIndex).firstCity(&iLoop); pLoopCity != nullptr; pLoopCity = CvPlayerAI::getPlayer(eIndex).nextCity(&iLoop))
 	{
 		iValue += pLoopCity->AI_playerCloseness(eIndex, iMaxDistance);
 	}
@@ -13761,7 +13761,7 @@ int CvPlayerAI::AI_targetValidity(PlayerTypes ePlayer)
 {
 	FAssert(ePlayer != NO_PLAYER);
 
-	CvPlayerAI& kPlayer = GET_PLAYER(ePlayer);
+	CvPlayerAI& kPlayer = CvPlayerAI::getPlayer(ePlayer);
 
 	if (!kPlayer.isAlive())
 	{
@@ -14139,7 +14139,7 @@ CvPlot* CvPlayerAI::AI_advancedStartFindCapitalPlot()
 
 	for (int iPlayer = 0; iPlayer < MAX_PLAYERS; iPlayer++)
 	{
-		CvPlayer& kPlayer = GET_PLAYER((PlayerTypes)iPlayer);
+		CvPlayer& kPlayer = CvPlayerAI::getPlayer((PlayerTypes)iPlayer);
 		if (kPlayer.isAlive())
 		{
 			if (kPlayer.getTeam() == getTeam())
@@ -15019,7 +15019,7 @@ void CvPlayerAI::AI_doEnemyUnitData()
 						{
 							if (iAdjacentAttackers == -1)
 							{
-								iAdjacentAttackers = GET_PLAYER(pLoopPlot->getOwnerINLINE()).AI_adjacentPotentialAttackers(pLoopPlot);
+								iAdjacentAttackers = CvPlayerAI::getPlayer(pLoopPlot->getOwnerINLINE()).AI_adjacentPotentialAttackers(pLoopPlot);
 							}
 							if (iAdjacentAttackers > 0)
 							{
@@ -15312,7 +15312,7 @@ void CvPlayerAI::AI_diplomaticHissyFit(PlayerTypes ePlayer, int iAttitudeChange)
 		FAssert(false);
 		return;
 	}
-	CvPlayer& kPlayer = GET_PLAYER(ePlayer);
+	CvPlayer& kPlayer = CvPlayerAI::getPlayer(ePlayer);
 
 	if (iAttitudeChange >= 0)
 	{
@@ -16292,7 +16292,7 @@ bool CvPlayerAI::AI_prepareAssaultSea()
 
 	for (int iI = 0; iI < MAX_PLAYERS; iI++)
 	{
-		CvPlayerAI& kLoopPlayer = GET_PLAYER((PlayerTypes)iI);
+		CvPlayerAI& kLoopPlayer = CvPlayerAI::getPlayer((PlayerTypes)iI);
 
 		if (kLoopPlayer.isAlive())
 		{
@@ -16383,7 +16383,7 @@ int CvPlayerAI::AI_getYieldBestExportPrice(YieldTypes eYield) const
 		eParent = getID();
 	}
 
-	const CvPlayer& kParent = GET_PLAYER(eParent);
+	const CvPlayer& kParent = CvPlayerAI::getPlayer(eParent);
 
 	// Return the max price we would get by selling in the currently AI accessibly ports
 	// WTP, ray, Africa really is a bad decision here for AI. - It is too rare that AI should sail to Africa.
