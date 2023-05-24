@@ -309,6 +309,10 @@ const char* getSavedEnumNameCity(SavegameVariableTypes eType)
 
 		case CitySave_Oppressometer: return "CitySave_Oppressometer";
 		case CitySave_OppressometerGrowthModifier: return "CitySave_OppressometerGrowthModifier";
+
+		default:
+			FAssertMsg(false, "Unhandled SavegameVariableTypes");
+			break;
 	}
 	return "";
 }
@@ -594,6 +598,10 @@ void CvCity::read(CvSavegameReader& reader)
 
 		case CitySave_Oppressometer                              : reader.Read(m_iOppressometer)                            ; break;
 		case CitySave_OppressometerGrowthModifier                : reader.Read(m_iOppressometerGrowthModifier)              ; break;
+
+		default:
+			FAssertMsg(false, "Unhandled SavegameVariableTypes");
+			break;
 		}
 
 	}

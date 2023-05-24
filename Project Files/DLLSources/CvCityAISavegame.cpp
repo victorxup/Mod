@@ -91,6 +91,10 @@ const char* getSavedEnumNameCityAi(SavegameVariableTypes eType)
 
 	case CitySaveAi_BestBuildValue: return "CitySaveAi_BestBuildValue";
 	case CitySaveAi_BestBuild: return "CitySaveAi_BestBuild";
+
+	default:
+		FAssertMsg(false, "Unhandled SavegameVariableTypes");
+		break;
 	}
 	return "";
 }

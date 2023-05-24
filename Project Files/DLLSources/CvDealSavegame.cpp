@@ -34,6 +34,9 @@ const char* getSavedEnumNameDeal(SavegameVariableTypes eType)
 		case DealSave_SecondPlayer: return "DealSave_SecondPlayer";
 		case DealSave_firstTrades: return "DealSave_firstTrades";
 		case DealSave_secondTrades: return "DealSave_secondTrades";
+		default:
+			FAssertMsg(false, "Unhandled SavegameVariableTypes");
+			break;
 	}
 	return "";
 }
@@ -79,8 +82,9 @@ void CvDeal::read(CvSavegameReader& reader)
 		case DealSave_SecondPlayer: reader.Read(m_eSecondPlayer); break;
 		case DealSave_firstTrades: reader.Read(m_firstTrades); break;
 		case DealSave_secondTrades: reader.Read(m_secondTrades); break;
-		
-
+		default:
+			FAssertMsg(false, "Unhandled SavegameVariableTypes");
+			break;
 		}
 		
 	}

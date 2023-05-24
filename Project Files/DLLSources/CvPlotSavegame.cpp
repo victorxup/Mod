@@ -355,7 +355,7 @@ void CvPlot::read(CvSavegameReader& reader)
 		case Save_Units                    : reader.Read(m_units)                             ; break;
 
 		default:
-			FAssertMsg(false, "Unhandled savegame enum");
+			FAssertMsg(false, "Unhandled SavegameVariableTypes");
 			break;
 		}
 	}
