@@ -3,6 +3,7 @@
 #include "CvRandom.h"
 #include "CyCity.h"
 #include "CyReplayInfo.h"
+#include "CyPlot.h"
 //
 // published python interface for CyGame
 //

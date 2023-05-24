@@ -647,29 +647,6 @@ bool JustInTimeArray<T>::operator!=(const JustInTimeArray<T> &rhs) const
 	return !(this == &rhs);
 }
 
-template<class T>
-JustInTimeArray2D<T>::JustInTimeArray2D<T>(JITarrayTypes eType, JITarrayTypes eSubType, T eDefault)
-	: tArray(nullptr)
-	, m_iType(eType)
-	, m_iSubType(eSubType)
-	, m_iLength(getArrayLength(eType))
-	, m_eDefault(eDefault)
-{
-	FAssert(m_iLength > 1);
-	m_iArraysInUse = 0;
-}
-
-template<class T>
-JustInTimeArray2D<T>::JustInTimeArray2D<T>(int iLength, JITarrayTypes eSubType, T eDefault)
-	: tArray(nullptr)
-	, m_iType(JIT_ARRAY_NO_TYPE)
-	, m_iSubType(eSubType)
-	, m_iLength(iLength)
-	, m_eDefault(eDefault)
-{
-	FAssert(m_iLength > 1);
-	m_iArraysInUse = 0;
-}
 
 template<class T>
 JustInTimeArray2D<T>::~JustInTimeArray2D<T>()

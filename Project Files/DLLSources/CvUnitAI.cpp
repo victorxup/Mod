@@ -17595,7 +17595,8 @@ bool CvUnitAI::AI_treasureRetreat(int iMaxPathTurns)
 		return false;
 	}
 
-	for (int iPass = 0; iPass < 2; iPass++)
+	int iPass;
+	for (iPass = 0; iPass < 2; iPass++)
 	{
 		int iLoop;
 		for (CvCity* pLoopCity = CvPlayerAI::getPlayer(getOwnerINLINE()).firstCity(&iLoop); pLoopCity != nullptr; pLoopCity = CvPlayerAI::getPlayer(getOwnerINLINE()).nextCity(&iLoop))

@@ -55,7 +55,7 @@ class CvXMLLoadUtility
 
 	class GameTextList
 	{
-		friend GameTextList;
+		friend class GameTextList;
 
 	public:
 		GameTextContainer* get(std::string);

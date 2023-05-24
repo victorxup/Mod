@@ -210,9 +210,9 @@ public:
 	void addTo(EnumMap<Ta, bool, DEFAULT> & em, int iChange, const CvCivilizationInfo* pCivInfo) const;
 	template<typename Ta, class T, int DEFAULT>
 	bool addCache(EnumMap<Ta, T, DEFAULT> & em, int iChange, const CvCivilizationInfo* pCivInfo) const;
-	template<typename class T, int DEFAULT>
+	template<typename T, int DEFAULT>
 	bool addCache(EnumMap<BuildingTypes, T, DEFAULT> & em, int iChange, const CvCivilizationInfo* pCivInfo) const;
-	template<typename class T, int DEFAULT>
+	template<typename T, int DEFAULT>
 	bool addCache(EnumMap<UnitTypes, T, DEFAULT> & em, int iChange, const CvCivilizationInfo* pCivInfo) const;
 	template<typename Ta, class T, int DEFAULT>
 	void copyTo(EnumMap<Ta, T, DEFAULT> & em) const;
@@ -417,7 +417,7 @@ bool InfoArray2Only<T0, T1>::addCache(EnumMap<Ta, T, DEFAULT> & em, int iChange,
 }
 
 template<typename T0, typename T1>
-template<class T, int DEFAULT>
+template<typename T, int DEFAULT>
 bool InfoArray2Only<T0, T1>::addCache(EnumMap<BuildingTypes, T, DEFAULT> & em, int iChange, const CvCivilizationInfo* pCivInfo) const
 {
 	BOOST_STATIC_ASSERT((!boost::is_same<T, bool>::value));
@@ -438,7 +438,7 @@ bool InfoArray2Only<T0, T1>::addCache(EnumMap<BuildingTypes, T, DEFAULT> & em, i
 }
 
 template<typename T0, typename T1>
-template<class T, int DEFAULT>
+template<typename T, int DEFAULT>
 bool InfoArray2Only<T0, T1>::addCache(EnumMap<UnitTypes, T, DEFAULT> & em, int iChange, const CvCivilizationInfo* pCivInfo) const
 {
 	BOOST_STATIC_ASSERT((!boost::is_same<T, bool>::value));

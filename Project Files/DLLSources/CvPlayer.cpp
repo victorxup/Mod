@@ -4402,7 +4402,9 @@ void CvPlayer::handleDiploEvent(DiploEventTypes eDiploEvent, PlayerTypes ePlayer
 				location.deepCoastal = true;
 				location.europe = true;
 				CvCity *locationToAppear = kPlayer.buyUnitFromParentPlayer(getID(), "UNITCLASS_ROYAL_INTERVENTIONS_SHIP", 1, "", 0, location, false, false);
-				CvWString locationName = locationToAppear != nullptr ? locationToAppear->getNameKey() : gDLL->getText("TXT_KEY_CONCEPT_EUROPE");
+				CvWString locationName = locationToAppear != NULL
+					? static_cast<CvWString>(locationToAppear->getNameKey())
+					: gDLL->getText("TXT_KEY_CONCEPT_EUROPE");
 				CvWString szBuffer = gDLL->getText("TXT_KEY_ROYAL_INTERVENTION_ACCEPTED", GC.getLeaderHeadInfo(CvPlayerAI::getPlayer(enemyID).getLeaderType()).getDescription(), locationName.c_str());
 
 				kPlayer.buyUnitFromParentPlayer(getID(), "UNITCLASS_ROYAL_INTERVENTIONS_LAND_UNIT_1", 1, szBuffer, 0, LocationFlags::LocationFlagDeepCoastal, false, false);
@@ -24765,7 +24767,7 @@ void CvPlayer::read(FDataStreamBase* pStream)
 	read(reader);
 }
 
-void CvPlayer::write(FDataStreamBase* pStream)
+void CvPlayer::write(FDataStreamBase* pStream) const
 {
 	CvSavegameWriterBase writerbase(pStream);
 	CvSavegameWriter writer(writerbase);

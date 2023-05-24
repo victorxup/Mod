@@ -174,8 +174,26 @@ private:
 
 public:
 
-	JustInTimeArray2D(JITarrayTypes eType, JITarrayTypes eSubType, T eDefault = (T)0);
-	JustInTimeArray2D(int iLength, JITarrayTypes eSubType, T eDefault = (T)0);
+	JustInTimeArray2D(JITarrayTypes eType, JITarrayTypes eSubType, T eDefault = (T)0)
+		: m_tArray(nullptr)
+		, m_iType(eType)
+		, m_iSubType(eSubType)
+		, m_iLength(getArrayLength(eType))
+		, m_eDefault(eDefault)
+	{
+		FAssert(m_iLength > 1);
+		m_iArraysInUse = 0;
+	}
+	JustInTimeArray2D(int iLength, JITarrayTypes eSubType, T eDefault = (T)0)
+		: m_tArray(nullptr)
+		, m_iType(JIT_ARRAY_NO_TYPE)
+		, m_iSubType(eSubType)
+		, m_iLength(iLength)
+		, m_eDefault(eDefault)
+	{
+		FAssert(m_iLength > 1);
+		m_iArraysInUse = 0;
+	}
 	~JustInTimeArray2D();
 
 	// reset all arrays

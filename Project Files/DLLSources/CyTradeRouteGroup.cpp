@@ -17,7 +17,9 @@ int CyTradeRouteGroup::getID()
 
 std::wstring CyTradeRouteGroup::getName()
 {
-	return m_pTradeGroup ? m_pTradeGroup->getName(0) : std::wstring();
+	if (m_pTradeGroup == nullptr)
+		return std::wstring();
+	return m_pTradeGroup->getName(0);
 }
 
 
