@@ -40,16 +40,16 @@ public:
 	virtual T* getAt(int iIndex) const = 0;
 	T* operator[]( int iIndex ) const;
 
-	// start at the beginning of the list and return the first item or NULL when done
+	// start at the beginning of the list and return the first item or nullptr when done
 	T* beginIter(int* pIterIdx) const;
 
-	// iterate from the current position and return the next item found or NULL when done
+	// iterate from the current position and return the next item found or nullptr when done
 	T* nextIter(int* pIterIdx) const;
 
-	// start at the end of the list and return the last item or NULL when done
+	// start at the end of the list and return the last item or nullptr when done
 	T* endIter(int* pIterIdx) const;
 
-	// iterate from the current position and return the prev item found or NULL when done
+	// iterate from the current position and return the prev item found or nullptr when done
 	T* prevIter(int* pIterIdx) const;
 
 	// Returns the iIndex after the last iIndex in the array containing an element
@@ -92,7 +92,7 @@ inline T* FFreeListArrayBase< T >::operator[]( int iIndex ) const
 // iteration functions
 //
 
-// start at the beginning of the list and return the first item or NULL when done
+// start at the beginning of the list and return the first item or nullptr when done
 template <class T>
 T* FFreeListArrayBase<T>::beginIter(int* pIterIdx) const
 {
@@ -100,7 +100,7 @@ T* FFreeListArrayBase<T>::beginIter(int* pIterIdx) const
 	return nextIter(pIterIdx);
 }
 
-// iterate from the current position and return the next item found or NULL when done
+// iterate from the current position and return the next item found or nullptr when done
 template <class T>
 T* FFreeListArrayBase<T>::nextIter(int* pIterIdx) const
 {
@@ -113,10 +113,10 @@ T* FFreeListArrayBase<T>::nextIter(int* pIterIdx) const
 			return pObj;
 		}
 	}
-	return NULL;
+	return nullptr;
 }
 
-// start at the end of the list and return the last item or NULL when done
+// start at the end of the list and return the last item or nullptr when done
 template <class T>
 T* FFreeListArrayBase<T>::endIter(int* pIterIdx) const
 {
@@ -124,7 +124,7 @@ T* FFreeListArrayBase<T>::endIter(int* pIterIdx) const
 	return prevIter(pIterIdx);
 }
 
-// iterate from the current position and return the prev item found or NULL when done
+// iterate from the current position and return the prev item found or nullptr when done
 template <class T>
 T* FFreeListArrayBase<T>::prevIter(int* pIterIdx) const
 {
@@ -137,7 +137,7 @@ T* FFreeListArrayBase<T>::prevIter(int* pIterIdx) const
 			return pObj;
 		}
 	}
-	return NULL;
+	return nullptr;
 }
 
 #endif	//FFREELISTARRAYBASE_H

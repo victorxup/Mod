@@ -76,7 +76,7 @@ public:
 	DllExport void selectGroup(CvUnit* pUnit, bool bShift, bool bCtrl, bool bAlt);
 	DllExport void selectAll(CvPlot* pPlot);
 
-	DllExport bool canHandleAction(int iAction, CvPlot* pPlot = NULL, bool bTestVisible = false, bool bUseCache = false);
+	DllExport bool canHandleAction(int iAction, CvPlot* pPlot = nullptr, bool bTestVisible = false, bool bUseCache = false);
 	DllExport void setupActionCache();
 	DllExport void handleAction(int iAction);
 
@@ -354,7 +354,7 @@ public:
 
 	void addPlayer(PlayerTypes eNewPlayer, LeaderHeadTypes eLeader, CivilizationTypes eCiv);
 
-	bool testVictory(VictoryTypes eVictory, TeamTypes eTeam, bool* pbEndScore = NULL) const;
+	bool testVictory(VictoryTypes eVictory, TeamTypes eTeam, bool* pbEndScore = nullptr) const;
 
 	bool culturalVictoryValid();
 	int culturalVictoryNumCultureCities();

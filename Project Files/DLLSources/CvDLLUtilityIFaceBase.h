@@ -219,7 +219,7 @@ public:
 	virtual CvCacheObject* createBonusInfoCacheObject(char const* szCacheFileName) = 0;
 	virtual CvCacheObject* createImprovementInfoCacheObject(char const* szCacheFileName) = 0;
 
-	virtual bool cacheRead(CvCacheObject* pCache, char const* szSourceFileName=NULL) = 0;
+	virtual bool cacheRead(CvCacheObject* pCache, char const* szSourceFileName = nullptr) = 0;
 	virtual bool cacheWrite(CvCacheObject* pCache) = 0;
 	virtual void destroyCache(CvCacheObject*& pCache) = 0;
 

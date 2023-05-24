@@ -10,7 +10,7 @@
 #include "CvDLLPythonIFaceBase.h"
 #include "CvGlobals.h"
 
-CyCity::CyCity() : m_pCity(NULL)
+CyCity::CyCity() : m_pCity(nullptr)
 {
 
 }
@@ -72,12 +72,12 @@ int CyCity::getCityPlotIndex(CyPlot* pPlot)
 
 CyPlot* CyCity::getCityIndexPlot(int iIndex)
 {
-	return m_pCity ? new CyPlot(m_pCity->getCityIndexPlot(static_cast<CityPlotTypes>(iIndex))) : NULL;
+	return m_pCity ? new CyPlot(m_pCity->getCityIndexPlot(static_cast<CityPlotTypes>(iIndex))) : nullptr;
 }
 
 bool CyCity::canWork(CyPlot* pPlot)
 {
-	return m_pCity ? m_pCity->canWork(pPlot ? pPlot->getPlot() : NULL) : false;
+	return m_pCity ? m_pCity->canWork(pPlot ? pPlot->getPlot() : nullptr) : false;
 }
 
 void CyCity::clearWorkingOverride(int iIndex)
@@ -432,22 +432,22 @@ bool CyCity::atPlot(CyPlot* pPlot)
 
 CyPlot* CyCity::plot()
 {
-	return	m_pCity ? new CyPlot(m_pCity->plot()) : NULL;
+	return	m_pCity ? new CyPlot(m_pCity->plot()) : nullptr;
 }
 
 CyArea* CyCity::area()
 {
-	return	m_pCity ? new CyArea(m_pCity->area()) : NULL;
+	return	m_pCity ? new CyArea(m_pCity->area()) : nullptr;
 }
 
 CyArea* CyCity::waterArea()
 {
-	return	m_pCity ? new CyArea(m_pCity->waterArea()) : NULL;
+	return	m_pCity ? new CyArea(m_pCity->waterArea()) : nullptr;
 }
 
 CyPlot* CyCity::getRallyPlot()
 {
-	return	m_pCity ? new CyPlot(m_pCity->getRallyPlot()) : NULL;
+	return	m_pCity ? new CyPlot(m_pCity->getRallyPlot()) : nullptr;
 }
 
 int CyCity::getGameTurnFounded()
@@ -1038,7 +1038,7 @@ int CyCity::getOrderQueueLength()
 
 OrderData* CyCity::getOrderFromQueue(int iIndex)
 {
-	return m_pCity ? m_pCity->getOrderFromQueue(iIndex) : NULL;
+	return m_pCity ? m_pCity->getOrderFromQueue(iIndex) : nullptr;
 }
 
 void CyCity::setWallOverridePoints(const python::tuple& kPoints)
@@ -1046,7 +1046,7 @@ void CyCity::setWallOverridePoints(const python::tuple& kPoints)
 	if (!m_pCity)
 		return;
 
-	float* pPointsData = NULL;
+	float* pPointsData = nullptr;
 	int iSeqLength = gDLL->getPythonIFace()->putSeqInArray(kPoints.ptr() /*src*/, &pPointsData /*dst*/);
 
 	// copy to pairs vector
@@ -1159,12 +1159,12 @@ bool CyCity::isScoutVisited(int /*TeamTypes*/ eTeam) const
 
 CyUnit* CyCity::getPopulationUnitByIndex(int iUnitIndex)
 {
-	return m_pCity ? new CyUnit(m_pCity->getPopulationUnitByIndex(iUnitIndex)) : NULL;
+	return m_pCity ? new CyUnit(m_pCity->getPopulationUnitByIndex(iUnitIndex)) : nullptr;
 }
 
 CyUnit* CyCity::getPopulationUnitById(int iUnitID)
 {
-	return m_pCity ? new CyUnit(m_pCity->getPopulationUnitById(iUnitID)) : NULL;
+	return m_pCity ? new CyUnit(m_pCity->getPopulationUnitById(iUnitID)) : nullptr;
 }
 
 int CyCity::getPopulationUnitIndex(CyUnit* pUnit)
@@ -1186,7 +1186,7 @@ int CyCity::getTeachUnitClass()
 int CyCity::getTeachUnit() const
 {
 	PlayerTypes ePlayer = GC.getGameINLINE().getActivePlayer();
-	if (m_pCity == NULL || ePlayer == NO_PLAYER)
+	if (m_pCity == nullptr || ePlayer == NO_PLAYER)
 	{
 		return NO_UNIT;
 	}
@@ -1515,7 +1515,7 @@ bool CyCity::isEuropeAccessable() const
 
 CyUnit* CyCity::getUnitWorkingPlot(int iPlotIndex)
 {
-	return m_pCity ? new CyUnit(m_pCity->getUnitWorkingPlot(static_cast<CityPlotTypes>(iPlotIndex))) : NULL;
+	return m_pCity ? new CyUnit(m_pCity->getUnitWorkingPlot(static_cast<CityPlotTypes>(iPlotIndex))) : nullptr;
 }
 
 void CyCity::addPopulationUnit(CyUnit* pUnit, int /*ProfessionTypes*/ eProfession)
@@ -1538,7 +1538,7 @@ bool CyCity::isExport(int /*YieldTypes*/ eYield) const
 
 void CyCity::addExport(int /*YieldTypes*/ eYield)
 {
-	if (m_pCity != NULL)
+	if (m_pCity != nullptr)
 	{
 		m_pCity->addExport((YieldTypes) eYield);
 	}
@@ -1546,7 +1546,7 @@ void CyCity::addExport(int /*YieldTypes*/ eYield)
 
 void CyCity::removeExport(int /*YieldTypes*/ eYield)
 {
-	if (m_pCity != NULL)
+	if (m_pCity != nullptr)
 	{
 		m_pCity->removeExport((YieldTypes) eYield);
 	}
@@ -1559,7 +1559,7 @@ bool CyCity::isImport(int /*YieldTypes*/ eYield) const
 
 void CyCity::addImport(int /*YieldTypes*/ eYield)
 {
-	if (m_pCity != NULL)
+	if (m_pCity != nullptr)
 	{
 		m_pCity->addImport((YieldTypes) eYield);
 	}
@@ -1567,7 +1567,7 @@ void CyCity::addImport(int /*YieldTypes*/ eYield)
 
 void CyCity::removeImport(int /*YieldTypes*/ eYield)
 {
-	if (m_pCity != NULL)
+	if (m_pCity != nullptr)
 	{
 		m_pCity->removeImport((YieldTypes) eYield);
 	}

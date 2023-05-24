@@ -302,7 +302,7 @@ void CvArea::setTargetCity(PlayerTypes eIndex, CvCity* pNewValue)
 	FAssertMsg(eIndex >= 0, "eIndex is expected to be >= 0");
 	FAssertMsg(eIndex < MAX_PLAYERS, "eIndex is expected to be < MAX_PLAYERS");
 
-	if (pNewValue != NULL)
+	if (pNewValue != nullptr)
 	{
 		m_aTargetCities[eIndex] = pNewValue->getIDInfo();
 	}

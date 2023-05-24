@@ -56,7 +56,7 @@ void ProfilerManager::writeFile() const
 	// The reason is that C++ style apparently has a known bug in our compiler and it won't compile in some projects (like ours).
 	// The precise cause is unknown, but the recommendation is to use C style file writing.
 	FILE *f = fopen(filename.GetCString(), "w");
-	if (f != NULL)
+	if (f != nullptr)
 	{
 		fprintf(f, "Name\tAverage clocks\tNumber of calls\tTotal clocks\n");
 

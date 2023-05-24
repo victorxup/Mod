@@ -212,7 +212,7 @@ void EnumMapVariable<IndexType, T, DEFAULT_INT, LengthType, VARIABLE_TYPE_DYNAMI
 template<class IndexType, class T, int DEFAULT_INT, class LengthType, class STORAGE, VariableLengthTypes LENGTH_KNOWN_WHILE_COMPILING>
 bool EnumMapVariable<IndexType, T, DEFAULT_INT, LengthType, VARIABLE_TYPE_DYNAMIC, STORAGE, LENGTH_KNOWN_WHILE_COMPILING>::isAllocated() const
 {
-	return m_pArray != NULL;
+	return m_pArray != nullptr;
 }
 
 template<class IndexType, class T, int DEFAULT_INT, class LengthType, class STORAGE, VariableLengthTypes LENGTH_KNOWN_WHILE_COMPILING>
@@ -234,7 +234,7 @@ void EnumMapVariable<IndexType, T, DEFAULT_INT, LengthType, VARIABLE_TYPE_DYNAMI
 
 template<class IndexType, class T, int DEFAULT_INT, class LengthType, class STORAGE, VariableLengthTypes LENGTH_KNOWN_WHILE_COMPILING>
 EnumMapVariable<IndexType, T, DEFAULT_INT, LengthType, VARIABLE_TYPE_DYNAMIC, STORAGE, LENGTH_KNOWN_WHILE_COMPILING>::EnumMapVariable()
-	: m_pArray(NULL)
+	: m_pArray(nullptr)
 {}
 
 template<class IndexType, class T, int DEFAULT_INT, class LengthType, class STORAGE, VariableLengthTypes LENGTH_KNOWN_WHILE_COMPILING>
@@ -354,7 +354,7 @@ void EnumMapShared<IndexType, T, DEFAULT_INT, LengthType, STATIC, STORAGE, LENGT
 		m_pArray[i] += eValue;
 	}
 }
-	
+
 template<class IndexType, class T, int DEFAULT_INT, class LengthType, VariableStaticTypes STATIC, class STORAGE, VariableLengthTypes LENGTH_KNOWN_WHILE_COMPILING>
 T EnumMapShared<IndexType, T, DEFAULT_INT, LengthType, STATIC, STORAGE, LENGTH_KNOWN_WHILE_COMPILING>::getMin() const
 {

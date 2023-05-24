@@ -96,7 +96,7 @@ void CvTeam::addTeam(TeamTypes eTeam)
 				if (GET_TEAM(GET_PLAYER((PlayerTypes)iI).getTeam()).isHasMet(getID()) && GET_TEAM(GET_PLAYER((PlayerTypes)iI).getTeam()).isHasMet(eTeam))
 				{
 					szBuffer = gDLL->getText("TXT_KEY_MISC_PLAYER_PERMANENT_ALLIANCE", getName().GetCString(), GET_TEAM(eTeam).getName().GetCString());
-					gDLL->UI().addPlayerMessage(((PlayerTypes)iI), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_THEIRALLIANCE", MESSAGE_TYPE_MINOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT"));
+					gDLL->UI().addPlayerMessage(((PlayerTypes)iI), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_THEIRALLIANCE", MESSAGE_TYPE_MINOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT"));
 				}
 			}
 		}
@@ -106,14 +106,14 @@ void CvTeam::addTeam(TeamTypes eTeam)
 	GC.getGameINLINE().addReplayMessage(REPLAY_MESSAGE_MAJOR_EVENT, getLeaderID(), szBuffer, -1, -1, (ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT"));
 
 
-	for (pLoopDeal = GC.getGameINLINE().firstDeal(&iLoop); pLoopDeal != NULL; pLoopDeal = GC.getGameINLINE().nextDeal(&iLoop))
+	for (pLoopDeal = GC.getGameINLINE().firstDeal(&iLoop); pLoopDeal != nullptr; pLoopDeal = GC.getGameINLINE().nextDeal(&iLoop))
 	{
 		if (((GET_PLAYER(pLoopDeal->getFirstPlayer()).getTeam() == getID()) && (GET_PLAYER(pLoopDeal->getSecondPlayer()).getTeam() == eTeam)) ||
 			  ((GET_PLAYER(pLoopDeal->getFirstPlayer()).getTeam() == eTeam) && (GET_PLAYER(pLoopDeal->getSecondPlayer()).getTeam() == getID())))
 		{
 			bValid = true;
 
-			if (pLoopDeal->getFirstTrades() != NULL)
+			if (pLoopDeal->getFirstTrades() != nullptr)
 			{
 				for (pNode = pLoopDeal->getFirstTrades()->head(); pNode; pNode = pLoopDeal->getFirstTrades()->next(pNode))
 				{
@@ -126,7 +126,7 @@ void CvTeam::addTeam(TeamTypes eTeam)
 				}
 			}
 
-			if (pLoopDeal->getSecondTrades() != NULL)
+			if (pLoopDeal->getSecondTrades() != nullptr)
 			{
 				for (pNode = pLoopDeal->getSecondTrades()->head(); pNode; pNode = pLoopDeal->getSecondTrades()->next(pNode))
 				{
@@ -617,7 +617,7 @@ void CvTeam::declareWarNoRevolution(TeamTypes eTeam, bool bNewDiplo, WarPlanType
 
 	if (!isAtWar(eTeam))
 	{
-		for (pLoopDeal = GC.getGameINLINE().firstDeal(&iLoop); pLoopDeal != NULL; pLoopDeal = GC.getGameINLINE().nextDeal(&iLoop))
+		for (pLoopDeal = GC.getGameINLINE().firstDeal(&iLoop); pLoopDeal != nullptr; pLoopDeal = GC.getGameINLINE().nextDeal(&iLoop))
 		{
 			if (((GET_PLAYER(pLoopDeal->getFirstPlayer()).getTeam() == getID()) && (GET_PLAYER(pLoopDeal->getSecondPlayer()).getTeam() == eTeam)) ||
 				((GET_PLAYER(pLoopDeal->getFirstPlayer()).getTeam() == eTeam) && (GET_PLAYER(pLoopDeal->getSecondPlayer()).getTeam() == getID())))
@@ -784,7 +784,7 @@ void CvTeam::declareWarNoRevolution(TeamTypes eTeam, bool bNewDiplo, WarPlanType
 									if (GET_PLAYER((PlayerTypes)iI).isHuman())
 									{
 										pDiplo = new CvDiploParameters(getLeaderID());
-										FAssertMsg(pDiplo != NULL, "pDiplo must be valid");
+										FAssertMsg(pDiplo != nullptr, "pDiplo must be valid");
 										pDiplo->setDiploComment((DiploCommentTypes)GC.getInfoTypeForString("AI_DIPLOCOMMENT_DECLARE_WAR"));
 										pDiplo->setAIContact(true);
 										gDLL->beginDiplomacy(pDiplo, ((PlayerTypes)iI));
@@ -804,17 +804,17 @@ void CvTeam::declareWarNoRevolution(TeamTypes eTeam, bool bNewDiplo, WarPlanType
 					if (kLoopPlayer.getTeam() == getID())
 					{
 						szBuffer = gDLL->getText("TXT_KEY_MISC_YOU_DECLARED_WAR_ON", GET_TEAM(eTeam).getName().GetCString());
-						gDLL->UI().addPlayerMessage(((PlayerTypes)iI), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, bPlaySound ? "AS2D_DECLAREWAR" : NULL, MESSAGE_TYPE_MAJOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_WARNING_TEXT"));
+						gDLL->UI().addPlayerMessage(((PlayerTypes)iI), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, bPlaySound ? "AS2D_DECLAREWAR" : nullptr, MESSAGE_TYPE_MAJOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_WARNING_TEXT"));
 					}
 					else if (kLoopPlayer.getTeam() == eTeam)
 					{
 						szBuffer = gDLL->getText("TXT_KEY_MISC_DECLARED_WAR_ON_YOU", getName().GetCString());
-						gDLL->UI().addPlayerMessage(((PlayerTypes)iI), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, bPlaySound ? "AS2D_DECLAREWAR" : NULL, MESSAGE_TYPE_MAJOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_WARNING_TEXT"));
+						gDLL->UI().addPlayerMessage(((PlayerTypes)iI), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, bPlaySound ? "AS2D_DECLAREWAR" : nullptr, MESSAGE_TYPE_MAJOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_WARNING_TEXT"));
 					}
 					else if ((GET_TEAM(kLoopPlayer.getTeam()).isHasMet(getID()) || hasEuropePlayer()) && GET_TEAM(kLoopPlayer.getTeam()).isHasMet(eTeam))
 					{
 						szBuffer = gDLL->getText("TXT_KEY_MISC_SOMEONE_DECLARED_WAR", getName().GetCString(), GET_TEAM(eTeam).getName().GetCString());
-						gDLL->UI().addPlayerMessage(((PlayerTypes)iI), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, bPlaySound ? "AS2D_THEIRDECLAREWAR" : NULL, MESSAGE_TYPE_MAJOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_WARNING_TEXT"));
+						gDLL->UI().addPlayerMessage(((PlayerTypes)iI), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, bPlaySound ? "AS2D_THEIRDECLAREWAR" : nullptr, MESSAGE_TYPE_MAJOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_WARNING_TEXT"));
 					}
 				}
 			}
@@ -829,13 +829,13 @@ void CvTeam::declareWarNoRevolution(TeamTypes eTeam, bool bNewDiplo, WarPlanType
 			{
 				if (GET_PLAYER((PlayerTypes)iI).getTeam() == getID())
 				{
-					for (pLoopDeal = GC.getGameINLINE().firstDeal(&iLoop); pLoopDeal != NULL; pLoopDeal = GC.getGameINLINE().nextDeal(&iLoop))
+					for (pLoopDeal = GC.getGameINLINE().firstDeal(&iLoop); pLoopDeal != nullptr; pLoopDeal = GC.getGameINLINE().nextDeal(&iLoop))
 					{
 						bCancelDeal = false;
 
 						if ((pLoopDeal->getFirstPlayer() == ((PlayerTypes)iI)) || (pLoopDeal->getSecondPlayer() == ((PlayerTypes)iI)))
 						{
-							for (pNode = pLoopDeal->headFirstTradesNode(); (pNode != NULL); pNode = pLoopDeal->nextFirstTradesNode(pNode))
+							for (pNode = pLoopDeal->headFirstTradesNode(); (pNode != nullptr); pNode = pLoopDeal->nextFirstTradesNode(pNode))
 							{
 								if (pNode->m_data.m_eItemType == TRADE_DEFENSIVE_PACT)
 								{
@@ -843,7 +843,7 @@ void CvTeam::declareWarNoRevolution(TeamTypes eTeam, bool bNewDiplo, WarPlanType
 								}
 							}
 
-							for (pNode = pLoopDeal->headSecondTradesNode(); (pNode != NULL); pNode = pLoopDeal->nextSecondTradesNode(pNode))
+							for (pNode = pLoopDeal->headSecondTradesNode(); (pNode != nullptr); pNode = pLoopDeal->nextSecondTradesNode(pNode))
 							{
 								if (pNode->m_data.m_eItemType == TRADE_DEFENSIVE_PACT)
 								{
@@ -907,7 +907,7 @@ void CvTeam::declareWar(TeamTypes eTeam, bool bNewDiplo, WarPlanTypes eWarPlan)
 				PlayerTypes kingID = kPlayer.getParent();
 				CvPlayer& King = GET_PLAYER(kingID);
 				CvWString szMessage = gDLL->getText("TXT_KEY_COMPETITIOR_INDEPENDENCE_WAR", iPlayer.getCivilizationAdjectiveKey(), King.getCivilizationDescription());
-				gDLL->UI().addPlayerMessage(kPlayer.getID(), true, GC.getEVENT_MESSAGE_TIME(), szMessage, "AS2D_CITY_REVOLT", MESSAGE_TYPE_MAJOR_EVENT, ARTFILEMGR.getInterfaceArtInfo("WORLDBUILDER_CITY_EDIT")->getPath(), (ColorTypes)GC.getInfoTypeForString("COLOR_WHITE"), NULL, NULL, false, false);			
+				gDLL->UI().addPlayerMessage(kPlayer.getID(), true, GC.getEVENT_MESSAGE_TIME(), szMessage, "AS2D_CITY_REVOLT", MESSAGE_TYPE_MAJOR_EVENT, ARTFILEMGR.getInterfaceArtInfo("WORLDBUILDER_CITY_EDIT")->getPath(), (ColorTypes)GC.getInfoTypeForString("COLOR_WHITE"), NULL, NULL, false, false);
 			}
 		}
 		// TAC - Messages - Ray - END
@@ -964,17 +964,17 @@ void CvTeam::makePeace(TeamTypes eTeam, bool bBumpUnits)
 					if (GET_PLAYER((PlayerTypes)iI).getTeam() == getID())
 					{
 						szBuffer = gDLL->getText("TXT_KEY_MISC_YOU_MADE_PEACE_WITH", GET_TEAM(eTeam).getName().GetCString());
-						gDLL->UI().addPlayerMessage(((PlayerTypes)iI), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_MAKEPEACE", MESSAGE_TYPE_MAJOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT"));
+						gDLL->UI().addPlayerMessage(((PlayerTypes)iI), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_MAKEPEACE", MESSAGE_TYPE_MAJOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT"));
 					}
 					else if (GET_PLAYER((PlayerTypes)iI).getTeam() == eTeam)
 					{
 						szBuffer = gDLL->getText("TXT_KEY_MISC_YOU_MADE_PEACE_WITH", getName().GetCString());
-						gDLL->UI().addPlayerMessage(((PlayerTypes)iI), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_MAKEPEACE", MESSAGE_TYPE_MAJOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT"));
+						gDLL->UI().addPlayerMessage(((PlayerTypes)iI), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_MAKEPEACE", MESSAGE_TYPE_MAJOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT"));
 					}
 					else if (GET_TEAM(GET_PLAYER((PlayerTypes)iI).getTeam()).isHasMet(getID()) && GET_TEAM(GET_PLAYER((PlayerTypes)iI).getTeam()).isHasMet(eTeam))
 					{
 						szBuffer = gDLL->getText("TXT_KEY_MISC_SOMEONE_MADE_PEACE", getName().GetCString(), GET_TEAM(eTeam).getName().GetCString());
-						gDLL->UI().addPlayerMessage(((PlayerTypes)iI), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_THEIRMAKEPEACE", MESSAGE_TYPE_MAJOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT"));
+						gDLL->UI().addPlayerMessage(((PlayerTypes)iI), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_THEIRMAKEPEACE", MESSAGE_TYPE_MAJOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT"));
 					}
 				}
 			}
@@ -1045,7 +1045,7 @@ void CvTeam::signOpenBorders(TeamTypes eTeam)
 
 	if (!isAtWar(eTeam) && (getID() != eTeam))
 	{
-		setTradeItem(&item, TRADE_OPEN_BORDERS, 0, NULL);
+		setTradeItem(&item, TRADE_OPEN_BORDERS, 0, nullptr);
 
 		if (GET_PLAYER(getLeaderID()).canTradeItem(GET_TEAM(eTeam).getLeaderID(), item) && GET_PLAYER(GET_TEAM(eTeam).getLeaderID()).canTradeItem(getLeaderID(), item))
 		{
@@ -1072,7 +1072,7 @@ void CvTeam::signDefensivePact(TeamTypes eTeam)
 
 	if (!isAtWar(eTeam) && (getID() != eTeam))
 	{
-		setTradeItem(&item, TRADE_DEFENSIVE_PACT, 0, NULL);
+		setTradeItem(&item, TRADE_DEFENSIVE_PACT, 0, nullptr);
 
 		if (GET_PLAYER(getLeaderID()).canTradeItem(GET_TEAM(eTeam).getLeaderID(), item) && GET_PLAYER(GET_TEAM(eTeam).getLeaderID()).canTradeItem(getLeaderID(), item))
 		{
@@ -1605,7 +1605,7 @@ int CvTeam::countEnemyDangerByArea(CvArea* pArea) const
 	{
 		pLoopPlot = GC.getMap().plotByIndexINLINE(iI);
 
-		if (pLoopPlot != NULL)
+		if (pLoopPlot != nullptr)
 		{
 			if (pLoopPlot->area() == pArea)
 			{
@@ -2290,7 +2290,7 @@ void CvTeam::makeHasMet(TeamTypes eIndex, bool bNewDiplo)
 											if (GET_PLAYER((PlayerTypes)iI).isHuman())
 											{
 												pDiplo = new CvDiploParameters(getLeaderID());
-												FAssertMsg(pDiplo != NULL, "pDiplo must be valid");
+												FAssertMsg(pDiplo != nullptr, "pDiplo must be valid");
 												pDiplo->setDiploComment((DiploCommentTypes)GC.getInfoTypeForString("AI_DIPLOCOMMENT_FIRST_CONTACT"));
 												pDiplo->setAIContact(true);
 												gDLL->beginDiplomacy(pDiplo, ((PlayerTypes)iI));
@@ -2544,14 +2544,14 @@ void CvTeam::cancelDefensivePacts(TeamTypes eEndingTeam)
 	bool bCancelDeal;
 	int iLoop;
 
-	for (pLoopDeal = GC.getGameINLINE().firstDeal(&iLoop); pLoopDeal != NULL; pLoopDeal = GC.getGameINLINE().nextDeal(&iLoop))
+	for (pLoopDeal = GC.getGameINLINE().firstDeal(&iLoop); pLoopDeal != nullptr; pLoopDeal = GC.getGameINLINE().nextDeal(&iLoop))
 	{
 		bCancelDeal = false;
 
 		if ((GET_PLAYER(pLoopDeal->getFirstPlayer()).getTeam() == getID()) ||
 			(GET_PLAYER(pLoopDeal->getSecondPlayer()).getTeam() == getID()))
 		{
-			for (pNode = pLoopDeal->headFirstTradesNode(); (pNode != NULL); pNode = pLoopDeal->nextFirstTradesNode(pNode))
+			for (pNode = pLoopDeal->headFirstTradesNode(); (pNode != nullptr); pNode = pLoopDeal->nextFirstTradesNode(pNode))
 			{
 				if (pNode->m_data.m_eItemType == TRADE_DEFENSIVE_PACT)
 				{
@@ -2562,7 +2562,7 @@ void CvTeam::cancelDefensivePacts(TeamTypes eEndingTeam)
 
 			if (!bCancelDeal)
 			{
-				for (pNode = pLoopDeal->headSecondTradesNode(); (pNode != NULL); pNode = pLoopDeal->nextSecondTradesNode(pNode))
+				for (pNode = pLoopDeal->headSecondTradesNode(); (pNode != nullptr); pNode = pLoopDeal->nextSecondTradesNode(pNode))
 				{
 					if (pNode->m_data.m_eItemType == TRADE_DEFENSIVE_PACT)
 					{
@@ -2713,7 +2713,7 @@ int CvTeam::getRebelPercent() const
 		if (kPlayer.isAlive() && kPlayer.getTeam() == getID() && kPlayer.getParent() != NO_PLAYER && GET_PLAYER(kPlayer.getParent()).isAlive())
 		{
 			int iLoop;
-			for (CvCity* pCity = kPlayer.firstCity(&iLoop); pCity != NULL; pCity = kPlayer.nextCity(&iLoop))
+			for (CvCity* pCity = kPlayer.firstCity(&iLoop); pCity != nullptr; pCity = kPlayer.nextCity(&iLoop))
 			{
 				iRebelSentiment += pCity->getRebelSentiment();
 			}
@@ -2809,11 +2809,11 @@ void CvTeam::doRevolution()
 				//create REF in Europe
 				for (int i = 0; i < kTeamPlayer.getNumRevolutionEuropeUnits(); ++i)
 				{
-					CvUnit* pRevolutionUnit = NULL;
+					CvUnit* pRevolutionUnit = nullptr;
 					if (GC.getUnitInfo(kTeamPlayer.getRevolutionEuropeUnit(i)).getDomainType() == DOMAIN_SEA)
 					{
 						CvPlot* pOceanPlot = kParent.AI_getImperialShipSpawnPlot();
-						if (pOceanPlot != NULL)
+						if (pOceanPlot != nullptr)
 						{
 							pRevolutionUnit = kParent.initUnit(kTeamPlayer.getRevolutionEuropeUnit(i), kTeamPlayer.getRevolutionEuropeProfession(i), pOceanPlot->getX_INLINE(), pOceanPlot->getY_INLINE());
 							pRevolutionUnit->setUnitTravelState(UNIT_TRAVEL_STATE_IN_EUROPE, false);
@@ -2824,7 +2824,7 @@ void CvTeam::doRevolution()
 						pRevolutionUnit = kParent.initEuropeUnit(kTeamPlayer.getRevolutionEuropeUnit(i));
 						pRevolutionUnit->setProfession(kTeamPlayer.getRevolutionEuropeProfession(i));
 					}
-					FAssert(pRevolutionUnit != NULL);
+					FAssert(pRevolutionUnit != nullptr);
 				}
 				kTeamPlayer.clearRevolutionEuropeUnits();
 				kTeamPlayer.setYieldEuropeTradableAll();

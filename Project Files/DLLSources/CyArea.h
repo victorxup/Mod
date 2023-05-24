@@ -16,7 +16,7 @@ public:
 	CyArea();
 	CyArea(CvArea* pArea);					// Call from C++
 	CvArea* getArea() { return m_pArea;	}	// Call from C++
-	bool isNone() { return (m_pArea==NULL); }
+	bool isNone() { return m_pArea == nullptr; }
 
 	int calculateTotalBestNatureYield();
 	int countCoastalLand();

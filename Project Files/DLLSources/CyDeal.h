@@ -15,7 +15,7 @@ class CyDeal
 {
 
 public:
-	CyDeal(CvDeal* pDeal = NULL);
+	CyDeal(CvDeal* pDeal = nullptr);
 	virtual ~CyDeal();
 	CvDeal* getDeal() const { return m_pDeal; }
 

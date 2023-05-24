@@ -12,7 +12,7 @@ static void addEnumValues(T value, const char* szName, const char* szNoType, con
 {
 	boost::python::enum_<T> enumTable = python::enum_<T>(szName)
 		.value(szNumTypes, VARINFO<T>::END);
-	if (szNoType != NULL)
+	if (szNoType != nullptr)
 	{
 		enumTable.value(szNoType, static_cast<T>(-1));
 	}
@@ -30,10 +30,10 @@ void CyEnumsPythonInterface()
 	// arguments:
 	// 1: any variable of the enum type. Which one doesn't matter as it is only used to set the template type
 	// 2: name of enum in python
-	// 3: name of NO_ type. Skipped if it is set to NULL
+	// 3: name of NO_ type. Skipped if it is set to nullptr
 	// 4 name of NUM_
 	addEnumValues(NO_CONCEPT           , "ConceptTypes"       , "NO_CONCEPT"       , "NUM_CONCEPT_TYPES"        );
-	addEnumValues(MAX_NUM_SYMBOLS      , "FontSymbols"        , NULL               , "MAX_NUM_SYMBOLS"          );
+	addEnumValues(MAX_NUM_SYMBOLS      , "FontSymbols"        , nullptr               , "MAX_NUM_SYMBOLS"          );
 	addEnumValues(NO_WORLDSIZE         , "WorldSizeTypes"     , "NO_WORLDSIZE"     , "NUM_WORLDSIZE_TYPES"      );
 	addEnumValues(NO_YIELD             , "YieldTypes"         , "NO_YIELD"         , "NUM_YIELD_TYPES"          );
 

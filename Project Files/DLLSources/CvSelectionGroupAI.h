@@ -33,13 +33,13 @@ public:
 	CvUnit* AI_getBestGroupAttacker(const CvPlot* pPlot, bool bPotentialEnemy, int& iUnitOdds, bool bForce = false, bool bNoBlitz = false) const;
 	CvUnit* AI_getBestGroupSacrifice(const CvPlot* pPlot, bool bPotentialEnemy, bool bForce = false, bool bNoBlitz = false) const;
 	int AI_compareStacks(const CvPlot* pPlot, bool bPotentialEnemy, bool bCheckCanAttack = false, bool bCheckCanMove = false) const;
-	int AI_sumStrength(const CvPlot* pAttackedPlot = NULL, DomainTypes eDomainType = NO_DOMAIN, bool bCheckCanAttack = false, bool bCheckCanMove = false) const;
+	int AI_sumStrength(const CvPlot* pAttackedPlot = nullptr, DomainTypes eDomainType = NO_DOMAIN, bool bCheckCanAttack = false, bool bCheckCanMove = false) const;
 	void AI_queueGroupAttack(int iX, int iY);
 	void AI_cancelGroupAttack();
 	bool AI_isGroupAttack();
 
 	bool AI_isControlled();
-	bool AI_isDeclareWar(const CvPlot* pPlot = NULL);
+	bool AI_isDeclareWar(const CvPlot* pPlot = nullptr);
 
 	CvPlot* AI_getMissionAIPlot();
 
@@ -54,7 +54,7 @@ public:
 
 	bool AI_isFull();
 
-	bool AI_launchAssault(CvPlot* pTargetCityPlot = NULL);
+	bool AI_launchAssault(CvPlot* pTargetCityPlot = nullptr);
 	void AI_groupBombard();
 
 	int AI_getYieldsLoaded(short* piYields) const;
@@ -87,7 +87,7 @@ protected:
 	int m_iGroupAttackX;
 	int m_iGroupAttackY;
 
-	// R&R mod, vetiarvind, max yield import limit - start	
+	// R&R mod, vetiarvind, max yield import limit - start
 	bool getIgnoreDangerStatus() const;
 	// R&R mod, vetiarvind, max yield import limit - end
 private:

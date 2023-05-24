@@ -151,7 +151,7 @@ const CvInfoBase* getBaseInfo(JITarrayTypes eType, int iIndex)
 	case JIT_ARRAY_YIELD:              return &GC.getYieldInfo((YieldTypes)iIndex);
 	}
 	FAssertMsg(false, "missing info case");
-	return NULL;
+	return nullptr;
 }
 
 static const char* getArrayType(PlotTypes eType)
@@ -201,7 +201,7 @@ const char* getArrayType(JITarrayTypes eType, int iIndex)
 	case JIT_ARRAY_CIV_CATEGORY:       return getArrayType(static_cast<CivCategoryTypes>(iIndex));
 	}
 	const CvInfoBase *pInfo = getBaseInfo(eType, iIndex);
-	if (pInfo == NULL)
+	if (pInfo == nullptr)
 	{
 		FAssertMsg(false, "Failed to find info class");
 		return "";
@@ -222,7 +222,7 @@ const char* getArrayName(JITarrayTypes eType)
 	// both read and write use this function meaning it will be compared to itself (no need to sync with anything else)
 
 	JITarrayTypes eBaseType = GetBaseType(eType);
-	
+
 	switch (eBaseType)
 	{
 	case JIT_ARRAY_ACHIEVE:            return "Achieve";
@@ -292,7 +292,7 @@ const char* getArrayPrefix(JITarrayTypes eType)
 {
 	// returns the prefix for each array type
 	// each type of that array has to start with the prefix
-	
+
 	JITarrayTypes eBaseType = GetBaseType(eType);
 
 	switch (eBaseType)

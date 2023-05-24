@@ -11,7 +11,7 @@
 CyPlot::CyPlot(CvPlot* pPlot) : m_pPlot(pPlot)
 {
 }
-CyPlot::CyPlot() : m_pPlot(NULL)
+CyPlot::CyPlot() : m_pPlot(nullptr)
 {
 }
 void CyPlot::erase()
@@ -120,7 +120,7 @@ int CyPlot::getNearestLandArea()
 }
 CyPlot* CyPlot::getNearestLandPlot()
 {
-	return m_pPlot ? new CyPlot(m_pPlot->getNearestLandPlot()) : NULL;
+	return m_pPlot ? new CyPlot(m_pPlot->getNearestLandPlot()) : nullptr;
 }
 int CyPlot::seeFromLevel()
 {
@@ -152,12 +152,12 @@ int CyPlot::getBuildTurnsLeft(int /*BuildTypes*/ eBuild, int iNowExtra, int iThe
 }
 CyUnit* CyPlot::getBestDefender(int /*PlayerTypes*/ eOwner, int /*PlayerTypes*/ eAttackingPlayer, CyUnit* pAttacker, bool bTestAtWar, bool bTestPotentialEnemy, bool bTestCanMove)
 {
-	return m_pPlot ? new CyUnit(m_pPlot->getBestDefender((PlayerTypes) eOwner, (PlayerTypes) eAttackingPlayer, pAttacker->getUnit(), bTestAtWar, bTestPotentialEnemy, bTestCanMove)) : NULL;
+	return m_pPlot ? new CyUnit(m_pPlot->getBestDefender((PlayerTypes) eOwner, (PlayerTypes) eAttackingPlayer, pAttacker->getUnit(), bTestAtWar, bTestPotentialEnemy, bTestCanMove)) : nullptr;
 }
 
 CyUnit* CyPlot::getSelectedUnit()
 {
-	return m_pPlot ? new CyUnit(m_pPlot->getSelectedUnit()) : NULL;
+	return m_pPlot ? new CyUnit(m_pPlot->getSelectedUnit()) : nullptr;
 }
 int CyPlot::getUnitPower(int /* PlayerTypes */ eOwner)
 {
@@ -336,11 +336,11 @@ int CyPlot::getLatitude()
 }
 CyArea* CyPlot::area()
 {
-	return m_pPlot ? new CyArea(m_pPlot->area()) : NULL;
+	return m_pPlot ? new CyArea(m_pPlot->area()) : nullptr;
 }
 CyArea* CyPlot::waterArea()
 {
-	return m_pPlot ? new CyArea(m_pPlot->waterArea()) : NULL;
+	return m_pPlot ? new CyArea(m_pPlot->waterArea()) : nullptr;
 }
 int CyPlot::getArea()
 {
@@ -586,15 +586,15 @@ void CyPlot::setRouteType(int /*RouteTypes*/ eNewValue)
 }
 CyCity* CyPlot::getPlotCity()
 {
-	return m_pPlot ? new CyCity(m_pPlot->getPlotCity()) : NULL;
+	return m_pPlot ? new CyCity(m_pPlot->getPlotCity()) : nullptr;
 }
 CyCity* CyPlot::getWorkingCity()
 {
-	return m_pPlot ? new CyCity(m_pPlot->getWorkingCity()) : NULL;
+	return m_pPlot ? new CyCity(m_pPlot->getWorkingCity()) : nullptr;
 }
 CyCity* CyPlot::getWorkingCityOverride()
 {
-	return m_pPlot ? new CyCity(m_pPlot->getWorkingCityOverride()) : NULL;
+	return m_pPlot ? new CyCity(m_pPlot->getWorkingCityOverride()) : nullptr;
 }
 int CyPlot::getRiverID() const
 {
@@ -755,7 +755,7 @@ int CyPlot::getNumUnits()
 }
 CyUnit* CyPlot::getUnit(int iIndex)
 {
-	return m_pPlot ? new CyUnit(m_pPlot->getUnitByIndex(iIndex)) : NULL;
+	return m_pPlot ? new CyUnit(m_pPlot->getUnitByIndex(iIndex)) : nullptr;
 }
 std::string CyPlot::getScriptData() const
 {

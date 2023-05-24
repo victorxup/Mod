@@ -76,7 +76,7 @@ bool PlotRegion::isTerrainAdjacent(const EnumMap<TerrainTypes, bool> em) const
 		for (DirectionTypes eDirection = FIRST_DIRECTION; eDirection < NUM_DIRECTION_TYPES; ++eDirection)
 		{
 			const CvPlot* pAdjacentPlot = plotDirection(pRegionPlot->getX_INLINE(), pRegionPlot->getY_INLINE(), eDirection);
-			if (pAdjacentPlot != NULL && pAdjacentPlot->getTerrainType() != NO_TERRAIN)
+			if (pAdjacentPlot != nullptr && pAdjacentPlot->getTerrainType() != NO_TERRAIN)
 			{
 				if (em.get(pAdjacentPlot->getTerrainType()))
 				{
@@ -90,7 +90,7 @@ bool PlotRegion::isTerrainAdjacent(const EnumMap<TerrainTypes, bool> em) const
 
 void PlotRegion::add(int iPlot, std::vector<PlotRegion*>& plotRegions)
 {
-	if (plotRegions[iPlot] != NULL)
+	if (plotRegions[iPlot] != nullptr)
 	{
 		if (plotRegions[iPlot] != this)
 		{
@@ -126,7 +126,7 @@ PlotRegionMap::PlotRegionMap(const EnumMap<T, bool>& em)
 	const int iNumPlots = kMap.numPlots();
 
 	std::vector<PlotRegion*> plotRegions;
-	plotRegions.assign(iNumPlots, NULL);
+	plotRegions.assign(iNumPlots, nullptr);
 
 	// reserve memory for the highest amount of plot regions possible (in theory)
 	// most likely overkill, but by having the memory reserved, we can be sure no new allocations will take place
@@ -148,7 +148,7 @@ PlotRegionMap::PlotRegionMap(const EnumMap<T, bool>& em)
 			handlePlot(pPlot, 1, -1, plotRegions);
 			handlePlot(pPlot, -1, 0, plotRegions);
 
-			if (plotRegions[i] == NULL)
+			if (plotRegions[i] == nullptr)
 			{
 				// create a new region
 				m_aRegions.push_back(PlotRegion());
@@ -176,11 +176,11 @@ const PlotRegion& PlotRegionMap::getRegion(int iIndex) const
 void PlotRegionMap::handlePlot(CvPlot* pPlot, int iX, int iY, std::vector<PlotRegion*>& plotRegions)
 {
 	CvPlot* pOtherPlot = GC.getMap().plotINLINE(pPlot->getX_INLINE() + iX, pPlot->getY_INLINE() + iY);
-	if (pOtherPlot != NULL)
+	if (pOtherPlot != nullptr)
 	{
 		int iIndex = pOtherPlot->getIndex();
 		PlotRegion* pRegion = plotRegions[iIndex];
-		if (pRegion != NULL)
+		if (pRegion != nullptr)
 		{
 			pRegion->add(pPlot->getIndex(), plotRegions);
 		}
@@ -195,7 +195,7 @@ CvMap::CvMap()
 {
 	CvMapInitData defaultMapData;
 
-	m_pMapPlots = NULL;
+	m_pMapPlots = nullptr;
 
 	reset(&defaultMapData);
 }
@@ -212,7 +212,7 @@ CvMap::~CvMap()
 //	pInitInfo					- Optional init structure (used for WB load)
 // Returns:
 //	nothing.
-void CvMap::init(CvMapInitData* pInitInfo/*=NULL*/)
+void CvMap::init(CvMapInitData* pInitInfo /*= nullptr*/)
 {
 	PROFILE_FUNC();
 	gDLL->logMemState( CvString::format("CvMap::init begin - world size=%s, climate=%s, sealevel=%s, num custom options=%6",
@@ -348,19 +348,19 @@ void CvMap::setup()
 	KmodPathFinder::InitHeuristicWeights(); // K-Mod
 	CvDLLFAStarIFaceBase& kAStar = *gDLL->getFAStarIFace(); // advc
 
-	kAStar.Initialize(&GC.getPathFinder(), getGridWidthINLINE(), getGridHeightINLINE(), isWrapXINLINE(), isWrapYINLINE(), pathDestValid, pathHeuristic, pathCost, pathValid, pathAdd, NULL, NULL);
-	kAStar.Initialize(&GC.getInterfacePathFinder(), getGridWidthINLINE(), getGridHeightINLINE(), isWrapXINLINE(), isWrapYINLINE(), pathDestValid, pathHeuristic, pathCost, pathValid, pathAdd, NULL, NULL);
-	kAStar.Initialize(&GC.getStepFinder(), getGridWidthINLINE(), getGridHeightINLINE(), isWrapXINLINE(), isWrapYINLINE(), stepDestValid, stepHeuristic, stepCost, stepValid, stepAdd, NULL, NULL);
-	kAStar.Initialize(&GC.getRouteFinder(), getGridWidthINLINE(), getGridHeightINLINE(), isWrapXINLINE(), isWrapYINLINE(), NULL, NULL, NULL, routeValid, NULL, NULL, NULL);
-	kAStar.Initialize(&GC.getBorderFinder(), getGridWidthINLINE(), getGridHeightINLINE(), isWrapXINLINE(), isWrapYINLINE(), NULL, NULL, NULL, borderValid, NULL, NULL, NULL);
-	kAStar.Initialize(&GC.getAreaFinder(), getGridWidthINLINE(), getGridHeightINLINE(), isWrapXINLINE(), isWrapYINLINE(), NULL, NULL, NULL, areaValid, NULL, joinArea, NULL);
+	kAStar.Initialize(&GC.getPathFinder(), getGridWidthINLINE(), getGridHeightINLINE(), isWrapXINLINE(), isWrapYINLINE(), pathDestValid, pathHeuristic, pathCost, pathValid, pathAdd, nullptr, nullptr);
+	kAStar.Initialize(&GC.getInterfacePathFinder(), getGridWidthINLINE(), getGridHeightINLINE(), isWrapXINLINE(), isWrapYINLINE(), pathDestValid, pathHeuristic, pathCost, pathValid, pathAdd, nullptr, nullptr);
+	kAStar.Initialize(&GC.getStepFinder(), getGridWidthINLINE(), getGridHeightINLINE(), isWrapXINLINE(), isWrapYINLINE(), stepDestValid, stepHeuristic, stepCost, stepValid, stepAdd, nullptr, nullptr);
+	kAStar.Initialize(&GC.getRouteFinder(), getGridWidthINLINE(), getGridHeightINLINE(), isWrapXINLINE(), isWrapYINLINE(), nullptr, nullptr, nullptr, routeValid, nullptr, nullptr, nullptr);
+	kAStar.Initialize(&GC.getBorderFinder(), getGridWidthINLINE(), getGridHeightINLINE(), isWrapXINLINE(), isWrapYINLINE(), nullptr, nullptr, nullptr, borderValid, nullptr, nullptr, nullptr);
+	kAStar.Initialize(&GC.getAreaFinder(), getGridWidthINLINE(), getGridHeightINLINE(), isWrapXINLINE(), isWrapYINLINE(), nullptr, nullptr, nullptr, areaValid, nullptr, joinArea, nullptr);
 
 	// Erik: We have to create and initialize the coastal route pathfinder since
 	// the exe cannot do this for us
 	FAStar* coastalRouteFinder = gDLL->getFAStarIFace()->create();
 	FAssert(coastalRouteFinder);
 	GC.setCoastalRouteFinder(coastalRouteFinder);
-	kAStar.Initialize(&GC.getCoastalRouteFinder(), getGridWidthINLINE(), getGridHeightINLINE(), isWrapXINLINE(), isWrapYINLINE(), NULL, stepHeuristic, stepCost, coastalRouteValid, NULL, NULL, NULL);
+	kAStar.Initialize(&GC.getCoastalRouteFinder(), getGridWidthINLINE(), getGridHeightINLINE(), isWrapXINLINE(), isWrapYINLINE(), nullptr, stepHeuristic, stepCost, coastalRouteValid, nullptr, nullptr, nullptr);
 }
 
 
@@ -374,7 +374,7 @@ void CvMap::setupGraphical()
 
 	PROFILE_FUNC();
 
-	if (m_pMapPlots != NULL)
+	if (m_pMapPlots != nullptr)
 	{
 		gDLL->getEngineIFace()->RebuildAllTileArt();
 		for (int iI = 0; iI < numPlotsINLINE(); iI++)
@@ -554,7 +554,7 @@ void CvMap::updateMinOriginalStartDist(CvArea* pArea)
 	{
 		pStartingPlot = GET_PLAYER((PlayerTypes)iI).getStartingPlot();
 
-		if (pStartingPlot != NULL)
+		if (pStartingPlot != nullptr)
 		{
 			if (pStartingPlot->area() == pArea)
 			{
@@ -611,14 +611,14 @@ void CvMap::verifyUnitValidPlot()
 
 CvPlot* CvMap::syncRandPlot(int iFlags, int iArea, int iMinUnitDistance, int iTimeout)
 {
-	CvPlot* pPlot = NULL;
+	CvPlot* pPlot = nullptr;
 	int iCount = 0;
 
 	while (iCount < iTimeout)
 	{
 		CvPlot* pTestPlot = plotSoren(GC.getGameINLINE().getSorenRandNum(getGridWidthINLINE(), "Rand Plot Width"), GC.getGameINLINE().getSorenRandNum(getGridHeightINLINE(), "Rand Plot Height"));
 
-		FAssertMsg(pTestPlot != NULL, "TestPlot is not assigned a valid value");
+		FAssertMsg(pTestPlot != nullptr, "TestPlot is not assigned a valid value");
 
 		if ((iArea == -1) || (pTestPlot->getArea() == iArea))
 		{
@@ -634,7 +634,7 @@ CvPlot* CvMap::syncRandPlot(int iFlags, int iArea, int iMinUnitDistance, int iTi
 						{
 							CvPlot* pLoopPlot = plotXY(pTestPlot->getX_INLINE(), pTestPlot->getY_INLINE(), iDX, iDY);
 
-							if (pLoopPlot != NULL)
+							if (pLoopPlot != nullptr)
 							{
 								if (pLoopPlot->isUnit())
 								{
@@ -746,7 +746,7 @@ CvCity* CvMap::findCity(int iX, int iY, PlayerTypes eOwner, TeamTypes eTeam, boo
 CvCity* CvMap::findCity(Coordinates coord, PlayerTypes eOwner, TeamTypes eTeam, bool bSameArea, bool bCoastalOnly, TeamTypes eTeamAtWarWith, DirectionTypes eDirection, CvCity* pSkipCity)
 {
 	int iBestValue = MAX_INT;
-	CvCity* pBestCity = NULL;
+	CvCity* pBestCity = nullptr;
 
 	for (int iI = 0; iI < MAX_PLAYERS; iI++)
 	{
@@ -757,7 +757,7 @@ CvCity* CvMap::findCity(Coordinates coord, PlayerTypes eOwner, TeamTypes eTeam, 
 				if ((eTeam == NO_TEAM) || (GET_PLAYER((PlayerTypes)iI).getTeam() == eTeam))
 				{
 					int iLoop;
-					for (CvCity* pLoopCity = GET_PLAYER((PlayerTypes)iI).firstCity(&iLoop); pLoopCity != NULL; pLoopCity = GET_PLAYER((PlayerTypes)iI).nextCity(&iLoop))
+					for (CvCity* pLoopCity = GET_PLAYER((PlayerTypes)iI).firstCity(&iLoop); pLoopCity != nullptr; pLoopCity = GET_PLAYER((PlayerTypes)iI).nextCity(&iLoop))
 					{
 						if (!bSameArea || (pLoopCity->area() == coord.plot()->area()) || (bCoastalOnly && (pLoopCity->waterArea() == coord.plot()->area())))
 						{
@@ -767,7 +767,7 @@ CvCity* CvMap::findCity(Coordinates coord, PlayerTypes eOwner, TeamTypes eTeam, 
 								{
 									if ((eDirection == NO_DIRECTION) || (estimateDirection(dxWrap(pLoopCity->getX_INLINE() - coord.x()), dyWrap(pLoopCity->getY_INLINE() - coord.y())) == eDirection))
 									{
-										if ((pSkipCity == NULL) || (pLoopCity != pSkipCity))
+										if (pSkipCity == nullptr || pLoopCity != pSkipCity)
 										{
 											int iValue = plotDistance(coord, pLoopCity->coord());
 
@@ -794,7 +794,7 @@ CvCity* CvMap::findCity(Coordinates coord, PlayerTypes eOwner, TeamTypes eTeam, 
 CvSelectionGroup* CvMap::findSelectionGroup(int iX, int iY, PlayerTypes eOwner, bool bReadyToSelect)
 {
 	int iBestValue = MAX_INT;
-	CvSelectionGroup* pBestSelectionGroup = NULL;
+	CvSelectionGroup* pBestSelectionGroup = nullptr;
 
 	for (int iI = 0; iI < MAX_PLAYERS; iI++)
 	{
@@ -803,7 +803,7 @@ CvSelectionGroup* CvMap::findSelectionGroup(int iX, int iY, PlayerTypes eOwner, 
 			if ((eOwner == NO_PLAYER) || (iI == eOwner))
 			{
 				int iLoop;
-				for(CvSelectionGroup* pLoopSelectionGroup = GET_PLAYER((PlayerTypes)iI).firstSelectionGroup(&iLoop); pLoopSelectionGroup != NULL; pLoopSelectionGroup = GET_PLAYER((PlayerTypes)iI).nextSelectionGroup(&iLoop))
+				for (CvSelectionGroup* pLoopSelectionGroup = GET_PLAYER((PlayerTypes)iI).firstSelectionGroup(&iLoop); pLoopSelectionGroup != nullptr; pLoopSelectionGroup = GET_PLAYER((PlayerTypes)iI).nextSelectionGroup(&iLoop))
 				{
 					if (!bReadyToSelect || pLoopSelectionGroup->readyToSelect())
 					{
@@ -827,10 +827,10 @@ CvSelectionGroup* CvMap::findSelectionGroup(int iX, int iY, PlayerTypes eOwner, 
 CvArea* CvMap::findBiggestArea(bool bWater)
 {
 	int iBestValue = 0;
-	CvArea* pBestArea = NULL;
+	CvArea* pBestArea = nullptr;
 
 	int iLoop;
-	for (CvArea* pLoopArea = firstArea(&iLoop); pLoopArea != NULL; pLoopArea = nextArea(&iLoop))
+	for (CvArea* pLoopArea = firstArea(&iLoop); pLoopArea != nullptr; pLoopArea = nextArea(&iLoop))
 	{
 		if (pLoopArea->isWater() == bWater)
 		{
@@ -877,7 +877,7 @@ bool CvMap::findWater(CvPlot* pPlot, int iRange, bool bFreshWater)
 		{
 			CvPlot* pLoopPlot	= plotXY(pPlot->getX_INLINE(), pPlot->getY_INLINE(), iDX, iDY);
 
-			if (pLoopPlot != NULL)
+			if (pLoopPlot != nullptr)
 			{
 				if (bFreshWater)
 				{
@@ -1170,7 +1170,7 @@ int CvMap::getNumLandAreas()
 
 	iNumLandAreas = 0;
 
-	for(pLoopArea = GC.getMap().firstArea(&iLoop); pLoopArea != NULL; pLoopArea = GC.getMap().nextArea(&iLoop))
+	for (pLoopArea = GC.getMap().firstArea(&iLoop); pLoopArea != nullptr; pLoopArea = GC.getMap().nextArea(&iLoop))
 	{
 		if (!(pLoopArea->isWater()))
 		{
@@ -1242,14 +1242,14 @@ int CvMap::calculatePathDistance(CvPlot *pSource, CvPlot *pDest, CvPlot *pInvali
 {
 	FAStarNode* pNode;
 
-	if (pSource == NULL || pDest == NULL)
+	if (pSource == nullptr || pDest == nullptr)
 	{
 		return -1;
 	}
 
 	// Super Forts begin *canal* *choke*
 	// 1 must be added because 0 is already being used as the default value for iInfo in GeneratePath()
-	int iInvalidPlot = (pInvalidPlot == NULL) ? 0 : GC.getMap().plotNum(pInvalidPlot->getX_INLINE(), pInvalidPlot->getY_INLINE()) + 1;
+	int iInvalidPlot = pInvalidPlot == nullptr ? 0 : GC.getMap().plotNum(pInvalidPlot->getX_INLINE(), pInvalidPlot->getY_INLINE()) + 1;
 
 	if (gDLL->getFAStarIFace()->GeneratePath(&GC.getStepFinder(), pSource->getX_INLINE(), pSource->getY_INLINE(), pDest->getX_INLINE(), pDest->getY_INLINE(), false, iInvalidPlot, true))
 //  if (gDLL->getFAStarIFace()->GeneratePath(&GC.getStepFinder(), pSource->getX_INLINE(), pSource->getY_INLINE(), pDest->getX_INLINE(), pDest->getY_INLINE(), false, 0, true)) -- original
@@ -1257,7 +1257,7 @@ int CvMap::calculatePathDistance(CvPlot *pSource, CvPlot *pDest, CvPlot *pInvali
 	{
 		pNode = gDLL->getFAStarIFace()->GetLastNode(&GC.getStepFinder());
 
-		if (pNode != NULL)
+		if (pNode != nullptr)
 		{
 			return pNode->m_iData1;
 		}
@@ -1399,7 +1399,7 @@ void visitPlot(CvPlot* pPlot, std::queue<CvPlot*>& plotQueue, stdext::hash_set<C
 	{
 		CvPlot* pAdjacentPlot = plotDirection(pPlot->getX_INLINE(), pPlot->getY_INLINE(), ((DirectionTypes)iI));
 
-		if (pAdjacentPlot == NULL)
+		if (pAdjacentPlot == nullptr)
 			continue;
 
 		if (visited.find(pAdjacentPlot) != visited.end())
@@ -1456,7 +1456,7 @@ void CvMap::calculateAreas()
 		if (pLoopPlot->isWater())
 		{
 			gDLL->callUpdater();
-			FAssertMsg(pLoopPlot != NULL, "LoopPlot is not assigned a valid value");
+			FAssertMsg(pLoopPlot != nullptr, "LoopPlot is not assigned a valid value");
 
 			if (pLoopPlot->getArea() == FFreeList::INVALID_INDEX)
 			{
@@ -1483,7 +1483,7 @@ void CvMap::calculateAreas()
 			continue;
 
 		gDLL->callUpdater();
-		FAssertMsg(pLoopPlot != NULL, "LoopPlot is not assigned a valid value");
+		FAssertMsg(pLoopPlot != nullptr, "LoopPlot is not assigned a valid value");
 
 		if (pLoopPlot->getArea() == FFreeList::INVALID_INDEX)
 		{

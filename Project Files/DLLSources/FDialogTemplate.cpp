@@ -17,7 +17,7 @@ CDialogTemplate::CDialogTemplate(LPCSTR caption, DWORD style, int x, int y, int 
 
 	dialogTemplate->style = style;
 
-	if (font != NULL)
+	if (font != nullptr)
 	{
 		dialogTemplate->style |= DS_SETFONT;
 	}
@@ -37,7 +37,7 @@ CDialogTemplate::CDialogTemplate(LPCSTR caption, DWORD style, int x, int y, int 
 	// Add the dialog's caption to the template
 	AppendString(caption);
 
-	if (font != NULL)
+	if (font != nullptr)
 	{
 		AppendData(&fontSize, sizeof(WORD));
 		AppendString(font);
@@ -176,7 +176,7 @@ void CDialogTemplate::AlignData(int size)
 
 void CDialogTemplate::AppendString(LPCSTR string)
 {
-	int length = MultiByteToWideChar(CP_ACP, 0, string, -1, NULL, 0);
+	int length = MultiByteToWideChar(CP_ACP, 0, string, -1, nullptr, 0);
 
 	WCHAR* wideString = (WCHAR*)malloc(sizeof(WCHAR) * length);
 	MultiByteToWideChar(CP_ACP, 0, string, -1, wideString, length);

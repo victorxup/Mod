@@ -13,7 +13,7 @@
 
 template<class T>
 JustInTimeArray<T>::JustInTimeArray(JITarrayTypes eType, T eDefault)
-: m_tArray(NULL)
+: m_tArray(nullptr)
 , m_iType(eType)
 , m_iLength(getArrayLength(eType))
 , m_eDefault(eDefault)
@@ -41,7 +41,7 @@ void JustInTimeArray<T>::copy(const JustInTimeArray<T> &OtherArray)
 	FAssert(this->m_eDefault == OtherArray.m_eDefault);
 
 	if (!OtherArray.isAllocated())
-	{ 
+	{
 		reset();
 		return;
 	}
@@ -61,7 +61,7 @@ int JustInTimeArray<T>::set(T value, int iIndex)
 
 	int iReturnVal = 0;
 
-	if (m_tArray == NULL)
+	if (m_tArray == nullptr)
 	{
 		if (value == m_eDefault)
 		{
@@ -106,7 +106,7 @@ bool JustInTimeArray<T>::addCache(int iChange, int iIndex)
 	{
 		return 0;
 	}
-	 
+
 	bool bBefore = get(iIndex) > 0;
 	add((T)iChange, iIndex);
 	bool bAfter = get(iIndex) > 0;
@@ -120,7 +120,7 @@ double JustInTimeArray<double>::getFloat(int iIndex) const
 {
 	FAssert(iIndex >= 0);
 	FAssert(iIndex < m_iLength);
-	if (m_tArray != NULL)
+	if (m_tArray != nullptr)
 	{
 		return m_tArray[iIndex] + FLOAT_OFFSET;
 	}
@@ -141,8 +141,8 @@ bool JustInTimeArray<double>::addCache(int iChange, const InfoArray* pIarray, Cv
 {
 	FAssert(pIarray->getDimentions() == 2);
 	FAssert(iChange == 1 || iChange == -1);
-	FAssert(!(pPlayer == NULL && fpConvert != NULL));
-	FAssert(!(pPlayer == NULL && fpUpdate  != NULL));
+	FAssert(!(pPlayer == nullptr && fpConvert != nullptr));
+	FAssert(!(pPlayer == nullptr && fpUpdate  != nullptr));
 
 	int iLength = pIarray->getLength();
 
@@ -150,7 +150,7 @@ bool JustInTimeArray<double>::addCache(int iChange, const InfoArray* pIarray, Cv
 	{
 		int iIndex = pIarray->getWithType(getType(), i, 0);
 		FAssert(iIndex >= 0);
-		if (fpConvert != NULL)
+		if (fpConvert != nullptr)
 		{
 			iIndex = (pPlayer->*fpConvert)(iIndex);
 		}
@@ -169,7 +169,7 @@ bool JustInTimeArray<double>::addCache(int iChange, const InfoArray* pIarray, Cv
 			{
 				set(get(iIndex) / fValue, iIndex);
 			}
-			if (fpUpdate != NULL)
+			if (fpUpdate != nullptr)
 			{
 				// read below for reasonf for setting change to false
 				(pPlayer->*fpUpdate)(iIndex, false);
@@ -280,7 +280,7 @@ int JustInTimeArray<T>::getPositiveCount() const
 	{
 		return m_eDefault > 0 ? m_iLength : 0;
 	}
-	
+
 	int iCount = 0;
 	for (int i = 0; i < m_iLength; ++i)
 	{
@@ -325,7 +325,7 @@ int JustInTimeArray<T>::safeAdd(T value, int iIndex)
 template<class T>
 bool JustInTimeArray<T>::hasContent()
 {
-	if (m_tArray == NULL)
+	if (m_tArray == nullptr)
 	{
 		return false;
 	}
@@ -344,7 +344,7 @@ bool JustInTimeArray<T>::hasContent()
 template<class T>
 int JustInTimeArray<T>::getFirstNoneDefault()
 {
-	if (m_tArray == NULL)
+	if (m_tArray == nullptr)
 	{
 		return NO_NONEDEFAULT_ARRAY;
 	}
@@ -363,10 +363,10 @@ int JustInTimeArray<T>::getFirstNoneDefault()
 template<class T>
 unsigned int JustInTimeArray<T>::getNumUsedElements(T* pNormalArray) const
 {
-	T* pPointer = pNormalArray != NULL ? pNormalArray : m_tArray;
+	T* pPointer = pNormalArray != nullptr ? pNormalArray : m_tArray;
 
 	unsigned int iMax = 0;
-	if (pPointer != NULL)
+	if (pPointer != nullptr)
 	{
 		for (unsigned int iIndex = 0; iIndex < m_iLength; iIndex++)
 		{
@@ -423,7 +423,7 @@ void JustInTimeArray<T>::read(FDataStreamBase* pStream, bool bRead)
 	{
 		return;
 	}
-	
+
 	for (unsigned int i = 0; i < m_iLength; ++i)
 	{
 		int iBuffer = 0;
@@ -440,7 +440,7 @@ void JustInTimeArray<T>::write(FDataStreamBase* pStream, bool bWrite)
 	{
 		return;
 	}
-	
+
 	for (unsigned int i = 0; i < m_iLength; ++i)
 	{
 		int iBuffer = get(i);
@@ -580,7 +580,7 @@ JustInTimeArray<T>& JustInTimeArray<T>::operator=(const JustInTimeArray<T> &rhs)
 	{
 		this->set(rhs.get(i), i);
 	}
-	
+
 	this->hasContent(); // clear array if possible
 
 	return *this;
@@ -649,7 +649,7 @@ bool JustInTimeArray<T>::operator!=(const JustInTimeArray<T> &rhs) const
 
 template<class T>
 JustInTimeArray2D<T>::JustInTimeArray2D<T>(JITarrayTypes eType, JITarrayTypes eSubType, T eDefault)
-	: tArray(NULL)
+	: tArray(nullptr)
 	, m_iType(eType)
 	, m_iSubType(eSubType)
 	, m_iLength(getArrayLength(eType))
@@ -661,7 +661,7 @@ JustInTimeArray2D<T>::JustInTimeArray2D<T>(JITarrayTypes eType, JITarrayTypes eS
 
 template<class T>
 JustInTimeArray2D<T>::JustInTimeArray2D<T>(int iLength, JITarrayTypes eSubType, T eDefault)
-	: tArray(NULL)
+	: tArray(nullptr)
 	, m_iType(JIT_ARRAY_NO_TYPE)
 	, m_iSubType(eSubType)
 	, m_iLength(iLength)
@@ -687,8 +687,8 @@ void JustInTimeArray2D<T>::allocate()
 	// Instead the approach is to go a bit more low level, allocate the memory manually without calling a constructor
 	//   next the memory is filled with data from the local JIT array, which did call the constructor.
 	// This only works because all arrays are identical and no array in the JIT arrays has been allocated yet.
-	
-	if (tArray != NULL)
+
+	if (tArray != nullptr)
 	{
 		return;
 	}
@@ -712,7 +712,7 @@ void JustInTimeArray2D<T>::maybeFreeArray()
 	if (isAllocated() && m_iArraysInUse == 0)
 	{
 		free(tArray);
-		tArray = NULL;
+		tArray = nullptr;
 	}
 }
 
@@ -802,14 +802,14 @@ bool JustInTimeArray2D<T>::addCache(int iChange, const InfoArrayBase* pIarray)
 template<class T>
 bool JustInTimeArray2D<T>::isAllocated() const
 {
-	return tArray != NULL;
+	return tArray != nullptr;
 }
 
 template<class T>
 bool JustInTimeArray2D<T>::isAllocated(int iIndex) const
 {
 	FAssert(iIndex >= 0 && iIndex < m_iLength);
-	return tArray != NULL && tArray[iIndex].isAllocated();
+	return tArray != nullptr && tArray[iIndex].isAllocated();
 }
 
 
@@ -828,7 +828,7 @@ void JustInTimeArray2D<T>::Write(FDataStreamBase* pStream)
 template<class T>
 void JustInTimeArray2D<T>::ReadWrite(bool bRead, FDataStreamBase* pStream)
 {
-	
+
 	unsigned short iLength = 0;
 
 	if (bRead)
@@ -891,14 +891,14 @@ void JustInTimeArray2D<T>::ReadWrite(bool bRead, FDataStreamBase* pStream)
 		}
 	}
 	maybeFreeArray();
-	
+
 }
 
 template<class T>
 CacheArray2D<T>::CacheArray2D(int iLength, int iSubLength)
 	: m_iLength(iLength)
 	, m_iSubLength(iSubLength)
-	, m_aArray(NULL)
+	, m_aArray(nullptr)
 #ifdef FASSERT_ENABLE
 	, m_iType(JIT_ARRAY_NO_TYPE)
 	, m_iSubType(JIT_ARRAY_NO_TYPE)
@@ -910,7 +910,7 @@ template<class T>
 CacheArray2D<T>::CacheArray2D(int iLength, JITarrayTypes eSubType)
 	: m_iLength(iLength)
 	, m_iSubLength(getArrayLength(eSubType))
-	, m_aArray(NULL)
+	, m_aArray(nullptr)
 #ifdef FASSERT_ENABLE
 	, m_iType(JIT_ARRAY_NO_TYPE)
 	, m_iSubType(eSubType)
@@ -922,7 +922,7 @@ template<class T>
 CacheArray2D<T>::CacheArray2D(JITarrayTypes eType, int iSubLength)
 	: m_iLength(getArrayLength(eType))
 	, m_iSubLength(iSubLength)
-	, m_aArray(NULL)
+	, m_aArray(nullptr)
 #ifdef FASSERT_ENABLE
 	, m_iType(eType)
 	, m_iSubType(JIT_ARRAY_NO_TYPE)
@@ -934,7 +934,7 @@ template<class T>
 CacheArray2D<T>::CacheArray2D(JITarrayTypes eType, JITarrayTypes eSubType)
 	: m_iLength(getArrayLength(eType))
 	, m_iSubLength(getArrayLength(eSubType))
-	, m_aArray(NULL)
+	, m_aArray(nullptr)
 #ifdef FASSERT_ENABLE
 	, m_iType(eType)
 	, m_iSubType(eSubType)
@@ -951,7 +951,7 @@ CacheArray2D<T>::~CacheArray2D<T>()
 template<class T>
 T CacheArray2D<T>::get(int iIndex, int iSubIndex) const
 {
-	if (m_aArray == NULL)
+	if (m_aArray == nullptr)
 	{
 		return 0;
 	}
@@ -1029,7 +1029,7 @@ void CacheArray2D<T>::addCacheAccumulative(int iChange, const InfoArrayBase& kIa
 template<class T>
 void CacheArray2D<T>::allocate()
 {
-	if (m_aArray == NULL || m_iLength > 0 || m_iSubLength > 0)
+	if (m_aArray == nullptr || m_iLength > 0 || m_iSubLength > 0)
 	{
 		int iLength = m_iLength * m_iSubLength;
 		m_aArray = new T [iLength];

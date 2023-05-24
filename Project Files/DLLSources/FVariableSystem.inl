@@ -111,7 +111,7 @@ inline void FVariableSystem::UnInit()
 	while ( iIterator != m_mapVariableMap.end())
 	{
 		pkVariable = (FVariable*)iIterator->second;
-		if ( pkVariable != NULL ) delete pkVariable;
+		if (pkVariable != nullptr) delete pkVariable;
 		++iIterator;
 	}
 	m_mapVariableMap.clear ();
@@ -511,13 +511,13 @@ inline bool FVariableSystem::GetValue( const char * szVariable, const wchar * & 
 //---------------------------------------------------------------------------------------
 //! \brief Gets a pointer to the variable object that contains the given variable
 //! \param szVariable The name of the variable to obtain
-//! \retval Pointer to the requested FVariable, or NULL if the variable does not exist
+//! \retval Pointer to the requested FVariable, or nullptr if the variable does not exist
 //---------------------------------------------------------------------------------------
 inline const FVariable * FVariableSystem::GetVariable( const char * szVariable ) const
 {
 	VSIteratorC iIterator;
 	iIterator = m_mapVariableMap.find ( szVariable );
-	if ( iIterator == m_mapVariableMap.end()) return NULL;
+	if (iIterator == m_mapVariableMap.end()) return nullptr;
 	return iIterator->second;
 }
 
@@ -526,7 +526,7 @@ inline const FVariable * FVariableSystem::GetVariable( const char * szVariable )
 //---------------------------------------------------------------------------------------
 //! \brief Gets a pointer to the variable object that contains the given variable
 //! \param szVariable The name of the variable to obtain
-//! \retval Pointer to the requested FVariable, or NULL if the variable does not exist
+//! \retval Pointer to the requested FVariable, or nullptr if the variable does not exist
 //---------------------------------------------------------------------------------------
 inline void FVariableSystem::SetValue( const char * szVariable, bool bValue )
 {

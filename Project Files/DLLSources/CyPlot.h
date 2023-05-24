@@ -16,7 +16,7 @@ public:
 	DllExport CyPlot(CvPlot*);			// Call from C++
 	CvPlot* getPlot() { return m_pPlot; }	// Call from C++
 	void setPlot(CvPlot* p) { m_pPlot=p; }	// Call from C++
-	bool isNone() { return (m_pPlot==NULL); }
+	bool isNone() { return m_pPlot == nullptr; }
 	void erase();
 	DllExport NiPoint3 getPoint();
 	int getTeam();
@@ -28,7 +28,7 @@ public:
 	bool isWithinTeamCityRadius(int /*TeamTypes*/ eTeam, int /*PlayerTypes*/ eIgnorePlayer);
 	bool isLake();
 	bool isRiverSide();
-	bool isRiver(); 
+	bool isRiver();
 	bool isFreshWater();// WTP, ray, Health Overhaul
 	bool isRiverConnection(int /*DirectionTypes*/ eDirection);
 	int getNearestLandArea();
@@ -205,4 +205,3 @@ private:
 	CvPlot* m_pPlot;
 };
 #endif	// CyPlot_h
-

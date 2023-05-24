@@ -72,7 +72,7 @@ AlertWindow::returnTypes AlertWindow::openWindow()
 	// without this the game will freeze with the window behind and people can have problems getting out of the now frozen game
 	flag |= MB_SETFOREGROUND | MB_TOPMOST;
 
-	return (returnTypes)MessageBoxA(NULL, message.c_str(), header.c_str(), flag);
+	return (returnTypes)MessageBoxA(nullptr, message.c_str(), header.c_str(), flag);
 }
 
 void AlertWindow::setDefaultButton(int iButton)
@@ -97,12 +97,12 @@ void testStringCompare(tinyxml2::XMLElement* tagElement, CvString& str, char con
 	{
 		bool bFallback = false;
 		tinyxml2::XMLElement* translationElement = tagElement->NextSiblingElement(languageName);
-		if (translationElement == NULL)
+		if (translationElement == nullptr)
 		{
 			bFallback = true;
 			translationElement = tagElement->NextSiblingElement("English");
 		}
-		if (translationElement == NULL)
+		if (translationElement == nullptr)
 		{
 			return;
 		}
@@ -154,22 +154,22 @@ void AlertWindow::setMessageArguments(int i1, int i2, int i3, int i4, int i5)
 		FAssertMsg(false, "Alert_Window_utf8.xml failed to open");
 		return;
 	}
-	FAssert(gDLL != NULL);
+	FAssert(gDLL != nullptr);
 	// use English if somebody adds an alert window prior to gDLL being set (hence no current language available)
-	char const* languageName = gDLL != NULL ? CvGameText::getLanguageName(gDLL->getCurrentLanguage()) : "English";
+	char const* languageName = gDLL != nullptr ? CvGameText::getLanguageName(gDLL->getCurrentLanguage()) : "English";
 
 	tinyxml2::XMLElement* loopElement = doc.FirstChildElement("Civ4GameText");
 
 	FAssert(loopElement);
-	if (loopElement == NULL)
+	if (loopElement == nullptr)
 	{
 		return;
 	}
 
-	for (loopElement = loopElement->FirstChildElement("TEXT"); loopElement != NULL; loopElement = loopElement->NextSiblingElement("TEXT"))
+	for (loopElement = loopElement->FirstChildElement("TEXT"); loopElement != nullptr; loopElement = loopElement->NextSiblingElement("TEXT"))
 	{
 		tinyxml2::XMLElement* tagElement = loopElement->FirstChildElement("Tag");
-		if (tagElement != NULL)
+		if (tagElement != nullptr)
 		{
 			testStringCompare(tagElement, header , languageName);
 			testStringCompare(tagElement, message, languageName);

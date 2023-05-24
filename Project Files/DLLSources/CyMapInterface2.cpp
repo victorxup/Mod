@@ -37,7 +37,7 @@ void CyMapPythonInterface2(python::class_<CyMap>& x)
 		.def("plot", &CyMap::plot, python::return_value_policy<python::manage_new_object>(), "CyPlot (iX,iY) - get CyPlot at (iX,iY)")
 		.def("sPlot", &CyMap::sPlot, python::return_value_policy<python::reference_existing_object>(), "CyPlot (iX,iY) - static - get CyPlot at (iX,iY)")
 		.def("pointToPlot", &CyMap::pointToPlot, python::return_value_policy<python::manage_new_object>())
-		.def("getIndexAfterLastArea", &CyMap::getIndexAfterLastArea, "int () - index for handling NULL areas")
+		.def("getIndexAfterLastArea", &CyMap::getIndexAfterLastArea, "int () - index for handling null areas")
 		.def("getNumAreas", &CyMap::getNumAreas, "int () - total areas")
 		.def("getNumLandAreas", &CyMap::getNumLandAreas, "int () - total land areas")
 		.def("getArea", &CyMap::getArea, python::return_value_policy<python::manage_new_object>(), "CyArea (iID) - get CyArea at iID")
@@ -49,11 +49,11 @@ void CyMapPythonInterface2(python::class_<CyMap>& x)
 		.def("regenerateGameElements", &CyMap::regenerateGameElements, "used to regenerate everything but the terrain and height maps")
 		.def("updateFog", &CyMap::updateFog, "void ()")
 		.def("updateMinimapColor", &CyMap::updateMinimapColor, "void ()")
-		.def("updateMinOriginalStartDist", &CyMap::updateMinOriginalStartDist, "void (CyArea* pArea)")		
+		.def("updateMinOriginalStartDist", &CyMap::updateMinOriginalStartDist, "void (CyArea* pArea)")
 		.def("calculateCanalAndChokePoints", &CyMap::calculateCanalAndChokePoints, "void ()")// Super Forts  *canal* *choke*
 
 		.def("updateWaterPlotTerrainTypes", &CyMap::updateWaterPlotTerrainTypes, "void ()") // autodetect lakes
-		
+
 		.def("getCityCatchmentRadius", &CyMap::getCityCatchmentRadius, "int ()")
 		.def("setCityCatchmentRadiusMapMaker", &CyMap::setCityCatchmentRadiusMapMaker, "void (int)")
 		.def("setCityCatchmentRadiusNoMapMaker", &CyMap::setCityCatchmentRadiusNoMapMaker, "void (int)")

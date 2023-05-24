@@ -40,7 +40,7 @@ CvCity::CvCity()
 	: m_yields(*this)
 {
 
-	m_paTradeCities = NULL;
+	m_paTradeCities = nullptr;
 
 	CvDLLEntity::createCityEntity(this);		// create and attach entity to city
 
@@ -221,7 +221,7 @@ void CvCity::init(int iID, PlayerTypes eOwner, Coordinates initCoord, bool bBump
 	{
 		CvPlot* const pAdjacentPlot = coord().neighbourPlot(eDirection);
 
-		if (pAdjacentPlot != NULL)
+		if (pAdjacentPlot != nullptr)
 		{
 			if (pAdjacentPlot->getCulture(getOwnerINLINE()) < GC.getDefineINT("FREE_CITY_ADJACENT_CULTURE"))
 			{
@@ -447,11 +447,11 @@ void CvCity::kill()
 	{
 		CvPlot* pLoopPlot = getCityIndexPlot(eLoopCityPlot);
 
-		if (pLoopPlot != NULL)
+		if (pLoopPlot != nullptr)
 		{
 			if (pLoopPlot->getWorkingCityOverride() == this)
 			{
-				pLoopPlot->setWorkingCityOverride(NULL);
+				pLoopPlot->setWorkingCityOverride(nullptr);
 			}
 		}
 	}
@@ -481,7 +481,7 @@ void CvCity::kill()
 	//remove home plot yields
 	setYieldRateDirty();
 
-	pPlot->setPlotCity(NULL);
+	pPlot->setPlotCity(nullptr);
 
 	area()->changeCitiesPerPlayer(getOwnerINLINE(), -1);
 
@@ -506,7 +506,7 @@ void CvCity::kill()
 	{
 		CvPlot* pAdjacentPlot = plotDirection(pPlot->getX_INLINE(), pPlot->getY_INLINE(), ((DirectionTypes)iI));
 
-		if (pAdjacentPlot != NULL)
+		if (pAdjacentPlot != nullptr)
 		{
 			pAdjacentPlot->updateCulture(true);
 		}
@@ -616,7 +616,7 @@ void CvCity::doTurn()
 		{
 			CvPlot* const pLoopPlot = getCityIndexPlot(eLoopCityPlot);
 
-			if (pLoopPlot != NULL)
+			if (pLoopPlot != nullptr)
 			{
 				if (pLoopPlot->getWorkingCity() == this)
 				{
@@ -720,7 +720,7 @@ void CvCity::updateSelectedCity()
 	{
 		CvPlot* const pLoopPlot = getCityIndexPlot(eLoopCityPlot);
 
-		if (pLoopPlot != NULL)
+		if (pLoopPlot != nullptr)
 		{
 			pLoopPlot->updateShowCitySymbols();
 		}
@@ -734,7 +734,7 @@ void CvCity::updateYield()
 	{
 		CvPlot* pLoopPlot = getCityIndexPlot(eLoopCityPlot);
 
-		if (pLoopPlot != NULL)
+		if (pLoopPlot != nullptr)
 		{
 			pLoopPlot->updateYield(true);
 		}
@@ -800,7 +800,7 @@ void CvCity::doTask(TaskTypes eTask, int iData1, int iData2, bool bOption, bool 
 			for (int i = 0; i < NUM_CITY_PLOTS; ++i)
 			{
 				CvPlot* pLoopPlot = ::plotCity(getX_INLINE(), getY_INLINE(), i);
-				if (pLoopPlot != NULL)
+				if (pLoopPlot != nullptr)
 				{
 					pLoopPlot->setCulture(getOwnerINLINE(), 0, false);
 				}
@@ -885,7 +885,7 @@ void CvCity::doTask(TaskTypes eTask, int iData1, int iData2, bool bOption, bool 
 		break;
 
 	case TASK_CLEAR_RALLY_PLOT:
-		setRallyPlot(NULL);
+		setRallyPlot(nullptr);
 		break;
 
 	case TASK_YIELD_IMPORT:
@@ -967,12 +967,12 @@ void CvCity::doTask(TaskTypes eTask, int iData1, int iData2, bool bOption, bool 
 	case TASK_CLEAR_SPECIALTY:
 		{
 			CvUnit* pUnit = GET_PLAYER(getOwnerINLINE()).getUnit(iData1);
-			if (pUnit == NULL)
+			if (pUnit == nullptr)
 			{
 				pUnit = getPopulationUnitById(iData1);
 			}
 
-			if (pUnit != NULL)
+			if (pUnit != nullptr)
 			{
 				pUnit->clearSpecialty();
 			}
@@ -1073,7 +1073,7 @@ CvPlot* CvCity::getCityIndexPlot(CityPlotTypes eCityPlot) const
 
 bool CvCity::canWork(const CvPlot* pPlot) const
 {
-	if (pPlot == NULL)
+	if (pPlot == nullptr)
 	{
 		return false;
 	}
@@ -1085,7 +1085,7 @@ bool CvCity::canWork(const CvPlot* pPlot) const
 
 	FAssertMsg(getCityPlotIndex(pPlot) != -1, "getCityPlotIndex(pPlot) is expected to be assigned (not -1)");
 
-	if (pPlot->plotCheck(PUF_canSiege, getOwnerINLINE()) != NULL)
+	if (pPlot->plotCheck(PUF_canSiege, getOwnerINLINE()) != nullptr)
 	{
 		return false;
 	}
@@ -1112,11 +1112,11 @@ void CvCity::verifyWorkingPlot(int iPlotIndex)
 	FAssert(iPlotIndex >= 0 && iPlotIndex < NUM_CITY_PLOTS);
 
 	CvUnit* pUnit = getUnitWorkingPlot((CityPlotTypes)iPlotIndex);
-	if (pUnit != NULL)
+	if (pUnit != nullptr)
 	{
 		CvPlot* pPlot = getCityIndexPlot((CityPlotTypes)iPlotIndex);
 
-		if (pPlot != NULL)
+		if (pPlot != nullptr)
 		{
 			bool bCanWork = canWork(pPlot);
 
@@ -1156,7 +1156,7 @@ int CvCity::getNumAvailableWorkPlots() const
 			{
 				CvPlot* pLoopPlot = getCityIndexPlot(eLoopCityPlot);
 
-				if (pLoopPlot != NULL)
+				if (pLoopPlot != nullptr)
 				{
 					if (canWork(pLoopPlot))
 					{
@@ -1176,9 +1176,9 @@ void CvCity::clearWorkingOverride(int iIndex)
 
 	pPlot = getCityIndexPlot((CityPlotTypes)iIndex);
 
-	if (pPlot != NULL)
+	if (pPlot != nullptr)
 	{
-		pPlot->setWorkingCityOverride(NULL);
+		pPlot->setWorkingCityOverride(nullptr);
 	}
 }
 
@@ -1191,7 +1191,7 @@ int CvCity::countNumImprovedPlots(ImprovementTypes eImprovement, bool bPotential
 	{
 		const CvPlot* const pLoopPlot = getCityIndexPlot(eLoopCityPlot);
 
-		if (pLoopPlot != NULL)
+		if (pLoopPlot != nullptr)
 		{
 			if (pLoopPlot->getWorkingCity() == this)
 			{
@@ -1223,7 +1223,7 @@ int CvCity::countNumWaterPlots() const
 	{
 		const CvPlot* const pLoopPlot = getCityIndexPlot(eLoopCityPlot);
 
-		if (pLoopPlot != NULL)
+		if (pLoopPlot != nullptr)
 		{
 			if (pLoopPlot->getWorkingCity() == this)
 			{
@@ -1246,7 +1246,7 @@ int CvCity::countNumRiverPlots() const
 	{
 		CvPlot* pLoopPlot = getCityIndexPlot(eLoopCityPlot);
 
-		if (pLoopPlot != NULL)
+		if (pLoopPlot != nullptr)
 		{
 			if (pLoopPlot->getWorkingCity() == this)
 			{
@@ -1403,7 +1403,7 @@ int CvCity::findPopulationRank() const
 
 		int iLoop;
 		CvCity* pLoopCity;
-		for (pLoopCity = GET_PLAYER(getOwnerINLINE()).firstCity(&iLoop); pLoopCity != NULL; pLoopCity = GET_PLAYER(getOwnerINLINE()).nextCity(&iLoop))
+		for (pLoopCity = GET_PLAYER(getOwnerINLINE()).firstCity(&iLoop); pLoopCity != nullptr; pLoopCity = GET_PLAYER(getOwnerINLINE()).nextCity(&iLoop))
 		{
 			if ((pLoopCity->getPopulation() > getPopulation()) ||
 				((pLoopCity->getPopulation() == getPopulation()) && (pLoopCity->getID() < getID())))
@@ -1431,7 +1431,7 @@ int CvCity::findBaseYieldRateRank(YieldTypes eYield) const //note this function 
 
 		int iLoop;
 		CvCity* pLoopCity;
-		for (pLoopCity = GET_PLAYER(getOwnerINLINE()).firstCity(&iLoop); pLoopCity != NULL; pLoopCity = GET_PLAYER(getOwnerINLINE()).nextCity(&iLoop))
+		for (pLoopCity = GET_PLAYER(getOwnerINLINE()).firstCity(&iLoop); pLoopCity != nullptr; pLoopCity = GET_PLAYER(getOwnerINLINE()).nextCity(&iLoop))
 		{
 			int iYieldRate = pLoopCity->getYieldRate(eYield);
 			if ((iYieldRate > iRate) || ((iYieldRate == iRate) && (pLoopCity->getID() < getID())))
@@ -1458,7 +1458,7 @@ int CvCity::findYieldRateRank(YieldTypes eYield) const  //note this function is 
 
 		int iLoop;
 		CvCity* pLoopCity;
-		for (pLoopCity = GET_PLAYER(getOwnerINLINE()).firstCity(&iLoop); pLoopCity != NULL; pLoopCity = GET_PLAYER(getOwnerINLINE()).nextCity(&iLoop))
+		for (pLoopCity = GET_PLAYER(getOwnerINLINE()).firstCity(&iLoop); pLoopCity != nullptr; pLoopCity = GET_PLAYER(getOwnerINLINE()).nextCity(&iLoop))
 		{
 			if ((pLoopCity->getYieldRate(eYield) > iRate) ||
 				((pLoopCity->getYieldRate(eYield) == iRate) && (pLoopCity->getID() < getID())))
@@ -1868,14 +1868,14 @@ int CvCity::getFoodTurnsLeft() const
 
 bool CvCity::isProduction() const
 {
-	return (headOrderQueueNode() != NULL);
+	return headOrderQueueNode() != nullptr;
 }
 
 bool CvCity::isProductionUnit() const
 {
 	CLLNode<OrderData>* pOrderNode = headOrderQueueNode();
 
-	if (pOrderNode != NULL)
+	if (pOrderNode != nullptr)
 	{
 		return (pOrderNode->m_data.getType() == ORDER_TRAIN);
 	}
@@ -1888,7 +1888,7 @@ bool CvCity::isProductionBuilding() const
 {
 	CLLNode<OrderData>* pOrderNode = headOrderQueueNode();
 
-	if (pOrderNode != NULL)
+	if (pOrderNode != nullptr)
 	{
 		return (pOrderNode->m_data.getType() == ORDER_CONSTRUCT);
 	}
@@ -1900,7 +1900,7 @@ bool CvCity::isProductionConvince() const
 {
 	CLLNode<OrderData>* pOrderNode = headOrderQueueNode();
 
-	if (pOrderNode != NULL)
+	if (pOrderNode != nullptr)
 	{
 		return (pOrderNode->m_data.getType() == ORDER_CONVINCE);
 	}
@@ -1980,7 +1980,7 @@ UnitTypes CvCity::getProductionUnit() const
 {
 	CLLNode<OrderData>* pOrderNode = headOrderQueueNode();
 
-	if (pOrderNode != NULL)
+	if (pOrderNode != nullptr)
 	{
 		switch (pOrderNode->m_data.getType())
 		{
@@ -2006,7 +2006,7 @@ UnitAITypes CvCity::getProductionUnitAI() const
 {
 	CLLNode<OrderData>* pOrderNode = headOrderQueueNode();
 
-	if (pOrderNode != NULL)
+	if (pOrderNode != nullptr)
 	{
 		switch (pOrderNode->m_data.getType())
 		{
@@ -2032,7 +2032,7 @@ BuildingTypes CvCity::getProductionBuilding() const
 {
 	CLLNode<OrderData>* pOrderNode = headOrderQueueNode();
 
-	if (pOrderNode != NULL)
+	if (pOrderNode != nullptr)
 	{
 		switch (pOrderNode->m_data.getType())
 		{
@@ -2057,7 +2057,7 @@ FatherPointTypes CvCity::getProductionFatherPoint() const
 {
 	CLLNode<OrderData>* pOrderNode = headOrderQueueNode();
 
-	if (pOrderNode != NULL)
+	if (pOrderNode != nullptr)
 	{
 		switch (pOrderNode->m_data.getType())
 		{
@@ -2082,7 +2082,7 @@ const CvInfoBase* CvCity::getProductionInfo() const
 {
 	CLLNode<OrderData>* pOrderNode = headOrderQueueNode();
 
-	if (pOrderNode != NULL)
+	if (pOrderNode != nullptr)
 	{
 		switch (pOrderNode->m_data.getType())
 		{
@@ -2104,14 +2104,14 @@ const CvInfoBase* CvCity::getProductionInfo() const
 		}
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 
 const wchar* CvCity::getProductionName() const
 {
 	const CvInfoBase* pInfo = getProductionInfo();
-	if (pInfo != NULL)
+	if (pInfo != nullptr)
 	{
 		return pInfo->getDescription();
 	}
@@ -2124,7 +2124,7 @@ int CvCity::getGeneralProductionTurnsLeft() const
 {
 	CLLNode<OrderData>* pOrderNode = headOrderQueueNode();
 
-	if (pOrderNode != NULL)
+	if (pOrderNode != nullptr)
 	{
 		switch (pOrderNode->m_data.getType())
 		{
@@ -2152,7 +2152,7 @@ int CvCity::getGeneralProductionTurnsLeft() const
 const wchar* CvCity::getProductionNameKey() const
 {
 	const CvInfoBase* pInfo = getProductionInfo();
-	if (pInfo != NULL)
+	if (pInfo != nullptr)
 	{
 		return pInfo->getTextKeyWide();
 	}
@@ -2166,7 +2166,7 @@ int CvCity::getFirstUnitOrder(UnitTypes eUnit) const
 
 	CLLNode<OrderData>* pOrderNode = headOrderQueueNode();
 
-	while (pOrderNode != NULL)
+	while (pOrderNode != nullptr)
 	{
 		if (pOrderNode->m_data.getType() == ORDER_TRAIN)
 		{
@@ -2191,7 +2191,7 @@ int CvCity::getFirstBuildingOrder(BuildingTypes eBuilding) const
 
 	CLLNode<OrderData>* pOrderNode = headOrderQueueNode();
 
-	while (pOrderNode != NULL)
+	while (pOrderNode != nullptr)
 	{
 		if (pOrderNode->m_data.getType() == ORDER_CONSTRUCT)
 		{
@@ -2215,7 +2215,7 @@ int CvCity::getNumTrainUnitAI(UnitAITypes eUnitAI) const
 
 	CLLNode<OrderData>* pOrderNode = headOrderQueueNode();
 
-	while (pOrderNode != NULL)
+	while (pOrderNode != nullptr)
 	{
 		if (pOrderNode->m_data.getType() == ORDER_TRAIN)
 		{
@@ -2236,7 +2236,7 @@ int CvCity::getProduction() const
 {
 	CLLNode<OrderData>* pOrderNode = headOrderQueueNode();
 
-	if (pOrderNode != NULL)
+	if (pOrderNode != nullptr)
 	{
 		switch (pOrderNode->m_data.getType())
 		{
@@ -2265,7 +2265,7 @@ int CvCity::getProductionNeededUncached(YieldTypes eYield) const
 {
 	CLLNode<OrderData>* pOrderNode = headOrderQueueNode();
 
-	if (pOrderNode != NULL)
+	if (pOrderNode != nullptr)
 	{
 		switch (pOrderNode->m_data.getType())
 		{
@@ -2331,7 +2331,7 @@ int CvCity::getProductionTurnsLeft() const
 {
 	CLLNode<OrderData>* pOrderNode = headOrderQueueNode();
 
-	if (pOrderNode != NULL)
+	if (pOrderNode != nullptr)
 	{
 		switch (pOrderNode->m_data.getType())
 		{
@@ -2453,7 +2453,7 @@ int CvCity::getProductionModifier() const
 {
 	CLLNode<OrderData>* pOrderNode = headOrderQueueNode();
 
-	if (pOrderNode != NULL)
+	if (pOrderNode != nullptr)
 	{
 		switch (pOrderNode->m_data.getType())
 		{
@@ -2943,7 +2943,7 @@ int CvCity::getHurryCostModifier(bool bIgnoreNew) const
 	int iModifier = 100;
 	CLLNode<OrderData>* pOrderNode = headOrderQueueNode();
 
-	if (pOrderNode != NULL)
+	if (pOrderNode != nullptr)
 	{
 		switch (pOrderNode->m_data.getType())
 		{
@@ -3154,7 +3154,7 @@ bool CvCity::isHasBuildingClass(BuildingClassTypes eIndex) const
 
 int CvCity::getProfessionOutput(ProfessionTypes eProfession, const CvUnit* pUnit, BuildingTypes* peBuilding) const
 {
-	if (peBuilding != NULL)
+	if (peBuilding != nullptr)
 	{
 		*peBuilding = NO_BUILDING;
 	}
@@ -3180,13 +3180,13 @@ int CvCity::getProfessionOutput(ProfessionTypes eProfession, const CvUnit* pUnit
 	}
 
 	int iModifier = 100;
-	if (pUnit != NULL)
+	if (pUnit != nullptr)
 	{
 		iModifier += GC.getUnitInfo(pUnit->getUnitType()).getYieldModifier(eYieldProduced);
 	}
 
 	int iExtra = 0;
-	if (pUnit != NULL)
+	if (pUnit != nullptr)
 	{
 		const CvUnitInfo& kUnit = GC.getUnitInfo(pUnit->getUnitType());
 		iExtra += kUnit.getYieldChange(eYieldProduced);
@@ -3204,7 +3204,7 @@ int CvCity::getProfessionOutput(ProfessionTypes eProfession, const CvUnit* pUnit
 				if (iBuildingOutput > iProfessionOutput)
 				{
 					iProfessionOutput = iBuildingOutput;
-					if (peBuilding != NULL)
+					if (peBuilding != nullptr)
 					{
 						*peBuilding = eBuilding;
 					}
@@ -3386,7 +3386,7 @@ void CvCity::setRallyPlot(CvPlot* pPlot)
 {
 	if (getRallyPlot() != pPlot)
 	{
-		if (pPlot != NULL)
+		if (pPlot != nullptr)
 		{
 			m_rallyCoordinates = pPlot->coord();
 		}
@@ -3750,7 +3750,7 @@ void CvCity::setLastDefenseDamage(int iNewValue)
 
 bool CvCity::isBombardable(const CvUnit* pUnit) const
 {
-	if (NULL != pUnit && !pUnit->isEnemy(getTeam()))
+	if (pUnit != nullptr && !pUnit->isEnemy(getTeam()))
 	{
 		return false;
 	}
@@ -3887,7 +3887,7 @@ void CvCity::setAllCitizensAutomated(bool bAutomated)
 	for (uint i = 0; i < m_aPopulationUnits.size(); ++i)
 	{
 		CvUnit* pUnit = m_aPopulationUnits[i];
-		if (pUnit != NULL)
+		if (pUnit != nullptr)
 		{
 			pUnit->setColonistLocked(!bAutomated);
 		}
@@ -3907,7 +3907,7 @@ void CvCity::setAllCitizensAutomated(bool bAutomated)
 void CvCity::setCitizenAutomated(int iUnitId)
 {
 	CvUnit* pUnit = getPopulationUnitById(iUnitId);
-	if (pUnit != NULL)
+	if (pUnit != nullptr)
 	{
 		pUnit->setColonistLocked(false);
 
@@ -4074,7 +4074,7 @@ void CvCity::setCultureLevel(CultureLevelTypes eNewValue)
 
 							CvPlot*	const pLoopPlot = plotXY(getX_INLINE(), getY_INLINE(), iDX, iDY);
 
-							if (pLoopPlot != NULL)
+							if (pLoopPlot != nullptr)
 							{
 								pLoopPlot->changeCultureRangeCities(getOwnerINLINE(), eCultureRange, -1);
 							}
@@ -4100,7 +4100,7 @@ void CvCity::setCultureLevel(CultureLevelTypes eNewValue)
 
 							CvPlot* const pLoopPlot = plotXY(getX_INLINE(), getY_INLINE(), iDX, iDY);
 
-							if (pLoopPlot != NULL)
+							if (pLoopPlot != nullptr)
 							{
 								pLoopPlot->changeCultureRangeCities(getOwnerINLINE(), eCultureRange, 1);
 							}
@@ -4118,7 +4118,7 @@ void CvCity::setCultureLevel(CultureLevelTypes eNewValue)
 			{
 				CvPlot* const pLoopPlot = plotXY(getX_INLINE(), getY_INLINE(), iDX, iDY);
 
-				if (pLoopPlot != NULL)
+				if (pLoopPlot != nullptr)
 				{
 					pLoopPlot->updateCulture(true);
 				}
@@ -4285,7 +4285,7 @@ int CvCity::getRawYieldConsumed(YieldTypes eYieldType) const
 	for (int i = 0; i < getPopulation(); ++i)
 	{
 		CvUnit* pUnit = getPopulationUnitByIndex(i);
-		if (NULL != pUnit)
+		if (pUnit != nullptr)
 		{
 			ProfessionTypes eProfession = pUnit->getProfession();
 			if (NO_PROFESSION != eProfession)
@@ -4316,7 +4316,7 @@ int CvCity::getBaseYieldRateModifier(YieldTypes eIndex, int iExtra) const
 
 	iModifier = getYieldRateModifier(eIndex);
 
-	if (area() != NULL)
+	if (area() != nullptr)
 	{
 		iModifier += area()->getYieldRateModifier(getOwnerINLINE(), eIndex);
 	}
@@ -4461,7 +4461,7 @@ int CvCity::getProductionOutput(ProfessionTypes eProfession) const
 			if (iI != CITY_HOME_PLOT)
 			{
 				CvPlot* pLoopPlot = plotCity(getX_INLINE(), getY_INLINE(), iI);
-				if ((pLoopPlot != NULL) && (pLoopPlot->getWorkingCity() == this))
+				if (pLoopPlot != nullptr && pLoopPlot->getWorkingCity() == this)
 				{
 					iOutput += AI_professionBasicOutput(eProfession, NO_UNIT, pLoopPlot);
 				}
@@ -4470,7 +4470,7 @@ int CvCity::getProductionOutput(ProfessionTypes eProfession) const
 	}
 	else
 	{
-		iOutput = AI_professionBasicOutput(eProfession, NO_UNIT, NULL);
+		iOutput = AI_professionBasicOutput(eProfession, NO_UNIT, nullptr);
 	}
 
 	return iOutput;
@@ -4500,7 +4500,7 @@ int CvCity::getPotentialProductionOutput(ProfessionTypes eProfession) const
 			if (iI != CITY_HOME_PLOT)
 			{
 				CvPlot* pLoopPlot = plotCity(getX_INLINE(), getY_INLINE(), iI);
-				if ((pLoopPlot != NULL) && (pLoopPlot->getWorkingCity() == this))
+				if (pLoopPlot != nullptr && pLoopPlot->getWorkingCity() == this)
 				{
 					YieldTypes eBestYield = NO_YIELD;
 					int iBestOutput = 0;
@@ -4824,13 +4824,13 @@ void CvCity::setYieldStored(YieldTypes eYield, int iValue)
 			{
 				CvPlot* pLoopPlot = getCityIndexPlot(eLoopCityPlot);
 
-				if (pLoopPlot != NULL)
+				if (pLoopPlot != nullptr)
 				{
 					if (pLoopPlot->getWorkingCity() == this)
 					{
 						pLoopPlot->updateYield(true);
 						// R&R, ray , MYCP partially based on code of Aymerick - START
-						if (getYieldStored(eYield) <= 0 && getUnitWorkingPlot(pLoopPlot) != NULL && eYield == GC.getProfessionInfo(getUnitWorkingPlot(pLoopPlot)->getProfession()).getYieldsProduced(0))
+						if (getYieldStored(eYield) <= 0 && getUnitWorkingPlot(pLoopPlot) != nullptr && eYield == GC.getProfessionInfo(getUnitWorkingPlot(pLoopPlot)->getProfession()).getYieldsProduced(0))
 						// R&R, ray , MYCP partially based on code of Aymerick - END
 						{
 							getUnitWorkingPlot(pLoopPlot)->setColonistLocked(false);
@@ -4873,11 +4873,11 @@ void CvCity::calculateNetYields(int aiYields[NUM_YIELD_TYPES], int* aiProducedYi
 
 	int aiConsumed[NUM_YIELD_TYPES];
 	int aiProduced[NUM_YIELD_TYPES];
-	if (aiProducedYields == NULL)
+	if (aiProducedYields == nullptr)
 	{
 		aiProducedYields = aiProduced;
 	}
-	if (aiConsumedYields == NULL)
+	if (aiConsumedYields == nullptr)
 	{
 		aiConsumedYields = aiConsumed;
 	}
@@ -4923,7 +4923,7 @@ void CvCity::calculateNetYields(int aiYields[NUM_YIELD_TYPES], int* aiProducedYi
 					YieldTypes eYieldProduced = (YieldTypes) kProfession.getYieldsProduced(0);
 					CvPlot* pCurrentWorkedPlot = getPlotWorkedByUnit(pUnit);
 
-					if (pCurrentWorkedPlot != NULL)
+					if (pCurrentWorkedPlot != nullptr)
 					{
 						int availableAmountOfYield = pCurrentWorkedPlot->calculatePotentialProfessionYieldAmount(pUnit->getProfession(), pUnit, false);
 						if (availableAmountOfYield == 0 && bPrintWarning)
@@ -5350,11 +5350,11 @@ void CvCity::popOrderInternal()
 {
 	CLLNode<OrderData>* pOrderNode = headOrderQueueNode();
 
-	if (pOrderNode == NULL)
+	if (pOrderNode == nullptr)
 		return;
 
 	m_orderQueue.deleteNode(pOrderNode);
-	pOrderNode = NULL;
+	pOrderNode = nullptr;
 }
 
 bool CvCity::isEverOwned(PlayerTypes eIndex) const
@@ -5406,7 +5406,7 @@ void CvCity::setRevealed(TeamTypes eIndex, bool bNewValue)
 			{
 				CvPlot* const pLoopPlot = getCityIndexPlot(eLoopCityPlot);
 
-				if (pLoopPlot != NULL)
+				if (pLoopPlot != nullptr)
 				{
 					pLoopPlot->updateSymbols();
 				}
@@ -5459,7 +5459,7 @@ void CvCity::doFoundMessage()
 	CvWString szBuffer;
 
 	szBuffer = gDLL->getText("TXT_KEY_MISC_CITY_HAS_BEEN_FOUNDED", getNameKey());
-	gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, -1, szBuffer, coord(), ARTFILEMGR.getInterfaceArtInfo("WORLDBUILDER_CITY_EDIT")->getPath(), MESSAGE_TYPE_MAJOR_EVENT, NULL, NO_COLOR);
+	gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, -1, szBuffer, coord(), ARTFILEMGR.getInterfaceArtInfo("WORLDBUILDER_CITY_EDIT")->getPath(), MESSAGE_TYPE_MAJOR_EVENT, nullptr, NO_COLOR);
 
 	szBuffer = gDLL->getText("TXT_KEY_MISC_CITY_IS_FOUNDED", getNameKey());
 	GC.getGameINLINE().addReplayMessage(REPLAY_MESSAGE_CITY_FOUNDED, getOwnerINLINE(), szBuffer, coord(), (ColorTypes)GC.getInfoTypeForString("COLOR_ALT_HIGHLIGHT_TEXT"));
@@ -5667,7 +5667,7 @@ CvUnit* CvCity::getUnitWorkingPlot(CityPlotTypes ePlotIndex) const
 		return getPopulationUnitById(iUnitId);
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 
@@ -5728,7 +5728,7 @@ CvUnit* CvCity::getUnitWorkingPlot(const CvPlot* pPlot) const
 		return getUnitWorkingPlot(eCityPlot);
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 
@@ -5747,12 +5747,12 @@ void CvCity::setUnitWorkingPlot(int iPlotIndex, int iUnitId)
 
 	CvPlot* pPlot = getCityIndexPlot((CityPlotTypes)iPlotIndex);
 
-	if (pPlot != NULL)
+	if (pPlot != nullptr)
 	{
 		//make sure unit is outdoor profession
 		CvUnit* pUnit = getPopulationUnitById(iUnitId);
-		FAssert(pUnit != NULL);
-		if (pUnit == NULL)
+		FAssert(pUnit != nullptr);
+		if (pUnit == nullptr)
 		{
 			return;
 		}
@@ -5793,7 +5793,7 @@ void CvCity::setUnitWorkingPlot(int iPlotIndex, int iUnitId)
 
 			//unassign current worked plot
 			CvPlot* pCurrentWorkedPlot = getPlotWorkedByUnit(pUnit);
-			if(pCurrentWorkedPlot != NULL)
+			if (pCurrentWorkedPlot != nullptr)
 			{
 				clearUnitWorkingPlot(pCurrentWorkedPlot);
 			}
@@ -5836,7 +5836,7 @@ void CvCity::clearUnitWorkingPlot(int iPlotIndex)
 	}
 
 	CvPlot* pPlot = getCityIndexPlot((CityPlotTypes)iPlotIndex);
-	if (pPlot != NULL)
+	if (pPlot != nullptr)
 	{
 		m_em_iWorkingPlot.set(iPlotIndex, -1);
 
@@ -5888,19 +5888,19 @@ void CvCity::alterUnitWorkingPlot(int iPlotIndex, int iUnitId, bool bAskProfessi
 	}
 
 	CvPlot* pPlot = getCityIndexPlot(ePlotIndex);
-	if (pPlot == NULL)
+	if (pPlot == nullptr)
 	{
 		return;
 	}
 
-	CvUnit* pUnit = NULL;
+	CvUnit* pUnit = nullptr;
 	if (iUnitId != -1)
 	{
 		pUnit = getPopulationUnitById(iUnitId);
-		if (pUnit == NULL)
+		if (pUnit == nullptr)
 		{
 			pUnit = GET_PLAYER(getOwnerINLINE()).getUnit(iUnitId);
-			if (pUnit != NULL)
+			if (pUnit != nullptr)
 			{
 				if (!pUnit->canJoinCity(plot()))
 				{
@@ -5918,13 +5918,13 @@ void CvCity::alterUnitWorkingPlot(int iPlotIndex, int iUnitId, bool bAskProfessi
 
 	if (canWork(pPlot))
 	{
-		if (pUnit != NULL)
+		if (pUnit != nullptr)
 		{
 			pUnit->setColonistLocked(true);
 		}
 
 		CvUnit* pUnitWorkingPlot = getUnitWorkingPlot(ePlotIndex);
-		if (NULL != pUnitWorkingPlot)
+		if (pUnitWorkingPlot != nullptr)
 		{
 			clearUnitWorkingPlot(ePlotIndex);
 		}
@@ -5936,7 +5936,7 @@ void CvCity::alterUnitWorkingPlot(int iPlotIndex, int iUnitId, bool bAskProfessi
 
 		if (isHuman() && bAskProfession)
 		{
-			if (pUnit != NULL)
+			if (pUnit != nullptr)
 			{
 				CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_CHOOSE_PROFESSION, getID(), pUnit->getID(), 1);
 				gDLL->getInterfaceIFace()->addPopup(pInfo, getOwnerINLINE(), true, true);
@@ -5962,14 +5962,14 @@ void CvCity::alterUnitWorkingBuilding(BuildingTypes eBuilding, int iUnitId, bool
 		return;
 	}
 
-	CvUnit* pUnit = NULL;
+	CvUnit* pUnit = nullptr;
 	if (iUnitId != -1)
 	{
 		pUnit = getPopulationUnitById(iUnitId);
-		if (pUnit == NULL)
+		if (pUnit == nullptr)
 		{
 			pUnit = GET_PLAYER(getOwnerINLINE()).getUnit(iUnitId);
-			if (pUnit != NULL)
+			if (pUnit != nullptr)
 			{
 				if (!pUnit->canJoinCity(plot()))
 				{
@@ -5984,7 +5984,7 @@ void CvCity::alterUnitWorkingBuilding(BuildingTypes eBuilding, int iUnitId, bool
 	{
 		ProfessionTypes eBestProfession = NO_PROFESSION;
 
-		if (pUnit != NULL)
+		if (pUnit != nullptr)
 		{
 			pUnit->setColonistLocked(true);
 			//code based on the one in setUnitWorkingPlot()
@@ -6041,7 +6041,7 @@ void CvCity::alterUnitWorkingBuilding(BuildingTypes eBuilding, int iUnitId, bool
 		}
 		if (isHuman() && bAskProfession && eBestProfession != NO_PROFESSION)
 		{
-			if (pUnit != NULL)
+			if (pUnit != nullptr)
 			{
 				CvPopupInfo* const pInfo = new CvPopupInfo(BUTTONPOPUP_CHOOSE_PROFESSION, getID(), pUnit->getID(), 2);
 				gDLL->getInterfaceIFace()->addPopup(pInfo, getOwnerINLINE(), true, true);
@@ -6054,7 +6054,7 @@ void CvCity::alterUnitWorkingBuilding(BuildingTypes eBuilding, int iUnitId, bool
 void CvCity::alterUnitProfession(int iUnitId, ProfessionTypes eProfession)
 {
 	CvUnit* pUnit = getPopulationUnitById(iUnitId);
-	if(pUnit != NULL)
+	if (pUnit != nullptr)
 	{
 		if (pUnit->canHaveProfession(eProfession, false))
 		{
@@ -6082,7 +6082,7 @@ void CvCity::ejectToTransport(int iUnitId, int iTransportId)
 	CvUnit* pUnit = getPopulationUnitById(iUnitId);
 	CvUnit* pTransport = GET_PLAYER(getOwnerINLINE()).getUnit(iTransportId);
 
-	if (pUnit != NULL && pTransport != NULL)
+	if (pUnit != nullptr && pTransport != nullptr)
 	{
 		if (pUnit->canLoadUnit(pTransport, pUnit->plot(), true))
 		{
@@ -6097,12 +6097,12 @@ void CvCity::ejectToTransport(int iUnitId, int iTransportId)
 void CvCity::replaceCitizen(int iUnitId, int iReplacedUnitId, bool bAskProfession)
 {
 	CvUnit* pUnit = getPopulationUnitById(iUnitId);
-	if (pUnit == NULL)
+	if (pUnit == nullptr)
 	{
 		pUnit = GET_PLAYER(getOwnerINLINE()).getUnit(iUnitId);
 		// TAC - Clear Specialty Fix - koma13 - START
-		//if (pUnit == NULL || !pUnit->canJoinCity(plot()))
-		if (pUnit == NULL || !pUnit->canJoinCity(plot(), false, true))
+		//if (pUnit == nullptr || !pUnit->canJoinCity(plot()))
+		if (pUnit == nullptr || !pUnit->canJoinCity(plot(), false, true))
 		// TAC - Clear Specialty Fix - koma13 - END
 		{
 			return;
@@ -6111,13 +6111,13 @@ void CvCity::replaceCitizen(int iUnitId, int iReplacedUnitId, bool bAskProfessio
 	}
 
 	CvUnit* pReplacedUnit = getPopulationUnitById(iReplacedUnitId);
-	if (pReplacedUnit == NULL)
+	if (pReplacedUnit == nullptr)
 	{
 		return;
 	}
 
 	CvPlot* pPlot = getPlotWorkedByUnit(pReplacedUnit);
-	if (pPlot != NULL)
+	if (pPlot != nullptr)
 	{
 		pUnit->setColonistLocked(true);
 		clearUnitWorkingPlot(pPlot);
@@ -6188,7 +6188,7 @@ bool CvCity::isEuropeAccessable() const
 	for (int iI = 0; iI < NUM_DIRECTION_TYPES; iI++)
 	{
 		const CvPlot* const pAdjacentPlot = plotDirection(getX_INLINE(), getY_INLINE(), ((DirectionTypes)iI));
-		if (pAdjacentPlot != NULL && pAdjacentPlot->isWater() && pAdjacentPlot->isEuropeAccessable() && (pAdjacentPlot->getTerrainType() == TERRAIN_COAST || pAdjacentPlot->getTerrainType() == TERRAIN_SHALLOW_COAST))
+		if (pAdjacentPlot != nullptr && pAdjacentPlot->isWater() && pAdjacentPlot->isEuropeAccessable() && (pAdjacentPlot->getTerrainType() == TERRAIN_COAST || pAdjacentPlot->getTerrainType() == TERRAIN_SHALLOW_COAST))
 		{
 			return true;
 		}
@@ -6435,7 +6435,7 @@ BuildingTypes CvCity::getDominantBuilding(SpecialBuildingTypes eSpecialBuilding)
 
 void CvCity::clearOrderQueue()
 {
-	while (headOrderQueueNode() != NULL)
+	while (headOrderQueueNode() != nullptr)
 	{
 		popOrder(0);
 	}
@@ -6597,7 +6597,7 @@ void CvCity::popOrder(int iNum, bool bFinish, bool bChoose)
 
 	CLLNode<OrderData>* pOrderNode = headOrderQueueNode();
 
-	while (pOrderNode != NULL)
+	while (pOrderNode != nullptr)
 	{
 		if (iCount == iNum)
 		{
@@ -6609,7 +6609,7 @@ void CvCity::popOrder(int iNum, bool bFinish, bool bChoose)
 		pOrderNode = nextOrderQueueNode(pOrderNode);
 	}
 
-	if (pOrderNode == NULL)
+	if (pOrderNode == nullptr)
 	{
 		return;
 	}
@@ -6652,7 +6652,7 @@ void CvCity::popOrder(int iNum, bool bFinish, bool bChoose)
 			setUnitProduction(eTrainUnit, 0);
 
 			CvUnit* const pUnit = GET_PLAYER(getOwnerINLINE()).initUnit(eTrainUnit, GC.getUnitInfo(eTrainUnit).getDefaultProfession(), getX_INLINE(), getY_INLINE(), eTrainAIUnit);
-			FAssertMsg(pUnit != NULL, "pUnit is expected to be assigned a valid unit object");
+			FAssertMsg(pUnit != nullptr, "pUnit is expected to be assigned a valid unit object");
 
 			pUnit->finishMoves();
 
@@ -6660,7 +6660,7 @@ void CvCity::popOrder(int iNum, bool bFinish, bool bChoose)
 
 			CvPlot* const pRallyPlot = getRallyPlot();
 
-			if (pRallyPlot != NULL)
+			if (pRallyPlot != nullptr)
 			{
 				pUnit->getGroup()->pushMission(MISSION_MOVE_TO, pRallyPlot->getX_INLINE(), pRallyPlot->getY_INLINE());
 			}
@@ -6726,7 +6726,7 @@ void CvCity::popOrder(int iNum, bool bFinish, bool bChoose)
 	}
 
 	m_orderQueue.deleteNode(pOrderNode);
-	pOrderNode = NULL;
+	pOrderNode = nullptr;
 
 	setAutoThresholdCache(); // transport feeder - Nightinggale
 
@@ -6766,7 +6766,7 @@ void CvCity::popOrder(int iNum, bool bFinish, bool bChoose)
 		}
 	}
 
-	LPCSTR szIcon = NULL;
+	LPCSTR szIcon = nullptr;
 
 	if (bFinish && !bMessage)
 	{
@@ -6915,7 +6915,7 @@ bool CvCity::processRequiredYields(int iNum)
 {
 	CLLNode<OrderData>* pOrderNode = headOrderQueueNode();
 
-	for (int iCount = 0; pOrderNode != NULL; ++iCount)
+	for (int iCount = 0; pOrderNode != nullptr; ++iCount)
 	{
 		if (iCount == iNum)
 		{
@@ -6924,7 +6924,7 @@ bool CvCity::processRequiredYields(int iNum)
 		pOrderNode = nextOrderQueueNode(pOrderNode);
 	}
 
-	if (pOrderNode == NULL)
+	if (pOrderNode == nullptr)
 	{
 		return false;
 	}
@@ -6974,7 +6974,7 @@ void CvCity::getOrdersWaitingForYield(std::vector< std::pair<OrderTypes, int> >&
 				if (canTrain(eUnit) && GET_PLAYER(getOwnerINLINE()).getYieldProductionNeeded(eUnit, eYield) > 0)
 				{
 					bool bFound = false;
-					for  (CLLNode<OrderData>* pOrderNode = headOrderQueueNode(); pOrderNode != NULL; pOrderNode = nextOrderQueueNode(pOrderNode))
+					for (CLLNode<OrderData>* pOrderNode = headOrderQueueNode(); pOrderNode != nullptr; pOrderNode = nextOrderQueueNode(pOrderNode))
 					{
 						if (pOrderNode->m_data.getType() == ORDER_TRAIN && pOrderNode->m_data.unit() == eUnit)
 						{
@@ -7003,7 +7003,7 @@ void CvCity::getOrdersWaitingForYield(std::vector< std::pair<OrderTypes, int> >&
 				if (canConstruct(eBuilding) && GET_PLAYER(getOwnerINLINE()).getYieldProductionNeeded(eBuilding, eYield) > 0)
 				{
 					bool bFound = false;
-					for  (CLLNode<OrderData>* pOrderNode = headOrderQueueNode(); pOrderNode != NULL; pOrderNode = nextOrderQueueNode(pOrderNode))
+					for (CLLNode<OrderData>* pOrderNode = headOrderQueueNode(); pOrderNode != nullptr; pOrderNode = nextOrderQueueNode(pOrderNode))
 					{
 						if (pOrderNode->m_data.getType() == ORDER_CONSTRUCT && pOrderNode->m_data.building() == eBuilding)
 						{
@@ -7026,7 +7026,7 @@ void CvCity::startHeadOrder()
 {
 	CLLNode<OrderData>* pOrderNode = headOrderQueueNode();
 
-	if (pOrderNode != NULL)
+	if (pOrderNode != nullptr)
 	{
 		AI_setAssignWorkDirty(true);
 	}
@@ -7050,13 +7050,13 @@ OrderData* CvCity::getOrderFromQueue(int iIndex)
 
 	pOrderNode = m_orderQueue.nodeNum(iIndex);
 
-	if (pOrderNode != NULL)
+	if (pOrderNode != nullptr)
 	{
 		return &(pOrderNode->m_data);
 	}
 	else
 	{
-		return NULL;
+		return nullptr;
 	}
 }
 
@@ -7241,7 +7241,7 @@ void CvCity::doYields()
 {
 	OOS_LOG("CvCity::doYields start", getID());
 	int aiYields[NUM_YIELD_TYPES];
-	calculateNetYields(aiYields, NULL, NULL, true);
+	calculateNetYields(aiYields, nullptr, nullptr, true);
 
 	const int iTotalYields = getTotalYieldStored();
 	const int iMaxCapacity = getMaxYieldCapacity();
@@ -7302,7 +7302,7 @@ void CvCity::doYields()
 		if (iTotalProfitFromDomesticMarket != 0 && GC.getDOMESTIC_SALES_MESSAGES() == 1)
 		{
 			CvWString szBuffer = gDLL->getText("TXT_KEY_GOODS_DOMESTIC_SOLD", getNameKey(), iTotalProfitFromDomesticMarket);
-			gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), NULL, MESSAGE_TYPE_MINOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_WHITE"), true, true);
+			gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), nullptr, MESSAGE_TYPE_MINOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_WHITE"), true, true);
 		}
 	}
 	// R&R, ray, adjustment Domestic Markets, END
@@ -7340,7 +7340,7 @@ void CvCity::doYields()
 						// R&R, ray , MYCP partially based on code of Aymerick - END
 						{
 							FAssert(!pLoopUnit->getUnitInfo().isTreasure());
-							int iStudentOutput = getProfessionOutput(eProfession, pLoopUnit, NULL) * getBaseYieldRateModifier(YIELD_EDUCATION) / 100;
+							int iStudentOutput = getProfessionOutput(eProfession, pLoopUnit, nullptr) * getBaseYieldRateModifier(YIELD_EDUCATION) / 100;
 							FAssert(iStudentOutput > 0);
 							pLoopUnit->setYieldStored(pLoopUnit->getYieldStored() + std::max(iStudentOutput, 1));
 
@@ -7469,7 +7469,7 @@ void CvCity::doYields()
 						else
 						{
 							CvWString szBuffer = gDLL->getText("TXT_KEY_GOODS_LOST_SOLD", iLoss, GC.getYieldInfo(eYield).getChar(), getNameKey(), iProfit);
-							gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), NULL, MESSAGE_TYPE_MINOR_EVENT, GC.getYieldInfo(eYield).getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_WHITE"), true, true);
+							gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), nullptr, MESSAGE_TYPE_MINOR_EVENT, GC.getYieldInfo(eYield).getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_WHITE"), true, true);
 						}
 						// R&R, ray , Changes to Custom House - END
 					}
@@ -7483,7 +7483,7 @@ void CvCity::doYields()
 				{
 					bPrintOnce = true;
 					CvWString szBuffer = gDLL->getText("TXT_KEY_RUNNING_OUT_OF_SPACE_NEW_CAPACITY", getNameKey());
-					gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), "AS2D_DEAL_CANCELLED", MESSAGE_TYPE_MINOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), true, true);
+					gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), "AS2D_DEAL_CANCELLED", MESSAGE_TYPE_MINOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), true, true);
 				}
 
 				if (aiYields[eYield] > 0)
@@ -7505,7 +7505,7 @@ void CvCity::doYields()
 	if (iCustomHouseProfit > 0)
 	{
 		CvWString szBuffer = gDLL->getText("TXT_KEY_GOODS_SOLD_CUSTOM_HOUSE_SINGLE_MESSAGE", getNameKey(), iCustomHouseProfit);
-		gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), NULL, MESSAGE_TYPE_MINOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_WHITE"), true, true);
+		gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), nullptr, MESSAGE_TYPE_MINOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_WHITE"), true, true);
 	}
 
 }
@@ -7615,7 +7615,7 @@ void CvCity::doPlotCulture(bool bUpdate, PlayerTypes ePlayer, int iCultureRate)
 					{
 						CvPlot* const pLoopPlot = plotXY(getX_INLINE(), getY_INLINE(), iDX, iDY);
 
-						if (pLoopPlot != NULL)
+						if (pLoopPlot != nullptr)
 						{
 							if (pLoopPlot->isPotentialCityWorkForArea(area()))
 							{
@@ -7676,7 +7676,7 @@ bool CvCity::doCheckProduction()
 
 				pOrderNode = headOrderQueueNode();
 
-				while (pOrderNode != NULL)
+				while (pOrderNode != nullptr)
 				{
 					if (pOrderNode->m_data.getType() == ORDER_TRAIN)
 					{
@@ -7710,7 +7710,7 @@ bool CvCity::doCheckProduction()
 	{
 		OrderData* const pOrder = getOrderFromQueue(iI);
 
-		if (pOrder != NULL)
+		if (pOrder != nullptr)
 		{
 			if (!canContinueProduction(*pOrder))
 			{
@@ -8105,10 +8105,10 @@ char const* CvCity::getCityBillboardProductionIcon() const
 	{
 		CLLNode<OrderData>* pOrderNode;
 		pOrderNode = headOrderQueueNode();
-		FAssert(pOrderNode != NULL);
+		FAssert(pOrderNode != nullptr);
 		(void)pOrderNode; // Silence cppcheck
 		const CvInfoBase* pInfo = getProductionInfo();
-		if (pInfo != NULL)
+		if (pInfo != nullptr)
 		{
 			return pInfo->getButton();
 		}
@@ -8167,10 +8167,10 @@ bool CvCity::getCityBillboardBottomBarValues(float& fStored, float& fRate, float
 
 		// show training progress
 		int iBestTimer = MAX_INT;
-		CvUnit* pBestUnit = NULL;
+		CvUnit* pBestUnit = nullptr;
 		CvPlot* pPlot = plot();
 		CLLNode<IDInfo>* pUnitNode = pPlot->headUnitNode();
-		while (pUnitNode != NULL)
+		while (pUnitNode != nullptr)
 		{
 			CvUnit* pLoopUnit = ::getUnit(pUnitNode->m_data);
 			pUnitNode = plot()->nextUnitNode(pUnitNode);
@@ -8188,7 +8188,7 @@ bool CvCity::getCityBillboardBottomBarValues(float& fStored, float& fRate, float
 			}
 		}
 
-		if (pBestUnit != NULL)
+		if (pBestUnit != nullptr)
 		{
 			int iLearnTime = pBestUnit->getLearnTime();
 			float fLearnTime = std::max(1.0f, (float) iLearnTime);
@@ -8402,7 +8402,7 @@ bool CvCity::canApplyEvent(EventTypes eEvent, const EventTriggeredData& kTrigger
 			if (eLoopCityPlot != CITY_HOME_PLOT)
 			{
 				CvPlot* pPlot = getCityIndexPlot(eLoopCityPlot);
-				if (NULL != pPlot && pPlot->getOwnerINLINE() == getOwnerINLINE())
+				if (pPlot != nullptr && pPlot->getOwnerINLINE() == getOwnerINLINE())
 				{
 					if (NO_IMPROVEMENT != pPlot->getImprovementType() && !GC.getImprovementInfo(pPlot->getImprovementType()).isPermanent())
 					{
@@ -8466,7 +8466,7 @@ void CvCity::applyEvent(EventTypes eEvent, const EventTriggeredData& kTriggeredD
 					if (ePlot != CITY_HOME_PLOT)
 					{
 						CvPlot* pPlot = getCityIndexPlot(ePlot);
-						if (NULL != pPlot && pPlot->getOwnerINLINE() == getOwnerINLINE())
+						if (pPlot != nullptr && pPlot->getOwnerINLINE() == getOwnerINLINE())
 						{
 							if (NO_IMPROVEMENT != pPlot->getImprovementType() && !GC.getImprovementInfo(pPlot->getImprovementType()).isPermanent())
 							{
@@ -8707,10 +8707,10 @@ void CvCity::liberate(bool bConquest)
 		GET_PLAYER(ePlayer).acquireCity(this, false, true);
 		GET_PLAYER(ePlayer).AI_changeMemoryCount(eOwner, MEMORY_LIBERATED_CITIES, 1);
 
-		if (NULL != pPlot)
+		if (pPlot != nullptr)
 		{
 			CvCity* pCity = pPlot->getPlotCity();
-			if (NULL != pCity)
+			if (pCity != nullptr)
 			{
 				pCity->setCulture(ePlayer, pCity->getCulture(ePlayer) + iOldOwnerCulture / 2, true);
 			}
@@ -8736,7 +8736,7 @@ PlayerTypes CvCity::getLiberationPlayer(bool bConquest) const
 		if (kLoopPlayer.isAlive() && kLoopPlayer.getParent() == getOwnerINLINE())
 		{
 			CvCity* pLoopCapital = kLoopPlayer.getPrimaryCity();
-			if (NULL != pLoopCapital)
+			if (pLoopCapital != nullptr)
 			{
 				if (pLoopCapital->area() == area())
 				{
@@ -8762,7 +8762,7 @@ PlayerTypes CvCity::getLiberationPlayer(bool bConquest) const
 			if (kLoopPlayer.canReceiveTradeCity(getOwnerINLINE()))
 			{
 				CvCity* pCapital = kLoopPlayer.getPrimaryCity();
-				if (NULL != pCapital)
+				if (pCapital != nullptr)
 				{
 					int iCapitalDistance = ::plotDistance(getX_INLINE(), getY_INLINE(), pCapital->getX_INLINE(), pCapital->getY_INLINE());
 					if (area() != pCapital->area())
@@ -8810,7 +8810,7 @@ PlayerTypes CvCity::getLiberationPlayer(bool bConquest) const
 		{
 			CvPlot* pLoopPlot = ::plotCity(getX_INLINE(), getY_INLINE(), iPlot);
 
-			if (NULL != pLoopPlot)
+			if (pLoopPlot != nullptr)
 			{
 				if (pLoopPlot->isVisibleEnemyUnit(eBestPlayer))
 				{
@@ -8835,10 +8835,10 @@ int CvCity::getBestYieldAmountAvailable(ProfessionTypes eProfession, const CvUni
 	// R&R, ray , MYCP partially based on code of Aymerick - END
 	int iBestYieldAvailable = 0;
 
-	if(pUnit != NULL)
+	if (pUnit != nullptr)
 	{
 		CvPlot* pWorkingPlot = getPlotWorkedByUnit(pUnit);
-		if(pWorkingPlot != NULL)
+		if (pWorkingPlot != nullptr)
 		{
 			iBestYieldAvailable = pWorkingPlot->calculatePotentialProfessionYieldAmount(eProfession, pUnit, false);
 		}
@@ -8852,7 +8852,7 @@ int CvCity::getBestYieldAmountAvailable(ProfessionTypes eProfession, const CvUni
 			{
 				CvPlot* pPlot = getCityIndexPlot(eLoopCityPlot);
 
-				if (NULL != pPlot && canWork(pPlot))
+				if (pPlot != nullptr && canWork(pPlot))
 				{
 					int iYieldAmount = pPlot->calculatePotentialProfessionYieldAmount(eProfession, pUnit, false);
 					if (iYieldAmount > iBestYieldAvailable)
@@ -8883,10 +8883,10 @@ int CvCity::getBestYieldsAmountAvailable(YieldTypes eYield, ProfessionTypes ePro
 
 	int iBestYieldAvailable = 0;
 
-	if(pUnit != NULL)
+	if (pUnit != nullptr)
 	{
 		CvPlot* pWorkingPlot = getPlotWorkedByUnit(pUnit);
-		if(pWorkingPlot != NULL)
+		if (pWorkingPlot != nullptr)
 		{
 			iBestYieldAvailable = pWorkingPlot->calculatePotentialProfessionYieldsAmount(eYield, eProfession, pUnit, false);
 		}
@@ -8900,7 +8900,7 @@ int CvCity::getBestYieldsAmountAvailable(YieldTypes eYield, ProfessionTypes ePro
 			{
 				CvPlot* pPlot = getCityIndexPlot(eLoopCityPlot);
 
-				if (NULL != pPlot && canWork(pPlot))
+				if (pPlot != nullptr && canWork(pPlot))
 				{
 					int iYieldAmount = pPlot->calculatePotentialProfessionYieldsAmount(eYield, eProfession, pUnit, false);
 					if (iYieldAmount > iBestYieldAvailable)
@@ -8922,7 +8922,7 @@ int CvCity::getBestYieldsAmountAvailable(YieldTypes eYield, ProfessionTypes ePro
 // R&R, ray , MYCP partially based on code of Aymerick - END
 void CvCity::addPopulationUnit(CvUnit* pUnit, ProfessionTypes eProfession)
 {
-	if (NULL == pUnit)
+	if (pUnit == nullptr)
 	{
 		FAssert(false);
 		return;
@@ -8964,7 +8964,7 @@ bool CvCity::removePopulationUnit(CvUnit* pUnit, bool bDelete, ProfessionTypes e
 
 	//remove unit from worked plots
 	CvPlot* pWorkedPlot = getPlotWorkedByUnit(pUnit);
-	if (pWorkedPlot != NULL)
+	if (pWorkedPlot != nullptr)
 	{
 			clearUnitWorkingPlot(pWorkedPlot);
 	}
@@ -9027,7 +9027,7 @@ CvUnit* CvCity::removeUnitType(UnitTypes eUnit, ProfessionTypes eProfession)
 		}
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 
@@ -9063,7 +9063,7 @@ CvUnit* CvCity::getPopulationUnitById(int iUnitId) const
 		}
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 CvUnit* CvCity::getPopulationUnitByIndex(int iUnitIndex) const
@@ -9074,7 +9074,7 @@ CvUnit* CvCity::getPopulationUnitByIndex(int iUnitIndex) const
 	}
 
 	FAssert(false);
-	return NULL;
+	return nullptr;
 }
 
 int CvCity::getPopulationUnitIndex(const CvUnit& kUnit) const
@@ -9101,7 +9101,7 @@ CvPlot* CvCity::getPlotWorkedByUnit(const CvUnit* pUnit) const
 		}
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 CvUnit* CvCity::createYieldUnit(YieldTypes eYield, PlayerTypes ePlayer, int iYieldAmount)
@@ -9110,18 +9110,18 @@ CvUnit* CvCity::createYieldUnit(YieldTypes eYield, PlayerTypes ePlayer, int iYie
 	FAssert(iYieldAmount > 0);
 	FAssert(ePlayer != NO_PLAYER);
 
-	CvUnit* pUnit = NULL;
+	CvUnit* pUnit = nullptr;
 	CvPlayer& kOwner = GET_PLAYER(ePlayer);
 	UnitTypes eUnit = (UnitTypes)GC.getCivilizationInfo(kOwner.getCivilizationType()).getCivilizationUnits(GC.getYieldInfo(eYield).getUnitClass());
 	if (NO_UNIT != eUnit)
 	{
 		pUnit = kOwner.initUnit(eUnit, GC.getUnitInfo(eUnit).getDefaultProfession(), getX_INLINE(), getY_INLINE(), NO_UNITAI, NO_DIRECTION, iYieldAmount);
-		FAssertMsg(pUnit != NULL, "pUnit expected to be assigned (not NULL)");
+		FAssertMsg(pUnit != nullptr, "pUnit expected to be assigned (not null)");
 
 		FAssert(iYieldAmount <= getYieldStored(eYield));
 		changeYieldStored(eYield, -iYieldAmount);
 		AI_changeTradeBalance(eYield, -iYieldAmount);
-		if (NULL != pUnit)
+		if (pUnit != nullptr)
 		{
 			pUnit->setHomeCity(this);
 		}
@@ -9293,7 +9293,7 @@ bool CvCity::canProduceYield(YieldTypes eYield)
 					for (int j = 0; j < NUM_CITY_PLOTS; ++j)
 					{
 						CvPlot* pLoopPlot = plotCity(getX_INLINE(), getY_INLINE(), j);
-						if (pLoopPlot != NULL)
+						if (pLoopPlot != nullptr)
 						{
 							if (pLoopPlot->calculateYield(eYield, false) > 0)
 							{
@@ -9439,7 +9439,7 @@ GoodyTypes CvCity::getGoodyType(const CvUnit* pUnit) const
 		FAssert(eGoody >= 0);
 		FAssert(eGoody < GC.getNumGoodyInfos());
 
-		if (pUnit == NULL || GET_PLAYER(pUnit->getOwnerINLINE()).canReceiveGoody(plot(), eGoody, pUnit))
+		if (pUnit == nullptr || GET_PLAYER(pUnit->getOwnerINLINE()).canReceiveGoody(plot(), eGoody, pUnit))
 		{
 			OOS_LOG("can receive goody", getTypeStr(eGoody));
 			int iRandValue = GC.getGameINLINE().getSorenRandNum(GC.getGoodyInfo(eGoody).getCityGoodyWeight(), "City Goodies");
@@ -9458,7 +9458,7 @@ GoodyTypes CvCity::getGoodyType(const CvUnit* pUnit) const
 int CvCity::doGoody(CvUnit* pUnit, GoodyTypes eGoody)
 {
 	int iValue = -1;
-	FAssert(pUnit != NULL);
+	FAssert(pUnit != nullptr);
 
 	CvPlayer& kPlayer = GET_PLAYER(pUnit->getOwnerINLINE());
 	if (eGoody != NO_GOODY)
@@ -9526,7 +9526,7 @@ void CvCity::setMissionaryPlayer(PlayerTypes ePlayer, bool bBurnMessage)
 		{
 			CvWString szBuffer = gDLL->getText("TXT_KEY_MISSION_REMOVED", getNameKey(), GET_PLAYER(eOldPlayer).getCivilizationAdjectiveKey());
 
-			gDLL->UI().addAllPlayersMessage(false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), "AS2D_DEAL_CANCELLED", MESSAGE_TYPE_MINOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT"), false, false);
+			gDLL->UI().addAllPlayersMessage(false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), "AS2D_DEAL_CANCELLED", MESSAGE_TYPE_MINOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT"), false, false);
 		}
 
 		if (getMissionaryPlayer() != NO_PLAYER)
@@ -9563,7 +9563,7 @@ void CvCity::setTradePostPlayer(PlayerTypes ePlayer, bool bBurnMessage)
 		{
 			CvWString szBuffer = gDLL->getText("TXT_KEY_TRADE_POST_REMOVED", getNameKey(), GET_PLAYER(eOldPlayer).getCivilizationAdjectiveKey());
 
-			gDLL->UI().addAllPlayersMessage(false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), "AS2D_DEAL_CANCELLED", MESSAGE_TYPE_MINOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT"), false, false);
+			gDLL->UI().addAllPlayersMessage(false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), "AS2D_DEAL_CANCELLED", MESSAGE_TYPE_MINOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT"), false, false);
 		}
 
 		if (getTradePostPlayer() != NO_PLAYER)
@@ -9671,7 +9671,7 @@ int CvCity::getCityHealthChangeFromCentralPlot() const
 	CvPlot* pCityCenterPlot = plot();
 
 	// let us be save, maybe Abandon City may mess around
-	if (pCityCenterPlot != NULL)
+	if (pCityCenterPlot != nullptr)
 	{
 		if (pCityCenterPlot->isFreshWater())
 		{
@@ -9706,7 +9706,7 @@ int CvCity::getCityHealthChangeFromRessourcesInCityRadius() const
 	{
 		CvPlot* pLoopPlot = getCityIndexPlot(eLoopCityPlot);
 
-		if(pLoopPlot != NULL && pLoopPlot->getBonusType() != NO_BONUS)
+		if (pLoopPlot != nullptr && pLoopPlot->getBonusType() != NO_BONUS)
 		{
 			// only if worked
 			if (isPlotProducingYields(pLoopPlot))
@@ -9786,7 +9786,7 @@ int CvCity::getMonasteryCrossBonusForCity() const
 	{
 		CvPlot* pLoopPlot = getCityIndexPlot(eLoopCityPlot);
 		// if it has a Monastery and a Missionary in it
-		if(pLoopPlot != NULL && pLoopPlot->isMonastery() && (pLoopPlot->getMonasteryMissionary() != NULL))
+		if (pLoopPlot != nullptr && pLoopPlot->isMonastery() && (pLoopPlot->getMonasteryMissionary() != nullptr))
 		{
 			// we double if it is second level improvement, which we know if it has no more upgrade
 			if (GC.getImprovementInfo(pLoopPlot->getImprovementType()).getImprovementUpgrade() == NO_IMPROVEMENT)
@@ -9817,7 +9817,7 @@ int CvCity::getFortDefenseBonusForCity() const
 	{
 		CvPlot* pLoopPlot = getCityIndexPlot(eLoopCityPlot);
 		// if it has a Fort that is protected
-		if(pLoopPlot != NULL && pLoopPlot->isFort() && (pLoopPlot->getFortDefender() != NULL))
+		if (pLoopPlot != nullptr && pLoopPlot->isFort() && (pLoopPlot->getFortDefender() != nullptr))
 		{
 			// we double if it is second level improvement, which we know if it has no more upgrade
 			if (GC.getImprovementInfo(pLoopPlot->getImprovementType()).getImprovementUpgrade() == NO_IMPROVEMENT)
@@ -9849,7 +9849,7 @@ int CvCity::getImprovementFoodModifierForCity() const
 	FOREACH(CityPlot)
 	{
 		CvPlot* pLoopPlot = getCityIndexPlot(eLoopCityPlot);
-		if (pLoopPlot != NULL)
+		if (pLoopPlot != nullptr)
 		{
 			ImprovementTypes eImprovement = pLoopPlot->getImprovementType();
 			if(eImprovement != NO_IMPROVEMENT)
@@ -9881,7 +9881,7 @@ int CvCity::getImprovementHammersModifierForCity() const
 	FOREACH(CityPlot)
 	{
 		CvPlot* pLoopPlot = getCityIndexPlot(eLoopCityPlot);
-		if(pLoopPlot != NULL)
+		if (pLoopPlot != nullptr)
 		{
 			ImprovementTypes eImprovement = pLoopPlot->getImprovementType();
 			if(eImprovement != NO_IMPROVEMENT)
@@ -9913,7 +9913,7 @@ int CvCity::getImprovementToolsModifierForCity() const
 	FOREACH(CityPlot)
 	{
 		CvPlot* pLoopPlot = getCityIndexPlot(eLoopCityPlot);
-		if (pLoopPlot != NULL)
+		if (pLoopPlot != nullptr)
 		{
 			ImprovementTypes eImprovement = pLoopPlot->getImprovementType();
 			if(eImprovement != NO_IMPROVEMENT)
@@ -9947,7 +9947,7 @@ int CvCity::getImprovementStorageModifierForCity() const
 	FOREACH(CityPlot)
 	{
 		CvPlot* pLoopPlot = getCityIndexPlot(eLoopCityPlot);
-		if (pLoopPlot != NULL)
+		if (pLoopPlot != nullptr)
 		{
 			ImprovementTypes eImprovement = pLoopPlot->getImprovementType();
 			if(eImprovement != NO_IMPROVEMENT)
@@ -10382,7 +10382,7 @@ int CvCity::getCityHarbourSpaceUsed() const
 	for (int i = 0; i < pPlot->getNumUnits(); ++i)
 	{
 		CvUnit* pLoopUnit = pPlot->getUnitByIndex(i);
-		if (pLoopUnit != NULL && pLoopUnit->getDomainType() == DOMAIN_SEA)
+		if (pLoopUnit != nullptr && pLoopUnit->getDomainType() == DOMAIN_SEA)
 		{
 			iCityHarbourSpaceUsed += pLoopUnit->getUnitInfo().getHarbourSpaceNeeded();
 		}
@@ -10424,7 +10424,7 @@ int CvCity::getCityBarracksSpaceUsed() const
 		// we only count Land Units that can attack, civil Units are not considered
 		// we also not consider Units loaded on Ships
 		// we also not consider Units of other Nations
-		if (pLoopUnit != NULL && pLoopUnit->getDomainType() == DOMAIN_LAND && pLoopUnit->canAttack() && pLoopUnit->getTransportUnit() == NULL && pLoopUnit->getOwnerINLINE() == getOwnerINLINE())
+		if (pLoopUnit != nullptr && pLoopUnit->getDomainType() == DOMAIN_LAND && pLoopUnit->canAttack() && pLoopUnit->getTransportUnit() == nullptr && pLoopUnit->getOwnerINLINE() == getOwnerINLINE())
 		{
 			iCityBarracksSpaceUsed += pLoopUnit->getUnitInfo().getBarracksSpaceNeeded();
 			// we also need to consider Professions
@@ -10660,7 +10660,7 @@ int CvCity::getUnhappinessFromMissingDefense() const
 	{
 		CvUnit* pLoopUnit = pPlot->getUnitByIndex(i);
 		// we check for a Land Unit that can fight on that plot and is from our own Player
-		if (pLoopUnit != NULL && pLoopUnit->getDomainType() == DOMAIN_LAND && pLoopUnit->canAttack() && pLoopUnit->getOwnerINLINE() == getOwnerINLINE())
+		if (pLoopUnit != nullptr && pLoopUnit->getDomainType() == DOMAIN_LAND && pLoopUnit->canAttack() && pLoopUnit->getOwnerINLINE() == getOwnerINLINE())
 		{
 			iDefendersFound++;
 		}
@@ -11078,7 +11078,7 @@ int CvCity::getLawFromCityDefenders() const
 	{
 		CvUnit* pLoopUnit = pPlot->getUnitByIndex(i);
 		// we check for a Land Unit that can fight on that plot and is from our own Player
-		if (pLoopUnit != NULL && pLoopUnit->getDomainType() == DOMAIN_LAND && pLoopUnit->canAttack() && pLoopUnit->getOwnerINLINE() == getOwnerINLINE())
+		if (pLoopUnit != nullptr && pLoopUnit->getDomainType() == DOMAIN_LAND && pLoopUnit->canAttack() && pLoopUnit->getOwnerINLINE() == getOwnerINLINE())
 		{
 			iDefendersFound++;
 			iDefendersFound += pLoopUnit->getAdditionalLawToCityFromUnit(); // WTP, ray, Lawkeeper Promotion - START
@@ -11359,7 +11359,7 @@ UnitClassTypes CvCity::bestTeachUnitClass()
 							for (int j = 0; j < NUM_CITY_PLOTS; ++j)
 							{
 								CvPlot* pLoopPlot = plotCity(getX_INLINE(), getY_INLINE(), j);
-								if (pLoopPlot != NULL)
+								if (pLoopPlot != nullptr)
 								{
 									if (pLoopPlot->isValidYieldChanges(eLoopUnit) && !(eWantedYield == YIELD_FOOD && pLoopPlot->isHills()))
 									{
@@ -11422,7 +11422,7 @@ UnitClassTypes CvCity::bestTeachUnitClass()
 
 	int iLoop = 0;
 	CvCity* pLoopCity;
-	for (pLoopCity = kOwner.firstCity(&iLoop); pLoopCity != NULL; pLoopCity = kOwner.nextCity(&iLoop))
+	for (pLoopCity = kOwner.firstCity(&iLoop); pLoopCity != nullptr; pLoopCity = kOwner.nextCity(&iLoop))
 	{
 		if (pLoopCity->getTeachUnitClass() != NO_UNITCLASS)
 		{
@@ -11787,7 +11787,7 @@ CvUnit* CvCity::ejectBestDefender(CvUnit* pCurrentBest, CvUnit* pAttacker)
 	ProfessionTypes eProfession;
 	CvUnit* pDefender = getBestDefender(&eProfession, pCurrentBest, pAttacker);
 
-	if (pDefender != NULL)
+	if (pDefender != nullptr)
 	{
 		if (pDefender != pCurrentBest)
 		{
@@ -11804,28 +11804,28 @@ CvUnit* CvCity::ejectBestDefender(CvUnit* pCurrentBest, CvUnit* pAttacker)
 CvUnit* CvCity::getBestDefender(ProfessionTypes* peProfession, CvUnit* pCurrentBest, const CvUnit* pAttacker) const
 {
 	//initialize profession
-	if (peProfession != NULL)
+	if (peProfession != nullptr)
 	{
 		*peProfession = NO_PROFESSION;
-		if (pCurrentBest != NULL)
+		if (pCurrentBest != nullptr)
 		{
 			*peProfession = pCurrentBest->getProfession();
 		}
 	}
 
-	if (pAttacker != NULL && !pAttacker->isEnemy(getTeam(), plot()))
+	if (pAttacker != nullptr && !pAttacker->isEnemy(getTeam(), plot()))
 	{
 		return pCurrentBest;
 	}
 
-	if (pCurrentBest != NULL && !pCurrentBest->isUnarmed() && pCurrentBest->isCityDefender())
+	if (pCurrentBest != nullptr && !pCurrentBest->isUnarmed() && pCurrentBest->isCityDefender())
 	{
 		return pCurrentBest;
 	}
 
 	CvUnit* pBestUnit = pCurrentBest;
 	ProfessionTypes eBestProfession = NO_PROFESSION;
-	if(pBestUnit != NULL)
+	if (pBestUnit != nullptr)
 	{
 		eBestProfession = pBestUnit->getProfession();
 	}
@@ -11864,7 +11864,7 @@ CvUnit* CvCity::getBestDefender(ProfessionTypes* peProfession, CvUnit* pCurrentB
 		}
 	}
 
-	if (peProfession != NULL)
+	if (peProfession != nullptr)
 	{
 		*peProfession = eBestProfession;
 	}
@@ -11909,7 +11909,7 @@ bool CvCity::educateStudent(int iUnitId, UnitTypes eUnit)
 {
 
 	CvUnit* pUnit = getPopulationUnitById(iUnitId);
-	if (pUnit == NULL)
+	if (pUnit == nullptr)
 	{
 		return false;
 	}
@@ -11929,7 +11929,7 @@ bool CvCity::educateStudent(int iUnitId, UnitTypes eUnit)
 	}
 
 	CvUnit* pLearnUnit = GET_PLAYER(getOwnerINLINE()).initUnit(eUnit, NO_PROFESSION, pUnit->getX_INLINE(), pUnit->getY_INLINE(), pUnit->AI_getUnitAIType());
-	FAssert(pLearnUnit != NULL);
+	FAssert(pLearnUnit != nullptr);
 	pLearnUnit->convert(pUnit, true);
 
 	OOS_LOG_3("Newly educated unit", CvString(getName()).c_str(), getTypeStr(eUnit));
@@ -12147,7 +12147,7 @@ void CvCity::addExport(YieldTypes eYield, bool bUpdateRoutes)
 					if (kCityPlayer.isAlive() && kRoutePlayer.canUnloadYield((PlayerTypes) iCityPlayer))
 					{
 						int iLoop;
-						for (CvCity* pLoopCity = kCityPlayer.firstCity(&iLoop); pLoopCity != NULL; pLoopCity = kCityPlayer.nextCity(&iLoop))
+						for (CvCity* pLoopCity = kCityPlayer.firstCity(&iLoop); pLoopCity != nullptr; pLoopCity = kCityPlayer.nextCity(&iLoop))
 						{
 							if (pLoopCity->isImport(eYield))
 							{
@@ -12202,7 +12202,7 @@ void CvCity::removeExport(YieldTypes eYield, bool bUpdateRoutes)
 				for (uint i = 0; i < aiRoutes.size(); ++i)
 				{
 					CvTradeRoute* pRoute = aiRoutes[i];
-					if (pRoute != NULL && pRoute->getSourceCity() == getIDInfo() && pRoute->getYield() == eYield)
+					if (pRoute != nullptr && pRoute->getSourceCity() == getIDInfo() && pRoute->getYield() == eYield)
 					{
 						aiRouteIds.push_back(pRoute->getID());
 					}
@@ -12236,7 +12236,7 @@ void CvCity::updateExport(YieldTypes eYield)
 			for (uint i = 0; i < aiRoutes.size(); ++i)
 			{
 				CvTradeRoute* pRoute = aiRoutes[i];
-				if (pRoute != NULL && pRoute->getSourceCity() == getIDInfo() && pRoute->getYield() == eYield)
+				if (pRoute != nullptr && pRoute->getSourceCity() == getIDInfo() && pRoute->getYield() == eYield)
 				{
 					++iExportCount;
 				}
@@ -12292,7 +12292,7 @@ void CvCity::addImport(YieldTypes eYield, bool bUpdateRoutes)
 					if (kCityPlayer.isAlive() && kRoutePlayer.canLoadYield((PlayerTypes) iCityPlayer))
 					{
 						int iLoop;
-						for (CvCity* pLoopCity = kCityPlayer.firstCity(&iLoop); pLoopCity != NULL; pLoopCity = kCityPlayer.nextCity(&iLoop))
+						for (CvCity* pLoopCity = kCityPlayer.firstCity(&iLoop); pLoopCity != nullptr; pLoopCity = kCityPlayer.nextCity(&iLoop))
 						{
 							if (pLoopCity->isExport(eYield))
 							{
@@ -12336,7 +12336,7 @@ void CvCity::removeImport(YieldTypes eYield, bool bUpdateRoutes)
 				for (uint i = 0; i < aiRoutes.size(); ++i)
 				{
 					CvTradeRoute* pRoute = aiRoutes[i];
-					if (pRoute != NULL && pRoute->getDestinationCity() == getIDInfo() && pRoute->getYield() == eYield)
+					if (pRoute != nullptr && pRoute->getDestinationCity() == getIDInfo() && pRoute->getYield() == eYield)
 					{
 						aiRouteIds.push_back(pRoute->getID());
 					}
@@ -12370,7 +12370,7 @@ void CvCity::updateImport(YieldTypes eYield)
 			for (uint i = 0; i < aiRoutes.size(); ++i)
 			{
 				CvTradeRoute* pRoute = aiRoutes[i];
-				if (pRoute != NULL && pRoute->getDestinationCity() == getIDInfo() && pRoute->getYield() == eYield)
+				if (pRoute != nullptr && pRoute->getDestinationCity() == getIDInfo() && pRoute->getYield() == eYield)
 				{
 					++iImportCount;
 				}
@@ -12566,7 +12566,7 @@ void CvCity::setAutoThresholdCache(YieldTypes eYield)
 	// no need for this part. getProductionNeeded() is called twice in a row. The second result should never be bigger than the first.
 #else
 	// everything in production queue
-	for  (CLLNode<OrderData>* pOrderNode = headOrderQueueNode(); pOrderNode != NULL; pOrderNode = nextOrderQueueNode(pOrderNode))
+	for (CLLNode<OrderData>* pOrderNode = headOrderQueueNode(); pOrderNode != nullptr; pOrderNode = nextOrderQueueNode(pOrderNode))
 	{
 		switch (pOrderNode->m_data.getType())
 		{
@@ -12849,7 +12849,7 @@ bool CvCity::LbD_try_become_expert(CvUnit* convUnit, int base, int increase, int
 	//ray16
 	OOS_LOG_3("Learning by doing", CvString(getName()).c_str(), getTypeStr(expertUnitType));
 	CvUnit* expertUnit = GET_PLAYER(getOwnerINLINE()).initUnit(expertUnitType, NO_PROFESSION, getX_INLINE(), getY_INLINE(), convUnit->AI_getUnitAIType());
-	FAssert(expertUnit != NULL);
+	FAssert(expertUnit != nullptr);
 	bool remove = removePopulationUnit(convUnit, false, GC.getCivilizationInfo(GET_PLAYER(getOwnerINLINE()).getCivilizationType()).getDefaultProfession());
 	FAssertMsg(remove, "Failed to remove unit!");
 	(void)remove; // Silence cppcheck
@@ -12963,7 +12963,7 @@ bool CvCity::LbD_try_get_free(CvUnit* convUnit, int base, int increase, int pre_
 	//ray16
 	OOS_LOG_3("Learning by doing (free)", CvString(getName()).c_str(), getTypeStr(GeneratedUnitType));
 	CvUnit* GeneratedUnit = GET_PLAYER(getOwnerINLINE()).initUnit(GeneratedUnitType, NO_PROFESSION, getX_INLINE(), getY_INLINE(), convUnit->AI_getUnitAIType());
-	FAssert(GeneratedUnit != NULL);
+	FAssert(GeneratedUnit != nullptr);
 	bool remove = removePopulationUnit(convUnit, false, GC.getCivilizationInfo(GET_PLAYER(getOwnerINLINE()).getCivilizationType()).getDefaultProfession());
 	FAssertMsg(remove, "Failed to remove unit!");
 	(void)remove; // Silence cppcheck
@@ -13286,12 +13286,12 @@ void CvCity::doExtraCityDefenseAttacks()
 
 		CvWString szBuffer;
 		CvPlot* pPlot = plot();
-		CvPlot* pAdjacentPlot = NULL;
-		CvUnit* pBombUnit = NULL;
-		CvUnit* pLoopUnit = NULL;
-		CvUnit* pLoopUnit2 = NULL;
-		CLLNode<IDInfo>* pUnitNode = NULL;
-		CLLNode<IDInfo>* pUnitNode2 = NULL;
+		CvPlot* pAdjacentPlot = nullptr;
+		CvUnit* pBombUnit = nullptr;
+		CvUnit* pLoopUnit = nullptr;
+		CvUnit* pLoopUnit2 = nullptr;
+		CLLNode<IDInfo>* pUnitNode = nullptr;
+		CLLNode<IDInfo>* pUnitNode2 = nullptr;
 		bool alreadyBombarded = false;
 		bool bCanBomb = false;
 
@@ -13317,7 +13317,7 @@ void CvCity::doExtraCityDefenseAttacks()
 					for (int iI = 0; iI < NUM_DIRECTION_TYPES; iI++)
 					{
 						pAdjacentPlot = plotDirection(getX_INLINE(), getY_INLINE(), ((DirectionTypes)iI));
-						if (pAdjacentPlot != NULL)
+						if (pAdjacentPlot != nullptr)
 						{
 							pUnitNode2 = pAdjacentPlot->headUnitNode();
 							while (pUnitNode2)
@@ -13392,33 +13392,33 @@ void CvCity::doExtraCityDefenseAttacks()
 											if (pLoopUnit2->isDead())
 											{
 												int iExperience = pLoopUnit2->attackXPValue();
-												iExperience = ((iExperience * pLoopUnit2->currCombatStr(plot(), pBombUnit)) / pBombUnit->currCombatStr(NULL, NULL));
+												iExperience = (iExperience * pLoopUnit2->currCombatStr(plot(), pBombUnit)) / pBombUnit->currCombatStr(nullptr, nullptr);
 												iExperience = range(iExperience, GC.getDefineINT("MIN_EXPERIENCE_PER_COMBAT"), GC.getDefineINT("MAX_EXPERIENCE_PER_COMBAT"));
 
 												pBombUnit->changeExperience(iExperience, pLoopUnit2->maxXPValue(), true, plot()->getOwnerINLINE() == pBombUnit->getOwnerINLINE(), true);
 
 												szBuffer = gDLL->getText("TXT_KEY_FORTBOMB_SUNK_GOOD", getNameKey());
-												gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), true, true);
+												gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), true, true);
 
 												szBuffer = gDLL->getText("TXT_KEY_FORTBOMB_SUNK_BAD", getNameKey());
-												gDLL->UI().addPlayerMessage(pLoopUnit2->getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, pLoopUnit2, "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), true, true);
+												gDLL->UI().addPlayerMessage(pLoopUnit2->getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, pLoopUnit2, "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), true, true);
 											}
 											else
 											{
 												szBuffer = gDLL->getText("TXT_KEY_FORTBOMB_HIT_GOOD", getNameKey());
-												gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), true, true);
+												gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), true, true);
 
 												szBuffer = gDLL->getText("TXT_KEY_FORTBOMB_HIT_BAD", getNameKey());
-												gDLL->UI().addPlayerMessage(pLoopUnit2->getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, pLoopUnit2, "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), true, true);
+												gDLL->UI().addPlayerMessage(pLoopUnit2->getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, pLoopUnit2, "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), true, true);
 											}
 										}
 										else
 										{
 											szBuffer = gDLL->getText("TXT_KEY_FORTBOMB_MISS_BAD", getNameKey());
-											gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), true, true);
+											gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), true, true);
 
 											szBuffer = gDLL->getText("TXT_KEY_FORTBOMB_MISS_GOOD", getNameKey());
-											gDLL->UI().addPlayerMessage(pLoopUnit2->getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, pLoopUnit2, "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), true, true);
+											gDLL->UI().addPlayerMessage(pLoopUnit2->getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, pLoopUnit2, "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), true, true);
 										}
 									}
 									//case water end
@@ -13431,33 +13431,33 @@ void CvCity::doExtraCityDefenseAttacks()
 											if (pLoopUnit2->isDead())
 											{
 												int iExperience = pLoopUnit2->attackXPValue();
-												iExperience = ((iExperience * pLoopUnit2->currCombatStr(plot(), pBombUnit)) / pBombUnit->currCombatStr(NULL, NULL));
+												iExperience = (iExperience * pLoopUnit2->currCombatStr(plot(), pBombUnit)) / pBombUnit->currCombatStr(nullptr, nullptr);
 												iExperience = range(iExperience, GC.getDefineINT("MIN_EXPERIENCE_PER_COMBAT"), GC.getDefineINT("MAX_EXPERIENCE_PER_COMBAT"));
 
 												pBombUnit->changeExperience(iExperience, pLoopUnit2->maxXPValue(), true, plot()->getOwnerINLINE() == pBombUnit->getOwnerINLINE(), true);
 
 												szBuffer = gDLL->getText("TXT_KEY_FORTBOMB_DESTROYED_GOOD", getNameKey());
-												gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), true, true);
+												gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), true, true);
 
 												szBuffer = gDLL->getText("TXT_KEY_FORTBOMB_DESTROYED_BAD", getNameKey());
-												gDLL->UI().addPlayerMessage(pLoopUnit2->getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, pLoopUnit2, "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), true, true);
+												gDLL->UI().addPlayerMessage(pLoopUnit2->getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, pLoopUnit2, "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), true, true);
 											}
 											else
 											{
 												szBuffer = gDLL->getText("TXT_KEY_FORTBOMB_HIT_LAND_GOOD", getNameKey(), iDamage);
-												gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), true, true);
+												gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), true, true);
 
 												szBuffer = gDLL->getText("TXT_KEY_FORTBOMB_HIT_LAND_BAD", getNameKey(), iDamage);
-												gDLL->UI().addPlayerMessage(pLoopUnit2->getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, pLoopUnit2, "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), true, true);
+												gDLL->UI().addPlayerMessage(pLoopUnit2->getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, pLoopUnit2, "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), true, true);
 											}
 										}
 										else
 										{
 											szBuffer = gDLL->getText("TXT_KEY_FORTBOMB_MISS_LAND_BAD", getNameKey());
-											gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), true, true);
+											gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), true, true);
 
 											szBuffer = gDLL->getText("TXT_KEY_FORTBOMB_MISS_LAND_GOOD", getNameKey());
-											gDLL->UI().addPlayerMessage(pLoopUnit2->getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, pLoopUnit2, "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), true, true);
+											gDLL->UI().addPlayerMessage(pLoopUnit2->getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, pLoopUnit2, "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), true, true);
 										}
 									}
 									//case land end
@@ -13482,7 +13482,7 @@ void CvCity::doExtraCityDefenseAttacks()
 
 								// we stop, because we have already fired once. reason is balancing
 								alreadyBombarded = true;
-								pUnitNode2 = NULL;
+								pUnitNode2 = nullptr;
 							}
 						}
 					}
@@ -13499,12 +13499,12 @@ void CvCity::doExtraCityDefenseAttacks()
 
 		CvWString szBuffer;
 		CvPlot* pPlot = plot();
-		CvPlot* pAdjacentPlot = NULL;
-		CvUnit* pDefenseUnit = NULL;
-		CvUnit* pLoopUnit = NULL;
-		CvUnit* pLoopUnit2 = NULL;
-		CLLNode<IDInfo>* pUnitNode = NULL;
-		CLLNode<IDInfo>* pUnitNode2 = NULL;
+		CvPlot* pAdjacentPlot = nullptr;
+		CvUnit* pDefenseUnit = nullptr;
+		CvUnit* pLoopUnit = nullptr;
+		CvUnit* pLoopUnit2 = nullptr;
+		CLLNode<IDInfo>* pUnitNode = nullptr;
+		CLLNode<IDInfo>* pUnitNode2 = nullptr;
 		bool alreadyFired = false;
 		bool bCanFire = false;
 
@@ -13532,7 +13532,7 @@ void CvCity::doExtraCityDefenseAttacks()
 					{
 						pAdjacentPlot = plotDirection(getX_INLINE(), getY_INLINE(), ((DirectionTypes)iI));
 						//we do not fire on Water here
-						if (pAdjacentPlot != NULL && !pAdjacentPlot->isWater())
+						if (pAdjacentPlot != nullptr && !pAdjacentPlot->isWater())
 						{
 							pUnitNode2 = pAdjacentPlot->headUnitNode();
 							while (pUnitNode2)
@@ -13596,33 +13596,33 @@ void CvCity::doExtraCityDefenseAttacks()
 											if (pLoopUnit2->isDead())
 											{
 												int iExperience = pLoopUnit2->attackXPValue();
-												iExperience = ((iExperience * pLoopUnit2->currCombatStr(plot(), pDefenseUnit)) / pDefenseUnit->currCombatStr(NULL, NULL));
+												iExperience = (iExperience * pLoopUnit2->currCombatStr(plot(), pDefenseUnit)) / pDefenseUnit->currCombatStr(nullptr, nullptr);
 												iExperience = range(iExperience, GC.getDefineINT("MIN_EXPERIENCE_PER_COMBAT"), GC.getDefineINT("MAX_EXPERIENCE_PER_COMBAT"));
 
 												pDefenseUnit->changeExperience(iExperience, pLoopUnit2->maxXPValue(), true, plot()->getOwnerINLINE() == pDefenseUnit->getOwnerINLINE(), true);
 
 												szBuffer = gDLL->getText("TXT_KEY_FORTDEFENSE_DESTROYED_GOOD", getNameKey());
-												gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), true, true);
+												gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), true, true);
 
 												szBuffer = gDLL->getText("TXT_KEY_FORTDEFENSE_DESTROYED_BAD", getNameKey());
-												gDLL->UI().addPlayerMessage(pLoopUnit2->getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, pLoopUnit2, "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), true, true);
+												gDLL->UI().addPlayerMessage(pLoopUnit2->getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, pLoopUnit2, "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), true, true);
 											}
 											else
 											{
 												szBuffer = gDLL->getText("TXT_KEY_FORTDEFENSE_HIT_LAND_GOOD", getNameKey(), iDamage);
-												gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"),true, true);
+												gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"),true, true);
 
 												szBuffer = gDLL->getText("TXT_KEY_FORTDEFENSE_HIT_LAND_BAD", getNameKey(), iDamage);
-												gDLL->UI().addPlayerMessage(pLoopUnit2->getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, pLoopUnit2, "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), true, true);
+												gDLL->UI().addPlayerMessage(pLoopUnit2->getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, pLoopUnit2, "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), true, true);
 											}
 										}
 										else
 										{
 											szBuffer = gDLL->getText("TXT_KEY_FORTDEFENSE_MISS_LAND_BAD", getNameKey());
-											gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), true, true);
+											gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), true, true);
 
 											szBuffer = gDLL->getText("TXT_KEY_FORTDEFENSE_MISS_LAND_GOOD", getNameKey());
-											gDLL->UI().addPlayerMessage(pLoopUnit2->getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, pLoopUnit2, "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), true, true);
+											gDLL->UI().addPlayerMessage(pLoopUnit2->getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, pLoopUnit2, "AS2D_CIVIC_ADOPT", MESSAGE_TYPE_MINOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), true, true);
 										}
 									}
 									//case land end
@@ -13646,7 +13646,7 @@ void CvCity::doExtraCityDefenseAttacks()
 								}
 								// we stop, because we have already fired once. reason is balancing
 								alreadyFired = true;
-								pUnitNode2 = NULL;
+								pUnitNode2 = nullptr;
 							}
 						}
 					}
@@ -13906,7 +13906,7 @@ void CvCity::createFleeingUnit(UnitTypes eUnit, bool bDefaultAI)
 	CvPlayer& barbarianPlayer = GET_PLAYER(GC.getGameINLINE().getBarbarianPlayer());
 
 	// find plot
-	CvPlot* pBestPlot = NULL;
+	CvPlot* pBestPlot = nullptr;
 	int iBestValue = MAX_INT;
 
 	for (int iI = 0; iI < GC.getMap().numPlotsINLINE(); iI++)
@@ -13929,7 +13929,7 @@ void CvCity::createFleeingUnit(UnitTypes eUnit, bool bDefaultAI)
 	}
 
 	// init fleeing or revolting Unit
-	if (pBestPlot != NULL)
+	if (pBestPlot != nullptr)
 	{
 		// Fleeing AI
 		if (bDefaultAI == false)
@@ -13974,7 +13974,7 @@ void CvCity::doEntertainmentBuildings()
 		OOS_LOG_3("Entertainment building", CvString(getName()).c_str(), iGoldthroughCulture);
 		GET_PLAYER(getOwnerINLINE()).changeGold(iGoldthroughCulture);
 		CvWString szBuffer = gDLL->getText("TXT_KEY_GOLD_BY_ENTERTAINMENT", GC.getBuildingInfo(highestLevelEntertainmentBuilding).getDescription(), getNameKey(), iGoldthroughCulture);
-		gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), NULL, MESSAGE_TYPE_MINOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_WHITE"), true, true);
+		gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), nullptr, MESSAGE_TYPE_MINOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_WHITE"), true, true);
 	}
 }
 // R&R, ray, Entertainment Buildings - END
@@ -14099,7 +14099,7 @@ void CvCity::spawnOwnPlayerUnitOnAdjacentPlotOfCity(int /*UnitClassTypes*/ iInde
 		for (int iI = 0; iI < NUM_DIRECTION_TYPES; iI++)
 		{
 			CvPlot* pAdjacentPlot = plotDirection(getX_INLINE(), getY_INLINE(), ((DirectionTypes)iI));
-			if (pAdjacentPlot != NULL)
+			if (pAdjacentPlot != nullptr)
 			{
 				// if the adjacent Plot is valid and there are no other Units, prevent Cities for safety reasons
 				if (pAdjacentPlot->isValidDomainForAction(eUnitToSpawn) && pAdjacentPlot->getNumUnits() == 0 && !pAdjacentPlot->isCity())
@@ -14135,7 +14135,7 @@ void CvCity::spawnBarbarianUnitOnAdjacentPlotOfCity(int /*UnitClassTypes*/ iInde
 		for (int iI = 0; iI < NUM_DIRECTION_TYPES; iI++)
 		{
 			CvPlot* pAdjacentPlot = plotDirection(getX_INLINE(), getY_INLINE(), ((DirectionTypes)iI));
-			if (pAdjacentPlot != NULL)
+			if (pAdjacentPlot != nullptr)
 			{
 				// if the adjacent Plot is valid and there are no other Units, prevent Cities for safety reasons
 				if (pAdjacentPlot->isValidDomainForAction(eUnitToSpawn) && pAdjacentPlot->getNumUnits() == 0 && !pAdjacentPlot->isCity())
@@ -14164,7 +14164,7 @@ bool CvCity::isOwnPlayerUnitOnAdjacentPlotOfCity(int /*UnitClassTypes*/ iIndex) 
 		for (int iI = 0; iI < NUM_DIRECTION_TYPES; iI++)
 		{
 			CvPlot* pAdjacentPlot = plotDirection(getX_INLINE(), getY_INLINE(), ((DirectionTypes)iI));
-			if (pAdjacentPlot != NULL)
+			if (pAdjacentPlot != nullptr)
 			{
 				// if the adjacent Plot is valid and there are no other Units, prevent Cities for safety reasons
 				CLLNode<IDInfo>* pUnitNode = pAdjacentPlot->headUnitNode();
@@ -14203,7 +14203,7 @@ bool CvCity::isBarbarianUnitOnAdjacentPlotOfCity(int /*UnitClassTypes*/ iIndex) 
 		for (int iI = 0; iI < NUM_DIRECTION_TYPES; iI++)
 		{
 			CvPlot* pAdjacentPlot = plotDirection(getX_INLINE(), getY_INLINE(), ((DirectionTypes)iI));
-			if (pAdjacentPlot != NULL)
+			if (pAdjacentPlot != nullptr)
 			{
 				// if the adjacent Plot is valid and there are no other Units, prevent Cities for safety reasons
 				CLLNode<IDInfo>* pUnitNode = pAdjacentPlot->headUnitNode();
@@ -14273,7 +14273,7 @@ void CvCity::UpdateBuildingAffectedCache()
 
 		// only work on plots owned by the city owner
 		// this is needed when loading savegames as not all players will be loaded at this point
-		if (pLoopPlot != NULL && pLoopPlot->getOwnerINLINE() == getOwnerINLINE())
+		if (pLoopPlot != nullptr && pLoopPlot->getOwnerINLINE() == getOwnerINLINE())
 		{
 			pLoopPlot->setYieldCache();
 		}
@@ -14351,10 +14351,10 @@ void CvCity::doOppressometerGrowth()
 	FOREACH(CityPlot)
 	{
 		CvPlot* pPlot = getCityIndexPlot(eLoopCityPlot);
-		if (pPlot != NULL && isPlotProducingYields(eLoopCityPlot))
+		if (pPlot != nullptr && isPlotProducingYields(eLoopCityPlot))
 		{
 			CvUnit* const pUnit = getUnitWorkingPlot(pPlot);
-			if (pUnit != NULL)
+			if (pUnit != nullptr)
 			{
 				const int iForcedLaborFactor = pUnit->getForcedLaborFactor();
 				if (iForcedLaborFactor > 0)

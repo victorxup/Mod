@@ -7,7 +7,7 @@
 #include "CyArea.h"
 #include "CvTeam.h"
 #include "CyUnit.h"
-CyTeam::CyTeam() : m_pTeam(NULL)
+CyTeam::CyTeam() : m_pTeam(nullptr)
 {
 }
 CyTeam::CyTeam(CvTeam* pTeam) : m_pTeam(pTeam)

@@ -54,9 +54,9 @@ public:
 	// note that it is possible to have allocated arrays with only default content
 	inline bool isAllocated() const
 	{
-		return m_tArray != NULL;
+		return m_tArray != nullptr;
 	}
-	
+
 	inline int length() const
 	{
 		return m_iLength;
@@ -89,7 +89,7 @@ public:
 	// 1D array are read as all included indexes stores 1
 	// returns true if an allow change value (a number goes 0->1 or 1->0)
 	// pCivInfo is needed when going from BuildingClass->Building or UnitClass to Unit
-	bool addCache(int iChange, const InfoArrayBase& kIarray, const CvCivilizationInfo *pCivInfo = NULL);
+	bool addCache(int iChange, const InfoArrayBase& kIarray, const CvCivilizationInfo *pCivInfo = nullptr);
 
 	// add a number to all indexes
 	void addAll(int iChange, int iValue);
@@ -120,7 +120,7 @@ public:
 		return !hasContent();
 	}
 
-	unsigned int getNumUsedElements(T* pNormalArray = NULL) const;
+	unsigned int getNumUsedElements(T* pNormalArray = nullptr) const;
 
 	// floating point cache modifiers
 	T getFloat(int iIndex) const;
@@ -132,7 +132,7 @@ public:
 	// bEnable can be used like "uiFlag > x" to make oneline conditional loads
 	// pNormalArray can be used to make read/write take place in an array other than the JIT array, but it must be allocated to the same length as the JIT array
 	// this is normally not used, but it helps when making savegames resistant to xml changes while keeping vanilla code as untouched as possible
-	// TODO remove this when cleaning up savegame code 
+	// TODO remove this when cleaning up savegame code
 	void read (FDataStreamBase* pStream, bool bEnable);
 	void write(FDataStreamBase* pStream, bool bEnable);
 	void Read(FDataStreamBase* pStream);
@@ -223,10 +223,10 @@ public:
 	T getAccumulative(int iIndex, int iSubIndex) const;
 
 	// returns true if an allow change value (a number goes 0->1 or 1->0)
-	bool addCache(int iChange, const InfoArrayBase& kIarray, const CvCivilizationInfo *pCivInfo = NULL);
+	bool addCache(int iChange, const InfoArrayBase& kIarray, const CvCivilizationInfo *pCivInfo = nullptr);
 
 	// adds numbers to index and all higher indexes. Used for bonus like +1 if number is 3 or higher
-	void addCacheAccumulative(int iChange, const InfoArrayBase& kIarray, const CvCivilizationInfo *pCivInfo = NULL);
+	void addCacheAccumulative(int iChange, const InfoArrayBase& kIarray, const CvCivilizationInfo *pCivInfo = nullptr);
 
 	// set all variables to a specific value (reset frees the memory and is better than assigning 0)
 	void assign(T iNewValue, int iIndex = -1, int iSubIndex = -1);
@@ -285,10 +285,10 @@ const char* getArrayTypeWithoutPrefix(JITarrayTypes eType, int iIndex);
 JITarrayTypes getJITArrayTypeFromString(const char* szType);
 
 template<typename T>
-T getIndexForType(const char* pTypeString, const char* pAssertMsg = NULL)
+T getIndexForType(const char* pTypeString, const char* pAssertMsg = nullptr)
 {
 	int iIndex = getIndexForType(VARINFO<T>::JIT, pTypeString);
-	FAssertMsg(iIndex != -1 || pAssertMsg == NULL, pAssertMsg);
+	FAssertMsg(iIndex != -1 || pAssertMsg == nullptr, pAssertMsg);
 	return (T)iIndex;
 }
 

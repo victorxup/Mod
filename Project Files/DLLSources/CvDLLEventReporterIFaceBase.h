@@ -16,7 +16,7 @@ class CvSelectionGroup;
 class CvDLLEventReporterIFaceBase
 {
 public:
-	virtual void genericEvent(const char* szEventName, void* pythonArgs=NULL) = 0;
+	virtual void genericEvent(const char* szEventName, void* pythonArgs = nullptr) = 0;
 	virtual void mouseEvent(int evt, const POINT& ptCursor) = 0;
 	virtual void kbdEvent(int evt, int key) = 0;
 

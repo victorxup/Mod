@@ -3,8 +3,8 @@
 #ifndef CyCity_h
 #define CyCity_h
 //
-// Python wrapper class for CvCity 
-// 
+// Python wrapper class for CvCity
+//
 
 //#include "CvEnums.h"
 #include <string>
@@ -22,17 +22,17 @@ public:
 	CyCity();
 	DllExport CyCity(CvCity* pCity);		// Call from C++
 	CvCity* getCity() { return m_pCity;	}	// Call from C++
-	bool isNone() { return (m_pCity==NULL); }
+	bool isNone() { return m_pCity == nullptr; }
 	void kill();
 
 	void createGreatGeneral(int /*UnitTypes*/ eGreatGeneralUnit, bool bIncrementExperience);
 	void createGreatAdmiral(int /*UnitTypes*/ eGreatAdmiralUnit, bool bIncrementExperience); // R&R, ray, Great Admirals
 
 	// WTP, ray, Lieutenants and Captains - START
-	void createBraveLieutenant(int /*UnitTypes*/ eBraveLieutenantUnit); 
-	void createCapableCaptain(int /*UnitTypes*/ eCapableCaptainUnit); 
+	void createBraveLieutenant(int /*UnitTypes*/ eBraveLieutenantUnit);
+	void createCapableCaptain(int /*UnitTypes*/ eCapableCaptainUnit);
 	// WTP, ray, Lieutenants and Captains - END
-	 
+
 	void doTask(int /*TaskTypes*/ eTask, int iData1, int iData2, bool bOption);
 	void chooseProduction(int /*UnitTypes*/ eTrainUnit, int /*BuildingTypes*/ eConstructBuilding, bool bFinish, bool bFront);
 	int getCityPlotIndex(CyPlot* pPlot);
@@ -74,7 +74,7 @@ public:
 	int getProductionNeeded(int /*YieldTypes*/ eYield);
 	int getProductionTurnsLeft();
 	int getUnitProductionTurnsLeft(int /*UnitTypes*/ iUnit, int iNum);
-	int getBuildingProductionTurnsLeft(int /*BuildingTypes*/ iBuilding, int iNum);								
+	int getBuildingProductionTurnsLeft(int /*BuildingTypes*/ iBuilding, int iNum);
 	void setProduction(int iNewValue);
 	void changeProduction(int iChange);
 	int getProductionModifier();
@@ -98,11 +98,11 @@ public:
 	bool isCoastal(int iMinWaterSize);
 	bool isDisorder();
 	int extraPopulation();
-	int foodConsumption(int iExtra);												 
+	int foodConsumption(int iExtra);
 	int foodDifference();
 	int growthThreshold();
 	int productionLeft();
-	int hurryCost(bool bExtra, bool bIgnoreNew);																						 
+	int hurryCost(bool bExtra, bool bIgnoreNew);
 	int hurryGold(int /*HurryTypes*/ iHurry);
 	int hurryPopulation(int /*HurryTypes*/ iHurry);
 	int hurryProduction(int /*HurryTypes*/ iHurry);
@@ -207,16 +207,16 @@ public:
 	int getYieldBuyPrice(int /*YieldTypes*/ eYield) const;
 	int getYieldDemand(int /*YieldTypes*/ eYield) const;
 	//R&R, Robert Surcouf, Domestic Market display END
-	
+
 	bool isEverOwned(int /*PlayerTypes*/ eIndex);
 	PlayerTypes getMissionaryPlayer() const; // R&R, Robert Surcouf, No More Variables Hidden game option START
 	int getMissionaryRate() const; // R&R, Robert Surcouf, No More Variables Hidden game option END
-	
+
 	PlayerTypes getTradePostPlayer() const; // WTP, ray, Native Trade Posts - START
 	int getNativeTradeRate() const; // WTP, ray, Native Trade Posts - START
 
-	bool isRevealed(int /*TeamTypes*/ eIndex, bool bDebug);	
-	void setRevealed(int /*TeamTypes*/ eIndex, bool bNewValue);	
+	bool isRevealed(int /*TeamTypes*/ eIndex, bool bDebug);
+	void setRevealed(int /*TeamTypes*/ eIndex, bool bNewValue);
 	std::wstring getName();
 	std::wstring getNameForm(int iForm);
 	std::wstring getNameKey();
@@ -233,8 +233,8 @@ public:
 	void setUnitProduction(int iIndex, int iNewValue);
 	void changeUnitProduction(int /*UnitTypes*/ iIndex, int iChange);
 
-	int getUnitCombatFreeExperience(int /*UnitCombatTypes*/ eIndex);	
-	int getFreePromotionCount(int /*PromotionTypes*/ eIndex);	
+	int getUnitCombatFreeExperience(int /*UnitCombatTypes*/ eIndex);
+	int getFreePromotionCount(int /*PromotionTypes*/ eIndex);
 	bool isFreePromotion(int /*PromotionTypes*/ eIndex);
 
 	bool isHasRealBuilding(int /*BuildingTypes*/ iIndex);
@@ -267,7 +267,7 @@ public:
 	int AI_countBestBuilds(CyArea* pArea);
 	int AI_cityValue();
 	int /*YieldTypes*/ AI_getDesiredYield() const;// Robert Surcouf
-	
+
 	std::string getScriptData() const;
 	void setScriptData(std::string szNewValue);
 
@@ -364,7 +364,7 @@ public:
 	bool isImport(int /*YieldTypes*/ eYield) const;
 	void addImport(int /*YieldTypes*/ eYield);
 	void removeImport(int /*YieldTypes*/ eYield);
-	int getMaintainLevel(int /*YieldTypes*/ eYield) const;	
+	int getMaintainLevel(int /*YieldTypes*/ eYield) const;
 	int getImportsLimit(int /*YieldTypes*/ eYield) const;	// R&R mod, vetiarvind, max yield import limit
 	// transport feeder - start - Nightinggale
 	bool isImportFeeder(int /*YieldTypes*/ eYield) const;

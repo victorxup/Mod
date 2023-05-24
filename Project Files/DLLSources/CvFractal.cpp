@@ -25,7 +25,7 @@ CvFractal::~CvFractal()
 
 void CvFractal::uninit()
 {
-	if (m_aaiFrac != NULL)
+	if (m_aaiFrac != nullptr)
 	{
 		for (int iX = 0; iX < m_iFracX + 1; iX++)
 		{
@@ -37,7 +37,7 @@ void CvFractal::uninit()
 
 void CvFractal::reset()
 {
-	m_aaiFrac = NULL;
+	m_aaiFrac = nullptr;
 	m_iFracXExp = -1;
 	m_iFracYExp = -1;
 	m_iXs = -1;
@@ -49,7 +49,7 @@ void CvFractal::reset()
 
 void CvFractal::fracInit(int iNewXs, int iNewYs, int iGrain, CvRandom& random, int iFlags, CvFractal* pRifts, int iFracXExp/*=7*/, int iFracYExp/*=6*/)
 {
-	fracInitInternal(iNewXs, iNewYs, iGrain, random, NULL, -1, iFlags, pRifts, iFracXExp, iFracYExp);
+	fracInitInternal(iNewXs, iNewYs, iGrain, random, nullptr, -1, iFlags, pRifts, iFracXExp, iFracYExp);
 }
 
 // pbyHints should be a 1d array of bytes representing a 2d array
@@ -112,7 +112,7 @@ void CvFractal::fracInitInternal(int iNewXs, int iNewYs, int iGrain, CvRandom& r
 
 	int iHintsWidth = (1 << (m_iFracXExp - iSmooth)) + ((m_iFlags & FRAC_WRAP_X) ? 0 : 1);
 	int iHintsHeight = (1 << (m_iFracYExp - iSmooth)) + ((m_iFlags & FRAC_WRAP_Y) ? 0 : 1);
-	if (pbyHints != NULL)
+	if (pbyHints != nullptr)
 	{
 		FAssertMsg(iHintsLength == iHintsWidth*iHintsHeight, "pbyHints is the wrong size!")
 	}
@@ -192,7 +192,7 @@ void CvFractal::fracInitInternal(int iNewXs, int iNewYs, int iGrain, CvRandom& r
 			{
 				if ((iPass == iSmooth))// If this is the first, pass, set the initial random spots
 				{
-					if (pbyHints == NULL)
+					if (pbyHints == nullptr)
 					{
 						m_aaiFrac[iX << iPass][iY << iPass] = random.get(256, "Fractal Gen");
 					}

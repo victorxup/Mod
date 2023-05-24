@@ -47,7 +47,7 @@ public:
 
 	int AI_attackOdds(const CvPlot* pPlot, bool bPotentialEnemy) const;
 
-	bool AI_bestCityBuild(CvCity* pCity, CvPlot** ppBestPlot = NULL, BuildTypes* peBestBuild = NULL, CvPlot* pIgnorePlot = NULL, CvUnit* pUnit = NULL);
+	bool AI_bestCityBuild(CvCity* pCity, CvPlot** ppBestPlot = nullptr, BuildTypes* peBestBuild = nullptr, CvPlot* pIgnorePlot = nullptr, CvUnit* pUnit = nullptr);
 
 	bool AI_isCityAIType() const;
 
@@ -73,7 +73,7 @@ public:
 
 	void AI_doInitialMovePriority();
 	void AI_doFound();
-	
+
 	ProfessionTypes AI_getOldProfession() const;
 	void AI_setOldProfession(ProfessionTypes eProfession);
 	ProfessionTypes AI_getIdealProfession() const;
@@ -104,7 +104,7 @@ protected:
 	ProfessionTypes m_eOldProfession;
 
 	int m_iAutomatedAbortTurn;
-	
+
 	mutable ProfessionTypes m_eIdealProfessionCache;
 
 	// < JAnimals Mod Start >
@@ -123,7 +123,7 @@ protected:
 	void AI_treasureMove();
 	void AI_yieldUhMove();
 	void AI_generalMove();
-	
+
 	void AI_offensiveMove();
 	// TAC - AI Attack City - koma13 - START
 	void AI_attackCityMove();
@@ -131,11 +131,11 @@ protected:
 
 	void AI_defensiveMove();
 	void AI_counterMove();
-	
+
 	void AI_defensiveBraveMove();
 	void AI_offensiveBraveMove();
 	void AI_counterBraveMove();
-	
+
 	void AI_transportMove();
 	void AI_transportMoveRoutes();
 	void AI_transportMoveFull();
@@ -191,11 +191,11 @@ protected:
 	bool AI_collectGoods();
 
 	bool AI_deliverUnits(UnitAITypes eUnitAI = NO_UNITAI);
-	
+
 	CvPlot* AI_bestDestinationPlot(bool bIgnoreDanger = false);	// TAC - AI Improved Naval AI - koma13
 
 	bool AI_loadUnits(UnitAITypes eUnitAI, MissionAITypes eMissionAI);
-	
+
 	bool AI_wakeCargo(UnitAITypes eUnitAI, int iPriority);
 
 	int AI_promotionValue(PromotionTypes ePromotion);
@@ -287,14 +287,14 @@ protected:
 
 	// R&R, ray, Natives raiding party - START
 	CvCity* AI_nativePickRaidTargetCity(int iFlags = 0, int iMaxPath = MAX_INT);
-	bool AI_nativeGoToRaidTargetCity(int iFlags = 0, int iMaxPath = MAX_INT, CvCity* pTargetCity = NULL);
+	bool AI_nativeGoToRaidTargetCity(int iFlags = 0, int iMaxPath = MAX_INT, CvCity* pTargetCity = nullptr);
 	// R&R, ray, Natives raiding party - END
 
 	bool AI_extortCity();
 
 	// TAC - AI Attack City - koma13, jdog5000(BBAI) - START
 	CvCity* AI_pickTargetCity(int iFlags = 0, int iMaxPath = MAX_INT, bool bHuntBarbs = false);
-	bool AI_goToTargetCity(int iFlags = 0, int iMaxPath = MAX_INT, CvCity* pTargetCity = NULL);
+	bool AI_goToTargetCity(int iFlags = 0, int iMaxPath = MAX_INT, CvCity* pTargetCity = nullptr);
 	bool AI_pillageAroundCity(CvCity* pTargetCity, int iBonusValueThreshold = 0, int iMaxPathTurns = MAX_INT);
 	// TAC - AI Attack City - koma13, jdog5000(BBAI) - END
 
@@ -323,12 +323,12 @@ protected:
 	bool AI_yieldDestination(int iMaxPath = MAX_INT);
 	bool AI_yieldNativeDestination(int iMaxPath = MAX_INT);
 	bool AI_tradeWithCity();
-	
+
 	// TAC - AI Assault Sea - koma13, jdog5000(BBAI) - START
 	bool AI_assaultSeaTransport(bool bNative = false);
 	bool AI_assaultSeaReinforce(bool bNative = false);
 	// TAC - AI Assault Sea - koma13, jdog5000(BBAI) - END
-	
+
 	bool AI_settlerSeaFerry();
 	bool AI_specialSeaTransportMissionary();
 	bool AI_connectPlot(CvPlot* pPlot, int iRange = 0);
@@ -342,16 +342,16 @@ protected:
 	bool AI_routeTerritory(bool bImprovementOnly = false);
 	bool AI_travelToUpgradeCity();
 	bool AI_retreatToCity(bool bPrimary = false, int iMaxPath = MAX_INT, bool bAvoidDanger = false);
-	
+
 	bool AI_retreatFromDanger();	// TAC - AI Improved Naval AI - koma13
 
 	bool AI_treasureRetreat(int iMaxPathTurns = MAX_INT);
-	
+
 	// TAC - AI Assault Sea - koma13, jdog5000(BBAI) - START
 	//bool AI_pickup(UnitAITypes eUnitAI);
 	bool AI_pickup(UnitAITypes eUnitAI, int iMaxPath = MAX_INT);
 	// TAC - AI Assault Sea - koma13, jdog5000(BBAI) - END
-	
+
 	bool AI_moveToStagingCity();
 
 	bool AI_disembark(bool bEnemyCity = true);
@@ -359,7 +359,7 @@ protected:
 
 	bool AI_followBombard();
 
-	bool AI_potentialEnemy(TeamTypes eTeam, const CvPlot* pPlot = NULL);
+	bool AI_potentialEnemy(TeamTypes eTeam, const CvPlot* pPlot = nullptr);
 
 	bool AI_defendPlot(CvPlot* pPlot);
 	int AI_pillageValue(CvPlot* pPlot);
@@ -392,9 +392,9 @@ protected:
 
 	bool AI_canGroupWithAIType(UnitAITypes eUnitAI) const;
 	bool AI_allowGroup(const CvUnit* pUnit, UnitAITypes eUnitAI) const;
-	
+
 	bool AI_isOnMission();
-	
+
 	bool AI_isObsoleteTradeShip();
 
 	bool AI_sailTo(const SailToHelper& sth, bool bMove, bool bIgnoreDanger = true);

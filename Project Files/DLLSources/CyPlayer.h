@@ -39,7 +39,7 @@ public:
 	bool isAchieveGained(int /*AchieveTypes*/ eAchieve);
 	int getAchieveYear(int /*AchieveTypes*/ eAchieve);
 	// PatchMod: Achievements END
-	bool isNone() { return (m_pPlayer==NULL); }
+	bool isNone() { return m_pPlayer == nullptr; }
 	int startingPlotRange();
 	CyPlot* findStartingPlot(bool bRandomize);
 	CyCity* initCity(int x, int y);
@@ -132,7 +132,7 @@ public:
 	// R&R, ray, Great Admirals - START
 	void createGreatAdmiral(int eGreatAdmiralUnit, bool bIncrementExperience, int iX, int iY);
 	int getGreatAdmiralsCreated();
-	int getGreatAdmiralsThresholdModifier(); 
+	int getGreatAdmiralsThresholdModifier();
 	// R&R, ray, Great Admirals - END
 	// WTP, ray, Lieutenants and Captains - START
 	void createBraveLieutenant(int eBraveLieutenantUnit, int iX, int iY);
@@ -418,7 +418,7 @@ public:
 	bool editTradeRouteGroup(int iId, const std::wstring groupName);
 	bool removeTradeRouteGroup(int iId);
 	int getNumTradeGroups() const;
-	CyTradeRouteGroup* getTradeGroup(int iIndex);	
+	CyTradeRouteGroup* getTradeGroup(int iIndex);
 	// R&R mod, vetiarvind, trade groups - end
 
 	CyInfoArray* getSpecialBuildingTypes() const;
@@ -439,7 +439,7 @@ public:
 private:
 	CvPlayer* m_pPlayer;
 	// R&R mod, vetiarvind, trade groups - start
-	int m_lastUpdatedTradegroup; 
+	int m_lastUpdatedTradegroup;
 	int m_loadedTradeGroup;
 	// R&R mod, vetiarvind, trade groups - end
 };

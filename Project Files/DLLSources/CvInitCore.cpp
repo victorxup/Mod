@@ -59,8 +59,8 @@ CvInitCore::CvInitCore()
 	m_aszPythonCheck = new CvString[MAX_PLAYERS];
 	m_aszXMLCheck = new CvString[MAX_PLAYERS];
 
-	m_aeCustomMapOptions = NULL;
-	m_abVictories = NULL;
+	m_aeCustomMapOptions = nullptr;
+	m_abVictories = nullptr;
 
 	reset(NO_GAMEMODE);
 }
@@ -952,10 +952,10 @@ void CvInitCore::refreshCustomMapOptions()
 			bool bOK;
 			long iNumOptions = 0;
 
-			gDLL->getPythonIFace()->callFunction(CvString(getMapScriptName()).GetCString(), "getNumHiddenCustomMapOptions", NULL, &iNumOptions);
+			gDLL->getPythonIFace()->callFunction(CvString(getMapScriptName()).GetCString(), "getNumHiddenCustomMapOptions", nullptr, &iNumOptions);
 			m_iNumHiddenCustomMapOptions = iNumOptions;
 
-			bOK = gDLL->getPythonIFace()->callFunction(CvString(getMapScriptName()).GetCString(), "getNumCustomMapOptions", NULL, &iNumOptions);
+			bOK = gDLL->getPythonIFace()->callFunction(CvString(getMapScriptName()).GetCString(), "getNumCustomMapOptions", nullptr, &iNumOptions);
 			if (bOK)
 			{
 				// Got number of custom map options - now get the option defaults
@@ -1899,7 +1899,7 @@ void CvInitCore::showReadFailureMessage(char *szHeader, char* szMessage)
 	dialogTemplate.AddButton( _T("&OK :("), WS_VISIBLE, 0,
 		130, 80, 60, 16, IDC_BUTTON_OK );
 
-	DialogBoxIndirect(GetModuleHandle(0), dialogTemplate.GetDialogTemplate(), NULL, (DLGPROC)CvInitCoreReadFailureCallback);
+	DialogBoxIndirect(GetModuleHandle(0), dialogTemplate.GetDialogTemplate(), nullptr, (DLGPROC)CvInitCoreReadFailureCallback);
 
 	printf(szMessage);
 	while (true)

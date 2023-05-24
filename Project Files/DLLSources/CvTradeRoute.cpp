@@ -47,15 +47,15 @@ void CvTradeRoute::setSourceCity(const IDInfo& kCity)
 		m_kSourceCity = kCity;
 
 		CvCity* pCity = ::getCity(getSourceCity());
-		FAssert(pCity != NULL);
-		if (pCity != NULL)
+		FAssert(pCity != nullptr);
+		if (pCity != nullptr)
 		{
 			pCity->updateExport(getYield());
 		}
 
 		pCity = ::getCity(kOldCity);
-		FAssert(pCity != NULL);
-		if (pCity != NULL)
+		FAssert(pCity != nullptr);
+		if (pCity != nullptr)
 		{
 			pCity->updateExport(getYield());
 		}
@@ -72,8 +72,8 @@ const wchar* CvTradeRoute::getSourceCityNameKey() const
 	}
 
 	CvCity* pCity = ::getCity(getSourceCity());
-	FAssert(pCity != NULL);
-	if (pCity != NULL)
+	FAssert(pCity != nullptr);
+	if (pCity != nullptr)
 	{
 		return pCity->getNameKey();
 	}
@@ -96,15 +96,15 @@ void CvTradeRoute::setDestinationCity(const IDInfo& kCity)
 		m_kDestinationCity = kCity;
 
 		CvCity* pCity = ::getCity(getDestinationCity());
-		FAssert(pCity != NULL || getDestinationCity().iID == EUROPE_CITY_ID);
-		if (pCity != NULL)
+		FAssert(pCity != nullptr || getDestinationCity().iID == EUROPE_CITY_ID);
+		if (pCity != nullptr)
 		{
 			pCity->updateImport(getYield());
 		}
 
 		pCity = ::getCity(kOldCity);
-		FAssert(pCity != NULL || getDestinationCity().iID == EUROPE_CITY_ID);
-		if (pCity != NULL)
+		FAssert(pCity != nullptr || getDestinationCity().iID == EUROPE_CITY_ID);
+		if (pCity != nullptr)
 		{
 			pCity->updateImport(getYield());
 		}
@@ -121,8 +121,8 @@ const wchar* CvTradeRoute::getDestinationCityNameKey() const
 	}
 
 	CvCity* pCity = ::getCity(getDestinationCity());
-	FAssert(pCity != NULL);
-	if (pCity != NULL)
+	FAssert(pCity != nullptr);
+	if (pCity != nullptr)
 	{
 		return pCity->getNameKey();
 	}
@@ -145,16 +145,16 @@ void CvTradeRoute::setYield(YieldTypes eYield)
 		m_eYield = eYield;
 
 		CvCity* pCity = ::getCity(getDestinationCity());
-		FAssert(pCity != NULL);
-		if (pCity != NULL)
+		FAssert(pCity != nullptr);
+		if (pCity != nullptr)
 		{
 			pCity->updateImport(getYield());
 			pCity->updateImport(eOldYield);
 		}
 
 		pCity = ::getCity(getSourceCity());
-		FAssert(pCity != NULL);
-		if (pCity != NULL)
+		FAssert(pCity != nullptr);
+		if (pCity != nullptr)
 		{
 			pCity->updateExport(getYield());
 			pCity->updateExport(eOldYield);

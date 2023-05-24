@@ -120,7 +120,7 @@ void CvMap::read(CvSavegameReader reader)
 
 		case Save_WrapX:               reader.Read(m_bWrapX);              break;
 		case Save_WrapY:               reader.Read(m_bWrapY);              break;
-		
+
 		case Save_UseTwoPlotCities:
 		{
 			char iBuffer = 0;
@@ -130,7 +130,7 @@ void CvMap::read(CvSavegameReader reader)
 		}
 		case Save_Plots:
 		{
-			FAssertMsg(m_pMapPlots == NULL, "Memory leak");
+			FAssertMsg(m_pMapPlots == nullptr, "Memory leak");
 			const int iNumPlots = numPlotsINLINE();
 			m_pMapPlots = new CvPlot[iNumPlots];
 			for (int iI = 0; iI < iNumPlots; ++iI)
@@ -149,7 +149,7 @@ void CvMap::read(CvSavegameReader reader)
 			break;
 		}
 	}
-	
+
 	// Loading done. Set up the cache (if any).
 
 	{

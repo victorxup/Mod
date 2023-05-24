@@ -55,7 +55,7 @@ namespace
 		case WM_INITDIALOG:
 			{
 				char modulePath[MAX_PATH];
-				GetModuleFileName(NULL, modulePath, MAX_PATH);
+				GetModuleFileName(nullptr, modulePath, MAX_PATH);
 
 				const char* moduleName = strrchr(modulePath, '\\');
 				moduleName = moduleName ? moduleName+1 : modulePath;
@@ -139,14 +139,14 @@ namespace
 			ES_AUTOHSCROLL | ES_READONLY | WS_VSCROLL | WS_HSCROLL | WS_VISIBLE, WS_EX_STATICEDGE,
 			7,7,365,130, IDC_ASSERTION_TEXT );
 
-		int res = DialogBoxIndirect(GetModuleHandle(0), dialogTemplate.GetDialogTemplate(), NULL, (DLGPROC)AssertDlgProc);
+		int res = DialogBoxIndirect(GetModuleHandle(0), dialogTemplate.GetDialogTemplate(), nullptr, (DLGPROC)AssertDlgProc);
 		return res;
 	}
 
 } // end anonymous namespace
 
 bool FAssertDlg(const char* szExpr, const char* szMsg, const char* szFile, unsigned int line,
-	/* <advc.006f> */ const char* szFunction, /* </advc006f> */ bool& bIgnoreAlways) 
+	/* <advc.006f> */ const char* szFunction, /* </advc006f> */ bool& bIgnoreAlways)
 {
 //	FILL_CONTEXT( g_AssertInfo.context );
 

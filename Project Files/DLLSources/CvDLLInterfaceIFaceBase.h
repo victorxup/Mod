@@ -24,7 +24,7 @@ class CvDLLInterfaceIFaceBase
 public:
 	virtual void lookAtSelectionPlot(bool bRelease = false) = 0;
 
-	virtual bool canHandleAction(int iAction, CvPlot* pPlot = NULL, bool bTestVisible = false) = 0;
+	virtual bool canHandleAction(int iAction, CvPlot* pPlot = nullptr, bool bTestVisible = false) = 0;
 	virtual bool canDoInterfaceMode(InterfaceModeTypes eInterfaceMode, CvSelectionGroup* pSelectionGroup) = 0;
 
 	virtual CvPlot* getLookAtPlot() = 0;
@@ -85,8 +85,8 @@ public:
 	// WTP, jooe: use Coordinates class, add wrapper functions for plot, unit, city
 	void addPlayerMessage(PlayerTypes ePlayer, bool bForce, int iLength,
 		CvWString szString, const Coordinates coord,
-		LPCTSTR pszSound = NULL, InterfaceMessageTypes eType = MESSAGE_TYPE_INFO,
-		LPCSTR pszIcon = NULL, ColorTypes eFlashColor = NO_COLOR,
+		LPCTSTR pszSound = nullptr, InterfaceMessageTypes eType = MESSAGE_TYPE_INFO,
+		LPCSTR pszIcon = nullptr, ColorTypes eFlashColor = NO_COLOR,
 		bool bShowOffScreenArrows = false, bool bShowOnScreenArrows = false);
 
 	void addPlayerMessage(PlayerTypes ePlayer, bool bForce, int iLength,
@@ -104,7 +104,7 @@ public:
 	void addPlayerMessage(PlayerTypes ePlayer, bool bForce, int iLength,
 		CvWString szString,
 		LPCTSTR pszSound, InterfaceMessageTypes eType = MESSAGE_TYPE_INFO,
-		LPCSTR pszIcon = NULL, ColorTypes eFlashColor = NO_COLOR,
+		LPCSTR pszIcon = nullptr, ColorTypes eFlashColor = NO_COLOR,
 		bool bShowOffScreenArrows = false, bool bShowOnScreenArrows = false)
 		{
 			addPlayerMessage(ePlayer, bForce, iLength, szString,
@@ -115,8 +115,8 @@ public:
 
 	void addPlayerMessage(PlayerTypes ePlayer, bool bForce, int iLength,
 		CvWString szString, CvPlot const *pPlot,
-		LPCTSTR pszSound = NULL, InterfaceMessageTypes eType = MESSAGE_TYPE_INFO,
-		LPCSTR pszIcon = NULL, ColorTypes eFlashColor = NO_COLOR,
+		LPCTSTR pszSound = nullptr, InterfaceMessageTypes eType = MESSAGE_TYPE_INFO,
+		LPCSTR pszIcon = nullptr, ColorTypes eFlashColor = NO_COLOR,
 		bool bShowOffScreenArrows = false, bool bShowOnScreenArrows = false)
 		{
 			addPlayerMessage(ePlayer, bForce, iLength, szString,
@@ -127,8 +127,8 @@ public:
 
 	void addPlayerMessage(PlayerTypes ePlayer, bool bForce, int iLength,
 		CvWString szString, CvCity const *pCity,
-		LPCTSTR pszSound = NULL, InterfaceMessageTypes eType = MESSAGE_TYPE_INFO,
-		LPCSTR pszIcon = NULL, ColorTypes eFlashColor = NO_COLOR,
+		LPCTSTR pszSound = nullptr, InterfaceMessageTypes eType = MESSAGE_TYPE_INFO,
+		LPCSTR pszIcon = nullptr, ColorTypes eFlashColor = NO_COLOR,
 		bool bShowOffScreenArrows = false, bool bShowOnScreenArrows = false)
 		{
 			addPlayerMessage(ePlayer, bForce, iLength, szString,
@@ -139,8 +139,8 @@ public:
 
 	void addPlayerMessage(PlayerTypes ePlayer, bool bForce, int iLength,
 		CvWString szString, CvUnit *pUnit,
-		LPCTSTR pszSound = NULL, InterfaceMessageTypes eType = MESSAGE_TYPE_INFO,
-		LPCSTR pszIcon = NULL, ColorTypes eFlashColor = NO_COLOR,
+		LPCTSTR pszSound = nullptr, InterfaceMessageTypes eType = MESSAGE_TYPE_INFO,
+		LPCSTR pszIcon = nullptr, ColorTypes eFlashColor = NO_COLOR,
 		bool bShowOffScreenArrows = false, bool bShowOnScreenArrows = false)
 		{
 			addPlayerMessage(ePlayer, bForce, iLength, szString,
@@ -151,8 +151,8 @@ public:
 
 	void addAllPlayersMessage(bool bForce, int iLength,
 		CvWString szString, const Coordinates coord,
-		LPCTSTR pszSound = NULL, InterfaceMessageTypes eType = MESSAGE_TYPE_INFO,
-		LPCSTR pszIcon = NULL, ColorTypes eFlashColor = NO_COLOR,
+		LPCTSTR pszSound = nullptr, InterfaceMessageTypes eType = MESSAGE_TYPE_INFO,
+		LPCSTR pszIcon = nullptr, ColorTypes eFlashColor = NO_COLOR,
 		bool bShowOffScreenArrows = false, bool bShowOnScreenArrows = false);
 
 	void addAllPlayersMessage(bool bForce, int iLength,
@@ -170,7 +170,7 @@ public:
 	void addAllPlayersMessage(bool bForce, int iLength,
 		CvWString szString,
 		LPCTSTR pszSound, InterfaceMessageTypes eType = MESSAGE_TYPE_INFO,
-		LPCSTR pszIcon = NULL, ColorTypes eFlashColor = NO_COLOR,
+		LPCSTR pszIcon = nullptr, ColorTypes eFlashColor = NO_COLOR,
 		bool bShowOffScreenArrows = false, bool bShowOnScreenArrows = false)
 		{
 			addAllPlayersMessage(bForce, iLength, szString,
@@ -181,8 +181,8 @@ public:
 
 	void addAllPlayersMessage(bool bForce, int iLength,
 		CvWString szString, CvPlot const *pPlot,
-		LPCTSTR pszSound = NULL, InterfaceMessageTypes eType = MESSAGE_TYPE_INFO,
-		LPCSTR pszIcon = NULL, ColorTypes eFlashColor = NO_COLOR,
+		LPCTSTR pszSound = nullptr, InterfaceMessageTypes eType = MESSAGE_TYPE_INFO,
+		LPCSTR pszIcon = nullptr, ColorTypes eFlashColor = NO_COLOR,
 		bool bShowOffScreenArrows = false, bool bShowOnScreenArrows = false)
 		{
 			addAllPlayersMessage(bForce, iLength, szString,
@@ -193,8 +193,8 @@ public:
 
 	void addAllPlayersMessage(bool bForce, int iLength,
 		CvWString szString, CvCity const *pCity,
-		LPCTSTR pszSound = NULL, InterfaceMessageTypes eType = MESSAGE_TYPE_INFO,
-		LPCSTR pszIcon = NULL, ColorTypes eFlashColor = NO_COLOR,
+		LPCTSTR pszSound = nullptr, InterfaceMessageTypes eType = MESSAGE_TYPE_INFO,
+		LPCSTR pszIcon = nullptr, ColorTypes eFlashColor = NO_COLOR,
 		bool bShowOffScreenArrows = false, bool bShowOnScreenArrows = false)
 		{
 			addAllPlayersMessage(bForce, iLength, szString,
@@ -205,8 +205,8 @@ public:
 
 	void addAllPlayersMessage(bool bForce, int iLength,
 		CvWString szString, CvUnit *pUnit,
-		LPCTSTR pszSound = NULL, InterfaceMessageTypes eType = MESSAGE_TYPE_INFO,
-		LPCSTR pszIcon = NULL, ColorTypes eFlashColor = NO_COLOR,
+		LPCTSTR pszSound = nullptr, InterfaceMessageTypes eType = MESSAGE_TYPE_INFO,
+		LPCSTR pszIcon = nullptr, ColorTypes eFlashColor = NO_COLOR,
 		bool bShowOffScreenArrows = false, bool bShowOnScreenArrows = false)
 		{
 			addAllPlayersMessage(bForce, iLength, szString,
@@ -217,8 +217,8 @@ public:
 
 	void addOtherPlayersMessage(PlayerTypes eExcludePlayer, bool bForce, int iLength,
 		CvWString szString, const Coordinates coord,
-		LPCTSTR pszSound = NULL, InterfaceMessageTypes eType = MESSAGE_TYPE_INFO,
-		LPCSTR pszIcon = NULL, ColorTypes eFlashColor = NO_COLOR,
+		LPCTSTR pszSound = nullptr, InterfaceMessageTypes eType = MESSAGE_TYPE_INFO,
+		LPCSTR pszIcon = nullptr, ColorTypes eFlashColor = NO_COLOR,
 		bool bShowOffScreenArrows = false, bool bShowOnScreenArrows = false);
 
 	void addOtherPlayersMessage(PlayerTypes eExcludePlayer, bool bForce, int iLength,
@@ -236,7 +236,7 @@ public:
 	void addOtherPlayersMessage(PlayerTypes eExcludePlayer, bool bForce, int iLength,
 		CvWString szString,
 		LPCTSTR pszSound, InterfaceMessageTypes eType = MESSAGE_TYPE_INFO,
-		LPCSTR pszIcon = NULL, ColorTypes eFlashColor = NO_COLOR,
+		LPCSTR pszIcon = nullptr, ColorTypes eFlashColor = NO_COLOR,
 		bool bShowOffScreenArrows = false, bool bShowOnScreenArrows = false)
 		{
 			addOtherPlayersMessage(eExcludePlayer, bForce, iLength, szString,
@@ -247,8 +247,8 @@ public:
 
 	void addOtherPlayersMessage(PlayerTypes eExcludePlayer, bool bForce, int iLength,
 		CvWString szString, CvPlot const *pPlot,
-		LPCTSTR pszSound = NULL, InterfaceMessageTypes eType = MESSAGE_TYPE_INFO,
-		LPCSTR pszIcon = NULL, ColorTypes eFlashColor = NO_COLOR,
+		LPCTSTR pszSound = nullptr, InterfaceMessageTypes eType = MESSAGE_TYPE_INFO,
+		LPCSTR pszIcon = nullptr, ColorTypes eFlashColor = NO_COLOR,
 		bool bShowOffScreenArrows = false, bool bShowOnScreenArrows = false)
 		{
 			addOtherPlayersMessage(eExcludePlayer, bForce, iLength, szString,
@@ -259,8 +259,8 @@ public:
 
 	void addOtherPlayersMessage(PlayerTypes eExcludePlayer, bool bForce, int iLength,
 		CvWString szString, CvCity const *pCity,
-		LPCTSTR pszSound = NULL, InterfaceMessageTypes eType = MESSAGE_TYPE_INFO,
-		LPCSTR pszIcon = NULL, ColorTypes eFlashColor = NO_COLOR,
+		LPCTSTR pszSound = nullptr, InterfaceMessageTypes eType = MESSAGE_TYPE_INFO,
+		LPCSTR pszIcon = nullptr, ColorTypes eFlashColor = NO_COLOR,
 		bool bShowOffScreenArrows = false, bool bShowOnScreenArrows = false)
 		{
 			addOtherPlayersMessage(eExcludePlayer, bForce, iLength, szString,
@@ -271,8 +271,8 @@ public:
 
 	void addOtherPlayersMessage(PlayerTypes eExcludePlayer, bool bForce, int iLength,
 		CvWString szString, CvUnit *pUnit,
-		LPCTSTR pszSound = NULL, InterfaceMessageTypes eType = MESSAGE_TYPE_INFO,
-		LPCSTR pszIcon = NULL, ColorTypes eFlashColor = NO_COLOR,
+		LPCTSTR pszSound = nullptr, InterfaceMessageTypes eType = MESSAGE_TYPE_INFO,
+		LPCSTR pszIcon = nullptr, ColorTypes eFlashColor = NO_COLOR,
 		bool bShowOffScreenArrows = false, bool bShowOnScreenArrows = false)
 		{
 			addOtherPlayersMessage(eExcludePlayer, bForce, iLength, szString,
@@ -283,12 +283,12 @@ public:
 
 
 protected:
-	virtual void addMessage(PlayerTypes ePlayer, bool bForce, int iLength, CvWString szString, LPCTSTR pszSound = NULL,
-		InterfaceMessageTypes eType = MESSAGE_TYPE_INFO, LPCSTR pszIcon = NULL, ColorTypes eFlashColor = NO_COLOR,
+	virtual void addMessage(PlayerTypes ePlayer, bool bForce, int iLength, CvWString szString, LPCTSTR pszSound = nullptr,
+		InterfaceMessageTypes eType = MESSAGE_TYPE_INFO, LPCSTR pszIcon = nullptr, ColorTypes eFlashColor = NO_COLOR,
 		int iFlashX = -1, int iFlashY = -1, bool bShowOffScreenArrows = false, bool bShowOnScreenArrows = false) = 0;
 
 	void addMessage(PlayerTypes ePlayer, bool bForce, int iLength, CvWString szString, const Coordinates coord, LPCTSTR pszSound,
-			InterfaceMessageTypes eType = MESSAGE_TYPE_INFO, LPCSTR pszIcon = NULL, ColorTypes eFlashColor = NO_COLOR,
+			InterfaceMessageTypes eType = MESSAGE_TYPE_INFO, LPCSTR pszIcon = nullptr, ColorTypes eFlashColor = NO_COLOR,
 			bool bShowOffScreenArrows = false, bool bShowOnScreenArrows = false)
 			{
 				addMessage(ePlayer, bForce, iLength, szString, pszSound,
@@ -381,7 +381,7 @@ public:
 	virtual bool isClockAlarmOn() = 0;
 
 	virtual void setScreenDying(int iPythonFileID, bool bDying) = 0;
-	virtual void exitingToMainMenu(const char* szLoadFile=NULL) = 0;
+	virtual void exitingToMainMenu(const char* szLoadFile = nullptr) = 0;
 	virtual void setWorldBuilder(bool bTurnOn) = 0;
 
 	virtual int getFontLeftJustify() = 0;
@@ -394,9 +394,9 @@ public:
 	virtual void popupStartHLayout(CvPopup* pPopup, uint iFlags) = 0;
 	virtual void popupEndLayout(CvPopup* pPopup) = 0;
 	virtual void popupSetHeaderString( CvPopup* pPopup, CvWString szText, uint uiFlags = DLL_FONT_CENTER_JUSTIFY ) = 0;
-	virtual void popupSetBodyString( CvPopup* pPopup, CvWString szText, uint uiFlags = DLL_FONT_LEFT_JUSTIFY, char *szName = NULL, CvWString szHelpText = "" ) = 0;
+	virtual void popupSetBodyString(CvPopup* pPopup, CvWString szText, uint uiFlags = DLL_FONT_LEFT_JUSTIFY, char *szName = nullptr, CvWString szHelpText = "") = 0;
 	virtual void popupLaunch( CvPopup* pPopup, bool bCreateOkButton = true, PopupStates bState = POPUPSTATE_QUEUED, int iNumPixelScroll = 0 ) = 0;
-	virtual void popupSetPopupType( CvPopup* pPopup, PopupEventTypes ePopupType, LPCTSTR szArtFileName = NULL ) = 0;
+	virtual void popupSetPopupType(CvPopup* pPopup, PopupEventTypes ePopupType, LPCTSTR szArtFileName = nullptr) = 0;
 	virtual void popupSetStyle( CvPopup* pPopup, const char* styleId ) = 0;
 
 	virtual void popupAddDDS( CvPopup* pPopup, const char* szIconFilename, int iWidth = 0, int iHeight = 0, CvWString szHelpText = "") = 0;

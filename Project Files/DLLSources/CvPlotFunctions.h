@@ -113,7 +113,7 @@ inline void RevealedPlotDataArray::set(TeamTypes eTeam, ImprovementTypes eImprov
 
 inline bool RevealedPlotDataArray::isAllocated() const
 {
-	return m_pArray != NULL;
+	return m_pArray != nullptr;
 }
 
 

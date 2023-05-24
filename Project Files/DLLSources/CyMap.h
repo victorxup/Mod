@@ -21,7 +21,7 @@ public:
 	DllExport CyMap();
 	CyMap(CvMap* pMap);		// Call from C++
 	CvMap* getMap() { return m_pMap;	}	// Call from C++
-	bool isNone() { return (m_pMap==NULL); }
+	bool isNone() { return m_pMap == nullptr; }
 
 	void erasePlots();
 	void setRevealedPlots(int /*TeamTypes*/ eTeam, bool bNewValue, bool bTerrainOnly);

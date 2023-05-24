@@ -36,7 +36,7 @@
 #define DllExport   __declspec( dllexport )
 
 // The makefile use version 1310 to compile
-// VC use never versions for IntelliSense 
+// VC use never versions for IntelliSense
 // Used to avoid IntelliSense spamming bogus errors
 #if _MSC_VER == 1310
 # define MakefileCompilation
@@ -150,9 +150,9 @@ typedef wchar_t          wchar;
 #define MAX_UNSIGNED_INT                    (0xffffffff)
 #define MIN_UNSIGNED_INT                    (0x00000000)
 
-#define SAFE_DELETE(p)       { if(p) { delete (p);     (p)=NULL; } }
-#define SAFE_DELETE_ARRAY(p) { if(p) { delete[] (p);   (p)=NULL; } }
-#define SAFE_RELEASE(p)      { if(p) { (p)->Release(); (p)=NULL; } }
+#define SAFE_DELETE(p)       { if (p) { delete (p);     (p) = nullptr; } }
+#define SAFE_DELETE_ARRAY(p) { if (p) { delete[] (p);   (p) = nullptr; } }
+#define SAFE_RELEASE(p)      { if (p) { (p)->Release(); (p) = nullptr; } }
 
 #define SQR(x)      ( (x) * (x) )
 #define DEGTORAD(x) ( (float)( (x) * (M_PI / 180) ))

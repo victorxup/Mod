@@ -12,7 +12,7 @@
 #include "CyUnit.h"
 //#include "CvStructs.h"
 
-CySelectionGroup::CySelectionGroup() : m_pSelectionGroup(NULL)
+CySelectionGroup::CySelectionGroup() : m_pSelectionGroup(nullptr)
 {
 
 }
@@ -42,7 +42,7 @@ void CySelectionGroup::popMission()
 
 CyPlot* CySelectionGroup::lastMissionPlot()
 {
-	return m_pSelectionGroup ? new CyPlot(m_pSelectionGroup->lastMissionPlot()) : NULL;
+	return m_pSelectionGroup ? new CyPlot(m_pSelectionGroup->lastMissionPlot()) : nullptr;
 }
 
 bool CySelectionGroup::canStartMission(int iMission, int iData1, int iData2, CyPlot* pPlot, bool bTestVisible)
@@ -167,12 +167,12 @@ bool CySelectionGroup::atPlot(CyPlot* pPlot)
 
 CyPlot* CySelectionGroup::plot()
 {
-	return m_pSelectionGroup ? new CyPlot( m_pSelectionGroup->plot() ) : NULL;
+	return m_pSelectionGroup ? new CyPlot(m_pSelectionGroup->plot()) : nullptr;
 }
 
 CyArea* CySelectionGroup::area()
 {
-	return m_pSelectionGroup ? new CyArea( m_pSelectionGroup->area() ) : NULL;
+	return m_pSelectionGroup ? new CyArea(m_pSelectionGroup->area()) : nullptr;
 }
 
 int /*RouteTypes*/ CySelectionGroup::getBestBuildRoute(CyPlot* pPlot, BuildTypes* peBestBuild)
@@ -243,12 +243,12 @@ void CySelectionGroup::setAutomateType(int /*AutomateTypes*/ eNewValue)
 
 CyPlot* CySelectionGroup::getPathFirstPlot()
 {
-	return m_pSelectionGroup ? new CyPlot(m_pSelectionGroup->getPathFirstPlot()) : NULL;
+	return m_pSelectionGroup ? new CyPlot(m_pSelectionGroup->getPathFirstPlot()) : nullptr;
 }
 
 CyPlot* CySelectionGroup::getPathEndTurnPlot()
 {
-	return m_pSelectionGroup ? new CyPlot(m_pSelectionGroup->getPathEndTurnPlot()) : NULL;
+	return m_pSelectionGroup ? new CyPlot(m_pSelectionGroup->getPathEndTurnPlot()) : nullptr;
 }
 
 bool CySelectionGroup::generatePath(CyPlot* pFromPlot, CyPlot* pToPlot, int iFlags, bool bReuse, int* piPathTurns)
@@ -293,17 +293,17 @@ int CySelectionGroup::getLengthMissionQueue()
 
 MissionData* CySelectionGroup::getMissionFromQueue(int iIndex)
 {
-	return m_pSelectionGroup ? m_pSelectionGroup->getMissionFromQueue(iIndex) : NULL;
+	return m_pSelectionGroup ? m_pSelectionGroup->getMissionFromQueue(iIndex) : nullptr;
 }
 
 CyUnit* CySelectionGroup::getHeadUnit()
 {
-	return m_pSelectionGroup ? new CyUnit(m_pSelectionGroup->getHeadUnit()) : NULL;
+	return m_pSelectionGroup ? new CyUnit(m_pSelectionGroup->getHeadUnit()) : nullptr;
 }
 
 CyUnit* CySelectionGroup::getUnitAt(int index)
 {
-	return m_pSelectionGroup ? new CyUnit(m_pSelectionGroup->getUnitAt(index)) : NULL;
+	return m_pSelectionGroup ? new CyUnit(m_pSelectionGroup->getUnitAt(index)) : nullptr;
 }
 
 int CySelectionGroup::getMissionType( int iNode )

@@ -4,7 +4,7 @@
 #include "CvDLLInterfaceIFaceBase.h"
 #include "CvSavegame.h"
 
-CvTradeRouteGroup::CvTradeRouteGroup() 
+CvTradeRouteGroup::CvTradeRouteGroup()
 {
 	m_Routes.clear();
 }
@@ -25,7 +25,7 @@ void CvTradeRouteGroup::setID(int iId)
 }
 
 void CvTradeRouteGroup::addRoute(CvTradeRoute* tradeRoute)
-{	
+{
 
 	for (std::vector<CvTradeRoute>::iterator it = m_Routes.begin(); it != m_Routes.end(); ++it)
 	{
@@ -37,25 +37,25 @@ void CvTradeRouteGroup::addRoute(CvTradeRoute* tradeRoute)
 			pTradeRoute.getID();
 		}
 	}
-	
-		
+
+
 	m_Routes.push_back(*tradeRoute);
-	
+
 }
 
 void CvTradeRouteGroup::addRoute(const IDInfo& kSource, const IDInfo& kDestination, YieldTypes eYield)
 {
-	
+
 	CvCity* pSourceCity = ::getCity(kSource);
-	
-	if (pSourceCity == NULL)
+
+	if (pSourceCity == nullptr)
 	{
 		return;
 	}
-	
+
 
 	CvCity* pDestinationCity = ::getCity(kDestination);
-	
+
 	if (kSource == kDestination)
 	{
 		return;
@@ -74,10 +74,10 @@ void CvTradeRouteGroup::addRoute(const IDInfo& kSource, const IDInfo& kDestinati
 
 	CvTradeRoute pTradeRoute = CvTradeRoute();
 
-	pTradeRoute.init(kSource, kDestination, eYield);	
+	pTradeRoute.init(kSource, kDestination, eYield);
 	m_Routes.push_back(pTradeRoute);
-	
-	
+
+
 }
 
 void CvTradeRouteGroup::removeRoute(int routeId)
@@ -88,9 +88,9 @@ void CvTradeRouteGroup::removeRoute(int routeId)
 		{
 			it = m_Routes.erase(it);
 		}
-		else 
+		else
 			++it;
-	}	
+	}
 }
 
 void CvTradeRouteGroup::clearRoutes()

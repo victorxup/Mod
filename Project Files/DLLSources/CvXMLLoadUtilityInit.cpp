@@ -27,7 +27,7 @@ void CvXMLLoadUtility::InitStringList(CvString **ppszList, int iListLen, CvStrin
 	int i;	// loop counter
 	CvString* pszList;
 
-	FAssertMsg(*ppszList == NULL,"memory leak?");
+	FAssertMsg(*ppszList == nullptr,"memory leak?");
 	FAssertMsg((0 < iListLen),"list size to allocate is less than 1");
 	// allocate memory for the boolean pointer based on the list length parameter
 	*ppszList = new CvString[iListLen];
@@ -86,7 +86,7 @@ void CvXMLLoadUtility::InitImprovementBonusList(CvImprovementBonusInfo** ppImpro
 	int i;	// loop counter
 	CvImprovementBonusInfo* paImprovementBonus;
 
-	FAssertMsg(*ppImprovementBonus == NULL,"memory leak?");
+	FAssertMsg(*ppImprovementBonus == nullptr,"memory leak?");
 	FAssertMsg((0 < iListLen),"list size to allocate is less than 1");
 	// allocate memory for the bonus type pointer based on the list length parameter
 	*ppImprovementBonus = new CvImprovementBonusInfo[iListLen];
@@ -98,7 +98,7 @@ void CvXMLLoadUtility::InitImprovementBonusList(CvImprovementBonusInfo** ppImpro
 	{
 		paImprovementBonus[i].m_bBonusMakesValid = false;
 
-		FAssertMsg(paImprovementBonus[i].m_aiYieldChange==NULL, "mem leak");
+		FAssertMsg(paImprovementBonus[i].m_aiYieldChange == nullptr, "mem leak");
 		paImprovementBonus[i].m_aiYieldChange = new int[NUM_YIELD_TYPES];
 		for (int j = 0; j < NUM_YIELD_TYPES; j++)
 		{
@@ -124,7 +124,7 @@ void CvXMLLoadUtility::InitBuildingDefaults(int **ppiDefaults)
 	int i;
 	int* piDefaults;
 
-	FAssertMsg(*ppiDefaults == NULL,"memory leak?");
+	FAssertMsg(*ppiDefaults == nullptr,"memory leak?");
 	// allocate memory based on the number of building classes
 	*ppiDefaults = new int[GC.getNumBuildingClassInfos()];
 	// set the local pointer to the new memory
@@ -153,7 +153,7 @@ void CvXMLLoadUtility::InitUnitDefaults(int **ppiDefaults)
 	int i;
 	int* piDefaults;
 
-	FAssertMsg(*ppiDefaults == NULL,"memory leak?");
+	FAssertMsg(*ppiDefaults == nullptr,"memory leak?");
 	// allocate memory based on the number of uniting classes
 	*ppiDefaults = new int[GC.getNumUnitClassInfos()];
 	// set the local pointer to the new memory

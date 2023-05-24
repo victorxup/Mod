@@ -5,7 +5,7 @@
 
 
 CyTradeRoute::CyTradeRoute() :
-m_pTradeRoute(NULL)
+m_pTradeRoute(nullptr)
 {
 }
 

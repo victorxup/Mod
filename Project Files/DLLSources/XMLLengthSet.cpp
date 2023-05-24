@@ -28,7 +28,7 @@ static int getNumEntries(const std::string& path, const char* file)
 
 	tinyxml2::XMLElement* element = doc.FirstChildElement();
 	element = element->FirstChildElement();
-	if (element->FirstChildElement("Type") == NULL)
+	if (element->FirstChildElement("Type") == nullptr)
 	{
 		// most files have the entries inside two layers of parents
 		// a few (diplomacy only?) only has one
@@ -37,7 +37,7 @@ static int getNumEntries(const std::string& path, const char* file)
 	}
 
 	int count = 0;
-	while (element != NULL)
+	while (element != nullptr)
 	{
 		count++;
 		element = element->NextSiblingElement();
@@ -48,7 +48,7 @@ static int getNumEntries(const std::string& path, const char* file)
 static std::string GetCurrentDirectory(bool bLoadDLLPath)
 {
 	char buffer[MAX_PATH];
-	GetModuleFileNameA(bLoadDLLPath ? GetModuleHandle(_T("CvGameCoreDLL.dll")) : NULL, buffer, MAX_PATH);
+	GetModuleFileNameA(bLoadDLLPath ? GetModuleHandle(_T("CvGameCoreDLL.dll")) : nullptr, buffer, MAX_PATH);
 	std::string::size_type pos = std::string(buffer).find_last_of("\\/");
 
 	return std::string(buffer).substr(0, pos);
@@ -77,7 +77,7 @@ void setupVARINFO();
 loadXML::loadXML()
 {
 	const std::string basePath = GetCurrentDirectory(true);
-	
+
 	setXmlLengthsAuto(basePath);
 	setupVARINFO();
 }

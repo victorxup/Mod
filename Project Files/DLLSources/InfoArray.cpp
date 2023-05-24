@@ -9,7 +9,7 @@
 InfoArray::InfoArray()
 	: m_iLength(0)
 	, m_iNumDimentions(0)
-	, m_pArray(NULL)
+	, m_pArray(nullptr)
 	, m_aiTypes(0)
 {
 	for (int i = 3; i >= 0; --i)
@@ -26,7 +26,7 @@ InfoArrayBase::InfoArrayBase(JITarrayTypes eType0, JITarrayTypes eType1, JITarra
 	: m_iLength(0)
 	, m_iNumDimentions(0)
 	, m_bStatic(false)
-	, m_pArray(NULL)
+	, m_pArray(nullptr)
 	, m_aiTypes(0)
 {
 	std::vector<JITarrayTypes> aTypes;
@@ -86,7 +86,7 @@ int InfoArrayBase::getInternal(int iIndex, int iDimention) const
 	}
 	else
 	{
-		FAssert(m_pArray != NULL);
+		FAssert(m_pArray != nullptr);
 
 		unsigned int iArrayIndex = (iIndex * m_iNumDimentions) + iDimention;
 
@@ -111,7 +111,7 @@ void InfoArrayBase::_setLength(int iLength)
 	if (m_bStatic)
 	{
 		// clear static array
-		m_pArray = NULL;
+		m_pArray = nullptr;
 	}
 	else
 	{
@@ -271,7 +271,7 @@ int InfoArrayBase::getWithTypeWithConversion(JITarrayTypes eType, int iIndex, in
 {
 	if (eType == JIT_ARRAY_BUILDING && getType(iTokenIndex) == JIT_ARRAY_BUILDINGCLASS)
 	{
-		FAssertMsg(pCivInfo != NULL, "InfoArray::getWithType called without pCivInfo argument when in index conversion mode");
+		FAssertMsg(pCivInfo != nullptr, "InfoArray::getWithType called without pCivInfo argument when in index conversion mode");
 		int iValue = getInternal(iIndex, iTokenIndex);
 		if (iValue >= 0 && iValue < GC.getNumBuildingClassInfos())
 		{
@@ -280,7 +280,7 @@ int InfoArrayBase::getWithTypeWithConversion(JITarrayTypes eType, int iIndex, in
 	}
 	else if (eType == JIT_ARRAY_UNIT && getType(iTokenIndex) == JIT_ARRAY_UNITCLASS)
 	{
-		FAssertMsg(pCivInfo != NULL, "InfoArray::getWithType called without pCivInfo argument when in index conversion mode");
+		FAssertMsg(pCivInfo != nullptr, "InfoArray::getWithType called without pCivInfo argument when in index conversion mode");
 		int iValue = getInternal(iIndex, iTokenIndex);
 		if (iValue >= 0 && iValue < GC.getNumUnitClassInfos())
 		{
@@ -316,7 +316,7 @@ InfoArrayBase& InfoArrayBase::operator=(const InfoArrayBase &rhs)
 		if (this->m_bStatic)
 		{
 			// clear static array
-			this->m_pArray = NULL;
+			this->m_pArray = nullptr;
 		}
 		else
 		{
@@ -367,7 +367,7 @@ void InfoArrayBase::readRecursive(CvXMLLoadUtility* pXML, int& iIndex, std::vect
 			readRecursive(pXML, iIndex, aArray, aIndex, iLevel+1, sTagName, szType);
 			gDLL->getXMLIFace()->SetToParent(pXML->GetXML());
 		}
-		else	
+		else
 		{
 			int iValue = 0;
 			CvString szTextVal;
@@ -458,7 +458,7 @@ void InfoArrayBase::read(CvXMLLoadUtility* pXML, const char* szType, const char 
 	if (m_bStatic)
 	{
 		// clear static array
-		m_pArray = NULL;
+		m_pArray = nullptr;
 	}
 	else
 	{
@@ -480,7 +480,7 @@ void InfoArrayBase::read(CvXMLLoadUtility* pXML, const char* szType, const char 
 
 			int iIndex = 0;
 			readRecursive(pXML, iIndex, aArray, aIndex, 0, sTagName, szType);
-			
+
 			int iArrayLength = aArray.size(); // local copy rather than the same function call over and over
 
 			m_iLength = iArrayLength / m_iNumDimentions;

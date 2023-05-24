@@ -3,7 +3,7 @@
 #include "CvDLLEntityIFaceBase.h"
 #include "CvGlobals.h"
 
-CvDLLEntity::CvDLLEntity() : m_pEntity(NULL)
+CvDLLEntity::CvDLLEntity() : m_pEntity(nullptr)
 {
 
 }

@@ -15,7 +15,7 @@
 #include "CvInitCore.h"
 #include "CyData.h"
 
-CyMap::CyMap() : m_pMap(NULL)
+CyMap::CyMap() : m_pMap(nullptr)
 {
 	m_pMap = &GC.getMap();
 }
@@ -51,22 +51,22 @@ void CyMap::updateVisibility()
 
 CyPlot* CyMap::syncRandPlot(int iFlags, int iArea, int iMinUnitDistance, int iTimeout)
 {
-	return m_pMap ? new CyPlot(m_pMap->syncRandPlot(iFlags, iArea, iMinUnitDistance, iTimeout)) : NULL;
+	return m_pMap ? new CyPlot(m_pMap->syncRandPlot(iFlags, iArea, iMinUnitDistance, iTimeout)) : nullptr;
 }
 
 CyCity* CyMap::findCity(int iX, int iY, int /*PlayerTypes*/ eOwner, int /*TeamTypes*/ eTeam, bool bSameArea, bool bCoastalOnly, int /*TeamTypes*/ eTeamAtWarWith, int /*DirectionTypes*/ eDirection, CyCity* pSkipCity)
 {
-	return m_pMap ? new CyCity(m_pMap->findCity(iX, iY, (PlayerTypes)eOwner, (TeamTypes)eTeam, bSameArea, bCoastalOnly, ((TeamTypes)eTeamAtWarWith), (DirectionTypes)eDirection, pSkipCity->getCity())) : NULL;
+	return m_pMap ? new CyCity(m_pMap->findCity(iX, iY, (PlayerTypes)eOwner, (TeamTypes)eTeam, bSameArea, bCoastalOnly, ((TeamTypes)eTeamAtWarWith), (DirectionTypes)eDirection, pSkipCity->getCity())) : nullptr;
 }
 
 CySelectionGroup* CyMap::findSelectionGroup(int iX, int iY, int /*PlayerTypes*/ eOwner, bool bReadyToSelect)
 {
-	return m_pMap ? new CySelectionGroup(m_pMap->findSelectionGroup(iX, iY, (PlayerTypes)eOwner, bReadyToSelect)) : NULL;
+	return m_pMap ? new CySelectionGroup(m_pMap->findSelectionGroup(iX, iY, (PlayerTypes)eOwner, bReadyToSelect)) : nullptr;
 }
 
 CyArea* CyMap::findBiggestArea(bool bWater)
 {
-	return m_pMap ? new CyArea(m_pMap->findBiggestArea(bWater)) : NULL;
+	return m_pMap ? new CyArea(m_pMap->findBiggestArea(bWater)) : nullptr;
 }
 
 int CyMap::getMapFractalFlags()
@@ -197,7 +197,7 @@ int CyMap::getNumBonusesOnLand(int /* BonusTypes */ eIndex)
 
 CyPlot* CyMap::plotByIndex(int iIndex)
 {
-	return m_pMap ? new CyPlot(m_pMap->plotByIndexINLINE(iIndex)) : NULL;
+	return m_pMap ? new CyPlot(m_pMap->plotByIndexINLINE(iIndex)) : nullptr;
 }
 
 //
@@ -211,7 +211,7 @@ CyPlot* CyMap::sPlotByIndex(int iIndex)
 		plot.setPlot(m_pMap->plotByIndexINLINE(iIndex));
 		return &plot;
 	}
-	return NULL;
+	return nullptr;
 }
 
 CyPlot* CyMap::plot(int iX, int iY)
@@ -231,7 +231,7 @@ CyPlot* CyMap::sPlot(int iX, int iY)
 
 CyPlot* CyMap::pointToPlot(float fX, float fY)
 {
-	return m_pMap ? new CyPlot(m_pMap->pointToPlot(fX, fY)) : NULL;
+	return m_pMap ? new CyPlot(m_pMap->pointToPlot(fX, fY)) : nullptr;
 }
 
 int CyMap::getIndexAfterLastArea()
@@ -251,7 +251,7 @@ int CyMap::getNumLandAreas()
 
 CyArea* CyMap::getArea(int iID)
 {
-	return m_pMap ? new CyArea(m_pMap->getArea(iID)) : NULL;
+	return m_pMap ? new CyArea(m_pMap->getArea(iID)) : nullptr;
 }
 
 void CyMap::recalculateAreas()
@@ -373,7 +373,7 @@ CyInfoArray* CyMap::getTerrainCount() const
 		for (int iPlot = 0; iPlot < m_pMap->numPlotsINLINE(); iPlot++)
 		{
 			const CvPlot* pPlot = m_pMap->plotByIndexINLINE(iPlot);
-			if (pPlot != NULL)
+			if (pPlot != nullptr)
 			{
 				TerrainTypes eTerrain = pPlot->getTerrainType();
 				if (eTerrain != NO_TERRAIN)

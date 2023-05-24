@@ -25,7 +25,7 @@ CvReplayInfo::CvReplayInfo() :
 	m_eVictoryType(NO_VICTORY),
 	m_iMapHeight(0),
 	m_iMapWidth(0),
-	m_pcMinimapPixels(NULL),
+	m_pcMinimapPixels(nullptr),
 	m_iNormalizedScore(0),
 	m_bMultiplayer(false),
 	m_iStartYear(0)
@@ -150,7 +150,7 @@ void CvReplayInfo::createInfo(PlayerTypes ePlayer)
 		if (it != mapPlayers.end())
 		{
 			CvReplayMessage* pMsg = new CvReplayMessage(game.getReplayMessageTurn(i), game.getReplayMessageType(i), (PlayerTypes)it->second);
-			if (NULL != pMsg)
+			if (pMsg != nullptr)
 			{
 				pMsg->setColor(game.getReplayMessageColor(i));
 				pMsg->setText(game.getReplayMessageText(i));
@@ -161,7 +161,7 @@ void CvReplayInfo::createInfo(PlayerTypes ePlayer)
 		else
 		{
 			CvReplayMessage* pMsg = new CvReplayMessage(game.getReplayMessageTurn(i), game.getReplayMessageType(i), NO_PLAYER);
-			if (NULL != pMsg)
+			if (pMsg != nullptr)
 			{
 				pMsg->setColor(game.getReplayMessageColor(i));
 				pMsg->setText(game.getReplayMessageText(i));
@@ -331,7 +331,7 @@ void CvReplayInfo::clearReplayMessageMap()
 	for (ReplayMessageList::const_iterator itList = m_listReplayMessages.begin(); itList != m_listReplayMessages.end(); ++itList)
 	{
 		const CvReplayMessage* pMessage = *itList;
-		if (NULL != pMessage)
+		if (pMessage != nullptr)
 		{
 			delete pMessage;
 		}
@@ -346,7 +346,7 @@ int CvReplayInfo::getReplayMessageTurn(uint i) const
 		return (-1);
 	}
 	const CvReplayMessage* pMessage =  m_listReplayMessages[i];
-	if (NULL == pMessage)
+	if (pMessage == nullptr)
 	{
 		return (-1);
 	}
@@ -360,7 +360,7 @@ ReplayMessageTypes CvReplayInfo::getReplayMessageType(uint i) const
 		return (NO_REPLAY_MESSAGE);
 	}
 	const CvReplayMessage* pMessage =  m_listReplayMessages[i];
-	if (NULL == pMessage)
+	if (pMessage == nullptr)
 	{
 		return (NO_REPLAY_MESSAGE);
 	}
@@ -374,7 +374,7 @@ int CvReplayInfo::getReplayMessagePlotX(uint i) const
 		return (-1);
 	}
 	const CvReplayMessage* pMessage =  m_listReplayMessages[i];
-	if (NULL == pMessage)
+	if (pMessage == nullptr)
 	{
 		return (-1);
 	}
@@ -388,7 +388,7 @@ int CvReplayInfo::getReplayMessagePlotY(uint i) const
 		return (-1);
 	}
 	const CvReplayMessage* pMessage =  m_listReplayMessages[i];
-	if (NULL == pMessage)
+	if (pMessage == nullptr)
 	{
 		return (-1);
 	}
@@ -402,7 +402,7 @@ PlayerTypes CvReplayInfo::getReplayMessagePlayer(uint i) const
 		return (NO_PLAYER);
 	}
 	const CvReplayMessage* pMessage =  m_listReplayMessages[i];
-	if (NULL == pMessage)
+	if (pMessage == nullptr)
 	{
 		return (NO_PLAYER);
 	}
@@ -413,12 +413,12 @@ LPCWSTR CvReplayInfo::getReplayMessageText(uint i) const
 {
 	if (i >= m_listReplayMessages.size())
 	{
-		return (NULL);
+		return nullptr;
 	}
 	const CvReplayMessage* pMessage =  m_listReplayMessages[i];
-	if (NULL == pMessage)
+	if (pMessage == nullptr)
 	{
-		return (NULL);
+		return nullptr;
 	}
 	return pMessage->getText().GetCString();
 }
@@ -430,7 +430,7 @@ ColorTypes CvReplayInfo::getReplayMessageColor(uint i) const
 		return (NO_COLOR);
 	}
 	const CvReplayMessage* pMessage =  m_listReplayMessages[i];
-	if (NULL == pMessage)
+	if (pMessage == nullptr)
 	{
 		return (NO_COLOR);
 	}
@@ -616,7 +616,7 @@ bool CvReplayInfo::read(FDataStreamBase& stream)
 		for (int i = 0; i < iNumTypes; i++)
 		{
 			CvReplayMessage* pMessage = new CvReplayMessage(0);
-			if (NULL != pMessage)
+			if (pMessage != nullptr)
 			{
 				pMessage->read(stream);
 			}
@@ -698,7 +698,7 @@ void CvReplayInfo::write(FDataStreamBase& stream)
 	ReplayMessageList::const_iterator it;
 	for (uint i = 0; i < m_listReplayMessages.size(); i++)
 	{
-		if (NULL != m_listReplayMessages[i])
+		if (m_listReplayMessages[i] != nullptr)
 		{
 			m_listReplayMessages[i]->write(stream);
 		}

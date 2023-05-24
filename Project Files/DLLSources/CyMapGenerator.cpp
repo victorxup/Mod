@@ -16,7 +16,7 @@
 #include "CvMapGenerator.h"
 #include "CyPlot.h"
 
-CyMapGenerator::CyMapGenerator() : m_pMapGenerator(NULL)
+CyMapGenerator::CyMapGenerator() : m_pMapGenerator(nullptr)
 {
 	m_pMapGenerator = &CvMapGenerator::GetInstance();
 }
@@ -178,9 +178,8 @@ void CyMapGenerator::setPlotTypes(boost::python::list& listPlotTypes)
 		return;
 	}
 
-	int* paiPlotTypes = NULL;
+	int* paiPlotTypes = nullptr;
 	gDLL->getPythonIFace()->putSeqInArray(listPlotTypes.ptr() /*src*/, &paiPlotTypes /*dst*/);
 	m_pMapGenerator->setPlotTypes(paiPlotTypes);
 	delete [] paiPlotTypes;
 }
-

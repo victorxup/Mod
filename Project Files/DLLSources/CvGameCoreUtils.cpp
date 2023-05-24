@@ -212,7 +212,7 @@ CvCity* getCity(const IDInfo& city)
 		return (GET_PLAYER((PlayerTypes)city.eOwner).getCity(city.iID));
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 CvUnit* getUnit(const IDInfo& unit)
@@ -222,13 +222,13 @@ CvUnit* getUnit(const IDInfo& unit)
 		return (GET_PLAYER((PlayerTypes)unit.eOwner).getUnit(unit.iID));
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 bool isBeforeUnitCycle(const CvUnit* pFirstUnit, const CvUnit* pSecondUnit)
 {
-	FAssert(pFirstUnit != NULL);
-	FAssert(pSecondUnit != NULL);
+	FAssert(pFirstUnit != nullptr);
+	FAssert(pSecondUnit != nullptr);
 	FAssert(pFirstUnit != pSecondUnit);
 
 	if (pFirstUnit->getOwnerINLINE() != pSecondUnit->getOwnerINLINE())
@@ -266,13 +266,13 @@ bool isBeforeUnitCycle(const CvUnit* pFirstUnit, const CvUnit* pSecondUnit)
 
 bool shouldMoveBefore(const CvUnit* pUnitA, const CvUnit* pUnitB)
 {
-	// Apparently it's possible for one of the pointer to be NULL so I've added
+	// Apparently it's possible for one of the pointer to be nullptr so I've added
 	// some extra protection
 	FAssert(pUnitA);
 	FAssert(pUnitB);
 
-	const int iMovePriorityA = (pUnitA != NULL) ? pUnitA->AI_getMovePriority() : 0;
-	const int iMovePriorityB = (pUnitB != NULL) ? pUnitB->AI_getMovePriority() : 0;
+	const int iMovePriorityA = pUnitA != nullptr ? pUnitA->AI_getMovePriority() : 0;
+	const int iMovePriorityB = pUnitB != nullptr ? pUnitB->AI_getMovePriority() : 0;
 
 	const int iDiff = iMovePriorityA - iMovePriorityB;
 	if (iDiff > 0)
@@ -356,8 +356,8 @@ int getCombatOdds(CvUnit* pAttacker, CvUnit* pDefender)
 	// setup battle, calculate strengths and odds
 	//////
 
-	int iAttackerStrength = pAttacker->currCombatStr(NULL, NULL);
-	int iAttackerFirepower = pAttacker->currFirepower(NULL, NULL);
+	int iAttackerStrength = pAttacker->currCombatStr(nullptr, nullptr);
+	int iAttackerFirepower = pAttacker->currFirepower(nullptr, nullptr);
 
 	int iDefenderStrength = pDefender->currCombatStr(pDefender->plot(), pAttacker);
 	int iDefenderFirepower = pDefender->currFirepower(pDefender->plot(), pAttacker);
@@ -423,8 +423,8 @@ int getCombatOddsDraw(CvUnit* pAttacker, CvUnit* pDefender)
 	// Erik: TODO, Cache this variable
 	const int iCombatDieSides = GC.getDefineINT("COMBAT_DIE_SIDES");
 
-	int iAttackerStrength = pAttacker->currCombatStr(NULL, NULL);
-	int iAttackerFirepower = pAttacker->currFirepower(NULL, NULL);
+	int iAttackerStrength = pAttacker->currCombatStr(nullptr, nullptr);
+	int iAttackerFirepower = pAttacker->currFirepower(nullptr, nullptr);
 
 	int iDefenderStrength = pDefender->currCombatStr(pDefender->plot(), pAttacker);
 	int iDefenderFirepower = pDefender->currFirepower(pDefender->plot(), pAttacker);
@@ -487,7 +487,7 @@ void setTradeItem(TradeData* pItem, TradeableItems eItemType, int iData1, const 
 {
 	pItem->m_eItemType = eItemType;
 	pItem->m_iData1 = iData1;
-	if (pTransport != NULL)
+	if (pTransport != nullptr)
 	{
 		pItem->m_kTransport = *pTransport;
 	}
@@ -963,14 +963,14 @@ int pathDestValid(int iToX, int iToY, const void* pointer, FAStar* finder)
 		if (pSelectionGroup->isAmphibPlot(&kToPlot))
 		{
 			for (CLLNode<IDInfo> const* pUnitNode1 = pSelectionGroup->headUnitNode();
-				pUnitNode1 != NULL; pUnitNode1 = pSelectionGroup->nextUnitNode(pUnitNode1))
+				pUnitNode1 != nullptr; pUnitNode1 = pSelectionGroup->nextUnitNode(pUnitNode1))
 			{
 				CvUnit const* pLoopUnit1 = ::getUnit(pUnitNode1->m_data);
 				if (pLoopUnit1->getCargo() > 0 && pLoopUnit1->domainCargo() == DOMAIN_LAND)
 				{
 					bool bValid = false;
 					for (CLLNode<IDInfo>* pUnitNode2 = pLoopUnit1->plot()->headUnitNode();
-						pUnitNode2 != NULL; pUnitNode2 = pLoopUnit1->plot()->nextUnitNode(pUnitNode2))
+						pUnitNode2 != nullptr; pUnitNode2 = pLoopUnit1->plot()->nextUnitNode(pUnitNode2))
 					{
 						CvUnit const* pLoopUnit2 = ::getUnit(pUnitNode2->m_data);
 						if (pLoopUnit2->getTransportUnit() == pLoopUnit1)
@@ -1029,9 +1029,9 @@ int pathCost(FAStarNode* parent, FAStarNode* node, int data, const void* pointer
 	int iMax;
 
 	pFromPlot = GC.getMap().plotSoren(parent->m_iX, parent->m_iY);
-	FAssert(pFromPlot != NULL);
+	FAssert(pFromPlot != nullptr);
 	pToPlot = GC.getMap().plotSoren(node->m_iX, node->m_iY);
-	FAssert(pToPlot != NULL);
+	FAssert(pToPlot != nullptr);
 
 	//CvSelectionGroup* pSelectionGroup = ((CvSelectionGroup *)pointer);
 	// K-Mod
@@ -1046,7 +1046,7 @@ int pathCost(FAStarNode* parent, FAStarNode* node, int data, const void* pointer
 
 	pUnitNode = pSelectionGroup->headUnitNode();
 
-	while (pUnitNode != NULL)
+	while (pUnitNode != nullptr)
 	{
 		pLoopUnit = ::getUnit(pUnitNode->m_data);
 		pUnitNode = pSelectionGroup->nextUnitNode(pUnitNode);
@@ -1110,7 +1110,7 @@ int pathCost(FAStarNode* parent, FAStarNode* node, int data, const void* pointer
 							{
 								pAdjacentPlot = plotDirection(pToPlot->getX_INLINE(), pToPlot->getY_INLINE(), ((DirectionTypes)iI));
 
-								if( pAdjacentPlot != NULL )
+								if (pAdjacentPlot != nullptr)
 								{
 									if (pAdjacentPlot->isOwned() && (atWar(pAdjacentPlot->getTeam(), pSelectionGroup->getHeadTeam()) || (pAdjacentPlot->getTeam() != pLoopUnit->getTeam() && pLoopUnit->isAlwaysHostile(pAdjacentPlot))))
 									{
@@ -1135,7 +1135,7 @@ int pathCost(FAStarNode* parent, FAStarNode* node, int data, const void* pointer
 							{
 								pAdjacentPlot = plotDirection(pToPlot->getX_INLINE(), pToPlot->getY_INLINE(), ((DirectionTypes)iI));
 
-								if( pAdjacentPlot != NULL )
+								if (pAdjacentPlot != nullptr)
 								{
 									if (pAdjacentPlot->isOwned() && (atWar(pAdjacentPlot->getTeam(), pSelectionGroup->getHeadTeam()) || (pAdjacentPlot->getTeam() != pLoopUnit->getTeam() && pLoopUnit->isAlwaysHostile(pAdjacentPlot))))
 									{
@@ -1198,7 +1198,7 @@ int pathCost(FAStarNode* parent, FAStarNode* node, int data, const void* pointer
 						for (int iI = 0; iI < NUM_DIRECTION_TYPES; iI++)
 						{
 							CvPlot* pLoopPlot = plotDirection(pToPlot->getX_INLINE(), pToPlot->getY_INLINE(), (DirectionTypes)iI);
-							if (pLoopPlot != NULL)
+							if (pLoopPlot != nullptr)
 							{
 								if (pLoopPlot->isRevealed(pSelectionGroup->getTeam(), false))
 								{
@@ -1307,7 +1307,7 @@ int pathCost(FAStarNode* parent, FAStarNode* node, int data, const void* pointer
 #endif
 	{
 		for (CLLNode<IDInfo> const* pUnitNode = pSelectionGroup->headUnitNode();
-			pUnitNode != NULL; pUnitNode = pSelectionGroup->nextUnitNode(pUnitNode))
+			pUnitNode != nullptr; pUnitNode = pSelectionGroup->nextUnitNode(pUnitNode))
 		{
 			CvUnit const* pLoopUnit = ::getUnit(pUnitNode->m_data);
 			int iMoveCost = kToPlot.movementCost(pLoopUnit, &kFromPlot,
@@ -1428,7 +1428,7 @@ int pathCost(FAStarNode* parent, FAStarNode* node, int data, const void* pointer
 			(Actually, not so exotic b/c advc.300 allows animals to survive
 			in continents w/o civ cities.) */
 			CvUnit* pUnit = kToPlot.getUnitByIndex(0);
-			if (pUnit != NULL && !pUnit->isAnimal()) // </advc.001>
+			if (pUnit != nullptr && !pUnit->isAnimal()) // </advc.001>
 			{
 				iEnemyDefence = GET_PLAYER(pSelectionGroup->getOwner()).
 					AI_localDefenceStrength(&kToPlot, NO_TEAM,
@@ -1504,7 +1504,7 @@ int pathCost(FAStarNode* parent, FAStarNode* node, int data, const void* pointer
 		int iEnemies = kToPlot.getNumVisibleEnemyDefenders(pSelectionGroup->getHeadUnit());
 
 		for (CLLNode<IDInfo> const* pUnitNode = pSelectionGroup->headUnitNode();
-			pUnitNode != NULL; pUnitNode = pSelectionGroup->nextUnitNode(pUnitNode))
+			pUnitNode != nullptr; pUnitNode = pSelectionGroup->nextUnitNode(pUnitNode))
 		{
 			CvUnit const* pLoopUnit = ::getUnit(pUnitNode->m_data);
 			if (!pLoopUnit->canFight())
@@ -1521,7 +1521,7 @@ int pathCost(FAStarNode* parent, FAStarNode* node, int data, const void* pointer
 									 // K-Mod note. the above code doesn't count all defensive bonuses, unfortunately.
 									 // We could count everything like this:
 									 /*CombatDetails combat_details;
-									 pLoopUnit->maxCombatStr(pToPlot, NULL, &combat_details);
+									 pLoopUnit->maxCombatStr(pToPlot, nullptr, &combat_details);
 									 iDefenceMod += combat_details.iModifierTotal;*/
 									 // but that seems like overkill. I'm worried it would be too slow.
 
@@ -1587,7 +1587,7 @@ int pathCost(FAStarNode* parent, FAStarNode* node, int data, const void* pointer
 				for (int iI = 0; iI < NUM_DIRECTION_TYPES; iI++)
 				{
 					pAdjacentPlot = plotDirection(kToPlot.getX(), kToPlot.getY(), (DirectionTypes)iI);
-					if (pAdjacentPlot != NULL)
+					if (pAdjacentPlot != nullptr)
 					{
 						if (pAdjacentPlot->isOwned() && atWar(pAdjacentPlot->getTeam(), pSelectionGroup->getHeadTeam()))
 						{
@@ -1739,7 +1739,7 @@ int pathValid(FAStarNode* parent, FAStarNode* node, int data, const void* pointe
 {
 	PROFILE_FUNC();
 
-	if (parent == NULL)
+	if (parent == nullptr)
 		return TRUE;
 	// advc: Was unused (apart from an assertion)
 	/*CvPlot* pFromPlot = ...;
@@ -1808,7 +1808,7 @@ int pathAdd(FAStarNode* parent, FAStarNode* node, int data, const void* pointer,
 		iTurns = parent->m_iData2;
 		/*if (iStartMoves == 0)
 		iTurns++;
-		for (CLLNode<IDInfo>* pUnitNode = pSelectionGroup->headUnitNode(); pUnitNode != NULL; pUnitNode = pSelectionGroup->nextUnitNode(pUnitNode)) {
+		for (CLLNode<IDInfo>* pUnitNode = pSelectionGroup->headUnitNode(); pUnitNode != nullptr; pUnitNode = pSelectionGroup->nextUnitNode(pUnitNode)) {
 		CvUnit* pLoopUnit = ::getUnit(pUnitNode->m_data);
 		int iUnitMoves = (iStartMoves == 0 ? pLoopUnit->maxMoves() : iStartMoves);
 		iUnitMoves -= pToPlot->movementCost(pLoopUnit, &kFromPlot);
@@ -1841,7 +1841,7 @@ int pathAdd(FAStarNode* parent, FAStarNode* node, int data, const void* pointer,
 		bool bUniformCost = true;
 
 		for (pUnitNode = pSelectionGroup->nextUnitNode(pUnitNode);
-			bUniformCost && pUnitNode != NULL; pUnitNode = pSelectionGroup->nextUnitNode(pUnitNode))
+			bUniformCost && pUnitNode != nullptr; pUnitNode = pSelectionGroup->nextUnitNode(pUnitNode))
 		{
 			CvUnit const* pLoopUnit = ::getUnit(pUnitNode->m_data);
 			int iLoopCost = kToPlot.movementCost(pLoopUnit, &kFromPlot/*,
@@ -1876,7 +1876,7 @@ int pathAdd(FAStarNode* parent, FAStarNode* node, int data, const void* pointer,
 			iMoves = MAX_INT;
 			const bool bMaxMoves = pStartNode->m_iData1 == 0 || bMoveMaxMoves;
 
-			for (pUnitNode = pSelectionGroup->headUnitNode(); pUnitNode != NULL; pUnitNode = pSelectionGroup->nextUnitNode(pUnitNode))
+			for (pUnitNode = pSelectionGroup->headUnitNode(); pUnitNode != nullptr; pUnitNode = pSelectionGroup->nextUnitNode(pUnitNode))
 			{
 				CvUnit const* pLoopUnit = ::getUnit(pUnitNode->m_data);
 				int iUnitMoves = bMaxMoves ? pLoopUnit->maxMoves() : pLoopUnit->movesLeft();
@@ -1914,9 +1914,9 @@ int stepDestValid(int iToX, int iToY, const void* pointer, FAStar* finder)
 	CvPlot* pToPlot;
 
 	pFromPlot = GC.getMap().plotSoren(gDLL->getFAStarIFace()->GetStartX(finder), gDLL->getFAStarIFace()->GetStartY(finder));
-	FAssert(pFromPlot != NULL);
+	FAssert(pFromPlot != nullptr);
 	pToPlot = GC.getMap().plotSoren(iToX, iToY);
-	FAssert(pToPlot != NULL);
+	FAssert(pToPlot != nullptr);
 
 	if (pFromPlot->area() != pToPlot->area())
 	{
@@ -1943,7 +1943,7 @@ int stepValid(FAStarNode* parent, FAStarNode* node, int data, const void* pointe
 {
 	CvPlot* pNewPlot;
 
-	if (parent == NULL)
+	if (parent == nullptr)
 	{
 		return TRUE;
 	}
@@ -2021,7 +2021,7 @@ int routeValid(FAStarNode* parent, FAStarNode* node, int data, const void* point
 	CvPlot* pNewPlot;
 	PlayerTypes ePlayer;
 
-	if (parent == NULL)
+	if (parent == nullptr)
 	{
 		return TRUE;
 	}
@@ -2045,7 +2045,7 @@ int coastalRouteValid(FAStarNode* parent, FAStarNode* node, int data, const void
 {
 	CvPlot* pNewPlot;
 
-	if (parent == NULL)
+	if (parent == nullptr)
 	{
 		return true;
 	}
@@ -2103,7 +2103,7 @@ int borderValid(FAStarNode* parent, FAStarNode* node, int data, const void* poin
 	CvPlot* pNewPlot;
 	PlayerTypes ePlayer;
 
-	if (parent == NULL)
+	if (parent == nullptr)
 	{
 		return TRUE;
 	}
@@ -2123,7 +2123,7 @@ int borderValid(FAStarNode* parent, FAStarNode* node, int data, const void* poin
 
 int areaValid(FAStarNode* parent, FAStarNode* node, int data, const void* pointer, FAStar* finder)
 {
-	if (parent == NULL)
+	if (parent == nullptr)
 	{
 		return TRUE;
 	}
@@ -2475,7 +2475,7 @@ void postLoadGameFixes()
 		// deal with each players' cities
 
 		int iLoop;
-		for (CvCity* pLoopCity = GET_PLAYER(ePlayer).firstCity(&iLoop); pLoopCity != NULL; pLoopCity = GET_PLAYER(ePlayer).nextCity(&iLoop))
+		for (CvCity* pLoopCity = GET_PLAYER(ePlayer).firstCity(&iLoop); pLoopCity != nullptr; pLoopCity = GET_PLAYER(ePlayer).nextCity(&iLoop))
 		{
 			pLoopCity->updateSlaveWorkerProductionBonus();
 		}
@@ -2484,7 +2484,7 @@ void postLoadGameFixes()
 
 		kPlayer.postLoadFixes();
 	}
-	
+
 	GC.getGameINLINE().postLoadFixes();
 }
 /// post load function - end - Nightinggale
@@ -2522,7 +2522,7 @@ CvString getCompileFlags(int iDefineFlags)
 bool CvDLLUtilityIFaceBase::isOOSVisible() const
 {
 	long lResult = 0;
-	gDLL->getPythonIFace()->callFunction(PYCPPModule, "isOOSVisible", NULL, &lResult);
+	gDLL->getPythonIFace()->callFunction(PYCPPModule, "isOOSVisible", nullptr, &lResult);
 	return lResult != 0;
 }
 

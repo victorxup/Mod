@@ -68,14 +68,14 @@ public:
 
 		m_eFAStarListType = NO_FASTARLIST;
 
-		m_pParent = NULL;
-		m_pNext = NULL;
-		m_pPrev = NULL;
-		m_pStack = NULL;
+		m_pParent = nullptr;
+		m_pNext = nullptr;
+		m_pPrev = nullptr;
+		m_pStack = nullptr;
 
 		for (i = 0; i < 8; i++)
 		{
-			m_apChildren[i] = NULL;
+			m_apChildren[i] = nullptr;
 		}
 	}
 
@@ -94,14 +94,14 @@ public:
 
 		m_eFAStarListType = NO_FASTARLIST;
 
-		m_pParent = NULL;
-		m_pNext = NULL;
-		m_pPrev = NULL;
-		m_pStack = NULL;
+		m_pParent = nullptr;
+		m_pNext = nullptr;
+		m_pPrev = nullptr;
+		m_pStack = nullptr;
 
 		for (i = 0; i < 8; i++)
 		{
-			m_apChildren[i] = NULL;
+			m_apChildren[i] = nullptr;
 		}
 	}
 

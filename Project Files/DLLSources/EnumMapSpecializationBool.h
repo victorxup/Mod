@@ -269,7 +269,7 @@ void EnumMapBoolVariable<IndexType, T, DEFAULT, LengthType, VARIABLE_TYPE_DYNAMI
 template<class IndexType, class T, int DEFAULT, class LengthType, VariableLengthTypes LENGTH_KNOWN_WHILE_COMPILING>
 bool EnumMapBoolVariable<IndexType, T, DEFAULT, LengthType, VARIABLE_TYPE_DYNAMIC, LENGTH_KNOWN_WHILE_COMPILING>::isAllocated() const
 {
-	return NUM_ELEMENTS <= 32 || m_pArray != NULL;
+	return NUM_ELEMENTS <= 32 || m_pArray != nullptr;
 }
 
 template<class IndexType, class T, int DEFAULT, class LengthType, VariableLengthTypes LENGTH_KNOWN_WHILE_COMPILING>
@@ -357,7 +357,7 @@ void EnumMapBoolVariable<IndexType, T, DEFAULT, LengthType, VARIABLE_TYPE_DYNAMI
 
 template<class IndexType, class T, int DEFAULT, class LengthType, VariableLengthTypes LENGTH_KNOWN_WHILE_COMPILING>
 EnumMapBoolVariable<IndexType, T, DEFAULT, LengthType, VARIABLE_TYPE_DYNAMIC, LENGTH_KNOWN_WHILE_COMPILING>::EnumMapBoolVariable()
-	: m_pArray(NULL)
+	: m_pArray(nullptr)
 {
 	reset();
 }
@@ -418,7 +418,7 @@ void EnumMapBoolVariable<IndexType, T, DEFAULT, LengthType, VARIABLE_TYPE_DYNAMI
 template<class IndexType, class T, int DEFAULT, class LengthType>
 bool EnumMapBoolVariable<IndexType, T, DEFAULT, LengthType, VARIABLE_TYPE_DYNAMIC, VARIABLE_LENGTH_ALL_KNOWN>::isAllocated() const
 {
-	return m_pArray != NULL;
+	return m_pArray != nullptr;
 }
 
 template<class IndexType, class T, int DEFAULT, class LengthType>
@@ -482,7 +482,7 @@ void EnumMapBoolVariable<IndexType, T, DEFAULT, LengthType, VARIABLE_TYPE_DYNAMI
 
 template<class IndexType, class T, int DEFAULT, class LengthType>
 EnumMapBoolVariable<IndexType, T, DEFAULT, LengthType, VARIABLE_TYPE_DYNAMIC, VARIABLE_LENGTH_ALL_KNOWN>::EnumMapBoolVariable()
-	: m_pArray(NULL)
+	: m_pArray(nullptr)
 {
 }
 

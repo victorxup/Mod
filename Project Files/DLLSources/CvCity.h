@@ -198,7 +198,7 @@ public:
 
 	bool isHasBuildingClass(BuildingClassTypes eIndex) const;
 	DllExport bool isHasBuilding(BuildingTypes eIndex) const;
-	int getProfessionOutput(ProfessionTypes eProfession, const CvUnit* pUnit, BuildingTypes* peBuilding = NULL) const;
+	int getProfessionOutput(ProfessionTypes eProfession, const CvUnit* pUnit, BuildingTypes* peBuilding = nullptr) const;
 	int getProfessionInput(ProfessionTypes eProfession, const CvUnit* pUnit) const;
 	BuildingTypes getYieldBuilding(YieldTypes eYield) const;
 	DllExport int getID() const;
@@ -377,7 +377,7 @@ public:
 	void changeYieldStored(YieldTypes eYield, int iChange);
 	int getYieldRushed(YieldTypes eYield) const;
 	void changeYieldRushed(YieldTypes eYield, int iChange);
-	void calculateNetYields(int aiYields[], int* aiProducedYields = NULL, int* aiConsumedYields = NULL, bool bPrintWarning = false) const;
+	void calculateNetYields(int aiYields[], int* aiProducedYields = nullptr, int* aiConsumedYields = nullptr, bool bPrintWarning = false) const;
 	int calculateNetYield(YieldTypes eYield) const;
 	int calculateActualYieldProduced(YieldTypes eYield) const;
 	int calculateActualYieldConsumed(YieldTypes eYield) const;
@@ -650,7 +650,7 @@ public:
 	virtual bool AI_avoidGrowth() const = 0;
 	virtual void AI_setAvoidGrowth(bool bNewValue) = 0;
 	virtual void AI_chooseProduction() = 0;
-	virtual UnitTypes AI_bestUnit(bool bAsync = false, UnitAITypes* peBestUnitAI = NULL, bool bPickAny = false) const = 0;
+	virtual UnitTypes AI_bestUnit(bool bAsync = false, UnitAITypes* peBestUnitAI = nullptr, bool bPickAny = false) const = 0;
 	virtual UnitTypes AI_bestUnitAI(UnitAITypes eUnitAI, bool bAsync = false) const = 0;
 	virtual BuildingTypes AI_bestBuilding(int iFocusFlags = 0, int iMaxTurns = MAX_INT, bool bAsync = false) const = 0;
 	virtual int AI_buildingValue(BuildingTypes eBuilding, int iFocusFlags = 0) const = 0;
@@ -691,7 +691,7 @@ public:
 	virtual int AI_professionValue(ProfessionTypes eProfession, const CvUnit* pUnit, const CvPlot* pPlot, const CvUnit* pDisplaceUnit) const = 0;
 	virtual int AI_professionBasicOutput(ProfessionTypes eProfession, UnitTypes eUnit, const CvPlot* pPlot) const = 0;
 	virtual int AI_unitJoinCityValue(CvUnit* pUnit, ProfessionTypes* peNewProfession) const = 0;
-	virtual int AI_unitJoinReplaceValue(CvUnit* pUnit, CvUnit** pReplaceUnit = NULL) const = 0;
+	virtual int AI_unitJoinReplaceValue(CvUnit* pUnit, CvUnit** pReplaceUnit = nullptr) const = 0;
 	virtual bool AI_canMakeGift() const = 0;
 	virtual int AI_getGiftTimer() const = 0;
 	virtual void AI_setGiftTimer(int iNewValue) = 0;

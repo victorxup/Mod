@@ -62,8 +62,8 @@ void CvXMLLoadUtility::DestroyFXml()
 //------------------------------------------------------------------------------------------------------
 CvXMLLoadUtility::CvXMLLoadUtility() :
 m_iCurProgressStep(0),
-m_pCBFxn(NULL),
-m_pFXml(NULL)
+m_pCBFxn(nullptr),
+m_pFXml(nullptr)
 {
 	m_pSchemaCache = gDLL->getXMLIFace()->CreateFXmlSchemaCache();
 }
@@ -115,7 +115,7 @@ void CvXMLLoadUtility::ResetGlobalEffectInfo()
 
 	GC.getEffectInfo().clear();
 
-	LoadGlobalClassInfo(GC.getEffectInfo(), "CIV4EffectInfos", "Misc", "Civ4EffectInfos/EffectInfos/EffectInfo", NULL);
+	LoadGlobalClassInfo(GC.getEffectInfo(), "CIV4EffectInfos", "Misc", "Civ4EffectInfos/EffectInfos/EffectInfo", nullptr);
 }
 
 
@@ -428,9 +428,9 @@ bool CvXMLLoadUtility::SetStringList(CvString** ppszStringArray, int* piSize)
 	int i;
 	CvString* pszStringArray;
 
-	FAssertMsg(*ppszStringArray == NULL, "Possible memory leak");
+	FAssertMsg(*ppszStringArray == nullptr, "Possible memory leak");
 	*piSize = gDLL->getXMLIFace()->GetNumChildren(m_pFXml);
-	*ppszStringArray = NULL;
+	*ppszStringArray = nullptr;
 	if (*piSize > 0)
 	{
 		*ppszStringArray = new CvString[*piSize];

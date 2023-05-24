@@ -78,7 +78,7 @@ T* CvIdVector<T>::getById(int iId) const
 		return it->second;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 template <class T>

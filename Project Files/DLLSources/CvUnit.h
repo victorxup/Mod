@@ -98,7 +98,7 @@ public:
 	void reset(int iID = 0, UnitTypes eUnit = NO_UNIT, PlayerTypes eOwner = NO_PLAYER, bool bConstructorCall = false);
 	void setupGraphical();
 	void convert(CvUnit* pUnit, bool bKill);
-	void kill(bool bDelay, CvUnit* pAttacker = NULL);
+	void kill(bool bDelay, CvUnit* pAttacker = nullptr);
 	void removeFromMap();
 	void addToMap(Coordinates targetCoord);
 	void addToMap(CvPlot *targetPlot);
@@ -120,11 +120,11 @@ public:
 	CvPlot* getPathEndTurnPlot() const;
 	int getPathCost() const;
 	// TAC - AI Improved Naval AI - koma13 - START
-	//bool generatePath(const CvPlot* pToPlot, int iFlags = 0, bool bReuse = false, int* piPathTurns = NULL) const;
-	//bool generatePath(const CvPlot* pToPlot, int iFlags = 0, bool bReuse = false, int* piPathTurns = NULL, bool bIgnoreDanger = true) const;
+	//bool generatePath(const CvPlot* pToPlot, int iFlags = 0, bool bReuse = false, int* piPathTurns = nullptr) const;
+	//bool generatePath(const CvPlot* pToPlot, int iFlags = 0, bool bReuse = false, int* piPathTurns = nullptr, bool bIgnoreDanger = true) const;
 	// TAC - AI Improved Naval AI - koma13 - END
 	bool generatePath(const CvPlot* pToPlot, int iFlags = 0, bool bReuse = false,							// Exposed to Python
-		int* piPathTurns = NULL,
+		int* piPathTurns = nullptr,
 		int iMaxPath = -1, // K-Mod
 		bool bUseTempFinder = false) const; // advc.128
 	KmodPathFinder& getPathFinder() const; // K-Mod
@@ -281,7 +281,7 @@ public:
 	bool hasUpgrade(bool bSearch = false) const;
 	bool hasUpgrade(UnitTypes eUnit, bool bSearch = false) const;
 	CvCity* getUpgradeCity(bool bSearch = false) const;
-	CvCity* getUpgradeCity(UnitTypes eUnit, bool bSearch = false, int* iSearchValue = NULL) const;
+	CvCity* getUpgradeCity(UnitTypes eUnit, bool bSearch = false, int* iSearchValue = nullptr) const;
 	void upgrade(UnitTypes eUnit);
 	HandicapTypes getHandicapType() const;
 	DllExport CivilizationTypes getCivilizationType() const;
@@ -331,10 +331,10 @@ public:
 	void setBaseCombatStr(int iCombat);
 	int baseCombatStr() const;
 	void updateBestLandCombat();
-	int maxCombatStr(const CvPlot* pPlot, const CvUnit* pAttacker, CombatDetails* pCombatDetails = NULL) const;
-	int currCombatStr(const CvPlot* pPlot, const CvUnit* pAttacker, CombatDetails* pCombatDetails = NULL) const;
+	int maxCombatStr(const CvPlot* pPlot, const CvUnit* pAttacker, CombatDetails* pCombatDetails = nullptr) const;
+	int currCombatStr(const CvPlot* pPlot, const CvUnit* pAttacker, CombatDetails* pCombatDetails = nullptr) const;
 	int currFirepower(const CvPlot* pPlot, const CvUnit* pAttacker) const;
-	int currEffectiveStr(const CvPlot* pPlot, const CvUnit* pAttacker, CombatDetails* pCombatDetails = NULL) const;
+	int currEffectiveStr(const CvPlot* pPlot, const CvUnit* pAttacker, CombatDetails* pCombatDetails = nullptr) const;
 	DllExport float maxCombatStrFloat(const CvPlot* pPlot, const CvUnit* pAttacker) const;
 	DllExport float currCombatStrFloat(const CvPlot* pPlot, const CvUnit* pAttacker) const;
 	bool isUnarmed() const;
@@ -343,7 +343,7 @@ public:
 
 	DllExport bool canFight() const;
 	bool canAttack() const;
-	bool canDefend(const CvPlot* pPlot = NULL) const;
+	bool canDefend(const CvPlot* pPlot = nullptr) const;
 	bool canSiege(TeamTypes eTeam) const;
 
 	bool isAutomated() const;
@@ -460,8 +460,8 @@ public:
 	int getGameTurnCreated() const;
 	void setGameTurnCreated(int iNewValue);
 	DllExport int getDamage() const;
-	void setDamage(int iNewValue, CvUnit* pAttacker = NULL, bool bNotifyEntity = true);
-	void changeDamage(int iChange, CvUnit* pAttacker = NULL);
+	void setDamage(int iNewValue, CvUnit* pAttacker = nullptr, bool bNotifyEntity = true);
+	void changeDamage(int iChange, CvUnit* pAttacker = nullptr);
 	void addDamageRandom(int iMinDamage, int iMaxDamage, int iMinHealthPercentageRemaining = 0);
 
 	int getMoves() const;
@@ -590,7 +590,7 @@ public:
 
 	bool canLeaveCity() const;
 	bool setProfession(ProfessionTypes eProfession, bool bForce = false, bool bRemoveYieldsFromCity = true);
-	bool canHaveProfession(ProfessionTypes eProfession, bool bBumpOther,  const CvPlot* pPlot = NULL, bool bForceCheck = false) const;
+	bool canHaveProfession(ProfessionTypes eProfession, bool bBumpOther,  const CvPlot* pPlot = nullptr, bool bForceCheck = false) const;
 	void processProfession(ProfessionTypes eProfession, int iChange, bool bUpdateCity, bool bRemoveYieldsFromCity = true);
 	void processProfessionStats(ProfessionTypes eProfession, int iChange);
 private:
@@ -703,8 +703,8 @@ public:
 	DllExport int getSubUnitsAlive() const;
 	int getSubUnitsAlive(int iDamage) const;
 
-	DllExport bool isEnemy(TeamTypes eTeam, const CvPlot* pPlot = NULL) const;
-	bool isPotentialEnemy(TeamTypes eTeam, const CvPlot* pPlot = NULL) const;
+	DllExport bool isEnemy(TeamTypes eTeam, const CvPlot* pPlot = nullptr) const;
+	bool isPotentialEnemy(TeamTypes eTeam, const CvPlot* pPlot = nullptr) const;
 
 	int getTriggerValue(EventTriggerTypes eTrigger, const CvPlot* pPlot, bool bCheckPlot) const;
 	bool canApplyEvent(EventTypes eEvent) const;
@@ -792,7 +792,7 @@ public:
 	virtual int AI_groupFirstVal() = 0;
 	virtual int AI_groupSecondVal() = 0;
 	virtual int AI_attackOdds(const CvPlot* pPlot, bool bPotentialEnemy) const = 0;
-	virtual bool AI_bestCityBuild(CvCity* pCity, CvPlot** ppBestPlot = NULL, BuildTypes* peBestBuild = NULL, CvPlot* pIgnorePlot = NULL, CvUnit* pUnit = NULL) = 0;
+	virtual bool AI_bestCityBuild(CvCity* pCity, CvPlot** ppBestPlot = nullptr, BuildTypes* peBestBuild = nullptr, CvPlot* pIgnorePlot = nullptr, CvUnit* pUnit = nullptr) = 0;
 	virtual bool AI_isCityAIType() const = 0;
 	virtual UnitAITypes AI_getUnitAIType() const = 0;
 	virtual void AI_setUnitAIType(UnitAITypes eNewValue) = 0;
@@ -971,7 +971,7 @@ protected:
 	void increaseBattleRounds( CvBattleDefinition & battleDefinition ) const;
 	int computeWaveSize( bool bRangedRound, int iAttackerMax, int iDefenderMax ) const;
 
-	void getDefenderCombatValues(CvUnit& kDefender, const CvPlot* pPlot, int iOurStrength, int iOurFirepower, int& iTheirOdds, int& iTheirStrength, int& iOurDamage, int& iTheirDamage, CombatDetails* pTheirDetails = NULL) const;
+	void getDefenderCombatValues(CvUnit& kDefender, const CvPlot* pPlot, int iOurStrength, int iOurFirepower, int& iTheirOdds, int& iTheirStrength, int& iOurDamage, int& iTheirDamage, CombatDetails* pTheirDetails = nullptr) const;
 
 	bool isCombatVisible(const CvUnit* pDefender) const;
 	void resolveCombat(CvUnit* pDefender, CvPlot* pPlot, CvBattleDefinition& kBattle);

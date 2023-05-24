@@ -8,7 +8,7 @@
 #include "CyDeal.h"
 #include "CyUnit.h"
 CyGameTextMgr::CyGameTextMgr() :
-m_pGameTextMgr(NULL)
+m_pGameTextMgr(nullptr)
 {
 	m_pGameTextMgr = &CvGameTextMgr::GetInstance();
 }
@@ -58,7 +58,7 @@ std::wstring CyGameTextMgr::getNetStats(int /*PlayerTypes*/ iPlayer)
 std::wstring CyGameTextMgr::getUnitHelp(int iUnit, bool bCivilopediaText, bool bStrategyText, CyCity* pCity)
 {
 	CvWStringBuffer szBuffer;
-	GAMETEXT.setUnitHelp(szBuffer, (UnitTypes)iUnit, bCivilopediaText, bStrategyText, ((pCity != NULL) ? pCity->getCity() : NULL));
+	GAMETEXT.setUnitHelp(szBuffer, (UnitTypes)iUnit, bCivilopediaText, bStrategyText, pCity != nullptr ? pCity->getCity() : nullptr);
 	return szBuffer.getCString();
 }
 std::wstring CyGameTextMgr::getSpecificUnitHelp(CyUnit* pUnit, bool bOneLine, bool bShort)
@@ -73,7 +73,7 @@ std::wstring CyGameTextMgr::getSpecificUnitHelp(CyUnit* pUnit, bool bOneLine, bo
 std::wstring CyGameTextMgr::getBuildingHelp(int iBuilding, bool bCivilopediaText, bool bStrategyText, CyCity* pCity)
 {
 	CvWStringBuffer szBuffer;
-	GAMETEXT.setBuildingHelp(szBuffer, (BuildingTypes)iBuilding, bCivilopediaText, bStrategyText, ((pCity != NULL) ? pCity->getCity() : NULL));
+	GAMETEXT.setBuildingHelp(szBuffer, (BuildingTypes)iBuilding, bCivilopediaText, bStrategyText, pCity != nullptr ? pCity->getCity() : nullptr);
 	return szBuffer.getCString();
 }
 std::wstring CyGameTextMgr::getPromotionHelp(int iPromotion, bool bCivilopediaText)
@@ -145,7 +145,7 @@ std::wstring CyGameTextMgr::parseLeaderTraits(int /*LeaderHeadTypes*/ iLeader, i
 std::wstring CyGameTextMgr::getTradeString(TradeData* pTradeData, int iPlayer1, int iPlayer2)
 {
 	CvWStringBuffer szBuffer;
-	if (NULL != pTradeData)
+	if (pTradeData != nullptr)
 	{
 		GAMETEXT.getTradeString(szBuffer, *pTradeData, (PlayerTypes)iPlayer1, (PlayerTypes) iPlayer2);
 	}

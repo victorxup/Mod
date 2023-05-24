@@ -18,7 +18,7 @@ CyDeal::~CyDeal()
 
 bool CyDeal::isNone()
 {
-	return (NULL == m_pDeal);
+	return m_pDeal == nullptr;
 }
 
 int CyDeal::getID() const
@@ -53,11 +53,11 @@ int CyDeal::getLengthSecondTrades() const
 
 TradeData* CyDeal::getFirstTrade(int i) const
 {
-	if (i < getLengthFirstTrades() && NULL != m_pDeal && NULL != m_pDeal->getFirstTrades())
+	if (i < getLengthFirstTrades() && m_pDeal != nullptr && m_pDeal->getFirstTrades() != nullptr)
 	{
 		const CLinkList<TradeData>& listTradeData = *(m_pDeal->getFirstTrades());
 		int iCount = 0;
-		for (CLLNode<TradeData>* pNode = listTradeData.head(); NULL != pNode; pNode = listTradeData.next(pNode))
+		for (CLLNode<TradeData>* pNode = listTradeData.head(); pNode != nullptr; pNode = listTradeData.next(pNode))
 		{
 			if (iCount == i)
 			{
@@ -66,16 +66,16 @@ TradeData* CyDeal::getFirstTrade(int i) const
 			iCount++;
 		}
 	}
-	return (NULL);
+	return nullptr;
 }
 
 TradeData* CyDeal::getSecondTrade(int i) const
 {
-	if (i < getLengthSecondTrades() && NULL != m_pDeal && NULL != m_pDeal->getSecondTrades())
+	if (i < getLengthSecondTrades() && m_pDeal != nullptr && m_pDeal->getSecondTrades() != nullptr)
 	{
 		const CLinkList<TradeData>& listTradeData = *(m_pDeal->getSecondTrades());
 		int iCount = 0;
-		for (CLLNode<TradeData>* pNode = listTradeData.head(); NULL != pNode; pNode = listTradeData.next(pNode))
+		for (CLLNode<TradeData>* pNode = listTradeData.head(); pNode != nullptr; pNode = listTradeData.next(pNode))
 		{
 			if (iCount == i)
 			{
@@ -84,12 +84,12 @@ TradeData* CyDeal::getSecondTrade(int i) const
 			iCount++;
 		}
 	}
-	return (NULL);
+	return nullptr;
 }
 
 void CyDeal::kill()
 {
-	if (NULL != m_pDeal)
+	if (m_pDeal != nullptr)
 	{
 		m_pDeal->kill(true, NO_TEAM);
 	}

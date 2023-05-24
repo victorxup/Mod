@@ -15,7 +15,7 @@ void CvDLLEngineIFaceBase::TriggerEffect(const TriggerEffectArguments& arguments
 
 	// technically audio has nothing to do with trigger effect
 	// however at the time of introducing this function, all calls had play audio as the following line
-	if (arguments.audio != NULL)
+	if (arguments.audio != nullptr)
 	{
 		gDLL->getInterfaceIFace()->playGeneralSound(arguments.audio, arguments.pt3Point);
 	}

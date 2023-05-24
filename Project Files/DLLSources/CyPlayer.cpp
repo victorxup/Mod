@@ -20,7 +20,7 @@
 #include "CyData.h"
 
 
-CyPlayer::CyPlayer() : m_pPlayer(NULL)
+CyPlayer::CyPlayer() : m_pPlayer(nullptr)
 {
 }
 CyPlayer::CyPlayer(CvPlayer* pPlayer) : m_pPlayer(pPlayer)
@@ -32,11 +32,11 @@ int CyPlayer::startingPlotRange()
 }
 CyPlot* CyPlayer::findStartingPlot(bool bRandomize)
 {
-	return m_pPlayer ? new CyPlot(m_pPlayer->findStartingPlot(bRandomize)) : NULL;
+	return m_pPlayer ? new CyPlot(m_pPlayer->findStartingPlot(bRandomize)) : nullptr;
 }
 CyCity* CyPlayer::initCity(int x, int y)
 {
-	return m_pPlayer ? new CyCity(m_pPlayer->initCity(Coordinates(x, y), true)) : NULL;
+	return m_pPlayer ? new CyCity(m_pPlayer->initCity(Coordinates(x, y), true)) : nullptr;
 }
 void CyPlayer::acquireCity(CyCity* pCity, bool bConquest, bool bTrade)
 {
@@ -54,11 +54,11 @@ std::wstring CyPlayer::getNewCityName()
 }
 CyUnit* CyPlayer::initUnit(int /*UnitTypes*/ iIndex, int iProfession, int iX, int iY, UnitAITypes eUnitAI, DirectionTypes eFacingDirection, int iYieldStored)
 {
-	return m_pPlayer ? new CyUnit(m_pPlayer->initUnit((UnitTypes) iIndex, (ProfessionTypes) iProfession, iX, iY, eUnitAI, eFacingDirection, iYieldStored)) : NULL;
+	return m_pPlayer ? new CyUnit(m_pPlayer->initUnit((UnitTypes) iIndex, (ProfessionTypes) iProfession, iX, iY, eUnitAI, eFacingDirection, iYieldStored)) : nullptr;
 }
 CyUnit* CyPlayer::initEuropeUnit(int /*UnitTypes*/ eUnit, UnitAITypes eUnitAI, DirectionTypes eFacingDirection)
 {
-	return m_pPlayer ? new CyUnit(m_pPlayer->initEuropeUnit((UnitTypes) eUnit, eUnitAI, eFacingDirection)) : NULL;
+	return m_pPlayer ? new CyUnit(m_pPlayer->initEuropeUnit((UnitTypes) eUnit, eUnitAI, eFacingDirection)) : nullptr;
 }
 void CyPlayer::killUnits()
 {
@@ -265,7 +265,7 @@ bool CyPlayer::canBuild(CyPlot* pPlot, int /*BuildTypes*/ eBuild, bool bTestEra,
 }
 int /*RouteTypes*/ CyPlayer::getBestRoute(CyPlot* pPlot) const
 {
-	return m_pPlayer ? (int) m_pPlayer->getBestRoute(NULL != pPlot ? pPlot->getPlot() : NULL) : -1;
+	return m_pPlayer ? (int) m_pPlayer->getBestRoute(pPlot != nullptr ? pPlot->getPlot() : nullptr) : -1;
 }
 int CyPlayer::getImprovementUpgradeRate() const
 {
@@ -305,7 +305,7 @@ CyPlot* CyPlayer::getStartingPlot()
 {
 	if (!m_pPlayer)
 	{
-		return NULL;
+		return nullptr;
 	}
 	return new CyPlot(m_pPlayer->getStartingPlot());
 }
@@ -315,7 +315,7 @@ void CyPlayer::setStartingPlot(CyPlot* pPlot, bool bUpdateStartDist)
 	{
 		return;
 	}
-	m_pPlayer->setStartingPlot(NULL != pPlot ? pPlot->getPlot() : NULL, bUpdateStartDist);
+	m_pPlayer->setStartingPlot(pPlot != nullptr ? pPlot->getPlot() : nullptr, bUpdateStartDist);
 }
 int CyPlayer::getTotalPopulation()
 {
@@ -370,11 +370,11 @@ void CyPlayer::changeAdvancedStartPoints(int iChange)
 }
 int CyPlayer::getAdvancedStartUnitCost(int /*UnitTypes*/ eUnit, bool bAdd, CyPlot* pPlot)
 {
-	return m_pPlayer ? m_pPlayer->getAdvancedStartUnitCost((UnitTypes) eUnit, bAdd, NULL != pPlot ? pPlot->getPlot() : NULL) : -1;
+	return m_pPlayer ? m_pPlayer->getAdvancedStartUnitCost((UnitTypes) eUnit, bAdd, pPlot != nullptr ? pPlot->getPlot() : nullptr) : -1;
 }
 int CyPlayer::getAdvancedStartCityCost(bool bAdd, CyPlot* pPlot)
 {
-	return m_pPlayer ? m_pPlayer->getAdvancedStartCityCost(bAdd, NULL != pPlot ? pPlot->getPlot() : NULL) : -1;
+	return m_pPlayer ? m_pPlayer->getAdvancedStartCityCost(bAdd, pPlot != nullptr ? pPlot->getPlot() : nullptr) : -1;
 }
 int CyPlayer::getAdvancedStartPopCost(bool bAdd, CyCity* pCity)
 {
@@ -390,15 +390,15 @@ int CyPlayer::getAdvancedStartBuildingCost(int /*BuildingTypes*/ eBuilding, bool
 }
 int CyPlayer::getAdvancedStartImprovementCost(int /*ImprovementTypes*/ eImprovement, bool bAdd, CyPlot* pPlot)
 {
-	return m_pPlayer ? m_pPlayer->getAdvancedStartImprovementCost((ImprovementTypes) eImprovement, bAdd, NULL != pPlot ? pPlot->getPlot() : NULL) : -1;
+	return m_pPlayer ? m_pPlayer->getAdvancedStartImprovementCost((ImprovementTypes) eImprovement, bAdd, pPlot != nullptr ? pPlot->getPlot() : nullptr) : -1;
 }
 int CyPlayer::getAdvancedStartRouteCost(int /*RouteTypes*/ eRoute, bool bAdd, CyPlot* pPlot)
 {
-	return m_pPlayer ? m_pPlayer->getAdvancedStartRouteCost((RouteTypes) eRoute, bAdd, NULL != pPlot ? pPlot->getPlot() : NULL) : -1;
+	return m_pPlayer ? m_pPlayer->getAdvancedStartRouteCost((RouteTypes) eRoute, bAdd, pPlot != nullptr ? pPlot->getPlot() : nullptr) : -1;
 }
 int CyPlayer::getAdvancedStartVisibilityCost(bool bAdd, CyPlot* pPlot)
 {
-	return m_pPlayer ? m_pPlayer->getAdvancedStartVisibilityCost(bAdd, NULL != pPlot ? pPlot->getPlot() : NULL) : -1;
+	return m_pPlayer ? m_pPlayer->getAdvancedStartVisibilityCost(bAdd, pPlot != nullptr ? pPlot->getPlot() : nullptr) : -1;
 }
 void CyPlayer::createGreatGeneral(int eGreatGeneralUnit, bool bIncrementExperience, int iX, int iY)
 {
@@ -493,7 +493,7 @@ int CyPlayer::getLevelExperienceModifier() const
 }
 CyCity* CyPlayer::getCapitalCity()
 {
-	return m_pPlayer ? new CyCity(m_pPlayer->getCapitalCity()) : NULL;
+	return m_pPlayer ? new CyCity(m_pPlayer->getCapitalCity()) : nullptr;
 }
 int CyPlayer::getCitiesLost()
 {
@@ -864,8 +864,8 @@ std::wstring CyPlayer::getCityName(int iIndex)
 python::tuple CyPlayer::firstCity(bool bRev)
 {
 	int iterIn = 0;
-	CvCity* pvObj = m_pPlayer ? m_pPlayer->firstCity(&iterIn, bRev) : NULL;
-	CyCity* pyObj = pvObj ? new CyCity(pvObj) : NULL;
+	CvCity* pvObj = m_pPlayer ? m_pPlayer->firstCity(&iterIn, bRev) : nullptr;
+	CyCity* pyObj = pvObj ? new CyCity(pvObj) : nullptr;
 	python::tuple tup=python::make_tuple(pyObj, iterIn);
 	delete pyObj;
 	return tup;
@@ -873,8 +873,8 @@ python::tuple CyPlayer::firstCity(bool bRev)
 // returns tuple of (CyCity, iterOut)
 python::tuple CyPlayer::nextCity(int iterIn, bool bRev)
 {
-	CvCity* pvObj = m_pPlayer ? m_pPlayer->nextCity(&iterIn, bRev) : NULL;
-	CyCity* pyObj = pvObj ? new CyCity(pvObj) : NULL;
+	CvCity* pvObj = m_pPlayer ? m_pPlayer->nextCity(&iterIn, bRev) : nullptr;
+	CyCity* pyObj = pvObj ? new CyCity(pvObj) : nullptr;
 	python::tuple tup=python::make_tuple(pyObj, iterIn);
 	delete pyObj;
 	return tup;
@@ -885,14 +885,14 @@ int CyPlayer::getNumCities()
 }
 CyCity* CyPlayer::getCity(int iID)
 {
-	return m_pPlayer ? new CyCity(m_pPlayer->getCity(iID)) : NULL;
+	return m_pPlayer ? new CyCity(m_pPlayer->getCity(iID)) : nullptr;
 }
 // returns tuple of (CyUnit, iterOut)
 python::tuple CyPlayer::firstUnit()
 {
 	int iterIn = 0;
-	CvUnit* pvUnit = m_pPlayer ? m_pPlayer->firstUnit(&iterIn) : NULL;
-	CyUnit* pyUnit = pvUnit ? new CyUnit(pvUnit) : NULL;
+	CvUnit* pvUnit = m_pPlayer ? m_pPlayer->firstUnit(&iterIn) : nullptr;
+	CyUnit* pyUnit = pvUnit ? new CyUnit(pvUnit) : nullptr;
 	python::tuple tup=python::make_tuple(pyUnit, iterIn);
 	delete pyUnit;
 	return tup;
@@ -900,8 +900,8 @@ python::tuple CyPlayer::firstUnit()
 // returns tuple of (CyUnit, iterOut)
 python::tuple CyPlayer::nextUnit(int iterIn)
 {
-	CvUnit* pvObj = m_pPlayer ? m_pPlayer->nextUnit(&iterIn) : NULL;
-	CyUnit* pyObj = pvObj ? new CyUnit(pvObj) : NULL;
+	CvUnit* pvObj = m_pPlayer ? m_pPlayer->nextUnit(&iterIn) : nullptr;
+	CyUnit* pyObj = pvObj ? new CyUnit(pvObj) : nullptr;
 	python::tuple tup=python::make_tuple(pyObj, iterIn);
 	delete pyObj;
 	return tup;
@@ -920,7 +920,7 @@ int CyPlayer::getNumShips()
 
 CyUnit* CyPlayer::getUnit(int iID)
 {
-	return m_pPlayer ? new CyUnit(m_pPlayer->getUnit(iID)) : NULL;
+	return m_pPlayer ? new CyUnit(m_pPlayer->getUnit(iID)) : nullptr;
 }
 int CyPlayer::getNumEuropeUnits()
 {
@@ -928,11 +928,11 @@ int CyPlayer::getNumEuropeUnits()
 }
 CyUnit* CyPlayer::getEuropeUnit(int iIndex)
 {
-	return m_pPlayer ? new CyUnit(m_pPlayer->getEuropeUnit(iIndex)) : NULL;
+	return m_pPlayer ? new CyUnit(m_pPlayer->getEuropeUnit(iIndex)) : nullptr;
 }
 CyUnit* CyPlayer::getEuropeUnitById(int iId)
 {
-	return m_pPlayer ? new CyUnit(m_pPlayer->getEuropeUnitById(iId)) : NULL;
+	return m_pPlayer ? new CyUnit(m_pPlayer->getEuropeUnitById(iId)) : nullptr;
 }
 void CyPlayer::loadUnitFromEurope(CyUnit* pUnit, CyUnit* pTransport)
 {
@@ -953,8 +953,8 @@ void CyPlayer::unloadUnitToEurope(CyUnit* pUnit)
 python::tuple CyPlayer::firstSelectionGroup(bool bRev)
 {
 	int iterIn = 0;
-	CvSelectionGroup* pvObj = m_pPlayer ? m_pPlayer->firstSelectionGroup(&iterIn, bRev) : NULL;
-	CySelectionGroup* pyObj = pvObj ? new CySelectionGroup(pvObj) : NULL;
+	CvSelectionGroup* pvObj = m_pPlayer ? m_pPlayer->firstSelectionGroup(&iterIn, bRev) : nullptr;
+	CySelectionGroup* pyObj = pvObj ? new CySelectionGroup(pvObj) : nullptr;
 	python::tuple tup=python::make_tuple(pyObj, iterIn);
 	delete pyObj;
 	return tup;
@@ -962,8 +962,8 @@ python::tuple CyPlayer::firstSelectionGroup(bool bRev)
 // returns tuple of (CySelectionGroup, iterOut)
 python::tuple CyPlayer::nextSelectionGroup(int iterIn, bool bRev)
 {
-	CvSelectionGroup* pvObj = m_pPlayer ? m_pPlayer->nextSelectionGroup(&iterIn, bRev) : NULL;
-	CySelectionGroup* pyObj = pvObj ? new CySelectionGroup(pvObj) : NULL;
+	CvSelectionGroup* pvObj = m_pPlayer ? m_pPlayer->nextSelectionGroup(&iterIn, bRev) : nullptr;
+	CySelectionGroup* pyObj = pvObj ? new CySelectionGroup(pvObj) : nullptr;
 	python::tuple tup=python::make_tuple(pyObj, iterIn);
 	delete pyObj;
 	return tup;
@@ -974,7 +974,7 @@ int CyPlayer::getNumSelectionGroups()
 }
 CySelectionGroup* CyPlayer::getSelectionGroup(int iID)
 {
-	return m_pPlayer ? new CySelectionGroup(m_pPlayer->getSelectionGroup(iID)) : NULL;
+	return m_pPlayer ? new CySelectionGroup(m_pPlayer->getSelectionGroup(iID)) : nullptr;
 }
 int CyPlayer::countNumTravelUnits(int /*UnitTravelStates*/ eState, int /*DomainTypes*/ eDomain)
 {
@@ -990,7 +990,7 @@ void CyPlayer::trigger(/*EventTriggerTypes*/int eEventTrigger)
 }
 const EventTriggeredData* CyPlayer::getEventOccured(int /*EventTypes*/ eEvent) const
 {
-	return m_pPlayer ? m_pPlayer->getEventOccured((EventTypes)eEvent) : NULL;
+	return m_pPlayer ? m_pPlayer->getEventOccured((EventTypes)eEvent) : nullptr;
 }
 void CyPlayer::resetEventOccured(int /*EventTypes*/ eEvent)
 {
@@ -1001,11 +1001,11 @@ void CyPlayer::resetEventOccured(int /*EventTypes*/ eEvent)
 }
 EventTriggeredData* CyPlayer::getEventTriggered(int iID) const
 {
-	return m_pPlayer ? m_pPlayer->getEventTriggered(iID) : NULL;
+	return m_pPlayer ? m_pPlayer->getEventTriggered(iID) : nullptr;
 }
 EventTriggeredData* CyPlayer::initTriggeredData(int /*EventTriggerTypes*/ eEventTrigger, bool bFire, int iCityId, int iPlotX, int iPlotY, int /*PlayerTypes*/ eOtherPlayer, int iOtherPlayerCityId, int iUnitId, int /*BuildingTypes*/ eBuilding)
 {
-	return m_pPlayer ? m_pPlayer->initTriggeredData((EventTriggerTypes)eEventTrigger, bFire, iCityId, iPlotX, iPlotY, (PlayerTypes)eOtherPlayer, iOtherPlayerCityId, iUnitId, (BuildingTypes)eBuilding) : NULL;
+	return m_pPlayer ? m_pPlayer->initTriggeredData((EventTriggerTypes)eEventTrigger, bFire, iCityId, iPlotX, iPlotY, (PlayerTypes)eOtherPlayer, iOtherPlayerCityId, iUnitId, (BuildingTypes)eBuilding) : nullptr;
 }
 int CyPlayer::getEventTriggerWeight(int /*EventTriggerTypes*/ eTrigger)
 {
@@ -1095,27 +1095,27 @@ void CyPlayer::AI_setExtraGoldTarget(int iNewValue)
 
 int CyPlayer::getScoreHistory(int iTurn) const
 {
-	return (NULL != m_pPlayer ? m_pPlayer->getScoreHistory(iTurn) : 0);
+	return m_pPlayer != nullptr ? m_pPlayer->getScoreHistory(iTurn) : 0;
 }
 int CyPlayer::getEconomyHistory(int iTurn) const
 {
-	return (NULL != m_pPlayer ? m_pPlayer->getEconomyHistory(iTurn) : 0);
+	return m_pPlayer != nullptr ? m_pPlayer->getEconomyHistory(iTurn) : 0;
 }
 int CyPlayer::getIndustryHistory(int iTurn) const
 {
-	return (NULL != m_pPlayer ? m_pPlayer->getIndustryHistory(iTurn) : 0);
+	return m_pPlayer != nullptr ? m_pPlayer->getIndustryHistory(iTurn) : 0;
 }
 int CyPlayer::getAgricultureHistory(int iTurn) const
 {
-	return (NULL != m_pPlayer ? m_pPlayer->getAgricultureHistory(iTurn) : 0);
+	return m_pPlayer != nullptr ? m_pPlayer->getAgricultureHistory(iTurn) : 0;
 }
 int CyPlayer::getPowerHistory(int iTurn) const
 {
-	return (NULL != m_pPlayer ? m_pPlayer->getPowerHistory(iTurn) : 0);
+	return m_pPlayer != nullptr ? m_pPlayer->getPowerHistory(iTurn) : 0;
 }
 int CyPlayer::getCultureHistory(int iTurn) const
 {
-	return (NULL != m_pPlayer ? m_pPlayer->getCultureHistory(iTurn) : 0);
+	return m_pPlayer != nullptr ? m_pPlayer->getCultureHistory(iTurn) : 0;
 }
 
 int CyPlayer::addTradeRoute(int iSourceCityOwner, int iSourceCityId, int iDestinationCityOwner, int iDestinationCityId, int /*YieldTypes*/ eYield)
@@ -1130,7 +1130,7 @@ bool CyPlayer::removeTradeRoute(int iId)
 
 CyTradeRoute* CyPlayer::getTradeRoute(int iId) const
 {
-	return new CyTradeRoute(m_pPlayer ? m_pPlayer->getTradeRoute(iId) : NULL);
+	return new CyTradeRoute(m_pPlayer ? m_pPlayer->getTradeRoute(iId) : nullptr);
 }
 
 int CyPlayer::getNumTradeRoutes() const
@@ -1140,7 +1140,7 @@ int CyPlayer::getNumTradeRoutes() const
 
 CyTradeRoute* CyPlayer::getTradeRouteByIndex(int iIndex) const
 {
-	return new CyTradeRoute(m_pPlayer ? m_pPlayer->getTradeRouteByIndex(iIndex) : NULL);
+	return new CyTradeRoute(m_pPlayer ? m_pPlayer->getTradeRouteByIndex(iIndex) : nullptr);
 }
 
 bool CyPlayer::editTradeRoute(int iId, int iSourceCityOwner, int iSourceCityId, int iDestinationCityOwner, int iDestinationCityId, int /*YieldTypes*/ eYield)
@@ -1360,7 +1360,7 @@ void CyPlayer::setYieldAfricaBuyPrice(int /*YieldTypes*/ eYield, int iPrice, boo
 }
 CyUnit* CyPlayer::buyYieldUnitFromAfrica(int /*YieldTypes*/ eYield, int iAmount, CyUnit* pTransport)
 {
-	return m_pPlayer ? (new CyUnit(m_pPlayer->buyYieldUnitFromAfrica((YieldTypes) eYield, iAmount, pTransport->getUnit()))) : NULL;
+	return m_pPlayer ? (new CyUnit(m_pPlayer->buyYieldUnitFromAfrica((YieldTypes) eYield, iAmount, pTransport->getUnit()))) : nullptr;
 }
 // R&R, ray, Africa - END
 // R&R, ray, Port Royal
@@ -1383,7 +1383,7 @@ void CyPlayer::setYieldPortRoyalBuyPrice(int /*YieldTypes*/ eYield, int iPrice, 
 }
 CyUnit* CyPlayer::buyYieldUnitFromPortRoyal(int /*YieldTypes*/ eYield, int iAmount, CyUnit* pTransport)
 {
-	return m_pPlayer ? (new CyUnit(m_pPlayer->buyYieldUnitFromPortRoyal((YieldTypes) eYield, iAmount, pTransport->getUnit()))) : NULL;
+	return m_pPlayer ? (new CyUnit(m_pPlayer->buyYieldUnitFromPortRoyal((YieldTypes) eYield, iAmount, pTransport->getUnit()))) : nullptr;
 }
 // R&R, ray, Port Royal - END
 void CyPlayer::sellYieldUnitToEurope(CyUnit* pUnit, int iAmount, int iCommission)
@@ -1393,7 +1393,7 @@ void CyPlayer::sellYieldUnitToEurope(CyUnit* pUnit, int iAmount, int iCommission
 }
 CyUnit* CyPlayer::buyYieldUnitFromEurope(int /*YieldTypes*/ eYield, int iAmount, CyUnit* pTransport)
 {
-	return m_pPlayer ? (new CyUnit(m_pPlayer->buyYieldUnitFromEurope((YieldTypes) eYield, iAmount, pTransport->getUnit()))) : NULL;
+	return m_pPlayer ? (new CyUnit(m_pPlayer->buyYieldUnitFromEurope((YieldTypes) eYield, iAmount, pTransport->getUnit()))) : nullptr;
 }
 int CyPlayer::getEuropeUnitBuyPrice(int /*UnitTypes*/ eUnit)
 {
@@ -1401,7 +1401,7 @@ int CyPlayer::getEuropeUnitBuyPrice(int /*UnitTypes*/ eUnit)
 }
 CyUnit* CyPlayer::buyEuropeUnit(int /*UnitTypes*/ eUnit)
 {
-	return m_pPlayer ? (new CyUnit(m_pPlayer->buyEuropeUnit((UnitTypes) eUnit, 100))) : NULL;
+	return m_pPlayer ? (new CyUnit(m_pPlayer->buyEuropeUnit((UnitTypes) eUnit, 100))) : nullptr;
 }
 int CyPlayer::getYieldBoughtTotal(int /*YieldTypes*/ eYield) const
 {
@@ -1512,11 +1512,11 @@ int CyPlayer::getNumAfricaUnits()
 }
 CyUnit* CyPlayer::getAfricaUnit(int iIndex)
 {
-	return m_pPlayer ? new CyUnit(m_pPlayer->getAfricaUnit(iIndex)) : NULL;
+	return m_pPlayer ? new CyUnit(m_pPlayer->getAfricaUnit(iIndex)) : nullptr;
 }
 CyUnit* CyPlayer::getAfricaUnitById(int iId)
 {
-	return m_pPlayer ? new CyUnit(m_pPlayer->getAfricaUnitById(iId)) : NULL;
+	return m_pPlayer ? new CyUnit(m_pPlayer->getAfricaUnitById(iId)) : nullptr;
 }
 void CyPlayer::loadUnitFromAfrica(CyUnit* pUnit, CyUnit* pTransport)
 {
@@ -1538,7 +1538,7 @@ int CyPlayer::getAfricaUnitBuyPrice(int /*UnitTypes*/ eUnit)
 }
 CyUnit* CyPlayer::buyAfricaUnit(int /*UnitTypes*/ eUnit)
 {
-	return m_pPlayer ? (new CyUnit(m_pPlayer->buyAfricaUnit((UnitTypes) eUnit, 100))) : NULL;
+	return m_pPlayer ? (new CyUnit(m_pPlayer->buyAfricaUnit((UnitTypes) eUnit, 100))) : nullptr;
 }
 bool CyPlayer::canTradeWithAfrica()
 {
@@ -1569,11 +1569,11 @@ int CyPlayer::getNumPortRoyalUnits()
 }
 CyUnit* CyPlayer::getPortRoyalUnit(int iIndex)
 {
-	return m_pPlayer ? new CyUnit(m_pPlayer->getPortRoyalUnit(iIndex)) : NULL;
+	return m_pPlayer ? new CyUnit(m_pPlayer->getPortRoyalUnit(iIndex)) : nullptr;
 }
 CyUnit* CyPlayer::getPortRoyalUnitById(int iId)
 {
-	return m_pPlayer ? new CyUnit(m_pPlayer->getPortRoyalUnitById(iId)) : NULL;
+	return m_pPlayer ? new CyUnit(m_pPlayer->getPortRoyalUnitById(iId)) : nullptr;
 }
 void CyPlayer::loadUnitFromPortRoyal(CyUnit* pUnit, CyUnit* pTransport)
 {
@@ -1595,7 +1595,7 @@ int CyPlayer::getPortRoyalUnitBuyPrice(int /*UnitTypes*/ eUnit)
 }
 CyUnit* CyPlayer::buyPortRoyalUnit(int /*UnitTypes*/ eUnit)
 {
-	return m_pPlayer ? (new CyUnit(m_pPlayer->buyPortRoyalUnit((UnitTypes) eUnit, 100))) : NULL;
+	return m_pPlayer ? (new CyUnit(m_pPlayer->buyPortRoyalUnit((UnitTypes) eUnit, 100))) : nullptr;
 }
 bool CyPlayer::canTradeWithPortRoyal()
 {
@@ -1645,7 +1645,7 @@ int CyPlayer::getNumTradeGroups() const
 }
 CyTradeRouteGroup* CyPlayer::getTradeGroup(int iIndex)
 {
-	return m_pPlayer ? new CyTradeRouteGroup(m_pPlayer->getTradeRouteGroup(iIndex)) : NULL;
+	return m_pPlayer ? new CyTradeRouteGroup(m_pPlayer->getTradeRouteGroup(iIndex)) : nullptr;
 }
 
 // R&R mod, vetiarvind, trade groups - end
@@ -1699,7 +1699,7 @@ CyInfoArray* CyPlayer::getTeachUnitTypes(int iTeachLevel) const
 {
 	EnumMap<UnitTypes, bool> em;
 
-	if (m_pPlayer != NULL)
+	if (m_pPlayer != nullptr)
 	{
 		const CvPlayerCivEffect& kPlayer = m_pPlayer->CivEffect();
 		for (UnitTypes eUnit = em.FIRST; eUnit <= em.LAST; ++eUnit)
@@ -1717,7 +1717,7 @@ CyInfoArray* CyPlayer::getTeachUnitTypes(int iTeachLevel) const
 int CyPlayer::getMaxTeachLevel() const
 {
 	int iLevel = 0;
-	if (m_pPlayer != NULL)
+	if (m_pPlayer != nullptr)
 	{
 		const CvPlayerCivEffect& kPlayer = m_pPlayer->CivEffect();
 		for (UnitTypes eUnit = FIRST_UNIT; eUnit < NUM_UNIT_TYPES; ++eUnit)

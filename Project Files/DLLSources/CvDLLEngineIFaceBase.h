@@ -109,7 +109,7 @@ public:
 		TriggerEffectArguments()
 			: effect(NO_EFFECT)
 			, rotation(0.0f)
-			, audio(NULL)
+			, audio(nullptr)
 		{}
 		EffectTypes effect;
 		NiPoint3 pt3Point;

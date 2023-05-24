@@ -14,7 +14,7 @@
 #include "CySelectionGroup.h"
 #include "CvDLLInterfaceIFaceBase.h"
 #include "CvGlobals.h"
-CyUnit::CyUnit() : m_pUnit(NULL)
+CyUnit::CyUnit() : m_pUnit(nullptr)
 {
 }
 CyUnit::CyUnit(CvUnit* pUnit) : m_pUnit(pUnit)
@@ -495,7 +495,7 @@ int CyUnit::hillsDefenseModifier()
 int CyUnit::DomesticBonusModifier()
 {
 	return m_pUnit ? m_pUnit->DomesticBonusModifier() : -1;
-}	
+}
 int CyUnit::terrainAttackModifier(int /*TerrainTypes*/ eTerrain)
 {
 	return m_pUnit ? m_pUnit->terrainAttackModifier((TerrainTypes) eTerrain) : -1;
@@ -586,7 +586,7 @@ bool CyUnit::isGroupHead()
 }
 CySelectionGroup* CyUnit::getGroup()
 {
-	return m_pUnit ? new CySelectionGroup( m_pUnit->getGroup() ) : NULL;
+	return m_pUnit ? new CySelectionGroup(m_pUnit->getGroup()) : nullptr;
 }
 int CyUnit::getHotKeyNumber()
 {
@@ -620,11 +620,11 @@ bool CyUnit::atPlot(CyPlot* pPlot)
 }
 CyPlot* CyUnit::plot()
 {
-	return m_pUnit ? new CyPlot(m_pUnit->plot()) : NULL;
+	return m_pUnit ? new CyPlot(m_pUnit->plot()) : nullptr;
 }
 CyArea* CyUnit::area()
 {
-	return m_pUnit ? new CyArea(m_pUnit->area()) : NULL;
+	return m_pUnit ? new CyArea(m_pUnit->area()) : nullptr;
 }
 int CyUnit::getGameTurnCreated()
 {
@@ -810,7 +810,7 @@ int CyUnit::getExtraHillsDefensePercent()
 }
 int CyUnit::getExtraDomesticBonusPercent()
 {
-	return m_pUnit ? m_pUnit->getExtraDomesticBonusPercent() : -1;			
+	return m_pUnit ? m_pUnit->getExtraDomesticBonusPercent() : -1;
 }
 int CyUnit::getPillageChange() const
 {
@@ -912,7 +912,7 @@ void CyUnit::setLeaderUnitType(int leaderUnitType)
 }
 CyUnit* CyUnit::getTransportUnit() const
 {
-	return m_pUnit ? new CyUnit(m_pUnit->getTransportUnit()) : NULL;
+	return m_pUnit ? new CyUnit(m_pUnit->getTransportUnit()) : nullptr;
 }
 bool CyUnit::isCargo()
 {
@@ -1186,7 +1186,7 @@ void CyUnit::centerCamera()
 }
 const CvArtInfoUnit* CyUnit::getArtInfo(int i) const
 {
-	return m_pUnit ? m_pUnit->getArtInfo(i) : NULL;
+	return m_pUnit ? m_pUnit->getArtInfo(i) : nullptr;
 }
 std::string CyUnit::getButton() const
 {

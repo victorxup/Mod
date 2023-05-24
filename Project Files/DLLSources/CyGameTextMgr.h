@@ -14,7 +14,7 @@ class CyGameTextMgr
 public:
 	CyGameTextMgr();
 	CyGameTextMgr(CvGameTextMgr* m_pGameTextMgr);			// Call from C++
-	bool isNone() { return (m_pGameTextMgr==NULL); }
+	bool isNone() { return m_pGameTextMgr == nullptr; }
 	void Reset();
 	std::wstring getTimeStr(int iGameTurn, bool bSave);
 	std::wstring getDateStr(int iGameTurn, bool bSave, int /*CalendarTypes*/ eCalendar, int iStartYear, int /*GameSpeedTypes*/ eSpeed);

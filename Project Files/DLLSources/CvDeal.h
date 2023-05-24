@@ -53,7 +53,7 @@ public:
 	DllExport CLLNode<TradeData>* headSecondTradesNode() const;
 	const CLinkList<TradeData>* getSecondTrades() const;
 
-	DllExport bool isCancelable(PlayerTypes eByPlayer = NO_PLAYER, CvWString* pszReason = NULL);
+	DllExport bool isCancelable(PlayerTypes eByPlayer = NO_PLAYER, CvWString* pszReason = nullptr);
 	int turnsToCancel(PlayerTypes eByPlayer = NO_PLAYER);
 
 	static bool isAnnual(TradeableItems eItem);

@@ -4,7 +4,7 @@
 // It's a relative of JustInTime arrays though it's aimed at storing xml data in info classes.
 //
 // It's designed to store static data as in write once and then it becomes read only. Writing is mainly directly from xml.
-// 
+//
 // read(tagname) is all it takes to read from xml, even if the tag is a list of lists.
 // Well developed error detection and asserting when reading xml data.
 // If xml contains something like Unit instead of UnitClass, it will tell you which file, what's wrong and what it expects.
@@ -35,7 +35,7 @@
 //
 // Written to work together with BoolArray, JustInTimeArray, JustInTimeArray2D and CacheArray2D.
 //   addCache in those (add in BoolArray) can be used in those to make a list of combined values of multiple InfoArrays
-// 
+//
 //
 //  The class is split into two classes:
 //    InfoArray: data and read functions
@@ -86,7 +86,7 @@ public:
 	int getIndex(int iIndex, int iSubIndex) const;
 	int getLength() const;
 	int getDimentions() const;
-	bool isBool() const; // dimentions and types are the same 
+	bool isBool() const; // dimentions and types are the same
 
 	int getMin(int iDimention) const;
 	int getMax(int iDimention) const;
@@ -102,7 +102,7 @@ public:
 
 	int getWithType(JITarrayTypes eType, int iIndex, int iTokenIndex) const;
 
-	// adds UnitClass->Unit and BuildingClass->Building conversion. Otherwise the same as without the civinfo argument 
+	// adds UnitClass->Unit and BuildingClass->Building conversion. Otherwise the same as without the civinfo argument
 	int getWithTypeWithConversion(JITarrayTypes eType, int iIndex, int iTokenIndex, const CvCivilizationInfo *pCivInfo) const;
 
 protected:
@@ -328,7 +328,7 @@ template<typename T0>
 template<typename Ta, class T, int DEFAULT>
 void InfoArray1Only<T0>::addTo(EnumMap<Ta, T, DEFAULT> & em, int iChange) const
 {
-	addTo(em, iChange, NULL);
+	addTo(em, iChange, nullptr);
 }
 
 template<typename T0>
@@ -364,7 +364,7 @@ template<typename T0, typename T1>
 template<typename Ta, class T, int DEFAULT>
 void InfoArray2Only<T0, T1>::addTo(EnumMap<Ta, T, DEFAULT> & em, int iChange) const
 {
-	addTo(em, iChange, NULL);
+	addTo(em, iChange, nullptr);
 }
 
 template<typename T0, typename T1>
@@ -503,7 +503,7 @@ template<typename T0, typename T1>
 template<typename Ta, typename Tb, typename T, int DEFAULT>
 void InfoArray2Only<T0, T1>::addTo(EnumMap2D<Ta, Tb, T, DEFAULT> & em, int iChange) const
 {
-	addTo(em, iChange, NULL);
+	addTo(em, iChange, nullptr);
 }
 
 template<typename T0, typename T1>
@@ -528,7 +528,7 @@ template<typename T0, typename T1, typename T2>
 template<typename Ta, typename Tb, typename T, int DEFAULT>
 void InfoArray3Only<T0, T1, T2>::addTo(EnumMap2D<Ta, Tb, T, DEFAULT> & em, int iChange) const
 {
-	addTo(em, iChange, NULL);
+	addTo(em, iChange, nullptr);
 }
 
 template<typename T0, typename T1, typename T2>
@@ -583,10 +583,10 @@ public:
 
 	// EnumMap interaction
 	void assignFrom(const EnumMapBase<T0, T>& em);
-	void addTo(EnumMapBase<Ta, Tb> & em, int iChange = 1, const CvCivilizationInfo* pCivInfo = NULL) const;
+	void addTo(EnumMapBase<Ta, Tb> & em, int iChange = 1, const CvCivilizationInfo* pCivInfo = nullptr) const;
 	void copyTo(EnumMapBase<T0, T> & em) const;
 
-	void addTo(EnumMap2D<Ta, Tb, Tc> & em, int iChange = 1, const CvCivilizationInfo* pCivInfo = NULL) const;
+	void addTo(EnumMap2D<Ta, Tb, Tc> & em, int iChange = 1, const CvCivilizationInfo* pCivInfo = nullptr) const;
 
 	// addTo uses pCivInfo if InfoArray is UnitClassTypes and EnumMap is UnitTypes. Same with buildings
 	// in all other cases pCivInfo isn't used and compilation fails unless T0 == Ta

@@ -364,7 +364,7 @@ void CvSavegameReader::Read(CvEventMap& Map)
 		EventTypes eEvent;
 		EventTriggeredData kData;
 		Read(eEvent);
-		Read(kData); 
+		Read(kData);
 		Map[eEvent]=kData;
 	}
 }
@@ -610,7 +610,7 @@ void CvSavegameWriter::Write(SavegameVariableTypes eType, const CvWString& szStr
 
 void CvSavegameWriter::Write(SavegameVariableTypes eType, const char* szString)
 {
-	if (szString != NULL)
+	if (szString != nullptr)
 	{
 		Write(eType);
 		Write(szString);
@@ -619,7 +619,7 @@ void CvSavegameWriter::Write(SavegameVariableTypes eType, const char* szString)
 
 void CvSavegameWriter::Write(SavegameVariableTypes eType, const wchar* szString)
 {
-	if (szString != NULL)
+	if (szString != nullptr)
 	{
 		Write(eType);
 		Write(szString);
@@ -763,7 +763,7 @@ void CvSavegameWriter::WriteXmlEnum(int iVariable, JITarrayTypes eType)
 	{
 		short iBuffer = iVariable;
 		Write(iBuffer);
-	} break; //so we dont write 3 bytes 
+	} break; //so we dont write 3 bytes
 	case 1:
 	{
 		int iTemp = iVariable + XML_ENUM_OFFSET;
@@ -816,7 +816,7 @@ bool CvSavegameBase::isCompressed() const
 
 CvSavegameReaderBase::CvSavegameReaderBase(FDataStreamBase* pStream)
 	: m_pStream(pStream),
-	m_MemoryAllocation(NULL),
+	m_MemoryAllocation(nullptr),
 	m_iRead(0)
 {
 	m_pStream->Read(&m_iFlag);

@@ -22,7 +22,7 @@ public:
 	CySelectionGroup(CvSelectionGroup* pSelectionGroup);		// Call from C++
 	CvSelectionGroup* getSelectionGroup() { return m_pSelectionGroup;	}	// Call from C++
 
-	bool isNone() { return (m_pSelectionGroup==NULL); }
+	bool isNone() { return m_pSelectionGroup == nullptr; }
 	void pushMission(MissionTypes eMission, int iData1, int iData2, int iFlags, bool bAppend, bool bManual, MissionAITypes eMissionAI, CyPlot* pMissionAIPlot, CyUnit* pMissionAIUnit);
 	void pushMoveToMission(int iX, int iY);
 	void popMission();
@@ -74,7 +74,7 @@ public:
 	void setAutomateType(int /*AutomateTypes*/ eNewValue);
 	CyPlot* getPathFirstPlot();
 	CyPlot* getPathEndTurnPlot();
-	
+
 	bool generatePath(CyPlot* pFromPlot, CyPlot* pToPlot, int iFlags, bool bReuse, int* piPathTurns); // Exposed to Python (K-mod added iMaxPath)
 	void resetPath();
 	bool isAssignedTradeRoute(int iRouteID) const;
@@ -94,4 +94,3 @@ protected:
 };
 
 #endif	// #ifndef CySelectionGroup_h
-

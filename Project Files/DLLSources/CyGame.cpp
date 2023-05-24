@@ -13,7 +13,7 @@
 #include "CyReplayInfo.h"
 #include "CvReplayInfo.h"
 #include "CyPlot.h"
-CyGame::CyGame() : m_pGame(NULL)
+CyGame::CyGame() : m_pGame(nullptr)
 {
 	m_pGame = &GC.getGameINLINE();
 }
@@ -177,85 +177,85 @@ int CyGame::getElapsedGameTurns()
 }
 int CyGame::getMaxTurns() const
 {
-	return (NULL != m_pGame ? m_pGame->getMaxTurns() : -1);
+	return m_pGame != nullptr ? m_pGame->getMaxTurns() : -1;
 }
 void CyGame::setMaxTurns(int iNewValue)
 {
-	if (NULL != m_pGame)
+	if (m_pGame != nullptr)
 	{
 		m_pGame->setMaxTurns(iNewValue);
 	}
 }
 void CyGame::changeMaxTurns(int iChange)
 {
-	if (NULL != m_pGame)
+	if (m_pGame != nullptr)
 	{
 		m_pGame->changeMaxTurns(iChange);
 	}
 }
 int CyGame::getMaxCityElimination() const
 {
-	return (NULL != m_pGame ? m_pGame->getMaxCityElimination() : -1);
+	return m_pGame != nullptr ? m_pGame->getMaxCityElimination() : -1;
 }
 void CyGame::setMaxCityElimination(int iNewValue)
 {
-	if (NULL != m_pGame)
+	if (m_pGame != nullptr)
 	{
 		m_pGame->setMaxCityElimination(iNewValue);
 	}
 }
 int CyGame::getNumAdvancedStartPoints() const
 {
-	return (NULL != m_pGame ? m_pGame->getNumAdvancedStartPoints() : -1);
+	return m_pGame != nullptr ? m_pGame->getNumAdvancedStartPoints() : -1;
 }
 void CyGame::setNumAdvancedStartPoints(int iNewValue)
 {
-	if (NULL != m_pGame)
+	if (m_pGame != nullptr)
 	{
 		m_pGame->setNumAdvancedStartPoints(iNewValue);
 	}
 }
 int CyGame::getStartTurn() const
 {
-	return (NULL != m_pGame ? m_pGame->getStartTurn() : -1);
+	return m_pGame != nullptr ? m_pGame->getStartTurn() : -1;
 }
 int CyGame::getStartYear() const
 {
-	return (NULL != m_pGame ? m_pGame->getStartYear() : -1);
+	return m_pGame != nullptr ? m_pGame->getStartYear() : -1;
 }
 void CyGame::setStartYear(int iNewValue)
 {
-	if (NULL != m_pGame)
+	if (m_pGame != nullptr)
 	{
 		m_pGame->setStartYear(iNewValue);
 	}
 }
 int CyGame::getEstimateEndTurn() const
 {
-	return (NULL != m_pGame ? m_pGame->getEstimateEndTurn() : -1);
+	return m_pGame != nullptr ? m_pGame->getEstimateEndTurn() : -1;
 }
 void CyGame::setEstimateEndTurn(int iNewValue)
 {
-	if (NULL != m_pGame)
+	if (m_pGame != nullptr)
 	{
 		m_pGame->setEstimateEndTurn(iNewValue);
 	}
 }
 int CyGame::getTurnSlice() const
 {
-	return (NULL != m_pGame ? m_pGame->getTurnSlice() : -1);
+	return m_pGame != nullptr ? m_pGame->getTurnSlice() : -1;
 }
 int CyGame::getMinutesPlayed() const
 {
-	return (NULL != m_pGame ? m_pGame->getMinutesPlayed() : 0);
+	return m_pGame != nullptr ? m_pGame->getMinutesPlayed() : 0;
 }
 int CyGame::getTargetScore() const
 {
-	return (NULL != m_pGame ? m_pGame->getTargetScore() : -1);
+	return m_pGame != nullptr ? m_pGame->getTargetScore() : -1;
 }
 int /*TurnTimerTypes*/ CyGame::getTurnTimerType() const
 {
-	return (NULL != m_pGame ? m_pGame->getTurnTimerType() : NO_TURNTIMER);
+	return m_pGame != nullptr ? m_pGame->getTurnTimerType() : NO_TURNTIMER;
 }
 int CyGame::getNumGameTurnActive()
 {
@@ -275,31 +275,31 @@ int CyGame::getTotalPopulation()
 }
 int CyGame::getMaxPopulation() const
 {
-	return (NULL != m_pGame ? m_pGame->getMaxPopulation() : 0);
+	return m_pGame != nullptr ? m_pGame->getMaxPopulation() : 0;
 }
 int CyGame::getMaxLand() const
 {
-	return (NULL != m_pGame ? m_pGame->getMaxLand() : 0);
+	return m_pGame != nullptr ? m_pGame->getMaxLand() : 0;
 }
 int CyGame::getMaxFather() const
 {
-	return (NULL != m_pGame ? m_pGame->getMaxFather() : 0);
+	return m_pGame != nullptr ? m_pGame->getMaxFather() : 0;
 }
 int CyGame::getInitPopulation() const
 {
-	return (NULL != m_pGame ? m_pGame->getInitPopulation() : 0);
+	return m_pGame != nullptr ? m_pGame->getInitPopulation() : 0;
 }
 int CyGame::getInitLand() const
 {
-	return (NULL != m_pGame ? m_pGame->getInitLand() : 0);
+	return m_pGame != nullptr ? m_pGame->getInitLand() : 0;
 }
 int CyGame::getInitFather() const
 {
-	return (NULL != m_pGame ? m_pGame->getInitFather() : 0);
+	return m_pGame != nullptr ? m_pGame->getInitFather() : 0;
 }
 int CyGame::getAIAutoPlay() const
 {
-	return (NULL != m_pGame ? m_pGame->getAIAutoPlay() : 0);
+	return m_pGame != nullptr ? m_pGame->getAIAutoPlay() : 0;
 }
 void CyGame::setAIAutoPlay(int iNewValue)
 {
@@ -533,7 +533,7 @@ CyDeal* CyGame::getDeal(int iID)
 	}
 	else
 	{
-		return NULL;
+		return nullptr;
 	}
 }
 CyDeal* CyGame::addDeal()
@@ -544,7 +544,7 @@ CyDeal* CyGame::addDeal()
 	}
 	else
 	{
-		return NULL;
+		return nullptr;
 	}
 }
 void CyGame::deleteDeal(int iID)
@@ -574,7 +574,7 @@ int CyGame::getSorenRandNum(int iNum, char const* pszLog)
 }
 int CyGame::calculateSyncChecksum()
 {
-	return m_pGame ? m_pGame->calculateSyncChecksum(NULL) : -1;
+	return m_pGame ? m_pGame->calculateSyncChecksum(nullptr) : -1;
 }
 int CyGame::calculateOptionsChecksum()
 {
@@ -592,7 +592,7 @@ bool CyGame::isPitbossHost() const				// remove once CvApp is exposed
 int CyGame::getCurrentLanguage() const				// remove once CvApp is exposed
 {
 	// Used by the language dropdown menu in game option GUI (exe hardcoded)
-	// 
+	//
 
 	for (int i = 0; i < CvGameText::getNumLanguagesStatic(); ++i)
 	{
@@ -608,7 +608,7 @@ int CyGame::getCurrentLanguage() const				// remove once CvApp is exposed
 void CyGame::setCurrentLanguage(int iNewLanguage)			// remove once CvApp is exposed
 {
 	// The user selected a new language form the options menu (which is inside the exe)
-	
+
 	// First tell CvGameText that a new language is selected.
 	// The reason is explained in CvGameText::getNumLanguages()
 	CvGameText::setChangeLanguage();
@@ -620,39 +620,39 @@ void CyGame::setCurrentLanguage(int iNewLanguage)			// remove once CvApp is expo
 }
 int CyGame::getReplayMessageTurn(int i) const
 {
-	return (NULL != m_pGame ? m_pGame->getReplayMessageTurn(i) : -1);
+	return m_pGame != nullptr ? m_pGame->getReplayMessageTurn(i) : -1;
 }
 ReplayMessageTypes CyGame::getReplayMessageType(int i) const
 {
-	return (NULL != m_pGame ? m_pGame->getReplayMessageType(i) : NO_REPLAY_MESSAGE);
+	return m_pGame != nullptr ? m_pGame->getReplayMessageType(i) : NO_REPLAY_MESSAGE;
 }
 int CyGame::getReplayMessagePlotX(int i) const
 {
-	return (NULL != m_pGame ? m_pGame->getReplayMessagePlotX(i) : -1);
+	return m_pGame != nullptr ? m_pGame->getReplayMessagePlotX(i) : -1;
 }
 int CyGame::getReplayMessagePlotY(int i) const
 {
-	return (NULL != m_pGame ? m_pGame->getReplayMessagePlotY(i) : -1);
+	return m_pGame != nullptr ? m_pGame->getReplayMessagePlotY(i) : -1;
 }
 int CyGame::getReplayMessagePlayer(int i) const
 {
-	return (NULL != m_pGame ? m_pGame->getReplayMessagePlayer(i) : -1);
+	return m_pGame != nullptr ? m_pGame->getReplayMessagePlayer(i) : -1;
 }
 ColorTypes CyGame::getReplayMessageColor(int i) const
 {
-	return (NULL != m_pGame ? m_pGame->getReplayMessageColor(i) : NO_COLOR);
+	return m_pGame != nullptr ? m_pGame->getReplayMessageColor(i) : NO_COLOR;
 }
 std::wstring CyGame::getReplayMessageText(int i) const
 {
-	return (NULL != m_pGame ? m_pGame->getReplayMessageText(i) : L"");
+	return m_pGame != nullptr ? m_pGame->getReplayMessageText(i) : L"";
 }
 uint CyGame::getNumReplayMessages() const
 {
-	return (NULL != m_pGame ? m_pGame->getNumReplayMessages() : 0);
+	return m_pGame != nullptr ? m_pGame->getNumReplayMessages() : 0;
 }
 CyReplayInfo* CyGame::getReplayInfo() const
 {
-	return (NULL != m_pGame ? (new CyReplayInfo(m_pGame->getReplayInfo())) : NULL);
+	return m_pGame != nullptr ? (new CyReplayInfo(m_pGame->getReplayInfo())) : nullptr;
 }
 void CyGame::saveReplay(int iPlayer)
 {
@@ -677,31 +677,31 @@ void CyGame::setPlotExtraYield(int iX, int iY, int /*YieldTypes*/ eYield, int iE
 }
 bool CyGame::isCivEverActive(int /*CivilizationTypes*/ eCivilization)
 {
-	return (NULL != m_pGame ? m_pGame->isCivEverActive((CivilizationTypes)eCivilization) : false);
+	return m_pGame != nullptr ? m_pGame->isCivEverActive((CivilizationTypes)eCivilization) : false;
 }
 bool CyGame::isLeaderEverActive(int /*LeaderHeadTypes*/ eLeader)
 {
-	return (NULL != m_pGame ? m_pGame->isLeaderEverActive((LeaderHeadTypes)eLeader) : false);
+	return m_pGame != nullptr ? m_pGame->isLeaderEverActive((LeaderHeadTypes)eLeader) : false;
 }
 bool CyGame::isUnitEverActive(int /*UnitTypes*/ eUnit)
 {
-	return (NULL != m_pGame ? m_pGame->isUnitEverActive((UnitTypes)eUnit) : false);
+	return m_pGame != nullptr ? m_pGame->isUnitEverActive((UnitTypes)eUnit) : false;
 }
 bool CyGame::isBuildingEverActive(int /*BuildingTypes*/ eBuilding)
 {
-	return (NULL != m_pGame ? m_pGame->isBuildingEverActive((BuildingTypes)eBuilding) : false);
+	return m_pGame != nullptr ? m_pGame->isBuildingEverActive((BuildingTypes)eBuilding) : false;
 }
 bool CyGame::isEventActive(int /*EventTriggerTypes*/ eTrigger)
 {
-	return (NULL != m_pGame ? m_pGame->isEventActive((EventTriggerTypes)eTrigger) : false);
+	return m_pGame != nullptr ? m_pGame->isEventActive((EventTriggerTypes)eTrigger) : false;
 }
 int /*TeamTypes*/ CyGame::getFatherTeam(int /*FatherTypes*/ eFather)
 {
-	return (NULL != m_pGame ? m_pGame->getFatherTeam((FatherTypes)eFather) : -1);
+	return m_pGame != nullptr ? m_pGame->getFatherTeam((FatherTypes)eFather) : -1;
 }
 int CyGame::getFatherGameTurn(int /*FatherTypes*/ eFather)
 {
-	return (NULL != m_pGame ? m_pGame->getFatherGameTurn((FatherTypes)eFather) : -1);
+	return m_pGame != nullptr ? m_pGame->getFatherGameTurn((FatherTypes)eFather) : -1;
 }
 void CyGame::setFatherTeam(int /*FatherTypes*/ eFather, int /*TeamTypes*/ eTeam)
 {
@@ -712,13 +712,13 @@ void CyGame::setFatherTeam(int /*FatherTypes*/ eFather, int /*TeamTypes*/ eTeam)
 }
 int CyGame::getFatherCategoryPosition(int /*FatherTypes*/ eFather)
 {
-	return (NULL != m_pGame ? m_pGame->getFatherCategoryPosition((FatherTypes)eFather) : -1);
+	return m_pGame != nullptr ? m_pGame->getFatherCategoryPosition((FatherTypes)eFather) : -1;
 }
 
 // R&R, ray, Correct Geographical Placement of Natives - START
 bool CyGame::isWBNorthAmericanNative()
 {
-	return (NULL != m_pGame ? m_pGame->isWBNorthAmericanNative() : -1);
+	return m_pGame != nullptr ? m_pGame->isWBNorthAmericanNative() : -1;
 }
 
 void CyGame::setWBNorthAmericanNative(bool bValue)
@@ -731,7 +731,7 @@ void CyGame::setWBNorthAmericanNative(bool bValue)
 
 bool CyGame::isWBSouthAmericanNative()
 {
-	return (NULL != m_pGame ? m_pGame->isWBSouthAmericanNative() : -1);
+	return m_pGame != nullptr ? m_pGame->isWBSouthAmericanNative() : -1;
 }
 
 void CyGame::setWBSouthAmericanNative(bool bValue)
@@ -744,7 +744,7 @@ void CyGame::setWBSouthAmericanNative(bool bValue)
 
 bool CyGame::isWBCentralAmericanNative()
 {
-	return (NULL != m_pGame ? m_pGame->isWBCentralAmericanNative() : -1);
+	return m_pGame != nullptr ? m_pGame->isWBCentralAmericanNative() : -1;
 }
 
 void CyGame::setWBCentralAmericanNative(bool bValue)
@@ -759,12 +759,12 @@ void CyGame::setWBCentralAmericanNative(bool bValue)
 // < JAnimals Mod Start >
 int /*PlayerTypes*/ CyGame::getBarbarianPlayer()
 {
-	return (NULL != m_pGame ? m_pGame->getBarbarianPlayer() : -1);
+	return m_pGame != nullptr ? m_pGame->getBarbarianPlayer() : -1;
 }
 
 bool CyGame::hasBarbarianPlayer()
 {
-	return (NULL != m_pGame ? m_pGame->hasBarbarianPlayer() : false);
+	return m_pGame != nullptr ? m_pGame->hasBarbarianPlayer() : false;
 }
 
 void CyGame::setBarbarianPlayer(int /*PlayerTypes*/ eNewValue)
@@ -777,12 +777,12 @@ void CyGame::setBarbarianPlayer(int /*PlayerTypes*/ eNewValue)
 
 bool CyGame::isBarbarianPlayer(int /*PlayerTypes*/ ePlayer)
 {
-	return (NULL != m_pGame ? m_pGame->isBarbarianPlayer((PlayerTypes) ePlayer) : false);
+	return m_pGame != nullptr ? m_pGame->isBarbarianPlayer((PlayerTypes) ePlayer) : false;
 }
 
 int /*PlayerTypes*/ CyGame::getNextPlayerType()
 {
-	return (NULL != m_pGame ? m_pGame->getNextPlayerType() : -1);
+	return m_pGame != nullptr ? m_pGame->getNextPlayerType() : -1;
 }
 // < JAnimals Mod End >
 
@@ -790,12 +790,12 @@ int /*PlayerTypes*/ CyGame::getNextPlayerType()
 // R&R, ray, the Church - START
 int /*PlayerTypes*/ CyGame::getChurchPlayer()
 {
-	return (NULL != m_pGame ? m_pGame->getChurchPlayer() : -1);
+	return m_pGame != nullptr ? m_pGame->getChurchPlayer() : -1;
 }
 
 bool CyGame::hasChurchPlayer()
 {
-	return (NULL != m_pGame ? m_pGame->hasChurchPlayer() : false);
+	return m_pGame != nullptr ? m_pGame->hasChurchPlayer() : false;
 }
 
 void CyGame::setChurchPlayer(int /*PlayerTypes*/ eNewValue)
@@ -808,6 +808,6 @@ void CyGame::setChurchPlayer(int /*PlayerTypes*/ eNewValue)
 
 bool CyGame::isChurchPlayer(int /*PlayerTypes*/ ePlayer)
 {
-	return (NULL != m_pGame ? m_pGame->isChurchPlayer((PlayerTypes) ePlayer) : false);
+	return m_pGame != nullptr ? m_pGame->isChurchPlayer((PlayerTypes) ePlayer) : false;
 }
 // R&R, ray, the Church - END

@@ -11,15 +11,15 @@
 
 #ifdef MULTICORE
 
-#pragma push_macro("free")  
-#pragma push_macro("new")  
+#pragma push_macro("free")
+#pragma push_macro("new")
 #undef free
 #undef new
 #include "tbb/parallel_for.h"
 #include "tbb/blocked_range.h"
 #include "tbb/cache_aligned_allocator.h"
-#pragma pop_macro("new")  
-#pragma pop_macro("free")  
+#pragma pop_macro("new")
+#pragma pop_macro("free")
 
 #endif
 
@@ -99,12 +99,12 @@ bool KmodPathFinder::ValidateNodeMap()
 		// <advc> According to cppcheck, the above is a "common realloc mistake".
 		FAStarNode* new_node_data = static_cast<FAStarNode*>(
 				realloc(node_data, sizeof(*node_data)*map_width*map_height));
-		if(new_node_data == NULL) {
+		if (new_node_data == nullptr) {
 			free(node_data);
-			FAssertMsg(new_node_data != NULL, "Failed to re-allocate memory");
+			FAssertMsg(new_node_data != nullptr, "Failed to re-allocate memory");
 		}
 		else node_data = new_node_data; // </advc>
-		end_node = NULL;
+		end_node = nullptr;
 	}
 	return true;
 }
@@ -118,7 +118,7 @@ bool KmodPathFinder::GeneratePath(int x1, int y1, int x2, int y2)
 	FAssertBounds(0, map_width , x2);
 	FAssertBounds(0, map_height, y2);
 
-	end_node = NULL;
+	end_node = nullptr;
 
 	if (!settings.pGroup)
 		return false;
@@ -190,7 +190,7 @@ bool KmodPathFinder::GeneratePath(const CvPlot* pToPlot)
 	if (!settings.pGroup || !pToPlot)
 		return false;
 
-	if (settings.pGroup->plot() == NULL)
+	if (settings.pGroup->plot() == nullptr)
 	{
 		FAssertMsg(false, "empty selection group trying to generate path");
 		return false;
@@ -215,7 +215,7 @@ CvPlot* KmodPathFinder::GetPathFirstPlot() const
 {
 	FAssert(end_node);
 	if (!end_node)
-		return NULL;
+		return nullptr;
 
 	FAStarNode* node = end_node;
 
@@ -241,7 +241,7 @@ CvPlot* KmodPathFinder::GetPathEndTurnPlot() const
 	while (node && node->m_iData2 > 1)
 	{
 		if (!GLOBAL_DEFINE_USE_CLASSIC_MOVEMENT_SYSTEM) {
-			if (node->m_pParent == NULL || (node->m_pParent->m_iData2 == 1 && node->m_pParent->m_iData1 > 0))
+			if (node->m_pParent == nullptr || (node->m_pParent->m_iData2 == 1 && node->m_pParent->m_iData1 > 0))
 				// With the new movement system enabled, there is a new possibility:
 				// The movement during this turn reaches a plot, but the moving unit has negative movement points after arriving there
 				// That means the m_iData2 for the end turn plot is still > 1
@@ -254,7 +254,7 @@ CvPlot* KmodPathFinder::GetPathEndTurnPlot() const
 		node = node->m_pParent;
 	}
 	FAssert(node);
-	return node ? GC.getMap().plotSoren(node->m_iX, node->m_iY) : NULL;
+	return node ? GC.getMap().plotSoren(node->m_iX, node->m_iY) : nullptr;
 }
 
 void KmodPathFinder::SetSettings(const CvPathSettings& new_settings)
@@ -263,7 +263,7 @@ void KmodPathFinder::SetSettings(const CvPathSettings& new_settings)
 	if (!ValidateNodeMap())
 	{
 		FAssertMsg(false, "Failed to validate node map for pathfinder.");
-		settings.pGroup = NULL;
+		settings.pGroup = nullptr;
 		return;
 	}
 
@@ -314,7 +314,7 @@ void KmodPathFinder::Reset()
 {
 	memset(&node_data[0], 0, sizeof(*node_data)*map_width*map_height);
 	open_list.clear();
-	end_node = NULL;
+	end_node = nullptr;
 	// settings is set separately.
 }
 
@@ -363,16 +363,16 @@ struct ProcesNodesOutput
 
 	void reset()
 	{
-		open_list = NULL;
-		child_nodes_out = NULL;
-		end_node = NULL;
+		open_list = nullptr;
+		child_nodes_out = nullptr;
+		end_node = nullptr;
 		iNewCost = MAX_INT;
 	}
 };
 
 	// A list of nodes we want to explore, the order is not important but the index will have to match with the slots below
 	std::vector<FAStarNode*> child_nodes(NUM_DIRECTION_TYPES);
-	// We maintain an array for output data with a slot per viable child node to avoid possible contention i.e. push_back 
+	// We maintain an array for output data with a slot per viable child node to avoid possible contention i.e. push_back
 	typedef std::vector<ProcesNodesOutput, tbb::cache_aligned_allocator<ProcesNodesOutput> > ProcesNodesOutputVec;
 	// Allocated once and then cleared to avoid allocations in the inner loop
 	ProcesNodesOutputVec pno(NUM_DIRECTION_TYPES);
@@ -391,11 +391,11 @@ void ResetProcesNodesOutput()
 // it is not mutated inside the par. loop
 struct ProcessNodesInternal
 {
-	ProcessNodesInternal(FAStarNode* parent_node_, std::vector<FAStarNode*>& child_nodes_, CvPathSettings& settings_, 
+	ProcessNodesInternal(FAStarNode* parent_node_, std::vector<FAStarNode*>& child_nodes_, CvPathSettings& settings_,
 		int dest_x_, int dest_y_, ProcesNodesOutputVec& pno_) :
-		parent_node(parent_node_), child_nodes(child_nodes_), settings(settings_), dest_x(dest_x_), dest_y(dest_y_), pno(pno_) 
+		parent_node(parent_node_), child_nodes(child_nodes_), settings(settings_), dest_x(dest_x_), dest_y(dest_y_), pno(pno_)
 		{}
-	
+
 	void operator()(const tbb::blocked_range<size_t>& r) const
 	{
 		const size_t end = r.end();
@@ -433,23 +433,23 @@ struct ProcessNodesInternal
 				else
 				{
 					// can't get to the plot from here.
-					child_node = NULL;
+					child_node = nullptr;
 				}
 			}
 			else
 			{
 				if (!pathValid_join(parent_node, child_node, settings.pGroup, settings.iFlags))
-					child_node = NULL;
+					child_node = nullptr;
 			}
 
-			if (child_node != NULL)
-			{ 
+			if (child_node != nullptr)
+			{
 				// Check if we've reached the destination node
 				if (x == dest_x && y == dest_y)
 				{
 					pno[i].end_node = child_node; // We've found our destination - but we still need to finish our calculations
 				}
-		
+
 				if (parent_node->m_iKnownCost < child_node->m_iKnownCost)
 				{
 					pno[i].iNewCost = parent_node->m_iKnownCost + pathCost(parent_node, child_node, 666, &settings, 0);
@@ -521,7 +521,7 @@ bool KmodPathFinder::ProcessNode()
 		FAStarNode* child_node = &GetNode(x, y);
 		child_node->m_iX = x;
 		child_node->m_iY = y;
-		child_nodes.push_back(child_node);			
+		child_nodes.push_back(child_node);
 	}
 
 	// Execute parallel work
@@ -531,24 +531,24 @@ bool KmodPathFinder::ProcessNode()
 
 	for (size_t i=0; i<pno.size(); i++)
 	{
-		// Add discovered reachable nodes to the open list	
-		if (pno[i].open_list != NULL)
-		{		
+		// Add discovered reachable nodes to the open list
+		if (pno[i].open_list != nullptr)
+		{
 			open_list.push_back(pno[i].open_list);
 		}
-		
+
 		// Add the end node if we found one
-		if (pno[i].end_node != NULL)
-		{		
-			//FAssert(end_node == NULL); // we can only have a single end-node
+		if (pno[i].end_node != nullptr)
+		{
+			//FAssert(end_node == nullptr); // we can only have a single end-node
 			end_node = pno[i].end_node;
 		}
-	
+
 		FAStarNode* const child_node = pno[i].child_nodes_out;
-		
-		if (child_node == NULL)
+
+		if (child_node == nullptr)
 			continue;
-	
+
 		const int x = child_node->m_iX;
 		const int y = child_node->m_iY;
 		const bool bNewNode = !child_node->m_bOnStack;

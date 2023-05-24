@@ -41,13 +41,13 @@ public:
 	bool doDelayedDeath();
 
 	void playActionSound();
-	DllExport void pushMission(MissionTypes eMission, int iData1 = -1, int iData2 = -1, int iFlags = 0, bool bAppend = false, bool bManual = false, MissionAITypes eMissionAI = NO_MISSIONAI, CvPlot* pMissionAIPlot = NULL, CvUnit* pMissionAIUnit = NULL);
+	DllExport void pushMission(MissionTypes eMission, int iData1 = -1, int iData2 = -1, int iFlags = 0, bool bAppend = false, bool bManual = false, MissionAITypes eMissionAI = NO_MISSIONAI, CvPlot* pMissionAIPlot = nullptr, CvUnit* pMissionAIUnit = nullptr);
 	void popMission();
 	DllExport void autoMission();
 	void updateMission();
 	DllExport CvPlot* lastMissionPlot();
 
-	bool canStartMission(int iMission, int iData1, int iData2, CvPlot* pPlot = NULL, bool bTestVisible = false, bool bUseCache = false);
+	bool canStartMission(int iMission, int iData1, int iData2, CvPlot* pPlot = nullptr, bool bTestVisible = false, bool bUseCache = false);
 	void startMission();
 	void continueMission(int iSteps = 0);
 	DllExport bool canDoInterfaceMode(InterfaceModeTypes eInterfaceMode);
@@ -101,11 +101,11 @@ public:
 	DomainTypes getDomainType() const;
   bool canBuildRoute(CvPlot* pPlot, RouteTypes ePreferredRoute = NO_ROUTE) const;
   BuildTypes getBestBuildRouteBuild(CvPlot *pPlot, RouteTypes ePreferredRoute) const;
-	RouteTypes getBestBuildRoute(CvPlot* pPlot, BuildTypes* peBestBuild = NULL, RouteTypes ePreferredRoute = NO_ROUTE) const;
+	RouteTypes getBestBuildRoute(CvPlot* pPlot, BuildTypes* peBestBuild = nullptr, RouteTypes ePreferredRoute = NO_ROUTE) const;
 
 	bool groupDeclareWar(CvPlot* pPlot, bool bForce = false);
 	bool groupAttack(int iX, int iY, int iFlags, bool& bFailedAlreadyFighting);
-	void groupMove(CvPlot* pPlot, bool bCombat, CvUnit* pCombatUnit = NULL, bool bEndMove = false);
+	void groupMove(CvPlot* pPlot, bool bCombat, CvUnit* pCombatUnit = nullptr, bool bEndMove = false);
 	bool groupPathTo(int iX, int iY, int iFlags);
 	bool groupRouteTo(int iX, int iY, int iFlags, RouteTypes ePreferredRoute = ROUTE_RAILROAD);
 	bool groupBuild(BuildTypes eBuild);
@@ -151,17 +151,17 @@ public:
 	// TAC - AI Improved Naval AI - koma13 - START
 	CvPlot* getPathPlotByIndex(int iIndex) const;
 	int getPathLength() const;
-	//bool generatePath(const CvPlot* pFromPlot, const CvPlot* pToPlot, int iFlags = 0, bool bReuse = false, int* piPathTurns = NULL) const;
-	//bool generatePath(const CvPlot* pFromPlot, const CvPlot* pToPlot, int iFlags = 0, bool bReuse = false, int* piPathTurns = NULL, bool bIgnoreDanger = true) const;
+	//bool generatePath(const CvPlot* pFromPlot, const CvPlot* pToPlot, int iFlags = 0, bool bReuse = false, int* piPathTurns = nullptr) const;
+	//bool generatePath(const CvPlot* pFromPlot, const CvPlot* pToPlot, int iFlags = 0, bool bReuse = false, int* piPathTurns = nullptr, bool bIgnoreDanger = true) const;
 	// TAC - AI Improved Naval AI - koma13 - END
-	bool generatePath(const CvPlot* pFromPlot, const CvPlot* pToPlot, int iFlags = 0, bool bReuse = false, int* piPathTurns = NULL, int iMaxPath = -1) const; // Exposed to Python (K-mod added iMaxPath)
+	bool generatePath(const CvPlot* pFromPlot, const CvPlot* pToPlot, int iFlags = 0, bool bReuse = false, int* piPathTurns = nullptr, int iMaxPath = -1) const; // Exposed to Python (K-mod added iMaxPath)
 	// void resetPath() const; // disabled by K-mod. Use path_finder.Reset instead. (was exposed to Python)
 
 	DllExport void clearUnits();
 	DllExport bool addUnit(CvUnit* pUnit, bool bMinimalChange);
 	void removeUnit(CvUnit* pUnit);
 	void mergeIntoGroup(CvSelectionGroup* pSelectionGroup);
-	CvSelectionGroup* splitGroup(int iSplitSize, CvUnit* pNewHeadUnit = NULL);
+	CvSelectionGroup* splitGroup(int iSplitSize, CvUnit* pNewHeadUnit = nullptr);
 
 	DllExport CLLNode<IDInfo>* deleteUnitNode(CLLNode<IDInfo>* pNode);
 	DllExport inline CLLNode<IDInfo>* nextUnitNode(CLLNode<IDInfo>* pNode) const
@@ -223,13 +223,13 @@ public:
 	virtual CvUnit* AI_getBestGroupAttacker(const CvPlot* pPlot, bool bPotentialEnemy, int& iUnitOdds, bool bForce = false, bool bNoBlitz = false) const = 0;
 	virtual CvUnit* AI_getBestGroupSacrifice(const CvPlot* pPlot, bool bPotentialEnemy, bool bForce = false, bool bNoBlitz = false) const = 0;
 	virtual int AI_compareStacks(const CvPlot* pPlot, bool bPotentialEnemy, bool bCheckCanAttack = false, bool bCheckCanMove = false) const = 0;
-	virtual int AI_sumStrength(const CvPlot* pAttackedPlot = NULL, DomainTypes eDomainType = NO_DOMAIN, bool bCheckCanAttack = false, bool bCheckCanMove = false) const = 0;
+	virtual int AI_sumStrength(const CvPlot* pAttackedPlot = nullptr, DomainTypes eDomainType = NO_DOMAIN, bool bCheckCanAttack = false, bool bCheckCanMove = false) const = 0;
 	virtual void AI_queueGroupAttack(int iX, int iY) = 0;
 	virtual void AI_cancelGroupAttack() = 0;
 	virtual bool AI_isGroupAttack() = 0;
 
 	virtual bool AI_isControlled() = 0;
-	virtual bool AI_isDeclareWar(const CvPlot* pPlot = NULL) = 0;
+	virtual bool AI_isDeclareWar(const CvPlot* pPlot = nullptr) = 0;
 	virtual CvPlot* AI_getMissionAIPlot() = 0;
 	virtual bool AI_isForceSeparate() = 0;
 	virtual void AI_makeForceSeparate() = 0;

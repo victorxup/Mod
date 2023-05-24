@@ -131,12 +131,12 @@ public:
 	bool SkipToNextVal();
 	// overloaded function that gets either the current xml node's or the next non-comment xml node's string value
 	// depending on if the current node is a non-comment node or not
-	bool GetXmlVal(std::wstring& pszVal, wchar* pszDefault = NULL);
-	bool GetXmlVal(std::string& pszVal, char* pszDefault = NULL);
+	bool GetXmlVal(std::wstring& pszVal, wchar* pszDefault = nullptr);
+	bool GetXmlVal(std::string& pszVal, char* pszDefault = nullptr);
 	// overloaded function that gets either the current xml node's or the next non-comment xml node's string value
 	// depending on if the current node is a non-comment node or not
-	bool GetXmlVal(wchar* pszVal, wchar* pszDefault = NULL);
-	bool GetXmlVal(char* pszVal, char* pszDefault = NULL);
+	bool GetXmlVal(wchar* pszVal, wchar* pszDefault = nullptr);
+	bool GetXmlVal(char* pszVal, char* pszDefault = nullptr);
 	// overloaded function that gets either the current xml node's or the next non-comment xml node's int value
 	// depending on if the current node is a non-comment node or not
 	bool GetXmlVal(int* piVal, int iDefault = 0);
@@ -149,12 +149,12 @@ public:
 
 	// overloaded function that sets the current xml node to it's next sibling and then
 	//	gets the next non-comment xml node's string value
-	bool GetNextXmlVal(std::string* pszVal, char* pszDefault = NULL);
-	bool GetNextXmlVal(std::wstring* pszVal, wchar* pszDefault = NULL);
+	bool GetNextXmlVal(std::string* pszVal, char* pszDefault = nullptr);
+	bool GetNextXmlVal(std::wstring* pszVal, wchar* pszDefault = nullptr);
 	// overloaded function that sets the current xml node to it's next sibling and then
 	//	gets the next non-comment xml node's string value
-	bool GetNextXmlVal(char* pszVal, char* pszDefault = NULL);
-	bool GetNextXmlVal(wchar* pszVal, wchar* pszDefault = NULL);
+	bool GetNextXmlVal(char* pszVal, char* pszDefault = nullptr);
+	bool GetNextXmlVal(wchar* pszVal, wchar* pszDefault = nullptr);
 	// overloaded function that sets the current xml node to it's next sibling and then
 	//	gets the next non-comment xml node's int value
 	bool GetNextXmlVal(int* piVal, int iDefault = 0);
@@ -167,12 +167,12 @@ public:
 
 	// overloaded function that sets the current xml node to it's first non-comment child node
 	//	and then gets that node's string value
-	bool GetChildXmlVal(std::string& pszVal, char* pszDefault = NULL);
-	bool GetChildXmlVal(std::wstring& pszVal, wchar* pszDefault = NULL);
+	bool GetChildXmlVal(std::string& pszVal, char* pszDefault = nullptr);
+	bool GetChildXmlVal(std::wstring& pszVal, wchar* pszDefault = nullptr);
 	// overloaded function that sets the current xml node to it's first non-comment child node
 	//	and then gets that node's string value
-	bool GetChildXmlVal(char* pszVal, char* pszDefault = NULL);
-	bool GetChildXmlVal(wchar* pszVal, wchar* pszDefault = NULL);
+	bool GetChildXmlVal(char* pszVal, char* pszDefault = nullptr);
+	bool GetChildXmlVal(wchar* pszVal, wchar* pszDefault = nullptr);
 	// overloaded function that sets the current xml node to it's first non-comment child node
 	//	and then gets that node's integer value
 	bool GetChildXmlVal(int* piVal, int iDefault = 0);
@@ -186,12 +186,12 @@ public:
 	// overloaded function that gets the child value of the tag with szName if there is only one child
 	// value of that name
 	void MapChildren();	// call this before GetChildXMLValByName to use fast searching
-	bool GetChildXmlValByName(std::string& pszVal, char const* szName, char* pszDefault = NULL);
-	bool GetChildXmlValByName(std::wstring& pszVal, char const* szName, wchar* pszDefault = NULL);
+	bool GetChildXmlValByName(std::string& pszVal, char const* szName, char* pszDefault = nullptr);
+	bool GetChildXmlValByName(std::wstring& pszVal, char const* szName, wchar* pszDefault = nullptr);
 	// overloaded function that gets the child value of the tag with szName if there is only one child
 	// value of that name
-	bool GetChildXmlValByName(char* pszVal, char const* szName, char* pszDefault = NULL);
-	bool GetChildXmlValByName(wchar* pszVal, char const* szName, wchar* pszDefault = NULL);
+	bool GetChildXmlValByName(char* pszVal, char const* szName, char* pszDefault = nullptr);
+	bool GetChildXmlValByName(wchar* pszVal, char const* szName, wchar* pszDefault = nullptr);
 	// overloaded function that gets the child value of the tag with szName if there is only one child
 	// value of that name
 	bool GetChildXmlValByName(int* piVal, char const* szName, int iDefault = 0);
@@ -276,7 +276,7 @@ private:
 
 //---------------------------------------PRIVATE INTERFACE---------------------------------
 private:
-	void UpdateProgressCB(const char* szMessage=NULL);
+	void UpdateProgressCB(const char* szMessage = nullptr);
 	bool Validate() { return true; }	// unused
 
 	template <class T>
@@ -330,7 +330,7 @@ private:
 
 	/// XML type preloading - start - Nightinggale
 	template <class T>
-	void PreLoadGlobalClassInfo(std::vector<T*>& aInfos, const char* szFileRoot, const char* szFileDirectory, const char* szXmlPath, bool bTwoPass, CvCacheObject* (CvDLLUtilityIFaceBase::*pArgFunction) (char const*) = NULL);
+	void PreLoadGlobalClassInfo(std::vector<T*>& aInfos, const char* szFileRoot, const char* szFileDirectory, const char* szXmlPath, bool bTwoPass, CvCacheObject* (CvDLLUtilityIFaceBase::*pArgFunction) (char const*) = nullptr);
 	void PreUpdateProgressCB(const char* szMessage);
 	void readXMLfiles(bool bFirst);
 	/// XML type preloading - end - Nightinggale

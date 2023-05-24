@@ -22,8 +22,8 @@ public:
           {
 	          m_data = val;
 
-	          m_pNext = NULL;
-	          m_pPrev = NULL;
+	          m_pNext = nullptr;
+	          m_pPrev = nullptr;
           }
 	virtual ~CLLNode() {}
 
@@ -101,8 +101,8 @@ inline CLinkList<tVARTYPE>::CLinkList()
 {
 	m_iLength = 0;
 
-	m_pHead = NULL;
-	m_pTail = NULL;
+	m_pHead = nullptr;
+	m_pTail = nullptr;
 }
 
 
@@ -122,7 +122,7 @@ inline void CLinkList<tVARTYPE>::clear()
 	CLLNode<tVARTYPE>* pNextNode;
 
 	pCurrNode = m_pHead;
-	while (pCurrNode != NULL)
+	while (pCurrNode != nullptr)
 	{
 		pNextNode = pCurrNode->m_pNext;
 		SAFE_DELETE(pCurrNode);
@@ -131,8 +131,8 @@ inline void CLinkList<tVARTYPE>::clear()
 
 	m_iLength = 0;
 
-	m_pHead = NULL;
-	m_pTail = NULL;
+	m_pHead = nullptr;
+	m_pTail = nullptr;
 }
 
 
@@ -142,11 +142,11 @@ inline void CLinkList<tVARTYPE>::insertAtBeginning(const tVARTYPE& val)
 {
 	CLLNode<tVARTYPE>* pNode;
 
-	assert((m_pHead == NULL) || (m_iLength > 0));
+	assert(m_pHead == nullptr || m_iLength > 0);
 
 	pNode = new CLLNode<tVARTYPE>(val);
 
-	if (m_pHead != NULL)
+	if (m_pHead != nullptr)
 	{
 		m_pHead->m_pPrev = pNode;
 		pNode->m_pNext = m_pHead;
@@ -168,11 +168,11 @@ inline void CLinkList<tVARTYPE>::insertAtEnd(const tVARTYPE& val)
 {
 	CLLNode<tVARTYPE>* pNode;
 
-	assert((m_pHead == NULL) || (m_iLength > 0));
+	assert(m_pHead == nullptr || m_iLength > 0);
 
 	pNode = new CLLNode<tVARTYPE>(val);
 
-	if (m_pTail != NULL)
+	if (m_pTail != nullptr)
 	{
 		m_pTail->m_pNext = pNode;
 		pNode->m_pPrev = m_pTail;
@@ -194,9 +194,9 @@ inline void CLinkList<tVARTYPE>::insertBefore(const tVARTYPE& val, CLLNode<tVART
 {
 	CLLNode<tVARTYPE>* pNode;
 
-	assert((m_pHead == NULL) || (m_iLength > 0));
+	assert(m_pHead == nullptr || m_iLength > 0);
 
-	if ((pThisNode == NULL) || (pThisNode->m_pPrev == NULL))
+	if (pThisNode == nullptr || pThisNode->m_pPrev == nullptr)
 	{
 		insertAtBeginning(val);
 		return;
@@ -219,9 +219,9 @@ inline void CLinkList<tVARTYPE>::insertAfter(const tVARTYPE& val, CLLNode<tVARTY
 {
 	CLLNode<tVARTYPE>* pNode;
 
-	assert((m_pHead == NULL) || (m_iLength > 0));
+	assert(m_pHead == nullptr || m_iLength > 0);
 
-	if ((pThisNode == NULL) || (pThisNode->m_pNext == NULL))
+	if (pThisNode == nullptr || pThisNode->m_pNext == nullptr)
 	{
 		insertAtEnd(val);
 		return;
@@ -244,30 +244,30 @@ inline CLLNode<tVARTYPE>* CLinkList<tVARTYPE>::deleteNode(CLLNode<tVARTYPE>* pNo
 	CLLNode<tVARTYPE>* pPrevNode;
 	CLLNode<tVARTYPE>* pNextNode;
 
-	assert(pNode != NULL);
+	assert(pNode != nullptr);
 
 	pPrevNode = pNode->m_pPrev;
 	pNextNode = pNode->m_pNext;
 
-	if ((pPrevNode != NULL) && (pNextNode != NULL))
+	if (pPrevNode != nullptr && pNextNode != nullptr)
 	{
 		pPrevNode->m_pNext = pNextNode;
 		pNextNode->m_pPrev = pPrevNode;
 	}
-	else if (pPrevNode != NULL)
+	else if (pPrevNode != nullptr)
 	{
-		pPrevNode->m_pNext = NULL;
+		pPrevNode->m_pNext = nullptr;
 		m_pTail = pPrevNode;
 	}
-	else if (pNextNode != NULL)
+	else if (pNextNode != nullptr)
 	{
-		pNextNode->m_pPrev = NULL;
+		pNextNode->m_pPrev = nullptr;
 		m_pHead = pNextNode;
 	}
 	else
 	{
-		m_pHead = NULL;
-		m_pTail = NULL;
+		m_pHead = nullptr;
+		m_pTail = nullptr;
 	}
 
 	SAFE_DELETE(pNode);
@@ -284,7 +284,7 @@ inline void CLinkList<tVARTYPE>::moveToEnd(CLLNode<tVARTYPE>* pNode)
 	CLLNode<tVARTYPE>* pPrevNode;
 	CLLNode<tVARTYPE>* pNextNode;
 
-	assert(pNode != NULL);
+	assert(pNode != nullptr);
 
 	if (getLength() == 1)
 	{
@@ -299,28 +299,28 @@ inline void CLinkList<tVARTYPE>::moveToEnd(CLLNode<tVARTYPE>* pNode)
 	pPrevNode = pNode->m_pPrev;
 	pNextNode = pNode->m_pNext;
 
-	if ((pPrevNode != NULL) && (pNextNode != NULL))
+	if (pPrevNode != nullptr && pNextNode != nullptr)
 	{
 		pPrevNode->m_pNext = pNextNode;
 		pNextNode->m_pPrev = pPrevNode;
 	}
-	else if (pPrevNode != NULL)
+	else if (pPrevNode != nullptr)
 	{
-		pPrevNode->m_pNext = NULL;
+		pPrevNode->m_pNext = nullptr;
 		m_pTail = pPrevNode;
 	}
-	else if (pNextNode != NULL)
+	else if (pNextNode != nullptr)
 	{
-		pNextNode->m_pPrev = NULL;
+		pNextNode->m_pPrev = nullptr;
 		m_pHead = pNextNode;
 	}
 	else
 	{
-		m_pHead = NULL;
-		m_pTail = NULL;
+		m_pHead = nullptr;
+		m_pTail = nullptr;
 	}
 
-	pNode->m_pNext = NULL;
+	pNode->m_pNext = nullptr;
 	m_pTail->m_pNext = pNode;
 	pNode->m_pPrev = m_pTail;
 	m_pTail = pNode;
@@ -330,7 +330,7 @@ inline void CLinkList<tVARTYPE>::moveToEnd(CLLNode<tVARTYPE>* pNode)
 template <class tVARTYPE>
 inline CLLNode<tVARTYPE>* CLinkList<tVARTYPE>::next(CLLNode<tVARTYPE>* pNode) const
 {
-  assert(pNode != NULL);
+  assert(pNode != nullptr);
 
   return pNode->m_pNext;
 }
@@ -339,7 +339,7 @@ inline CLLNode<tVARTYPE>* CLinkList<tVARTYPE>::next(CLLNode<tVARTYPE>* pNode) co
 template <class tVARTYPE>
 inline CLLNode<tVARTYPE>* CLinkList<tVARTYPE>::prev(CLLNode<tVARTYPE>* pNode) const
 {
-	assert(pNode != NULL);
+	assert(pNode != nullptr);
 
 	return pNode->m_pPrev;
 }
@@ -363,7 +363,7 @@ traversal without a list object. */
 template <class tVARTYPE>
 inline CLLNode<tVARTYPE>* CLinkList<tVARTYPE>::static_next(CLLNode<tVARTYPE>* pNode)
 {
-	//assert(pNode != NULL);
+	//assert(pNode != nullptr);
 	return pNode->m_pNext;
 }
 
@@ -384,7 +384,7 @@ inline CLLNode<tVARTYPE>* CLinkList<tVARTYPE>::nodeNum(int iNum) const
 	iCount = 0;
 	pNode = m_pHead;
 
-	while (pNode != NULL)
+	while (pNode != nullptr)
 	{
 		if (iCount == iNum)
 		{
@@ -395,7 +395,7 @@ inline CLLNode<tVARTYPE>* CLinkList<tVARTYPE>::nodeNum(int iNum) const
 		pNode = pNode->m_pNext;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 //

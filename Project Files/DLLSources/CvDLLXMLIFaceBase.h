@@ -21,7 +21,7 @@ public:
 	virtual bool LoadXml(FXml* xml, char const* pszXmlFile) = 0;
 	// validate the document/xml, returns true if successful and false otherwise,
 	//	if validate fails we also return an error string to indicate why it failed
-	virtual bool Validate(FXml* xml, char* pszError = NULL) = 0;
+	virtual bool Validate(FXml* xml, char* pszError = nullptr) = 0;
 	// locate a node in the document, returns true if a node is found and false otherwise
 	virtual bool LocateNode(FXml* xml, char const* pszXmlNode) = 0;
 	// locate the first sibling node in this sub-tree layer that has the xml tag name,

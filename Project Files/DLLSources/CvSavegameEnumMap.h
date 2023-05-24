@@ -176,7 +176,7 @@ inline void CvSavegameWriter::WriteEnumMap<TYPE2>::Write(CvSavegameWriter& kWrit
 	const bool bValid = TYPE == TYPE2 && !boost::is_same<bool, T>::value;
 	BOOST_STATIC_ASSERT(bValid);
 
-	SavegameEnumMapTokenWrite<IndexType, LengthType>* Token = NULL;
+	SavegameEnumMapTokenWrite<IndexType, LengthType>* Token = nullptr;
 	std::list<SavegameEnumMapTokenWrite<IndexType, LengthType>* > tokens;
 
 	FAssertMsg((int)VARINFO<LengthType>::END != 0, CvString::format("Saving EnumMap of length 0. Type: %s", VARINFO<LengthType>::getName()));
@@ -184,7 +184,7 @@ inline void CvSavegameWriter::WriteEnumMap<TYPE2>::Write(CvSavegameWriter& kWrit
 	{
 		if (em.getDefault() != em.get(i))
 		{
-			if (Token == NULL)
+			if (Token == nullptr)
 			{
 				Token = new SavegameEnumMapTokenWrite<IndexType, LengthType>();
 				Token->setStart(i);
@@ -192,9 +192,9 @@ inline void CvSavegameWriter::WriteEnumMap<TYPE2>::Write(CvSavegameWriter& kWrit
 			}
 			Token->setEnd(i);
 		}
-		else if (Token != NULL)
+		else if (Token != nullptr)
 		{
-			Token = NULL;
+			Token = nullptr;
 		}
 	}
 
@@ -266,7 +266,7 @@ template<>
 template<class IndexType, class T, int DEFAULT, class LengthType, VariableStaticTypes STATIC, VariableTypes TYPE, VariableLengthTypes LENGTH_KNOWN_WHILE_COMPILING>
 inline void CvSavegameWriter::WriteEnumMap<VARIABLE_TYPE_CLASS>::Write(CvSavegameWriter& kWriter, EnumMapBase<IndexType, T, DEFAULT, LengthType, STATIC, TYPE, LENGTH_KNOWN_WHILE_COMPILING>& em)
 {
-	SavegameEnumMapTokenWrite<IndexType, LengthType>* Token = NULL;
+	SavegameEnumMapTokenWrite<IndexType, LengthType>* Token = nullptr;
 	std::list<SavegameEnumMapTokenWrite<IndexType, LengthType>* > tokens;
 
 	FAssertMsg((int)VARINFO<LengthType>::END != 0, CvString::format("Saving EnumMap of length 0. Type: %s", VARINFO<LengthType>::getName()));
@@ -274,7 +274,7 @@ inline void CvSavegameWriter::WriteEnumMap<VARIABLE_TYPE_CLASS>::Write(CvSavegam
 	{
 		if (em[i].hasContent())
 		{
-			if (Token == NULL)
+			if (Token == nullptr)
 			{
 				Token = new SavegameEnumMapTokenWrite<IndexType, LengthType>();
 				Token->setStart(i);
@@ -282,9 +282,9 @@ inline void CvSavegameWriter::WriteEnumMap<VARIABLE_TYPE_CLASS>::Write(CvSavegam
 			}
 			Token->setEnd(i);
 		}
-		else if (Token != NULL)
+		else if (Token != nullptr)
 		{
-			Token = NULL;
+			Token = nullptr;
 		}
 	}
 

@@ -30,7 +30,7 @@ public:
 	void setWBCentralAmericanNative(bool bValue);
 	// R&R, ray, Correct Geographical Placement of Natives - END
 
-	bool isNone() { return (m_pGame==NULL); }
+	bool isNone() { return m_pGame == nullptr; }
 	void updateScore(bool bForce);
 	void cycleCities(bool bForward, bool bAdd);
 	void cycleSelectionGroups(bool bClear, bool bForward);

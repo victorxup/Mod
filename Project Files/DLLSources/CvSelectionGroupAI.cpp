@@ -58,12 +58,12 @@ void CvSelectionGroupAI::AI_separate()
 
 	pEntityNode = headUnitNode();
 
-	while (pEntityNode != NULL)
+	while (pEntityNode != nullptr)
 	{
 		pLoopUnit = ::getUnit(pEntityNode->m_data);
 		pEntityNode = nextUnitNode(pEntityNode);
 
-		pLoopUnit->joinGroup(NULL);
+		pLoopUnit->joinGroup(nullptr);
 		if (pLoopUnit->plot()->getTeam() == getTeam())
 		{
 			pLoopUnit->getGroup()->pushMission(MISSION_SKIP);
@@ -78,13 +78,13 @@ void CvSelectionGroupAI::AI_seperateNonAI(UnitAITypes eUnitAI)
 
 	pEntityNode = headUnitNode();
 
-	while (pEntityNode != NULL)
+	while (pEntityNode != nullptr)
 	{
 		pLoopUnit = ::getUnit(pEntityNode->m_data);
 		pEntityNode = nextUnitNode(pEntityNode);
 		if (pLoopUnit->AI_getUnitAIType() != eUnitAI)
 		{
-			pLoopUnit->joinGroup(NULL);
+			pLoopUnit->joinGroup(nullptr);
 			if (pLoopUnit->plot()->getTeam() == getTeam())
 			{
 				pLoopUnit->getGroup()->pushMission(MISSION_SKIP);
@@ -100,13 +100,13 @@ void CvSelectionGroupAI::AI_seperateAI(UnitAITypes eUnitAI)
 
 	pEntityNode = headUnitNode();
 
-	while (pEntityNode != NULL)
+	while (pEntityNode != nullptr)
 	{
 		pLoopUnit = ::getUnit(pEntityNode->m_data);
 		pEntityNode = nextUnitNode(pEntityNode);
 		if (pLoopUnit->AI_getUnitAIType() == eUnitAI)
 		{
-			pLoopUnit->joinGroup(NULL);
+			pLoopUnit->joinGroup(nullptr);
 			// TAC - AI Assault Sea - koma13, jdog5000(BBAI)
 			// Was potential crash in use of plot() if group emptied
 			//if (plot()->getTeam() == getTeam())
@@ -126,13 +126,13 @@ void CvSelectionGroupAI::AI_separateEmptyTransports()
 
 	pEntityNode = headUnitNode();
 
-	while (pEntityNode != NULL)
+	while (pEntityNode != nullptr)
 	{
 		pLoopUnit = ::getUnit(pEntityNode->m_data);
 		pEntityNode = nextUnitNode(pEntityNode);
 		if ((pLoopUnit->AI_getUnitAIType() == UNITAI_ASSAULT_SEA) && (pLoopUnit->getCargo() == 0))
 		{
-			pLoopUnit->joinGroup(NULL);
+			pLoopUnit->joinGroup(nullptr);
 			if (pLoopUnit->plot()->getTeam() == getTeam())
 			{
 				pLoopUnit->getGroup()->pushMission(MISSION_SKIP);
@@ -188,7 +188,7 @@ bool CvSelectionGroupAI::AI_update()
 		{
 			FAssert(false);
 			CvUnit* pHeadUnit = getHeadUnit();
-			if (NULL != pHeadUnit)
+			if (pHeadUnit != nullptr)
 			{
 				if (GC.getLogging())
 				{
@@ -217,7 +217,7 @@ bool CvSelectionGroupAI::AI_update()
 		{
 			CvUnit* pHeadUnit = getHeadUnit();
 
-			if (pHeadUnit == NULL || pHeadUnit->isDelayedDeath())
+			if (pHeadUnit == nullptr || pHeadUnit->isDelayedDeath())
 			{
 				break;
 			}
@@ -247,13 +247,13 @@ bool CvSelectionGroupAI::AI_update()
 	if (!bDead)
 	{
 		CvUnit* pHeadUnit = getHeadUnit();
-		if (pHeadUnit != NULL)
+		if (pHeadUnit != nullptr)
 		{
 			if ((pHeadUnit->getUnitTravelState() == UNIT_TRAVEL_STATE_IN_EUROPE || pHeadUnit->getUnitTravelState() == UNIT_TRAVEL_STATE_IN_AFRICA) && AI_isControlled())
 			{
 				pEntityNode = headUnitNode();
 
-				while (pEntityNode != NULL)
+				while (pEntityNode != nullptr)
 				{
 					pLoopUnit = ::getUnit(pEntityNode->m_data);
 					pEntityNode = nextUnitNode(pEntityNode);
@@ -272,7 +272,7 @@ bool CvSelectionGroupAI::AI_update()
 			{
 				pEntityNode = headUnitNode();
 
-				while ((pEntityNode != NULL) && readyToMove(true))
+				while (pEntityNode != nullptr && readyToMove(true))
 				{
 					pLoopUnit = ::getUnit(pEntityNode->m_data);
 					pEntityNode = nextUnitNode(pEntityNode);
@@ -328,9 +328,9 @@ int CvSelectionGroupAI::AI_attackOdds(const CvPlot* pPlot, bool bPotentialEnemy)
 	/************************************************************************************************/
 	// From Lead From Behind by UncutDragon
 	// original
-	//if (pPlot->getBestDefender(NO_PLAYER, getOwnerINLINE(), NULL, !bPotentialEnemy, bPotentialEnemy) == NULL)
+	//if (pPlot->getBestDefender(NO_PLAYER, getOwnerINLINE(), nullptr, !bPotentialEnemy, bPotentialEnemy) == nullptr)
 	// modified
-	if (!pPlot->hasDefender(false, NO_PLAYER, getOwnerINLINE(), NULL, !bPotentialEnemy, bPotentialEnemy))
+	if (!pPlot->hasDefender(false, NO_PLAYER, getOwnerINLINE(), nullptr, !bPotentialEnemy, bPotentialEnemy))
 		/************************************************************************************************/
 		/* BETTER_BTS_AI_MOD                       END                                                  */
 		/************************************************************************************************/
@@ -341,7 +341,7 @@ int CvSelectionGroupAI::AI_attackOdds(const CvPlot* pPlot, bool bPotentialEnemy)
 	int iOdds = 0;
 	pAttacker = AI_getBestGroupAttacker(pPlot, bPotentialEnemy, iOdds);
 
-	if (pAttacker == NULL)
+	if (pAttacker == nullptr)
 	{
 		return 0;
 	}
@@ -361,13 +361,13 @@ CvUnit* CvSelectionGroupAI::AI_getBestGroupAttacker(const CvPlot* pPlot, bool bP
 
 	iBestValue = 0;
 	iBestOdds = 0;
-	pBestUnit = NULL;
+	pBestUnit = nullptr;
 
 	pUnitNode = headUnitNode();
 
-	bool bIsHuman = (pUnitNode != NULL) ? GET_PLAYER(::getUnit(pUnitNode->m_data)->getOwnerINLINE()).isHuman() : true;
+	bool bIsHuman = pUnitNode != nullptr ? GET_PLAYER(::getUnit(pUnitNode->m_data)->getOwnerINLINE()).isHuman() : true;
 
-	while (pUnitNode != NULL)
+	while (pUnitNode != nullptr)
 	{
 		pLoopUnit = ::getUnit(pUnitNode->m_data);
 		pUnitNode = nextUnitNode(pUnitNode);
@@ -421,10 +421,10 @@ CvUnit* CvSelectionGroupAI::AI_getBestGroupAttacker(const CvPlot* pPlot, bool bP
 CvUnit* CvSelectionGroupAI::AI_getBestGroupSacrifice(const CvPlot* pPlot, bool bPotentialEnemy, bool bForce, bool bNoBlitz) const
 {
 	int iBestValue = 0;
-	CvUnit* pBestUnit = NULL;
+	CvUnit* pBestUnit = nullptr;
 
 	CLLNode<IDInfo>* pUnitNode = headUnitNode();
-	while (pUnitNode != NULL)
+	while (pUnitNode != nullptr)
 	{
 		CvUnit* pLoopUnit = ::getUnit(pUnitNode->m_data);
 		pUnitNode = nextUnitNode(pUnitNode);
@@ -467,7 +467,7 @@ CvUnit* CvSelectionGroupAI::AI_getBestGroupSacrifice(const CvPlot* pPlot, bool b
 // (so 100 is even ratio, numbers over 100 mean this group is more powerful than the stack on a plot)
 int CvSelectionGroupAI::AI_compareStacks(const CvPlot* pPlot, bool bPotentialEnemy, bool bCheckCanAttack, bool bCheckCanMove) const
 {
-	FAssert(pPlot != NULL);
+	FAssert(pPlot != nullptr);
 
 	int	compareRatio;
 	DomainTypes eDomainType = getDomainType();
@@ -502,7 +502,7 @@ int CvSelectionGroupAI::AI_sumStrength(const CvPlot* pAttackedPlot, DomainTypes 
 
 	pUnitNode = headUnitNode();
 
-	while (pUnitNode != NULL)
+	while (pUnitNode != nullptr)
 	{
 		pLoopUnit = ::getUnit(pUnitNode->m_data);
 		pUnitNode = nextUnitNode(pUnitNode);
@@ -514,7 +514,7 @@ int CvSelectionGroupAI::AI_sumStrength(const CvPlot* pAttackedPlot, DomainTypes 
 			if (!bCheckCanAttack || bCanAttack)
 			{
 				if (!bCheckCanMove || pLoopUnit->canMove())
-					if (!bCheckCanMove || pAttackedPlot == NULL || pLoopUnit->canMoveInto(*pAttackedPlot, /*bAttack*/ true, /*bDeclareWar*/ true))
+					if (!bCheckCanMove || pAttackedPlot == nullptr || pLoopUnit->canMoveInto(*pAttackedPlot, /*bAttack*/ true, /*bDeclareWar*/ true))
 						if (eDomainType == NO_DOMAIN || pLoopUnit->getDomainType() == eDomainType)
 							strSum += pLoopUnit->currEffectiveStr(pAttackedPlot, pLoopUnit);
 			}
@@ -550,7 +550,7 @@ bool CvSelectionGroupAI::AI_isControlled()
 
 bool CvSelectionGroupAI::AI_isDeclareWar(const CvPlot* pPlot)
 {
-	FAssert(getHeadUnit() != NULL);
+	FAssert(getHeadUnit() != nullptr);
 
 	if (isHuman())
 	{
@@ -559,7 +559,7 @@ bool CvSelectionGroupAI::AI_isDeclareWar(const CvPlot* pPlot)
 	else
 	{
 		bool bLimitedWar = false;
-		if (pPlot != NULL)
+		if (pPlot != nullptr)
 		{
 			TeamTypes ePlotTeam = pPlot->getTeam();
 			if (ePlotTeam != NO_TEAM)
@@ -574,7 +574,7 @@ bool CvSelectionGroupAI::AI_isDeclareWar(const CvPlot* pPlot)
 
 		CvUnit* pHeadUnit = getHeadUnit();
 
-		if (pHeadUnit != NULL)
+		if (pHeadUnit != nullptr)
 		{
 			switch (pHeadUnit->AI_getUnitAIType())
 			{
@@ -654,7 +654,7 @@ void CvSelectionGroupAI::AI_setMissionAI(MissionAITypes eNewMissionAI, CvPlot* p
 {
 	m_eMissionAIType = eNewMissionAI;
 
-	if (pNewPlot != NULL)
+	if (pNewPlot != nullptr)
 	{
 		m_iMissionAIX = pNewPlot->getX_INLINE();
 		m_iMissionAIY = pNewPlot->getY_INLINE();
@@ -665,7 +665,7 @@ void CvSelectionGroupAI::AI_setMissionAI(MissionAITypes eNewMissionAI, CvPlot* p
 		m_iMissionAIY = INVALID_PLOT_COORD;
 	}
 
-	if (pNewUnit != NULL)
+	if (pNewUnit != nullptr)
 	{
 		m_missionAIUnit = pNewUnit->getIDInfo();
 	}
@@ -696,7 +696,7 @@ bool CvSelectionGroupAI::AI_isFull()
 		// first pass, count but ignore special cargo units
 		pUnitNode = headUnitNode();
 
-		while (pUnitNode != NULL)
+		while (pUnitNode != nullptr)
 		{
 			pLoopUnit = ::getUnit(pUnitNode->m_data);
 			pUnitNode = nextUnitNode(pUnitNode);
@@ -722,7 +722,7 @@ bool CvSelectionGroupAI::AI_isFull()
 		if (iSpecialCargoCount >= iCargoCount)
 		{
 			pUnitNode = headUnitNode();
-			while (pUnitNode != NULL)
+			while (pUnitNode != nullptr)
 			{
 				pLoopUnit = ::getUnit(pUnitNode->m_data);
 				pUnitNode = nextUnitNode(pUnitNode);
@@ -752,7 +752,7 @@ bool CvSelectionGroupAI::AI_launchAssault(CvPlot* pTargetCityPlot)
 	CLLNode<IDInfo>* pUnitNode = plot()->headUnitNode();
 	CvUnit* pLoopUnit;
 
-    while (pUnitNode != NULL)
+    while (pUnitNode != nullptr)
     {
 		pLoopUnit = ::getUnit(pUnitNode->m_data);
 		pUnitNode = plot()->nextUnitNode(pUnitNode);
@@ -784,7 +784,7 @@ bool CvSelectionGroupAI::AI_launchAssault(CvPlot* pTargetCityPlot)
         pLoopUnit = units_it->second;
 		if (pLoopUnit->canMove() && pLoopUnit->canAttack())
 		{
-//			if (pLoopUnit->AI_attackFromTransport(NULL, 40, 80))
+//			if (pLoopUnit->AI_attackFromTransport(nullptr, 40, 80))
 //			{
 //			    bAction = true;
 //			}
@@ -797,7 +797,7 @@ bool CvSelectionGroupAI::AI_launchAssault(CvPlot* pTargetCityPlot)
 //        pLoopUnit = units_it->second;
 //        if (pLoopUnit->canMove())
 //        {
-//            if (pLoopUnit->AI_moveFromTransport(NULL))
+//            if (pLoopUnit->AI_moveFromTransport(nullptr))
 //            {
 //                bAction = true;
 //            }
@@ -808,7 +808,7 @@ bool CvSelectionGroupAI::AI_launchAssault(CvPlot* pTargetCityPlot)
 //        pLoopUnit = units_it->second;
 //		if (pLoopUnit->canMove() && pLoopUnit->canAttack())
 //		{
-//			if (pLoopUnit->AI_attackFromTransport(NULL, 0, 100))
+//			if (pLoopUnit->AI_attackFromTransport(nullptr, 0, 100))
 //			{
 //			    bAction = true;
 //			}
@@ -827,9 +827,9 @@ bool CvSelectionGroupAI::AI_launchAssault(CvPlot* pTargetCityPlot)
 void CvSelectionGroupAI::AI_groupBombard()
 {
  	CLLNode<IDInfo>* pEntityNode = headUnitNode();
-	CvUnit* pLoopUnit = NULL;
+	CvUnit* pLoopUnit = nullptr;
 
-	while (pEntityNode != NULL)
+	while (pEntityNode != nullptr)
 	{
 		pLoopUnit = ::getUnit(pEntityNode->m_data);
 		pEntityNode = nextUnitNode(pEntityNode);
@@ -845,7 +845,7 @@ void CvSelectionGroupAI::AI_groupBombard()
 // rather than the amount of treasure since that wasn't used anyway
 int CvSelectionGroupAI::AI_getYieldsLoaded(short* piYields) const
 {
-	FAssert(piYields != NULL);
+	FAssert(piYields != nullptr);
 
 	int iAmount = 0;
 
@@ -853,13 +853,13 @@ int CvSelectionGroupAI::AI_getYieldsLoaded(short* piYields) const
 	buildCargoUnitList(unitList);
 
 	CLLNode<IDInfo>* pUnitNode = unitList.head();
-	while (pUnitNode != NULL)
+	while (pUnitNode != nullptr)
 	{
 		CvUnit* pLoopUnit = ::getUnit(pUnitNode->m_data);
 		pUnitNode = unitList.next(pUnitNode);
 
 		// Should not be possible, but let's add this for safety
-		if (pLoopUnit == NULL)
+		if (pLoopUnit == nullptr)
 			continue;
 
 		if (pLoopUnit->getYieldStored() > 0)
@@ -883,7 +883,7 @@ void CvSelectionGroupAI::processTradeRoute(CvTradeRoute* pRoute, std::map<IDInfo
 	yieldsDelivered[pRoute->getYield()] = true;
 	CvCity* pPlotCity = plot()->getPlotCity();
 
-	if (pPlotCity != NULL && ::getCity(pRoute->getDestinationCity()) == pPlotCity)
+	if (pPlotCity != nullptr && ::getCity(pRoute->getDestinationCity()) == pPlotCity)
 	{
 		yieldsToUnload[pRoute->getYield()] = true;
 	}
@@ -918,12 +918,12 @@ bool CvSelectionGroupAI::AI_tradeRoutes()
 	// Erik: We need to determine if we're dealing with a coastal transport
 	bool bCoastalTransport = false;
 	CLLNode<IDInfo>* pUnitNode = headUnitNode();
-	while (pUnitNode != NULL)
+	while (pUnitNode != nullptr)
 	{
 		CvUnit* pLoopUnit = ::getUnit(pUnitNode->m_data);
 		pUnitNode = nextUnitNode(pUnitNode);
 
-		if (pLoopUnit != NULL)
+		if (pLoopUnit != nullptr)
 		{
 			UnitAITypes aiType = pLoopUnit->AI_getUnitAIType();
 
@@ -945,7 +945,7 @@ bool CvSelectionGroupAI::AI_tradeRoutes()
 
 			// transport feeder - start - Nightinggale
 			CvCity* pDestinationCity = ::getCity(pRoute->getDestinationCity());
-			if (pDestinationCity != NULL && pDestinationCity->isAutoImportStopped(pRoute->getYield()))
+			if (pDestinationCity != nullptr && pDestinationCity->isAutoImportStopped(pRoute->getYield()))
 			{
 				// ignore trade routes where destination is using feeder service and is full
 				continue;
@@ -971,7 +971,7 @@ bool CvSelectionGroupAI::AI_tradeRoutes()
 			const DomainTypes domainType = getDomainType();
 			// R&R, vetiarvind, max trade capacity  - end
 
-			if ((pSourceCity != NULL) && ((domainType != DOMAIN_SEA) || (pSourceWaterArea != NULL)))
+			if (pSourceCity != nullptr && (domainType != DOMAIN_SEA || pSourceWaterArea != nullptr))
 			{
 				int iSourceArea = (domainType == DOMAIN_SEA) ? pSourceWaterArea->getID() : pSourceCity->getArea();
 				if (domainType == DOMAIN_SEA ? plot()->isAdjacentToArea(iSourceArea) : (iSourceArea == getArea()) ||
@@ -992,12 +992,12 @@ bool CvSelectionGroupAI::AI_tradeRoutes()
 		{
 			CvTradeRoute* pRoute = kOwner.getTradeRoute(*it);
 			CvCity* pSourceCity = ::getCity(pRoute->getSourceCity());
-			if (pSourceCity != NULL)
+			if (pSourceCity != nullptr)
 			{
 				const DomainTypes domainType = getDomainType();
 
 				CvArea* pSourceWaterArea = pSourceCity->waterArea();
-				if (getDomainType() != DOMAIN_SEA || pSourceWaterArea != NULL) //land or good water..this if block is basically the same code as the AI_full_automate case
+				if (getDomainType() != DOMAIN_SEA || pSourceWaterArea != nullptr) //land or good water..this if block is basically the same code as the AI_full_automate case
 				{
 					int iSourceArea = (getDomainType() == DOMAIN_SEA) ? pSourceWaterArea->getID() : pSourceCity->getArea();
 					if (domainType == DOMAIN_SEA ? plot()->isAdjacentToArea(iSourceArea) : (iSourceArea == getArea()) ||
@@ -1029,23 +1029,23 @@ bool CvSelectionGroupAI::AI_tradeRoutes()
 		}
 	} // human or non-automate-full
 
-	if ((pPlotCity != NULL) && hasCargo())
+	if (pPlotCity != nullptr && hasCargo())
 	{
 		std::vector<CvUnit*> units;
 
 		//Unload everything which we should unload here, or can't unload anywhere...
 		CLLNode<IDInfo>* pUnitNode = plot()->headUnitNode();
-		while (pUnitNode != NULL)
+		while (pUnitNode != nullptr)
 		{
 			CvUnit* pLoopUnit = ::getUnit(pUnitNode->m_data);
 			pUnitNode = plot()->nextUnitNode(pUnitNode);
 
-			if (pLoopUnit != NULL)
+			if (pLoopUnit != nullptr)
 			{
 				YieldTypes eYield = pLoopUnit->getYield();
 				CvUnit* pTransport = pLoopUnit->getTransportUnit();
 
-				if ((eYield != NO_YIELD) && pTransport != NULL && (yieldsToUnload[eYield] || !(yieldsDelivered[eYield])))
+				if ((eYield != NO_YIELD) && pTransport != nullptr && (yieldsToUnload[eYield] || !(yieldsDelivered[eYield])))
 				{
 					if (pTransport->getGroup() == this && pLoopUnit->canUnload())
 					{
@@ -1083,13 +1083,13 @@ bool CvSelectionGroupAI::AI_tradeRoutes()
 		for (uint i = 0; i < routes.size(); ++i)
 		{
 			CvCity* pDestinationCity = ::getCity(routes[i]->getDestinationCity());
-			if ((pDestinationCity != NULL) && (pDestinationCity != pPlotCity))
+			if (pDestinationCity != nullptr && pDestinationCity != pPlotCity)
 			{
 				// R&R mod, vetiarvind, max yield import limit - start
 
 				YieldTypes eYield = routes[i]->getYield();
 				int yieldsToUnload = aiYieldsLoaded[eYield];
-				if(pDestinationCity != NULL && pDestinationCity->getMaxImportAmount(eYield) > 0)
+				if (pDestinationCity != nullptr && pDestinationCity->getMaxImportAmount(eYield) > 0)
 				{
 					int turnsToReach = 0;
 					generatePath(plot(), pDestinationCity->plot(), (bIgnoreDanger ? MOVE_IGNORE_DANGER : MOVE_NO_ENEMY_TERRITORY), true, &turnsToReach);
@@ -1119,7 +1119,7 @@ bool CvSelectionGroupAI::AI_tradeRoutes()
 	{
 		CvCity* pSourceCity = ::getCity(routes[i]->getSourceCity());
 
-		if ((pSourceCity != NULL) && (bNoCargo || (cityValues[routes[i]->getSourceCity()] > 0)))
+		if (pSourceCity != nullptr && (bNoCargo || cityValues[routes[i]->getSourceCity()] > 0))
 		{
 			CvCity* pDestinationCity = ::getCity(routes[i]->getDestinationCity());
 			YieldTypes eYield = routes[i]->getYield();
@@ -1129,7 +1129,7 @@ bool CvSelectionGroupAI::AI_tradeRoutes()
 			int iAmount = pSourceCity->getYieldStored(eYield) - pSourceCity->getAutoMaintainThreshold(eYield);
 			// transport feeder - end - Nightinggale
 			// R&R mod, vetiarvind, max yield import limit - start
-			if(pDestinationCity != NULL &&   pDestinationCity->getMaxImportAmount(eYield) > 0)
+			if (pDestinationCity != nullptr && pDestinationCity->getMaxImportAmount(eYield) > 0)
 			{
 				int turnsToReachToSource = 0, turnsToReachFromSourceToDest = 0;
 				const bool bSourceOk = generatePath(plot(), pSourceCity->plot(), (bIgnoreDanger ? MOVE_IGNORE_DANGER : MOVE_NO_ENEMY_TERRITORY), true, &turnsToReachToSource);
@@ -1162,7 +1162,7 @@ bool CvSelectionGroupAI::AI_tradeRoutes()
 				iAmount = estimateYieldsToLoad(pDestinationCity, iAmount, eYield, turnsRequired, aiYieldsLoaded[eYield]);
 			}
 			// Note that Europe has no import limit!
-			else if (pDestinationCity == NULL && routes[i]->getDestinationCity() == kEurope)
+			else if (pDestinationCity == nullptr && routes[i]->getDestinationCity() == kEurope)
 			{
 				// This is a Europe trade-route, exempt it from the reachability criteria
 				// TODO: Check that there is actually a route to Europe!
@@ -1213,7 +1213,7 @@ bool CvSelectionGroupAI::AI_tradeRoutes()
 		if (iValue > 0)
 		{
 			CvCity* pCity = ::getCity(it->first);
-			if (pCity != NULL)
+			if (pCity != nullptr)
 			{
 				FAssert(!atPlot(pCity->plot()));
 				// TAC - Trade Routes Advisor - koma13 - START
@@ -1272,7 +1272,7 @@ bool CvSelectionGroupAI::AI_tradeRoutes()
 		}
 	}
 
-	if ((pPlotCity != NULL) && (kBestDestination.eOwner != NO_PLAYER))
+	if (pPlotCity != nullptr && kBestDestination.eOwner != NO_PLAYER)
 	{
 		//We need to keep looping and recalculating
 		//For example a city might have "101" of an item, we want to move the first 100 but not the 1.
@@ -1293,7 +1293,7 @@ bool CvSelectionGroupAI::AI_tradeRoutes()
 				// Erik: This is redundant. Instead of looping through all routes, just find the subset of routes to the best destination city
 
 				CvCity* pSourceCity = ::getCity(routes[i]->getSourceCity());
-				if ((pSourceCity != NULL && pSourceCity == pPlotCity) // R&R mod, vetiarvind, max yield import limit (move plot==srcCity check outside as optmztn)
+				if ((pSourceCity != nullptr && pSourceCity == pPlotCity) // R&R mod, vetiarvind, max yield import limit (move plot==srcCity check outside as optmztn)
 					&& (routes[i]->getDestinationCity() == kBestDestination))
 				{
 					CvCity* pDestinationCity = ::getCity(routes[i]->getDestinationCity());
@@ -1307,7 +1307,7 @@ bool CvSelectionGroupAI::AI_tradeRoutes()
 
 					// R&R mod, vetiarvind, max yield import limit - start
 					int iOriginalAmount = iAmount;
-					int bDestinationHasImportLimit = pDestinationCity != NULL && pDestinationCity->getMaxImportAmount(eYield) > 0;
+					int bDestinationHasImportLimit = pDestinationCity != nullptr && pDestinationCity->getMaxImportAmount(eYield) > 0;
 					if(bDestinationHasImportLimit)
 					{
 						int turnsToReach = 0;
@@ -1342,12 +1342,12 @@ bool CvSelectionGroupAI::AI_tradeRoutes()
 			if (iBestRouteValue > 0)
 			{
 				CLLNode<IDInfo>* pUnitNode = headUnitNode();
-				while (pUnitNode != NULL)
+				while (pUnitNode != nullptr)
 				{
 					CvUnit* pLoopUnit = ::getUnit(pUnitNode->m_data);
 					pUnitNode = nextUnitNode(pUnitNode);
 
-					if (pLoopUnit != NULL)
+					if (pLoopUnit != nullptr)
 					{
 						if (pLoopUnit->canLoadYield(plot(), routes[iBestRoute]->getYield(), false) ) 			// R&R mod, vetiarvind, max yield import limit fix
 						{
@@ -1377,7 +1377,7 @@ bool CvSelectionGroupAI::AI_tradeRoutes()
 	{
 		// Transport group is full and can't find any destination
 		CvCity* pCity = kOwner.AI_findBestPort();
-		if (pCity != NULL && !atPlot(pCity->plot()))
+		if (pCity != nullptr && !atPlot(pCity->plot()))
 		{
 			// check that the city is reachable
 			int iTurns = 0;
@@ -1396,7 +1396,7 @@ bool CvSelectionGroupAI::AI_tradeRoutes()
 	if (kBestDestination != kEurope)
 	{
 		CvCity* pBestDestinationCity = ::getCity(kBestDestination);
-		if (pBestDestinationCity != NULL)
+		if (pBestDestinationCity != nullptr)
 		{
 			FAssert(!atPlot(pBestDestinationCity->plot()));
 			// TAC - Trade Routes Advisor - koma13 - START
@@ -1410,7 +1410,7 @@ bool CvSelectionGroupAI::AI_tradeRoutes()
 
 				CLLNode<IDInfo>* pUnitNode = plot()->headUnitNode();
 				CvUnit* pLoopUnit;
-				while (pUnitNode != NULL)
+				while (pUnitNode != nullptr)
 				{
 					pLoopUnit = ::getUnit(pUnitNode->m_data);
 					pUnitNode = plot()->nextUnitNode(pUnitNode);
@@ -1454,17 +1454,17 @@ CvUnit* CvSelectionGroupAI::AI_ejectBestDefender(CvPlot* pDefendPlot)
 
 	pEntityNode = headUnitNode();
 
-	CvUnit* pBestUnit = NULL;
+	CvUnit* pBestUnit = nullptr;
 	int iBestUnitValue = 0;
 
-	while (pEntityNode != NULL)
+	while (pEntityNode != nullptr)
 	{
 		pLoopUnit = ::getUnit(pEntityNode->m_data);
 		pEntityNode = nextUnitNode(pEntityNode);
 
 		if (!pLoopUnit->noDefensiveBonus())
 		{
-			int iValue = pLoopUnit->currEffectiveStr(pDefendPlot, NULL) * 100;
+			int iValue = pLoopUnit->currEffectiveStr(pDefendPlot, nullptr) * 100;
 
 			if (pDefendPlot->isCity(true, getTeam()))
 			{
@@ -1485,9 +1485,9 @@ CvUnit* CvSelectionGroupAI::AI_ejectBestDefender(CvPlot* pDefendPlot)
 		}
 	}
 
-	if (NULL != pBestUnit && getNumUnits() > 1)
+	if (pBestUnit != nullptr && getNumUnits() > 1)
 	{
-		pBestUnit->joinGroup(NULL);
+		pBestUnit->joinGroup(nullptr);
 	}
 
 	return pBestUnit;
@@ -1502,12 +1502,12 @@ bool CvSelectionGroupAI::getIgnoreDangerStatus() const
 	bool bIgnoreDanger = false;
 
 	CLLNode<IDInfo>* pUnitNode = headUnitNode();
-	while (pUnitNode != NULL)
+	while (pUnitNode != nullptr)
 	{
 		CvUnit* pLoopUnit = ::getUnit(pUnitNode->m_data);
 		pUnitNode = nextUnitNode(pUnitNode);
 
-		if (pLoopUnit != NULL && !pLoopUnit->isCargo())
+		if (pLoopUnit != nullptr && !pLoopUnit->isCargo())
 		{
 			if (pLoopUnit->isIgnoreDanger())
 			{

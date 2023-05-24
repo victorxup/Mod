@@ -41,7 +41,7 @@ void CvDiploParameters::setDiploComment(DiploCommentTypes eCommentType)
 
 void CvDiploParameters::addDiploCommentVariable(const wchar *szArg)
 {
-	if (szArg != NULL)
+	if (szArg != nullptr)
 	{
 		FVariable var;
 		var.m_eType = FVARTYPE_WSTRING;

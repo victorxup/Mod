@@ -48,7 +48,7 @@ const wchar* PopupReturn::getEditBoxString(int iGroup) const
 	std::map<int, CvWString>::const_iterator it = m_aszEditBoxString.find(iGroup);
 	if (it == m_aszEditBoxString.end())
 	{
-		return NULL;
+		return nullptr;
 	}
 
 	return (*it).second.GetCString();

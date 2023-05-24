@@ -4,7 +4,7 @@
 #include "CvTradeRouteGroup.h"
 #include "CvGlobals.h"
 
-CyTradeRouteGroup::CyTradeRouteGroup() : m_pTradeGroup(NULL){}
+CyTradeRouteGroup::CyTradeRouteGroup() : m_pTradeGroup(nullptr){}
 CyTradeRouteGroup::CyTradeRouteGroup(CvTradeRouteGroup* pTradeGroup) : m_pTradeGroup(pTradeGroup)
 {
 
@@ -22,11 +22,11 @@ std::wstring CyTradeRouteGroup::getName()
 
 
 void CyTradeRouteGroup::setName(std::wstring szName)
-{	
+{
 	if (m_pTradeGroup)
 		m_pTradeGroup->setName(CvWString(szName).GetCString());
 }
-	
+
 
 void CyTradeRouteGroup::removeRoute(int routeId)
 {

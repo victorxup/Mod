@@ -106,7 +106,7 @@ BOOL APIENTRY DllMain(HANDLE hModule,
 	case DLL_PROCESS_DETACH:
 		OutputDebugString("DLL_PROCESS_DETACH\n");
 		timeEndPeriod(1);
-		GC.setDLLIFace(NULL);
+		GC.setDLLIFace(nullptr);
 		break;
 	}
 
@@ -116,7 +116,7 @@ BOOL APIENTRY DllMain(HANDLE hModule,
 std::string GetDLLPath(bool bLoadDLLPath)
 {
 	char buffer[MAX_PATH];
-	GetModuleFileNameA(bLoadDLLPath ? GetModuleHandle(_T("CvGameCoreDLL.dll")) : NULL, buffer, MAX_PATH);
+	GetModuleFileNameA(bLoadDLLPath ? GetModuleHandle(_T("CvGameCoreDLL.dll")) : nullptr, buffer, MAX_PATH);
 	std::string::size_type pos = std::string(buffer).find_last_of("\\/");
 
 	return std::string(buffer).substr(0, pos);

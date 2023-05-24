@@ -195,7 +195,7 @@ unsigned short CvRandom::get(unsigned short usNum, char const* pszLog)
 {
 	FAssertMsg(!m_bSynced || GC.isMainThread(), "Random called outside main thread");
 
-	if (pszLog != NULL)
+	if (pszLog != nullptr)
 	{
 		if (GC.getLogging() && GC.getRandLogging())
 		{

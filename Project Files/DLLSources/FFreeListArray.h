@@ -73,7 +73,7 @@ FFreeListArray<T>::FFreeListArray()
 	m_iLastIndex = FFreeList::INVALID_INDEX;
 	m_iNumSlots = 0;
 
-	m_pArray = NULL;
+	m_pArray = nullptr;
 }
 
 
@@ -111,7 +111,7 @@ void FFreeListArray<T>::init(int iNumSlots)
 template <class T>
 void FFreeListArray<T>::uninit()
 {
-	if (m_pArray != NULL)
+	if (m_pArray != nullptr)
 	{
 		removeAll();
 
@@ -125,7 +125,7 @@ void FFreeListArray<T>::insert(T data)
 {
 	int iIndex;
 
-	if (m_pArray == NULL)
+	if (m_pArray == nullptr)
 	{
 		init();
 	}
@@ -158,7 +158,7 @@ void FFreeListArray<T>::insertAt(T data, int iIndex)
 {
 	int iTempIndex;
 
-	if (m_pArray == NULL)
+	if (m_pArray == nullptr)
 	{
 		init();
 	}
@@ -225,7 +225,7 @@ void FFreeListArray<T>::insertFirst(T data)
 {
 	int iI;
 
-	if (m_pArray == NULL)
+	if (m_pArray == nullptr)
 	{
 		init();
 	}
@@ -252,9 +252,9 @@ void FFreeListArray<T>::insertFirst(T data)
 template <class T>
 T* FFreeListArray<T>::getAt(int iIndex)
 {
-	if ((m_pArray == NULL) || (iIndex == FFreeList::INVALID_INDEX))
+	if (m_pArray == nullptr || iIndex == FFreeList::INVALID_INDEX)
 	{
-		return NULL;
+		return nullptr;
 	}
 
 	if ((iIndex >= 0) && (iIndex <= m_iLastIndex))
@@ -265,7 +265,7 @@ T* FFreeListArray<T>::getAt(int iIndex)
 		}
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 
@@ -274,7 +274,7 @@ int FFreeListArray<T>::getIndex(T data)
 {
 	int iI;
 
-	if (m_pArray == NULL)
+	if (m_pArray == nullptr)
 	{
 		return FFreeList::INVALID_INDEX;
 	}
@@ -299,7 +299,7 @@ bool FFreeListArray<T>::remove(T data)
 {
 	int iI;
 
-	assert(m_pArray != NULL);
+	assert(m_pArray != nullptr);
 
 	for (iI = 0; iI <= m_iLastIndex; iI++)
 	{
@@ -319,7 +319,7 @@ bool FFreeListArray<T>::remove(T data)
 template <class T>
 bool FFreeListArray<T>::removeAt(int iIndex)
 {
-	assert(m_pArray != NULL);
+	assert(m_pArray != nullptr);
 
 	if ((iIndex >= 0) && (iIndex <= m_iLastIndex))
 	{
@@ -342,7 +342,7 @@ void FFreeListArray<T>::removeAll()
 {
 	int iI;
 
-	if (m_pArray == NULL)
+	if (m_pArray == nullptr)
 	{
 		return;
 	}

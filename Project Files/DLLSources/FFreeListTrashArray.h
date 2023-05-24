@@ -95,7 +95,7 @@ public:
 
 	int getNextFreeIndex(int iIndex)
 	{
-		if ((iIndex >= getNumSlots()) || (m_pArray == NULL))
+		if ((iIndex >= getNumSlots()) || (m_pArray == nullptr))
 		{
 			assert(false);
 			return FFreeList::INVALID_INDEX;
@@ -104,7 +104,7 @@ public:
 	}
 	void setNextFreeIndex(int iIndex, int iNewValue)
 	{
-		if ((iIndex >= getNumSlots()) || (m_pArray == NULL))
+		if ((iIndex >= getNumSlots()) || (m_pArray == nullptr))
 		{
 			assert(false);
 			return;
@@ -137,7 +137,7 @@ template <class T>
 FFreeListTrashArray<T>::FFreeListTrashArray()
 {
 	m_iCurrentID = FLTA_MAX_BUCKETS;
-	m_pArray = NULL;
+	m_pArray = nullptr;
 }
 
 
@@ -187,7 +187,7 @@ void FFreeListTrashArray<T>::init(int iNumSlots)
 		for (iI = 0; iI < m_iNumSlots; iI++)
 		{
 			m_pArray[iI].iNextFreeIndex = FFreeList::INVALID_INDEX;
-			m_pArray[iI].pData = NULL;
+			m_pArray[iI].pData = nullptr;
 		}
 	}
 }
@@ -196,7 +196,7 @@ void FFreeListTrashArray<T>::init(int iNumSlots)
 template <class T>
 void FFreeListTrashArray<T>::uninit()
 {
-	if (m_pArray != NULL)
+	if (m_pArray != nullptr)
 	{
 		removeAll();
 
@@ -210,7 +210,7 @@ T* FFreeListTrashArray<T>::add()
 {
 	int iIndex;
 
-	if (m_pArray == NULL)
+	if (m_pArray == nullptr)
 	{
 		init();
 	}
@@ -220,7 +220,7 @@ T* FFreeListTrashArray<T>::add()
 	{
 		if ((m_iNumSlots * FLTA_GROWTH_FACTOR) > FLTA_MAX_BUCKETS)
 		{
-			return NULL;
+			return nullptr;
 		}
 
 		growArray();
@@ -253,9 +253,9 @@ T* FFreeListTrashArray<T>::getAt(int iID) const
 {
 	int iIndex;
 
-	if ((iID == FFreeList::INVALID_INDEX) || (m_pArray == NULL))
+	if ((iID == FFreeList::INVALID_INDEX) || (m_pArray == nullptr))
 	{
-		return NULL;
+		return nullptr;
 	}
 
 	iIndex = (iID & FLTA_INDEX_MASK);
@@ -263,7 +263,7 @@ T* FFreeListTrashArray<T>::getAt(int iID) const
 	assert(iIndex >= 0);
 
 	if ((iIndex <= m_iLastIndex) &&
-		(m_pArray[iIndex].pData != NULL))
+		(m_pArray[iIndex].pData != nullptr))
 	{
 		if (((iID & FLTA_ID_MASK) == 0) || (m_pArray[iIndex].pData->getID() == iID))
 		{
@@ -271,7 +271,7 @@ T* FFreeListTrashArray<T>::getAt(int iID) const
 		}
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 
@@ -280,9 +280,9 @@ bool FFreeListTrashArray<T>::remove(T* pData)
 {
 	int iI;
 
-	assert(m_pArray != NULL);
+	assert(m_pArray != nullptr);
 
-	if (pData != NULL)
+	if (pData != nullptr)
 	{
 		for (iI = 0; iI <= m_iLastIndex; iI++)
 		{
@@ -302,7 +302,7 @@ bool FFreeListTrashArray<T>::removeAt(int iID)
 {
 	int iIndex;
 
-	if ((iID == FFreeList::INVALID_INDEX) || (m_pArray == NULL))
+	if ((iID == FFreeList::INVALID_INDEX) || (m_pArray == nullptr))
 	{
 		return false;
 	}
@@ -312,12 +312,12 @@ bool FFreeListTrashArray<T>::removeAt(int iID)
 	assert(iIndex >= 0);
 
 	if ((iIndex <= m_iLastIndex) &&
-		(m_pArray[iIndex].pData != NULL))
+		(m_pArray[iIndex].pData != nullptr))
 	{
 		if (((iID & FLTA_ID_MASK) == 0) || (m_pArray[iIndex].pData->getID() == iID))
 		{
 			delete m_pArray[iIndex].pData;
-			m_pArray[iIndex].pData = NULL;
+			m_pArray[iIndex].pData = nullptr;
 
 			m_pArray[iIndex].iNextFreeIndex = m_iFreeListHead;
 			m_iFreeListHead = iIndex;
@@ -340,7 +340,7 @@ void FFreeListTrashArray<T>::removeAll()
 {
 	int iI;
 
-	if (m_pArray == NULL)
+	if (m_pArray == nullptr)
 	{
 		return;
 	}
@@ -352,11 +352,11 @@ void FFreeListTrashArray<T>::removeAll()
 	for (iI = 0; iI < m_iNumSlots; iI++)
 	{
 		m_pArray[iI].iNextFreeIndex = FFreeList::INVALID_INDEX;
-		if (m_pArray[iI].pData != NULL)
+		if (m_pArray[iI].pData != nullptr)
 		{
 			delete m_pArray[iI].pData;
 		}
-		m_pArray[iI].pData = NULL;
+		m_pArray[iI].pData = nullptr;
 	}
 }
 
@@ -366,15 +366,15 @@ void FFreeListTrashArray<T>::load(T* pData)
 {
 	int iIndex;
 
-	assert(pData != NULL);
+	assert(pData != nullptr);
 	assert((pData->getID() & FLTA_ID_MASK) < m_iCurrentID);
-	assert(m_pArray != NULL);
+	assert(m_pArray != nullptr);
 
 	iIndex = (pData->getID() & FLTA_INDEX_MASK);
 
 	assert(iIndex < FLTA_MAX_BUCKETS);
 	assert(iIndex <= m_iLastIndex);
-	assert(m_pArray[iIndex].pData == NULL);
+	assert(m_pArray[iIndex].pData == nullptr);
 	assert(m_pArray[iIndex].iNextFreeIndex == FFreeList::INVALID_INDEX);
 
 	m_pArray[iIndex].pData = pData;
@@ -389,7 +389,7 @@ void FFreeListTrashArray<T>::growArray()
 	int iOldNumSlots;
 	int iI;
 
-	assert(m_pArray != NULL);
+	assert(m_pArray != nullptr);
 
 	pOldArray = m_pArray;
 	iOldNumSlots = m_iNumSlots;
@@ -407,7 +407,7 @@ void FFreeListTrashArray<T>::growArray()
 		else
 		{
 			m_pArray[iI].iNextFreeIndex = FFreeList::INVALID_INDEX;
-			m_pArray[iI].pData = NULL;
+			m_pArray[iI].pData = nullptr;
 		}
 	}
 

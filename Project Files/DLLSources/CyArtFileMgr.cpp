@@ -6,7 +6,7 @@
 #include "CvArtFileMgr.h"
 #include "CyGlobalContext.h"
 
-CyArtFileMgr::CyArtFileMgr() : m_pArtFileMgr(NULL)
+CyArtFileMgr::CyArtFileMgr() : m_pArtFileMgr(nullptr)
 {
 	m_pArtFileMgr = &ARTFILEMGR;
 }
@@ -32,55 +32,55 @@ void CyArtFileMgr::buildArtFileInfoMaps()
 
 CvArtInfoInterface* CyArtFileMgr::getInterfaceArtInfo( const char * szArtDefineTag ) const
 {
-	return m_pArtFileMgr ? m_pArtFileMgr->getInterfaceArtInfo( szArtDefineTag ) : NULL;
+	return m_pArtFileMgr ? m_pArtFileMgr->getInterfaceArtInfo(szArtDefineTag) : nullptr;
 }
 
 CvArtInfoMovie* CyArtFileMgr::getMovieArtInfo( const char * szArtDefineTag ) const
 {
-	return m_pArtFileMgr ? m_pArtFileMgr->getMovieArtInfo( szArtDefineTag ) : NULL;
+	return m_pArtFileMgr ? m_pArtFileMgr->getMovieArtInfo(szArtDefineTag) : nullptr;
 }
 
 CvArtInfoMisc* CyArtFileMgr::getMiscArtInfo( const char * szArtDefineTag ) const
 {
-	return m_pArtFileMgr ? m_pArtFileMgr->getMiscArtInfo( szArtDefineTag ) : NULL;
+	return m_pArtFileMgr ? m_pArtFileMgr->getMiscArtInfo(szArtDefineTag) : nullptr;
 }
 
 CvArtInfoUnit* CyArtFileMgr::getUnitArtInfo( const char * szArtDefineTag ) const
 {
-	return m_pArtFileMgr ? m_pArtFileMgr->getUnitArtInfo( szArtDefineTag ) : NULL;
+	return m_pArtFileMgr ? m_pArtFileMgr->getUnitArtInfo(szArtDefineTag) : nullptr;
 }
 
 CvArtInfoBuilding* CyArtFileMgr::getBuildingArtInfo( const char * szArtDefineTag ) const
 {
-	return m_pArtFileMgr ? m_pArtFileMgr->getBuildingArtInfo( szArtDefineTag ) : NULL;
+	return m_pArtFileMgr ? m_pArtFileMgr->getBuildingArtInfo(szArtDefineTag) : nullptr;
 }
 
 CvArtInfoCivilization* CyArtFileMgr::getCivilizationArtInfo( const char * szArtDefineTag ) const
 {
-	return m_pArtFileMgr ? m_pArtFileMgr->getCivilizationArtInfo( szArtDefineTag ) : NULL;
+	return m_pArtFileMgr ? m_pArtFileMgr->getCivilizationArtInfo(szArtDefineTag) : nullptr;
 }
 
 CvArtInfoLeaderhead* CyArtFileMgr::getLeaderheadArtInfo( const char * szArtDefineTag ) const
 {
-	return m_pArtFileMgr ? m_pArtFileMgr->getLeaderheadArtInfo( szArtDefineTag ) : NULL;
+	return m_pArtFileMgr ? m_pArtFileMgr->getLeaderheadArtInfo(szArtDefineTag) : nullptr;
 }
 
 CvArtInfoBonus* CyArtFileMgr::getBonusArtInfo( const char * szArtDefineTag ) const
 {
-	return m_pArtFileMgr ? m_pArtFileMgr->getBonusArtInfo( szArtDefineTag ) : NULL;
+	return m_pArtFileMgr ? m_pArtFileMgr->getBonusArtInfo(szArtDefineTag) : nullptr;
 }
 
 CvArtInfoImprovement* CyArtFileMgr::getImprovementArtInfo( const char * szArtDefineTag ) const
 {
-	return m_pArtFileMgr ? m_pArtFileMgr->getImprovementArtInfo( szArtDefineTag ) : NULL;
+	return m_pArtFileMgr ? m_pArtFileMgr->getImprovementArtInfo(szArtDefineTag) : nullptr;
 }
 
 CvArtInfoTerrain* CyArtFileMgr::getTerrainArtInfo( const char * szArtDefineTag ) const
 {
-	return m_pArtFileMgr ? m_pArtFileMgr->getTerrainArtInfo( szArtDefineTag ) : NULL;
+	return m_pArtFileMgr ? m_pArtFileMgr->getTerrainArtInfo(szArtDefineTag) : nullptr;
 }
 
 CvArtInfoFeature* CyArtFileMgr::getFeatureArtInfo( const char * szArtDefineTag ) const
 {
-	return m_pArtFileMgr ? m_pArtFileMgr->getFeatureArtInfo( szArtDefineTag ) : NULL;
+	return m_pArtFileMgr ? m_pArtFileMgr->getFeatureArtInfo(szArtDefineTag) : nullptr;
 }

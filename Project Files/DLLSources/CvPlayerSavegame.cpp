@@ -1144,7 +1144,7 @@ void CvPlayer::write(CvSavegameWriter writer)
 			for (it = currentPopups.begin(); it != currentPopups.end(); ++it)
 			{
 				CvPopupInfo* pInfo = *it;
-				if (NULL != pInfo)
+				if (pInfo != nullptr)
 				{
 					writer.Write(*pInfo);
 				}
@@ -1152,7 +1152,7 @@ void CvPlayer::write(CvSavegameWriter writer)
 			for (it = m_listPopups.begin(); it != m_listPopups.end(); ++it)
 			{
 				CvPopupInfo* pInfo = *it;
-				if (NULL != pInfo)
+				if (pInfo != nullptr)
 				{
 					writer.Write(*pInfo);
 				}

@@ -33,7 +33,7 @@ public:
 
 	void AI_chooseProduction();
 
-	UnitTypes AI_bestUnit(bool bAsync = false, UnitAITypes* peBestUnitAI = NULL, bool bPickAny = false) const;
+	UnitTypes AI_bestUnit(bool bAsync = false, UnitAITypes* peBestUnitAI = nullptr, bool bPickAny = false) const;
 	UnitTypes AI_bestUnitAI(UnitAITypes eUnitAI, bool bAsync = false) const;
 
 	BuildingTypes AI_bestBuilding(int iFocusFlags = 0, int iMaxTurns = 0, bool bAsync = false) const;
@@ -41,7 +41,7 @@ public:
 	BuildingTypes AI_bestBuildingIgnoreRequirements(int iFocusFlags = 0, int iMaxTurns = 0) const;
 
 	bool AI_isProductionBuilding(BuildingTypes eBuilding, bool bMajorCity = false) const;	// TAC - AI Buildings - koma13
-	
+
 	int AI_buildingValue(BuildingTypes eBuilding, int iFocusFlags = 0) const;
 
 	int AI_neededSeaWorkers() const;
@@ -103,7 +103,7 @@ public:
 	CvUnit* AI_getWorstProfessionUnit(ProfessionTypes eProfession) const;
 
 	int AI_unitJoinCityValue(CvUnit* pUnit, ProfessionTypes* peNewProfession) const;
-	int AI_unitJoinReplaceValue(CvUnit* pUnit, CvUnit** pReplaceUnit = NULL) const;
+	int AI_unitJoinReplaceValue(CvUnit* pUnit, CvUnit** pReplaceUnit = nullptr) const;
 
 	bool AI_canMakeGift() const;
 	int AI_getGiftTimer() const;
@@ -137,7 +137,7 @@ public:
 
 	int AI_getTradeBalance(YieldTypes eYield) const;
 	void AI_changeTradeBalance(YieldTypes eYield, int iAmount);
-	
+
 	int AI_getYieldAdvantage(YieldTypes eYield) const;
 	void AI_setYieldAdvantage(YieldTypes eYield, int iNewValue);
 
@@ -168,11 +168,11 @@ public:
 
 	void AI_setWorkforceHack(bool bNewValue);
 	bool AI_isWorkforceHack() const;
-	
+
 	bool AI_isMajorCity() const;
 
-	void read(FDataStreamBase* pStream); 
-	void write(FDataStreamBase* pStream); 
+	void read(FDataStreamBase* pStream);
+	void write(FDataStreamBase* pStream);
 
 	void read(CvSavegameReader reader);
 	void write(CvSavegameWriter writer);

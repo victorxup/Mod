@@ -28,7 +28,7 @@ void CvPlayerCivEffect::applyCivEffect(const CivEffectInfo& kCivEffect, int iCha
 
 	m_ja_iCacheAllowsBonuses                                          .addCache(iChange, kCivEffect.getAllowedBonuses                (), pCivInfo);
 	bUpdateBuilds |= m_ja_iCacheAllowsBuilds                          .addCache(iChange, kCivEffect.getAllowedBuilds                 (), pCivInfo);
-	bUpdateBuildings |= kCivEffect.getAllowedBuildingClasses()        .addCache(m_em_iCacheAllowsBuildings                    , iChange, pCivInfo);	
+	bUpdateBuildings |= kCivEffect.getAllowedBuildingClasses()        .addCache(m_em_iCacheAllowsBuildings                    , iChange, pCivInfo);
 	m_ja_iCacheAllowsCivics                                           .addCache(iChange, kCivEffect.getAllowedCivics                 (), pCivInfo);
 	bUpdateImmigrants |= m_ja_iCacheAllowsImmigrants                  .addCache(iChange, kCivEffect.getAllowedImmigrants             (), pCivInfo);
 	bUpdateBuilds |= m_ja_iCacheAllowsImprovements                    .addCache(iChange, kCivEffect.getAllowedImprovements           (), pCivInfo);
@@ -122,7 +122,7 @@ void CvPlayerCivEffect::applyCivEffect(const CivEffectInfo& kCivEffect, int iCha
 	if (bUpdateBuildings || kCivEffect.getCanUseDomesticMarket() != 0)
 	{
 		int iLoop;
-		for (CvCity* pLoopCity = firstCity(&iLoop); pLoopCity != NULL; pLoopCity = nextCity(&iLoop))
+		for (CvCity* pLoopCity = firstCity(&iLoop); pLoopCity != nullptr; pLoopCity = nextCity(&iLoop))
 		{
 			pLoopCity->UpdateBuildingAffectedCache();
 		}

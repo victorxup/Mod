@@ -319,7 +319,7 @@ public:
 	void changeFatherPoints(FatherPointTypes ePointType, int iChange);
 	int getBuildCost(const CvPlot* pPlot, BuildTypes eBuild) const;
 	bool canBuild(const CvPlot* pPlot, BuildTypes eBuild, bool bTestEra = false, bool bTestVisible = false) const;
-	RouteTypes getBestRoute(CvPlot* pPlot = NULL) const;
+	RouteTypes getBestRoute(CvPlot* pPlot = nullptr) const;
 	int getImprovementUpgradeRate() const;
 	int calculateTotalYield(YieldTypes eYield) const;
 	void calculateTotalYields(int aiYields[]) const;
@@ -348,14 +348,14 @@ public:
 	void changeAdvancedStartPoints(int iChange);
 	DllExport void doAdvancedStartAction(AdvancedStartActionTypes eAction, int iX, int iY, int iData, bool bAdd);
 	void doAdvancedStartAction(AdvancedStartActionTypes eAction, Coordinates coord, int iData, bool bAdd);
-	DllExport int getAdvancedStartUnitCost(UnitTypes eUnit, bool bAdd, CvPlot* pPlot = NULL);
-	DllExport int getAdvancedStartCityCost(bool bAdd, CvPlot* pPlot = NULL);
-	DllExport int getAdvancedStartPopCost(bool bAdd, CvCity* pCity = NULL);
-	DllExport int getAdvancedStartCultureCost(bool bAdd, CvCity* pCity = NULL);
-	DllExport int getAdvancedStartBuildingCost(BuildingTypes eBuilding, bool bAdd, CvCity* pCity = NULL);
-	DllExport int getAdvancedStartImprovementCost(ImprovementTypes eImprovement, bool bAdd, CvPlot* pPlot = NULL);
-	DllExport int getAdvancedStartRouteCost(RouteTypes eRoute, bool bAdd, CvPlot* pPlot = NULL);
-	DllExport int getAdvancedStartVisibilityCost(bool bAdd, CvPlot* pPlot = NULL);
+	DllExport int getAdvancedStartUnitCost(UnitTypes eUnit, bool bAdd, CvPlot* pPlot = nullptr);
+	DllExport int getAdvancedStartCityCost(bool bAdd, CvPlot* pPlot = nullptr);
+	DllExport int getAdvancedStartPopCost(bool bAdd, CvCity* pCity = nullptr);
+	DllExport int getAdvancedStartCultureCost(bool bAdd, CvCity* pCity = nullptr);
+	DllExport int getAdvancedStartBuildingCost(BuildingTypes eBuilding, bool bAdd, CvCity* pCity = nullptr);
+	DllExport int getAdvancedStartImprovementCost(ImprovementTypes eImprovement, bool bAdd, CvPlot* pPlot = nullptr);
+	DllExport int getAdvancedStartRouteCost(RouteTypes eRoute, bool bAdd, CvPlot* pPlot = nullptr);
+	DllExport int getAdvancedStartVisibilityCost(bool bAdd, CvPlot* pPlot = nullptr);
 
 	void createGreatGeneral(UnitTypes eGreatGeneralUnit, bool bIncrementExperience, const Coordinates coord);
 	int getGreatGeneralsCreated() const;
@@ -907,8 +907,8 @@ public:
 	virtual int AI_totalUnitAIs(UnitAITypes eUnitAI) = 0;
 	virtual int AI_totalAreaUnitAIs(CvArea* pArea, UnitAITypes eUnitAI) = 0;
 	virtual int AI_totalWaterAreaUnitAIs(CvArea* pArea, UnitAITypes eUnitAI) = 0;
-	virtual int AI_plotTargetMissionAIs(CvPlot* pPlot, MissionAITypes eMissionAI, CvSelectionGroup* pSkipSelectionGroup = NULL, int iRange = 0) = 0;
-	virtual int AI_unitTargetMissionAIs(CvUnit* pUnit, MissionAITypes eMissionAI, CvSelectionGroup* pSkipSelectionGroup = NULL) = 0;
+	virtual int AI_plotTargetMissionAIs(CvPlot* pPlot, MissionAITypes eMissionAI, CvSelectionGroup* pSkipSelectionGroup = nullptr, int iRange = 0) = 0;
+	virtual int AI_unitTargetMissionAIs(CvUnit* pUnit, MissionAITypes eMissionAI, CvSelectionGroup* pSkipSelectionGroup = nullptr) = 0;
 	virtual int AI_civicValue(CivicTypes eCivic) = 0;
 	virtual int AI_getNumAIUnits(UnitAITypes eIndex) = 0;
 	virtual void AI_changePeacetimeTradeValue(PlayerTypes eIndex, int iChange) = 0;
@@ -928,7 +928,7 @@ public:
 	virtual CvCity* AI_findBestCity() const = 0;
 	// TAC - AI purchases military units - koma13 - START
 	//virtual CvCity* AI_findBestPort() const = 0;
-	virtual CvCity* AI_findBestPort(CvArea* pArea = NULL, CvCity* pNoAccessCity = NULL) const = 0;
+	virtual CvCity* AI_findBestPort(CvArea* pArea = nullptr, CvCity* pNoAccessCity = nullptr) const = 0;
 	// TAC - AI purchases military units - koma13 - END
 
 	bool checkPopulation() const;
@@ -1221,7 +1221,7 @@ protected:
 	// void makePeaceWithAll();
 	void kill();
 
-	// WTP, jooe, functionalise the buy Unit logic. Return value is the city where the units will appear (or NULL)
+	// WTP, jooe, functionalise the buy Unit logic. Return value is the city where the units will appear (or nullptr)
 	CvCity* buyUnitFromParentPlayer(PlayerTypes eSellingPlayer, const char *szUnitClass, int iNumUnits, CvWString szIDTag = CvWString(), int iPriceToPay = 0, LocationFlags eLocationFlags = LocationFlags::LocationFlagNone, bool bReceivePrice = true, bool bMessageMentionLocation = true);
 	CvCity* buyUnitFromPlayer(PlayerTypes eSellingPlayer, UnitClassTypes eUnitClass, int iNumUnits, CvWString szIDTag = CvWString(), int iPriceToPay = 0, LocationFlags eLocationFlags = LocationFlags::LocationFlagNone, bool bReceivePrice = true, bool bMessageMentionLocation = true);
 	CvCity* buyUnitFromPlayer(PlayerTypes eSellingPlayer, UnitTypes eUnitType, int iNumUnits, CvWString szIDTag = CvWString(), int iPriceToPay = 0, LocationFlags eLocationFlags = LocationFlags::LocationFlagNone, bool bReceivePrice = true, bool bMessageMentionLocation = true);
@@ -1268,7 +1268,7 @@ public:
 // cache CvPlayer::getYieldEquipmentAmount - start - Nightinggale
 inline int CvPlayer::getYieldEquipmentAmount(ProfessionTypes eProfession, YieldTypes eYield) const
 {
-	FAssert(m_cache_YieldEquipmentAmount != NULL);
+	FAssert(m_cache_YieldEquipmentAmount != nullptr);
 	FAssert(eProfession >= 0 && eProfession < GC.getNumProfessionInfos());
 	return m_cache_YieldEquipmentAmount[eProfession].get(eYield);
 }
@@ -1278,7 +1278,7 @@ inline bool CvPlayer::hasContentsYieldEquipmentAmount(ProfessionTypes eProfessio
 	// strictly speaking it returns true if the array is allocated without considering the content of the array.
 	// The reason why it works is because Update_cache_YieldEquipmentAmount() will only allocate arrays if they contain anything
 	//   and deallocate them if it is changed to contain only 0.
-	FAssert(m_cache_YieldEquipmentAmount != NULL);
+	FAssert(m_cache_YieldEquipmentAmount != nullptr);
 	FAssert(eProfession >= 0 && eProfession < GC.getNumProfessionInfos());
 	return m_cache_YieldEquipmentAmount[eProfession].isAllocated();
 }

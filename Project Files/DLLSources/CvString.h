@@ -55,7 +55,7 @@ public:
 	{
 		CvWString szOutput;
 		const wchar* pChar = GetCString();
-		while (pChar != NULL && *pChar != NULL)
+		while (pChar != nullptr && *pChar != '\0')
 		{
 			if (*pChar == '<')
 			{
@@ -63,7 +63,7 @@ public:
 				{
 					++pChar;
 				}
-				while (pChar != NULL && *pChar != '>');
+				while (pChar != nullptr && *pChar != '>');
 				if (*pChar == '>')
 				{
 					++pChar;
@@ -109,7 +109,7 @@ public:
 };
 
 
-//#define WIDEPTR(s) (s ? CvWString(s).c_str() : NULL)
+//#define WIDEPTR(s) (s ? CvWString(s).c_str() : nullptr)
 
 inline CvWString operator+( const CvWString& s, const CvWString& t) { return (std::wstring&)s + (std::wstring&)t; }
 inline CvWString operator+( const CvWString& s, const wchar* t) { return (std::wstring&)s + std::wstring(t); }
@@ -121,7 +121,7 @@ class CvWStringBuffer
 public:
 	CvWStringBuffer()
 	{
-		m_pBuffer = NULL;
+		m_pBuffer = nullptr;
 		m_iLength = 0;
 		m_iCapacity = 0;
 	}
@@ -142,7 +142,7 @@ public:
 
 	void append(const wchar *szCharacters)
 	{
-		if(szCharacters == NULL)
+		if (szCharacters == nullptr)
 			return;
 
 		int inputLength = wcslen(szCharacters);
@@ -177,7 +177,7 @@ public:
 
 	void clear()
 	{
-		if(m_pBuffer != NULL)
+		if (m_pBuffer != nullptr)
 		{
 			m_iLength = 0;
 			m_pBuffer[0] = 0; //null character
@@ -207,7 +207,7 @@ private:
 			wchar *newBuffer = new wchar [m_iCapacity];
 
 			//copy data
-			if(m_pBuffer != NULL)
+			if (m_pBuffer != nullptr)
 			{
 				memcpy(newBuffer, m_pBuffer, sizeof(wchar) * (m_iLength + 1)); //null character
 				//erase old memory
@@ -512,4 +512,3 @@ inline void CvString::Format( LPCSTR lpszFormat, ... )
 }
 
 #endif	// CvString_h
-

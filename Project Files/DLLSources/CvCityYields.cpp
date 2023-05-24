@@ -49,7 +49,7 @@ int CvCityYields::getBaseRawYieldProducedIndoor(YieldTypes eYieldType) const
 	for (int i = 0; i < m_city.getPopulation(); ++i)
 	{
 		CvUnit* pUnit = m_city.getPopulationUnitByIndex(i);
-		if (NULL != pUnit)
+		if (pUnit != nullptr)
 		{
 			ProfessionTypes eProfession = pUnit->getProfession();
 			if (NO_PROFESSION != eProfession)
@@ -91,7 +91,7 @@ int CvCityYields::getBaseRawYieldProducedPlots(YieldTypes eYieldType) const
 	FOREACH(CityPlot)
 	{
 		CvPlot* pPlot = m_city.getCityIndexPlot(eLoopCityPlot);
-		if (pPlot != NULL)
+		if (pPlot != nullptr)
 		{
 			if (m_city.isPlotProducingYields(eLoopCityPlot))
 			{
@@ -110,7 +110,7 @@ int CvCityYields::getBaseRawYieldProducedPlots(YieldTypes eYieldType) const
 					{
 						int iProductionModifier = 100;
 						CvUnit* pUnit = m_city.getUnitWorkingPlot(pPlot);
-						if (pUnit != NULL && pUnit->getUnitInfo().LbD_canEscape() && pUnit->getUnitInfo().getYieldChange(eYieldType) > 0)
+						if (pUnit != nullptr && pUnit->getUnitInfo().LbD_canEscape() && pUnit->getUnitInfo().getYieldChange(eYieldType) > 0)
 						{
 							iProductionModifier += iSlaveWorkerProductionBonus;
 						}

@@ -30,7 +30,7 @@ public:
 	virtual PyObject* MakeFunctionArgs(void** args, int argc) = 0;
 
 	virtual bool moduleExists(const char* moduleName, bool bLoadIfNecessary) = 0;
-	virtual bool callFunction(const char* moduleName, const char* fxnName, void* fxnArg=NULL) = 0;
+	virtual bool callFunction(const char* moduleName, const char* fxnName, void* fxnArg = nullptr) = 0;
 	virtual bool callFunction(const char* moduleName, const char* fxnName, void* fxnArg, long* result) = 0;
 	virtual bool callFunction(const char* moduleName, const char* fxnName, void* fxnArg, CvString* result) = 0;
 	virtual bool callFunction(const char* moduleName, const char* fxnName, void* fxnArg, CvWString* result) = 0;
@@ -121,7 +121,7 @@ void CvDLLPythonIFaceBase::setSeqFromArray(const T* aSrc, int size, PyObject* ds
 template <typename T>
 int CvDLLPythonIFaceBase::putSeqInArray(PyObject* src, T** aDst)
 {
-	*aDst = NULL;
+	*aDst = nullptr;
 	int size = PySequence_Length(src);
 	if (size<1)
 		return 0;
@@ -146,7 +146,7 @@ int CvDLLPythonIFaceBase::putSeqInArray(PyObject* src, T** aDst)
 template <typename T>
 int CvDLLPythonIFaceBase::putFloatSeqInArray(PyObject* src, T** aDst)
 {
-	*aDst = NULL;
+	*aDst = nullptr;
 	int size = PySequence_Length(src);
 	if (size<1)
 		return 0;
@@ -171,7 +171,7 @@ int CvDLLPythonIFaceBase::putFloatSeqInArray(PyObject* src, T** aDst)
 template <typename T>
 int CvDLLPythonIFaceBase::putStringSeqInArray(PyObject* src, T** aDst)
 {
-	*aDst = NULL;
+	*aDst = nullptr;
 	int size = PySequence_Length(src);
 	if (size<1)
 		return 0;

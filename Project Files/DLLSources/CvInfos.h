@@ -1869,7 +1869,7 @@ inline Ta CvCivilizationInfo::getCivSpecificForClass(Tb eVar) const
 {
 	// WARNING
 	// do not access member data from this call
-	// InfoArray calls this while the this pointer is NULL
+	// InfoArray calls this while the this pointer is null
 	// As such treat it as static even though it isn't due to the specialized functions
 	BOOST_STATIC_ASSERT((boost::is_same<Ta, Tb>::value));
 	return eVar;
@@ -1878,14 +1878,14 @@ inline Ta CvCivilizationInfo::getCivSpecificForClass(Tb eVar) const
 template<>
 inline BuildingTypes CvCivilizationInfo::getCivSpecificForClass(BuildingClassTypes eVar) const
 {
-	FAssertMsg(this != NULL, "InfoArray: BuildingClass->Unit conversion done on a NULL civ pointer");
+	FAssertMsg(this != nullptr, "InfoArray: BuildingClass->Unit conversion done on a null civ pointer");
 	return (BuildingTypes)getCivilizationBuildings(eVar);
 }
 
 template<>
 inline UnitTypes CvCivilizationInfo::getCivSpecificForClass(UnitClassTypes eVar) const
 {
-	FAssertMsg(this != NULL, "InfoArray: UnitClass->Unit conversion done on a NULL civ pointer");
+	FAssertMsg(this != nullptr, "InfoArray: UnitClass->Unit conversion done on a null civ pointer");
 	return (UnitTypes)getCivilizationUnits(eVar);
 }
 
@@ -4200,11 +4200,11 @@ public:
 	{
 		Response() :
 			m_iNumDiplomacyText(0),
-			m_abCivilizationTypes(NULL),
-			m_abLeaderHeadTypes(NULL),
-			m_abAttitudeTypes(NULL),
-			m_abDiplomacyPowerTypes(NULL),
-			m_paszDiplomacyText(NULL)
+			m_abCivilizationTypes(nullptr),
+			m_abLeaderHeadTypes(nullptr),
+			m_abAttitudeTypes(nullptr),
+			m_abDiplomacyPowerTypes(nullptr),
+			m_paszDiplomacyText(nullptr)
 		{
 		}
 		virtual ~Response ()

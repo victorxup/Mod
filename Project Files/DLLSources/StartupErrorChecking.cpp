@@ -185,7 +185,7 @@ static void checkPublicMapSetting()
 		switch (returnVal)
 		{
 		case AlertWindow::returnTypes::clickedAbout: exit(0);
-		case AlertWindow::returnTypes::clickedRetry: 
+		case AlertWindow::returnTypes::clickedRetry:
 			checkPublicMapSetting();
 			return;
 		case AlertWindow::returnTypes::clickedIgnore:
@@ -294,7 +294,7 @@ namespace StartupCheck
 
 	void GlobalInitXMLCheck()
 	{
-		FAssert(gDLL != NULL);
+		FAssert(gDLL != nullptr);
 		if (GC.shiftKey())
 		{
 			testAllWindows();

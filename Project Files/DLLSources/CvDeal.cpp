@@ -88,12 +88,12 @@ void CvDeal::kill(bool bKillTeam, TeamTypes eKillingTeam)
 
 	CLLNode<TradeData>* pNode;
 
-	for (pNode = headFirstTradesNode(); (pNode != NULL); pNode = nextFirstTradesNode(pNode))
+	for (pNode = headFirstTradesNode(); (pNode != nullptr); pNode = nextFirstTradesNode(pNode))
 	{
 		endTrade(pNode->m_data, getFirstPlayer(), getSecondPlayer(), bKillTeam, eKillingTeam);
 	}
 
-	for (pNode = headSecondTradesNode(); (pNode != NULL); pNode = nextSecondTradesNode(pNode))
+	for (pNode = headSecondTradesNode(); (pNode != nullptr); pNode = nextSecondTradesNode(pNode))
 	{
 		endTrade(pNode->m_data, getSecondPlayer(), getFirstPlayer(), bKillTeam, eKillingTeam);
 	}
@@ -109,7 +109,7 @@ void CvDeal::addTrades(CLinkList<TradeData>* pFirstList, CLinkList<TradeData>* p
 	bool bSave;
 	int iValue;
 
-	if (pFirstList != NULL)
+	if (pFirstList != nullptr)
 	{
 		for (pNode = pFirstList->head(); pNode; pNode = pFirstList->next(pNode))
 		{
@@ -123,7 +123,7 @@ void CvDeal::addTrades(CLinkList<TradeData>* pFirstList, CLinkList<TradeData>* p
 		}
 	}
 
-	if (pSecondList != NULL)
+	if (pSecondList != nullptr)
 	{
 		for (pNode = pSecondList->head(); pNode; pNode = pSecondList->next(pNode))
 		{
@@ -142,11 +142,11 @@ void CvDeal::addTrades(CLinkList<TradeData>* pFirstList, CLinkList<TradeData>* p
 	{
 		if (!isPeaceDealBetweenOthers(pFirstList, pSecondList))
 		{
-			if ((pSecondList != NULL) && (pSecondList->getLength() > 0))
+			if (pSecondList != nullptr && pSecondList->getLength() > 0)
 			{
 				iValue = GET_PLAYER(getFirstPlayer()).AI_dealVal(getSecondPlayer(), pSecondList, true);
 
-				if ((pFirstList != NULL) && (pFirstList->getLength() > 0))
+				if (pFirstList != nullptr && pFirstList->getLength() > 0)
 				{
 					GET_PLAYER(getFirstPlayer()).AI_changePeacetimeTradeValue(getSecondPlayer(), iValue);
 				}
@@ -155,11 +155,11 @@ void CvDeal::addTrades(CLinkList<TradeData>* pFirstList, CLinkList<TradeData>* p
 					GET_PLAYER(getFirstPlayer()).AI_changePeacetimeGrantValue(getSecondPlayer(), iValue);
 				}
 			}
-			if ((pFirstList != NULL) && (pFirstList->getLength() > 0))
+			if (pFirstList != nullptr && pFirstList->getLength() > 0)
 			{
 				iValue = GET_PLAYER(getSecondPlayer()).AI_dealVal(getFirstPlayer(), pFirstList, true);
 
-				if ((pSecondList != NULL) && (pSecondList->getLength() > 0))
+				if (pSecondList != nullptr && pSecondList->getLength() > 0)
 				{
 					GET_PLAYER(getSecondPlayer()).AI_changePeacetimeTradeValue(getFirstPlayer(), iValue);
 				}
@@ -171,7 +171,7 @@ void CvDeal::addTrades(CLinkList<TradeData>* pFirstList, CLinkList<TradeData>* p
 		}
 	}
 
-	if (pFirstList != NULL)
+	if (pFirstList != nullptr)
 	{
 		for (pNode = pFirstList->head(); pNode; pNode = pFirstList->next(pNode))
 		{
@@ -184,7 +184,7 @@ void CvDeal::addTrades(CLinkList<TradeData>* pFirstList, CLinkList<TradeData>* p
 		}
 	}
 
-	if (pSecondList != NULL)
+	if (pSecondList != nullptr)
 	{
 		for (pNode = pSecondList->head(); pNode; pNode = pSecondList->next(pNode))
 		{
@@ -199,7 +199,7 @@ void CvDeal::addTrades(CLinkList<TradeData>* pFirstList, CLinkList<TradeData>* p
 
 	bAlliance = false;
 
-	if (pFirstList != NULL)
+	if (pFirstList != nullptr)
 	{
 		for (pNode = pFirstList->head(); pNode; pNode = pFirstList->next(pNode))
 		{
@@ -210,7 +210,7 @@ void CvDeal::addTrades(CLinkList<TradeData>* pFirstList, CLinkList<TradeData>* p
 		}
 	}
 
-	if (pSecondList != NULL)
+	if (pSecondList != nullptr)
 	{
 		for (pNode = pSecondList->head(); pNode; pNode = pSecondList->next(pNode))
 		{
@@ -286,7 +286,7 @@ bool CvDeal::isPeaceDeal() const
 {
 	CLLNode<TradeData>* pNode;
 
-	for (pNode = headFirstTradesNode(); (pNode != NULL); pNode = nextFirstTradesNode(pNode))
+	for (pNode = headFirstTradesNode(); (pNode != nullptr); pNode = nextFirstTradesNode(pNode))
 	{
 		if (pNode->m_data.m_eItemType == getPeaceItem())
 		{
@@ -294,7 +294,7 @@ bool CvDeal::isPeaceDeal() const
 		}
 	}
 
-	for (pNode = headSecondTradesNode(); (pNode != NULL); pNode = nextSecondTradesNode(pNode))
+	for (pNode = headSecondTradesNode(); (pNode != nullptr); pNode = nextSecondTradesNode(pNode))
 	{
 		if (pNode->m_data.m_eItemType == getPeaceItem())
 		{
@@ -309,7 +309,7 @@ bool CvDeal::isPeaceDealBetweenOthers(CLinkList<TradeData>* pFirstList, CLinkLis
 {
 	CLLNode<TradeData>* pNode;
 
-	if (pFirstList != NULL)
+	if (pFirstList != nullptr)
 	{
 		for (pNode = pFirstList->head(); pNode; pNode = pFirstList->next(pNode))
 		{
@@ -320,7 +320,7 @@ bool CvDeal::isPeaceDealBetweenOthers(CLinkList<TradeData>* pFirstList, CLinkLis
 		}
 	}
 
-	if (pSecondList != NULL)
+	if (pSecondList != nullptr)
 	{
 		for (pNode = pSecondList->head(); pNode; pNode = pSecondList->next(pNode))
 		{
@@ -445,9 +445,9 @@ const CLinkList<TradeData>* CvDeal::getSecondTrades() const
 void CvDeal::write(FDataStreamBase* pStream)
 {
 	CvSavegameWriterBase writerbase(pStream);
-	CvSavegameWriter writer(writerbase); 
-	write(writer); 
-	writerbase.WriteFile(); 
+	CvSavegameWriter writer(writerbase);
+	write(writer);
+	writerbase.WriteFile();
 }
 
 void CvDeal::read(FDataStreamBase* pStream)
@@ -474,7 +474,7 @@ bool CvDeal::startTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eT
 	{
 	case TRADE_CITIES:
 		pCity = GET_PLAYER(eFromPlayer).getCity(trade.m_iData1);
-		if (pCity != NULL)
+		if (pCity != nullptr)
 		{
 			if (pCity->getLiberationPlayer(false) == eToPlayer)
 			{
@@ -519,16 +519,16 @@ bool CvDeal::startTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eT
 		{
 			YieldTypes eYield = (YieldTypes) trade.m_iData1;
 			CvUnit* pTransport = ::getUnit(trade.m_kTransport);
-			FAssert(pTransport != NULL);
-			if (pTransport != NULL)
+			FAssert(pTransport != nullptr);
+			if (pTransport != nullptr)
 			{
 				int iAmount = 0;
-				
+
 				CvPlot* pPlot = pTransport->plot();
-				FAssert(pPlot != NULL);
+				FAssert(pPlot != nullptr);
 				CvCity *pCity = pPlot->getPlotCity();
-				FAssert(pCity != NULL);
-				if (pCity != NULL)
+				FAssert(pCity != nullptr);
+				if (pCity != nullptr)
 				{
 					//load yields from city onto transport
 					if(pCity->getOwnerINLINE() == eFromPlayer)
@@ -542,7 +542,7 @@ bool CvDeal::startTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eT
 						for (int i = 0; i < pPlot->getNumUnits(); ++i)
 						{
 							CvUnit* pLoopUnit = pPlot->getUnitByIndex(i);
-							if (pLoopUnit != NULL)
+							if (pLoopUnit != nullptr)
 							{
 								if (pLoopUnit->getTransportUnit() == pTransport && pLoopUnit->getYield() == eYield)
 								{
@@ -555,7 +555,7 @@ bool CvDeal::startTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eT
 						FAssert(aUnits.size() > 0);
 						for (uint i = 0; i < aUnits.size(); ++i)
 						{
-							aUnits[i]->setTransportUnit(NULL);  // unloads goods into city and kills the unit
+							aUnits[i]->setTransportUnit(nullptr);  // unloads goods into city and kills the unit
 						}
 					}
 
@@ -582,7 +582,7 @@ bool CvDeal::startTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eT
 									kFrom.AI_changeGoldTradedTo(eToPlayer, -iAmount * iNativeHappy);
 								}
 							}
-							
+
 							if (GET_PLAYER(eToPlayer).isNative())
 							{
 								if (iNativeHappy > 0)
@@ -801,7 +801,7 @@ void CvDeal::endTeamTrade(TradeableItems eItem, TeamTypes eFromTeam, TeamTypes e
 	int iLoop;
 	CLLNode<TradeData>* pNode;
 
-	for (pLoopDeal = GC.getGameINLINE().firstDeal(&iLoop); pLoopDeal != NULL; pLoopDeal = GC.getGameINLINE().nextDeal(&iLoop))
+	for (pLoopDeal = GC.getGameINLINE().firstDeal(&iLoop); pLoopDeal != nullptr; pLoopDeal = GC.getGameINLINE().nextDeal(&iLoop))
 	{
 		if (pLoopDeal != this)
 		{
@@ -823,7 +823,7 @@ void CvDeal::endTeamTrade(TradeableItems eItem, TeamTypes eFromTeam, TeamTypes e
 
 			if (bValid && GET_PLAYER(pLoopDeal->getFirstPlayer()).getTeam() == eToTeam && GET_PLAYER(pLoopDeal->getSecondPlayer()).getTeam() == eFromTeam)
 			{
-				if (pLoopDeal->getSecondTrades() != NULL)
+				if (pLoopDeal->getSecondTrades() != nullptr)
 				{
 					for (pNode = pLoopDeal->getSecondTrades()->head(); pNode; pNode = pLoopDeal->getSecondTrades()->next(pNode))
 					{
@@ -928,4 +928,3 @@ TradeableItems CvDeal::getGoldItem()
 {
 	return TRADE_GOLD;
 }
-

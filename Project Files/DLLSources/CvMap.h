@@ -110,7 +110,7 @@ public:
 	CvMap();
 	virtual ~CvMap();
 
-	DllExport void init(CvMapInitData* pInitData=NULL);
+	DllExport void init(CvMapInitData* pInitData = nullptr);
 	DllExport void setupGraphical();
 	DllExport void reset(CvMapInitData* pInitData);
 
@@ -144,8 +144,8 @@ public:
 
 	CvPlot* syncRandPlot(int iFlags = 0, int iArea = -1, int iMinUnitDistance = -1, int iTimeout = 100);
 
-	DllExport CvCity* findCity(int iX, int iY, PlayerTypes eOwner = NO_PLAYER, TeamTypes eTeam = NO_TEAM, bool bSameArea = true, bool bCoastalOnly = false, TeamTypes eTeamAtWarWith = NO_TEAM, DirectionTypes eDirection = NO_DIRECTION, CvCity* pSkipCity = NULL);
-	CvCity* findCity(Coordinates coord, PlayerTypes eOwner = NO_PLAYER, TeamTypes eTeam = NO_TEAM, bool bSameArea = true, bool bCoastalOnly = false, TeamTypes eTeamAtWarWith = NO_TEAM, DirectionTypes eDirection = NO_DIRECTION, CvCity* pSkipCity = NULL);
+	DllExport CvCity* findCity(int iX, int iY, PlayerTypes eOwner = NO_PLAYER, TeamTypes eTeam = NO_TEAM, bool bSameArea = true, bool bCoastalOnly = false, TeamTypes eTeamAtWarWith = NO_TEAM, DirectionTypes eDirection = NO_DIRECTION, CvCity* pSkipCity = nullptr);
+	CvCity* findCity(Coordinates coord, PlayerTypes eOwner = NO_PLAYER, TeamTypes eTeam = NO_TEAM, bool bSameArea = true, bool bCoastalOnly = false, TeamTypes eTeamAtWarWith = NO_TEAM, DirectionTypes eDirection = NO_DIRECTION, CvCity* pSkipCity = nullptr);
 	CvSelectionGroup* findSelectionGroup(int iX, int iY, PlayerTypes eOwner = NO_PLAYER, bool bReadyToSelect = false);
 
 	CvArea* findBiggestArea(bool bWater);
@@ -258,7 +258,7 @@ public:
 #ifdef _USRDLL
 	inline CvPlot* plotByIndexINLINE(int iIndex) const
 	{
-		return (((iIndex >= 0) && (iIndex < (getGridWidthINLINE() * getGridHeightINLINE()))) ? &(m_pMapPlots[iIndex]) : NULL);
+		return iIndex >= 0 && iIndex < getGridWidthINLINE() * getGridHeightINLINE() ? &m_pMapPlots[iIndex] : nullptr;
 	}
 #endif
 	DllExport CvPlot* plot(int iX, int iY) const;
@@ -267,18 +267,18 @@ public:
 	{
 		if ((iX == INVALID_PLOT_COORD) || (iY == INVALID_PLOT_COORD))
 		{
-			return NULL;
+			return nullptr;
 		}
 		int iMapX = coordRange(iX, getGridWidthINLINE(), isWrapXINLINE());
 		int iMapY = coordRange(iY, getGridHeightINLINE(), isWrapYINLINE());
-		return ((isPlotINLINE(iMapX, iMapY)) ? &(m_pMapPlots[plotNumINLINE(iMapX, iMapY)]) : NULL);
+		return isPlotINLINE(iMapX, iMapY) ? &m_pMapPlots[plotNumINLINE(iMapX, iMapY)] : nullptr;
 	}
 
 	__forceinline CvPlot* plotINLINE(Coordinates coord) const
 	{
 		if(!coord.isOnMap())
 			{
-				return NULL;
+				return nullptr;
 			}
 		return &(m_pMapPlots[plotNumINLINE(coord)]);
 	}
@@ -286,7 +286,7 @@ public:
 	__forceinline CvPlot* plotSoren(int iX, int iY) const // advc.inl: Renamed from plotSorenINLINE
 	{
 		if (iX == INVALID_PLOT_COORD || iY == INVALID_PLOT_COORD)
-			return NULL;
+			return nullptr;
 		FAssert(isPlot(iX, iY)); // advc: Assertion added
 		return &(m_pMapPlots[plotNum(iX, iY)]);
 	} // <advc.inl> Even faster and less confusingly named; replacing the above in most places.
@@ -294,7 +294,7 @@ public:
 	__forceinline CvPlot* plotSoren(Coordinates coord) const
 	{
 		if (coord.isInvalidPlotCoord())
-			return NULL;
+			return nullptr;
 		FAssert(isPlotINLINE(coord)); // advc: Assertion added
 		return &(m_pMapPlots[plotNumINLINE(coord)]);
 	}
@@ -328,7 +328,7 @@ public:
 	void resetPathDistance();
 	// Super Forts begin *canal* *choke*
 	//int calculatePathDistance(CvPlot *pSource, CvPlot *pDest); //original
-	int calculatePathDistance(CvPlot *pSource, CvPlot *pDest, CvPlot *pInvalidPlot = NULL);	// Exposed to Python
+	int calculatePathDistance(CvPlot *pSource, CvPlot *pDest, CvPlot *pInvalidPlot = nullptr);	// Exposed to Python
 	void calculateCanalAndChokePoints();	// Exposed to Python
 	// Super Forts end
 

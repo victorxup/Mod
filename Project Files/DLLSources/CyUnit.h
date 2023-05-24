@@ -21,7 +21,7 @@ public:
 	DllExport CyUnit(CvUnit* pUnit);		// Call from C++
 	CvUnit* getUnit() { return m_pUnit;	};	// Call from C++
 	const CvUnit* getUnit() const { return m_pUnit;	};	// Call from C++
-	bool isNone() { return (m_pUnit==NULL); }
+	bool isNone() { return m_pUnit == nullptr; }
 	void convert(CyUnit* pUnit);
 	void kill(bool bDelay);
 	void NotifyEntity(int /*MissionTypes*/ eMission);
@@ -29,7 +29,7 @@ public:
 	bool canDoCommand(CommandTypes eCommand, int iData1, int iData2, bool bTestVisible);
 	void doCommand(CommandTypes eCommand, int iData1, int iData2);
 	CyPlot* getPathEndTurnPlot();
-	bool generatePath(CyPlot* pToPlot, int iFlags = 0, bool bReuse = false, int* piPathTurns = NULL);
+	bool generatePath(CyPlot* pToPlot, int iFlags = 0, bool bReuse = false, int* piPathTurns = nullptr);
 	bool canEnterTerritory(int /*PlayerTypes*/ ePlayer, bool bIgnoreRightOfPassage);
 	bool canEnterArea(int /*PlayerTypes*/ ePlayer, CyArea* pArea, bool bIgnoreRightOfPassage);
 	bool canMoveInto(CyPlot* pPlot, bool bAttack, bool bDeclareWar, bool bIgnoreLoad);
@@ -136,7 +136,7 @@ public:
 	int cityDefenseModifier();
 	int hillsAttackModifier();
 	int hillsDefenseModifier();
-	int DomesticBonusModifier();	
+	int DomesticBonusModifier();
 	int terrainAttackModifier(int /*TerrainTypes*/ eTerrain);
 	int terrainDefenseModifier(int /*TerrainTypes*/ eTerrain);
 	int featureAttackModifier(int /*FeatureTypes*/ eFeature);
@@ -212,12 +212,12 @@ public:
 	int getExtraCityDefensePercent();
 	int getExtraHillsAttackPercent();
 	int getExtraHillsDefensePercent();
-	int getExtraDomesticBonusPercent();	
+	int getExtraDomesticBonusPercent();
 	int getPillageChange() const;
 	int getAnimalGoldChange() const; //WTP, ray, Animal Promotions increase gold from Animals
 	int getSlaveRevoltReductionBonus() const; //WTP, ray, Slave Hunter and Slave Master
 	int getSlaveWorkerProductionBonus() const; //WTP, ray, Slave Hunter and Slave Master
-	int getUpgradeDiscount() const; 
+	int getUpgradeDiscount() const;
 	int getExperiencePercent() const;
 	int getImmobileTimer() const;
 	void setImmobileTimer(int iNewValue);

@@ -20,7 +20,7 @@ public:
 	int getTotalProductionRate();
 	// PatchMod: Victorys END
 
-	bool isNone() { return (m_pTeam==NULL); }
+	bool isNone() { return m_pTeam == nullptr; }
 	void addTeam(int /*TeamTypes*/ eTeam);
 	bool canChangeWarPeace(int /*TeamTypes*/ eTeam);
 	bool canDeclareWar(int /*TeamTypes*/ eTeam);

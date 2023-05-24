@@ -201,7 +201,7 @@ void CvUnit::resetSavedData(int iID, UnitTypes eUnit, PlayerTypes eOwner, bool b
 {
 	m_eFacingDirection = defaultFacingDirection;
 	m_eUnitType = eUnit;
-	m_pUnitInfo = (NO_UNIT != m_eUnitType) ? &GC.getUnitInfo(m_eUnitType) : NULL;
+	m_pUnitInfo = NO_UNIT != m_eUnitType ? &GC.getUnitInfo(m_eUnitType) : nullptr;
 
 	m_iID = iID;
 	m_iGroupID = defaultGroupID;

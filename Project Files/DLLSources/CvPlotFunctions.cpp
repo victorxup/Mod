@@ -9,7 +9,7 @@ RevealedPlotData::RevealedPlotData()
 }
 
 RevealedPlotDataArray::RevealedPlotDataArray()
-	: m_pArray(NULL)
+	: m_pArray(nullptr)
 {
 }
 
@@ -40,7 +40,7 @@ bool Coordinates::isOnMap() const
 
 CvPlot* Coordinates::plot() const
 {
-	return isOnMap() ? GC.getMap().plotINLINE(*this) : NULL;
+	return isOnMap() ? GC.getMap().plotINLINE(*this) : nullptr;
 }
 
 int Coordinates::plotNum() const

@@ -279,7 +279,7 @@ void PlotExtraYield::read(CvSavegameReader& reader)
 	tempArray.copyToVector(m_aeExtraYield);
 }
 
-void PlotExtraYield::write(CvSavegameWriter& writer) const 
+void PlotExtraYield::write(CvSavegameWriter& writer) const
 {
 	writer.Write(m_iX);
 	writer.Write(m_iY);
@@ -399,10 +399,10 @@ void CvBattleRound::setNumAlive(BattleUnitTypes unitType, int value)
 CvMissionDefinition::CvMissionDefinition() :
 	m_fMissionTime(0.0f),
 	m_eMissionType(NO_MISSION),
-	m_pPlot(NULL)
+	m_pPlot(nullptr)
 {
 	for(int i=0;i<BATTLE_UNIT_COUNT;i++)
-		m_aUnits[i] = NULL;
+		m_aUnits[i] = nullptr;
 }
 
 MissionTypes CvMissionDefinition::getMissionType() const
@@ -462,7 +462,7 @@ CvBattleDefinition::CvBattleDefinition() :
 
 	for(int i=0;i<BATTLE_UNIT_COUNT;i++)
 	{
-		m_aUnits[i] = NULL;
+		m_aUnits[i] = nullptr;
 		for(int j=0;j<BATTLE_TIME_COUNT;j++)
 			m_aDamage[i][j] = 0;
 	}
@@ -625,4 +625,3 @@ PBGameSetupData::PBGameSetupData()
 		abMPOptions.push_back(false);
 	}
 }
-

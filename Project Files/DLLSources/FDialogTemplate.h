@@ -17,7 +17,7 @@ class CDialogTemplate
 {
 public:
 	CDialogTemplate(LPCSTR caption, DWORD style, int x, int y, int w, int h,
-		LPCSTR font = NULL, WORD fontSize = 8);
+		LPCSTR font = nullptr, WORD fontSize = 8);
 
 	~CDialogTemplate();
 

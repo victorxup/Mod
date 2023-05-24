@@ -62,7 +62,7 @@ static Cv##name##ArtInfoItem g##name##ArtInfoItem; \
 \
 CvArtInfo##name* CvArtFileMgr::get##name##ArtInfo( const char *szArtDefineTag ) const \
 { \
-	FAssertMsg(szArtDefineTag, "NULL string on art info lookup?"); \
+	FAssertMsg(szArtDefineTag, "null string on art info lookup?"); \
 	ArtInfo##name##MapType::const_iterator it = m_map##name##ArtInfos->find( szArtDefineTag );\
 	if ( it == m_map##name##ArtInfos->end() ) \
 	{\
@@ -71,7 +71,7 @@ CvArtInfo##name* CvArtFileMgr::get##name##ArtInfo( const char *szArtDefineTag ) 
 		FAssertMsg(false, szErrorMsg ); \
 		if ( 0 == strcmp(szArtDefineTag, "ERROR") ) \
 		{ \
-			return NULL; \
+			return nullptr; \
 		} \
 		else \
 		{ \

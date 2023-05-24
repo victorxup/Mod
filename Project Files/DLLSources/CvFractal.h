@@ -30,7 +30,7 @@ public:
 	// iFracXExp should be 8 or less
 	// iFracYExp should be one less than iFracXExp for Civ3 worlds
 
-	DllExport void fracInit(int iNewXs, int iNewYs, int iGrain, CvRandom& random, int iFlags, CvFractal* pRifts=NULL, int iFracXExp=DEFAULT_FRAC_X_EXP, int iFracYExp=DEFAULT_FRAC_Y_EXP);
+	DllExport void fracInit(int iNewXs, int iNewYs, int iGrain, CvRandom& random, int iFlags, CvFractal* pRifts = nullptr, int iFracXExp = DEFAULT_FRAC_X_EXP, int iFracYExp = DEFAULT_FRAC_Y_EXP);
 	DllExport void fracInitHinted(int iNewXs, int iNewYs, int iGrain, CvRandom& random, byte* pbyHints, int iHintsLength, int iFlags, CvFractal* pRifts, int iFracXExp=DEFAULT_FRAC_X_EXP, int iFracYExp=DEFAULT_FRAC_Y_EXP);
 
 	DllExport int getHeight(int x, int y);
