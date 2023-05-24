@@ -1724,7 +1724,7 @@ void CvGameTextMgr::setPlotListHelp(CvWStringBuffer &szString, const CvPlot* pPl
 					// R&R, ray, Natives raiding party - START
 					if (!gDLL->altKey())
 					{
-						if (pPlot->getTeam() == NO_TEAM || GET_TEAM(pHeadGroup->getTeam()).isAtWar(pPlot->getTeam()))
+						if (pPlot->getTeam() == NO_TEAM || CvTeamAI::getTeam(pHeadGroup->getTeam()).isAtWar(pPlot->getTeam()))
 						{
 							szString.append(NEWLINE);
 							CvWString szTempBuffer;
@@ -2668,7 +2668,7 @@ void CvGameTextMgr::setPlotHelp(CvWStringBuffer& szString, CvPlot* pPlot)
 		if (pPlot->isOwned())
 		{
 			CvPlayerAI& kPlayer = CvPlayerAI::getPlayer(pPlot->getOwnerINLINE());
-			CvTeamAI& kTeam = GET_TEAM(kPlayer.getTeam());
+			CvTeamAI& kTeam = CvTeamAI::getTeam(kPlayer.getTeam());
 
 			szString.append(CvWString::format(L"\n FriendDist = %d, ECityDist = %d, EUnitDist = %d", kPlayer.AI_cityDistance(pPlot), kTeam.AI_enemyCityDistance(pPlot), kTeam.AI_enemyUnitDistance(pPlot)));
 		}
@@ -7749,7 +7749,7 @@ void CvGameTextMgr::getAttitudeString(CvWStringBuffer& szBuffer, PlayerTypes ePl
 	int iI;
 	CvPlayerAI& kPlayer = CvPlayerAI::getPlayer(ePlayer);
 	TeamTypes eTeam = (TeamTypes) kPlayer.getTeam();
-	CvTeamAI& kTeam = GET_TEAM(eTeam);
+	CvTeamAI& kTeam = CvTeamAI::getTeam(eTeam);
 
 	szBuffer.append(gDLL->getText("TXT_KEY_ATTITUDE_TOWARDS", GC.getAttitudeInfo(CvPlayerAI::getPlayer(ePlayer).AI_getAttitude(eTargetPlayer)).getTextKeyWide(), CvPlayerAI::getPlayer(eTargetPlayer).getNameKey()));
 
@@ -7917,7 +7917,7 @@ void CvGameTextMgr::getAttitudeString(CvWStringBuffer& szBuffer, PlayerTypes ePl
         if (GC.getGameINLINE().isOption(GAMEOPTION_NO_MORE_VARIABLES_HIDDEN))
         {
             iAttitudeChange = GC.getLeaderHeadInfo(kPlayer.getPersonalityType()).getLostWarAttitudeChange();
-            if (GET_TEAM(CvPlayerAI::getPlayer(eTargetPlayer).getTeam()).AI_getWarSuccess(kPlayer.getTeam()) > GET_TEAM(kPlayer.getTeam()).AI_getWarSuccess(CvPlayerAI::getPlayer(eTargetPlayer).getTeam()))
+            if (CvTeamAI::getTeam(CvPlayerAI::getPlayer(eTargetPlayer).getTeam()).AI_getWarSuccess(kPlayer.getTeam()) > CvTeamAI::getTeam(kPlayer.getTeam()).AI_getWarSuccess(CvPlayerAI::getPlayer(eTargetPlayer).getTeam()))
             {
                 if ((iPass == 0) ? (iAttitudeChange > 0) : (iAttitudeChange < 0))
                 {
@@ -7927,7 +7927,7 @@ void CvGameTextMgr::getAttitudeString(CvWStringBuffer& szBuffer, PlayerTypes ePl
                 }
             }
 
-            iAttitudeChange = - std::max(0, (GET_TEAM(CvPlayerAI::getPlayer(eTargetPlayer).getTeam()).getNumMembers() - GET_TEAM(kPlayer.getTeam()).getNumMembers()));
+            iAttitudeChange = - std::max(0, (CvTeamAI::getTeam(CvPlayerAI::getPlayer(eTargetPlayer).getTeam()).getNumMembers() - CvTeamAI::getTeam(kPlayer.getTeam()).getNumMembers()));
             if ((iPass == 0) ? (iAttitudeChange > 0) : (iAttitudeChange < 0))
             {
                 szTempBuffer.Format(SETCOLR L"%s" ENDCOLR, TEXT_COLOR((iAttitudeChange > 0) ? "COLOR_POSITIVE_TEXT" : "COLOR_NEGATIVE_TEXT"), gDLL->getText(((iAttitudeChange > 0) ? "TXT_KEY_MISC_TEAMSIZE_ATTITUDE" : "TXT_KEY_MISC_TEAMSIZE_ATTITUDE"), iAttitudeChange).GetCString());
@@ -7999,7 +7999,7 @@ void CvGameTextMgr::getTradeString(CvWStringBuffer& szBuffer, const TradeData& t
 	case TRADE_PEACE:
 	case TRADE_WAR:
 	case TRADE_EMBARGO:
-		szBuffer.assign(CvWString::format(L"%s", GET_TEAM((TeamTypes)tradeData.m_iData1).getName().GetCString()));
+		szBuffer.assign(CvWString::format(L"%s", CvTeamAI::getTeam((TeamTypes)tradeData.m_iData1).getName().GetCString()));
 		break;
 	default:
 		FAssert(false);
@@ -8309,7 +8309,7 @@ void CvGameTextMgr::parseLeaderHeadHelp(CvWStringBuffer &szBuffer, PlayerTypes e
 
 	if (eOtherPlayer != NO_PLAYER)
 	{
-		CvTeam& kThisTeam = GET_TEAM(CvPlayerAI::getPlayer(eThisPlayer).getTeam());
+		CvTeam& kThisTeam = CvTeamAI::getTeam(CvPlayerAI::getPlayer(eThisPlayer).getTeam());
 		if (eOtherPlayer != eThisPlayer && kThisTeam.isHasMet(CvPlayerAI::getPlayer(eOtherPlayer).getTeam()))
 		{
 			getAttitudeString(szBuffer, eThisPlayer, eOtherPlayer);
@@ -8326,8 +8326,8 @@ void CvGameTextMgr::parseLeaderLineHelp(CvWStringBuffer &szBuffer, PlayerTypes e
 	{
 		return;
 	}
-	CvTeam& thisTeam = GET_TEAM(CvPlayerAI::getPlayer(eThisPlayer).getTeam());
-	CvTeam& otherTeam = GET_TEAM(CvPlayerAI::getPlayer(eOtherPlayer).getTeam());
+	CvTeam& thisTeam = CvTeamAI::getTeam(CvPlayerAI::getPlayer(eThisPlayer).getTeam());
+	CvTeam& otherTeam = CvTeamAI::getTeam(CvPlayerAI::getPlayer(eOtherPlayer).getTeam());
 
 	if (thisTeam.getID() == otherTeam.getID())
 	{
@@ -10334,18 +10334,18 @@ void CvGameTextMgr::setEventHelp(CvWStringBuffer& szBuffer, EventTypes eEvent, i
 
 	if (NO_PLAYER != pTriggeredData->m_eOtherPlayer)
 	{
-		TeamTypes eWorstEnemy = GET_TEAM(CvPlayerAI::getPlayer(pTriggeredData->m_eOtherPlayer).getTeam()).AI_getWorstEnemy();
+		TeamTypes eWorstEnemy = CvTeamAI::getTeam(CvPlayerAI::getPlayer(pTriggeredData->m_eOtherPlayer).getTeam()).AI_getWorstEnemy();
 		if (NO_TEAM != eWorstEnemy)
 		{
 			if (kEvent.getTheirEnemyAttitudeModifier() > 0)
 			{
 				szBuffer.append(NEWLINE);
-				szBuffer.append(gDLL->getText("TXT_KEY_EVENT_ATTITUDE_GOOD", kEvent.getTheirEnemyAttitudeModifier(), GET_TEAM(eWorstEnemy).getName().GetCString()));
+				szBuffer.append(gDLL->getText("TXT_KEY_EVENT_ATTITUDE_GOOD", kEvent.getTheirEnemyAttitudeModifier(), CvTeamAI::getTeam(eWorstEnemy).getName().GetCString()));
 			}
 			else if (kEvent.getTheirEnemyAttitudeModifier() < 0)
 			{
 				szBuffer.append(NEWLINE);
-				szBuffer.append(gDLL->getText("TXT_KEY_EVENT_ATTITUDE_BAD", kEvent.getTheirEnemyAttitudeModifier(), GET_TEAM(eWorstEnemy).getName().GetCString()));
+				szBuffer.append(gDLL->getText("TXT_KEY_EVENT_ATTITUDE_BAD", kEvent.getTheirEnemyAttitudeModifier(), CvTeamAI::getTeam(eWorstEnemy).getName().GetCString()));
 			}
 		}
 	}
@@ -10549,7 +10549,7 @@ void CvGameTextMgr::setFatherHelp(CvWStringBuffer &szBuffer, FatherTypes eFather
 					szTempBuffer += L"\n";
 				}
 
-				szTempBuffer += CvWString::format(L"%d%c", (eTeam != NO_TEAM ? GET_TEAM(eTeam).getFatherPointCost(eFather, ePointType) : kFatherInfo.getPointCost(ePointType)), GC.getFatherPointInfo(ePointType).getChar());
+				szTempBuffer += CvWString::format(L"%d%c", (eTeam != NO_TEAM ? CvTeamAI::getTeam(eTeam).getFatherPointCost(eFather, ePointType) : kFatherInfo.getPointCost(ePointType)), GC.getFatherPointInfo(ePointType).getChar());
 			}
 		}
 

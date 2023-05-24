@@ -2655,7 +2655,7 @@ RouteTypes CvSelectionGroup::getBestBuildRoute(CvPlot* pPlot, BuildTypes* peBest
 // Returns true if group was bumped...
 bool CvSelectionGroup::groupDeclareWar(CvPlot* pPlot, bool bForce)
 {
-	CvTeamAI& kTeam = GET_TEAM(getTeam());
+	CvTeamAI& kTeam = CvTeamAI::getTeam(getTeam());
 	TeamTypes ePlotTeam = pPlot->getTeam();
 
 	if (!AI_isDeclareWar(pPlot))

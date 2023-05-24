@@ -180,9 +180,9 @@ bool atWar(TeamTypes eTeamA, TeamTypes eTeamB)
 	}
 	else
 	{
-		FAssert(GET_TEAM(eTeamA).isAtWar(eTeamB) == GET_TEAM(eTeamB).isAtWar(eTeamA));
-		FAssert((eTeamA != eTeamB) || !(GET_TEAM(eTeamA).isAtWar(eTeamB)));
-		return GET_TEAM(eTeamA).isAtWar(eTeamB);
+		FAssert(CvTeamAI::getTeam(eTeamA).isAtWar(eTeamB) == CvTeamAI::getTeam(eTeamB).isAtWar(eTeamA));
+		FAssert((eTeamA != eTeamB) || !(CvTeamAI::getTeam(eTeamA).isAtWar(eTeamB)));
+		return CvTeamAI::getTeam(eTeamA).isAtWar(eTeamB);
 	}
 }
 
@@ -195,7 +195,7 @@ bool isPotentialEnemy(TeamTypes eOurTeam, TeamTypes eTheirTeam)
 
 	if (eOurTeam != NO_TEAM)
 	{
-		if (GET_TEAM(eOurTeam).AI_isSneakAttackReady(eTheirTeam))
+		if (CvTeamAI::getTeam(eOurTeam).AI_isSneakAttackReady(eTheirTeam))
 		{
 			return true;
 		}
@@ -761,7 +761,7 @@ bool PUF_canDeclareWar( const CvUnit* pUnit, int iData1, int iData2)
 		return false;
 	}
 
-	return (iData2 ? false : GET_TEAM(eOtherTeam).canDeclareWar(eOurTeam));
+	return (iData2 ? false : CvTeamAI::getTeam(eOtherTeam).canDeclareWar(eOurTeam));
 }
 
 bool PUF_canDefend(const CvUnit* pUnit, int iData1, int iData2)
@@ -1098,7 +1098,7 @@ int pathCost(FAStarNode* parent, FAStarNode* node, int data, const void* pointer
 					// Add additional cost for ending turn in or adjacent to enemy territory based on flags
 					if (iFlags & MOVE_AVOID_ENEMY_WEIGHT_3)
 					{
-						if (pToPlot->isOwned() && ((GET_TEAM(pSelectionGroup->getHeadTeam()).AI_getWarPlan(pToPlot->getTeam()) != NO_WARPLAN) || (pToPlot->getTeam() != pLoopUnit->getTeam() && pLoopUnit->isAlwaysHostile(pToPlot))))
+						if (pToPlot->isOwned() && ((CvTeamAI::getTeam(pSelectionGroup->getHeadTeam()).AI_getWarPlan(pToPlot->getTeam()) != NO_WARPLAN) || (pToPlot->getTeam() != pLoopUnit->getTeam() && pLoopUnit->isAlwaysHostile(pToPlot))))
 						{
 							iCost *= 3;
 						}
@@ -1123,7 +1123,7 @@ int pathCost(FAStarNode* parent, FAStarNode* node, int data, const void* pointer
 					}
 					else if (iFlags & MOVE_AVOID_ENEMY_WEIGHT_2)
 					{
-						if (pToPlot->isOwned() && ((GET_TEAM(pSelectionGroup->getHeadTeam()).AI_getWarPlan(pToPlot->getTeam()) != NO_WARPLAN) || (pToPlot->getTeam() != pLoopUnit->getTeam() && pLoopUnit->isAlwaysHostile(pToPlot))))
+						if (pToPlot->isOwned() && ((CvTeamAI::getTeam(pSelectionGroup->getHeadTeam()).AI_getWarPlan(pToPlot->getTeam()) != NO_WARPLAN) || (pToPlot->getTeam() != pLoopUnit->getTeam() && pLoopUnit->isAlwaysHostile(pToPlot))))
 						{
 							iCost *= 2;
 						}
@@ -1287,16 +1287,16 @@ int pathCost(FAStarNode* parent, FAStarNode* node, int data, const void* pointer
 		if (eSecondOwner != NO_PLAYER && eFirstOwner != NO_PLAYER &&
 			((pSelectionGroup->getDomainType() == DOMAIN_SEA) == kToPlot.isWater()))
 		{	// Avoid tiles that flip from us to the enemy upon DoW
-			if (TEAMID(eFirstOwner) == eTeam && (GET_TEAM(eTeam).isHuman() ?
-				(!GET_TEAM(eTeam).isFriendlyTerritory(TEAMID(eSecondOwner)) &&
-					!GET_TEAM(eTeam).isAtWar(TEAMID(eSecondOwner))) :
-				GET_TEAM(eTeam).AI_isSneakAttackReady(TEAMID(eSecondOwner))))
+			if (TEAMID(eFirstOwner) == eTeam && (CvTeamAI::getTeam(eTeam).isHuman() ?
+				(!CvTeamAI::getTeam(eTeam).isFriendlyTerritory(TEAMID(eSecondOwner)) &&
+					!CvTeamAI::getTeam(eTeam).isAtWar(TEAMID(eSecondOwner))) :
+				CvTeamAI::getTeam(eTeam).AI_isSneakAttackReady(TEAMID(eSecondOwner))))
 				iFlipModifier++;
 			// Seek out enemy tiles that will flip to us upon DoW
-			if (TEAMID(eSecondOwner) == eTeam && (GET_TEAM(eTeam).isHuman() ?
-				(!GET_TEAM(eTeam).isFriendlyTerritory(TEAMID(eFirstOwner)) &&
-					!GET_TEAM(eTeam).isAtWar(TEAMID(eFirstOwner))) :
-				GET_TEAM(eTeam).AI_isSneakAttackReady(TEAMID(eFirstOwner))))
+			if (TEAMID(eSecondOwner) == eTeam && (CvTeamAI::getTeam(eTeam).isHuman() ?
+				(!CvTeamAI::getTeam(eTeam).isFriendlyTerritory(TEAMID(eFirstOwner)) &&
+					!CvTeamAI::getTeam(eTeam).isAtWar(TEAMID(eFirstOwner))) :
+				CvTeamAI::getTeam(eTeam).AI_isSneakAttackReady(TEAMID(eFirstOwner))))
 				iFlipModifier--;
 			/*  This could be done much more accurately, taking into account
 			vassal agreements, defensive pacts, and going through the entire
@@ -1439,7 +1439,7 @@ int pathCost(FAStarNode* parent, FAStarNode* node, int data, const void* pointer
 		else
 		{
 			// plot not visible. use memory
-			iEnemyDefence = GET_TEAM(eTeam).AI_getStrengthMemory(kToPlot.getX(), kToPlot.getY());
+			iEnemyDefence = CvTeamAI::getTeam(eTeam).AI_getStrengthMemory(kToPlot.getX(), kToPlot.getY());
 		}
 
 		if (iEnemyDefence > 0)
@@ -1463,7 +1463,7 @@ int pathCost(FAStarNode* parent, FAStarNode* node, int data, const void* pointer
 	from trying to move _through_ enemy territory and thus declaring war
 	earlier than necessary */
 	if (bAIControl && (iFlags & MOVE_DECLARE_WAR) && eToPlotTeam != NO_TEAM &&
-		eToPlotTeam != eTeam && GET_TEAM(eTeam).AI_isSneakAttackReady(eToPlotTeam))
+		eToPlotTeam != eTeam && CvTeamAI::getTeam(eTeam).AI_isSneakAttackReady(eToPlotTeam))
 		iWorstCost += PATH_DOW_WEIGHT;
 	// </advc.082>
 	if (iWorstMovesLeft <= 0)
@@ -1514,7 +1514,7 @@ int pathCost(FAStarNode* parent, FAStarNode* node, int data, const void* pointer
 			{
 				iDefenceMod += pLoopUnit->noDefensiveBonus() ? 0 :
 					//pToPlot->defenseModifier(eTeam, false);
-					GET_TEAM(eTeam).AI_plotDefense(kToPlot); // advc.012
+					CvTeamAI::getTeam(eTeam).AI_plotDefense(kToPlot); // advc.012
 			}
 			else iDefenceMod -= 100; // we don't want to be here.
 
@@ -1577,7 +1577,7 @@ int pathCost(FAStarNode* parent, FAStarNode* node, int data, const void* pointer
 		// additional cost for ending turn in or adjacent to enemy territory based on flags (based on BBAI)
 		if (iFlags & (MOVE_AVOID_ENEMY_WEIGHT_2 | MOVE_AVOID_ENEMY_WEIGHT_3))
 		{
-			if (kToPlot.isOwned() && GET_TEAM(eTeam).AI_getWarPlan(eToPlotTeam) != NO_WARPLAN)
+			if (kToPlot.isOwned() && CvTeamAI::getTeam(eTeam).AI_getWarPlan(eToPlotTeam) != NO_WARPLAN)
 			{
 				iWorstCost *= (iFlags & MOVE_AVOID_ENEMY_WEIGHT_3) ? 3 : 2;
 			}
@@ -1701,7 +1701,7 @@ int pathValid_source(FAStarNode* parent, CvSelectionGroup* pSelectionGroup, int 
 	if (kFromPlot.isRevealed(pSelectionGroup->getHeadTeam(), false))
 	{
 		PROFILE("pathValid move through");
-		CvTeamAI& kTeam = GET_TEAM(pSelectionGroup->getHeadTeam());
+		CvTeamAI& kTeam = CvTeamAI::getTeam(pSelectionGroup->getHeadTeam());
 
 		int iEnemyDefence;
 		if (kFromPlot.isVisible(pSelectionGroup->getHeadTeam(), false))

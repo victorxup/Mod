@@ -725,7 +725,7 @@ void CvUnit::updateOwnerCache(int iChange)
 
 	CvPlayer& kPlayer = CvPlayerAI::getPlayer(getOwnerINLINE());
 
-	GET_TEAM(getTeam()).changeUnitClassCount(m_pUnitInfo->getUnitClassType(), iChange);
+	CvTeamAI::getTeam(getTeam()).changeUnitClassCount(m_pUnitInfo->getUnitClassType(), iChange);
 	kPlayer.changeUnitClassCount(m_pUnitInfo->getUnitClassType(), iChange);
 	kPlayer.changeAssets(getAsset() * iChange);
 	kPlayer.changePower(getPower() * iChange);
@@ -1442,7 +1442,7 @@ void CvUnit::updateCombat(bool bQuick)
 
 			if (!m_pUnitInfo->isHiddenNationality() && !pDefender->getUnitInfo().isHiddenNationality())
 			{
-				GET_TEAM(pDefender->getTeam()).AI_changeWarSuccess(getTeam(), GC.getDefineINT("WAR_SUCCESS_DEFENDING"));
+				CvTeamAI::getTeam(pDefender->getTeam()).AI_changeWarSuccess(getTeam(), GC.getDefineINT("WAR_SUCCESS_DEFENDING"));
 			}
 
 			// R&R, ray, Natives raiding party - START
@@ -1515,7 +1515,7 @@ void CvUnit::updateCombat(bool bQuick)
 
 					if ((bHasParents && pDefender->getUnitInfo().getDomainType() == DOMAIN_SEA) || (bIsEurope && pDefender->getUnitInfo().isCapturesShips()))
 					{
-						bool bAtWar = GET_TEAM(getTeam()).isAtWar(pDefender->getTeam());
+						bool bAtWar = CvTeamAI::getTeam(getTeam()).isAtWar(pDefender->getTeam());
 
 						if ((getUnitInfo().isCapturesCargo() && bAtWar) || !getUnitInfo().isCapturesCargo())
 						{
@@ -1590,10 +1590,10 @@ void CvUnit::updateCombat(bool bQuick)
 
 				if (!bIsNativeRaid)
 				{
-					GET_TEAM(getTeam()).AI_changeWarSuccess(pDefender->getTeam(), GC.getDefineINT("WAR_SUCCESS_ATTACKING"));
+					CvTeamAI::getTeam(getTeam()).AI_changeWarSuccess(pDefender->getTeam(), GC.getDefineINT("WAR_SUCCESS_ATTACKING"));
 					if (CvPlayerAI::getPlayer(getOwnerINLINE()).isNative())
 					{
-						GET_TEAM(getTeam()).AI_changeDamages(pDefender->getTeam(), -2 * pDefender->getUnitInfo().getAssetValue());
+						CvTeamAI::getTeam(getTeam()).AI_changeDamages(pDefender->getTeam(), -2 * pDefender->getUnitInfo().getAssetValue());
 					}
 				}
 				// R&R, ray, Natives raiding party - END
@@ -2968,7 +2968,7 @@ bool CvUnit::canEnterTerritory(PlayerTypes ePlayer, bool bIgnoreRightOfPassage) 
 
 	TeamTypes eTeam = CvPlayerAI::getPlayer(ePlayer).getTeam();
 
-	if (GET_TEAM(getTeam()).isFriendlyTerritory(eTeam))
+	if (CvTeamAI::getTeam(getTeam()).isFriendlyTerritory(eTeam))
 	{
 		return true;
 	}
@@ -3015,7 +3015,7 @@ bool CvUnit::canEnterTerritory(PlayerTypes ePlayer, bool bIgnoreRightOfPassage) 
 
 	if (!bIgnoreRightOfPassage)
 	{
-		if (GET_TEAM(getTeam()).isOpenBorders(eTeam))
+		if (CvTeamAI::getTeam(getTeam()).isOpenBorders(eTeam))
 		{
 			return true;
 		}
@@ -3056,7 +3056,7 @@ TeamTypes CvUnit::getDeclareWarUnitMove(const CvPlot* pPlot) const
 	PlayerTypes eRevealedPlayer = pPlot->getRevealedOwner(getTeam(), false);
 	if (eRevealedTeam != NO_TEAM)
 	{
-		if (GET_TEAM(getTeam()).canDeclareWar(pPlot->getTeam()))
+		if (CvTeamAI::getTeam(getTeam()).canDeclareWar(pPlot->getTeam()))
 		{
 			if (!canEnterArea(eRevealedPlayer, pPlot->area()))
 			{
@@ -3580,7 +3580,7 @@ bool CvUnit::canMoveInto(CvPlot const& kPlot, bool bAttack, bool bDeclareWar, bo
 	{
 		FAssert(ePlotTeam != NO_TEAM);
 
-		if (!(GET_TEAM(getTeam()).canDeclareWar(ePlotTeam)))
+		if (!(CvTeamAI::getTeam(getTeam()).canDeclareWar(ePlotTeam)))
 		{
 			return false;
 		}
@@ -3594,7 +3594,7 @@ bool CvUnit::canMoveInto(CvPlot const& kPlot, bool bAttack, bool bDeclareWar, bo
 		}
 		else
 		{
-			if (GET_TEAM(getTeam()).AI_isSneakAttackReady(ePlotTeam))
+			if (CvTeamAI::getTeam(getTeam()).AI_isSneakAttackReady(ePlotTeam))
 			{
 				if (!(getGroup()->AI_isDeclareWar(&kPlot)))
 				{
@@ -6724,7 +6724,7 @@ int CvUnit::healRate(const CvPlot* pPlot) const
 
 	if (pPlot->isCity(true, getTeam()))
 	{
-		iTotalHeal += (GC.getDefineINT("CITY_HEAL_RATE") * (100 + (GET_TEAM(getTeam()).isFriendlyTerritory(pPlot->getTeam()) ? getExtraFriendlyHeal() : getExtraNeutralHeal()))) / 100;
+		iTotalHeal += (GC.getDefineINT("CITY_HEAL_RATE") * (100 + (CvTeamAI::getTeam(getTeam()).isFriendlyTerritory(pPlot->getTeam()) ? getExtraFriendlyHeal() : getExtraNeutralHeal()))) / 100;
 		CvCity* pCity = pPlot->getPlotCity();
 		if (pCity && !pCity->isOccupation())
 		{
@@ -6733,7 +6733,7 @@ int CvUnit::healRate(const CvPlot* pPlot) const
 	}
 	else
 	{
-		if (!GET_TEAM(getTeam()).isFriendlyTerritory(pPlot->getTeam()))
+		if (!CvTeamAI::getTeam(getTeam()).isFriendlyTerritory(pPlot->getTeam()))
 		{
 			if (isEnemy(pPlot->getTeam(), pPlot))
 			{
@@ -7316,7 +7316,7 @@ bool CvUnit::doFoundCheckNatives()
 			{
 				if (pLoopPlot->isOwned() && !pLoopPlot->isCity())
 				{
-					if (CvPlayerAI::getPlayer(pLoopPlot->getOwnerINLINE()).isNative() && !GET_TEAM(pLoopPlot->getTeam()).isAtWar(getTeam()))
+					if (CvPlayerAI::getPlayer(pLoopPlot->getOwnerINLINE()).isNative() && !CvTeamAI::getTeam(pLoopPlot->getTeam()).isAtWar(getTeam()))
 					{
 						eNativeOwner = pLoopPlot->getOwnerINLINE();
 						iCost += pLoopPlot->getBuyPrice(getOwnerINLINE());
@@ -7327,7 +7327,7 @@ bool CvUnit::doFoundCheckNatives()
 
 		if (eNativeOwner != NO_PLAYER)
 		{
-			GET_TEAM(getTeam()).meet(CvPlayerAI::getPlayer(eNativeOwner).getTeam(), false);
+			CvTeamAI::getTeam(getTeam()).meet(CvPlayerAI::getPlayer(eNativeOwner).getTeam(), false);
 		}
 
 		if (eNativeOwner != NO_PLAYER && !CvPlayerAI::getPlayer(eNativeOwner).isHuman())
@@ -7379,8 +7379,8 @@ bool CvUnit::doAcquireCheckNatives()
 				if (pLoopPlot->isOwned() && !pLoopPlot->isCity())
 				{
 					PlayerTypes ePossibleNativeOwner = pLoopPlot->findHighestCulturePlayer();
-					//if (CvPlayerAI::getPlayer(pLoopPlot->getOwnerINLINE()).isNative() && !GET_TEAM(pLoopPlot->getTeam()).isAtWar(getTeam()))
-					if (CvPlayerAI::getPlayer(ePossibleNativeOwner).isNative() && !GET_TEAM(CvPlayerAI::getPlayer(ePossibleNativeOwner).getTeam()).isAtWar(getTeam()))
+					//if (CvPlayerAI::getPlayer(pLoopPlot->getOwnerINLINE()).isNative() && !CvTeamAI::getTeam(pLoopPlot->getTeam()).isAtWar(getTeam()))
+					if (CvPlayerAI::getPlayer(ePossibleNativeOwner).isNative() && !CvTeamAI::getTeam(CvPlayerAI::getPlayer(ePossibleNativeOwner).getTeam()).isAtWar(getTeam()))
 					{
 						eNativeOwner = ePossibleNativeOwner;
 						iCost += pLoopPlot->getBuyPrice(ePossibleNativeOwner);
@@ -7393,7 +7393,7 @@ bool CvUnit::doAcquireCheckNatives()
 		{
 			m_iMoneyToBuyLand = iCost;
 			m_ePlayerToBuyLand = eNativeOwner;
-			GET_TEAM(getTeam()).meet(CvPlayerAI::getPlayer(eNativeOwner).getTeam(), false);
+			CvTeamAI::getTeam(getTeam()).meet(CvPlayerAI::getPlayer(eNativeOwner).getTeam(), false);
 		}
 
 		if (eNativeOwner != NO_PLAYER && !CvPlayerAI::getPlayer(eNativeOwner).isHuman())
@@ -7425,9 +7425,9 @@ void CvUnit::buyLandAfterAcquire()
 	if (m_ePlayerToBuyLand != NO_PLAYER)
 	{
 		//resetting to Peace if Acquiring City has caused war
-		if (GET_TEAM(CvPlayerAI::getPlayer(m_ePlayerToBuyLand).getTeam()).isAtWar(getTeam()))
+		if (CvTeamAI::getTeam(CvPlayerAI::getPlayer(m_ePlayerToBuyLand).getTeam()).isAtWar(getTeam()))
 		{
-			GET_TEAM(CvPlayerAI::getPlayer(m_ePlayerToBuyLand).getTeam()).makePeace(getTeam());
+			CvTeamAI::getTeam(CvPlayerAI::getPlayer(m_ePlayerToBuyLand).getTeam()).makePeace(getTeam());
 			CvWString szBuffer = gDLL->getText("TXT_KEY_MAKE_PEACE_AFTER_ACQUIRE_CITY", CvPlayerAI::getPlayer(m_ePlayerToBuyLand).getNameKey());
 			gDLL->UI().addPlayerMessage(getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, GC.getEraInfo(GC.getGameINLINE().getCurrentEra()).getAudioUnitDefeatScript(), MESSAGE_TYPE_INFO, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), NULL, NULL);
 		}
@@ -7464,7 +7464,7 @@ bool CvUnit::doFound(bool bBuyLand)
 				if (pLoopPlot->isOwned() && !pLoopPlot->isCity())
 				{
 					//don't buy land if at war, it will be taken
-					if (CvPlayerAI::getPlayer(pLoopPlot->getOwnerINLINE()).isNative() && !GET_TEAM(pLoopPlot->getTeam()).isAtWar(getTeam()))
+					if (CvPlayerAI::getPlayer(pLoopPlot->getOwnerINLINE()).isNative() && !CvTeamAI::getTeam(pLoopPlot->getTeam()).isAtWar(getTeam()))
 					{
 						CvPlayerAI::getPlayer(getOwnerINLINE()).buyLand(pLoopPlot, bIsFirstCity);
 					}
@@ -9983,7 +9983,7 @@ int CvUnit::rebelModifier(PlayerTypes eOtherPlayer) const
 		return 0;
 	}
 
-	int iModifier = std::max(0, GET_TEAM(getTeam()).getRebelPercent() - GC.getDefineINT("REBEL_PERCENT_FOR_REVOLUTION"));
+	int iModifier = std::max(0, CvTeamAI::getTeam(getTeam()).getRebelPercent() - GC.getDefineINT("REBEL_PERCENT_FOR_REVOLUTION"));
 
 	iModifier *= CvPlayerAI::getPlayer(getOwnerINLINE()).getRebelCombatPercent();
 	iModifier /= 100;
@@ -10749,7 +10749,7 @@ void CvUnit::jumpTo(Coordinates toCoord, bool bGroup, bool bUpdate, bool bShow, 
 		{
 			if (isEnemy(pNewCity->getTeam()) && !canCoexistWithEnemyUnit(pNewCity->getTeam()) && canFight())
 			{
-				GET_TEAM(getTeam()).AI_changeWarSuccess(pNewCity->getTeam(), GC.getDefineINT("WAR_SUCCESS_CITY_CAPTURING"));
+				CvTeamAI::getTeam(getTeam()).AI_changeWarSuccess(pNewCity->getTeam(), GC.getDefineINT("WAR_SUCCESS_CITY_CAPTURING"));
 				PlayerTypes eNewOwner = CvPlayerAI::getPlayer(getOwnerINLINE()).pickConqueredCityOwner(*pNewCity);
 
 				if (NO_PLAYER != eNewOwner)
@@ -10832,13 +10832,13 @@ void CvUnit::jumpTo(Coordinates toCoord, bool bGroup, bool bUpdate, bool bShow, 
 					for (iI = 0; iI < MAX_TEAMS; iI++)
 					{
 						TeamTypes eLoopTeam = (TeamTypes) iI;
-						if (GET_TEAM(eLoopTeam).isAlive())
+						if (CvTeamAI::getTeam(eLoopTeam).isAlive())
 						{
 							if (!isInvisible(eLoopTeam, false) && getVisualOwner(eLoopTeam) == getOwnerINLINE())
 							{
 								if (pLoopPlot->plotCount(PUF_isVisualTeam, eLoopTeam, getTeam(), NO_PLAYER, eLoopTeam, PUF_isVisible, getOwnerINLINE(), -1) > 0)
 								{
-									GET_TEAM(eLoopTeam).meet(getTeam(), true);
+									CvTeamAI::getTeam(eLoopTeam).meet(getTeam(), true);
 								}
 							}
 						}
@@ -10848,7 +10848,7 @@ void CvUnit::jumpTo(Coordinates toCoord, bool bGroup, bool bUpdate, bool bShow, 
 					{
 						if (pLoopPlot->isCity() || !CvPlayerAI::getPlayer(pLoopPlot->getOwnerINLINE()).isAlwaysOpenBorders())
 						{
-							GET_TEAM(pLoopPlot->getTeam()).meet(getTeam(), true);
+							CvTeamAI::getTeam(pLoopPlot->getTeam()).meet(getTeam(), true);
 						}
 					}
 				}
@@ -12236,7 +12236,7 @@ bool CvUnit::canHaveProfession(ProfessionTypes eProfession, bool bBumpOther, con
 					{
 						bool hasWar = false;
 						TeamTypes ownTeamID = kOwner.getTeam();
-						CvTeam& ownTeam = GET_TEAM(ownTeamID);
+						CvTeam& ownTeam = CvTeamAI::getTeam(ownTeamID);
 
 						// R&R, ray, changes to Wild Animals - START
 						TeamTypes barbarianTeam = CvPlayerAI::getPlayer(GC.getGameINLINE().getBarbarianPlayer()).getTeam();
@@ -12244,7 +12244,7 @@ bool CvUnit::canHaveProfession(ProfessionTypes eProfession, bool bBumpOther, con
 						for (int iJ = 0; iJ < MAX_TEAMS; iJ++)
 						{
 							// R&R, ray, changes to Wild Animals - START
-							if ((iJ != barbarianTeam) && ownTeam.isAtWar((TeamTypes)iJ) && GET_TEAM((TeamTypes)iJ).isAlive())
+							if ((iJ != barbarianTeam) && ownTeam.isAtWar((TeamTypes)iJ) && CvTeamAI::getTeam((TeamTypes)iJ).isAlive())
 							{
 								hasWar = true;
 								break;
@@ -13872,7 +13872,7 @@ bool CvUnit::potentialWarAction(const CvPlot* pPlot) const
 		return true;
 	}
 
-	if (getGroup()->AI_isDeclareWar(pPlot) && GET_TEAM(eUnitTeam).AI_getWarPlan(ePlotTeam) != NO_WARPLAN)
+	if (getGroup()->AI_isDeclareWar(pPlot) && CvTeamAI::getTeam(eUnitTeam).AI_getWarPlan(ePlotTeam) != NO_WARPLAN)
 	{
 		return true;
 	}
@@ -15282,7 +15282,7 @@ bool CvUnit::raidTreasury(CvCity* pCity)
 		CvPlayerAI::getPlayer(eTargetPlayer).changeGold(-iNumTotalGold);
 	}
 
-	GET_TEAM(getTeam()).AI_changeDamages(pCity->getTeam(), -iNumTotalGold);
+	CvTeamAI::getTeam(getTeam()).AI_changeDamages(pCity->getTeam(), -iNumTotalGold);
 
 	CvPlot* pPlot = pCity->plot();
 	if (pPlot->isVisible(GC.getGame().getActiveTeam(), false))
@@ -15343,7 +15343,7 @@ bool CvUnit::raidBuilding(CvCity* pCity)
 	BuildingTypes eTargetBuilding = aBuildings[GC.getGameINLINE().getSorenRandNum(aBuildings.size(), "Choose raid building")];
 	pCity->setHasRealBuilding(eTargetBuilding, false);
 
-	GET_TEAM(getTeam()).AI_changeDamages(pCity->getTeam(), -GC.getBuildingInfo(eTargetBuilding).getAssetValue());
+	CvTeamAI::getTeam(getTeam()).AI_changeDamages(pCity->getTeam(), -GC.getBuildingInfo(eTargetBuilding).getAssetValue());
 
 	CvPlot* pPlot = pCity->plot();
 	if (pPlot->isVisible(GC.getGame().getActiveTeam(), false))
@@ -15412,7 +15412,7 @@ bool CvUnit::raidProduction(CvCity* pCity)
 			pCity->setBuildingProduction(eTarget, 0);
 		}
 
-		GET_TEAM(getTeam()).AI_changeDamages(pCity->getTeam(), -GC.getBuildingInfo(eTarget).getAssetValue());
+		CvTeamAI::getTeam(getTeam()).AI_changeDamages(pCity->getTeam(), -GC.getBuildingInfo(eTarget).getAssetValue());
 
 		CvPlot* pPlot = pCity->plot();
 		if (pPlot->isVisible(GC.getGame().getActiveTeam(), false))
@@ -15453,7 +15453,7 @@ bool CvUnit::raidProduction(CvCity* pCity)
 			pCity->setUnitProduction(eTarget, 0);
 		}
 
-		GET_TEAM(getTeam()).AI_changeDamages(pCity->getTeam(), -GC.getUnitInfo(eTarget).getAssetValue());
+		CvTeamAI::getTeam(getTeam()).AI_changeDamages(pCity->getTeam(), -GC.getUnitInfo(eTarget).getAssetValue());
 
 		CvPlot* pPlot = pCity->plot();
 		if (pPlot->isVisible(GC.getGame().getActiveTeam(), false))
@@ -15532,7 +15532,7 @@ bool CvUnit::raidScalp(CvCity* pCity)
 	gDLL->UI().addPlayerMessage(getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szString, "AS2D_CITYRAID", MESSAGE_TYPE_MINOR_EVENT, pTargetUnit->getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), pCity->getX_INLINE(), pCity->getY_INLINE(), true, true);
 	gDLL->UI().addPlayerMessage(pCity->getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szString, "AS2D_CITYRAID", MESSAGE_TYPE_MINOR_EVENT, pTargetUnit->getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), pCity->getX_INLINE(), pCity->getY_INLINE(), true, true);
 
-	GET_TEAM(getTeam()).AI_changeDamages(pCity->getTeam(), -pTargetUnit->getAsset());
+	CvTeamAI::getTeam(getTeam()).AI_changeDamages(pCity->getTeam(), -pTargetUnit->getAsset());
 
 	pCity->removePopulationUnit(pTargetUnit, false, NO_PROFESSION);
 	pTargetUnit->kill(false, this);
@@ -15616,7 +15616,7 @@ bool CvUnit::raidHarbor(CvCity* pCity)
 	gDLL->UI().addPlayerMessage(getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szString, "AS2D_CITYRAID", MESSAGE_TYPE_MINOR_EVENT, pTargetUnit->getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_GREEN"), pCity->getX_INLINE(), pCity->getY_INLINE(), true, true);
 	gDLL->UI().addPlayerMessage(pCity->getOwnerINLINE(), true, GC.getEVENT_MESSAGE_TIME(), szString, "AS2D_CITYRAID", MESSAGE_TYPE_MINOR_EVENT, pTargetUnit->getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_RED"), pCity->getX_INLINE(), pCity->getY_INLINE(), true, true);
 
-	GET_TEAM(getTeam()).AI_changeDamages(pCity->getTeam(), -iDamage);
+	CvTeamAI::getTeam(getTeam()).AI_changeDamages(pCity->getTeam(), -iDamage);
 
 	pTargetUnit->changeDamage(iDamage, this);
 
@@ -15772,7 +15772,7 @@ bool CvUnit::raidGoods(CvCity* pCity)
 
 	pCity->changeYieldStored(eYield, -iYieldsStolen);
 
-	GET_TEAM(getTeam()).AI_changeDamages(pCity->getTeam(), -CvPlayerAI::getPlayer(getOwnerINLINE()).AI_yieldValue(eYield, true, iYieldsStolen));
+	CvTeamAI::getTeam(getTeam()).AI_changeDamages(pCity->getTeam(), -CvPlayerAI::getPlayer(getOwnerINLINE()).AI_yieldValue(eYield, true, iYieldsStolen));
 
 	CvCity* pHomeCity = getHomeCity();
 	if (pHomeCity == nullptr)

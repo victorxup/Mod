@@ -1959,7 +1959,7 @@ bool CvPlot::canHaveImprovement(ImprovementTypes eImprovement, TeamTypes eTeam, 
 	}
 
 	// R&R, ray, Improving AI logic for Improvements
-	if (eImprovement != NO_IMPROVEMENT && getBonusType() != NO_BONUS && eTeam != NO_TEAM && !GET_TEAM(eTeam).isHuman())
+	if (eImprovement != NO_IMPROVEMENT && getBonusType() != NO_BONUS && eTeam != NO_TEAM && !CvTeamAI::getTeam(eTeam).isHuman())
 	{
 		bool improvementDoesMatchBonus = false;
 		const CvBonusInfo& kBonus = GC.getBonusInfo(getBonusType());
@@ -2003,7 +2003,7 @@ bool CvPlot::canHaveImprovement(ImprovementTypes eImprovement, TeamTypes eTeam, 
 
 	// R&R, ray, Livestock Breeding, for AI
 	CvCity* pWorkingCity = getWorkingCity();
-	if (pWorkingCity != nullptr && eTeam != NO_TEAM && !GET_TEAM(eTeam).isHuman() && getBonusType() == NO_BONUS)
+	if (pWorkingCity != nullptr && eTeam != NO_TEAM && !CvTeamAI::getTeam(eTeam).isHuman() && getBonusType() == NO_BONUS)
 	{
 		const CvImprovementInfo& kImprovement = GC.getImprovementInfo(eImprovement);
 		bool isLivestockImprovment = false;
@@ -3337,7 +3337,7 @@ int CvPlot::defenseModifier(TeamTypes eDefender, bool bHelp) const
 
 	if (eImprovement != NO_IMPROVEMENT)
 	{
-		if (eDefender != NO_TEAM && (getTeam() == NO_TEAM || GET_TEAM(eDefender).isFriendlyTerritory(getTeam())))
+		if (eDefender != NO_TEAM && (getTeam() == NO_TEAM || CvTeamAI::getTeam(eDefender).isFriendlyTerritory(getTeam())))
 		{
 			// Super Forts begin *bombard*
 			iModifier += GC.getImprovementInfo(eImprovement).getDefenseModifier() - getDefenseDamage();
@@ -3955,7 +3955,7 @@ bool CvPlot::isVisibleToCivTeam() const
 
 	for (iI = 0; iI < MAX_TEAMS; ++iI)
 	{
-		if (GET_TEAM((TeamTypes)iI).isAlive())
+		if (CvTeamAI::getTeam((TeamTypes)iI).isAlive())
 		{
 			if (isVisible(((TeamTypes)iI), false))
 			{
@@ -4110,7 +4110,7 @@ bool CvPlot::isCity(bool bCheckImprovement, TeamTypes eForTeam) const
 		// WTP, ray, Canal - also adjust here
 		if (GC.getImprovementInfo(getImprovementType()).isActsAsCity() || GC.getImprovementInfo(getImprovementType()).isCanal())
 		{
-			if (NO_TEAM == eForTeam || (NO_TEAM == getTeam() && GC.getImprovementInfo(getImprovementType()).isOutsideBorders()) || GET_TEAM(eForTeam).isFriendlyTerritory(getTeam()))
+			if (NO_TEAM == eForTeam || (NO_TEAM == getTeam() && GC.getImprovementInfo(getImprovementType()).isOutsideBorders()) || CvTeamAI::getTeam(eForTeam).isFriendlyTerritory(getTeam()))
 			{
 				return true;
 			}
@@ -4143,7 +4143,7 @@ bool CvPlot::isFriendlyCity(const CvUnit& kUnit, bool bCheckImprovement) const
 			return true;
 		}
 
-		if (eTeam != NO_TEAM && GET_TEAM(ePlotTeam).isOpenBorders(eTeam))
+		if (eTeam != NO_TEAM && CvTeamAI::getTeam(ePlotTeam).isOpenBorders(eTeam))
 		{
 			return true;
 		}
@@ -5442,7 +5442,7 @@ void CvPlot::setOwner(PlayerTypes eNewValue, bool bCheckUnits)
 			if (!isWater())
 			{
 				CvPlayerAI::getPlayer(getOwnerINLINE()).changeTotalLand(-1);
-				GET_TEAM(getTeam()).changeTotalLand(-1);
+				CvTeamAI::getTeam(getTeam()).changeTotalLand(-1);
 
 				if (isOwnershipScore())
 				{
@@ -5480,7 +5480,7 @@ void CvPlot::setOwner(PlayerTypes eNewValue, bool bCheckUnits)
 			if (!isWater())
 			{
 				CvPlayerAI::getPlayer(getOwnerINLINE()).changeTotalLand(1);
-				GET_TEAM(getTeam()).changeTotalLand(1);
+				CvTeamAI::getTeam(getTeam()).changeTotalLand(1);
 
 				if (isOwnershipScore())
 				{
@@ -5502,7 +5502,7 @@ void CvPlot::setOwner(PlayerTypes eNewValue, bool bCheckUnits)
 
 		for (int iI = 0; iI < MAX_TEAMS; ++iI)
 		{
-			if (GET_TEAM((TeamTypes)iI).isAlive())
+			if (CvTeamAI::getTeam((TeamTypes)iI).isAlive())
 			{
 				updateRevealedOwner((TeamTypes)iI);
 			}
@@ -5739,7 +5739,7 @@ void CvPlot::setPlotType(PlotTypes eNewValue, bool bRecalculate, bool bRebuildGr
 			if (isOwned())
 			{
 				CvPlayerAI::getPlayer(getOwnerINLINE()).changeTotalLand((isWater()) ? -1 : 1);
-				GET_TEAM(getTeam()).changeTotalLand((isWater()) ? -1 : 1);
+				CvTeamAI::getTeam(getTeam()).changeTotalLand((isWater()) ? -1 : 1);
 			}
 
 			if (bRecalculate)
@@ -6177,7 +6177,7 @@ void CvPlot::setImprovementType(ImprovementTypes eNewValue)
 
 		for (int iI = 0; iI < MAX_TEAMS; ++iI)
 		{
-			if (GET_TEAM((TeamTypes)iI).isAlive())
+			if (CvTeamAI::getTeam((TeamTypes)iI).isAlive())
 			{
 				if (isVisible((TeamTypes)iI, false))
 				{
@@ -6270,7 +6270,7 @@ void CvPlot::setRouteType(RouteTypes eNewValue)
 
 		for (iI = 0; iI < MAX_TEAMS; ++iI)
 		{
-			if (GET_TEAM((TeamTypes)iI).isAlive())
+			if (CvTeamAI::getTeam((TeamTypes)iI).isAlive())
 			{
 				if (isVisible((TeamTypes)iI, false))
 				{
@@ -7384,7 +7384,7 @@ int CvPlot::getBuyPrice(PlayerTypes ePlayer) const
 	int iModifier = 100;
 	if (getOwnerINLINE() != NO_PLAYER)
 	{
-		if (!GET_TEAM(CvPlayerAI::getPlayer(ePlayer).getTeam()).isAtWar(getTeam()))
+		if (!CvTeamAI::getTeam(CvPlayerAI::getPlayer(ePlayer).getTeam()).isAtWar(getTeam()))
 		{
 			iModifier += GC.getDefineINT("BUY_PLOT_OWNED_COST_MODIFIER");
 		}
@@ -7911,8 +7911,8 @@ void CvPlot::setRevealed(TeamTypes eTeam, bool bNewValue, bool bTerrainOnly, Tea
 				{
 					tilePoints = GC.getFatherPointInfo(ePointType).getLandTilePoints();
 				}
-				tilePoints *= gameSpeedMod * GET_TEAM(eTeam).getBestFatherPointMultiplier()  /10000;
-				GET_TEAM(eTeam).changeFatherPoints(ePointType, tilePoints);
+				tilePoints *= gameSpeedMod * CvTeamAI::getTeam(eTeam).getBestFatherPointMultiplier()  /10000;
+				CvTeamAI::getTeam(eTeam).changeFatherPoints(ePointType, tilePoints);
 			}
 
 			// ONEVENT - PlotRevealed
@@ -9777,7 +9777,7 @@ int CvPlot::countFriendlyCulture(TeamTypes eTeam) const
 		CvPlayer& kLoopPlayer = CvPlayerAI::getPlayer((PlayerTypes)iPlayer);
 		if (kLoopPlayer.isAlive())
 		{
-			CvTeam& kLoopTeam = GET_TEAM(kLoopPlayer.getTeam());
+			CvTeam& kLoopTeam = CvTeamAI::getTeam(kLoopPlayer.getTeam());
 			if (kLoopPlayer.getTeam() == eTeam || kLoopTeam.isOpenBorders(eTeam))
 			{
 				iTotalCulture += getCulture((PlayerTypes)iPlayer);
@@ -10083,7 +10083,7 @@ void CvPlot::doFort()
 				pLoopUnit2 = ::getUnit(pUnitNode2->m_data);
 				pUnitNode2 = pAdjacentPlot->nextUnitNode(pUnitNode2);
 
-				if (pDefenseUnit->getTeam() != pLoopUnit2->getTeam() && (GET_TEAM(pDefenseUnit->getTeam()).isAtWar(pLoopUnit2->getTeam()) || pLoopUnit2->getUnitInfo().isHiddenNationality()) && !pLoopUnit2->isCargo())
+				if (pDefenseUnit->getTeam() != pLoopUnit2->getTeam() && (CvTeamAI::getTeam(pDefenseUnit->getTeam()).isAtWar(pLoopUnit2->getTeam()) || pLoopUnit2->getUnitInfo().isHiddenNationality()) && !pLoopUnit2->isCargo())
 				{
 					int defenseRandNum = GC.getGameINLINE().getSorenRandNum(100, "Fort Defense Attack");
 					int iDamage = 0;
@@ -10273,7 +10273,7 @@ void CvPlot::doMonastery()
 				pUnitNode2 = pAdjacentPlot->nextUnitNode(pUnitNode2);
 
 				// Native Unit and we are not at war
-				if (pLoopUnit2->isNative() && !GET_TEAM(missionaryUnit->getTeam()).isAtWar(pLoopUnit2->getTeam()))
+				if (pLoopUnit2->isNative() && !CvTeamAI::getTeam(missionaryUnit->getTeam()).isAtWar(pLoopUnit2->getTeam()))
 				{
 					int iMonasteryFeatureChance= GC.getGameINLINE().getSorenRandNum(100, "Monastery Feature");
 

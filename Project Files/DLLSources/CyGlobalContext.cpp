@@ -87,7 +87,7 @@ CyTeam* CyGlobalContext::getCyTeam(int i)
 		int j;
 		for(j=0;j<MAX_TEAMS;j++)
 		{
-			cyTeams[j]=CyTeam(&GET_TEAM((TeamTypes)j));
+			cyTeams[j]=CyTeam(&CvTeamAI::getTeam((TeamTypes)j));
 		}
 		bInit = true;
 	}

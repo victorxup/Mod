@@ -1383,7 +1383,7 @@ void CvDLLButtonPopup::OnFocus(CvPopup* pPopup, CvPopupInfo &info)
 		break;
 
 	case BUTTONPOPUP_FOUNDING_FATHER:
-		if (!GET_TEAM(GC.getGameINLINE().getActiveTeam()).canConvinceFather((FatherTypes) info.getData1()))
+		if (!CvTeamAI::getTeam(GC.getGameINLINE().getActiveTeam()).canConvinceFather((FatherTypes) info.getData1()))
 		{
 			gDLL->getInterfaceIFace()->popupSetAsCancelled(pPopup);
 		}
@@ -2069,7 +2069,7 @@ bool CvDLLButtonPopup::launchRazeCityPopup(CvPopup* pPopup, CvPopupInfo &info)
 	bool bRaze = player.canRaze(pNewCity);
 	bool bGift = ((eHighestCulturePlayer != NO_PLAYER)
 		&& (eHighestCulturePlayer != player.getID())
-		&& ((player.getTeam() == CvPlayerAI::getPlayer(eHighestCulturePlayer).getTeam()) || GET_TEAM(player.getTeam()).isOpenBorders(CvPlayerAI::getPlayer(eHighestCulturePlayer).getTeam())));
+		&& ((player.getTeam() == CvPlayerAI::getPlayer(eHighestCulturePlayer).getTeam()) || CvTeamAI::getTeam(player.getTeam()).isOpenBorders(CvPlayerAI::getPlayer(eHighestCulturePlayer).getTeam())));
 
 	CvWString szBuffer;
 	if (iCaptureGold > 0)
@@ -2126,14 +2126,14 @@ bool CvDLLButtonPopup::launchDeclareWarMovePopup(CvPopup* pPopup, CvPopupInfo &i
 	{
 		szBuffer = gDLL->getText("TXT_KEY_POPUP_ENTER_LANDS_WAR", CvPlayerAI::getPlayer(pPlot->getOwnerINLINE()).getCivilizationAdjective());
 
-		if (GET_TEAM(GC.getGameINLINE().getActiveTeam()).isOpenBordersTrading())
+		if (CvTeamAI::getTeam(GC.getGameINLINE().getActiveTeam()).isOpenBordersTrading())
 		{
 			szBuffer += gDLL->getText("TXT_KEY_POPUP_ENTER_WITH_OPEN_BORDERS");
 		}
 	}
 	else
 	{
-		szBuffer = gDLL->getText("TXT_KEY_POPUP_DOES_THIS_MEAN_WAR", GET_TEAM(eRivalTeam).getName().GetCString());
+		szBuffer = gDLL->getText("TXT_KEY_POPUP_DOES_THIS_MEAN_WAR", CvTeamAI::getTeam(eRivalTeam).getName().GetCString());
 	}
 	gDLL->getInterfaceIFace()->popupSetBodyString(pPopup, szBuffer);
 	gDLL->getInterfaceIFace()->popupAddGenericButton(pPopup, gDLL->getText("TXT_KEY_DECLARE_WAR_YES").c_str(), nullptr, 0);
@@ -2405,7 +2405,7 @@ bool CvDLLButtonPopup::launchMainMenuPopup(CvPopup* pPopup, CvPopupInfo &info)
 		{
 			for (int j = i+1; bShow && j < MAX_TEAMS; j++)
 			{
-				if (GET_TEAM((TeamTypes)i).isHasMet((TeamTypes)j))
+				if (CvTeamAI::getTeam((TeamTypes)i).isHasMet((TeamTypes)j))
 				{
 					bShow = false;
 				}
@@ -3151,7 +3151,7 @@ bool CvDLLButtonPopup::launchFoundingFatherPopup(CvPopup* pPopup, CvPopupInfo &i
 		return false;
 	}
 
-	if (!GET_TEAM(GC.getGameINLINE().getActiveTeam()).canConvinceFather(eFather))
+	if (!CvTeamAI::getTeam(GC.getGameINLINE().getActiveTeam()).canConvinceFather(eFather))
 	{
 		return false;
 	}

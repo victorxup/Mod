@@ -280,7 +280,7 @@ void KmodPathFinder::SetSettings(const CvPathSettings& new_settings)
 		// If the war flag is the only difference, and we aren't sneak attack ready anyway - then there is effectively no difference.
 		relevant_flags &= ~MOVE_DECLARE_WAR;
 		if ((settings.iFlags & relevant_flags) != (new_settings.iFlags & relevant_flags)
-			|| GET_TEAM(settings.pGroup->getHeadTeam()).AI_isSneakAttackReady())
+			|| CvTeamAI::getTeam(settings.pGroup->getHeadTeam()).AI_isSneakAttackReady())
 		{
 			Reset();
 		}

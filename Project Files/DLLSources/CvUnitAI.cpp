@@ -2164,7 +2164,7 @@ void CvUnitAI::AI_treasureMove()
 
 	CvCity* pCity = plot()->getOwnerINLINE() == getOwnerINLINE() ? plot()->getPlotCity() : nullptr;
 
-	bool bAtWar = GET_TEAM(getTeam()).getAnyWarPlanCount();
+	bool bAtWar = CvTeamAI::getTeam(getTeam()).getAnyWarPlanCount();
 
 	if (pCity != nullptr)
 	{
@@ -2834,7 +2834,7 @@ void CvUnitAI::AI_attackCityMove()
 					return;
 				}
 
-				int iOurOffense = GET_TEAM(getTeam()).AI_getOurPlotStrength(plot(),1,false,false,true);
+				int iOurOffense = CvTeamAI::getTeam(getTeam()).AI_getOurPlotStrength(plot(),1,false,false,true);
 				int iEnemyOffense = CvPlayerAI::getPlayer(getOwnerINLINE()).AI_getEnemyPlotStrength(pTargetCity->plot(),2,false,false);
 
 				// If in danger, seek defensive ground
@@ -3052,7 +3052,7 @@ void CvUnitAI::AI_attackCityMove()
 		}
 	}
 
-	bool bAnyWarPlan = (GET_TEAM(getTeam()).getAnyWarPlanCount() > 0);
+	bool bAnyWarPlan = (CvTeamAI::getTeam(getTeam()).getAnyWarPlanCount() > 0);
 
 	if (bReadyToAttack)
 	{
@@ -3109,7 +3109,7 @@ void CvUnitAI::AI_attackCityMove()
 
 				if (pTargetCity != nullptr)
 				{
-					if (AI_solveBlockageProblem(pTargetCity->plot(), (GET_TEAM(getTeam()).getAtWarCount() == 0)))
+					if (AI_solveBlockageProblem(pTargetCity->plot(), (CvTeamAI::getTeam(getTeam()).getAtWarCount() == 0)))
 					{
 						return;
 					}
@@ -3159,8 +3159,8 @@ void CvUnitAI::AI_attackCityMove()
 
 	if (plot()->getOwnerINLINE() == getOwnerINLINE() && bLandWar)
 	{
-		//if( (GET_TEAM(getTeam()).getAtWarCount(true) > 0) )
-		if( (GET_TEAM(getTeam()).getAtWarCount() > 0) )
+		//if( (CvTeamAI::getTeam(getTeam()).getAtWarCount(true) > 0) )
+		if( (CvTeamAI::getTeam(getTeam()).getAtWarCount() > 0) )
 		{
 			if (pTargetCity == nullptr)
 			{
@@ -3326,7 +3326,7 @@ void CvUnitAI::AI_counterMove()
 void CvUnitAI::AI_defensiveBraveMove()
 {
 	FAssert(canMove());
-	bool bAtWar = GET_TEAM(getTeam()).getAnyWarPlanCount();
+	bool bAtWar = CvTeamAI::getTeam(getTeam()).getAnyWarPlanCount();
 
 	if (GC.getGameINLINE().getSorenRandNum(10, "AI upgrade unit profession") == 0)
 	{
@@ -3633,7 +3633,7 @@ void CvUnitAI::AI_defensiveBraveMove()
 void CvUnitAI::AI_offensiveBraveMove()
 {
 	FAssert(canMove());
-	bool bAtWar = GET_TEAM(getTeam()).getAnyWarPlanCount();
+	bool bAtWar = CvTeamAI::getTeam(getTeam()).getAnyWarPlanCount();
 
 	if (GC.getGameINLINE().getSorenRandNum(10, "AI upgrade unit profession") == 0)
 	{
@@ -3754,7 +3754,7 @@ void CvUnitAI::AI_offensiveBraveMove()
 				return;
 			}
 
-			CvTeamAI& kTeam = GET_TEAM(getTeam());
+			CvTeamAI& kTeam = CvTeamAI::getTeam(getTeam());
 			if (AI_advance(true))
 			{
 				if (kTeam.AI_enemyCityDistance(plot()) <= iLoiterDistance)
@@ -3799,7 +3799,7 @@ void CvUnitAI::AI_offensiveBraveMove()
 void CvUnitAI::AI_counterBraveMove()
 {
 	FAssert(canMove());
-	bool bAtWar = GET_TEAM(getTeam()).getAnyWarPlanCount();
+	bool bAtWar = CvTeamAI::getTeam(getTeam()).getAnyWarPlanCount();
 
 	if (GC.getGameINLINE().getSorenRandNum(10, "AI upgrade unit profession") == 0)
 	{
@@ -3988,7 +3988,7 @@ void CvUnitAI::AI_imperialShipMove()
 		pPlotCity = nullptr;
 	}
 
-	if (GET_TEAM(getTeam()).getAnyWarPlanCount() == 0)
+	if (CvTeamAI::getTeam(getTeam()).getAnyWarPlanCount() == 0)
 	{
 		if (pPlotCity != nullptr)
 		{
@@ -4121,7 +4121,7 @@ void CvUnitAI::AI_imperialSoldierMove()
 		pPlotCity = nullptr;
 	}
 
-	if (GET_TEAM(getTeam()).getAnyWarPlanCount() == 0)
+	if (CvTeamAI::getTeam(getTeam()).getAnyWarPlanCount() == 0)
     {
     	if (pPlotCity != nullptr)
     	{
@@ -4218,7 +4218,7 @@ void CvUnitAI::AI_imperialMountedMove()
 		pPlotCity = nullptr;
 	}
 
-	if (GET_TEAM(getTeam()).getAnyWarPlanCount() == 0)
+	if (CvTeamAI::getTeam(getTeam()).getAnyWarPlanCount() == 0)
     {
     	if (pPlotCity != nullptr)
     	{
@@ -4311,7 +4311,7 @@ void CvUnitAI::AI_imperialCannonMove()
 		pPlotCity = nullptr;
 	}
 
-	if (GET_TEAM(getTeam()).getAnyWarPlanCount() == 0)
+	if (CvTeamAI::getTeam(getTeam()).getAnyWarPlanCount() == 0)
 	{
 		if (pPlotCity != nullptr)
 		{
@@ -4712,7 +4712,7 @@ void CvUnitAI::AI_transportSeaMove()
 	}
 
 	// TAC - AI Improved Naval AI - koma13 - START
-	bool bAtWar = GET_TEAM(getTeam()).getAnyWarPlanCount();
+	bool bAtWar = CvTeamAI::getTeam(getTeam()).getAnyWarPlanCount();
 	int iExtra = (kOwner.AI_isStrategy(STRATEGY_REVOLUTION_PREPARING) && !bAtWar) ? cargoSpace() : 0;
 	bool bPickupUnitsFromEurope = ((kOwner.AI_cargoSpaceToEurope(getGroup()) + iExtra) < kOwner.getNumEuropeUnits());
 	// TAC - AI Improved Naval AI - koma13 - END
@@ -5071,7 +5071,7 @@ void CvUnitAI::AI_assaultSeaMove()
 
 	if (plot()->isCity(true))
 	{
-		int iOurDefense = GET_TEAM(getTeam()).AI_getOurPlotStrength(plot(),0,true,false,true);
+		int iOurDefense = CvTeamAI::getTeam(getTeam()).AI_getOurPlotStrength(plot(),0,true,false,true);
 		int iEnemyOffense = CvPlayerAI::getPlayer(getOwnerINLINE()).AI_getEnemyPlotStrength(plot(),2,false,false);
 
 		if( getDamage() > 0 )	// extra risk to leaving when wounded
@@ -5133,7 +5133,7 @@ void CvUnitAI::AI_assaultSeaMove()
 
 	bool bReinforce = false;
 	bool bAttack = false;
-	bool bNoWarPlans = (GET_TEAM(getTeam()).getAnyWarPlanCount() == 0);
+	bool bNoWarPlans = (CvTeamAI::getTeam(getTeam()).getAnyWarPlanCount() == 0);
 	bool bAttackNatives = false;
 	bool bLandWar = false;
 	bool bIsNative = isNative();
@@ -5199,7 +5199,7 @@ void CvUnitAI::AI_assaultSeaMove()
 					if( pCity->getPreviousOwner() != NO_PLAYER )
 					{
 						// Just captured city, probably from naval invasion.  If area targets, drop cargo and leave so as to not to be lost in quick counter attack
-						if( GET_TEAM(getTeam()).countEnemyPowerByArea(plot()->area()) > 0 )
+						if( CvTeamAI::getTeam(getTeam()).countEnemyPowerByArea(plot()->area()) > 0 )
 						{
 							getGroup()->unloadAll();
 
@@ -5656,7 +5656,7 @@ void CvUnitAI::AI_escortSeaMove()
 
 	if (plot()->isCity(true)) //prioritize getting outta there
 	{
-		int iOurDefense = GET_TEAM(getTeam()).AI_getOurPlotStrength(plot(),0,true,false,true);
+		int iOurDefense = CvTeamAI::getTeam(getTeam()).AI_getOurPlotStrength(plot(),0,true,false,true);
 		int iEnemyOffense = CvPlayerAI::getPlayer(getOwnerINLINE()).AI_getEnemyPlotStrength(plot(),2,false,false);
 
 		if( getDamage() > 0 )	// extra risk to leaving when wounded
@@ -6561,7 +6561,7 @@ bool CvUnitAI::AI_europe()
 			{
 				if (pLoopUnit->canLoadUnit(this, plot(), false))
 				{
-					bool bLoadUnit = (GET_TEAM(getTeam()).getAnyWarPlanCount() > 0) ? true : false;
+					bool bLoadUnit = (CvTeamAI::getTeam(getTeam()).getAnyWarPlanCount() > 0) ? true : false;
 
 					if (!bLoadUnit && (pLoopUnit->AI_getUnitAIType() == UNITAI_DEFENSIVE))
 					{
@@ -6656,7 +6656,7 @@ bool CvUnitAI::AI_europe()
 		/*
 		if (kOwner.AI_isStrategy(STRATEGY_SELL_TO_NATIVES) && GC.getGameINLINE().getSorenRandNum(2, "AI sell to natives") == 0)
 		{
-			if ((AI_getUnitAIType() == UNITAI_TRANSPORT_SEA) || (AI_getUnitAIType() == UNITAI_ASSAULT_SEA && GET_TEAM(getTeam()).getAnyWarPlanCount() == 0))
+			if ((AI_getUnitAIType() == UNITAI_TRANSPORT_SEA) || (AI_getUnitAIType() == UNITAI_ASSAULT_SEA && CvTeamAI::getTeam(getTeam()).getAnyWarPlanCount() == 0))
 			{
 				if (cargoSpace() < 5)
 				{
@@ -8564,7 +8564,7 @@ bool CvUnitAI::AI_advance(bool bAttack)
 
 	int iBestValue = MAX_INT;
 	CvPlot* pBestPlot = nullptr;
-	CvTeamAI& kTeam = GET_TEAM(getTeam());
+	CvTeamAI& kTeam = CvTeamAI::getTeam(getTeam());
 	for (int i = 0; i < NUM_DIRECTION_TYPES; ++i)
 	{
 		CvPlot* pDirectionPlot = plotDirection(getX_INLINE(), getY_INLINE(), (DirectionTypes)i);
@@ -8601,7 +8601,7 @@ bool CvUnitAI::AI_loiter(int iMinDistance, int iMaxDistance, bool bAttack)
 {
 	int iBestValue = MAX_INT;
 	CvPlot* pBestPlot = nullptr;
-	CvTeamAI& kTeam = GET_TEAM(getTeam());
+	CvTeamAI& kTeam = CvTeamAI::getTeam(getTeam());
 	for (int iX = -1; iX <= 1; ++iX)
 	{
 		for (int iY = -1; iY <= 1; ++iY)
@@ -8703,7 +8703,7 @@ bool CvUnitAI::AI_counter(int iTether)
 {
 	int iBestValue = 0;
 	CvPlot* pBestPlot = nullptr;
-	CvTeamAI& kTeam = GET_TEAM(getTeam());
+	CvTeamAI& kTeam = CvTeamAI::getTeam(getTeam());
 	CvPlayerAI& kOwner = CvPlayerAI::getPlayer(getOwnerINLINE());
 
 	for (int i = 0; i < NUM_DIRECTION_TYPES; ++i)
@@ -9052,7 +9052,7 @@ bool CvUnitAI::AI_spreadReligion()
 			if (kLoopPlayer.canHaveMission(getOwnerINLINE()) && getMissionarySuccessPercent() > 50)
 			{
 				// Do not consider cities belonging to players that we have a war plan against
-				if (GET_TEAM(getTeam()).AI_getWarPlan(kLoopPlayer.getTeam()) != NO_WARPLAN)
+				if (CvTeamAI::getTeam(getTeam()).AI_getWarPlan(kLoopPlayer.getTeam()) != NO_WARPLAN)
 					continue;
 
 				if (kLoopPlayer.AI_getAttitude(getOwnerINLINE()) >= ATTITUDE_ANNOYED)
@@ -9152,7 +9152,7 @@ bool CvUnitAI::AI_spreadTradePosts()
 			if (kLoopPlayer.canHaveTradePost(getOwnerINLINE()) && getNativeTradePostSuccessPercent() > 50)
 			{
 				// Do not consider cities belonging to players that we have a war plan against
-				if (GET_TEAM(getTeam()).AI_getWarPlan(kLoopPlayer.getTeam()) != NO_WARPLAN)
+				if (CvTeamAI::getTeam(getTeam()).AI_getWarPlan(kLoopPlayer.getTeam()) != NO_WARPLAN)
 					continue;
 
 				if (kLoopPlayer.AI_getAttitude(getOwnerINLINE()) >= ATTITUDE_ANNOYED)
@@ -9270,7 +9270,7 @@ bool CvUnitAI::AI_learn(int iRange)
 						if (CvPlayerAI::getPlayer(pPlotCity->getOwnerINLINE()).isNative() && pPlotCity->isScoutVisited(getTeam()))
 						{
 							// Do not consider cities belonging to players that we have a war plan against
-							if (GET_TEAM(getTeam()).AI_getWarPlan(CvPlayerAI::getPlayer(pPlotCity->getOwnerINLINE()).getTeam()) != NO_WARPLAN)
+							if (CvTeamAI::getTeam(getTeam()).AI_getWarPlan(CvPlayerAI::getPlayer(pPlotCity->getOwnerINLINE()).getTeam()) != NO_WARPLAN)
 								continue;
 
 							if (!isEnemy(pPlotCity->getTeam()))
@@ -10534,7 +10534,7 @@ bool CvUnitAI::AI_guardCityCounter(int iMaxPath)
 		bForceTransport = true;
 	}
 
-	CvTeamAI& kTeam = GET_TEAM(getTeam());
+	CvTeamAI& kTeam = CvTeamAI::getTeam(getTeam());
 	int iCurrentDistance = kTeam.AI_enemyUnitDistance(plot());
 	if (iCurrentDistance < 2)
 	{
@@ -11126,7 +11126,7 @@ bool CvUnitAI::AI_lead(std::vector<UnitAITypes>& aeUnitAITypes)
 	bool bNeedLeader = false;
 	for (int iI = 0; iI < MAX_TEAMS; iI++)
 	{
-		CvTeamAI& kLoopTeam = GET_TEAM((TeamTypes)iI);
+		CvTeamAI& kLoopTeam = CvTeamAI::getTeam((TeamTypes)iI);
 		if (isEnemy((TeamTypes)iI))
 		{
 			if (kLoopTeam.countNumUnitsByArea(area()) > 0)
@@ -11618,7 +11618,7 @@ bool CvUnitAI::AI_hide()
 
 					for (iI = 0; iI < MAX_TEAMS; iI++)
 					{
-						if (GET_TEAM((TeamTypes)iI).isAlive())
+						if (CvTeamAI::getTeam((TeamTypes)iI).isAlive())
 						{
 							if (pLoopPlot->isInvisibleVisible(((TeamTypes)iI), getInvisibleType()))
 							{
@@ -11913,7 +11913,7 @@ int CvUnitAI::AI_explorePlotValue(CvPlot* pPlot, bool bImportantOnly) const
 		}
 	}
 
-	const CvTeam& kTeam = GET_TEAM(getTeam()); // K-Mod
+	const CvTeam& kTeam = CvTeamAI::getTeam(getTeam()); // K-Mod
 
 	if (!bImportantOnly || iValue > 0)
 	{
@@ -11966,7 +11966,7 @@ bool CvUnitAI::AI_explore(bool bFavorOpenBorders)
 	pBestPlot = nullptr;
 	pBestExplorePlot = nullptr;
 
-	bool bNoContact = (GC.getGameINLINE().countCivTeamsAlive() > GET_TEAM(getTeam()).getHasMetCivCount());
+	bool bNoContact = (GC.getGameINLINE().countCivTeamsAlive() > CvTeamAI::getTeam(getTeam()).getHasMetCivCount());
 
 	for (iI = 0; iI < GC.getMap().numPlotsINLINE(); iI++)
 	{
@@ -12509,7 +12509,7 @@ bool CvUnitAI::AI_exploreOpenBorders(int iRange)
 	CvPlot* pBestPlot = nullptr;
 	CvPlot* pBestExplorePlot = nullptr;
 	int iBestValue = 0;
-	CvTeamAI& kTeam = GET_TEAM(getTeam());
+	CvTeamAI& kTeam = CvTeamAI::getTeam(getTeam());
 	for (int iDX = -iRange; iDX <= iRange; iDX++)
 	{
 		for (int iDY = -iRange; iDY <= iRange; iDY++)
@@ -13396,9 +13396,9 @@ bool CvUnitAI::AI_extortCity()
 			{
 				if (AI_potentialEnemy(pLoopPlot->getTeam(), pLoopPlot))
 				{
-					CvTeamAI& kPlotTeam = GET_TEAM(pLoopPlot->getTeam());
+					CvTeamAI& kPlotTeam = CvTeamAI::getTeam(pLoopPlot->getTeam());
 
-					if (GET_TEAM(getTeam()).AI_getWarPlan(pLoopPlot->getTeam()) == WARPLAN_EXTORTION)
+					if (CvTeamAI::getTeam(getTeam()).AI_getWarPlan(pLoopPlot->getTeam()) == WARPLAN_EXTORTION)
 					{
 						int iValue = GC.getGame().getSorenRandNum(100, "AI choose extort city");
 
@@ -13515,7 +13515,7 @@ CvCity* CvUnitAI::AI_pickTargetCity(int iFlags, int iMaxPathTurns, bool bHuntBar
 								// already on the way, pick a different target
 								if( iPathTurns > 2 && pLoopCity->isVisible(getTeam(), false) )
 								{
-									int iOurOffense = GET_TEAM(getTeam()).AI_getOurPlotStrength(pLoopCity->plot(),2,false,false,true);
+									int iOurOffense = CvTeamAI::getTeam(getTeam()).AI_getOurPlotStrength(pLoopCity->plot(),2,false,false,true);
 									int iEnemyDefense = CvPlayerAI::getPlayer(getOwnerINLINE()).AI_getEnemyPlotStrength(pLoopCity->plot(),1,true,false);
 
 									if( 100*iOurOffense >= 350*iEnemyDefense )
@@ -13933,7 +13933,7 @@ bool CvUnitAI::AI_cityAttack(int iRange, int iOddsThreshold, bool bFollow)
 					//if (pLoopPlot->isCity() || (pLoopPlot->isCity(true, getTeam()) && pLoopPlot->isVisibleEnemyUnit(this))) - Original Code
 					// Super Forts end
 					{
-						if (AI_potentialEnemy(pLoopPlot->getTeam(), pLoopPlot) && (GET_TEAM(getTeam()).AI_getWarPlan(pLoopPlot->getTeam()) != WARPLAN_EXTORTION))
+						if (AI_potentialEnemy(pLoopPlot->getTeam(), pLoopPlot) && (CvTeamAI::getTeam(getTeam()).AI_getWarPlan(pLoopPlot->getTeam()) != WARPLAN_EXTORTION))
 						{
 							if (!atPlot(pLoopPlot) && ((bFollow) ? canMoveInto(*pLoopPlot, true) : (generatePath(pLoopPlot, 0, true, &iPathTurns) && (iPathTurns <= iRange))))
 							{
@@ -13998,7 +13998,7 @@ bool CvUnitAI::AI_anyAttack(int iRange, int iOddsThreshold, int iMinStack, bool 
 					if (bAllowCities || !pLoopPlot->isCity(true))
 					{
 						bool bCanBombard = canBombard(pLoopPlot);
-						if (bCanBombard || pLoopPlot->isVisibleEnemyUnit(this) || (pLoopPlot->isCity(true) && AI_potentialEnemy(pLoopPlot->getTeam(), pLoopPlot) && (GET_TEAM(getTeam()).AI_getWarPlan(pLoopPlot->getTeam()) != WARPLAN_EXTORTION)))
+						if (bCanBombard || pLoopPlot->isVisibleEnemyUnit(this) || (pLoopPlot->isCity(true) && AI_potentialEnemy(pLoopPlot->getTeam(), pLoopPlot) && (CvTeamAI::getTeam(getTeam()).AI_getWarPlan(pLoopPlot->getTeam()) != WARPLAN_EXTORTION)))
 						{
 							int iPathTurns;
 							if (!atPlot(pLoopPlot) && ((bFollow) ? canMoveInto(*pLoopPlot, true) : (generatePath(pLoopPlot, 0, true, &iPathTurns) && (iPathTurns <= iRange))))
@@ -14094,7 +14094,7 @@ bool CvUnitAI::AI_smartAttack(int iRange, int iLowOddsThreshold, int iHighOddsTh
 			{
 				if (canMoveOrAttackInto(pLoopPlot, true))
 				{
-					if (pLoopPlot->isVisibleEnemyUnit(this) || (pLoopPlot->isCity() && AI_potentialEnemy(pLoopPlot->getTeam(), pLoopPlot) && (GET_TEAM(getTeam()).AI_getWarPlan(pLoopPlot->getTeam()) != WARPLAN_EXTORTION)))
+					if (pLoopPlot->isVisibleEnemyUnit(this) || (pLoopPlot->isCity() && AI_potentialEnemy(pLoopPlot->getTeam(), pLoopPlot) && (CvTeamAI::getTeam(getTeam()).AI_getWarPlan(pLoopPlot->getTeam()) != WARPLAN_EXTORTION)))
 					{
 						if (!atPlot(pLoopPlot) && (generatePath(pLoopPlot, 0, true, &iPathTurns) && (iPathTurns <= iRange)))
 						{
@@ -16178,7 +16178,7 @@ bool CvUnitAI::AI_assaultSeaReinforce(bool bNative)
 					{
 						int iOurPower = std::max(1, pLoopCity->area()->getPower(getOwnerINLINE()));
 						// Enemy power includes barb power
-						int iEnemyPower = GET_TEAM(getTeam()).countEnemyPowerByArea(pLoopCity->area());
+						int iEnemyPower = CvTeamAI::getTeam(getTeam()).countEnemyPowerByArea(pLoopCity->area());
 
 						// Don't send troops to areas we are dominating already
 						// Don't require presence of enemy cities, just a dangerous force
@@ -17815,10 +17815,10 @@ bool CvUnitAI::AI_moveToStagingCity()
 
 	int iWarCount = 0;
 	TeamTypes eTargetTeam = NO_TEAM;
-	CvTeam& kTeam = GET_TEAM(getTeam());
+	CvTeam& kTeam = CvTeamAI::getTeam(getTeam());
 	for (int iI = 0; iI < MAX_TEAMS; iI++)
 	{
-		if ((iI != getTeam()) && GET_TEAM((TeamTypes)iI).isAlive())
+		if ((iI != getTeam()) && CvTeamAI::getTeam((TeamTypes)iI).isAlive())
 		{
 			if (kTeam.AI_isSneakAttackPreparing((TeamTypes)iI))
 			{
@@ -17847,7 +17847,7 @@ bool CvUnitAI::AI_moveToStagingCity()
 			if( (area()->getAreaAIType(getTeam()) == AREAAI_ASSAULT) || (area()->getAreaAIType(getTeam()) == AREAAI_ASSAULT_MASSING) )
 			{
 				CvArea* pWaterArea = pLoopCity->waterArea();
-				if (pWaterArea != nullptr && GET_TEAM(getTeam()).AI_isWaterAreaRelevant(pWaterArea))
+				if (pWaterArea != nullptr && CvTeamAI::getTeam(getTeam()).AI_isWaterAreaRelevant(pWaterArea))
 				{
 					// BBAI TODO:  Need a better way to determine which cities should serve as invasion launch locations
 
@@ -17912,7 +17912,7 @@ bool CvUnitAI::AI_moveToStagingCity()
 
 bool CvUnitAI::AI_disembark(bool bEnemyCity)
 {
-	CvTeamAI& kTeam = GET_TEAM(getTeam());
+	CvTeamAI& kTeam = CvTeamAI::getTeam(getTeam());
 	int iBestValue = 0;
 	CvPlot* pBestPlot = nullptr;
 	for (int i = 0; i < NUM_DIRECTION_TYPES; ++i)
@@ -17961,7 +17961,7 @@ bool CvUnitAI::AI_imperialSeaAssault()
     CvPlot* pBestPlot = nullptr;
     CvPlot* pBestAssaultPlot = nullptr;
 
-    CvTeamAI& kTeam = GET_TEAM(getTeam());
+    CvTeamAI& kTeam = CvTeamAI::getTeam(getTeam());
 
 	CvPlot* pTargetPlot = nullptr;
 
@@ -18672,7 +18672,7 @@ bool CvUnitAI::AI_poach()
 		return false;
 	}
 
-	if (GET_TEAM(getTeam()).getNumMembers() > 1)
+	if (CvTeamAI::getTeam(getTeam()).getNumMembers() > 1)
 	{
 		return false;
 	}
@@ -18685,7 +18685,7 @@ bool CvUnitAI::AI_poach()
 		return false;
 	}
 
-	if (GET_TEAM(getTeam()).getAnyWarPlanCount() > 0)
+	if (CvTeamAI::getTeam(getTeam()).getAnyWarPlanCount() > 0)
 	{
 		return false;
 	}
@@ -18715,7 +18715,7 @@ bool CvUnitAI::AI_poach()
 						CvUnit* pLoopUnit = ::getUnit(pUnitNode->m_data);
 						pUnitNode = pLoopPlot->nextUnitNode(pUnitNode);
 						if ((pLoopUnit->getTeam() != getTeam())
-							&& GET_TEAM(getTeam()).canDeclareWar(pLoopUnit->getTeam()))
+							&& CvTeamAI::getTeam(getTeam()).canDeclareWar(pLoopUnit->getTeam()))
 						{
 							if (!pLoopUnit->canDefend())
 							{
@@ -18754,9 +18754,9 @@ bool CvUnitAI::AI_poach()
 	if (pBestPoachPlot != nullptr)
 	{
 		//No war roll.
-		if (!GET_TEAM(getTeam()).AI_performNoWarRolls(eBestPoachTeam))
+		if (!CvTeamAI::getTeam(getTeam()).AI_performNoWarRolls(eBestPoachTeam))
 		{
-			GET_TEAM(getTeam()).declareWar(eBestPoachTeam, true, WARPLAN_LIMITED);
+			CvTeamAI::getTeam(getTeam()).declareWar(eBestPoachTeam, true, WARPLAN_LIMITED);
 
 			FAssert(!atPlot(pBestPoachPlot));
 			getGroup()->pushMission(MISSION_MOVE_TO, pBestPoachPlot->getX_INLINE(), pBestPoachPlot->getY_INLINE(), MOVE_DIRECT_ATTACK);
@@ -18862,7 +18862,7 @@ bool CvUnitAI::AI_solveBlockageProblem(CvPlot* pDestPlot, bool bDeclareWar)
 							{
 								if (!isPotentialEnemy(pPlot->getTeam(), pPlot))
 								{
-									CvTeamAI& kTeam = GET_TEAM(getTeam());
+									CvTeamAI& kTeam = CvTeamAI::getTeam(getTeam());
 									if (kTeam.canDeclareWar(pPlot->getTeam()))
 									{
 										WarPlanTypes eWarPlan = WARPLAN_LIMITED;

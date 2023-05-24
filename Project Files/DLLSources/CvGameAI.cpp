@@ -64,7 +64,7 @@ void CvGameAI::AI_updateAssignWork()
 	for (int iI = 0; iI < MAX_PLAYERS; iI++)
 	{
 		CvPlayer& kLoopPlayer = CvPlayerAI::getPlayer((PlayerTypes)iI);
-		if (GET_TEAM(kLoopPlayer.getTeam()).isHuman() && kLoopPlayer.isAlive())
+		if (CvTeamAI::getTeam(kLoopPlayer.getTeam()).isHuman() && kLoopPlayer.isAlive())
 		{
 			kLoopPlayer.AI_updateAssignWork();
 		}

@@ -510,7 +510,7 @@ void CvGame::initDiplomacy()
 
 	for (int iI = 0; iI < MAX_TEAMS; iI++)
 	{
-		CvTeam& kTeam = GET_TEAM((TeamTypes)iI);
+		CvTeam& kTeam = CvTeamAI::getTeam((TeamTypes)iI);
 		kTeam.meet(((TeamTypes)iI), false);
 
 		for (int iJ = 0; iJ < MAX_PLAYERS; ++iJ)
@@ -559,7 +559,7 @@ void CvGame::initDiplomacy()
 
 					if (kLoopPlayer2.isAlive())
 					{
-						if (GET_TEAM(kLoopPlayer1.getTeam()).canChangeWarPeace(kLoopPlayer2.getTeam()))
+						if (CvTeamAI::getTeam(kLoopPlayer1.getTeam()).canChangeWarPeace(kLoopPlayer2.getTeam()))
 						{
 							implementDeal((PlayerTypes)iPlayer1, (PlayerTypes)iPlayer2, &player1List, &player2List);
 						}
@@ -735,7 +735,7 @@ void CvGame::assignStartingPlots()
 			{
 				iLoopTeam = ((iI + iRandOffset) % MAX_TEAMS);
 
-				if (GET_TEAM((TeamTypes)iLoopTeam).isAlive())
+				if (CvTeamAI::getTeam((TeamTypes)iLoopTeam).isAlive())
 				{
 					for (iJ = 0; iJ < MAX_PLAYERS; iJ++)
 					{
@@ -1227,7 +1227,7 @@ int CvGame::getTeamClosenessScore(int** aaiDistances, int* aiStartingLocs)
 
 	for (int iTeam = 0; iTeam < MAX_TEAMS; iTeam++)
 	{
-		if (GET_TEAM((TeamTypes)iTeam).isAlive())
+		if (CvTeamAI::getTeam((TeamTypes)iTeam).isAlive())
 		{
 			int iTeamTotalDist = 0;
 			int iNumEdges = 0;
@@ -3430,7 +3430,7 @@ If bStarsVisible, then there will be stars visible behind the globe when it is o
 If bWorldIsRound, then the world will bend into a globe; otherwise, it will show up as a plane  */
 void CvGame::getGlobeviewConfigurationParameters(TeamTypes eTeam, bool& bStarsVisible, bool& bWorldIsRound)
 {
-	if(GET_TEAM(eTeam).isMapCentering())
+	if(CvTeamAI::getTeam(eTeam).isMapCentering())
 	{
 		bStarsVisible = true;
 		bWorldIsRound = true;
@@ -3464,9 +3464,9 @@ int CvGame::getAdjustedPopulationPercent(VictoryTypes eVictory) const
 
 	for (iI = 0; iI < MAX_TEAMS; iI++)
 	{
-		if (GET_TEAM((TeamTypes)iI).isAlive())
+		if (CvTeamAI::getTeam((TeamTypes)iI).isAlive())
 		{
-			iPopulation = GET_TEAM((TeamTypes)iI).getTotalPopulation();
+			iPopulation = CvTeamAI::getTeam((TeamTypes)iI).getTotalPopulation();
 
 			if (iPopulation > iBestPopulation)
 			{
@@ -3558,7 +3558,7 @@ int CvGame::countCivTeamsAlive() const
 
 	for (iI = 0; iI < MAX_TEAMS; iI++)
 	{
-		if (GET_TEAM((TeamTypes)iI).isAlive())
+		if (CvTeamAI::getTeam((TeamTypes)iI).isAlive())
 		{
 			iCount++;
 		}
@@ -3577,7 +3577,7 @@ int CvGame::countCivTeamsEverAlive() const
 
 	for (iI = 0; iI < MAX_TEAMS; iI++)
 	{
-		if (GET_TEAM((TeamTypes)iI).isEverAlive())
+		if (CvTeamAI::getTeam((TeamTypes)iI).isEverAlive())
 		{
 			iCount++;
 		}
@@ -4286,7 +4286,7 @@ void CvGame::initScoreCalculation()
 
 	for (int iTeam = 0; iTeam < MAX_TEAMS; ++iTeam)
 	{
-		CvTeam& kTeam = GET_TEAM((TeamTypes) iTeam);
+		CvTeam& kTeam = CvTeamAI::getTeam((TeamTypes) iTeam);
 		for (int iPointType = 0; iPointType < GC.getNumFatherPointInfos(); ++iPointType)
 		{
 			FatherPointTypes ePointType = (FatherPointTypes) iPointType;
@@ -4478,9 +4478,9 @@ void CvGame::setFinalInitialized(bool bNewValue)
 		{
 			for (iI = 0; iI < MAX_TEAMS; iI++)
 			{
-				if (GET_TEAM((TeamTypes)iI).isAlive())
+				if (CvTeamAI::getTeam((TeamTypes)iI).isAlive())
 				{
-					GET_TEAM((TeamTypes)iI).AI_updateAreaStragies();
+					CvTeamAI::getTeam((TeamTypes)iI).AI_updateAreaStragies();
 				}
 			}
 			/// PlotGroup - start - Nightinggale
@@ -4695,9 +4695,9 @@ void CvGame::setWinner(TeamTypes eNewWinner, VictoryTypes eNewVictory)
 			{
 				for (int iTeam = 0; iTeam < MAX_TEAMS; ++iTeam)
 				{
-					if (GET_TEAM((TeamTypes) iTeam).isParentOf(getWinner()))
+					if (CvTeamAI::getTeam((TeamTypes) iTeam).isParentOf(getWinner()))
 					{
-						GET_TEAM(getWinner()).makePeace((TeamTypes) iTeam);
+						CvTeamAI::getTeam(getWinner()).makePeace((TeamTypes) iTeam);
 					}
 				}
 
@@ -4712,8 +4712,8 @@ void CvGame::setWinner(TeamTypes eNewWinner, VictoryTypes eNewVictory)
 
 			if (getWinner() != NO_TEAM)
 			{
-				szBuffer = gDLL->getText("TXT_KEY_GAME_WON", GET_TEAM(getWinner()).getName().GetCString(), GC.getVictoryInfo(getVictory()).getTextKeyWide());
-				addReplayMessage(REPLAY_MESSAGE_MAJOR_EVENT, GET_TEAM(getWinner()).getLeaderID(), szBuffer, -1, -1, (ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT"));
+				szBuffer = gDLL->getText("TXT_KEY_GAME_WON", CvTeamAI::getTeam(getWinner()).getName().GetCString(), GC.getVictoryInfo(getVictory()).getTextKeyWide());
+				addReplayMessage(REPLAY_MESSAGE_MAJOR_EVENT, CvTeamAI::getTeam(getWinner()).getLeaderID(), szBuffer, -1, -1, (ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT"));
 			}
 
 			if ((getAIAutoPlay() > 0) || gDLL->GetAutorun())
@@ -5326,7 +5326,7 @@ void CvGame::doTurn()
 	// TAC - AI More Immigrants - koma13 - END
 	for (TeamTypes eTeam = FIRST_TEAM; eTeam < NUM_TEAM_TYPES; ++eTeam)
 	{
-		CvTeam &kTeam = GET_TEAM(eTeam);
+		CvTeam &kTeam = CvTeamAI::getTeam(eTeam);
 		if (kTeam.isAlive())
 		{
 			kTeam.doTurn();
@@ -5376,7 +5376,7 @@ void CvGame::doTurn()
 	{
 		for (iI = 0; iI < MAX_TEAMS; iI++)
 		{
-			CvTeam& kTeam = GET_TEAM((TeamTypes)iI);
+			CvTeam& kTeam = CvTeamAI::getTeam((TeamTypes)iI);
 			if (kTeam.isAlive())
 			{
 				kTeam.setTurnActive(true);
@@ -5442,18 +5442,18 @@ void CvGame::createBarbarianPlayer()
 				{
 					if (iI != eTeam)
 					{
-						if (GET_TEAM((TeamTypes)iI).isAlive())
+						if (CvTeamAI::getTeam((TeamTypes)iI).isAlive())
 						{
 							// R&R, ray, changes to Wild Animals
-							// if (!GET_TEAM(eTeam).isAtWar((TeamTypes)iI))
+							// if (!CvTeamAI::getTeam(eTeam).isAtWar((TeamTypes)iI))
 							// Natives and Kings will not Fight Animals
-							if (!GET_TEAM((TeamTypes)iI).hasNativePlayer() && !GET_TEAM((TeamTypes)iI).hasEuropePlayer() && !GET_TEAM(eTeam).isAtWar((TeamTypes)iI))
+							if (!CvTeamAI::getTeam((TeamTypes)iI).hasNativePlayer() && !CvTeamAI::getTeam((TeamTypes)iI).hasEuropePlayer() && !CvTeamAI::getTeam(eTeam).isAtWar((TeamTypes)iI))
 							{
-								GET_TEAM(eTeam).declareWar(((TeamTypes)iI), false, GET_TEAM(eTeam).AI_getWarPlan((TeamTypes)iI));
+								CvTeamAI::getTeam(eTeam).declareWar(((TeamTypes)iI), false, CvTeamAI::getTeam(eTeam).AI_getWarPlan((TeamTypes)iI));
 							}
-							if (!GET_TEAM(eTeam).isPermanentWarPeace((TeamTypes)iI))
+							if (!CvTeamAI::getTeam(eTeam).isPermanentWarPeace((TeamTypes)iI))
 							{
-								GET_TEAM(eTeam).setPermanentWarPeace(((TeamTypes)iI), true);
+								CvTeamAI::getTeam(eTeam).setPermanentWarPeace(((TeamTypes)iI), true);
 							}
 						}
 					}
@@ -5704,10 +5704,10 @@ void CvGame::createChurchPlayer()
 					if (iI != eTeam)
 					{
 						// set permanent peace with all Europeans and make contact
-						if (GET_TEAM((TeamTypes)iI).isAlive() && !GET_TEAM((TeamTypes)iI).hasNativePlayer())
+						if (CvTeamAI::getTeam((TeamTypes)iI).isAlive() && !CvTeamAI::getTeam((TeamTypes)iI).hasNativePlayer())
 						{
-							GET_TEAM(eTeam).setPermanentWarPeace(((TeamTypes)iI), true);
-							GET_TEAM(eTeam).meet(((TeamTypes)iI), false);
+							CvTeamAI::getTeam(eTeam).setPermanentWarPeace(((TeamTypes)iI), true);
+							CvTeamAI::getTeam(eTeam).meet(((TeamTypes)iI), false);
 						}
 					}
 				}
@@ -5741,13 +5741,13 @@ void CvGame::updateWar()
 
 	for (int iI = 0; iI < MAX_TEAMS; iI++)
 	{
-		CvTeam& kTeam1 = GET_TEAM((TeamTypes)iI);
+		CvTeam& kTeam1 = CvTeamAI::getTeam((TeamTypes)iI);
 		if (kTeam1.isAlive() && kTeam1.isHuman())
 		{
 			for (int iJ = 0; iJ < MAX_TEAMS; iJ++)
 			{
 				TeamTypes eTeam2 = (TeamTypes) iJ;
-				CvTeam& kTeam2 = GET_TEAM(eTeam2);
+				CvTeam& kTeam2 = CvTeamAI::getTeam(eTeam2);
 				if (kTeam2.isAlive() && !kTeam2.isHuman())
 				{
 					FAssert(iI != iJ);
@@ -5899,7 +5899,7 @@ bool CvGame::testVictory(VictoryTypes eVictory, TeamTypes eTeam, bool* pbEndScor
 {
 	FAssert(eVictory >= 0 && eVictory < GC.getNumVictoryInfos());
 	FAssert(eTeam >=0 && eTeam < MAX_TEAMS);
-	FAssert(GET_TEAM(eTeam).isAlive());
+	FAssert(CvTeamAI::getTeam(eTeam).isAlive());
 
 	bool bValid = isVictoryValid(eVictory);
 	if (pbEndScore)
@@ -5930,7 +5930,7 @@ bool CvGame::testVictory(VictoryTypes eVictory, TeamTypes eTeam, bool* pbEndScor
 
 				for (int iK = 0; iK < MAX_TEAMS; iK++)
 				{
-					if (GET_TEAM((TeamTypes)iK).isAlive())
+					if (CvTeamAI::getTeam((TeamTypes)iK).isAlive())
 					{
 						if (iK != eTeam)
 						{
@@ -5967,7 +5967,7 @@ bool CvGame::testVictory(VictoryTypes eVictory, TeamTypes eTeam, bool* pbEndScor
 			{
 				if (isNetworkMultiPlayer())
 				{
-					if (!GET_TEAM(eTeam).hasEuropePlayer())
+					if (!CvTeamAI::getTeam(eTeam).hasEuropePlayer())
 					{
 						bValid = false;
 					}
@@ -6009,7 +6009,7 @@ bool CvGame::testVictory(VictoryTypes eVictory, TeamTypes eTeam, bool* pbEndScor
 
 				for (int iK = 0; iK < MAX_TEAMS; iK++)
 				{
-					if (GET_TEAM((TeamTypes)iK).isAlive())
+					if (CvTeamAI::getTeam((TeamTypes)iK).isAlive())
 					{
 						if (iK != eTeam)
 						{
@@ -6034,7 +6034,7 @@ bool CvGame::testVictory(VictoryTypes eVictory, TeamTypes eTeam, bool* pbEndScor
 	{
 		if (GC.getVictoryInfo(eVictory).isConquest())
 		{
-			if (GET_TEAM(eTeam).getNumCities() == 0)
+			if (CvTeamAI::getTeam(eTeam).getNumCities() == 0)
 			{
 				bValid = false;
 			}
@@ -6044,11 +6044,11 @@ bool CvGame::testVictory(VictoryTypes eVictory, TeamTypes eTeam, bool* pbEndScor
 
 				for (int iK = 0; iK < MAX_TEAMS; iK++)
 				{
-					if (GET_TEAM((TeamTypes)iK).isAlive())
+					if (CvTeamAI::getTeam((TeamTypes)iK).isAlive())
 					{
 						if (iK != eTeam)
 						{
-							if (GET_TEAM((TeamTypes)iK).getNumCities() > 0)
+							if (CvTeamAI::getTeam((TeamTypes)iK).getNumCities() > 0)
 							{
 								bFound = true;
 								break;
@@ -6069,7 +6069,7 @@ bool CvGame::testVictory(VictoryTypes eVictory, TeamTypes eTeam, bool* pbEndScor
 	{
 		if (GC.getVictoryInfo(eVictory).isRevolution())
 		{
-			if (!GET_TEAM(eTeam).checkIndependence())
+			if (!CvTeamAI::getTeam(eTeam).checkIndependence())
 			{
 				bValid = false;
 			}
@@ -6080,7 +6080,7 @@ bool CvGame::testVictory(VictoryTypes eVictory, TeamTypes eTeam, bool* pbEndScor
 	{
 		if (getAdjustedPopulationPercent(eVictory) > 0)
 		{
-			if (100 * GET_TEAM(eTeam).getTotalPopulation() < getTotalPopulation() * getAdjustedPopulationPercent(eVictory))
+			if (100 * CvTeamAI::getTeam(eTeam).getTotalPopulation() < getTotalPopulation() * getAdjustedPopulationPercent(eVictory))
 			{
 				bValid = false;
 			}
@@ -6091,7 +6091,7 @@ bool CvGame::testVictory(VictoryTypes eVictory, TeamTypes eTeam, bool* pbEndScor
 	{
 		if (getAdjustedLandPercent(eVictory) > 0)
 		{
-			if (100 * GET_TEAM(eTeam).getTotalLand() < GC.getMap().getLandPlots() * getAdjustedLandPercent(eVictory))
+			if (100 * CvTeamAI::getTeam(eTeam).getTotalLand() < GC.getMap().getLandPlots() * getAdjustedLandPercent(eVictory))
 			{
 				bValid = false;
 			}
@@ -6133,17 +6133,17 @@ bool CvGame::testVictory(VictoryTypes eVictory, TeamTypes eTeam, bool* pbEndScor
 	{
 		if (GC.getVictoryInfo(eVictory).getTotalCultureRatio() > 0)
 		{
-			int iThreshold = ((GET_TEAM(eTeam).countTotalCulture() * 100) / GC.getVictoryInfo(eVictory).getTotalCultureRatio());
+			int iThreshold = ((CvTeamAI::getTeam(eTeam).countTotalCulture() * 100) / GC.getVictoryInfo(eVictory).getTotalCultureRatio());
 
 			bool bFound = false;
 
 			for (int iK = 0; iK < MAX_TEAMS; iK++)
 			{
-				if (GET_TEAM((TeamTypes)iK).isAlive())
+				if (CvTeamAI::getTeam((TeamTypes)iK).isAlive())
 				{
 					if (iK != eTeam)
 					{
-						if (GET_TEAM((TeamTypes)iK).countTotalCulture() > iThreshold)
+						if (CvTeamAI::getTeam((TeamTypes)iK).countTotalCulture() > iThreshold)
 						{
 							bFound = true;
 							break;
@@ -6163,7 +6163,7 @@ bool CvGame::testVictory(VictoryTypes eVictory, TeamTypes eTeam, bool* pbEndScor
 	{
 		for (int iK = 0; iK < GC.getNumBuildingClassInfos(); iK++)
 		{
-			if (GC.getBuildingClassInfo((BuildingClassTypes) iK).getVictoryThreshold(eVictory) > GET_TEAM(eTeam).getBuildingClassCount((BuildingClassTypes)iK))
+			if (GC.getBuildingClassInfo((BuildingClassTypes) iK).getVictoryThreshold(eVictory) > CvTeamAI::getTeam(eTeam).getBuildingClassCount((BuildingClassTypes)iK))
 			{
 				bValid = false;
 				break;
@@ -6176,7 +6176,7 @@ bool CvGame::testVictory(VictoryTypes eVictory, TeamTypes eTeam, bool* pbEndScor
 	{
 		if (GC.getVictoryInfo(eVictory).getTotalProductionRate() > 0)
 		{
-			if (GC.getVictoryInfo(eVictory).getTotalProductionRate() > GET_TEAM(eTeam).getTotalProductionRate())
+			if (GC.getVictoryInfo(eVictory).getTotalProductionRate() > CvTeamAI::getTeam(eTeam).getTotalProductionRate())
 			{
 				bValid = false;
 			}
@@ -6254,7 +6254,7 @@ void CvGame::testVictory()
 	for (int iI = 0; iI < MAX_TEAMS; iI++)
 	{
 		TeamTypes eTeam = (TeamTypes) iI;
-		CvTeam& kLoopTeam = GET_TEAM(eTeam);
+		CvTeam& kLoopTeam = CvTeamAI::getTeam(eTeam);
 		if (kLoopTeam.isAlive())
 		{
 			for (int iJ = 0; iJ < GC.getNumVictoryInfos(); iJ++)
@@ -6763,7 +6763,7 @@ void CvGame::showEndGameSequence()
 			CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_TEXT);
 			if ((getWinner() != NO_TEAM) && (getVictory() != NO_VICTORY))
 			{
-				pInfo->setText(gDLL->getText("TXT_KEY_GAME_WON", GET_TEAM(getWinner()).getName().GetCString(), GC.getVictoryInfo(getVictory()).getTextKeyWide()));
+				pInfo->setText(gDLL->getText("TXT_KEY_GAME_WON", CvTeamAI::getTeam(getWinner()).getName().GetCString(), GC.getVictoryInfo(getVictory()).getTextKeyWide()));
 			}
 			else
 			{
@@ -7093,7 +7093,7 @@ void CvGame::setFatherTeam(FatherTypes eFather, TeamTypes eTeam)
 		bool bFirstTime = true;
 		if (getFatherTeam(eFather) != NO_TEAM)
 		{
-			GET_TEAM(getFatherTeam(eFather)).processFather(eFather, -1);
+			CvTeamAI::getTeam(getFatherTeam(eFather)).processFather(eFather, -1);
 			bFirstTime = false;
 		}
 
@@ -7101,7 +7101,7 @@ void CvGame::setFatherTeam(FatherTypes eFather, TeamTypes eTeam)
 
 		if (getFatherTeam(eFather) != NO_TEAM)
 		{
-			GET_TEAM(getFatherTeam(eFather)).processFather(eFather, 1);
+			CvTeamAI::getTeam(getFatherTeam(eFather)).processFather(eFather, 1);
 
 			if (bFirstTime)
 			{
@@ -7125,9 +7125,9 @@ void CvGame::setFatherTeam(FatherTypes eFather, TeamTypes eTeam)
 					CvPlayer& kPlayer = CvPlayerAI::getPlayer((PlayerTypes) iI);
 					if (kPlayer.isAlive())
 					{
-						if (GET_TEAM(kPlayer.getTeam()).isHasMet(eTeam))
+						if (CvTeamAI::getTeam(kPlayer.getTeam()).isHasMet(eTeam))
 						{
-							szBuffer = gDLL->getText("TXT_KEY_FATHER_JOINED_TEAM", GC.getFatherInfo(eFather).getTextKeyWide(), GET_TEAM(getFatherTeam(eFather)).getName().GetCString());
+							szBuffer = gDLL->getText("TXT_KEY_FATHER_JOINED_TEAM", GC.getFatherInfo(eFather).getTextKeyWide(), CvTeamAI::getTeam(getFatherTeam(eFather)).getName().GetCString());
 						}
 						else
 						{
@@ -7137,7 +7137,7 @@ void CvGame::setFatherTeam(FatherTypes eFather, TeamTypes eTeam)
 						gDLL->UI().addPlayerMessage(((PlayerTypes)iI), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_GLOBECIRCUMNAVIGATED", MESSAGE_TYPE_MAJOR_EVENT, nullptr, (ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT"));
 					}
 				}
-				szBuffer = gDLL->getText("TXT_KEY_FATHER_JOINED_TEAM", GC.getFatherInfo(eFather).getTextKeyWide(), GET_TEAM(getFatherTeam(eFather)).getName().GetCString());
+				szBuffer = gDLL->getText("TXT_KEY_FATHER_JOINED_TEAM", GC.getFatherInfo(eFather).getTextKeyWide(), CvTeamAI::getTeam(getFatherTeam(eFather)).getName().GetCString());
 				addReplayMessage(REPLAY_MESSAGE_MAJOR_EVENT, NO_PLAYER, szBuffer, -1, -1, (ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT"));
 			}
 		}

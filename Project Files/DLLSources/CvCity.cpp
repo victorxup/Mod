@@ -250,7 +250,7 @@ void CvCity::init(int iID, PlayerTypes eOwner, Coordinates initCoord, bool bBump
 
 	for (TeamTypes eTeam = FIRST_TEAM; eTeam < NUM_TEAM_TYPES; ++eTeam)
 	{
-		if (GET_TEAM(eTeam).isAlive())
+		if (CvTeamAI::getTeam(eTeam).isAlive())
 		{
 			if (pPlot->isVisible((eTeam), false))
 			{
@@ -270,7 +270,7 @@ void CvCity::init(int iID, PlayerTypes eOwner, Coordinates initCoord, bool bBump
 
 	area()->changeCitiesPerPlayer(getOwnerINLINE(), 1);
 
-	GET_TEAM(getTeam()).changeNumCities(1);
+	CvTeamAI::getTeam(getTeam()).changeNumCities(1);
 
 	GC.getGameINLINE().changeNumCities(1);
 
@@ -485,7 +485,7 @@ void CvCity::kill()
 
 	area()->changeCitiesPerPlayer(getOwnerINLINE(), -1);
 
-	GET_TEAM(getTeam()).changeNumCities(-1);
+	CvTeamAI::getTeam(getTeam()).changeNumCities(-1);
 
 	GC.getGameINLINE().changeNumCities(-1);
 
@@ -2753,7 +2753,7 @@ void CvCity::processBuilding(BuildingTypes eBuilding, int iChange)
 	CvPlayerAI::getPlayer(getOwnerINLINE()).changePower(kBuilding.getPowerValue() * iChange);
 	changeBuildingDefense(kBuilding.getDefenseModifier() * iChange);
 	changeBuildingBombardDefense(kBuilding.getBombardDefenseModifier() * iChange);
-	GET_TEAM(getTeam()).changeBuildingClassCount((BuildingClassTypes)kBuilding.getBuildingClassType(), iChange);
+	CvTeamAI::getTeam(getTeam()).changeBuildingClassCount((BuildingClassTypes)kBuilding.getBuildingClassType(), iChange);
 	CvPlayerAI::getPlayer(getOwnerINLINE()).changeBuildingClassCount((BuildingClassTypes)kBuilding.getBuildingClassType(), iChange);
 	setLayoutDirty(true);
 
@@ -10623,13 +10623,13 @@ int CvCity::getUnhappinessFromWars() const
 
 	for (int iI = 0; iI < MAX_TEAMS; iI++)
 	{
-		if (GET_TEAM((TeamTypes)iI).isAlive())
+		if (CvTeamAI::getTeam((TeamTypes)iI).isAlive())
 		{
 			// we do not count ourselves of course
-			if (iI != GET_TEAM(getTeam()).getID())
+			if (iI != CvTeamAI::getTeam(getTeam()).getID())
 			{
 				// we count teams we are at war with that have European Players - thus we do not count Native-only Teams, Wild Animals, Kings, ...
-				if (GET_TEAM(getTeam()).isAtWar((TeamTypes)iI) && GET_TEAM((TeamTypes)iI).hasColonialPlayer())
+				if (CvTeamAI::getTeam(getTeam()).isAtWar((TeamTypes)iI) && CvTeamAI::getTeam((TeamTypes)iI).hasColonialPlayer())
 				{
 					iNumEuropeanWars++;
 				}
@@ -10952,19 +10952,19 @@ int CvCity::getHappinessFromTreaties() const
 
 	for (int iI = 0; iI < MAX_TEAMS; iI++)
 	{
-		if (GET_TEAM((TeamTypes)iI).isAlive())
+		if (CvTeamAI::getTeam((TeamTypes)iI).isAlive())
 		{
 			// we do not count ourselves of course
-			if (iI != GET_TEAM(getTeam()).getID())
+			if (iI != CvTeamAI::getTeam(getTeam()).getID())
 			{
 				// we count teams we have opne borders with that have European Players - thus we do not count Native-only Teams, Wild Animals, Kings, ...
-				if (GET_TEAM(getTeam()).isOpenBorders((TeamTypes)iI) && GET_TEAM((TeamTypes)iI).hasColonialPlayer())
+				if (CvTeamAI::getTeam(getTeam()).isOpenBorders((TeamTypes)iI) && CvTeamAI::getTeam((TeamTypes)iI).hasColonialPlayer())
 				{
 					iNumOpenBorders++;
 				}
 
 				// we count teams we a defensive pact with that have European Players - thus we do not count Native-only Teams, Wild Animals, Kings, ...
-				if (GET_TEAM(getTeam()).isDefensivePact((TeamTypes)iI) && GET_TEAM((TeamTypes)iI).hasColonialPlayer())
+				if (CvTeamAI::getTeam(getTeam()).isDefensivePact((TeamTypes)iI) && CvTeamAI::getTeam((TeamTypes)iI).hasColonialPlayer())
 				{
 					iNumDefensivePacts++;
 				}
@@ -11219,13 +11219,13 @@ int CvCity::getCrimeFromWars() const
 
 	for (int iI = 0; iI < MAX_TEAMS; iI++)
 	{
-		if (GET_TEAM((TeamTypes)iI).isAlive())
+		if (CvTeamAI::getTeam((TeamTypes)iI).isAlive())
 		{
 			// we do not count ourselves of course
-			if (iI != GET_TEAM(getTeam()).getID())
+			if (iI != CvTeamAI::getTeam(getTeam()).getID())
 			{
 				// we count teams we are at war with that have European Players - thus we do not count Native-only Teams, Wild Animals, Kings, ...
-				if (GET_TEAM(getTeam()).isAtWar((TeamTypes)iI) && GET_TEAM((TeamTypes)iI).hasColonialPlayer())
+				if (CvTeamAI::getTeam(getTeam()).isAtWar((TeamTypes)iI) && CvTeamAI::getTeam((TeamTypes)iI).hasColonialPlayer())
 				{
 					iNumEuropeanWars++;
 				}
@@ -13325,7 +13325,7 @@ void CvCity::doExtraCityDefenseAttacks()
 								pLoopUnit2 = ::getUnit(pUnitNode2->m_data);
 								pUnitNode2 = pAdjacentPlot->nextUnitNode(pUnitNode2);
 
-								if (getTeam() != pLoopUnit2->getTeam() && (GET_TEAM(getTeam()).isAtWar(pLoopUnit2->getTeam()) || pLoopUnit2->getUnitInfo().isHiddenNationality()) && !pLoopUnit2->isCargo())
+								if (getTeam() != pLoopUnit2->getTeam() && (CvTeamAI::getTeam(getTeam()).isAtWar(pLoopUnit2->getTeam()) || pLoopUnit2->getUnitInfo().isHiddenNationality()) && !pLoopUnit2->isCargo())
 								{
 									int randNum = GC.getGameINLINE().getSorenRandNum(100, "City Defense Bomb");
 									int iDamage = 0;
@@ -13540,7 +13540,7 @@ void CvCity::doExtraCityDefenseAttacks()
 								pLoopUnit2 = ::getUnit(pUnitNode2->m_data);
 								pUnitNode2 = pAdjacentPlot->nextUnitNode(pUnitNode2);
 
-								if (getTeam() != pLoopUnit2->getTeam() && (GET_TEAM(getTeam()).isAtWar(pLoopUnit2->getTeam()) || pLoopUnit2->getUnitInfo().isHiddenNationality()) && !pLoopUnit2->isCargo())
+								if (getTeam() != pLoopUnit2->getTeam() && (CvTeamAI::getTeam(getTeam()).isAtWar(pLoopUnit2->getTeam()) || pLoopUnit2->getUnitInfo().isHiddenNationality()) && !pLoopUnit2->isCargo())
 								{
 									int defenseRandNum = GC.getGameINLINE().getSorenRandNum(100, "City Defense Attack");
 									int iDamage = 0;

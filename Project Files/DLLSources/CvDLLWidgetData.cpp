@@ -1063,7 +1063,7 @@ void CvDLLWidgetData::doContactCiv(CvWidgetDataStruct &widgetDataStruct)
 
 	if (gDLL->altKey())
 	{
-		if (GET_TEAM(GC.getGameINLINE().getActiveTeam()).canDeclareWar(CvPlayerAI::getPlayer((PlayerTypes)widgetDataStruct.m_iData1).getTeam()))
+		if (CvTeamAI::getTeam(GC.getGameINLINE().getActiveTeam()).canDeclareWar(CvPlayerAI::getPlayer((PlayerTypes)widgetDataStruct.m_iData1).getTeam()))
 		{
 			gDLL->sendChangeWar(CvPlayerAI::getPlayer((PlayerTypes)widgetDataStruct.m_iData1).getTeam(), true);
 		}
@@ -2530,7 +2530,7 @@ void CvDLLWidgetData::parseContactCivHelp(CvWidgetDataStruct &widgetDataStruct, 
 		GAMETEXT.parsePlayerTraits(szBuffer, otherPlayer.getID());
 	}
 
-	if (!(GET_TEAM(GC.getGameINLINE().getActiveTeam()).isHasMet(otherPlayer.getTeam())))
+	if (!(CvTeamAI::getTeam(GC.getGameINLINE().getActiveTeam()).isHasMet(otherPlayer.getTeam())))
 	{
 		szBuffer.append(NEWLINE);
 		szBuffer.append(gDLL->getText("TXT_KEY_MISC_HAVENT_MET_CIV"));
@@ -2558,14 +2558,14 @@ void CvDLLWidgetData::parseContactCivHelp(CvWidgetDataStruct &widgetDataStruct, 
 
 		if (otherPlayer.getTeam() != GC.getGameINLINE().getActiveTeam() && !::atWar(GC.getGameINLINE().getActiveTeam(), otherPlayer.getTeam()))
 		{
-			//if (GET_TEAM(GC.getGameINLINE().getActiveTeam()).canDeclareWar(otherPlayer.getTeam()))
-			if (GET_TEAM(GC.getGameINLINE().getActiveTeam()).canDeclareWar(otherPlayer.getTeam())&& !GC.getGameINLINE().isOption(GAMEOPTION_NO_MORE_VARIABLES_HIDDEN))
+			//if (CvTeamAI::getTeam(GC.getGameINLINE().getActiveTeam()).canDeclareWar(otherPlayer.getTeam()))
+			if (CvTeamAI::getTeam(GC.getGameINLINE().getActiveTeam()).canDeclareWar(otherPlayer.getTeam())&& !GC.getGameINLINE().isOption(GAMEOPTION_NO_MORE_VARIABLES_HIDDEN))
 			{
 				szBuffer.append(NEWLINE);
 				szBuffer.append(gDLL->getText("TXT_KEY_MISC_ALT_DECLARE_WAR"));
 			}
-			//else if (!GET_TEAM(otherPlayer.getTeam()).isParentOf(GC.getGameINLINE().getActiveTeam()))
-			else if (!GET_TEAM(otherPlayer.getTeam()).isParentOf(GC.getGameINLINE().getActiveTeam()) && !GET_TEAM(GC.getGameINLINE().getActiveTeam()).canDeclareWar(otherPlayer.getTeam()) && GC.getGameINLINE().isOption(GAMEOPTION_NO_MORE_VARIABLES_HIDDEN))
+			//else if (!CvTeamAI::getTeam(otherPlayer.getTeam()).isParentOf(GC.getGameINLINE().getActiveTeam()))
+			else if (!CvTeamAI::getTeam(otherPlayer.getTeam()).isParentOf(GC.getGameINLINE().getActiveTeam()) && !CvTeamAI::getTeam(GC.getGameINLINE().getActiveTeam()).canDeclareWar(otherPlayer.getTeam()) && GC.getGameINLINE().isOption(GAMEOPTION_NO_MORE_VARIABLES_HIDDEN))
 			{
 				szBuffer.append(NEWLINE);
 				szBuffer.append(gDLL->getText("TXT_KEY_MISC_CANNOT_DECLARE_WAR"));
@@ -2584,7 +2584,7 @@ void CvDLLWidgetData::parseContactCivHelp(CvWidgetDataStruct &widgetDataStruct, 
 		CvPlayerAI& player = CvPlayerAI::getPlayer((PlayerTypes)widgetDataStruct.m_iData1);
 
 		szBuffer.append(CvWString::format(L"\nPlayer %d, Team %d", player.getID(), player.getTeam()));
-		szBuffer.append(CvWString::format(L"\n%d%c %d%c", player.getGold(), GC.getSymbolID(GOLD_CHAR), GET_TEAM(player.getTeam()).getRebelPercent(), GC.getSymbolID(POWER_CHAR)));
+		szBuffer.append(CvWString::format(L"\n%d%c %d%c", player.getGold(), GC.getSymbolID(GOLD_CHAR), CvTeamAI::getTeam(player.getTeam()).getRebelPercent(), GC.getSymbolID(POWER_CHAR)));
 		szBuffer.append(CvWString::format(L"\nCities = %d, Units = %d, Pop = %d, AIPop = %d", player.getNumCities(), player.getNumUnits(), player.getTotalPopulation(), player.AI_getPopulation()));
 		szBuffer.append(CvWString::format(L"\nIncome = %d, Hurry Spending = %d", player.AI_getTotalIncome(), player.AI_getHurrySpending()));
 		for (int i = 0; i < NUM_STRATEGY_TYPES; ++i)
@@ -2626,7 +2626,7 @@ void CvDLLWidgetData::parseContactCivHelp(CvWidgetDataStruct &widgetDataStruct, 
 			szBuffer.append(CvWString::format(L"\nOverpopulation : %d", player.AI_getOverpopulationPercent()));
 		}
 
-		CvTeamAI& kTeam = GET_TEAM(player.getTeam());
+		CvTeamAI& kTeam = CvTeamAI::getTeam(player.getTeam());
 		for (int i = 0; i < MAX_PLAYERS; ++i)
 		{
 			CvPlayer& kLoopPlayer = CvPlayerAI::getPlayer((PlayerTypes)i);
@@ -2634,7 +2634,7 @@ void CvDLLWidgetData::parseContactCivHelp(CvWidgetDataStruct &widgetDataStruct, 
 			if (kLoopPlayer.isAlive())
 			{
 				TeamTypes eLoopTeam = kLoopPlayer.getTeam();
-				if (eLoopTeam != player.getTeam() && GET_TEAM(eLoopTeam).isAlive())
+				if (eLoopTeam != player.getTeam() && CvTeamAI::getTeam(eLoopTeam).isAlive())
 				{
 					WarPlanTypes eWarplan = kTeam.AI_getWarPlan(eLoopTeam);
 
@@ -2778,13 +2778,13 @@ void CvDLLWidgetData::parseTradeItem(CvWidgetDataStruct &widgetDataStruct, CvWSt
 			eWhoDenies = (widgetDataStruct.m_bOption ? eWhoFrom : eWhoTo);
 			break;
 		case TRADE_PEACE:
-			szBuffer.append(gDLL->getText("TXT_KEY_TRADE_MAKE_PEACE", GET_TEAM(CvPlayerAI::getPlayer(eWhoFrom).getTeam()).getName().GetCString(), GET_TEAM((TeamTypes)widgetDataStruct.m_iData2).getName().GetCString()));
+			szBuffer.append(gDLL->getText("TXT_KEY_TRADE_MAKE_PEACE", CvTeamAI::getTeam(CvPlayerAI::getPlayer(eWhoFrom).getTeam()).getName().GetCString(), CvTeamAI::getTeam((TeamTypes)widgetDataStruct.m_iData2).getName().GetCString()));
 			break;
 		case TRADE_WAR:
-			szBuffer.append(gDLL->getText("TXT_KEY_TRADE_MAKE_WAR", GET_TEAM(CvPlayerAI::getPlayer(eWhoFrom).getTeam()).getName().GetCString(), GET_TEAM((TeamTypes)widgetDataStruct.m_iData2).getName().GetCString()));
+			szBuffer.append(gDLL->getText("TXT_KEY_TRADE_MAKE_WAR", CvTeamAI::getTeam(CvPlayerAI::getPlayer(eWhoFrom).getTeam()).getName().GetCString(), CvTeamAI::getTeam((TeamTypes)widgetDataStruct.m_iData2).getName().GetCString()));
 			break;
 		case TRADE_EMBARGO:
-			szBuffer.append(gDLL->getText("TXT_KEY_TRADE_STOP_TRADING", GET_TEAM(CvPlayerAI::getPlayer(eWhoFrom).getTeam()).getName().GetCString(), GET_TEAM((TeamTypes)widgetDataStruct.m_iData2).getName().GetCString()));
+			szBuffer.append(gDLL->getText("TXT_KEY_TRADE_STOP_TRADING", CvTeamAI::getTeam(CvPlayerAI::getPlayer(eWhoFrom).getTeam()).getName().GetCString(), CvTeamAI::getTeam((TeamTypes)widgetDataStruct.m_iData2).getName().GetCString()));
 			break;
 		case TRADE_GOLD:
 			szBuffer.append(gDLL->getText("TXT_KEY_TRADE_GOLD"));
@@ -3046,7 +3046,7 @@ void CvDLLWidgetData::parseRebelHelp(CvWidgetDataStruct &widgetDataStruct, CvWSt
 	}
 	else
 	{
-		szBuffer.assign(gDLL->getText("TXT_KEY_MISC_REBEL_HELP", GET_TEAM(GC.getGameINLINE().getActiveTeam()).getRebelPercent()));
+		szBuffer.assign(gDLL->getText("TXT_KEY_MISC_REBEL_HELP", CvTeamAI::getTeam(GC.getGameINLINE().getActiveTeam()).getRebelPercent()));
 	}
 }
 

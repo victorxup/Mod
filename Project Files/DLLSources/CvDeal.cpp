@@ -69,7 +69,7 @@ void CvDeal::kill(bool bKillTeam, TeamTypes eKillingTeam)
 		CvWStringBuffer szDealString;
 		CvWString szCancelString = gDLL->getText("TXT_KEY_POPUP_DEAL_CANCEL");
 
-		if (GET_TEAM(CvPlayerAI::getPlayer(getFirstPlayer()).getTeam()).isHasMet(CvPlayerAI::getPlayer(getSecondPlayer()).getTeam()))
+		if (CvTeamAI::getTeam(CvPlayerAI::getPlayer(getFirstPlayer()).getTeam()).isHasMet(CvPlayerAI::getPlayer(getSecondPlayer()).getTeam()))
 		{
 			szDealString.clear();
 			GAMETEXT.getDealString(szDealString, *this, getFirstPlayer());
@@ -77,7 +77,7 @@ void CvDeal::kill(bool bKillTeam, TeamTypes eKillingTeam)
 			gDLL->UI().addPlayerMessage((PlayerTypes)getFirstPlayer(), true, GC.getEVENT_MESSAGE_TIME(), szString, "AS2D_DEAL_CANCELLED");
 		}
 
-		if (GET_TEAM(CvPlayerAI::getPlayer(getSecondPlayer()).getTeam()).isHasMet(CvPlayerAI::getPlayer(getFirstPlayer()).getTeam()))
+		if (CvTeamAI::getTeam(CvPlayerAI::getPlayer(getSecondPlayer()).getTeam()).isHasMet(CvPlayerAI::getPlayer(getFirstPlayer()).getTeam()))
 		{
 			szDealString.clear();
 			GAMETEXT.getDealString(szDealString, *this, getSecondPlayer());
@@ -136,7 +136,7 @@ void CvDeal::addTrades(CLinkList<TradeData>* pFirstList, CLinkList<TradeData>* p
 
 	if (atWar(CvPlayerAI::getPlayer(getFirstPlayer()).getTeam(), CvPlayerAI::getPlayer(getSecondPlayer()).getTeam()))
 	{
-		GET_TEAM(CvPlayerAI::getPlayer(getFirstPlayer()).getTeam()).makePeace(CvPlayerAI::getPlayer(getSecondPlayer()).getTeam(), true);
+		CvTeamAI::getTeam(CvPlayerAI::getPlayer(getFirstPlayer()).getTeam()).makePeace(CvPlayerAI::getPlayer(getSecondPlayer()).getTeam(), true);
 	}
 	else
 	{
@@ -225,11 +225,11 @@ void CvDeal::addTrades(CLinkList<TradeData>* pFirstList, CLinkList<TradeData>* p
 	{
 		if (CvPlayerAI::getPlayer(getFirstPlayer()).getTeam() < CvPlayerAI::getPlayer(getSecondPlayer()).getTeam())
 		{
-			GET_TEAM(CvPlayerAI::getPlayer(getFirstPlayer()).getTeam()).addTeam(CvPlayerAI::getPlayer(getSecondPlayer()).getTeam());
+			CvTeamAI::getTeam(CvPlayerAI::getPlayer(getFirstPlayer()).getTeam()).addTeam(CvPlayerAI::getPlayer(getSecondPlayer()).getTeam());
 		}
 		else if (CvPlayerAI::getPlayer(getSecondPlayer()).getTeam() < CvPlayerAI::getPlayer(getFirstPlayer()).getTeam())
 		{
-			GET_TEAM(CvPlayerAI::getPlayer(getSecondPlayer()).getTeam()).addTeam(CvPlayerAI::getPlayer(getFirstPlayer()).getTeam());
+			CvTeamAI::getTeam(CvPlayerAI::getPlayer(getSecondPlayer()).getTeam()).addTeam(CvPlayerAI::getPlayer(getFirstPlayer()).getTeam());
 		}
 	}
 }
@@ -615,11 +615,11 @@ bool CvDeal::startTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eT
 		break;
 
 	case TRADE_PEACE:
-		GET_TEAM(CvPlayerAI::getPlayer(eFromPlayer).getTeam()).makePeace((TeamTypes)trade.m_iData1);
+		CvTeamAI::getTeam(CvPlayerAI::getPlayer(eFromPlayer).getTeam()).makePeace((TeamTypes)trade.m_iData1);
 		break;
 
 	case TRADE_WAR:
-		GET_TEAM(CvPlayerAI::getPlayer(eFromPlayer).getTeam()).declareWar(((TeamTypes)trade.m_iData1), true, NO_WARPLAN);
+		CvTeamAI::getTeam(CvPlayerAI::getPlayer(eFromPlayer).getTeam()).declareWar(((TeamTypes)trade.m_iData1), true, NO_WARPLAN);
 
 		for (iI = 0; iI < MAX_PLAYERS; iI++)
 		{
@@ -652,7 +652,7 @@ bool CvDeal::startTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eT
 		if (trade.m_iData1 == 0)
 		{
 			startTeamTrade(TRADE_OPEN_BORDERS, CvPlayerAI::getPlayer(eFromPlayer).getTeam(), CvPlayerAI::getPlayer(eToPlayer).getTeam(), true, trade.m_kTransport);
-			GET_TEAM(CvPlayerAI::getPlayer(eFromPlayer).getTeam()).setOpenBorders(((TeamTypes)(CvPlayerAI::getPlayer(eToPlayer).getTeam())), true);
+			CvTeamAI::getTeam(CvPlayerAI::getPlayer(eFromPlayer).getTeam()).setOpenBorders(((TeamTypes)(CvPlayerAI::getPlayer(eToPlayer).getTeam())), true);
 		}
 		else
 		{
@@ -664,7 +664,7 @@ bool CvDeal::startTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eT
 		if (trade.m_iData1 == 0)
 		{
 			startTeamTrade(TRADE_DEFENSIVE_PACT, CvPlayerAI::getPlayer(eFromPlayer).getTeam(), CvPlayerAI::getPlayer(eToPlayer).getTeam(), true, trade.m_kTransport);
-			GET_TEAM(CvPlayerAI::getPlayer(eFromPlayer).getTeam()).setDefensivePact(((TeamTypes)(CvPlayerAI::getPlayer(eToPlayer).getTeam())), true);
+			CvTeamAI::getTeam(CvPlayerAI::getPlayer(eFromPlayer).getTeam()).setDefensivePact(((TeamTypes)(CvPlayerAI::getPlayer(eToPlayer).getTeam())), true);
 		}
 		else
 		{
@@ -676,7 +676,7 @@ bool CvDeal::startTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eT
 		break;
 
 	case TRADE_PEACE_TREATY:
-		GET_TEAM(CvPlayerAI::getPlayer(eFromPlayer).getTeam()).setForcePeace(((TeamTypes)(CvPlayerAI::getPlayer(eToPlayer).getTeam())), true);
+		CvTeamAI::getTeam(CvPlayerAI::getPlayer(eFromPlayer).getTeam()).setForcePeace(((TeamTypes)(CvPlayerAI::getPlayer(eToPlayer).getTeam())), true);
 		bSave = true;
 		break;
 
@@ -709,7 +709,7 @@ void CvDeal::endTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eToP
 		break;
 
 	case TRADE_OPEN_BORDERS:
-		GET_TEAM(CvPlayerAI::getPlayer(eFromPlayer).getTeam()).setOpenBorders(((TeamTypes)(CvPlayerAI::getPlayer(eToPlayer).getTeam())), false);
+		CvTeamAI::getTeam(CvPlayerAI::getPlayer(eFromPlayer).getTeam()).setOpenBorders(((TeamTypes)(CvPlayerAI::getPlayer(eToPlayer).getTeam())), false);
 		if (bTeam)
 		{
 			endTeamTrade(TRADE_OPEN_BORDERS, CvPlayerAI::getPlayer(eFromPlayer).getTeam(), CvPlayerAI::getPlayer(eToPlayer).getTeam(), eEndingTeam);
@@ -740,7 +740,7 @@ void CvDeal::endTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eToP
 		break;
 
 	case TRADE_DEFENSIVE_PACT:
-		GET_TEAM(CvPlayerAI::getPlayer(eFromPlayer).getTeam()).setDefensivePact(((TeamTypes)(CvPlayerAI::getPlayer(eToPlayer).getTeam())), false);
+		CvTeamAI::getTeam(CvPlayerAI::getPlayer(eFromPlayer).getTeam()).setDefensivePact(((TeamTypes)(CvPlayerAI::getPlayer(eToPlayer).getTeam())), false);
 		if (bTeam)
 		{
 			endTeamTrade(TRADE_DEFENSIVE_PACT, CvPlayerAI::getPlayer(eFromPlayer).getTeam(), CvPlayerAI::getPlayer(eToPlayer).getTeam(), eEndingTeam);
@@ -752,7 +752,7 @@ void CvDeal::endTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eToP
 		break;
 
 	case TRADE_PEACE_TREATY:
-		GET_TEAM(CvPlayerAI::getPlayer(eFromPlayer).getTeam()).setForcePeace(((TeamTypes)(CvPlayerAI::getPlayer(eToPlayer).getTeam())), false);
+		CvTeamAI::getTeam(CvPlayerAI::getPlayer(eFromPlayer).getTeam()).setForcePeace(((TeamTypes)(CvPlayerAI::getPlayer(eToPlayer).getTeam())), false);
 		break;
 
 	default:

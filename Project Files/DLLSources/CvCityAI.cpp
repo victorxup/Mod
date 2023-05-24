@@ -455,7 +455,7 @@ void CvCityAI::AI_chooseProduction()
 	if (pWaterArea != nullptr)
 	{
 		bMaybeWaterArea = true;
-		if (!GET_TEAM(getTeam()).AI_isWaterAreaRelevant(pWaterArea))
+		if (!CvTeamAI::getTeam(getTeam()).AI_isWaterAreaRelevant(pWaterArea))
 		{
 			pWaterArea = nullptr;
 		}
@@ -1204,7 +1204,7 @@ int CvCityAI::AI_buildingValue(BuildingTypes eBuilding, int iFocusFlags) const
 
 	if (kBuildingInfo.getDefenseModifier() != 0)
 	{
-		bool bAtWar = GET_TEAM(getTeam()).getAnyWarPlanCount();
+		bool bAtWar = CvTeamAI::getTeam(getTeam()).getAnyWarPlanCount();
 		int iCityDefense = getDefenseModifier();
 		int iDefense = kBuildingInfo.getDefenseModifier();
 
@@ -2827,7 +2827,7 @@ bool CvCityAI::AI_chooseLeastRepresentedUnit(UnitTypeWeightArray &allowedTypes)
 bool CvCityAI::AI_bestSpreadUnit(bool bMissionary, int iBaseChance, UnitTypes* eBestSpreadUnit, int* iBestSpreadUnitValue) const
 {
 	CvPlayerAI& kPlayer = CvPlayerAI::getPlayer(getOwnerINLINE());
-	CvTeamAI& kTeam = GET_TEAM(getTeam());
+	CvTeamAI& kTeam = CvTeamAI::getTeam(getTeam());
 	CvGame& kGame = GC.getGame();
 
 	FAssert(eBestSpreadUnit != nullptr && iBestSpreadUnitValue != nullptr);
@@ -2876,7 +2876,7 @@ bool CvCityAI::AI_chooseConvince()
 
 FatherPointTypes CvCityAI::AI_bestFatherPoint() const
 {
-	CvTeam& kTeam = GET_TEAM(getTeam());
+	CvTeam& kTeam = CvTeamAI::getTeam(getTeam());
 
 	FatherPointTypes eBestTotalPoint = NO_FATHER_POINT_TYPE;
 
@@ -6228,15 +6228,15 @@ int CvCityAI::AI_calculateWaterWorldPercent() const
 	int iOtherCityCount = 0;
 	for (iI = 0; iI < MAX_TEAMS; iI++)
 	{
-		if (GET_TEAM((TeamTypes)iI).isAlive())
+		if (CvTeamAI::getTeam((TeamTypes)iI).isAlive())
 		{
 			if (iI == getTeam())
 			{
-				iTeamCityCount += GET_TEAM((TeamTypes)iI).countNumCitiesByArea(area());
+				iTeamCityCount += CvTeamAI::getTeam((TeamTypes)iI).countNumCitiesByArea(area());
 			}
 			else
 			{
-				iOtherCityCount += GET_TEAM((TeamTypes)iI).countNumCitiesByArea(area());
+				iOtherCityCount += CvTeamAI::getTeam((TeamTypes)iI).countNumCitiesByArea(area());
 			}
 		}
 	}
@@ -6480,7 +6480,7 @@ void CvCityAI::AI_cachePlayerCloseness(int iMaxDistance) const
 	for (iI = 0; iI < MAX_PLAYERS; iI++)
 	{
 		if (CvPlayerAI::getPlayer((PlayerTypes)iI).isAlive() &&
-			((GET_TEAM(getTeam()).isHasMet(CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam()))))
+			((CvTeamAI::getTeam(getTeam()).isHasMet(CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam()))))
 		{
 			iValue = 0;
 			iBestValue = 0;
@@ -6563,12 +6563,12 @@ int CvCityAI::AI_cityThreat(bool bDangerPercent) const
 /* War tactics AI                                                                               */
 /************************************************************************************************/
 				// Beef up border security before starting war, but not too much
-				else if ( GET_TEAM(getTeam()).AI_getWarPlan(CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam()) != NO_WARPLAN )
+				else if ( CvTeamAI::getTeam(getTeam()).AI_getWarPlan(CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam()) != NO_WARPLAN )
 				{
 					iTempValue *= 180;
 				}
 				// Extra trust of Vassals, regardless of relations
-//				else if ( GET_TEAM(CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam()).isVassal(getTeam()) )
+//				else if ( CvTeamAI::getTeam(CvPlayerAI::getPlayer((PlayerTypes)iI).getTeam()).isVassal(getTeam()) )
 //				{
 //					iTempValue *= 30;
 //				}
