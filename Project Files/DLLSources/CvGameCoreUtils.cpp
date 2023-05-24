@@ -2143,7 +2143,7 @@ int joinArea(FAStarNode* parent, FAStarNode* node, int data, const void* pointer
 	return 1;
 }
 
-bool isPickableName(const TCHAR* szName)
+bool isPickableName(char const* szName)
 {
 	if (szName)
 	{

@@ -13704,7 +13704,7 @@ int CvGameText::getLanguageAtIndex(int iIndex)
 	return 0;
 }
 
-const TCHAR* CvGameText::getLanguageName(int iLanguageID)
+char const* CvGameText::getLanguageName(int iLanguageID)
 {
 	// The game will store the chosen language as an int, not a string.
 	// This has a history of messing up switching between mods.
@@ -13855,7 +13855,7 @@ void CvGameText::setText(const wchar* szText)
 {
 	m_szText = szText;
 }
-bool CvGameText::read(CvXMLLoadUtility* pXML, bool bUTF8, const char *szFileName, const TCHAR* szLanguage)
+bool CvGameText::read(CvXMLLoadUtility* pXML, bool bUTF8, const char *szFileName, char const* szLanguage)
 {
 	CvString szTextVal;
 	CvWString wszTextVal;
@@ -14795,7 +14795,7 @@ bool CvEventTriggerInfo::isTeam() const
 }
 
 // Begin EmperorFool: Events with Images
-const TCHAR* CvEventTriggerInfo::getEventArt() const
+char const* CvEventTriggerInfo::getEventArt() const
 {
 	if (m_szEventArt.empty())
 	{

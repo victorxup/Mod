@@ -60,7 +60,7 @@ std::string OpenURL::getBrowser()
 {
 	std::string readme = GetDLLPath(true);
 	readme.append("\\..\\readme.html");
-	TCHAR app[MAX_PATH] = { 0 };
+	char app[MAX_PATH] = { 0 };
 
 	int result = (int)::FindExecutable(_T(readme.c_str()), NULL, app);
 	if (result > 32)

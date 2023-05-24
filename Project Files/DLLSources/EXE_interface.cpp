@@ -3023,7 +3023,7 @@ public:
 			?getUnit@CvPlayer@@QBEPAVCvUnit@@H@Z=?getUnit@EXE_CvPlayer@@QBEPAVCvUnit@@H@Z
 */
 
-	DllExport const TCHAR* getUnitButton(UnitTypes eUnit) const
+	DllExport char const* getUnitButton(UnitTypes eUnit) const
 	{
 		if (eUnit <= UNIT_PLACEHOLDER)
 		{
