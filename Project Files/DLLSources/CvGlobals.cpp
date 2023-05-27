@@ -3144,11 +3144,10 @@ void CvGlobals::cleanInfoStrings()
 // Replace the vanilla getSymbolID with this function.
 // Vanilla wants to map modded symbol IDs to IDs outside of the range, which works on billboards.
 // This function allows mapping our own symbols to IDs, which works on billboards.
-int CvGlobals::getSymbolID(FontSymbols eSymbol) const
-{
+FontSymbols CvGlobals::getSymbolID(FontSymbols eSymbol) const {
 	if (eSymbol < 0 || eSymbol >= MAX_NUM_SYMBOLS)
 	{
-		return -1;
+		return NO_FONT_SYMBOLS;
 	}
 	return m_aiGameFontCustomSymbolID[eSymbol];
 }

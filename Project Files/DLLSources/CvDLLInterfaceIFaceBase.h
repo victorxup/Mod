@@ -61,7 +61,7 @@ public:
 	virtual void insertIntoSelectionList(CvUnit* pUnit, bool bClear, bool bToggle, bool bGroup = false, bool bSound = false, bool bMinimalChange = false) = 0;
 	virtual void selectionListPostChange() = 0;
 	virtual void selectionListPreChange() = 0;
-	virtual int getSymbolID(int iSymbol) = 0;
+	[[unavailable("Use GC.getSymbolID instead!")]] virtual int getSymbolID(int iSymbol) = 0;
 	virtual CLLNode<IDInfo>* deleteSelectionListNode(CLLNode<IDInfo>* pNode) = 0;
 	virtual CLLNode<IDInfo>* nextSelectionListNode(CLLNode<IDInfo>* pNode) = 0;
 	virtual int getLengthSelectionList() = 0;

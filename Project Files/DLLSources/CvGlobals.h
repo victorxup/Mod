@@ -891,7 +891,7 @@ public:
 	void postXMLLoad(bool bFirst);
 
 	/// GameFont XML control - start - Nightinggale
-	int getSymbolID(FontSymbols eSymbol) const;
+	FontSymbols getSymbolID(FontSymbols eSymbol) const;
 
 	void setupGameFontChars();
 	int getFontSymbolBonusOffset() const;

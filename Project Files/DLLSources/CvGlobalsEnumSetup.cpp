@@ -178,7 +178,7 @@ void CvGlobals::setupGameFontChars()
 
 	for (FontSymbols eSymbol = FIRST_FONTSYMBOL; eSymbol < MAX_NUM_SYMBOLS; ++eSymbol)
 	{
-		m_aiGameFontCustomSymbolID[eSymbol] = static_cast<FontSymbols>(GC.getDLLIFace()->getSymbolID(eSymbol));
+		m_aiGameFontCustomSymbolID[eSymbol] = GC.getSymbolID(eSymbol);
 	}
 
 	if (pInterface->SetToChildByTagName(pXML, "BillboardSymbols"))
