@@ -84,7 +84,7 @@ class EnumMapBase
 
 	// instances are only allowed to use specialized classes, not this generic one
 	// make sure this class can't compile
-	// BOOST_STATIC_ASSERT(false);
+	// static_assert(false);
 	// TODO(zig): Replace with modern C++ equivalent
 };
 

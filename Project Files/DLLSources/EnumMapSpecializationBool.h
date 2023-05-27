@@ -58,12 +58,12 @@ struct BoolToken
 	};
 };
 
-BOOST_STATIC_ASSERT(sizeof(BoolToken) == 4);
+static_assert(sizeof(BoolToken) == 4);
 
 template<class IndexType, class T, int DEFAULT, class LengthType, VariableStaticTypes STATIC, VariableLengthTypes LENGTH_KNOWN_WHILE_COMPILING>
 class EnumMapBoolVariable
 {
-	// BOOST_STATIC_ASSERT(0);
+	// static_assert(false);
 	// TODO(zig): Replace with modern C++ equivalent
 };
 
@@ -163,7 +163,7 @@ public:
 	int getNumTrueElements() const;
 protected:
 	EnumMapBase() : EnumMapBoolVariable<IndexType, T, DEFAULT, LengthType, STATIC, LENGTH_KNOWN_WHILE_COMPILING>() {}
-	BOOST_STATIC_ASSERT(DEFAULT == 0 || DEFAULT == 1); // bools can only be true or false
+	static_assert(DEFAULT == 0 || DEFAULT == 1); // bools can only be true or false
 };
 
 //

@@ -88,7 +88,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvActionInfo) == sizeof(CvActionInfo));
+static_assert(sizeof(EXE_CvActionInfo) == sizeof(CvActionInfo));
 
 
 class EXE_CvAnimationCategoryInfo : public CvAnimationCategoryInfo
@@ -103,7 +103,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvAnimationCategoryInfo) == sizeof(CvAnimationCategoryInfo));
+static_assert(sizeof(EXE_CvAnimationCategoryInfo) == sizeof(CvAnimationCategoryInfo));
 
 
 class EXE_CvAnimationPathInfo : public CvAnimationPathInfo
@@ -124,7 +124,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvAnimationPathInfo) == sizeof(CvAnimationPathInfo));
+static_assert(sizeof(EXE_CvAnimationPathInfo) == sizeof(CvAnimationPathInfo));
 
 
 class EXE_CvArtFileMgr : public CvArtFileMgr
@@ -157,7 +157,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvArtFileMgr) == sizeof(CvArtFileMgr));
+static_assert(sizeof(EXE_CvArtFileMgr) == sizeof(CvArtFileMgr));
 
 
 class EXE_CvArtInfoAsset : public CvArtInfoAsset
@@ -182,7 +182,7 @@ public:
 		return CvArtInfoAsset::getKFM();
 	}
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvArtInfoAsset) == sizeof(CvArtInfoAsset));
+static_assert(sizeof(EXE_CvArtInfoAsset) == sizeof(CvArtInfoAsset));
 
 
 class EXE_CvArtInfoBonus : public CvArtInfoBonus
@@ -200,7 +200,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvArtInfoBonus) == sizeof(CvArtInfoBonus));
+static_assert(sizeof(EXE_CvArtInfoBonus) == sizeof(CvArtInfoBonus));
 
 
 class EXE_CvArtInfoBuilding : public CvArtInfoBuilding
@@ -212,7 +212,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvArtInfoBuilding) == sizeof(CvArtInfoBuilding));
+static_assert(sizeof(EXE_CvArtInfoBuilding) == sizeof(CvArtInfoBuilding));
 
 
 class EXE_CvArtInfoCivilization : public CvArtInfoCivilization
@@ -224,7 +224,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvArtInfoCivilization) == sizeof(CvArtInfoCivilization));
+static_assert(sizeof(EXE_CvArtInfoCivilization) == sizeof(CvArtInfoCivilization));
 
 
 class EXE_CvArtInfoFeature : public CvArtInfoFeature
@@ -245,7 +245,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvArtInfoFeature) == sizeof(CvArtInfoFeature));
+static_assert(sizeof(EXE_CvArtInfoFeature) == sizeof(CvArtInfoFeature));
 
 
 class EXE_CvArtInfoLeaderhead : public CvArtInfoLeaderhead
@@ -257,7 +257,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvArtInfoLeaderhead) == sizeof(CvArtInfoLeaderhead));
+static_assert(sizeof(EXE_CvArtInfoLeaderhead) == sizeof(CvArtInfoLeaderhead));
 
 
 class EXE_CvArtInfoTerrain : public CvArtInfoTerrain
@@ -284,7 +284,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvArtInfoTerrain) == sizeof(CvArtInfoTerrain));
+static_assert(sizeof(EXE_CvArtInfoTerrain) == sizeof(CvArtInfoTerrain));
 
 
 class EXE_CvArtInfoUnit : public CvArtInfoUnit
@@ -341,7 +341,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvArtInfoUnit) == sizeof(CvArtInfoUnit));
+static_assert(sizeof(EXE_CvArtInfoUnit) == sizeof(CvArtInfoUnit));
 
 
 class EXE_CvAssetInfoBase : public CvAssetInfoBase
@@ -353,7 +353,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvAssetInfoBase) == sizeof(CvAssetInfoBase));
+static_assert(sizeof(EXE_CvAssetInfoBase) == sizeof(CvAssetInfoBase));
 
 
 class EXE_CvAttachableInfo : public CvAttachableInfo
@@ -365,7 +365,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvAttachableInfo) == sizeof(CvAttachableInfo));
+static_assert(sizeof(EXE_CvAttachableInfo) == sizeof(CvAttachableInfo));
 
 
 class EXE_CvBattleDefinition : public CvBattleDefinition
@@ -398,7 +398,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvBattleDefinition) == sizeof(CvBattleDefinition));
+static_assert(sizeof(EXE_CvBattleDefinition) == sizeof(CvBattleDefinition));
 
 
 class EXE_CvBattleRound : public CvBattleRound
@@ -422,7 +422,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvBattleRound) == sizeof(CvBattleRound));
+static_assert(sizeof(EXE_CvBattleRound) == sizeof(CvBattleRound));
 
 
 class EXE_CvBonusInfo : public CvBonusInfo
@@ -449,7 +449,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvBonusInfo) == sizeof(CvBonusInfo));
+static_assert(sizeof(EXE_CvBonusInfo) == sizeof(CvBonusInfo));
 
 
 class EXE_CvBuildInfo : public CvBuildInfo
@@ -464,7 +464,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvBuildInfo) == sizeof(CvBuildInfo));
+static_assert(sizeof(EXE_CvBuildInfo) == sizeof(CvBuildInfo));
 
 
 class EXE_CvBuildingInfo : public CvBuildingInfo
@@ -488,7 +488,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvBuildingInfo) == sizeof(CvBuildingInfo));
+static_assert(sizeof(EXE_CvBuildingInfo) == sizeof(CvBuildingInfo));
 
 
 class EXE_CvCameraOverlayInfo : public CvCameraOverlayInfo
@@ -506,7 +506,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvCameraOverlayInfo) == sizeof(CvCameraOverlayInfo));
+static_assert(sizeof(EXE_CvCameraOverlayInfo) == sizeof(CvCameraOverlayInfo));
 
 
 class EXE_CvCity : public CvCity
@@ -660,7 +660,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvCity) == sizeof(CvCity));
+static_assert(sizeof(EXE_CvCity) == sizeof(CvCity));
 
 
 class EXE_CvCivilizationInfo : public CvCivilizationInfo
@@ -723,7 +723,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvCivilizationInfo) == sizeof(CvCivilizationInfo));
+static_assert(sizeof(EXE_CvCivilizationInfo) == sizeof(CvCivilizationInfo));
 
 
 class EXE_CvColorInfo : public CvColorInfo
@@ -735,7 +735,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvColorInfo) == sizeof(CvColorInfo));
+static_assert(sizeof(EXE_CvColorInfo) == sizeof(CvColorInfo));
 
 
 class EXE_CvCommandInfo : public CvCommandInfo
@@ -747,7 +747,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvCommandInfo) == sizeof(CvCommandInfo));
+static_assert(sizeof(EXE_CvCommandInfo) == sizeof(CvCommandInfo));
 
 
 class EXE_CvCursorInfo : public CvCursorInfo
@@ -759,7 +759,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvCursorInfo) == sizeof(CvCursorInfo));
+static_assert(sizeof(EXE_CvCursorInfo) == sizeof(CvCursorInfo));
 
 
 class EXE_CvDLLButtonPopup : public CvDLLButtonPopup
@@ -777,7 +777,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvDLLButtonPopup) == sizeof(CvDLLButtonPopup));
+static_assert(sizeof(EXE_CvDLLButtonPopup) == sizeof(CvDLLButtonPopup));
 
 
 class EXE_CvDLLEntity : public CvDLLEntity
@@ -789,7 +789,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvDLLEntity) == sizeof(CvDLLEntity));
+static_assert(sizeof(EXE_CvDLLEntity) == sizeof(CvDLLEntity));
 
 
 class EXE_CvDLLWidgetData : public CvDLLWidgetData
@@ -819,7 +819,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvDLLWidgetData) == sizeof(CvDLLWidgetData));
+static_assert(sizeof(EXE_CvDLLWidgetData) == sizeof(CvDLLWidgetData));
 
 
 class EXE_CvDeal : public CvDeal
@@ -873,7 +873,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvDeal) == sizeof(CvDeal));
+static_assert(sizeof(EXE_CvDeal) == sizeof(CvDeal));
 
 
 class EXE_CvDiploParameters : public CvDiploParameters
@@ -961,7 +961,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvDiploParameters) == sizeof(CvDiploParameters));
+static_assert(sizeof(EXE_CvDiploParameters) == sizeof(CvDiploParameters));
 
 
 class EXE_CvEffectInfo : public CvEffectInfo
@@ -973,7 +973,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvEffectInfo) == sizeof(CvEffectInfo));
+static_assert(sizeof(EXE_CvEffectInfo) == sizeof(CvEffectInfo));
 
 
 class EXE_CvEntityEventInfo : public CvEntityEventInfo
@@ -988,7 +988,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvEntityEventInfo) == sizeof(CvEntityEventInfo));
+static_assert(sizeof(EXE_CvEntityEventInfo) == sizeof(CvEntityEventInfo));
 
 
 class EXE_CvEraInfo : public CvEraInfo
@@ -1012,7 +1012,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvEraInfo) == sizeof(CvEraInfo));
+static_assert(sizeof(EXE_CvEraInfo) == sizeof(CvEraInfo));
 
 
 class EXE_CvFatherPointInfo : public CvFatherPointInfo
@@ -1030,7 +1030,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvFatherPointInfo) == sizeof(CvFatherPointInfo));
+static_assert(sizeof(EXE_CvFatherPointInfo) == sizeof(CvFatherPointInfo));
 
 
 class EXE_CvFeatureInfo : public CvFeatureInfo
@@ -1048,7 +1048,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvFeatureInfo) == sizeof(CvFeatureInfo));
+static_assert(sizeof(EXE_CvFeatureInfo) == sizeof(CvFeatureInfo));
 
 
 class EXE_CvFractal : public CvFractal
@@ -1069,7 +1069,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvFractal) == sizeof(CvFractal));
+static_assert(sizeof(EXE_CvFractal) == sizeof(CvFractal));
 
 
 class EXE_CvGame : public CvGame
@@ -1303,7 +1303,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvGame) == sizeof(CvGame));
+static_assert(sizeof(EXE_CvGame) == sizeof(CvGame));
 
 
 class EXE_CvGameOptionInfo : public CvGameOptionInfo
@@ -1318,7 +1318,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvGameOptionInfo) == sizeof(CvGameOptionInfo));
+static_assert(sizeof(EXE_CvGameOptionInfo) == sizeof(CvGameOptionInfo));
 
 
 class EXE_CvGameText : public CvGameText
@@ -1333,7 +1333,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvGameText) == sizeof(CvGameText));
+static_assert(sizeof(EXE_CvGameText) == sizeof(CvGameText));
 
 
 class EXE_CvGameTextMgr : public CvGameTextMgr
@@ -1439,7 +1439,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvGameTextMgr) == sizeof(CvGameTextMgr));
+static_assert(sizeof(EXE_CvGameTextMgr) == sizeof(CvGameTextMgr));
 
 
 class EXE_CvGlobals : public CvGlobals
@@ -2209,7 +2209,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvGlobals) == sizeof(CvGlobals));
+static_assert(sizeof(EXE_CvGlobals) == sizeof(CvGlobals));
 
 
 class EXE_CvGraphicOptionInfo : public CvGraphicOptionInfo
@@ -2221,7 +2221,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvGraphicOptionInfo) == sizeof(CvGraphicOptionInfo));
+static_assert(sizeof(EXE_CvGraphicOptionInfo) == sizeof(CvGraphicOptionInfo));
 
 
 class EXE_CvImprovementInfo : public CvImprovementInfo
@@ -2248,7 +2248,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvImprovementInfo) == sizeof(CvImprovementInfo));
+static_assert(sizeof(EXE_CvImprovementInfo) == sizeof(CvImprovementInfo));
 
 
 class EXE_CvInfoBase : public CvInfoBase
@@ -2279,7 +2279,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvInfoBase) == sizeof(CvInfoBase));
+static_assert(sizeof(EXE_CvInfoBase) == sizeof(CvInfoBase));
 
 
 class EXE_CvInitCore : public CvInitCore
@@ -2609,7 +2609,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvInitCore) == sizeof(CvInitCore));
+static_assert(sizeof(EXE_CvInitCore) == sizeof(CvInitCore));
 
 
 class EXE_CvInterfaceModeInfo : public CvInterfaceModeInfo
@@ -2630,7 +2630,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvInterfaceModeInfo) == sizeof(CvInterfaceModeInfo));
+static_assert(sizeof(EXE_CvInterfaceModeInfo) == sizeof(CvInterfaceModeInfo));
 
 
 class EXE_CvLandscapeInfo : public CvLandscapeInfo
@@ -2678,7 +2678,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvLandscapeInfo) == sizeof(CvLandscapeInfo));
+static_assert(sizeof(EXE_CvLandscapeInfo) == sizeof(CvLandscapeInfo));
 
 
 class EXE_CvLeaderHeadInfo : public CvLeaderHeadInfo
@@ -2696,7 +2696,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvLeaderHeadInfo) == sizeof(CvLeaderHeadInfo));
+static_assert(sizeof(EXE_CvLeaderHeadInfo) == sizeof(CvLeaderHeadInfo));
 
 
 class EXE_CvMainMenuInfo : public CvMainMenuInfo
@@ -2717,7 +2717,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvMainMenuInfo) == sizeof(CvMainMenuInfo));
+static_assert(sizeof(EXE_CvMainMenuInfo) == sizeof(CvMainMenuInfo));
 
 
 class EXE_CvMap : public CvMap
@@ -2798,7 +2798,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvMap) == sizeof(CvMap));
+static_assert(sizeof(EXE_CvMap) == sizeof(CvMap));
 
 
 class EXE_CvMapGenerator : public CvMapGenerator
@@ -2846,7 +2846,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvMapGenerator) == sizeof(CvMapGenerator));
+static_assert(sizeof(EXE_CvMapGenerator) == sizeof(CvMapGenerator));
 
 
 class EXE_CvMissionDefinition : public CvMissionDefinition
@@ -2867,7 +2867,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvMissionDefinition) == sizeof(CvMissionDefinition));
+static_assert(sizeof(EXE_CvMissionDefinition) == sizeof(CvMissionDefinition));
 
 
 class EXE_CvMissionInfo : public CvMissionInfo
@@ -2885,7 +2885,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvMissionInfo) == sizeof(CvMissionInfo));
+static_assert(sizeof(EXE_CvMissionInfo) == sizeof(CvMissionInfo));
 
 
 class EXE_CvPlayer : public CvPlayer
@@ -3178,7 +3178,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvPlayer) == sizeof(CvPlayer));
+static_assert(sizeof(EXE_CvPlayer) == sizeof(CvPlayer));
 
 
 class EXE_CvPlayerAI : public CvPlayerAI
@@ -3196,7 +3196,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvPlayerAI) == sizeof(CvPlayerAI));
+static_assert(sizeof(EXE_CvPlayerAI) == sizeof(CvPlayerAI));
 
 
 class EXE_CvPlayerColorInfo : public CvPlayerColorInfo
@@ -3211,7 +3211,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvPlayerColorInfo) == sizeof(CvPlayerColorInfo));
+static_assert(sizeof(EXE_CvPlayerColorInfo) == sizeof(CvPlayerColorInfo));
 
 
 class EXE_CvPlayerOptionInfo : public CvPlayerOptionInfo
@@ -3223,7 +3223,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvPlayerOptionInfo) == sizeof(CvPlayerOptionInfo));
+static_assert(sizeof(EXE_CvPlayerOptionInfo) == sizeof(CvPlayerOptionInfo));
 
 
 class EXE_CvPlot : public CvPlot
@@ -3388,7 +3388,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvPlot) == sizeof(CvPlot));
+static_assert(sizeof(EXE_CvPlot) == sizeof(CvPlot));
 
 
 class EXE_CvPopupInfo : public CvPopupInfo
@@ -3492,7 +3492,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvPopupInfo) == sizeof(CvPopupInfo));
+static_assert(sizeof(EXE_CvPopupInfo) == sizeof(CvPopupInfo));
 
 
 class EXE_CvRandom : public CvRandom
@@ -3516,7 +3516,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvRandom) == sizeof(CvRandom));
+static_assert(sizeof(EXE_CvRandom) == sizeof(CvRandom));
 
 
 class EXE_CvReplayInfo : public CvReplayInfo
@@ -3540,7 +3540,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvReplayInfo) == sizeof(CvReplayInfo));
+static_assert(sizeof(EXE_CvReplayInfo) == sizeof(CvReplayInfo));
 
 
 class EXE_CvRiverModelInfo : public CvRiverModelInfo
@@ -3567,7 +3567,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvRiverModelInfo) == sizeof(CvRiverModelInfo));
+static_assert(sizeof(EXE_CvRiverModelInfo) == sizeof(CvRiverModelInfo));
 
 
 class EXE_CvRouteModelInfo : public CvRouteModelInfo
@@ -3591,7 +3591,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvRouteModelInfo) == sizeof(CvRouteModelInfo));
+static_assert(sizeof(EXE_CvRouteModelInfo) == sizeof(CvRouteModelInfo));
 
 
 class EXE_CvScalableInfo : public CvScalableInfo
@@ -3606,7 +3606,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvScalableInfo) == sizeof(CvScalableInfo));
+static_assert(sizeof(EXE_CvScalableInfo) == sizeof(CvScalableInfo));
 
 
 class EXE_CvSelectionGroup : public CvSelectionGroup
@@ -3693,7 +3693,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvSelectionGroup) == sizeof(CvSelectionGroup));
+static_assert(sizeof(EXE_CvSelectionGroup) == sizeof(CvSelectionGroup));
 
 
 class EXE_CvSlideShowInfo : public CvSlideShowInfo
@@ -3711,7 +3711,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvSlideShowInfo) == sizeof(CvSlideShowInfo));
+static_assert(sizeof(EXE_CvSlideShowInfo) == sizeof(CvSlideShowInfo));
 
 
 class EXE_CvSlideShowRandomInfo : public CvSlideShowRandomInfo
@@ -3723,7 +3723,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvSlideShowRandomInfo) == sizeof(CvSlideShowRandomInfo));
+static_assert(sizeof(EXE_CvSlideShowRandomInfo) == sizeof(CvSlideShowRandomInfo));
 
 
 class EXE_CvSpecialBuildingInfo : public CvSpecialBuildingInfo
@@ -3738,7 +3738,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvSpecialBuildingInfo) == sizeof(CvSpecialBuildingInfo));
+static_assert(sizeof(EXE_CvSpecialBuildingInfo) == sizeof(CvSpecialBuildingInfo));
 
 
 class EXE_CvTalkingHeadMessage : public CvTalkingHeadMessage
@@ -3802,7 +3802,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvTalkingHeadMessage) == sizeof(CvTalkingHeadMessage));
+static_assert(sizeof(EXE_CvTalkingHeadMessage) == sizeof(CvTalkingHeadMessage));
 
 
 class EXE_CvTeam : public CvTeam
@@ -3844,7 +3844,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvTeam) == sizeof(CvTeam));
+static_assert(sizeof(EXE_CvTeam) == sizeof(CvTeam));
 
 
 class EXE_CvTeamAI : public CvTeamAI
@@ -3856,7 +3856,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvTeamAI) == sizeof(CvTeamAI));
+static_assert(sizeof(EXE_CvTeamAI) == sizeof(CvTeamAI));
 
 
 class EXE_CvTerrainInfo : public CvTerrainInfo
@@ -3880,7 +3880,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvTerrainInfo) == sizeof(CvTerrainInfo));
+static_assert(sizeof(EXE_CvTerrainInfo) == sizeof(CvTerrainInfo));
 
 
 class EXE_CvTerrainPlaneInfo : public CvTerrainPlaneInfo
@@ -3925,7 +3925,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvTerrainPlaneInfo) == sizeof(CvTerrainPlaneInfo));
+static_assert(sizeof(EXE_CvTerrainPlaneInfo) == sizeof(CvTerrainPlaneInfo));
 
 
 class EXE_CvUnit : public CvUnit
@@ -4106,7 +4106,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvUnit) == sizeof(CvUnit));
+static_assert(sizeof(EXE_CvUnit) == sizeof(CvUnit));
 
 
 class EXE_CvUnitFormationInfo : public CvUnitFormationInfo
@@ -4133,7 +4133,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvUnitFormationInfo) == sizeof(CvUnitFormationInfo));
+static_assert(sizeof(EXE_CvUnitFormationInfo) == sizeof(CvUnitFormationInfo));
 
 
 class EXE_CvUnitInfo : public CvUnitInfo
@@ -4189,7 +4189,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvUnitInfo) == sizeof(CvUnitInfo));
+static_assert(sizeof(EXE_CvUnitInfo) == sizeof(CvUnitInfo));
 
 
 class EXE_CvVictoryInfo : public CvVictoryInfo
@@ -4204,7 +4204,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvVictoryInfo) == sizeof(CvVictoryInfo));
+static_assert(sizeof(EXE_CvVictoryInfo) == sizeof(CvVictoryInfo));
 
 
 class EXE_CvWaterPlaneInfo : public CvWaterPlaneInfo
@@ -4240,7 +4240,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvWaterPlaneInfo) == sizeof(CvWaterPlaneInfo));
+static_assert(sizeof(EXE_CvWaterPlaneInfo) == sizeof(CvWaterPlaneInfo));
 
 
 class EXE_CvWorldInfo : public CvWorldInfo
@@ -4255,7 +4255,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvWorldInfo) == sizeof(CvWorldInfo));
+static_assert(sizeof(EXE_CvWorldInfo) == sizeof(CvWorldInfo));
 
 
 class EXE_CvWorldPickerInfo : public CvWorldPickerInfo
@@ -4294,7 +4294,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvWorldPickerInfo) == sizeof(CvWorldPickerInfo));
+static_assert(sizeof(EXE_CvWorldPickerInfo) == sizeof(CvWorldPickerInfo));
 
 
 class EXE_CvXMLLoadUtility : public CvXMLLoadUtility
@@ -4345,7 +4345,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvXMLLoadUtility) == sizeof(CvXMLLoadUtility));
+static_assert(sizeof(EXE_CvXMLLoadUtility) == sizeof(CvXMLLoadUtility));
 
 
 class EXE_CvYieldInfo : public CvYieldInfo
@@ -4369,7 +4369,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CvYieldInfo) == sizeof(CvYieldInfo));
+static_assert(sizeof(EXE_CvYieldInfo) == sizeof(CvYieldInfo));
 
 
 class EXE_CyArgsList : public CyArgsList
@@ -4404,7 +4404,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CyArgsList) == sizeof(CyArgsList));
+static_assert(sizeof(EXE_CyArgsList) == sizeof(CyArgsList));
 
 
 class EXE_CyPlot : public CyPlot
@@ -4416,7 +4416,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_CyPlot) == sizeof(CyPlot));
+static_assert(sizeof(EXE_CyPlot) == sizeof(CyPlot));
 
 
 class EXE_PBGameSetupData : public PBGameSetupData
@@ -4425,7 +4425,7 @@ public:
 	// getMapName (incorrectly mangled)
 	#pragma comment(linker, "/EXPORT:?getMapName@PBGameSetupData@@QAE?AV?$basic_string@GU?$char_traits@G@std@@V?$allocator@G@2@@std@@XZ=?getMapName@PBGameSetupData@@QAE?AV?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@XZ")
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_PBGameSetupData) == sizeof(PBGameSetupData));
+static_assert(sizeof(EXE_PBGameSetupData) == sizeof(PBGameSetupData));
 
 
 class EXE_PBPlayerAdminData : public PBPlayerAdminData
@@ -4440,7 +4440,7 @@ public:
 	// getScore (incorrectly mangled)
 	#pragma comment(linker, "/EXPORT:?getScore@PBPlayerAdminData@@QAE?AV?$basic_string@GU?$char_traits@G@std@@V?$allocator@G@2@@std@@XZ=?getScore@PBPlayerAdminData@@QAE?AV?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@XZ")
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_PBPlayerAdminData) == sizeof(PBPlayerAdminData));
+static_assert(sizeof(EXE_PBPlayerAdminData) == sizeof(PBPlayerAdminData));
 
 
 class EXE_PBPlayerSetupData : public PBPlayerSetupData
@@ -4449,7 +4449,7 @@ public:
 	// getStatusText (incorrectly mangled)
 	#pragma comment(linker, "/EXPORT:?getStatusText@PBPlayerSetupData@@QAE?AV?$basic_string@GU?$char_traits@G@std@@V?$allocator@G@2@@std@@XZ=?getStatusText@PBPlayerSetupData@@QAE?AV?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@XZ")
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_PBPlayerSetupData) == sizeof(PBPlayerSetupData));
+static_assert(sizeof(EXE_PBPlayerSetupData) == sizeof(PBPlayerSetupData));
 
 
 class EXE_PopupReturn : public PopupReturn
@@ -4513,7 +4513,7 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_PopupReturn) == sizeof(PopupReturn));
+static_assert(sizeof(EXE_PopupReturn) == sizeof(PopupReturn));
 
 
 class EXE_TradeData : public TradeData
@@ -4528,4 +4528,4 @@ public:
 
 	*/
 };
-BOOST_STATIC_ASSERT(sizeof(EXE_TradeData) == sizeof(TradeData));
+static_assert(sizeof(EXE_TradeData) == sizeof(TradeData));

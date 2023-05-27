@@ -10,7 +10,7 @@
 template<class IndexType, class T, int DEFAULT_INT, class LengthType, VariableStaticTypes STATIC, class STORAGE, VariableLengthTypes LENGTH_KNOWN_WHILE_COMPILING>
 class EnumMapVariable
 {
-	// BOOST_STATIC_ASSERT(0);
+	// static_assert(false);
 	// TODO(zig): Replace with modern C++ equivalent
 };
 

@@ -56,7 +56,7 @@ protected:
 template<class IndexType, class T, class LengthType, VariableLengthTypes LENGTH_KNOWN_WHILE_COMPILING>
 EnumMapBase<IndexType, T, 0, LengthType, VARIABLE_TYPE_DYNAMIC, VARIABLE_TYPE_CLASS, LENGTH_KNOWN_WHILE_COMPILING>::EnumMapBase()
 {
-	BOOST_STATIC_ASSERT(VARINFO<T>::IS_CLASS == 1);
+	static_assert(VARINFO<T>::IS_CLASS == 1);
 }
 
 template<class IndexType, class T, class LengthType, VariableLengthTypes LENGTH_KNOWN_WHILE_COMPILING>

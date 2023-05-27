@@ -38,6 +38,6 @@ struct NetworkDataTradeRouteInts
 	};
 };
 
-BOOST_STATIC_ASSERT(sizeof(NetworkDataTradeRouteInts) == sizeof(int));
+static_assert(sizeof(NetworkDataTradeRouteInts) == sizeof(int));
 
 #endif // !NETWORK_DATA_PACKING_H

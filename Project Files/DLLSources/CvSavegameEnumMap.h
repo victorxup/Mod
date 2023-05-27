@@ -14,7 +14,7 @@ template<class IndexType, class T, int DEFAULT, class LengthType, VariableStatic
 inline void CvSavegameReader::ReadEnumMap<VARIABLE_TYPE_BOOL>::Read(CvSavegameReader& reader, EnumMapBase<IndexType, T, DEFAULT, LengthType, STATIC, TYPE, LENGTH_KNOWN_WHILE_COMPILING>& em)
 {
 	const bool bValid = boost::is_same<bool, T>::value;
-	BOOST_STATIC_ASSERT(bValid);
+	static_assert(bValid);
 	em.reset();
 
 	const int iLength = reader.GetXmlSize(VARINFO<LengthType>::JIT) > 0 ? reader.GetXmlSize(VARINFO<LengthType>::JIT) : VARINFO<LengthType>::NUM_ELEMENTS;
@@ -58,7 +58,7 @@ template<class IndexType, class T, int DEFAULT, class LengthType, VariableStatic
 inline void CvSavegameWriter::WriteEnumMap<VARIABLE_TYPE_BOOL>::Write(CvSavegameWriter& kWriter, EnumMapBase<IndexType, T, DEFAULT, LengthType, STATIC, TYPE, LENGTH_KNOWN_WHILE_COMPILING> const& em)
 {
 	const bool bValid = boost::is_same<bool, T>::value;
-	BOOST_STATIC_ASSERT(bValid);
+	static_assert(bValid);
 
 	const int iLength = em.getLength();
 
@@ -134,11 +134,11 @@ template<class IndexType, class T, int DEFAULT, class LengthType, VariableStatic
 inline void CvSavegameReader::ReadEnumMap<TYPE2>::Read(CvSavegameReader& reader, EnumMapBase<IndexType, T, DEFAULT, LengthType, STATIC, TYPE, LENGTH_KNOWN_WHILE_COMPILING>& em)
 {
 	const bool bValid1 = !boost::is_same<bool, T>::value;
-	BOOST_STATIC_ASSERT(bValid1);
+	static_assert(bValid1);
 	const bool bValid2 = TYPE == TYPE2;
-	BOOST_STATIC_ASSERT(bValid2);
+	static_assert(bValid2);
 	const bool bValid3 = TYPE != VARIABLE_TYPE_CLASS;
-	BOOST_STATIC_ASSERT(bValid3);
+	static_assert(bValid3);
 	em.reset();
 
 	while (true)
@@ -174,7 +174,7 @@ template<class IndexType, class T, int DEFAULT, class LengthType, VariableStatic
 inline void CvSavegameWriter::WriteEnumMap<TYPE2>::Write(CvSavegameWriter& kWriter, EnumMapBase<IndexType, T, DEFAULT, LengthType, STATIC, TYPE, LENGTH_KNOWN_WHILE_COMPILING> const& em)
 {
 	const bool bValid = TYPE == TYPE2 && !boost::is_same<bool, T>::value;
-	BOOST_STATIC_ASSERT(bValid);
+	static_assert(bValid);
 
 	SavegameEnumMapTokenWrite<IndexType, LengthType>* Token = nullptr;
 	std::list<SavegameEnumMapTokenWrite<IndexType, LengthType>* > tokens;

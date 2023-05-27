@@ -144,15 +144,15 @@ public:
 
 	// Allow enum types to be read without typecasting in the class read functions.
 	// Typecasting in the class read functions is a hassle, results in less readable code and is prone to bugs
-	
+
 	// The template class works because the savegame is a dumb byte steam.
 	// This means the type of variable doesn't matter. It takes the argument and saves it byte by byte.
 	// In other words you can use the wrong variable type as long as it's the same number of bytes.
-	// Both int and enum types are 32 bit. 
+	// Both int and enum types are 32 bit.
 	template<class T>
 	inline void Read(T* eVar)
 	{
-		BOOST_STATIC_ASSERT(sizeof(T) == 4);
+		static_assert(sizeof(T) == 4);
 		Read((int*)eVar);
 	}
 };

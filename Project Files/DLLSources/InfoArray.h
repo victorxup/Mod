@@ -286,7 +286,7 @@ template<typename T0, typename T1>
 template<typename Ta, class T, int DEFAULT>
 void InfoArray2Only<T0, T1>::assignFrom(const EnumMap<Ta, T, DEFAULT> & em)
 {
-	BOOST_STATIC_ASSERT((!boost::is_same<T, bool>::value));
+	static_assert(!boost::is_same<T, bool>::value);
 	const int iLength = em.getNumNonDefaultElements();
 	_setLength(iLength);
 	for (T0 eIndex = em.FIRST; eIndex <= em.LAST; ++eIndex)
@@ -335,7 +335,7 @@ template<typename T0>
 template<typename Ta, class T, int DEFAULT>
 void InfoArray1Only<T0>::addTo(EnumMap<Ta, T, DEFAULT> & em, int iChange, const CvCivilizationInfo* pCivInfo) const
 {
-	BOOST_STATIC_ASSERT((!boost::is_same<T, bool>::value));
+	static_assert(!boost::is_same<T, bool>::value);
 	for (int i = 0; i < getLength(); ++i)
 	{
 		const T0 eIndex = pCivInfo->getCivSpecificForClass<Ta, T0>(get0(i));
@@ -371,7 +371,7 @@ template<typename T0, typename T1>
 template<typename Ta, class T, int DEFAULT>
 void InfoArray2Only<T0, T1>::addTo(EnumMap<Ta, T, DEFAULT> & em, int iChange, const CvCivilizationInfo* pCivInfo) const
 {
-	BOOST_STATIC_ASSERT((!boost::is_same<T, bool>::value));
+	static_assert(!boost::is_same<T, bool>::value);
 	for (int i = 0; i < getLength(); ++i)
 	{
 		const T0 eIndex = pCivInfo->getCivSpecificForClass<Ta, T0>(get0(i));
@@ -400,7 +400,7 @@ template<typename T0, typename T1>
 template<typename Ta, class T, int DEFAULT>
 bool InfoArray2Only<T0, T1>::addCache(EnumMap<Ta, T, DEFAULT> & em, int iChange, const CvCivilizationInfo* pCivInfo) const
 {
-	BOOST_STATIC_ASSERT((!boost::is_same<T, bool>::value));
+	static_assert(!boost::is_same<T, bool>::value);
 	bool bChanged = false;
 	for (int i = 0; i < getLength(); ++i)
 	{
@@ -420,8 +420,8 @@ template<typename T0, typename T1>
 template<typename T, int DEFAULT>
 bool InfoArray2Only<T0, T1>::addCache(EnumMap<BuildingTypes, T, DEFAULT> & em, int iChange, const CvCivilizationInfo* pCivInfo) const
 {
-	BOOST_STATIC_ASSERT((!boost::is_same<T, bool>::value));
-	BOOST_STATIC_ASSERT((boost::is_same<T0, BuildingClassTypes>::value));
+	static_assert(!boost::is_same<T, bool>::value);
+	static_assert(boost::is_same<T0, BuildingClassTypes>::value);
 	bool bChanged = false;
 	for (int i = 0; i < getLength(); ++i)
 	{
@@ -441,8 +441,8 @@ template<typename T0, typename T1>
 template<typename T, int DEFAULT>
 bool InfoArray2Only<T0, T1>::addCache(EnumMap<UnitTypes, T, DEFAULT> & em, int iChange, const CvCivilizationInfo* pCivInfo) const
 {
-	BOOST_STATIC_ASSERT((!boost::is_same<T, bool>::value));
-	BOOST_STATIC_ASSERT((boost::is_same<T0, UnitClassTypes>::value));
+	static_assert(!boost::is_same<T, bool>::value);
+	static_assert(boost::is_same<T0, UnitClassTypes>::value);
 	bool bChanged = false;
 	for (int i = 0; i < getLength(); ++i)
 	{
@@ -510,7 +510,7 @@ template<typename T0, typename T1>
 template<typename Ta, typename Tb, typename T, int DEFAULT>
 void InfoArray2Only<T0, T1>::addTo(EnumMap2D<Ta, Tb, T, DEFAULT> & em, int iChange, const CvCivilizationInfo* pCivInfo) const
 {
-	BOOST_STATIC_ASSERT((!boost::is_same<Tb, bool>::value));
+	static_assert(!boost::is_same<Tb, bool>::value);
 	for (int i = 0; i < getLength(); ++i)
 	{
 		const Ta eIndex0 = pCivInfo->getCivSpecificForClass<Ta, T0>(get0(i));
@@ -535,7 +535,7 @@ template<typename T0, typename T1, typename T2>
 template<typename Ta, typename Tb, typename T, int DEFAULT>
 void InfoArray3Only<T0, T1, T2>::addTo(EnumMap2D<Ta, Tb, T, DEFAULT> & em, int iChange, const CvCivilizationInfo* pCivInfo) const
 {
-	BOOST_STATIC_ASSERT((!boost::is_same<T, bool>::value));
+	static_assert(!boost::is_same<T, bool>::value);
 	for (int i = 0; i < getLength(); ++i)
 	{
 		const Ta eIndex0 = pCivInfo->getCivSpecificForClass<Ta, T0>(get0(i));

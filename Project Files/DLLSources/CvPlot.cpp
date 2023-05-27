@@ -7701,7 +7701,7 @@ bool CvPlot::isRiverCrossing(DirectionTypes eIndex) const
 
 	// check bounds
 	// the code assumes 8 values, which can then fit in the 8 bits in a byte
-	BOOST_STATIC_ASSERT(NUM_DIRECTION_TYPES == (DirectionTypes)8);
+	static_assert(NUM_DIRECTION_TYPES == static_cast<DirectionTypes>(8));
 	FAssert(eIndex >= 0);
 
 	return HasBit(m_bmRiverCrossing, eIndex);

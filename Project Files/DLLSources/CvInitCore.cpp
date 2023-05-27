@@ -2145,7 +2145,7 @@ int CvInitCore::read(CvSavegameReader& reader, bool*& pArray, bool bAllocate, T 
 	EnumMap<T, bool> baTemp;
 	reader.Read(baTemp);
 	static const bool bCheck = (int)baTemp.FIRST == 0;
-	BOOST_STATIC_ASSERT(bCheck);
+	static_assert(bCheck);
 
 	if (bAllocate)
 	{
@@ -2165,7 +2165,7 @@ void CvInitCore::write(CvSavegameWriter& writer, bool* pArray, T eLength)
 {
 	EnumMap<T, bool> baTemp;
 	static const bool bCheck = (int)baTemp.FIRST == 0;
-	BOOST_STATIC_ASSERT(bCheck);
+	static_assert(bCheck);
 
 	for (T i = baTemp.FIRST; i < eLength; ++i)
 	{

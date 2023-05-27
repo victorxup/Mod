@@ -19,4 +19,4 @@ LocationFlags::LocationFlags(Flags flag)
 	europe      = flag == LocationFlagEurope;
 }
 // make sure LocationFlags is a drop in replacement for just using an enum type
-BOOST_STATIC_ASSERT(sizeof(LocationFlags) <= 4);
+static_assert(sizeof(LocationFlags) <= 4);

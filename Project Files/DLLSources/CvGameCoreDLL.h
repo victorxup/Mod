@@ -238,8 +238,6 @@ static inline T SetBits(T &x, const int iIndex, const int iNumBits, const T iVal
 # include <boost/python/def.hpp>
 #pragma pop_macro("DEBUG")
 
-#undef BOOST_STATIC_ASSERT
-#define BOOST_STATIC_ASSERT(x) static_assert(x, "BOOST_STATIC_ASSERT")
 
 namespace python = boost::python;
 

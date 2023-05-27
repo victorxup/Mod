@@ -107,7 +107,7 @@ public:
 	void read(CvSavegameReader& reader);
 	void write(CvSavegameWriter& writer) const;
 };
-BOOST_STATIC_ASSERT(sizeof(OrderData) == 16);
+static_assert(sizeof(OrderData) == 16);
 
 struct DllExport MissionData
 {
@@ -116,7 +116,7 @@ struct DllExport MissionData
 	int iData2;
 	int iFlags;
 	int iPushTurn;
-	
+
 	void read(CvSavegameReader& reader);
 	void write(CvSavegameWriter& writer) const;
 };

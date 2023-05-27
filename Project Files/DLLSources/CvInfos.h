@@ -1871,7 +1871,7 @@ inline Ta CvCivilizationInfo::getCivSpecificForClass(Tb eVar) const
 	// do not access member data from this call
 	// InfoArray calls this while the this pointer is null
 	// As such treat it as static even though it isn't due to the specialized functions
-	BOOST_STATIC_ASSERT((boost::is_same<Ta, Tb>::value));
+	static_assert(boost::is_same<Ta, Tb>::value);
 	return eVar;
 }
 

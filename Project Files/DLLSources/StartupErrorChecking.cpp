@@ -21,21 +21,21 @@ template <int T>
 static AlertWindow::returnTypes showWindow()
 {
 	// only specialized templates should be used
-	BOOST_STATIC_ASSERT(0);
+	static_assert(false);
 }
 
 template <int T>
 static AlertWindow::returnTypes showWindow(const char*)
 {
 	// only specialized templates should be used
-	BOOST_STATIC_ASSERT(0);
+	static_assert(false);
 }
 
 template <int T>
 static AlertWindow::returnTypes showWindow(const char*, int, int)
 {
 	// only specialized templates should be used
-	BOOST_STATIC_ASSERT(0);
+	static_assert(false);
 }
 
 
