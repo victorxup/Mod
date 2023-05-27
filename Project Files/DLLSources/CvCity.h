@@ -68,8 +68,8 @@ public:
 
 	void doTurn();
 	bool isCitySelected() const;
-	DllExport bool canBeSelected() const;
-	DllExport void updateSelectedCity();
+	__declspec(dllexport) bool canBeSelected() const;
+	__declspec(dllexport) void updateSelectedCity();
 	void updateYield();
 	void updateVisibility();
 	void createGreatGeneral(UnitTypes eGreatGeneralUnit, bool bIncrementExperience);
@@ -80,11 +80,11 @@ public:
 	void createCapableCaptain(UnitTypes eGreatAdmiralUnit);
 	// WTP, ray, Lieutenants and Captains - END
 
-	DllExport void doTask(TaskTypes eTask, int iData1 = -1, int iData2 = -1, bool bOption = false, bool bAlt = false, bool bShift = false, bool bCtrl = false);
+	__declspec(dllexport) void doTask(TaskTypes eTask, int iData1 = -1, int iData2 = -1, bool bOption = false, bool bAlt = false, bool bShift = false, bool bCtrl = false);
 
-	DllExport void chooseProduction(UnitTypes eTrainUnit = NO_UNIT, BuildingTypes eConstructBuilding = NO_BUILDING, bool bFinish = false, bool bFront = false);
+	__declspec(dllexport) void chooseProduction(UnitTypes eTrainUnit = NO_UNIT, BuildingTypes eConstructBuilding = NO_BUILDING, bool bFinish = false, bool bFront = false);
 
-	DllExport int getCityPlotIndex(const CvPlot* pPlot) const;
+	__declspec(dllexport) int getCityPlotIndex(const CvPlot* pPlot) const;
 	CvPlot* getCityIndexPlot(CityPlotTypes eCityPlot) const;
 
 	bool canWork(const CvPlot* pPlot) const;
@@ -111,13 +111,13 @@ public:
 
 	UnitTypes allUpgradesAvailable(UnitTypes eUnit, int iUpgradeCount = 0) const;
 
-	DllExport bool canTrain(UnitTypes eUnit, bool bContinue = false, bool bTestVisible = false, bool bIgnoreCost = false, bool bIgnoreUpgrades = false) const;
+	__declspec(dllexport) bool canTrain(UnitTypes eUnit, bool bContinue = false, bool bTestVisible = false, bool bIgnoreCost = false, bool bIgnoreUpgrades = false) const;
 	bool canTrain(UnitCombatTypes eUnitCombat) const;
-	DllExport bool canConstruct(BuildingTypes eBuilding, bool bContinue = false, bool bTestVisible = false, bool bIgnoreCost = false) const;
-	DllExport bool canConvince(FatherPointTypes eFatherPoint, bool bContinue = false, bool bTestVisible = false) const;
+	__declspec(dllexport) bool canConstruct(BuildingTypes eBuilding, bool bContinue = false, bool bTestVisible = false, bool bIgnoreCost = false) const;
+	__declspec(dllexport) bool canConvince(FatherPointTypes eFatherPoint, bool bContinue = false, bool bTestVisible = false) const;
 
 	int getFoodTurnsLeft() const;
-	DllExport bool isProduction() const;
+	__declspec(dllexport) bool isProduction() const;
 	bool isProductionUnit() const;
 	bool isProductionBuilding() const;
 	bool isProductionConvince() const;
@@ -144,8 +144,8 @@ public:
 	int getYieldProductionNeeded(UnitTypes eUnit, YieldTypes eYield) const;
 	int getYieldProductionNeeded(BuildingTypes eBuilding, YieldTypes eYield) const;
 	int getProductionTurnsLeft() const;
-	DllExport int getProductionTurnsLeft(UnitTypes eUnit, int iNum) const;
-	DllExport int getProductionTurnsLeft(BuildingTypes eBuilding, int iNum) const;
+	__declspec(dllexport) int getProductionTurnsLeft(UnitTypes eUnit, int iNum) const;
+	__declspec(dllexport) int getProductionTurnsLeft(BuildingTypes eBuilding, int iNum) const;
 	int getProductionTurnsLeft(int iProductionNeeded, int iProduction, int iFirstProductionDifference, int iProductionDifference) const;
 	void setProduction(int iNewValue);
 	void changeProduction(int iChange);
@@ -156,22 +156,22 @@ public:
 
 	int getCurrentProductionDifference(bool bOverflow) const;
 
-	DllExport bool canHurry(HurryTypes eHurry, bool bTestVisible = false) const;
+	__declspec(dllexport) bool canHurry(HurryTypes eHurry, bool bTestVisible = false) const;
 	void hurry(HurryTypes eHurry);
 
 	void processBuilding(BuildingTypes eBuilding, int iChange);
 	HandicapTypes getHandicapType() const;
-	DllExport CivilizationTypes getCivilizationType() const;
+	__declspec(dllexport) CivilizationTypes getCivilizationType() const;
 	LeaderHeadTypes getPersonalityType() const;
 	ArtStyleTypes getArtStyleType() const;
-	DllExport CitySizeTypes getCitySizeType() const;
+	__declspec(dllexport) CitySizeTypes getCitySizeType() const;
 
 	bool hasTrait(TraitTypes eTrait) const;
 	bool isHuman() const;
 	bool isNative() const;
-	DllExport bool isVisible(TeamTypes eTeam, bool bDebug) const;
+	__declspec(dllexport) bool isVisible(TeamTypes eTeam, bool bDebug) const;
 
-	DllExport bool isCapital() const;
+	__declspec(dllexport) bool isCapital() const;
 	bool isCoastal(int iMinWaterSize) const;
 	bool isDisorder() const;
 
@@ -184,8 +184,8 @@ public:
 	int productionLeft() const;
 	int hurryCost(bool bExtra, bool bIgnoreNew) const;
 	int getHurryCostModifier(bool bIgnoreNew = false) const;
-	DllExport int hurryGold(HurryTypes eHurry) const;
-	DllExport int hurryPopulation(HurryTypes eHurry) const;
+	__declspec(dllexport) int hurryGold(HurryTypes eHurry) const;
+	__declspec(dllexport) int hurryPopulation(HurryTypes eHurry) const;
 	int hurryProduction(HurryTypes eHurry) const;
 	int maxHurryPopulation() const;
 	int hurryYield(HurryTypes eHurry, YieldTypes eYield) const;
@@ -197,20 +197,20 @@ public:
 	// Custom_House_Mod End
 
 	bool isHasBuildingClass(BuildingClassTypes eIndex) const;
-	DllExport bool isHasBuilding(BuildingTypes eIndex) const;
+	__declspec(dllexport) bool isHasBuilding(BuildingTypes eIndex) const;
 	int getProfessionOutput(ProfessionTypes eProfession, const CvUnit* pUnit, BuildingTypes* peBuilding = nullptr) const;
 	int getProfessionInput(ProfessionTypes eProfession, const CvUnit* pUnit) const;
 	BuildingTypes getYieldBuilding(YieldTypes eYield) const;
-	DllExport int getID() const;
+	__declspec(dllexport) int getID() const;
 	int getIndex() const;
-	DllExport IDInfo getIDInfo() const;
+	__declspec(dllexport) IDInfo getIDInfo() const;
 	void setID(int iID);
-	DllExport int getX() const;
+	__declspec(dllexport) int getX() const;
 	inline int getX_INLINE() const
 	{
 		return m_coord.x();
 	}
-	DllExport int getY() const;
+	__declspec(dllexport) int getY() const;
 	inline int getY_INLINE() const
 	{
 		return m_coord.y();
@@ -222,9 +222,9 @@ public:
 	bool at(int iX, int iY) const;
 	bool at(Coordinates coord) const;
 	bool at(const CvPlot* pPlot) const;
-	DllExport CvPlot* plot() const;
+	__declspec(dllexport) CvPlot* plot() const;
 	int getArea() const;
-	DllExport CvArea* area() const;
+	__declspec(dllexport) CvArea* area() const;
 	CvArea* waterArea() const;
 
 	CvPlot* getRallyPlot() const;
@@ -310,19 +310,19 @@ public:
 	void setProductionAutomated(bool bNewValue, bool bClear);
 
 	/* allows you to programatically specify a cities walls rather than having them be generated automagically */
-	DllExport bool isWallOverride() const;
+	__declspec(dllexport) bool isWallOverride() const;
 	void setWallOverride(bool bOverride);
-	DllExport bool isBillboardDirty() const;
-	DllExport void setBillboardDirty(bool bNewValue);
-	DllExport bool isLayoutDirty() const;
-	DllExport void setLayoutDirty(bool bNewValue);
+	__declspec(dllexport) bool isBillboardDirty() const;
+	__declspec(dllexport) void setBillboardDirty(bool bNewValue);
+	__declspec(dllexport) bool isLayoutDirty() const;
+	__declspec(dllexport) void setLayoutDirty(bool bNewValue);
 
-	DllExport PlayerTypes getOwner() const;
+	__declspec(dllexport) PlayerTypes getOwner() const;
 	inline PlayerTypes getOwnerINLINE() const
 	{
 		return m_eOwner;
 	}
-	DllExport TeamTypes getTeam() const;
+	__declspec(dllexport) TeamTypes getTeam() const;
 
 	PlayerTypes getPreviousOwner() const;
 	void setPreviousOwner(PlayerTypes eNewValue);
@@ -386,11 +386,11 @@ public:
 
 	bool isEverOwned(PlayerTypes eIndex) const;
 	void setEverOwned(PlayerTypes eIndex, bool bNewValue);
-	DllExport bool isRevealed(TeamTypes eIndex, bool bDebug) const;
+	__declspec(dllexport) bool isRevealed(TeamTypes eIndex, bool bDebug) const;
 	void setRevealed(TeamTypes eIndex, bool bNewValue);
 
-	DllExport const CvWString getName(uint uiForm = 0) const;
-	DllExport const wchar* getNameKey() const;
+	__declspec(dllexport) const CvWString getName(uint uiForm = 0) const;
+	__declspec(dllexport) const wchar* getNameKey() const;
 	void setName(const wchar* szNewValue, bool bFound = false);
 	void doFoundMessage();
 	// Script data needs to be a narrow string for pickling in Python
@@ -458,25 +458,25 @@ public:
 	void stopHeadOrder();
 	int getOrderQueueLength() const;
 	OrderData* getOrderFromQueue(int iIndex);
-	DllExport CLLNode<OrderData>* nextOrderQueueNode(CLLNode<OrderData>* pNode) const;
-	DllExport CLLNode<OrderData>* headOrderQueueNode() const;
+	__declspec(dllexport) CLLNode<OrderData>* nextOrderQueueNode(CLLNode<OrderData>* pNode) const;
+	__declspec(dllexport) CLLNode<OrderData>* headOrderQueueNode() const;
 	CLLNode<OrderData>* tailOrderQueueNode() const;
 	// fill the kVisible array with buildings that you want shown in city, as well as the number of generics
 	// This function is called whenever CvCity::setLayoutDirty() is called
-	DllExport void getVisibleBuildings(std::list<BuildingTypes>& kVisible, int& iNumGenerics) const;
+	__declspec(dllexport) void getVisibleBuildings(std::list<BuildingTypes>& kVisible, int& iNumGenerics) const;
 	// Fill the kEffectNames array with references to effects in the CIV4EffectInfos.xml to have a
 	// city play a given set of effects. This is called whenever the interface updates the city billboard
 	// or when the zoom level changes
-	DllExport void getVisibleEffects(ZoomLevelTypes eCurrentZoom, std::vector<char const*>& kEffectNames) const;
+	__declspec(dllexport) void getVisibleEffects(ZoomLevelTypes eCurrentZoom, std::vector<char const*>& kEffectNames) const;
 
 	// Billboard appearance controls
-	DllExport void getCityBillboardSizeIconColors(NiColorA& kDotColor, NiColorA& kTextColor) const;
-	DllExport char const* getCityBillboardProductionIcon() const;
-	DllExport bool getCityBillboardTopBarValues(float& fStored, float& fRate, float& fRateExtra) const;
-	DllExport bool getCityBillboardBottomBarValues(float& fStored, float& fRate, float& fRateExtra) const;
+	__declspec(dllexport) void getCityBillboardSizeIconColors(NiColorA& kDotColor, NiColorA& kTextColor) const;
+	__declspec(dllexport) char const* getCityBillboardProductionIcon() const;
+	__declspec(dllexport) bool getCityBillboardTopBarValues(float& fStored, float& fRate, float& fRateExtra) const;
+	__declspec(dllexport) bool getCityBillboardBottomBarValues(float& fStored, float& fRate, float& fRateExtra) const;
 
 	void setWallOverridePoints(const std::vector< std::pair<float, float> >& kPoints); /* points are given in world space ... i.e. PlotXToPointX, etc */
-	DllExport const std::vector< std::pair<float, float> >& getWallOverridePoints() const;
+	__declspec(dllexport) const std::vector< std::pair<float, float> >& getWallOverridePoints() const;
 	int getTriggerValue(EventTriggerTypes eTrigger) const;
 	bool canApplyEvent(EventTypes eEvent, const EventTriggeredData& kTriggeredData) const;
 	void applyEvent(EventTypes eEvent, const EventTriggeredData& kTriggeredData, bool bClear);

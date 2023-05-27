@@ -22,15 +22,15 @@ public:
 	CvDLLButtonPopup();
 	virtual ~CvDLLButtonPopup();
 
-	DllExport static CvDLLButtonPopup& getInstance();
-	DllExport static void freeInstance();
+	__declspec(dllexport) static CvDLLButtonPopup& getInstance();
+	__declspec(dllexport) static void freeInstance();
 
-	DllExport virtual void OnOkClicked(CvPopup* pPopup, PopupReturn *pPopupReturn, CvPopupInfo &info);
-	DllExport virtual void OnAltExecute(CvPopup& popup, const PopupReturn& popupReturn, CvPopupInfo &info);
-	DllExport virtual void OnEscape(CvPopup& pPopup, CvPopupInfo &info);
-	DllExport virtual void OnFocus(CvPopup* pPopup, CvPopupInfo &info);
+	__declspec(dllexport) virtual void OnOkClicked(CvPopup* pPopup, PopupReturn *pPopupReturn, CvPopupInfo &info);
+	__declspec(dllexport) virtual void OnAltExecute(CvPopup& popup, const PopupReturn& popupReturn, CvPopupInfo &info);
+	__declspec(dllexport) virtual void OnEscape(CvPopup& pPopup, CvPopupInfo &info);
+	__declspec(dllexport) virtual void OnFocus(CvPopup* pPopup, CvPopupInfo &info);
 
-	DllExport bool launchButtonPopup(CvPopup* pPopup, CvPopupInfo &info);
+	__declspec(dllexport) bool launchButtonPopup(CvPopup* pPopup, CvPopupInfo &info);
 
 private:
 
@@ -90,7 +90,7 @@ private:
 	bool launchPurchasePortRoyalUnitPopup(CvPopup* pPopup, CvPopupInfo &info); // R&R, ray, Port Royal
 	bool isYieldSupportedInExportPanelForCity(CvCity* pCity, YieldTypes eYield); // R&R mod, vetiarvind, max yield import limit
 	//R&R mod, vetiarvind, trade groups - start
-	bool launchSaveTradeGroupPopup(CvPopup* pPopup, CvPopupInfo &info);	
+	bool launchSaveTradeGroupPopup(CvPopup* pPopup, CvPopupInfo &info);
 	std::vector<std::string> CvDLLButtonPopup::split(CvString &s, char delim);
 	//R&R mod, vetiarvind, trade groups - end
 	bool launchChooseCityPlotYieldPopup(CvPopup* pPopup, CvPopupInfo &info);

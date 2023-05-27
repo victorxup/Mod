@@ -18,8 +18,8 @@ class CvRandom
 
 public:
 
-	DllExport CvRandom();
-	DllExport virtual ~CvRandom();
+	__declspec(dllexport) CvRandom();
+	__declspec(dllexport) virtual ~CvRandom();
 
 	bool isSorenRand() const;
 	void setSorenRand();
@@ -30,16 +30,16 @@ public:
 	static void writeLog(const char* szLog, const char* szExtraText, int iData);
 	static void writeLog(const char* szLog, const char* szExtraText, const char* szText3);
 
-	DllExport void init(unsigned long ulSeed);
+	__declspec(dllexport) void init(unsigned long ulSeed);
 	void uninit();
 	void reset(unsigned long ulSeed = 0);
 
-	DllExport unsigned short get(unsigned short usNum, char const* pszLog = nullptr);  //  Returns value from 0 to num-1 inclusive.
-	DllExport float getFloat();
-	DllExport float getGaussian(float fMean, float fStandardDeviation);
+	__declspec(dllexport) unsigned short get(unsigned short usNum, char const* pszLog = nullptr);  //  Returns value from 0 to num-1 inclusive.
+	__declspec(dllexport) float getFloat();
+	__declspec(dllexport) float getGaussian(float fMean, float fStandardDeviation);
 	int pickValue(std::vector<int>& aWeights, char const* pszLog);
 	void shuffleArray(std::vector<int>& aNumbers, char const* pszLog);
-	DllExport void shuffleSequence(std::vector<int>& aNumbers, char const* pszLog);
+	__declspec(dllexport) void shuffleSequence(std::vector<int>& aNumbers, char const* pszLog);
 
 	void reseed(unsigned long ulNewValue);
 	unsigned long getSeed();

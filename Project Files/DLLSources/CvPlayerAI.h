@@ -26,11 +26,11 @@ public:
 		FAssertMsg(ePlayer < MAX_PLAYERS, "Player is not assigned a valid value");
 		return m_aPlayers[ePlayer];
 	}
-	DllExport static CvPlayerAI& getPlayerNonInl(PlayerTypes ePlayer);
+	__declspec(dllexport) static CvPlayerAI& getPlayerNonInl(PlayerTypes ePlayer);
 
 	static void initStatics();
 	static void freeStatics();
-	DllExport static bool areStaticsInitialized();
+	__declspec(dllexport) static bool areStaticsInitialized();
 
 	void AI_init();
 	void AI_uninit();
@@ -93,7 +93,7 @@ public:
 	// TAC - AI Improved Naval AI - koma13 - END
 
 	int AI_goldTarget();
-	DllExport DiploCommentTypes AI_getGreeting(PlayerTypes ePlayer);
+	__declspec(dllexport) DiploCommentTypes AI_getGreeting(PlayerTypes ePlayer);
 	bool AI_isWillingToTalk(PlayerTypes ePlayer);
 	bool AI_demandRebukedSneak(PlayerTypes ePlayer);
 	bool AI_demandRebukedWar(PlayerTypes ePlayer);

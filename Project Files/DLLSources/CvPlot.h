@@ -44,11 +44,11 @@ public:
 	void setupGraphical();
 	void erase();
 
-	DllExport float getPointX() const;
-	DllExport float getPointY() const;
-	DllExport NiPoint3 getPoint() const;
+	__declspec(dllexport) float getPointX() const;
+	__declspec(dllexport) float getPointY() const;
+	__declspec(dllexport) NiPoint3 getPoint() const;
 
-	DllExport TeamTypes getTeam() const;
+	__declspec(dllexport) TeamTypes getTeam() const;
 
 	void doTurn();
 
@@ -82,10 +82,10 @@ public:
 	bool isVisibleWorked() const;
 	bool isWithinTeamCityRadius(TeamTypes eTeam, PlayerTypes eIgnorePlayer = NO_PLAYER) const;
 
-	DllExport bool isLake() const;
+	__declspec(dllexport) bool isLake() const;
 
 	bool isRiverMask() const;
-	DllExport bool isRiverCrossingFlowClockwise(DirectionTypes eDirection) const;
+	__declspec(dllexport) bool isRiverCrossingFlowClockwise(DirectionTypes eDirection) const;
 	bool isRiverSide() const;
 	bool isRiver() const;
 	bool isFreshWater() const; // WTP, ray, Health Overhaul
@@ -159,18 +159,18 @@ public:
 
 	PlayerTypes calculateCulturalOwner() const;
 	void plotAction(PlotUnitFunc func, int iData1 = -1, int iData2 = -1, PlayerTypes eOwner = NO_PLAYER, TeamTypes eTeam = NO_TEAM);
-	DllExport int plotCount(ConstPlotUnitFunc funcA, int iData1A = -1, int iData2A = -1, PlayerTypes eOwner = NO_PLAYER, TeamTypes eTeam = NO_TEAM, ConstPlotUnitFunc funcB = nullptr, int iData1B = -1, int iData2B = -1) const;
+	__declspec(dllexport) int plotCount(ConstPlotUnitFunc funcA, int iData1A = -1, int iData2A = -1, PlayerTypes eOwner = NO_PLAYER, TeamTypes eTeam = NO_TEAM, ConstPlotUnitFunc funcB = nullptr, int iData1B = -1, int iData2B = -1) const;
 	CvUnit* plotCheck(ConstPlotUnitFunc funcA, int iData1A = -1, int iData2A = -1, PlayerTypes eOwner = NO_PLAYER, TeamTypes eTeam = NO_TEAM, ConstPlotUnitFunc funcB = nullptr, int iData1B = -1, int iData2B = -1) const;
 	bool isOwned() const;
 
 	bool isVisible(TeamTypes eTeam, bool bDebug) const;
-	DllExport bool isActiveVisible(bool bDebug) const;
+	__declspec(dllexport) bool isActiveVisible(bool bDebug) const;
 	bool isVisibleToCivTeam() const;
 	bool isVisibleToWatchingHuman() const;
 	bool isAdjacentVisible(TeamTypes eTeam, bool bDebug) const;
 	bool isAdjacentNonvisible(TeamTypes eTeam) const;
 
-	DllExport bool isGoody(TeamTypes eTeam = NO_TEAM) const;
+	__declspec(dllexport) bool isGoody(TeamTypes eTeam = NO_TEAM) const;
 	bool isGoodyForSpawningUnits(TeamTypes eTeam = NO_TEAM) const; //WTP, Unit only Goodies
 	bool isGoodyForSpawningHostileAnimals(TeamTypes eTeam = NO_TEAM) const; //WTP, Protected Hostile Goodies
 	bool isGoodyForSpawningHostileNatives(TeamTypes eTeam = NO_TEAM) const; //WTP, Protected Hostile Goodies
@@ -179,7 +179,7 @@ public:
 	bool isRevealedGoody(TeamTypes eTeam = NO_TEAM) const;
 	void removeGoody();
 
-	DllExport bool isCity(bool bCheckImprovement = false, TeamTypes eForTeam = NO_TEAM) const;
+	__declspec(dllexport) bool isCity(bool bCheckImprovement = false, TeamTypes eForTeam = NO_TEAM) const;
 	bool isFriendlyCity(const CvUnit& kUnit, bool bCheckImprovement) const;
 	bool isEnemyCity(const CvUnit& kUnit) const;
 
@@ -203,28 +203,28 @@ public:
 	int getNumDefenders(PlayerTypes ePlayer) const;
 	int getNumVisibleEnemyDefenders(const CvUnit* pUnit) const;
 	int getNumVisiblePotentialEnemyDefenders(const CvUnit* pUnit) const;
-	DllExport bool isVisibleEnemyUnit(PlayerTypes ePlayer) const;
+	__declspec(dllexport) bool isVisibleEnemyUnit(PlayerTypes ePlayer) const;
 	bool isVisibleEnemyUnit(const CvUnit* pUnit) const;
 	bool isVisibleOtherUnit(PlayerTypes ePlayer) const;
-	DllExport bool isFighting() const;
+	__declspec(dllexport) bool isFighting() const;
 
 	bool canHaveFeature(FeatureTypes eFeature) const;
 
-	DllExport bool isRoute() const;
+	__declspec(dllexport) bool isRoute() const;
 	bool isValidRoute(const CvUnit* pUnit) const;
 	bool isValidDomainForLocation(const CvUnit& unit) const;
 	bool isValidDomainForAction(const CvUnit& unit) const;
 	bool isValidDomainForAction(UnitTypes eUnit) const;
 	bool isImpassable() const;
 
-	DllExport int getX() const;
+	__declspec(dllexport) int getX() const;
 	inline int getX_INLINE() const
 	{
 		// return m_iX;
 		return m_coord.x();
 	}
 
-	DllExport int getY() const;
+	__declspec(dllexport) int getY() const;
 	inline int getY_INLINE() const
 	{
 		// return m_iY;
@@ -274,7 +274,7 @@ public:
 	hasNearbyPlotWith(T eVal, int iRange = 1) const;
 	//WTP, Nightinggale - Terrain locator - start
 
-	DllExport int getFeatureVariety() const;
+	__declspec(dllexport) int getFeatureVariety() const;
 
 	int getOwnershipDuration() const;
 	bool isOwnershipScore() const;
@@ -301,14 +301,14 @@ public:
 	bool isStartingPlot() const;
 	void setStartingPlot(bool bNewValue);
 
-	DllExport bool isNOfRiver() const;
+	__declspec(dllexport) bool isNOfRiver() const;
 	void setNOfRiver(bool bNewValue, CardinalDirectionTypes eRiverDir);
 
-	DllExport bool isWOfRiver() const;
+	__declspec(dllexport) bool isWOfRiver() const;
 	void setWOfRiver(bool bNewValue, CardinalDirectionTypes eRiverDir);
 
-	DllExport CardinalDirectionTypes getRiverNSDirection() const;
-	DllExport CardinalDirectionTypes getRiverWEDirection() const;
+	__declspec(dllexport) CardinalDirectionTypes getRiverNSDirection() const;
+	__declspec(dllexport) CardinalDirectionTypes getRiverWEDirection() const;
 	EuropeTypes getEurope() const;
 	void setEurope(EuropeTypes eEurope);
 	EuropeTypes getNearestEurope() const;
@@ -324,39 +324,39 @@ public:
 	bool isFlagDirty() const;
 	void setFlagDirty(bool bNewValue);
 
-	DllExport PlayerTypes getOwner() const;
+	__declspec(dllexport) PlayerTypes getOwner() const;
 	inline PlayerTypes getOwnerINLINE() const
 	{
 		return m_eOwner;
 	}
 	void setOwner(PlayerTypes eNewValue, bool bCheckUnits);
 	PlotTypes getPlotType() const;
-	DllExport bool isWater() const;
+	__declspec(dllexport) bool isWater() const;
 	bool hasLargeRiver() const;
 	bool isEurope() const;
 	bool isFlatlands() const;
-	DllExport bool isHills() const;
-	DllExport bool isPeak() const;
+	__declspec(dllexport) bool isHills() const;
+	__declspec(dllexport) bool isPeak() const;
 	void setPlotType(PlotTypes eNewValue, bool bRecalculate = true, bool bRebuildGraphics = true);
 
 	void setCoastline(bool bRecalculate = true, bool bRebuildGraphics = true); // autodetect lakes
-	DllExport TerrainTypes getTerrainType() const;
+	__declspec(dllexport) TerrainTypes getTerrainType() const;
 	void setTerrainType(TerrainTypes eNewValue, bool bRecalculate = true, bool bRebuildGraphics = true);
 
-	DllExport FeatureTypes getFeatureType() const;
+	__declspec(dllexport) FeatureTypes getFeatureType() const;
 	void setFeatureType(FeatureTypes eNewValue, int iVariety = -1);
-	DllExport BonusTypes getBonusType() const;
+	__declspec(dllexport) BonusTypes getBonusType() const;
 	void setBonusType(BonusTypes eNewValue);
 
-	DllExport ImprovementTypes getImprovementType() const;
+	__declspec(dllexport) ImprovementTypes getImprovementType() const;
 	void setImprovementType(ImprovementTypes eNewValue);
 
 	RouteTypes getRouteType() const;
 	void setRouteType(RouteTypes eNewValue);
 	void updateCityRoute();
-	DllExport CvCity* getPlotCity() const;
+	__declspec(dllexport) CvCity* getPlotCity() const;
 	void setPlotCity(CvCity* pNewValue);
-	DllExport CvCity* getWorkingCity() const;
+	__declspec(dllexport) CvCity* getWorkingCity() const;
 	void updateWorkingCity();
 	CvCity* getWorkingCityOverride() const;
 	void setWorkingCityOverride( const CvCity* pNewValue);
@@ -368,7 +368,7 @@ public:
 	int getRiverCrossingCount() const;
 	void changeRiverCrossingCount(int iChange);
 	const EnumMap<YieldTypes, short> getYield() const;
-	DllExport int getYield(YieldTypes eIndex) const;
+	__declspec(dllexport) int getYield(YieldTypes eIndex) const;
 
 	// TAC - AI Improved Naval AI - koma13 - START
 	int getDangerMap(PlayerTypes eIndex) const;
@@ -398,8 +398,8 @@ public:
 	void updateYield(bool bUpdateCity);
 	int calculateMaxYield(YieldTypes eYield) const;
 	int getYieldWithBuild(BuildTypes eBuild, YieldTypes eYield, bool bWithUpgrade) const;
-	DllExport int getCulture(PlayerTypes eIndex) const;
-	DllExport int countTotalCulture() const;
+	__declspec(dllexport) int getCulture(PlayerTypes eIndex) const;
+	__declspec(dllexport) int countTotalCulture() const;
 	int countFriendlyCulture(TeamTypes eTeam) const;
 	TeamTypes findHighestCultureTeam() const;
 	PlayerTypes findHighestCulturePlayer() const;
@@ -419,14 +419,14 @@ public:
 	int getVisibilityCount(TeamTypes eTeam) const;
 	void changeVisibilityCount(TeamTypes eTeam, int iChange, InvisibleTypes eSeeInvisible);
 
-	DllExport PlayerTypes getRevealedOwner(TeamTypes eTeam, bool bDebug) const;
+	__declspec(dllexport) PlayerTypes getRevealedOwner(TeamTypes eTeam, bool bDebug) const;
 	TeamTypes getRevealedTeam(TeamTypes eTeam, bool bDebug) const;
 	void setRevealedOwner(TeamTypes eTeam, PlayerTypes eNewValue);
 	void updateRevealedOwner(TeamTypes eTeam);
-	DllExport bool isRiverCrossing(DirectionTypes eIndex) const;
+	__declspec(dllexport) bool isRiverCrossing(DirectionTypes eIndex) const;
 	void updateRiverCrossing(DirectionTypes eIndex);
 	void updateRiverCrossing();
-	DllExport bool isRevealed(TeamTypes eTeam, bool bDebug) const;
+	__declspec(dllexport) bool isRevealed(TeamTypes eTeam, bool bDebug) const;
 	void setRevealed(TeamTypes eTeam, bool bNewValue, bool bTerrainOnly, TeamTypes eFromTeam);
 	bool isAdjacentRevealed(TeamTypes eTeam) const;
 	bool isAdjacentNonrevealed(TeamTypes eTeam) const;
@@ -443,31 +443,31 @@ public:
 	void updateFeatureSymbolVisibility();
 	void updateFeatureSymbol(bool bForce = false, bool bBuildTileArt = true);
 
-	DllExport bool isLayoutDirty() const;							// The plot layout contains bonuses and improvements --- it is, like the city layout, passively computed by LSystems
-	DllExport void setLayoutDirty(bool bDirty);
-	DllExport bool isLayoutStateDifferent() const;
-	DllExport void setLayoutStateToCurrent();
+	__declspec(dllexport) bool isLayoutDirty() const;							// The plot layout contains bonuses and improvements --- it is, like the city layout, passively computed by LSystems
+	__declspec(dllexport) void setLayoutDirty(bool bDirty);
+	__declspec(dllexport) bool isLayoutStateDifferent() const;
+	__declspec(dllexport) void setLayoutStateToCurrent();
 	bool updatePlotBuilder();
 
-	DllExport void getVisibleImprovementState(ImprovementTypes& eType, bool& bWorked);				// determines how the improvement state is shown in the engine
-	DllExport void getVisibleBonusState(BonusTypes& eType, bool& bImproved, bool& bWorked);		// determines how the bonus state is shown in the engine
+	__declspec(dllexport) void getVisibleImprovementState(ImprovementTypes& eType, bool& bWorked);				// determines how the improvement state is shown in the engine
+	__declspec(dllexport) void getVisibleBonusState(BonusTypes& eType, bool& bImproved, bool& bWorked);		// determines how the bonus state is shown in the engine
 	bool shouldUsePlotBuilder();
 	CvPlotBuilder* getPlotBuilder() { return m_pPlotBuilder; }
 
-	DllExport CvRoute* getRouteSymbol() const;
+	__declspec(dllexport) CvRoute* getRouteSymbol() const;
 	void updateRouteSymbol(bool bForce = false, bool bAdjacent = false);
 
-	DllExport CvRiver* getRiverSymbol() const;
+	__declspec(dllexport) CvRiver* getRiverSymbol() const;
 	void updateRiverSymbol(bool bForce = false, bool bAdjacent = false);
 
 	CvFeature* getFeatureSymbol() const;
 
-	DllExport CvFlagEntity* getFlagSymbol() const;
+	__declspec(dllexport) CvFlagEntity* getFlagSymbol() const;
 	CvFlagEntity* getFlagSymbolOffset() const;
-	DllExport void updateFlagSymbol();
+	__declspec(dllexport) void updateFlagSymbol();
 
-	DllExport CvUnit* getCenterUnit() const;
-	DllExport CvUnit* getDebugCenterUnit() const;
+	__declspec(dllexport) CvUnit* getCenterUnit() const;
+	__declspec(dllexport) CvUnit* getDebugCenterUnit() const;
 	void setCenterUnit(CvUnit* pNewValue);
 	int getCultureRangeCities(PlayerTypes eOwnerIndex, CultureLevelTypes eRangeIndex) const;
 	bool isCultureRangeCity(PlayerTypes eOwnerIndex, CultureLevelTypes eRangeIndex) const;
@@ -480,9 +480,9 @@ public:
 	CvUnit* getUnitByIndex(int iIndex) const;
 	void addUnit(CvUnit* pUnit, bool bUpdate = true);
 	void removeUnit(CvUnit* pUnit, bool bUpdate = true);
-	DllExport CLLNode<IDInfo>* nextUnitNode(CLLNode<IDInfo>* pNode) const;
+	__declspec(dllexport) CLLNode<IDInfo>* nextUnitNode(CLLNode<IDInfo>* pNode) const;
 	CLLNode<IDInfo>* prevUnitNode(CLLNode<IDInfo>* pNode) const;
-	DllExport CLLNode<IDInfo>* headUnitNode() const;
+	__declspec(dllexport) CLLNode<IDInfo>* headUnitNode() const;
 	CLLNode<IDInfo>* tailUnitNode() const;
 
 	// Script data needs to be a narrow string for pickling in Python
@@ -504,8 +504,8 @@ public:
 	int getCrumbs() const;
 	void addCrumbs(int iQuantity);
 
-	DllExport const char* getResourceLayerIcon(ResourceLayerOptions eOption, CvWStringBuffer& szHelp, PlotIndicatorVisibilityFlags& eVisibilityFlag, ColorTypes& eColor) const;
-	DllExport CvUnit* getUnitLayerUnit(UnitLayerOptionTypes eOption, CvWStringBuffer& szHelp, PlotIndicatorVisibilityFlags& eVisibilityFlag, ColorTypes& eColor, bool& bTestEnemyVisibility) const;
+	__declspec(dllexport) const char* getResourceLayerIcon(ResourceLayerOptions eOption, CvWStringBuffer& szHelp, PlotIndicatorVisibilityFlags& eVisibilityFlag, ColorTypes& eColor) const;
+	__declspec(dllexport) CvUnit* getUnitLayerUnit(UnitLayerOptionTypes eOption, CvWStringBuffer& szHelp, PlotIndicatorVisibilityFlags& eVisibilityFlag, ColorTypes& eColor, bool& bTestEnemyVisibility) const;
 
 	void postLoadFixes();
 

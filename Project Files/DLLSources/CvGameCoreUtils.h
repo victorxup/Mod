@@ -242,19 +242,19 @@ for (int iLoopY = iCenterY-iRange; iLoopY <= iCenterY+iRange; ++iLoopY) \
 for (int iLoopX = iCenterX-iRange; iLoopX <= iCenterX+iRange; ++iLoopX)
 
 
-DllExport bool isLeaderCivMatch(LeaderHeadTypes eLeader, CivilizationTypes eCiv, bool bHuman);
+__declspec(dllexport) bool isLeaderCivMatch(LeaderHeadTypes eLeader, CivilizationTypes eCiv, bool bHuman);
 
 CardinalDirectionTypes getOppositeCardinalDirection(CardinalDirectionTypes eDir);
 DirectionTypes cardinalDirectionToDirection(CardinalDirectionTypes eCard);
-DllExport bool isCardinalDirection(DirectionTypes eDirection);
+__declspec(dllexport) bool isCardinalDirection(DirectionTypes eDirection);
 DirectionTypes estimateDirection(int iDX, int iDY);
-DllExport DirectionTypes estimateDirection(const CvPlot* pFromPlot, const CvPlot* pToPlot);
-DllExport float directionAngle(DirectionTypes eDirection);
+__declspec(dllexport) DirectionTypes estimateDirection(const CvPlot* pFromPlot, const CvPlot* pToPlot);
+__declspec(dllexport) float directionAngle(DirectionTypes eDirection);
 bool atWar(TeamTypes eTeamA, TeamTypes eTeamB);
 bool isPotentialEnemy(TeamTypes eOurTeam, TeamTypes eTheirTeam);
 
-DllExport CvCity* getCity(const IDInfo& city);
-DllExport CvUnit* getUnit(const IDInfo& unit);
+__declspec(dllexport) CvCity* getCity(const IDInfo& city);
+__declspec(dllexport) CvUnit* getUnit(const IDInfo& unit);
 
 bool isBeforeUnitCycle(const CvUnit* pFirstUnit, const CvUnit* pSecondUnit);
 
@@ -265,20 +265,20 @@ int getCombatOdds(CvUnit* pAttacker, CvUnit* pDefender);
 int getCombatOddsDraw(CvUnit* pAttacker, CvUnit* pDefender);
 
 
-DllExport void setTradeItem(TradeData* pItem, TradeableItems eItemType, int iData1, const IDInfo* pTransport);
+__declspec(dllexport) void setTradeItem(TradeData* pItem, TradeableItems eItemType, int iData1, const IDInfo* pTransport);
 
 bool isPlotEventTrigger(EventTriggerTypes eTrigger);
-DllExport void clear(wchar* szString);
-DllExport void clear(char* szString);
-DllExport void clear(std::string& szString);
-DllExport void clear(std::wstring& szString);
-DllExport void safecpy(char * szDest, const char * szSource, int iMaxLen);
-DllExport void safecpy(wchar * szDest, const wchar * szSource, int iMaxLen);
-DllExport void safecpy(CvWString& szDest, const CvWString& szSource, int iMaxLen);
-DllExport bool isEmpty(const char* szString);
-DllExport bool isEmpty(const std::string& szStr);
-DllExport bool isEmpty(const wchar* szString);
-DllExport bool isEmpty(const std::wstring& szStr);
+__declspec(dllexport) void clear(wchar* szString);
+__declspec(dllexport) void clear(char* szString);
+__declspec(dllexport) void clear(std::string& szString);
+__declspec(dllexport) void clear(std::wstring& szString);
+__declspec(dllexport) void safecpy(char * szDest, const char * szSource, int iMaxLen);
+__declspec(dllexport) void safecpy(wchar * szDest, const wchar * szSource, int iMaxLen);
+__declspec(dllexport) void safecpy(CvWString& szDest, const CvWString& szSource, int iMaxLen);
+__declspec(dllexport) bool isEmpty(const char* szString);
+__declspec(dllexport) bool isEmpty(const std::string& szStr);
+__declspec(dllexport) bool isEmpty(const wchar* szString);
+__declspec(dllexport) bool isEmpty(const std::wstring& szStr);
 void setListHelp(wchar* szBuffer, const wchar* szStart, const wchar* szItem, const wchar* szSeparator, bool bFirst);
 void setListHelp(CvWString& szBuffer, const wchar* szStart, const wchar* szItem, const wchar* szSeparator, bool bFirst);
 void setListHelp(CvWStringBuffer& szBuffer, const wchar* szStart, const wchar* szItem, const wchar* szSeparator, bool bFirst);
@@ -291,7 +291,7 @@ bool PUF_isCombatTeam(const CvUnit* pUnit, int iData1, int iData2);
 bool PUF_isOtherTeam( const CvUnit* pUnit, int iData1, int iData2 = -1);
 bool PUF_isEnemy( const CvUnit* pUnit, int iData1, int iData2 = -1);
 bool PUF_isVisible( const CvUnit* pUnit, int iData1, int iData2 = -1);
-DllExport bool PUF_isVisibleDebug(const CvUnit* pUnit, int iData1, int iData2 = -1);
+__declspec(dllexport) bool PUF_isVisibleDebug(const CvUnit* pUnit, int iData1, int iData2 = -1);
 bool PUF_canSiege( const CvUnit* pUnit, int iData1, int iData2 = -1);
 bool PUF_isPotentialEnemy( const CvUnit* pUnit, int iData1, int iData2 = -1);
 bool PUF_canDeclareWar( const CvUnit* pUnit, int iData1 = -1, int iData2 = -1);
@@ -348,8 +348,8 @@ bool isPickableName(char const* szName);
 int getTurnMonthForGame(int iGameTurn, int iStartYear, CalendarTypes eCalendar, GameSpeedTypes eSpeed);
 int getTurnYearForGame(int iGameTurn, int iStartYear, CalendarTypes eCalendar, GameSpeedTypes eSpeed);
 
-DllExport void boolsToString(const bool* pBools, int iNumBools, CvString* szOut);
-DllExport void stringToBools(const char* szString, int* iNumBools, bool** ppBools);
+__declspec(dllexport) void boolsToString(const bool* pBools, int iNumBools, CvString* szOut);
+__declspec(dllexport) void stringToBools(const char* szString, int* iNumBools, bool** ppBools);
 
 void getDirectionTypeString(CvWString& szString, DirectionTypes eDirectionType);
 void getCardinalDirectionTypeString(CvWString& szString, CardinalDirectionTypes eDirectionType);

@@ -68,7 +68,7 @@ bool CvPlayerAI::areStaticsInitialized()
 	return true;
 }
 
-DllExport CvPlayerAI& CvPlayerAI::getPlayerNonInl(PlayerTypes ePlayer)
+__declspec(dllexport) CvPlayerAI& CvPlayerAI::getPlayerNonInl(PlayerTypes ePlayer)
 {
 	return getPlayer(ePlayer);
 }

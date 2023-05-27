@@ -129,7 +129,7 @@ class CvGlobals
 public:
 
 	// singleton accessor
-	DllExport inline static CvGlobals& getInstance();
+	__declspec(dllexport) inline static CvGlobals& getInstance();
 
 	CvGlobals();
 	virtual ~CvGlobals();
@@ -143,56 +143,56 @@ public:
 	CvAchieveInfo& getAchieveInfo(AchieveTypes eAchieve);
 	// PatchMod: Achievements END
 
-	DllExport void init();
-	DllExport void uninit();
+	__declspec(dllexport) void init();
+	__declspec(dllexport) void uninit();
 	void clearTypesMap();
 
-	DllExport CvDiplomacyScreen* getDiplomacyScreen();
-	DllExport CMPDiplomacyScreen* getMPDiplomacyScreen();
+	__declspec(dllexport) CvDiplomacyScreen* getDiplomacyScreen();
+	__declspec(dllexport) CMPDiplomacyScreen* getMPDiplomacyScreen();
 
-	DllExport FMPIManager*& getFMPMgrPtr();
-	DllExport CvPortal& getPortal();
-	DllExport CvSetupData& getSetupData();
-	DllExport CvInitCore& getInitCore();
-	DllExport CvInitCore& getLoadedInitCore();
-	DllExport CvInitCore& getIniInitCore();
-	DllExport CvMessageCodeTranslator& getMessageCodes();
-	DllExport CvStatsReporter& getStatsReporter();
+	__declspec(dllexport) FMPIManager*& getFMPMgrPtr();
+	__declspec(dllexport) CvPortal& getPortal();
+	__declspec(dllexport) CvSetupData& getSetupData();
+	__declspec(dllexport) CvInitCore& getInitCore();
+	__declspec(dllexport) CvInitCore& getLoadedInitCore();
+	__declspec(dllexport) CvInitCore& getIniInitCore();
+	__declspec(dllexport) CvMessageCodeTranslator& getMessageCodes();
+	__declspec(dllexport) CvStatsReporter& getStatsReporter();
 	CvStatsReporter* getStatsReporterPtr();
-	DllExport CvInterface& getInterface();
-	DllExport CvInterface* getInterfacePtr();
-	DllExport int getMaxCivPlayers() const;
+	__declspec(dllexport) CvInterface& getInterface();
+	__declspec(dllexport) CvInterface* getInterfacePtr();
+	__declspec(dllexport) int getMaxCivPlayers() const;
 	CvMap& getMap() { return *m_map; }
 	CvGameAI& getGameINLINE() { return *m_game; }			// inlined for perf reasons, do not use outside of dll
 	const CvGameAI& getGameConst() const { return *m_game; }
-	DllExport CvGameAI& getGame();
-	DllExport CvGameAI *getGamePointer();
-	DllExport CvRandom& getASyncRand();
-	DllExport CMessageQueue& getMessageQueue();
-	DllExport CMessageQueue& getHotMessageQueue();
-	DllExport CMessageControl& getMessageControl();
-	DllExport CvDropMgr& getDropMgr();
-	DllExport FAStar& getPathFinder();
-	DllExport FAStar& getInterfacePathFinder();
-	DllExport FAStar& getStepFinder();
-	DllExport FAStar& getRouteFinder();
-	DllExport FAStar& getBorderFinder();
-	DllExport FAStar& getAreaFinder();
+	__declspec(dllexport) CvGameAI& getGame();
+	__declspec(dllexport) CvGameAI *getGamePointer();
+	__declspec(dllexport) CvRandom& getASyncRand();
+	__declspec(dllexport) CMessageQueue& getMessageQueue();
+	__declspec(dllexport) CMessageQueue& getHotMessageQueue();
+	__declspec(dllexport) CMessageControl& getMessageControl();
+	__declspec(dllexport) CvDropMgr& getDropMgr();
+	__declspec(dllexport) FAStar& getPathFinder();
+	__declspec(dllexport) FAStar& getInterfacePathFinder();
+	__declspec(dllexport) FAStar& getStepFinder();
+	__declspec(dllexport) FAStar& getRouteFinder();
+	__declspec(dllexport) FAStar& getBorderFinder();
+	__declspec(dllexport) FAStar& getAreaFinder();
 
 	NiPoint3& getPt3Origin();
 
-	DllExport std::vector<CvInterfaceModeInfo*>& getInterfaceModeInfo();
-	DllExport CvInterfaceModeInfo& getInterfaceModeInfo(InterfaceModeTypes e);
+	__declspec(dllexport) std::vector<CvInterfaceModeInfo*>& getInterfaceModeInfo();
+	__declspec(dllexport) CvInterfaceModeInfo& getInterfaceModeInfo(InterfaceModeTypes e);
 
 	NiPoint3& getPt3CameraDir();
 
-	DllExport bool& getLogging();
-	DllExport bool& getRandLogging();
-	DllExport bool& getSynchLogging();
-	DllExport bool& overwriteLogs();
+	__declspec(dllexport) bool& getLogging();
+	__declspec(dllexport) bool& getRandLogging();
+	__declspec(dllexport) bool& getSynchLogging();
+	__declspec(dllexport) bool& overwriteLogs();
 
-	DllExport int* getPlotDirectionX();
-	DllExport int* getPlotDirectionY();
+	__declspec(dllexport) int* getPlotDirectionX();
+	__declspec(dllexport) int* getPlotDirectionY();
 	int* getPlotCardinalDirectionX();
 	int* getPlotCardinalDirectionY();
 	int* getCityPlotX();
@@ -203,146 +203,146 @@ public:
 	DirectionTypes getTurnLeftDirection(int i);
 	DirectionTypes* getTurnRightDirection();
 	DirectionTypes getTurnRightDirection(int i);
-	DllExport DirectionTypes getXYDirection(int i, int j);
+	__declspec(dllexport) DirectionTypes getXYDirection(int i, int j);
 
 	//
 	// Global Infos
 	// All info type strings are upper case and are kept in this hash map for fast lookup
 	//
-	DllExport int getInfoTypeForString(const char* szType, bool hideAssert = false) const;			// returns the infos index, use this when searching for an info type string
-	DllExport void setInfoTypeFromString(const char* szType, int idx);
-	DllExport void infoTypeFromStringReset();
-	DllExport void addToInfosVectors(void *infoVector);
-	DllExport void infosReset();
+	__declspec(dllexport) int getInfoTypeForString(const char* szType, bool hideAssert = false) const;			// returns the infos index, use this when searching for an info type string
+	__declspec(dllexport) void setInfoTypeFromString(const char* szType, int idx);
+	__declspec(dllexport) void infoTypeFromStringReset();
+	__declspec(dllexport) void addToInfosVectors(void *infoVector);
+	__declspec(dllexport) void infosReset();
 
-	DllExport int getNumWorldInfos();
+	__declspec(dllexport) int getNumWorldInfos();
 	std::vector<CvWorldInfo*>& getWorldInfo();
-	DllExport CvWorldInfo& getWorldInfo(WorldSizeTypes e);
+	__declspec(dllexport) CvWorldInfo& getWorldInfo(WorldSizeTypes e);
 
-	DllExport int getNumClimateInfos();
+	__declspec(dllexport) int getNumClimateInfos();
 	std::vector<CvClimateInfo*>& getClimateInfo();
-	DllExport CvClimateInfo& getClimateInfo(ClimateTypes e);
+	__declspec(dllexport) CvClimateInfo& getClimateInfo(ClimateTypes e);
 
-	DllExport int getNumSeaLevelInfos();
+	__declspec(dllexport) int getNumSeaLevelInfos();
 	std::vector<CvSeaLevelInfo*>& getSeaLevelInfo();
-	DllExport CvSeaLevelInfo& getSeaLevelInfo(SeaLevelTypes e);
+	__declspec(dllexport) CvSeaLevelInfo& getSeaLevelInfo(SeaLevelTypes e);
 
-	DllExport int getNumEuropeInfos();
+	__declspec(dllexport) int getNumEuropeInfos();
 	std::vector<CvEuropeInfo*>& getEuropeInfo();
-	DllExport CvEuropeInfo& getEuropeInfo(EuropeTypes e);
+	__declspec(dllexport) CvEuropeInfo& getEuropeInfo(EuropeTypes e);
 
-	DllExport int getNumColorInfos();
+	__declspec(dllexport) int getNumColorInfos();
 	std::vector<CvColorInfo*>& getColorInfo();
-	DllExport CvColorInfo& getColorInfo(ColorTypes e);
+	__declspec(dllexport) CvColorInfo& getColorInfo(ColorTypes e);
 
-	DllExport int getNumPlayerColorInfos();
+	__declspec(dllexport) int getNumPlayerColorInfos();
 	std::vector<CvPlayerColorInfo*>& getPlayerColorInfo();
-	DllExport CvPlayerColorInfo& getPlayerColorInfo(PlayerColorTypes e);
+	__declspec(dllexport) CvPlayerColorInfo& getPlayerColorInfo(PlayerColorTypes e);
 
-	DllExport int getNumHints();
+	__declspec(dllexport) int getNumHints();
 	std::vector<CvInfoBase*>& getHints();
-	DllExport CvInfoBase& getHints(int i);
+	__declspec(dllexport) CvInfoBase& getHints(int i);
 
 	int getNumMainMenus();
 	std::vector<CvMainMenuInfo*>& getMainMenus();
-	DllExport CvMainMenuInfo& getMainMenus(int i);
+	__declspec(dllexport) CvMainMenuInfo& getMainMenus(int i);
 
-	DllExport int getNumRouteModelInfos();
+	__declspec(dllexport) int getNumRouteModelInfos();
 	std::vector<CvRouteModelInfo*>& getRouteModelInfo();
-	DllExport CvRouteModelInfo& getRouteModelInfo(int i);
+	__declspec(dllexport) CvRouteModelInfo& getRouteModelInfo(int i);
 
-	DllExport int getNumRiverModelInfos();
+	__declspec(dllexport) int getNumRiverModelInfos();
 	std::vector<CvRiverModelInfo*>& getRiverModelInfo();
-	DllExport CvRiverModelInfo& getRiverModelInfo(int i);
+	__declspec(dllexport) CvRiverModelInfo& getRiverModelInfo(int i);
 
 	int getNumWaterPlaneInfos();
 	std::vector<CvWaterPlaneInfo*>& getWaterPlaneInfo();
-	DllExport CvWaterPlaneInfo& getWaterPlaneInfo(int i);
+	__declspec(dllexport) CvWaterPlaneInfo& getWaterPlaneInfo(int i);
 
-	DllExport int getNumTerrainPlaneInfos();
+	__declspec(dllexport) int getNumTerrainPlaneInfos();
 	std::vector<CvTerrainPlaneInfo*>& getTerrainPlaneInfo();
-	DllExport CvTerrainPlaneInfo& getTerrainPlaneInfo(int i);
+	__declspec(dllexport) CvTerrainPlaneInfo& getTerrainPlaneInfo(int i);
 
-	DllExport int getNumCameraOverlayInfos();
+	__declspec(dllexport) int getNumCameraOverlayInfos();
 	std::vector<CvCameraOverlayInfo*>& getCameraOverlayInfo();
-	DllExport CvCameraOverlayInfo& getCameraOverlayInfo(int i);
+	__declspec(dllexport) CvCameraOverlayInfo& getCameraOverlayInfo(int i);
 
 	int getNumAnimationPathInfos();
 	std::vector<CvAnimationPathInfo*>& getAnimationPathInfo();
-	DllExport CvAnimationPathInfo& getAnimationPathInfo(AnimationPathTypes e);
+	__declspec(dllexport) CvAnimationPathInfo& getAnimationPathInfo(AnimationPathTypes e);
 
 	int getNumAnimationCategoryInfos();
 	std::vector<CvAnimationCategoryInfo*>& getAnimationCategoryInfo();
-	DllExport CvAnimationCategoryInfo& getAnimationCategoryInfo(AnimationCategoryTypes e);
+	__declspec(dllexport) CvAnimationCategoryInfo& getAnimationCategoryInfo(AnimationCategoryTypes e);
 
 	int getNumEntityEventInfos();
 	std::vector<CvEntityEventInfo*>& getEntityEventInfo();
-	DllExport CvEntityEventInfo& getEntityEventInfo(EntityEventTypes e);
+	__declspec(dllexport) CvEntityEventInfo& getEntityEventInfo(EntityEventTypes e);
 
 	int getNumEffectInfos();
 	std::vector<CvEffectInfo*>& getEffectInfo();
-	DllExport CvEffectInfo& getEffectInfo(int i);
+	__declspec(dllexport) CvEffectInfo& getEffectInfo(int i);
 
 	int getNumAttachableInfos();
 	std::vector<CvAttachableInfo*>& getAttachableInfo();
-	DllExport CvAttachableInfo& getAttachableInfo(int i);
+	__declspec(dllexport) CvAttachableInfo& getAttachableInfo(int i);
 
-	DllExport int getNumUnitFormationInfos();
+	__declspec(dllexport) int getNumUnitFormationInfos();
 	std::vector<CvUnitFormationInfo*>& getUnitFormationInfo();
-	DllExport CvUnitFormationInfo& getUnitFormationInfo(int i);
+	__declspec(dllexport) CvUnitFormationInfo& getUnitFormationInfo(int i);
 
 	int getNumGameTextXML();
 	std::vector<CvGameText*>& getGameTextXML();
 
 	int getNumLandscapeInfos();
 	std::vector<CvLandscapeInfo*>& getLandscapeInfo();
-	DllExport CvLandscapeInfo& getLandscapeInfo(int iIndex);
-	DllExport int getActiveLandscapeID();
-	DllExport void setActiveLandscapeID(int iLandscapeID);
+	__declspec(dllexport) CvLandscapeInfo& getLandscapeInfo(int iIndex);
+	__declspec(dllexport) int getActiveLandscapeID();
+	__declspec(dllexport) void setActiveLandscapeID(int iLandscapeID);
 
-	DllExport int getNumTerrainInfos();
+	__declspec(dllexport) int getNumTerrainInfos();
 	std::vector<CvTerrainInfo*>& getTerrainInfo();
-	DllExport CvTerrainInfo& getTerrainInfo(TerrainTypes eTerrainNum);
+	__declspec(dllexport) CvTerrainInfo& getTerrainInfo(TerrainTypes eTerrainNum);
 	CvTerrainInfo& getInfo(TerrainTypes eTerrainNum);
 
-	DllExport int getNumBonusInfos();
-	DllExport std::vector<CvBonusInfo*>& getBonusInfo();
-	DllExport CvBonusInfo& getBonusInfo(BonusTypes eBonusNum);
+	__declspec(dllexport) int getNumBonusInfos();
+	__declspec(dllexport) std::vector<CvBonusInfo*>& getBonusInfo();
+	__declspec(dllexport) CvBonusInfo& getBonusInfo(BonusTypes eBonusNum);
 	CvBonusInfo& getInfo(BonusTypes eBonusNum);
 
-	DllExport int getNumFeatureInfos();
+	__declspec(dllexport) int getNumFeatureInfos();
 	std::vector<CvFeatureInfo*>& getFeatureInfo();
-	DllExport CvFeatureInfo& getFeatureInfo(FeatureTypes eFeatureNum);
+	__declspec(dllexport) CvFeatureInfo& getFeatureInfo(FeatureTypes eFeatureNum);
 	CvFeatureInfo& getInfo(FeatureTypes eFeatureNum);
 
-	DllExport int getNumCivilizationInfos();
-	DllExport std::vector<CvCivilizationInfo*>& getCivilizationInfo();
-	DllExport CvCivilizationInfo& getCivilizationInfo(CivilizationTypes eCivilizationNum);
+	__declspec(dllexport) int getNumCivilizationInfos();
+	__declspec(dllexport) std::vector<CvCivilizationInfo*>& getCivilizationInfo();
+	__declspec(dllexport) CvCivilizationInfo& getCivilizationInfo(CivilizationTypes eCivilizationNum);
 	CvCivilizationInfo& getInfo(CivilizationTypes eCivilizationNum);
 
-	DllExport int getNumLeaderHeadInfos();
-	DllExport std::vector<CvLeaderHeadInfo*>& getLeaderHeadInfo();
-	DllExport CvLeaderHeadInfo& getLeaderHeadInfo(LeaderHeadTypes eLeaderHeadNum);
+	__declspec(dllexport) int getNumLeaderHeadInfos();
+	__declspec(dllexport) std::vector<CvLeaderHeadInfo*>& getLeaderHeadInfo();
+	__declspec(dllexport) CvLeaderHeadInfo& getLeaderHeadInfo(LeaderHeadTypes eLeaderHeadNum);
 
 	int getNumTraitInfos();
-	DllExport std::vector<CvTraitInfo*>& getTraitInfo();
-	DllExport	CvTraitInfo& getTraitInfo(TraitTypes eTraitNum);
+	__declspec(dllexport) std::vector<CvTraitInfo*>& getTraitInfo();
+	__declspec(dllexport)	CvTraitInfo& getTraitInfo(TraitTypes eTraitNum);
 
-	DllExport int getNumCursorInfos();
+	__declspec(dllexport) int getNumCursorInfos();
 	std::vector<CvCursorInfo*>& getCursorInfo();
-	DllExport	CvCursorInfo& getCursorInfo(CursorTypes eCursorNum);
+	__declspec(dllexport)	CvCursorInfo& getCursorInfo(CursorTypes eCursorNum);
 
-	DllExport int getNumSlideShowInfos();
+	__declspec(dllexport) int getNumSlideShowInfos();
 	std::vector<CvSlideShowInfo*>& getSlideShowInfo();
-	DllExport	CvSlideShowInfo& getSlideShowInfo(int iIndex);
+	__declspec(dllexport)	CvSlideShowInfo& getSlideShowInfo(int iIndex);
 
-	DllExport int getNumSlideShowRandomInfos();
+	__declspec(dllexport) int getNumSlideShowRandomInfos();
 	std::vector<CvSlideShowRandomInfo*>& getSlideShowRandomInfo();
-	DllExport	CvSlideShowRandomInfo& getSlideShowRandomInfo(int iIndex);
+	__declspec(dllexport)	CvSlideShowRandomInfo& getSlideShowRandomInfo(int iIndex);
 
-	DllExport int getNumWorldPickerInfos();
+	__declspec(dllexport) int getNumWorldPickerInfos();
 	std::vector<CvWorldPickerInfo*>& getWorldPickerInfo();
-	DllExport	CvWorldPickerInfo& getWorldPickerInfo(int iIndex);
+	__declspec(dllexport)	CvWorldPickerInfo& getWorldPickerInfo(int iIndex);
 
 	int getNumUnitInfos() const;
 	std::vector<CvUnitInfo*>& getUnitInfo();
@@ -350,7 +350,7 @@ public:
 
 	int getNumSpecialUnitInfos();
 	std::vector<CvSpecialUnitInfo*>& getSpecialUnitInfo();
-	DllExport	CvSpecialUnitInfo& getSpecialUnitInfo(SpecialUnitTypes eSpecialUnitNum);
+	__declspec(dllexport)	CvSpecialUnitInfo& getSpecialUnitInfo(SpecialUnitTypes eSpecialUnitNum);
 
 	int getNumConceptInfos();
 	std::vector<CvInfoBase*>& getConceptInfo();
@@ -376,12 +376,12 @@ public:
 	CvInfoBase& getInvisibleInfo(InvisibleTypes e);
 
 	int getNumFatherInfos();
-	DllExport std::vector<CvFatherInfo*>& getFatherInfo();
+	__declspec(dllexport) std::vector<CvFatherInfo*>& getFatherInfo();
 	CvFatherInfo& getFatherInfo(FatherTypes e);
 
-	DllExport int getNumFatherPointInfos();
+	__declspec(dllexport) int getNumFatherPointInfos();
 	std::vector<CvFatherPointInfo*>& getFatherPointInfo();
-	DllExport CvFatherPointInfo& getFatherPointInfo(FatherPointTypes e);
+	__declspec(dllexport) CvFatherPointInfo& getFatherPointInfo(FatherPointTypes e);
 	CvFatherPointInfo& getInfo(FatherPointTypes e);
 
 	int getNumUnitCombatInfos();
@@ -395,45 +395,45 @@ public:
 	CvInfoBase& getUnitAIInfo(UnitAITypes eUnitAINum);
 
 	std::vector<CvInfoBase*>& getAttitudeInfo();
-	DllExport	CvInfoBase& getAttitudeInfo(AttitudeTypes eAttitudeNum);
+	__declspec(dllexport)	CvInfoBase& getAttitudeInfo(AttitudeTypes eAttitudeNum);
 
 	std::vector<CvInfoBase*>& getMemoryInfo();
-	DllExport	CvInfoBase& getMemoryInfo(MemoryTypes eMemoryNum);
+	__declspec(dllexport)	CvInfoBase& getMemoryInfo(MemoryTypes eMemoryNum);
 
 	int getNumFatherCategoryInfos();
 	std::vector<CvInfoBase*>& getFatherCategoryInfo();
-	DllExport	CvInfoBase& getFatherCategoryInfo(FatherCategoryTypes eFatherCategoryNum);
+	__declspec(dllexport)	CvInfoBase& getFatherCategoryInfo(FatherCategoryTypes eFatherCategoryNum);
 
 	int getNumGameOptionInfos();
 	std::vector<CvGameOptionInfo*>& getGameOptionInfo();
-	DllExport	CvGameOptionInfo& getGameOptionInfo(GameOptionTypes eGameOptionNum);
+	__declspec(dllexport)	CvGameOptionInfo& getGameOptionInfo(GameOptionTypes eGameOptionNum);
 
 	int getNumMPOptionInfos();
 	std::vector<CvMPOptionInfo*>& getMPOptionInfo();
-	DllExport	CvMPOptionInfo& getMPOptionInfo(MultiplayerOptionTypes eMPOptionNum);
+	__declspec(dllexport)	CvMPOptionInfo& getMPOptionInfo(MultiplayerOptionTypes eMPOptionNum);
 
 	int getNumForceControlInfos();
 	std::vector<CvForceControlInfo*>& getForceControlInfo();
-	DllExport	CvForceControlInfo& getForceControlInfo(ForceControlTypes eForceControlNum);
+	__declspec(dllexport)	CvForceControlInfo& getForceControlInfo(ForceControlTypes eForceControlNum);
 
 	std::vector<CvPlayerOptionInfo*>& getPlayerOptionInfo();
-	DllExport	CvPlayerOptionInfo& getPlayerOptionInfo(PlayerOptionTypes ePlayerOptionNum);
+	__declspec(dllexport)	CvPlayerOptionInfo& getPlayerOptionInfo(PlayerOptionTypes ePlayerOptionNum);
 
 	std::vector<CvGraphicOptionInfo*>& getGraphicOptionInfo();
-	DllExport	CvGraphicOptionInfo& getGraphicOptionInfo(GraphicOptionTypes eGraphicOptionNum);
+	__declspec(dllexport)	CvGraphicOptionInfo& getGraphicOptionInfo(GraphicOptionTypes eGraphicOptionNum);
 
 	std::vector<CvYieldInfo*>& getYieldInfo();
-	DllExport	CvYieldInfo& getYieldInfo(YieldTypes eYieldNum);
+	__declspec(dllexport)	CvYieldInfo& getYieldInfo(YieldTypes eYieldNum);
 	CvYieldInfo& getInfo(YieldTypes eYieldNum);
 
-	DllExport int getNumRouteInfos();
+	__declspec(dllexport) int getNumRouteInfos();
 	std::vector<CvRouteInfo*>& getRouteInfo();
-	DllExport	CvRouteInfo& getRouteInfo(RouteTypes eRouteNum);
+	__declspec(dllexport)	CvRouteInfo& getRouteInfo(RouteTypes eRouteNum);
 	CvRouteInfo& getInfo(RouteTypes eRouteNum);
 
-	DllExport int getNumImprovementInfos();
-	DllExport std::vector<CvImprovementInfo*>& getImprovementInfo();
-	DllExport CvImprovementInfo& getImprovementInfo(ImprovementTypes eImprovementNum);
+	__declspec(dllexport) int getNumImprovementInfos();
+	__declspec(dllexport) std::vector<CvImprovementInfo*>& getImprovementInfo();
+	__declspec(dllexport) CvImprovementInfo& getImprovementInfo(ImprovementTypes eImprovementNum);
 	CvImprovementInfo& getInfo(ImprovementTypes eImprovementNum);
 
 	int getNumGoodyInfos();
@@ -442,25 +442,25 @@ public:
 
 	int getNumBuildInfos();
 	std::vector<CvBuildInfo*>& getBuildInfo();
-	DllExport CvBuildInfo& getBuildInfo(BuildTypes eBuildNum);
+	__declspec(dllexport) CvBuildInfo& getBuildInfo(BuildTypes eBuildNum);
 
-	DllExport int getNumHandicapInfos();
-	DllExport std::vector<CvHandicapInfo*>& getHandicapInfo();
-	DllExport CvHandicapInfo& getHandicapInfo(HandicapTypes eHandicapNum);
+	__declspec(dllexport) int getNumHandicapInfos();
+	__declspec(dllexport) std::vector<CvHandicapInfo*>& getHandicapInfo();
+	__declspec(dllexport) CvHandicapInfo& getHandicapInfo(HandicapTypes eHandicapNum);
 
-	DllExport int getNumGameSpeedInfos();
+	__declspec(dllexport) int getNumGameSpeedInfos();
 	std::vector<CvGameSpeedInfo*>& getGameSpeedInfo();
-	DllExport CvGameSpeedInfo& getGameSpeedInfo(GameSpeedTypes eGameSpeedNum);
+	__declspec(dllexport) CvGameSpeedInfo& getGameSpeedInfo(GameSpeedTypes eGameSpeedNum);
 
 	int getNumAlarmInfos();
 	std::vector<CvAlarmInfo*>& getAlarmInfo();
 	CvAlarmInfo& getAlarmInfo(AlarmTypes eAlarm);
 
-	DllExport int getNumTurnTimerInfos();
+	__declspec(dllexport) int getNumTurnTimerInfos();
 	std::vector<CvTurnTimerInfo*>& getTurnTimerInfo();
-	DllExport CvTurnTimerInfo& getTurnTimerInfo(TurnTimerTypes eTurnTimerNum);
+	__declspec(dllexport) CvTurnTimerInfo& getTurnTimerInfo(TurnTimerTypes eTurnTimerNum);
 
-	DllExport int getNumBuildingClassInfos();
+	__declspec(dllexport) int getNumBuildingClassInfos();
 	std::vector<CvBuildingClassInfo*>& getBuildingClassInfo();
 	CvBuildingClassInfo& getBuildingClassInfo(BuildingClassTypes eBuildingClassNum);
 
@@ -469,78 +469,78 @@ public:
 	std::vector<CvBuildingInfo*>& getBuildingInfo();
 	CvBuildingInfo& getBuildingInfo(BuildingTypes eBuildingNum);
 
-	DllExport int getNumSpecialBuildingInfos();
+	__declspec(dllexport) int getNumSpecialBuildingInfos();
 	std::vector<CvSpecialBuildingInfo*>& getSpecialBuildingInfo();
-	DllExport CvSpecialBuildingInfo& getSpecialBuildingInfo(SpecialBuildingTypes eSpecialBuildingNum);
+	__declspec(dllexport) CvSpecialBuildingInfo& getSpecialBuildingInfo(SpecialBuildingTypes eSpecialBuildingNum);
 	CvSpecialBuildingInfo& getInfo(SpecialBuildingTypes eSpecialBuilding);
 
-	DllExport int getNumUnitClassInfos();
+	__declspec(dllexport) int getNumUnitClassInfos();
 	std::vector<CvUnitClassInfo*>& getUnitClassInfo();
 	CvUnitClassInfo& getUnitClassInfo(UnitClassTypes eUnitClassNum);
 
-	DllExport int getNumActionInfos();
+	__declspec(dllexport) int getNumActionInfos();
 	std::vector<CvActionInfo*>& getActionInfo();
-	DllExport CvActionInfo& getActionInfo(int i);
+	__declspec(dllexport) CvActionInfo& getActionInfo(int i);
 
 	std::vector<CvMissionInfo*>& getMissionInfo();
-	DllExport CvMissionInfo& getMissionInfo(MissionTypes eMissionNum);
+	__declspec(dllexport) CvMissionInfo& getMissionInfo(MissionTypes eMissionNum);
 
 	std::vector<CvControlInfo*>& getControlInfo();
 	CvControlInfo& getControlInfo(ControlTypes eControlNum);
 
 	std::vector<CvCommandInfo*>& getCommandInfo();
-	DllExport CvCommandInfo& getCommandInfo(CommandTypes eCommandNum);
+	__declspec(dllexport) CvCommandInfo& getCommandInfo(CommandTypes eCommandNum);
 
 	int getNumAutomateInfos();
 	std::vector<CvAutomateInfo*>& getAutomateInfo();
 	CvAutomateInfo& getAutomateInfo(int iAutomateNum);
 
-	DllExport int getNumPromotionInfos();
-	DllExport std::vector<CvPromotionInfo*>& getPromotionInfo();
-	DllExport CvPromotionInfo& getPromotionInfo(PromotionTypes ePromotionNum);
+	__declspec(dllexport) int getNumPromotionInfos();
+	__declspec(dllexport) std::vector<CvPromotionInfo*>& getPromotionInfo();
+	__declspec(dllexport) CvPromotionInfo& getPromotionInfo(PromotionTypes ePromotionNum);
 
 	int getNumProfessionInfos();
-	DllExport std::vector<CvProfessionInfo*>& getProfessionInfo();
+	__declspec(dllexport) std::vector<CvProfessionInfo*>& getProfessionInfo();
 	CvProfessionInfo& getProfessionInfo(ProfessionTypes eProfessionNum);
 
-	DllExport int getNumCivicOptionInfos();
+	__declspec(dllexport) int getNumCivicOptionInfos();
 	std::vector<CvInfoBase*>& getCivicOptionInfo();
 	CvInfoBase& getCivicOptionInfo(CivicOptionTypes eCivicOptionNum);
 
 	int getNumCivicInfos();
-	DllExport std::vector<CvCivicInfo*>& getCivicInfo();
+	__declspec(dllexport) std::vector<CvCivicInfo*>& getCivicInfo();
 	CvCivicInfo& getCivicInfo(CivicTypes eCivicNum);
 
 	int getNumDiplomacyInfos();
-	DllExport std::vector<CvDiplomacyInfo*>& getDiplomacyInfo();
-	DllExport	CvDiplomacyInfo& getDiplomacyInfo(int iDiplomacyNum);
+	__declspec(dllexport) std::vector<CvDiplomacyInfo*>& getDiplomacyInfo();
+	__declspec(dllexport)	CvDiplomacyInfo& getDiplomacyInfo(int iDiplomacyNum);
 
-	DllExport int getNumEraInfos();
+	__declspec(dllexport) int getNumEraInfos();
 	std::vector<CvEraInfo*>& getEraInfo();
-	DllExport	CvEraInfo& getEraInfo(EraTypes eEraNum);
+	__declspec(dllexport)	CvEraInfo& getEraInfo(EraTypes eEraNum);
 
-	DllExport int getNumHurryInfos();
+	__declspec(dllexport) int getNumHurryInfos();
 	std::vector<CvHurryInfo*>& getHurryInfo();
-	DllExport	CvHurryInfo& getHurryInfo(HurryTypes eHurryNum);
+	__declspec(dllexport)	CvHurryInfo& getHurryInfo(HurryTypes eHurryNum);
 
 	int getNumEmphasizeInfos();
 	std::vector<CvEmphasizeInfo*>& getEmphasizeInfo();
-	DllExport	CvEmphasizeInfo& getEmphasizeInfo(EmphasizeTypes eEmphasizeNum);
+	__declspec(dllexport)	CvEmphasizeInfo& getEmphasizeInfo(EmphasizeTypes eEmphasizeNum);
 
 	int getNumCultureLevelInfos();
 	std::vector<CvCultureLevelInfo*>& getCultureLevelInfo();
-	DllExport	CvCultureLevelInfo& getCultureLevelInfo(CultureLevelTypes eCultureLevelNum);
+	__declspec(dllexport)	CvCultureLevelInfo& getCultureLevelInfo(CultureLevelTypes eCultureLevelNum);
 
-	DllExport int getNumVictoryInfos();
+	__declspec(dllexport) int getNumVictoryInfos();
 	std::vector<CvVictoryInfo*>& getVictoryInfo();
-	DllExport	CvVictoryInfo& getVictoryInfo(VictoryTypes eVictoryNum);
+	__declspec(dllexport)	CvVictoryInfo& getVictoryInfo(VictoryTypes eVictoryNum);
 
 	int getNumEventTriggerInfos();
-	DllExport std::vector<CvEventTriggerInfo*>& getEventTriggerInfo();
+	__declspec(dllexport) std::vector<CvEventTriggerInfo*>& getEventTriggerInfo();
 	CvEventTriggerInfo& getEventTriggerInfo(EventTriggerTypes eEventTrigger);
 
 	int getNumEventInfos();
-	DllExport std::vector<CvEventInfo*>& getEventInfo();
+	__declspec(dllexport) std::vector<CvEventInfo*>& getEventInfo();
 	CvEventInfo& getEventInfo(EventTypes eEvent);
 
 	// trade screen type - start - Nightinggale
@@ -564,17 +564,17 @@ public:
 	std::vector<CvUnitArtStyleTypeInfo*>& getUnitArtStyleTypeInfo();
 	CvUnitArtStyleTypeInfo& getUnitArtStyleTypeInfo(UnitArtStyleTypes eUnitArtStyleTypeNum);
 	//Androrc End
-	DllExport int getNUM_ENGINE_DIRTY_BITS() const;
-	DllExport int getNUM_INTERFACE_DIRTY_BITS() const;
-	DllExport int getNUM_FORCECONTROL_TYPES() const;
-	DllExport int getNUM_INFOBAR_TYPES() const;
-	DllExport int getNUM_HEALTHBAR_TYPES() const;
+	__declspec(dllexport) int getNUM_ENGINE_DIRTY_BITS() const;
+	__declspec(dllexport) int getNUM_INTERFACE_DIRTY_BITS() const;
+	__declspec(dllexport) int getNUM_FORCECONTROL_TYPES() const;
+	__declspec(dllexport) int getNUM_INFOBAR_TYPES() const;
+	__declspec(dllexport) int getNUM_HEALTHBAR_TYPES() const;
 	int getNUM_CONTROL_TYPES() const;
-	DllExport int getNUM_LEADERANIM_TYPES() const;
+	__declspec(dllexport) int getNUM_LEADERANIM_TYPES() const;
 
 	int& getNumEntityEventTypes();
 	CvString*& getEntityEventTypes();
-	DllExport CvString& getEntityEventTypes(EntityEventTypes e);
+	__declspec(dllexport) CvString& getEntityEventTypes(EntityEventTypes e);
 
 	int& getNumAnimationOperatorTypes();
 	CvString*& getAnimationOperatorTypes();
@@ -583,9 +583,9 @@ public:
 	CvString*& getFunctionTypes();
 	CvString& getFunctionTypes(FunctionTypes e);
 
-	DllExport int& getNumArtStyleTypes();
+	__declspec(dllexport) int& getNumArtStyleTypes();
 	CvString*& getArtStyleTypes();
-	DllExport CvString& getArtStyleTypes(ArtStyleTypes e);
+	__declspec(dllexport) CvString& getArtStyleTypes(ArtStyleTypes e);
 
 	int& getNumCitySizeTypes();
 	CvString*& getCitySizeTypes();
@@ -603,13 +603,13 @@ public:
 	CvString*& getDirectionTypes();
 	CvString& getDirectionTypes(DirectionTypes e);
 
-	DllExport int& getNumFootstepAudioTypes();
+	__declspec(dllexport) int& getNumFootstepAudioTypes();
 	CvString*& getFootstepAudioTypes();
 	CvString& getFootstepAudioTypes(int i);
 	int getFootstepAudioTypeByTag(CvString strTag);
 
 	CvString*& getFootstepAudioTags();
-	DllExport CvString& getFootstepAudioTags(int i);
+	__declspec(dllexport) CvString& getFootstepAudioTags(int i);
 
 	CvString& getCurrentXMLFile();
 	void setCurrentXMLFile(char const* szFileName);
@@ -619,25 +619,25 @@ public:
 	// THESE ARE READ-ONLY
 	//
 
-	DllExport FVariableSystem* getDefinesVarSystem();
+	__declspec(dllexport) FVariableSystem* getDefinesVarSystem();
 	void cacheGlobals();
 
 	// ***** EXPOSED TO PYTHON *****
-	DllExport int getDefineINT( const char * szName ) const;
-	DllExport float getDefineFLOAT( const char * szName ) const;
+	__declspec(dllexport) int getDefineINT( const char * szName ) const;
+	__declspec(dllexport) float getDefineFLOAT( const char * szName ) const;
 	float getDefineFLOATUncached(const char * szName) const;
-	DllExport const char * getDefineSTRING( const char * szName ) const;
-	DllExport void setDefineINT( const char * szName, int iValue );
-	DllExport void setDefineFLOAT( const char * szName, float fValue );
-	DllExport void setDefineSTRING( const char * szName, const char * szValue );
+	__declspec(dllexport) const char * getDefineSTRING( const char * szName ) const;
+	__declspec(dllexport) void setDefineINT( const char * szName, int iValue );
+	__declspec(dllexport) void setDefineFLOAT( const char * szName, float fValue );
+	__declspec(dllexport) void setDefineSTRING( const char * szName, const char * szValue );
 
 	int getMAX_HIT_POINTS();
 	int getHILLS_EXTRA_DEFENSE();
 	int getRIVER_ATTACK_MODIFIER();
 	int getAMPHIB_ATTACK_MODIFIER();
-	DllExport int getMAX_PLOT_LIST_ROWS();
-	DllExport int getUNIT_MULTISELECT_MAX();
-	DllExport int getEVENT_MESSAGE_TIME();
+	__declspec(dllexport) int getMAX_PLOT_LIST_ROWS();
+	__declspec(dllexport) int getUNIT_MULTISELECT_MAX();
+	__declspec(dllexport) int getEVENT_MESSAGE_TIME();
 	int getROUTE_FEATURE_GROWTH_MODIFIER();
 	int getFEATURE_GROWTH_MODIFIER();
 	int getMIN_CITY_RANGE();
@@ -898,19 +898,19 @@ public:
 	int getFontSymbolCustomOffset() const;
 	/// GameFont XML control - end - Nightinggale
 
-	DllExport float getCAMERA_MIN_YAW();
-	DllExport float getCAMERA_MAX_YAW();
-	DllExport float getCAMERA_FAR_CLIP_Z_HEIGHT();
-	DllExport float getCAMERA_MAX_TRAVEL_DISTANCE();
-	DllExport float getCAMERA_START_DISTANCE();
-	DllExport float getPLOT_SIZE();
-	DllExport float getCAMERA_SPECIAL_PITCH();
-	DllExport float getCAMERA_MAX_TURN_OFFSET();
-	DllExport float getCAMERA_MIN_DISTANCE();
-	DllExport float getCAMERA_UPPER_PITCH();
-	DllExport float getCAMERA_LOWER_PITCH();
-	DllExport float getFIELD_OF_VIEW();
-	DllExport float getUNIT_MULTISELECT_DISTANCE();
+	__declspec(dllexport) float getCAMERA_MIN_YAW();
+	__declspec(dllexport) float getCAMERA_MAX_YAW();
+	__declspec(dllexport) float getCAMERA_FAR_CLIP_Z_HEIGHT();
+	__declspec(dllexport) float getCAMERA_MAX_TRAVEL_DISTANCE();
+	__declspec(dllexport) float getCAMERA_START_DISTANCE();
+	__declspec(dllexport) float getPLOT_SIZE();
+	__declspec(dllexport) float getCAMERA_SPECIAL_PITCH();
+	__declspec(dllexport) float getCAMERA_MAX_TURN_OFFSET();
+	__declspec(dllexport) float getCAMERA_MIN_DISTANCE();
+	__declspec(dllexport) float getCAMERA_UPPER_PITCH();
+	__declspec(dllexport) float getCAMERA_LOWER_PITCH();
+	__declspec(dllexport) float getFIELD_OF_VIEW();
+	__declspec(dllexport) float getUNIT_MULTISELECT_DISTANCE();
 
 	int getUSE_CAN_FOUND_CITIES_ON_WATER_CALLBACK();
 	int getUSE_CANNOT_DO_CIVIC_CALLBACK();
@@ -926,15 +926,15 @@ public:
 	int getUSE_CANNOT_TRAIN_CALLBACK();
 	int getUSE_CAN_TRAIN_CALLBACK();
 	int getUSE_UNIT_CANNOT_MOVE_INTO_CALLBACK();
-	DllExport int getUSE_FINISH_TEXT_CALLBACK();
-	DllExport int getUSE_ON_UNIT_SET_XY_CALLBACK();
-	DllExport int getUSE_ON_UNIT_SELECTED_CALLBACK();
-	DllExport int getUSE_ON_MISSIONARY_CONVERTED_UNIT_CALLBACK();
-	DllExport int getUSE_ON_UPDATE_CALLBACK();
-	DllExport int getUSE_ON_UNIT_CREATED_CALLBACK();
-	DllExport int getUSE_ON_UNIT_LOST_CALLBACK();
+	__declspec(dllexport) int getUSE_FINISH_TEXT_CALLBACK();
+	__declspec(dllexport) int getUSE_ON_UNIT_SET_XY_CALLBACK();
+	__declspec(dllexport) int getUSE_ON_UNIT_SELECTED_CALLBACK();
+	__declspec(dllexport) int getUSE_ON_MISSIONARY_CONVERTED_UNIT_CALLBACK();
+	__declspec(dllexport) int getUSE_ON_UPDATE_CALLBACK();
+	__declspec(dllexport) int getUSE_ON_UNIT_CREATED_CALLBACK();
+	__declspec(dllexport) int getUSE_ON_UNIT_LOST_CALLBACK();
 
-	DllExport int getMAX_CIV_PLAYERS();
+	__declspec(dllexport) int getMAX_CIV_PLAYERS();
 	int getMAX_PLAYERS();
 	int getMAX_CIV_TEAMS();
 	int getMAX_TEAMS();
@@ -946,52 +946,52 @@ public:
 
 	////////////// END DEFINES //////////////////
 
-	DllExport void setDLLIFace(CvDLLUtilityIFaceBase* pDll);
+	__declspec(dllexport) void setDLLIFace(CvDLLUtilityIFaceBase* pDll);
 	CvDLLUtilityIFaceBase* getDLLIFace() { return m_pDLL; }		// inlined for perf reasons, do not use outside of dll
-	DllExport CvDLLUtilityIFaceBase* getDLLIFaceNonInl();
+	__declspec(dllexport) CvDLLUtilityIFaceBase* getDLLIFaceNonInl();
 
-	DllExport bool IsGraphicsInitialized() const;
-	DllExport void SetGraphicsInitialized(bool bVal);
+	__declspec(dllexport) bool IsGraphicsInitialized() const;
+	__declspec(dllexport) void SetGraphicsInitialized(bool bVal);
 
 	//
 	// additional accessors for initting globals
 	//
 
-	DllExport void setInterface(CvInterface* pVal);
-	DllExport void setDiplomacyScreen(CvDiplomacyScreen* pVal);
-	DllExport void setMPDiplomacyScreen(CMPDiplomacyScreen* pVal);
-	DllExport void setMessageQueue(CMessageQueue* pVal);
-	DllExport void setHotJoinMessageQueue(CMessageQueue* pVal);
-	DllExport void setMessageControl(CMessageControl* pVal);
-	DllExport void setSetupData(CvSetupData* pVal);
-	DllExport void setMessageCodeTranslator(CvMessageCodeTranslator* pVal);
-	DllExport void setDropMgr(CvDropMgr* pVal);
-	DllExport void setPortal(CvPortal* pVal);
-	DllExport void setStatsReport(CvStatsReporter* pVal);
-	DllExport void setPathFinder(FAStar* pVal);
-	DllExport void setInterfacePathFinder(FAStar* pVal);
-	DllExport void setStepFinder(FAStar* pVal);
-	DllExport void setRouteFinder(FAStar* pVal);
-	DllExport void setBorderFinder(FAStar* pVal);
-	DllExport void setAreaFinder(FAStar* pVal);
+	__declspec(dllexport) void setInterface(CvInterface* pVal);
+	__declspec(dllexport) void setDiplomacyScreen(CvDiplomacyScreen* pVal);
+	__declspec(dllexport) void setMPDiplomacyScreen(CMPDiplomacyScreen* pVal);
+	__declspec(dllexport) void setMessageQueue(CMessageQueue* pVal);
+	__declspec(dllexport) void setHotJoinMessageQueue(CMessageQueue* pVal);
+	__declspec(dllexport) void setMessageControl(CMessageControl* pVal);
+	__declspec(dllexport) void setSetupData(CvSetupData* pVal);
+	__declspec(dllexport) void setMessageCodeTranslator(CvMessageCodeTranslator* pVal);
+	__declspec(dllexport) void setDropMgr(CvDropMgr* pVal);
+	__declspec(dllexport) void setPortal(CvPortal* pVal);
+	__declspec(dllexport) void setStatsReport(CvStatsReporter* pVal);
+	__declspec(dllexport) void setPathFinder(FAStar* pVal);
+	__declspec(dllexport) void setInterfacePathFinder(FAStar* pVal);
+	__declspec(dllexport) void setStepFinder(FAStar* pVal);
+	__declspec(dllexport) void setRouteFinder(FAStar* pVal);
+	__declspec(dllexport) void setBorderFinder(FAStar* pVal);
+	__declspec(dllexport) void setAreaFinder(FAStar* pVal);
 
 	// So that CvEnums are moddable in the DLL
-	DllExport int getNumDirections() const;
-	DllExport int getNumResourceLayers() const;
-	DllExport int getNumUnitLayerOptionTypes() const;
-	DllExport int getNumGameOptions() const;
-	DllExport int getNumMPOptions() const;
-	DllExport int getNumSpecialOptions() const;
-	DllExport int getNumGraphicOptions() const;
-	DllExport int getNumTradeableItems() const;
-	DllExport int getNumBasicItems() const;
-	DllExport int getNumTradeableHeadings() const;
-	DllExport int getNumCommandInfos() const;
-	DllExport int getNumControlInfos() const;
-	DllExport int getNumMissionInfos() const;
-	DllExport int getNumPlayerOptionInfos() const;
-	DllExport int getMaxNumSymbols() const;
-	DllExport int getNumGraphicLevels() const;
+	__declspec(dllexport) int getNumDirections() const;
+	__declspec(dllexport) int getNumResourceLayers() const;
+	__declspec(dllexport) int getNumUnitLayerOptionTypes() const;
+	__declspec(dllexport) int getNumGameOptions() const;
+	__declspec(dllexport) int getNumMPOptions() const;
+	__declspec(dllexport) int getNumSpecialOptions() const;
+	__declspec(dllexport) int getNumGraphicOptions() const;
+	__declspec(dllexport) int getNumTradeableItems() const;
+	__declspec(dllexport) int getNumBasicItems() const;
+	__declspec(dllexport) int getNumTradeableHeadings() const;
+	__declspec(dllexport) int getNumCommandInfos() const;
+	__declspec(dllexport) int getNumControlInfos() const;
+	__declspec(dllexport) int getNumMissionInfos() const;
+	__declspec(dllexport) int getNumPlayerOptionInfos() const;
+	__declspec(dllexport) int getMaxNumSymbols() const;
+	__declspec(dllexport) int getNumGraphicLevels() const;
 
 	void deleteInfoArrays();
 

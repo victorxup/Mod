@@ -19,8 +19,8 @@ public:
 	// PatchMod: Victorys START
 	int getTotalProductionRate() const;
 	// PatchMod: Victorys END
-	DllExport void init(TeamTypes eID);
-	DllExport void reset(TeamTypes eID = (TeamTypes)0, bool bConstructorCall = false);
+	__declspec(dllexport) void init(TeamTypes eID);
+	__declspec(dllexport) void reset(TeamTypes eID = (TeamTypes)0, bool bConstructorCall = false);
 
 protected:
 
@@ -36,9 +36,9 @@ public:
 
 	void updateYield();
 	bool canChangeWarPeace(TeamTypes eTeam) const;
-	DllExport bool canDeclareWar(TeamTypes eTeam) const;
-	DllExport void declareWar(TeamTypes eTeam, bool bNewDiplo, WarPlanTypes eWarPlan);
-	DllExport void makePeace(TeamTypes eTeam, bool bBumpUnits = true);
+	__declspec(dllexport) bool canDeclareWar(TeamTypes eTeam) const;
+	__declspec(dllexport) void declareWar(TeamTypes eTeam, bool bNewDiplo, WarPlanTypes eWarPlan);
+	__declspec(dllexport) void makePeace(TeamTypes eTeam, bool bBumpUnits = true);
 	bool canContact(TeamTypes eTeam) const;
 	void meet(TeamTypes eTeam, bool bNewDiplo);
 	void signOpenBorders(TeamTypes eTeam);
@@ -91,11 +91,11 @@ public:
 	bool isBarbarian() const;
 	PlayerTypes getLeaderID() const;
 	HandicapTypes getHandicapType() const;
-	DllExport CvWString getName() const;
+	__declspec(dllexport) CvWString getName() const;
 
-	DllExport int getNumMembers() const;
+	__declspec(dllexport) int getNumMembers() const;
 	void changeNumMembers(int iChange);
-	DllExport int getAliveCount() const;
+	__declspec(dllexport) int getAliveCount() const;
 	int isAlive() const;
 	void changeAliveCount(int iChange);
 	void addAliveMember(PlayerTypes ePlayer);
@@ -136,14 +136,14 @@ public:
 	bool isPermanentAllianceTrading() const;
 	void changePermanentAllianceTradingCount(int iChange);
 
-	DllExport bool isMapCentering() const;
+	__declspec(dllexport) bool isMapCentering() const;
 	void setMapCentering(bool bNewValue);
 
 	TeamTypes getID() const;
 
 	bool isHasMet(TeamTypes eIndex) const;
 	void makeHasMet(TeamTypes eIndex, bool bNewDiplo);
-	DllExport bool isAtWar(TeamTypes eIndex) const;
+	__declspec(dllexport) bool isAtWar(TeamTypes eIndex) const;
 	void setAtWar(TeamTypes eIndex, bool bNewValue);
 	bool isPermanentWarPeace(TeamTypes eIndex) const;
 	void setPermanentWarPeace(TeamTypes eIndex, bool bNewValue);
@@ -168,7 +168,7 @@ public:
 	void setForceRevealedBonus(BonusTypes eBonus, bool bRevealed);
 	bool isForceRevealedBonus(BonusTypes eBonus) const;
 
-	DllExport int countNumHumanGameTurnActive() const;
+	__declspec(dllexport) int countNumHumanGameTurnActive() const;
 	void setTurnActive(bool bNewValue, bool bTurn = true);
 	bool isTurnActive() const;
 

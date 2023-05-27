@@ -12,13 +12,13 @@ class CyCity;
 class CyPlot
 {
 public:
-	DllExport CyPlot();
-	DllExport CyPlot(CvPlot*);			// Call from C++
+	__declspec(dllexport) CyPlot();
+	__declspec(dllexport) CyPlot(CvPlot*);			// Call from C++
 	CvPlot* getPlot() { return m_pPlot; }	// Call from C++
 	void setPlot(CvPlot* p) { m_pPlot=p; }	// Call from C++
 	bool isNone() { return m_pPlot == nullptr; }
 	void erase();
-	DllExport NiPoint3 getPoint();
+	__declspec(dllexport) NiPoint3 getPoint();
 	int getTeam();
 	void updateVisibility();
 	bool isAdjacentToArea(CyArea* pArea);

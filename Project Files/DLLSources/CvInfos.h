@@ -34,12 +34,12 @@ public:
 	//constructor
 	CvInfoBase();
 	//destructor
-	DllExport virtual ~CvInfoBase();
+	__declspec(dllexport) virtual ~CvInfoBase();
 	virtual void reset();
-	DllExport bool isGraphicalOnly() const;
+	__declspec(dllexport) bool isGraphicalOnly() const;
 	bool hideFromPedia() const;
 
-	DllExport const char* getType() const;
+	__declspec(dllexport) const char* getType() const;
 	virtual const char* getButton() const;
 	// for python wide string handling
 	std::wstring pyGetTextKey() { return getTextKeyWide(); }
@@ -50,11 +50,11 @@ public:
 	std::wstring pyGetHelp() { return getHelp(); }
 	std::wstring pyGetStrategy() { return getStrategy(); }
 
-	DllExport const wchar* getTextKeyWide() const;
-	DllExport const wchar* getDescription(uint uiForm = 0) const;
-	DllExport const wchar* getText() const;
+	__declspec(dllexport) const wchar* getTextKeyWide() const;
+	__declspec(dllexport) const wchar* getDescription(uint uiForm = 0) const;
+	__declspec(dllexport) const wchar* getText() const;
 	const wchar* getCivilopedia() const;
-	DllExport const wchar* getHelp() const;
+	__declspec(dllexport) const wchar* getHelp() const;
 	const wchar* getStrategy() const;
 
 	bool isMatchForLink(std::wstring szLink, bool bKeysOnly) const;
@@ -101,9 +101,9 @@ class CvScalableInfo
 {
 public:
 	CvScalableInfo() : m_fScale(1.0f), m_fInterfaceScale(1.0f) { }
-	DllExport float getScale() const;
+	__declspec(dllexport) float getScale() const;
 	void setScale(float fScale);
-	DllExport float getInterfaceScale() const;
+	__declspec(dllexport) float getInterfaceScale() const;
 	void setInterfaceScale(float fInterfaceScale);
 	bool read(CvXMLLoadUtility* pXML);
 protected:
@@ -220,7 +220,7 @@ class CvPromotionInfo :	public CvHotkeyInfo
 {
 //---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
-	DllExport CvPromotionInfo();
+	__declspec(dllexport) CvPromotionInfo();
 	virtual ~CvPromotionInfo();
 	PromotionTypes getIndex() const { return m_eIndex; }
 	bool hideFromPedia() const;
@@ -357,7 +357,7 @@ class CvProfessionInfo :	public CvInfoBase
 {
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
-	DllExport CvProfessionInfo();
+	__declspec(dllexport) CvProfessionInfo();
 	virtual ~CvProfessionInfo();
 	ProfessionTypes getIndex() const { return m_eIndex; }
 	int getUnitCombatType() const;
@@ -478,13 +478,13 @@ class CvMissionInfo : public CvHotkeyInfo
 public:
 	CvMissionInfo();
 	virtual ~CvMissionInfo();
-	DllExport int getTime() const;
+	__declspec(dllexport) int getTime() const;
 
 	bool isSound() const;
-	DllExport bool isTarget() const;
+	__declspec(dllexport) bool isTarget() const;
 	bool isBuild() const;
 	bool getVisible() const;
-	DllExport EntityEventTypes getEntityEvent() const;
+	__declspec(dllexport) EntityEventTypes getEntityEvent() const;
 	const char* getWaypoint() const;		// effect type, Exposed to Python
 	bool read(CvXMLLoadUtility* pXML);
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
@@ -531,7 +531,7 @@ public:
 	virtual ~CvCommandInfo();
 	bool getConfirmCommand() const;
 	bool getVisible() const;
-	DllExport bool getAll() const;
+	__declspec(dllexport) bool getAll() const;
 	bool read(CvXMLLoadUtility* pXML);
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -594,8 +594,8 @@ public:
 	int getOriginalIndex() const;
 	void setOriginalIndex(int i);
 	bool isConfirmCommand() const;
-	DllExport bool isVisible() const;
-	DllExport ActionSubTypes getSubType() const;
+	__declspec(dllexport) bool isVisible() const;
+	__declspec(dllexport) ActionSubTypes getSubType() const;
 	void setSubType(ActionSubTypes eSubType);
 	// functions to replace the CvInfoBase calls
 	const char* getType() const;
@@ -607,17 +607,17 @@ public:
 	const wchar* getTextKeyWide() const;
 	// functions to replace the CvHotkey calls
 	int getActionInfoIndex() const;
-	DllExport int getHotKeyVal() const;
-	DllExport int getHotKeyPriority() const;
-	DllExport int getHotKeyValAlt() const;
-	DllExport int getHotKeyPriorityAlt() const;
+	__declspec(dllexport) int getHotKeyVal() const;
+	__declspec(dllexport) int getHotKeyPriority() const;
+	__declspec(dllexport) int getHotKeyValAlt() const;
+	__declspec(dllexport) int getHotKeyPriorityAlt() const;
 	int getOrderPriority() const;
-	DllExport bool isAltDown() const;
-	DllExport bool isShiftDown() const;
-	DllExport bool isCtrlDown() const;
-	DllExport bool isAltDownAlt() const;
-	DllExport bool isShiftDownAlt() const;
-	DllExport bool isCtrlDownAlt() const;
+	__declspec(dllexport) bool isAltDown() const;
+	__declspec(dllexport) bool isShiftDown() const;
+	__declspec(dllexport) bool isCtrlDown() const;
+	__declspec(dllexport) bool isAltDownAlt() const;
+	__declspec(dllexport) bool isShiftDownAlt() const;
+	__declspec(dllexport) bool isCtrlDownAlt() const;
 	const char* getHotKey() const;
 
 	std::wstring getHotKeyDescription() const;
@@ -682,7 +682,7 @@ class CvUnitInfo : public CvHotkeyInfo
 {
 //---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
-	DllExport CvUnitInfo();
+	__declspec(dllexport) CvUnitInfo();
 	virtual ~CvUnitInfo();
 
 	int getBerthSize() const; // PatchMod: Berth size START
@@ -746,8 +746,8 @@ public:
 	int getSeeInvisibleType(int i) const;
 	int getNumSeeInvisibleTypes() const;
 	int getPrereqBuilding() const;
-	DllExport int getGroupSize(int iProfession) const;									 // the initial number of individuals in the unit group
-	DllExport int getGroupDefinitions(int iProfession) const;					 // the number of UnitMeshGroups for this unit
+	__declspec(dllexport) int getGroupSize(int iProfession) const;									 // the initial number of individuals in the unit group
+	__declspec(dllexport) int getGroupDefinitions(int iProfession) const;					 // the number of UnitMeshGroups for this unit
 	int getMeleeWaveSize(int iProfession) const;
 	int getRangedWaveSize(int iProfession) const;
 	int getNumUnitNames() const;
@@ -774,7 +774,7 @@ public:
 	bool isCanMoveAllTerrain() const;
 	bool isFlatMovementCost() const;
 	bool isIgnoreTerrainCost() const;
-	DllExport bool isMechUnit() const;
+	__declspec(dllexport) bool isMechUnit() const;
 	bool isLineOfSight() const;
 	bool isHiddenNationality() const;
 	bool isSlaveShip() const; // WTP, ray Slave Ship
@@ -812,8 +812,8 @@ public:
 	// < JAnimals Mod Start >
 	bool isAnimal() const;
 	// < JAnimals Mod End >
-	DllExport float getUnitMaxSpeed(int iProfession) const;
-	DllExport float getUnitPadTime(int iProfession) const;
+	__declspec(dllexport) float getUnitMaxSpeed(int iProfession) const;
+	__declspec(dllexport) float getUnitPadTime(int iProfession) const;
 
 	/// Move Into Peak - start - Nightinggale
 	bool allowsMoveIntoPeak() const {return m_bMoveIntoPeak;}
@@ -836,7 +836,7 @@ public:
 	int getBonusYieldChange(int i) const;
 	int getYieldChange(int i) const;
 	int getYieldCost(YieldTypes eYield) const;
-	DllExport int getUnitGroupRequired(int i, int iProfession) const;
+	__declspec(dllexport) int getUnitGroupRequired(int i, int iProfession) const;
 
 	bool getUpgradeUnitClass(int i) const;
 	bool getUnitAIType(int i) const;
@@ -863,7 +863,7 @@ public:
 	const char* getArtDefineTag(int i, int iProfession, int iStyle = -1) const;
 	//Androrc End
 	const char* getUnitNames(int i) const;
-	DllExport const char* getFormationType() const;
+	__declspec(dllexport) const char* getFormationType() const;
 	const char* getButton() const;
 	void updateArtDefineButton();
 	const CvArtInfoUnit* getArtInfo(int i, int iProfession) const;
@@ -1075,15 +1075,15 @@ class CvUnitFormationInfo : public CvInfoBase
 {
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
-	DllExport CvUnitFormationInfo();
+	__declspec(dllexport) CvUnitFormationInfo();
 	virtual ~CvUnitFormationInfo();
-	DllExport const char* getFormationType() const;
-	DllExport const std::vector<EntityEventTypes> & getEventTypes() const;
-	DllExport int getNumUnitEntries() const;
-	DllExport const CvUnitEntry &getUnitEntry(int index) const;
-	DllExport void addUnitEntry(const CvUnitEntry &unitEntry);
+	__declspec(dllexport) const char* getFormationType() const;
+	__declspec(dllexport) const std::vector<EntityEventTypes> & getEventTypes() const;
+	__declspec(dllexport) int getNumUnitEntries() const;
+	__declspec(dllexport) const CvUnitEntry &getUnitEntry(int index) const;
+	__declspec(dllexport) void addUnitEntry(const CvUnitEntry &unitEntry);
 	int getNumGreatUnitEntries() const;
-	DllExport const CvUnitEntry &getGreatUnitEntry(int index) const;
+	__declspec(dllexport) const CvUnitEntry &getGreatUnitEntry(int index) const;
 	bool read(CvXMLLoadUtility* pXML);
 	//---------------------------------------PUBLIC MEMBER VARIABLES---------------------------------
 protected:
@@ -1135,7 +1135,7 @@ class CvCivicInfo :
 {
 //---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
-	DllExport CvCivicInfo();
+	__declspec(dllexport) CvCivicInfo();
 	virtual ~CvCivicInfo();
 	int getCivicOptionType() const;
 	int getAIWeight() const;
@@ -1217,7 +1217,7 @@ class CvDiplomacyInfo :
 	friend class CvXMLLoadUtility;		// so it can access private vars to initialize the class
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
-	DllExport CvDiplomacyInfo();
+	__declspec(dllexport) CvDiplomacyInfo();
 	virtual ~CvDiplomacyInfo();
 	void uninit();
 
@@ -1285,11 +1285,11 @@ public:
 	int getAICitySize() const;
 	// TAC - AI Buildings - koma13 - END
 
-	DllExport CvBuildingInfo();
+	__declspec(dllexport) CvBuildingInfo();
 	virtual ~CvBuildingInfo();
-	DllExport int getBuildingClassType() const;
+	__declspec(dllexport) int getBuildingClassType() const;
 	int getVictoryPrereq() const;
-	DllExport int getFreeStartEra() const;
+	__declspec(dllexport) int getFreeStartEra() const;
 	int getMaxStartEra() const;
 	int getFreePromotion() const;
 	int getRouteTypeCreated() const; //ray, removing hardcoded Roads for Buildings
@@ -1325,9 +1325,9 @@ public:
 	inline bool getIgnoresBoycott() const									{ return m_bIgnoresBoycott; }
 	inline bool getUnlocksStorageLossTradeSettings() const					{ return m_bUnlocksStorageLossTradeSettings; }
 	int getSpecialBuildingPriority() const;
-	DllExport float getVisibilityPriority() const;
+	__declspec(dllexport) float getVisibilityPriority() const;
 	bool isWorksWater() const;
-	DllExport bool isWater() const;
+	__declspec(dllexport) bool isWater() const;
 	bool isRiver() const;
 	bool isCapital() const;
 	bool isNationalWonder() const; // R&R, ray, National Wonders
@@ -1374,7 +1374,7 @@ public:
 	bool isBuildingClassNeededInCity(int i) const;
 
 	// Other
-	DllExport const CvArtInfoBuilding* getArtInfo() const;
+	__declspec(dllexport) const CvArtInfoBuilding* getArtInfo() const;
 	const CvArtInfoMovie* getMovieInfo() const;
 	const char* getButton() const;
 	const char* getMovie() const;
@@ -1488,8 +1488,8 @@ public:
 	virtual ~CvSpecialBuildingInfo();
 	bool isValid() const;
 	int getChar() const;
-	DllExport void setChar(int i);
-	DllExport int getFontButtonIndex() const;
+	__declspec(dllexport) void setChar(int i);
+	__declspec(dllexport) int getFontButtonIndex() const;
 
 	// Arrays
 	const InfoArray<BuildingTypes, int>& getBuildings() const;
@@ -1556,14 +1556,14 @@ class CvRiverModelInfo :
 public:
 	CvRiverModelInfo();
 	virtual ~CvRiverModelInfo();
-	DllExport const char* getModelFile() const;
+	__declspec(dllexport) const char* getModelFile() const;
 	void setModelFile(const char* szVal);				// The model filename
-	DllExport const char* getBorderFile() const;
+	__declspec(dllexport) const char* getBorderFile() const;
 	void setBorderFile(const char* szVal);				// The model filename
-	DllExport int getTextureIndex() const;
-	DllExport const char* getDeltaString() const;
-	DllExport const char* getConnectString() const;
-	DllExport const char* getRotateString() const;
+	__declspec(dllexport) int getTextureIndex() const;
+	__declspec(dllexport) const char* getDeltaString() const;
+	__declspec(dllexport) const char* getConnectString() const;
+	__declspec(dllexport) const char* getRotateString() const;
 
 	bool read(CvXMLLoadUtility* pXML);
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
@@ -1590,12 +1590,12 @@ class CvRouteModelInfo :
 public:
 	CvRouteModelInfo();
 	virtual ~CvRouteModelInfo();
-	DllExport RouteTypes getRouteType() const;				// The route type
-	DllExport const char* getModelFile() const;
+	__declspec(dllexport) RouteTypes getRouteType() const;				// The route type
+	__declspec(dllexport) const char* getModelFile() const;
 	void setModelFile(const char* szVal);				// The model filename
-	DllExport const char* getConnectString() const;
-	DllExport const char* getModelConnectString() const;
-	DllExport const char* getRotateString() const;
+	__declspec(dllexport) const char* getConnectString() const;
+	__declspec(dllexport) const char* getModelConnectString() const;
+	__declspec(dllexport) const char* getRotateString() const;
 
 	bool read(CvXMLLoadUtility* pXML);
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
@@ -1620,10 +1620,10 @@ class CvCivilizationInfo :
 {
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
-	DllExport CvCivilizationInfo();
+	__declspec(dllexport) CvCivilizationInfo();
 	virtual ~CvCivilizationInfo();
 	virtual void reset();
-	DllExport int getDefaultPlayerColor() const;
+	__declspec(dllexport) int getDefaultPlayerColor() const;
 	int getArtStyleType() const;
 	//Androrc UnitArtStyles
 	int getUnitArtStyleType() const;         // Expose to Python
@@ -1639,7 +1639,7 @@ public:
 	int getNumShipNames() const;
 	// TAC - Ship Names - Ray - END
 	int getNumLeaders() const;				 // the number of leaders the Civ has, this is needed so that random leaders can be generated easily
-	DllExport int getSelectionSoundScriptId() const;
+	__declspec(dllexport) int getSelectionSoundScriptId() const;
 	int getActionSoundScriptId() const;
 	int getAdvancedStartPoints() const;
 	int getAreaMultiplier() const;
@@ -1648,19 +1648,19 @@ public:
 	int getFavoredTerrain() const;
 	int getCapturedCityUnitClass() const;
 	ProfessionTypes getDefaultProfession() const;
-	DllExport int getMissionaryChar() const;
-	DllExport void setMissionaryChar(int iChar);
+	__declspec(dllexport) int getMissionaryChar() const;
+	__declspec(dllexport) void setMissionaryChar(int iChar);
 	int getChar() const;
 	int getTradingPostChar() const;
 	void setChar(int iChar);
 
-	DllExport bool isAIPlayable() const;
-	DllExport bool isPlayable() const;
+	__declspec(dllexport) bool isAIPlayable() const;
+	__declspec(dllexport) bool isPlayable() const;
 	bool isWaterStart() const;
-	DllExport bool isOpenBorders() const;
+	__declspec(dllexport) bool isOpenBorders() const;
 	bool isWaterWorks() const;
-	DllExport bool isEurope() const;
-	DllExport bool isNative() const;
+	__declspec(dllexport) bool isEurope() const;
+	__declspec(dllexport) bool isNative() const;
 
 	// R&R, ray, Correct Geographical Placement of Natives - START
 	bool isNorthAmericanNative() const;
@@ -1673,21 +1673,21 @@ public:
 	inline CivEffectTypes getCivEffect() const { return m_eCivEffect; }
 
 	std::wstring pyGetShortDescription(uint uiForm) { return getShortDescription(uiForm); }
-	DllExport const wchar* getShortDescription(uint uiForm = 0);
+	__declspec(dllexport) const wchar* getShortDescription(uint uiForm = 0);
 	const wchar* getShortDescriptionKey() const;
 	std::wstring pyGetShortDescriptionKey() { return getShortDescriptionKey(); }
 
 	std::wstring pyGetAdjective(uint uiForm) { return getAdjective(uiForm);  }
-	DllExport const wchar* getAdjective(uint uiForm = 0);
+	__declspec(dllexport) const wchar* getAdjective(uint uiForm = 0);
 	const wchar* getAdjectiveKey() const;
 	std::wstring pyGetAdjectiveKey() { return getAdjectiveKey(); }
 
-	DllExport const char* getFlagTexture() const;
+	__declspec(dllexport) const char* getFlagTexture() const;
 	const char* getArtDefineTag() const;
 	void setArtDefineTag(const char* szVal);
 	// Arrays
-	DllExport int getCivilizationBuildings(int i) const;
-	DllExport int getCivilizationUnits(int i) const;
+	__declspec(dllexport) int getCivilizationBuildings(int i) const;
+	__declspec(dllexport) int getCivilizationUnits(int i) const;
 	int getCivilizationProfessions(int i) const;
 	int getNumCivilizationFreeUnits() const;
 	int getCivilizationFreeUnitsClass(int index) const;
@@ -1698,7 +1698,7 @@ public:
 
 	template<typename Ta, typename Tb> Ta getCivSpecificForClass(Tb eVar) const;
 
-	DllExport bool isLeaders(int i) const;
+	__declspec(dllexport) bool isLeaders(int i) const;
 	bool isCivilizationFreeBuildingClass(int i) const;
 	bool isValidProfession(int i) const;
 	bool hasTrait(int i) const;
@@ -1717,9 +1717,9 @@ public:
 	std::string getShipNames(int i) const;
 	// TAC - Ship Names - Ray - END
 
-	DllExport const CvArtInfoCivilization* getArtInfo() const;
+	__declspec(dllexport) const CvArtInfoCivilization* getArtInfo() const;
 	const char* getButton() const;
-	DllExport int getDerivativeCiv() const;
+	__declspec(dllexport) int getDerivativeCiv() const;
 	void setDerivativeCiv(int iCiv);
 	bool read(CvXMLLoadUtility* pXML);
 	bool readPass2(CvXMLLoadUtility* pXML);
@@ -1836,12 +1836,12 @@ public:
 	int getNumCultureCities() const;
 	int getTotalCultureRatio() const;
 
-	DllExport bool getDefault() const;
+	__declspec(dllexport) bool getDefault() const;
 	bool isTargetScore() const;
 	bool isEndEurope() const;
 	bool isEndScore() const;
 	bool isConquest() const;
-	DllExport bool isPermanent() const;
+	__declspec(dllexport) bool isPermanent() const;
 	bool isRevolution() const;
 
 	const char* getMovie() const;
@@ -1956,7 +1956,7 @@ public:
 
     /** NBMOD REF **/
 
-	DllExport CvHandicapInfo();
+	__declspec(dllexport) CvHandicapInfo();
 	virtual ~CvHandicapInfo();
 
 	// TAC - AI More Immigrants - koma13 - START
@@ -2189,8 +2189,8 @@ public:
 	int getResultTerrain() const; // R&R, ray, Terraforming Features
 	int getResultFeature() const; // R&R, ray, Terraforming Features
 	int getRoute() const;
-	DllExport int getEntityEvent() const;
-	DllExport int getMissionType() const;
+	__declspec(dllexport) int getEntityEvent() const;
+	__declspec(dllexport) int getMissionType() const;
 	void setMissionType(int iNewType);
 	bool isKill() const;
 	bool isRoute() const;
@@ -2384,7 +2384,7 @@ class CvImprovementInfo :
 {
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
-	DllExport CvImprovementInfo();
+	__declspec(dllexport) CvImprovementInfo();
 	virtual ~CvImprovementInfo();
 	int getAdvancedStartCost() const;
 	int getAdvancedStartCostIncrease() const;
@@ -2421,21 +2421,21 @@ public:
 	bool isHillsMakesValid() const;
 	bool isRiverSideMakesValid() const;
 	bool isRequiresFlatlands() const;
-	DllExport bool isRequiresRiverSide() const;
+	__declspec(dllexport) bool isRequiresRiverSide() const;
 	bool isRequiresFeature() const;
-	DllExport bool isWater() const;
+	__declspec(dllexport) bool isWater() const;
 	bool isGoody() const;
 	bool isGoodyForSpawningUnits() const; //WTP, Unit only Goodies
 	bool isGoodyForSpawningHostileAnimals() const; //WTP, Unit only Goodies
 	bool isGoodyForSpawningHostileNatives() const; //WTP, Unit only Goodies
 	bool isGoodyForSpawningHostileCriminals() const; //WTP, Unit only Goodies
 	bool isPermanent() const;
-	DllExport bool useLSystem() const;
+	__declspec(dllexport) bool useLSystem() const;
 	bool isOutsideBorders() const;
 
 	const char* getArtDefineTag() const;
 	void setArtDefineTag(const char* szVal);
-	DllExport int getWorldSoundscapeScriptId() const;
+	__declspec(dllexport) int getWorldSoundscapeScriptId() const;
 	// Arrays
 	int getPrereqNatureYield(int i) const;
 	int* getPrereqNatureYieldArray();
@@ -2451,12 +2451,12 @@ public:
 	int getRouteYieldChanges(int i, int j) const;
 	int* getRouteYieldChangesArray(int i);				// For Moose - CvWidgetData XXX
 	int getImprovementBonusYield(int i, int j) const;
-	DllExport bool isImprovementBonusMakesValid(int i) const;
+	__declspec(dllexport) bool isImprovementBonusMakesValid(int i) const;
 	int getImprovementBonusDiscoverRand(int i) const;
 
 	// Other
 	const char* getButton() const;
-	DllExport const CvArtInfoImprovement* getArtInfo() const;
+	__declspec(dllexport) const CvArtInfoImprovement* getArtInfo() const;
 	void read(FDataStreamBase* stream);
 	void write(FDataStreamBase* stream);
 	bool read(CvXMLLoadUtility* pXML);
@@ -2536,10 +2536,10 @@ class CvBonusInfo :
 {
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
-	DllExport CvBonusInfo();
+	__declspec(dllexport) CvBonusInfo();
 	virtual ~CvBonusInfo();
-	DllExport int getChar() const;
-	DllExport void setChar(int i);
+	__declspec(dllexport) int getChar() const;
+	__declspec(dllexport) void setChar(int i);
 	int getHealthEffectFromRessource() const; // WTP, ray, Health from specific Bonus Ressources
 	int getAIObjective() const;
 	int getMinAreaSize() const;
@@ -2574,7 +2574,7 @@ public:
 	bool isCoastalLandOnly() const; // Ray, adding 2 more XML tags to control bonus placement
 	bool isOnlySouthernHemisphere() const;
 	bool isOnlyNorthernHemisphere() const;
-	DllExport bool useLSystem() const;
+	__declspec(dllexport) bool useLSystem() const;
 	const char* getArtDefineTag() const;
 	void setArtDefineTag(const char* szVal);
 	//TAC Whaling, ray
@@ -2585,13 +2585,13 @@ public:
 	int getYieldChange(int i) const;
 	int* getYieldChangeArray();
 	int getImprovementChange(int i) const;
-	DllExport bool isTerrain(int i) const;
-	DllExport bool isFeature(int i) const;
+	__declspec(dllexport) bool isTerrain(int i) const;
+	__declspec(dllexport) bool isFeature(int i) const;
 	bool isFeatureTerrain(int i) const;
 
 	// Other
 	const char* getButton() const;
-	DllExport const CvArtInfoBonus* getArtInfo() const;
+	__declspec(dllexport) const CvArtInfoBonus* getArtInfo() const;
 	int getBuilding() const;
 
 	void read(FDataStreamBase* stream);
@@ -2694,17 +2694,17 @@ public:
 	const char* getArtDefineTag() const;
 	void setArtDefineTag(const char* szTag);
 
-	DllExport int getWorldSoundscapeScriptId() const;
+	__declspec(dllexport) int getWorldSoundscapeScriptId() const;
 	EffectTypes getEffectType() const;
 	int getEffectProbability() const;
 	// Arrays
 	int getYieldChange(int i) const;
 	int getRiverYieldIncrease(int i) const;
-	DllExport int get3DAudioScriptFootstepIndex(int i) const;
+	__declspec(dllexport) int get3DAudioScriptFootstepIndex(int i) const;
 	bool isTerrain(int i) const;
 	int getNumVarieties() const;
 	// Other
-	DllExport const CvArtInfoFeature* getArtInfo() const;
+	__declspec(dllexport) const CvArtInfoFeature* getArtInfo() const;
 	const char* getButton() const;
 	bool read(CvXMLLoadUtility* pXML);
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
@@ -2772,8 +2772,8 @@ public:
 	CvYieldInfo();
 	virtual ~CvYieldInfo();
 	YieldTypes getIndex() const { return m_eIndex; }
-	DllExport int getChar() const;
-	DllExport void setChar(int i);
+	__declspec(dllexport) int getChar() const;
+	__declspec(dllexport) void setChar(int i);
 	const char* getIcon() const;
 	WidgetTypes getWikiWidget() const;
 	YieldTypes getID() const;
@@ -2814,10 +2814,10 @@ public:
 	int getAIWeightPercent() const;
 	int getAIBaseValue() const;
 	int getNativeBaseValue() const;
-	DllExport int getColorType() const;
+	__declspec(dllexport) int getColorType() const;
 	int getUnitClass() const;
-	DllExport int getTextureIndex() const;
-	DllExport int getWaterTextureIndex() const;
+	__declspec(dllexport) int getTextureIndex() const;
+	__declspec(dllexport) int getWaterTextureIndex() const;
 	int getPowerValue() const;
 	int getAssetValue() const;
 
@@ -2911,22 +2911,22 @@ public:
 	int getBuildModifier() const;
 	int getDefenseModifier() const;
 
-	DllExport bool isWater() const;
+	__declspec(dllexport) bool isWater() const;
 	bool isImpassable() const;
 	bool isFound() const;
 	bool isFoundCoast() const;
 	bool isBadCityLocation() const; // WTP, ray, Health Overhaul
 
-	DllExport const char* getArtDefineTag() const;
+	__declspec(dllexport) const char* getArtDefineTag() const;
 	void setArtDefineTag(const char* szTag);
 
-	DllExport int getWorldSoundscapeScriptId() const;
+	__declspec(dllexport) int getWorldSoundscapeScriptId() const;
 	// Arrays
 	int getYield(int i) const;
 	int getRiverYieldIncrease(int i) const;
-	DllExport int get3DAudioScriptFootstepIndex(int i) const;
+	__declspec(dllexport) int get3DAudioScriptFootstepIndex(int i) const;
 	// Other
-	DllExport const CvArtInfoTerrain* getArtInfo() const;
+	__declspec(dllexport) const CvArtInfoTerrain* getArtInfo() const;
 	const char* getButton() const;
 
 	bool canHavePlotType(PlotTypes ePlotType) const;
@@ -2968,11 +2968,11 @@ class CvInterfaceModeInfo :
 public:
 	CvInterfaceModeInfo();
 	virtual ~CvInterfaceModeInfo();
-	DllExport int getCursorIndex() const;
-	DllExport int getMissionType() const;
+	__declspec(dllexport) int getCursorIndex() const;
+	__declspec(dllexport) int getMissionType() const;
 	bool getVisible() const;
-	DllExport bool getGotoPlot() const;
-	DllExport bool getHighlightPlot() const;
+	__declspec(dllexport) bool getGotoPlot() const;
+	__declspec(dllexport) bool getHighlightPlot() const;
 	bool getSelectType() const;
 	bool getSelectAll() const;
 	bool read(CvXMLLoadUtility* pXML);
@@ -3000,7 +3000,7 @@ class CvLeaderHeadInfo :
 {
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
-	DllExport CvLeaderHeadInfo();
+	__declspec(dllexport) CvLeaderHeadInfo();
 	virtual ~CvLeaderHeadInfo();
 	int getAlarmType() const;
 	int getBaseAttitude() const;
@@ -3070,10 +3070,10 @@ public:
 	int getNoWarAttitudeProb(int i) const;
 	int getUnitAIWeightModifier(int i) const;
 	int getImprovementWeightModifier(int i) const;
-	DllExport int getDiploPeaceMusicScriptIds(int i) const;
-	DllExport int getDiploWarMusicScriptIds(int i) const;
+	__declspec(dllexport) int getDiploPeaceMusicScriptIds(int i) const;
+	__declspec(dllexport) int getDiploWarMusicScriptIds(int i) const;
 	// Other
-	DllExport const CvArtInfoLeaderhead* getArtInfo() const;
+	__declspec(dllexport) const CvArtInfoLeaderhead* getArtInfo() const;
 	const char* getLeaderHead() const;
 	const char* getButton() const;
 	void write(FDataStreamBase* stream);
@@ -3164,8 +3164,8 @@ class CvWorldInfo :
 public:
 	CvWorldInfo();
 	virtual ~CvWorldInfo();
-	DllExport int getDefaultPlayers() const;
-	DllExport int getDefaultNativePlayers() const;
+	__declspec(dllexport) int getDefaultPlayers() const;
+	__declspec(dllexport) int getDefaultNativePlayers() const;
 	int getUnitNameModifier() const;
 	int getTargetNumCities() const;
 	int getBuildingClassPrereqModifier() const;
@@ -3280,7 +3280,7 @@ class CvTraitInfo :
 {
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
-	DllExport CvTraitInfo();
+	__declspec(dllexport) CvTraitInfo();
 	virtual ~CvTraitInfo();
 
 	inline CivEffectTypes getCivEffect() const { return m_eCivEffect; }
@@ -3429,7 +3429,7 @@ class CvCursorInfo : public CvInfoBase
 public:
 	CvCursorInfo();
 	virtual ~CvCursorInfo();
-	DllExport const char* getPath();
+	__declspec(dllexport) const char* getPath();
 	void setPath(const char* szVal);
 
 	bool read(CvXMLLoadUtility* pXML);
@@ -3451,11 +3451,11 @@ class CvSlideShowInfo : public CvInfoBase
 public:
 	CvSlideShowInfo();
 	virtual ~CvSlideShowInfo();
-	DllExport const char* getPath();
+	__declspec(dllexport) const char* getPath();
 	void setPath(const char* szVal);
-	DllExport const char* getTransitionType();
+	__declspec(dllexport) const char* getTransitionType();
 	void setTransitionType(const char* szVal);
-	DllExport float getStartTime();
+	__declspec(dllexport) float getStartTime();
 	void setStartTime(float fVal);
 
 	bool read(CvXMLLoadUtility* pXML);
@@ -3479,7 +3479,7 @@ class CvSlideShowRandomInfo : public CvInfoBase
 public:
 	CvSlideShowRandomInfo();
 	virtual ~CvSlideShowRandomInfo();
-	DllExport const char* getPath();
+	__declspec(dllexport) const char* getPath();
 	void setPath(const char* szVal);
 	bool read(CvXMLLoadUtility* pXML);
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
@@ -3500,18 +3500,18 @@ class CvWorldPickerInfo : public CvInfoBase
 public:
 	CvWorldPickerInfo();
 	virtual ~CvWorldPickerInfo();
-	DllExport const char* getMapName();
+	__declspec(dllexport) const char* getMapName();
 	void setMapName(const char* szVal);
-	DllExport const char* getModelFile();
+	__declspec(dllexport) const char* getModelFile();
 	void setModelFile(const char* szVal);
-	DllExport int getNumSizes();
-	DllExport float getSize(int index);
-	DllExport int getNumClimates();
-	DllExport const char* getClimatePath(int index);
-	DllExport int getNumWaterLevelDecals();
-	DllExport const char* getWaterLevelDecalPath(int index);
-	DllExport int getNumWaterLevelGloss();
-	DllExport const char* getWaterLevelGlossPath(int index);
+	__declspec(dllexport) int getNumSizes();
+	__declspec(dllexport) float getSize(int index);
+	__declspec(dllexport) int getNumClimates();
+	__declspec(dllexport) const char* getClimatePath(int index);
+	__declspec(dllexport) int getNumWaterLevelDecals();
+	__declspec(dllexport) const char* getWaterLevelDecalPath(int index);
+	__declspec(dllexport) int getNumWaterLevelGloss();
+	__declspec(dllexport) const char* getWaterLevelGlossPath(int index);
 	bool read(CvXMLLoadUtility* pXML);
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -3538,11 +3538,11 @@ class CvAnimationPathInfo : public CvInfoBase
 	public:
 		CvAnimationPathInfo();
 		virtual ~CvAnimationPathInfo();
-		DllExport int getPathCategory( int i );
+		__declspec(dllexport) int getPathCategory( int i );
 		float getPathParameter( int i );
-		DllExport int getNumPathDefinitions();
-		DllExport CvAnimationPathDefinition * getPath( );
-		DllExport bool isMissionPath() const;
+		__declspec(dllexport) int getNumPathDefinitions();
+		__declspec(dllexport) CvAnimationPathDefinition * getPath( );
+		__declspec(dllexport) bool isMissionPath() const;
 		bool read(CvXMLLoadUtility* pXML);
 	//---------------------------------------PRIVATE MEMBER VARIABLES---------------------------------
 	private:
@@ -3563,8 +3563,8 @@ class CvAnimationCategoryInfo : public CvInfoBase
 	public:
 		CvAnimationCategoryInfo();
 		virtual ~CvAnimationCategoryInfo();
-		DllExport int getCategoryBaseID( );
-		DllExport int getCategoryDefaultTo( );
+		__declspec(dllexport) int getCategoryBaseID( );
+		__declspec(dllexport) int getCategoryDefaultTo( );
 		bool read(CvXMLLoadUtility* pXML);
 	//---------------------------------------PRIVATE MEMBER VARIABLES---------------------------------
 	private:
@@ -3586,8 +3586,8 @@ class CvEntityEventInfo : public CvInfoBase
 		CvEntityEventInfo();
 		virtual ~CvEntityEventInfo();
 		bool read(CvXMLLoadUtility* pXML);
-		DllExport AnimationPathTypes getAnimationPathType(int iIndex = 0) const;
-		DllExport EffectTypes getEffectType(int iIndex = 0) const;
+		__declspec(dllexport) AnimationPathTypes getAnimationPathType(int iIndex = 0) const;
+		__declspec(dllexport) EffectTypes getEffectType(int iIndex = 0) const;
 		int getAnimationPathCount() const;
 		int getEffectTypeCount() const;
 		bool getUpdateFormation() const;
@@ -3617,7 +3617,7 @@ public:
 	const char* getTag() const;
 	void setTag(const char* szDesc);
 
-	DllExport const char* getPath() const;
+	__declspec(dllexport) const char* getPath() const;
 	void setPath(const char* szDesc);
 
 	bool read(CvXMLLoadUtility* pXML);
@@ -3684,27 +3684,27 @@ public:
 	CvArtInfoUnit();
 	virtual ~CvArtInfoUnit();
 	const char* getFullLengthIcon() const;
-	DllExport bool getActAsRanged() const;
-	DllExport int getDamageStates() const;
-	DllExport const char* getTrailTexture() const;
-	DllExport float getTrailWidth() const;
-	DllExport float getTrailLength() const;
-	DllExport float getTrailTaper() const;
-	DllExport float getTrailFadeStarTime() const;
-	DllExport float getTrailFadeFalloff() const;
-	DllExport float getBattleDistance() const;
-	DllExport float getRangedDeathTime() const;
-	DllExport float getExchangeAngle() const;
-	DllExport bool getCombatExempt() const;
+	__declspec(dllexport) bool getActAsRanged() const;
+	__declspec(dllexport) int getDamageStates() const;
+	__declspec(dllexport) const char* getTrailTexture() const;
+	__declspec(dllexport) float getTrailWidth() const;
+	__declspec(dllexport) float getTrailLength() const;
+	__declspec(dllexport) float getTrailTaper() const;
+	__declspec(dllexport) float getTrailFadeStarTime() const;
+	__declspec(dllexport) float getTrailFadeFalloff() const;
+	__declspec(dllexport) float getBattleDistance() const;
+	__declspec(dllexport) float getRangedDeathTime() const;
+	__declspec(dllexport) float getExchangeAngle() const;
+	__declspec(dllexport) bool getCombatExempt() const;
 	bool getSmoothMove() const;
 	float getAngleInterpRate() const;
-	DllExport float getBankRate() const;
+	__declspec(dllexport) float getBankRate() const;
 	bool read(CvXMLLoadUtility* pXML);
 	const char* getTrainSound() const;
 	void setTrainSound(const char* szVal);
-	DllExport int getRunLoopSoundTag() const;
-	DllExport int getRunEndSoundTag() const;
-	DllExport int getSelectionSoundScriptId() const;
+	__declspec(dllexport) int getRunLoopSoundTag() const;
+	__declspec(dllexport) int getRunEndSoundTag() const;
+	__declspec(dllexport) int getSelectionSoundScriptId() const;
 	int getActionSoundScriptId() const;
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
@@ -3739,7 +3739,7 @@ public:
 	bool isAnimated() const;
 	const char* getCityTexture() const;
 	const char* getCitySelectedTexture() const;
-	DllExport const char* getLSystemName() const;
+	__declspec(dllexport) const char* getLSystemName() const;
 	bool read(CvXMLLoadUtility* pXML);
 protected:
 	bool m_bAnimated;
@@ -3753,7 +3753,7 @@ class CvArtInfoCivilization : public CvArtInfoAsset
 public:
 	CvArtInfoCivilization();
 	virtual ~CvArtInfoCivilization();
-	DllExport int getFontButtonIndex() const;
+	__declspec(dllexport) int getFontButtonIndex() const;
 	bool isWhiteFlag() const;
 	bool isInvertFlag() const;
 
@@ -3769,7 +3769,7 @@ class CvArtInfoLeaderhead : public CvArtInfoAsset
 public:
 	CvArtInfoLeaderhead() {}
 	virtual ~CvArtInfoLeaderhead() {}
-	DllExport const char* getBackgroundKFM() const;
+	__declspec(dllexport) const char* getBackgroundKFM() const;
 	void setBackgroundKFM( const char* szKFM);
 	bool read(CvXMLLoadUtility* pXML);
 protected:
@@ -3781,9 +3781,9 @@ class CvArtInfoBonus : public CvArtInfoScalableAsset
 public:
 	CvArtInfoBonus();
 	virtual ~CvArtInfoBonus() {}
-	DllExport int getFontButtonIndex() const;
-	DllExport bool isShadowCastor() const;
-	DllExport bool isRefractionCastor() const;
+	__declspec(dllexport) int getFontButtonIndex() const;
+	__declspec(dllexport) bool isShadowCastor() const;
+	__declspec(dllexport) bool isRefractionCastor() const;
 	bool read(CvXMLLoadUtility* pXML);
 protected:
 	int m_iFontButtonIndex;
@@ -3809,15 +3809,15 @@ class CvArtInfoTerrain : public CvArtInfoAsset
 public:
 	CvArtInfoTerrain();
 	virtual ~CvArtInfoTerrain();
-	DllExport const char* getBaseTexture();
+	__declspec(dllexport) const char* getBaseTexture();
 	void setBaseTexture(const char* szTmp );
-	DllExport const char* getGridTexture();
+	__declspec(dllexport) const char* getGridTexture();
 	void setGridTexture(const char* szTmp );
-	DllExport const char* getDetailTexture();
+	__declspec(dllexport) const char* getDetailTexture();
 	void setDetailTexture(const char* szTmp);
-	DllExport int getLayerOrder() const;
-	DllExport TerrainGroupTypes getTerrainGroup() const;
-	DllExport CvTextureBlendSlotList &getBlendList(int blendMask);
+	__declspec(dllexport) int getLayerOrder() const;
+	__declspec(dllexport) TerrainGroupTypes getTerrainGroup() const;
+	__declspec(dllexport) CvTextureBlendSlotList &getBlendList(int blendMask);
 	bool read(CvXMLLoadUtility* pXML);
 protected:
 	CvString m_szDetailTexture;				//!< Detail texture associated with the Terrain base texture
@@ -3833,8 +3833,8 @@ class CvArtInfoFeature : public CvArtInfoScalableAsset
 public:
 	CvArtInfoFeature();
 	virtual ~CvArtInfoFeature();
-	DllExport bool isAnimated() const;
-	DllExport TileArtTypes getTileArtType() const;
+	__declspec(dllexport) bool isAnimated() const;
+	__declspec(dllexport) TileArtTypes getTileArtType() const;
 	bool read(CvXMLLoadUtility* pXML);
 	class FeatureArtModel
 	{
@@ -3920,8 +3920,8 @@ public:
 		friend CvArtInfoFeature;
 	};
 
-	DllExport const FeatureVariety &getVariety(int index) const;
-	DllExport int getNumVarieties() const;
+	__declspec(dllexport) const FeatureVariety &getVariety(int index) const;
+	__declspec(dllexport) int getNumVarieties() const;
 protected:
 	int getConnectionMaskFromString(const CvString &connectionString);
 	bool m_bAnimated;
@@ -4006,8 +4006,8 @@ public:
 	int getFatherPercent() const;
 	int getGreatGeneralPercent() const;
 	int getEventChancePerTurn() const;
-	DllExport int getSoundtrackSpace() const;
-	DllExport int getNumSoundtracks() const;
+	__declspec(dllexport) int getSoundtrackSpace() const;
+	__declspec(dllexport) int getNumSoundtracks() const;
 	const char* getAudioUnitVictoryScript() const;
 	const char* getAudioUnitDefeatScript() const;
 
@@ -4015,11 +4015,11 @@ public:
 
 	bool isRevolution() const;
 	bool isNoGoodies() const;
-	DllExport bool isFirstSoundtrackFirst() const;
+	__declspec(dllexport) bool isFirstSoundtrackFirst() const;
 
 	// Arrays
-	DllExport int getSoundtracks(int i) const;
-	DllExport int getCitySoundscapeSciptId(int i) const;
+	__declspec(dllexport) int getSoundtracks(int i) const;
+	__declspec(dllexport) int getCitySoundscapeSciptId(int i) const;
 
 	bool read(CvXMLLoadUtility* pXML);
 protected:
@@ -4064,7 +4064,7 @@ class CvColorInfo :
 public:
 	CvColorInfo();
 	virtual ~CvColorInfo();
-	DllExport const NiColorA& getColor() const;
+	__declspec(dllexport) const NiColorA& getColor() const;
 
 	bool read(CvXMLLoadUtility* pXML);
 protected:
@@ -4084,8 +4084,8 @@ class CvPlayerColorInfo :
 public:
 	CvPlayerColorInfo();
 	virtual ~CvPlayerColorInfo();
-	DllExport int getColorTypePrimary() const;
-	DllExport int getColorTypeSecondary() const;
+	__declspec(dllexport) int getColorTypePrimary() const;
+	__declspec(dllexport) int getColorTypeSecondary() const;
 	int getTextColorType() const;
 
 	bool read(CvXMLLoadUtility* pXML);
@@ -4109,20 +4109,20 @@ class CvLandscapeInfo :
 	public:
 		CvLandscapeInfo();
 		virtual ~CvLandscapeInfo() {}
-		DllExport int getPlotVertsWide() const;
-		DllExport int getPlotVertsHigh() const;
-		DllExport int getPlotsPerCellX() const;
-		DllExport int getPlotsPerCellY() const;
-		DllExport int getCellVertsWide() const;
-		DllExport int getCellVertsHigh() const;
-		DllExport int getWaterHeight() const;
-		DllExport float getTextureScaleX() const;
-		DllExport float getTextureScaleY() const;
-		DllExport float getZScale() const;
+		__declspec(dllexport) int getPlotVertsWide() const;
+		__declspec(dllexport) int getPlotVertsHigh() const;
+		__declspec(dllexport) int getPlotsPerCellX() const;
+		__declspec(dllexport) int getPlotsPerCellY() const;
+		__declspec(dllexport) int getCellVertsWide() const;
+		__declspec(dllexport) int getCellVertsHigh() const;
+		__declspec(dllexport) int getWaterHeight() const;
+		__declspec(dllexport) float getTextureScaleX() const;
+		__declspec(dllexport) float getTextureScaleY() const;
+		__declspec(dllexport) float getZScale() const;
 
-		DllExport float getPeakScale() const;
-		DllExport float getHillScale() const;
-		DllExport const char* getEnvironmentTexture();
+		__declspec(dllexport) float getPeakScale() const;
+		__declspec(dllexport) float getHillScale() const;
+		__declspec(dllexport) const char* getEnvironmentTexture();
 
 		bool read(CvXMLLoadUtility* pXML);
 
@@ -4150,7 +4150,7 @@ class CvLandscapeInfo :
 class CvGameText : public CvInfoBase
 {
 public:
-	DllExport CvGameText();
+	__declspec(dllexport) CvGameText();
 	const wchar* getText() const;
 	void setText(const wchar* szText);
 	// for Python
@@ -4159,8 +4159,8 @@ public:
 	const wchar* getGender() const { return m_szGender; }
 	void setPlural(const wchar* szPlural) { m_szPlural = szPlural; }
 	const wchar* getPlural() const { return m_szPlural; }
-	DllExport int getNumLanguages() const; // not static for Python access
-	DllExport void setNumLanguages(int iNum); // not static for Python access
+	__declspec(dllexport) int getNumLanguages() const; // not static for Python access
+	__declspec(dllexport) void setNumLanguages(int iNum); // not static for Python access
 	bool read(CvXMLLoadUtility* pXML, bool bUTF8, const char *szFileName, char const* szLanguage);
 
 	static int getNumLanguagesStatic();
@@ -4266,7 +4266,7 @@ class CvEffectInfo :
 public:
 	CvEffectInfo();
 	virtual ~CvEffectInfo();
-	DllExport const char* getPath() const { return m_szPath; }
+	__declspec(dllexport) const char* getPath() const { return m_szPath; }
 	void setPath(const char* szVal) { m_szPath = szVal; }
 	float getUpdateRate( ) const { return m_fUpdateRate; };
 
@@ -4304,7 +4304,7 @@ class CvAttachableInfo :
 public:
 	CvAttachableInfo();
 	virtual ~CvAttachableInfo();
-	DllExport const char* getPath() const { return m_szPath; }
+	__declspec(dllexport) const char* getPath() const { return m_szPath; }
 	void setPath(const char* szVal) { m_szPath = szVal; }
 	bool read(CvXMLLoadUtility* pXML);
 
@@ -4325,8 +4325,8 @@ class CvGameOptionInfo :
 public:
 	CvGameOptionInfo();
 	virtual ~CvGameOptionInfo();
-	DllExport bool getDefault() const;
-	DllExport bool getVisible() const;
+	__declspec(dllexport) bool getDefault() const;
+	__declspec(dllexport) bool getVisible() const;
 	bool read(CvXMLLoadUtility* pXML);
 
 private:
@@ -4384,7 +4384,7 @@ class CvPlayerOptionInfo :
 public:
 	CvPlayerOptionInfo();
 	virtual ~CvPlayerOptionInfo();
-	DllExport bool getDefault() const;
+	__declspec(dllexport) bool getDefault() const;
 	bool read(CvXMLLoadUtility* pXML);
 
 private:
@@ -4403,7 +4403,7 @@ class CvGraphicOptionInfo :
 public:
 	CvGraphicOptionInfo();
 	virtual ~CvGraphicOptionInfo();
-	DllExport bool getDefault() const;
+	__declspec(dllexport) bool getDefault() const;
 	bool read(CvXMLLoadUtility* pXML);
 
 private:
@@ -4420,7 +4420,7 @@ class CvEventTriggerInfo : public CvInfoBase
 {
 	friend class CvXMLLoadUtility;
 public:
-	DllExport CvEventTriggerInfo();
+	__declspec(dllexport) CvEventTriggerInfo();
 	virtual ~CvEventTriggerInfo();
 	int getPercentGamesActive() const;
 	int getProbability() const;
@@ -4594,7 +4594,7 @@ class CvEventInfo : public CvInfoBase
 {
 	friend class CvXMLLoadUtility;
 public:
-	DllExport CvEventInfo();
+	__declspec(dllexport) CvEventInfo();
 	virtual ~CvEventInfo();
 	bool isQuest() const;
 	bool isGlobal() const;
@@ -4736,10 +4736,10 @@ class CvMainMenuInfo : public CvInfoBase
 public:
 	CvMainMenuInfo();
 	virtual ~CvMainMenuInfo();
-	DllExport std::string getScene() const;
-	DllExport std::string getSoundtrack() const;
-	DllExport std::string getLoading() const;
-	DllExport std::string getLoadingSlideshow() const;
+	__declspec(dllexport) std::string getScene() const;
+	__declspec(dllexport) std::string getSoundtrack() const;
+	__declspec(dllexport) std::string getLoading() const;
+	__declspec(dllexport) std::string getLoadingSlideshow() const;
 	bool read(CvXMLLoadUtility* pXML);
 
 protected:
@@ -4757,7 +4757,7 @@ protected:
 class CvFatherInfo : public CvInfoBase
 {
 public:
-	DllExport CvFatherInfo();
+	__declspec(dllexport) CvFatherInfo();
 	virtual ~CvFatherInfo();
 	int getFatherCategory() const;
 	TraitTypes getTrait() const;
@@ -4800,9 +4800,9 @@ class CvFatherPointInfo : public CvInfoBase
 public:
 	CvFatherPointInfo();
 	virtual ~CvFatherPointInfo();
-	DllExport int getChar() const;
-	DllExport void setChar(int i);
-	DllExport int getFontButtonIndex() const;
+	__declspec(dllexport) int getChar() const;
+	__declspec(dllexport) void setChar(int i);
+	__declspec(dllexport) int getFontButtonIndex() const;
 	int getLandTilePoints() const;
 	int getWaterTilePoints() const;
 	int getMeetNativePoints() const;

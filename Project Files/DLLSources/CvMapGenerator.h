@@ -14,8 +14,8 @@ class CvArea;
 class CvMapGenerator
 {
 public:
-	DllExport static CvMapGenerator& GetInstance();
-	DllExport static void FreeInstance() { SAFE_DELETE(m_pInst); }
+	__declspec(dllexport) static CvMapGenerator& GetInstance();
+	__declspec(dllexport) static void FreeInstance() { SAFE_DELETE(m_pInst); }
 	CvMapGenerator();
 	virtual ~CvMapGenerator();
 
@@ -23,29 +23,29 @@ public:
 	bool canPlaceGoodyAt(ImprovementTypes eImprovement, int iX, int iY);
 
 	// does all of the below "add..." functions:
-	DllExport void addGameElements();
+	__declspec(dllexport) void addGameElements();
 
 	void addLakes();
-	DllExport void addRivers();
+	__declspec(dllexport) void addRivers();
 	void doRiver(CvPlot* pStartPlot, CardinalDirectionTypes eLastCardinalDirection=NO_CARDINALDIRECTION, CardinalDirectionTypes eOriginalCardinalDirection=NO_CARDINALDIRECTION, int iThisRiverID=-1);
 	bool addRiver(CvPlot *pFreshWaterPlot);
-	DllExport void addFeatures();
+	__declspec(dllexport) void addFeatures();
 	void addFeaturesOnLand(); //WTP, ray, Randomize Features Map Option
 	void addFeaturesOnWater();
-	DllExport void addBonuses();
+	__declspec(dllexport) void addBonuses();
 	void addUniqueBonusType(BonusTypes eBonusType);
 	void addNonUniqueBonusType(BonusTypes eBonusType);
-	DllExport void addGoodies();
+	__declspec(dllexport) void addGoodies();
 	void addEurope();
 
-	DllExport void eraseRivers();
-	DllExport void eraseFeatures();
+	__declspec(dllexport) void eraseRivers();
+	__declspec(dllexport) void eraseFeatures();
 	void eraseFeaturesOnLand(); //WTP, ray, Randomize Features Map Option
-	DllExport void eraseBonuses();
-	DllExport void eraseGoodies();
-	DllExport void eraseEurope();
+	__declspec(dllexport) void eraseBonuses();
+	__declspec(dllexport) void eraseGoodies();
+	__declspec(dllexport) void eraseEurope();
 
-	DllExport void generateRandomMap();
+	__declspec(dllexport) void generateRandomMap();
 
 	void generatePlotTypes();
 	void generateTerrain();

@@ -19,7 +19,7 @@ public:
 	void init(int iID, PlayerTypes eFirstPlayer, PlayerTypes eSecondPlayer);
 	void uninit();
 
-	DllExport void kill(bool bKillTeam, TeamTypes eKillingTeam);
+	__declspec(dllexport) void kill(bool bKillTeam, TeamTypes eKillingTeam);
 
 	void addTrades(CLinkList<TradeData>* pFirstList, CLinkList<TradeData>* pSecondList, bool bCheckAllowed);
 
@@ -30,39 +30,39 @@ public:
 	bool isPeaceDeal() const;
 	bool isPeaceDealBetweenOthers(CLinkList<TradeData>* pFirstList, CLinkList<TradeData>* pSecondList) const;
 
-	DllExport int getID() const;
+	__declspec(dllexport) int getID() const;
 	void setID(int iID);
 
 	int getInitialGameTurn() const;
 	void setInitialGameTurn(int iNewValue);
 
-	DllExport PlayerTypes getFirstPlayer() const;
-	DllExport PlayerTypes getSecondPlayer() const;
+	__declspec(dllexport) PlayerTypes getFirstPlayer() const;
+	__declspec(dllexport) PlayerTypes getSecondPlayer() const;
 
 	void clearFirstTrades();
 	void insertAtEndFirstTrades(TradeData trade);
-	DllExport CLLNode<TradeData>* nextFirstTradesNode(CLLNode<TradeData>* pNode) const;
+	__declspec(dllexport) CLLNode<TradeData>* nextFirstTradesNode(CLLNode<TradeData>* pNode) const;
 	int getLengthFirstTrades() const;
-	DllExport CLLNode<TradeData>* headFirstTradesNode() const;
+	__declspec(dllexport) CLLNode<TradeData>* headFirstTradesNode() const;
 	const CLinkList<TradeData>* getFirstTrades() const;
 
 	void clearSecondTrades();
 	void insertAtEndSecondTrades(TradeData trade);
-	DllExport CLLNode<TradeData>* nextSecondTradesNode(CLLNode<TradeData>* pNode) const;
+	__declspec(dllexport) CLLNode<TradeData>* nextSecondTradesNode(CLLNode<TradeData>* pNode) const;
 	int getLengthSecondTrades() const;
-	DllExport CLLNode<TradeData>* headSecondTradesNode() const;
+	__declspec(dllexport) CLLNode<TradeData>* headSecondTradesNode() const;
 	const CLinkList<TradeData>* getSecondTrades() const;
 
-	DllExport bool isCancelable(PlayerTypes eByPlayer = NO_PLAYER, CvWString* pszReason = nullptr);
+	__declspec(dllexport) bool isCancelable(PlayerTypes eByPlayer = NO_PLAYER, CvWString* pszReason = nullptr);
 	int turnsToCancel(PlayerTypes eByPlayer = NO_PLAYER);
 
 	static bool isAnnual(TradeableItems eItem);
-	DllExport static bool isDual(TradeableItems eItem, bool bExcludePeace = false);
-	DllExport static bool hasData(TradeableItems eItem);
-	DllExport static bool isGold(TradeableItems eItem);
-	DllExport static bool isEndWar(TradeableItems eItem);
-	DllExport static TradeableItems getPeaceItem();
-	DllExport static TradeableItems getGoldItem();
+	__declspec(dllexport) static bool isDual(TradeableItems eItem, bool bExcludePeace = false);
+	__declspec(dllexport) static bool hasData(TradeableItems eItem);
+	__declspec(dllexport) static bool isGold(TradeableItems eItem);
+	__declspec(dllexport) static bool isEndWar(TradeableItems eItem);
+	__declspec(dllexport) static TradeableItems getPeaceItem();
+	__declspec(dllexport) static TradeableItems getGoldItem();
 
 	void read(FDataStreamBase* pStream);
 	void write(FDataStreamBase* pStream) const;

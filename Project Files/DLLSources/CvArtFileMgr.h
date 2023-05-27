@@ -44,7 +44,7 @@ class CvArtInfoInterface;
 #define ART_INFO_DECL(name) \
 public: \
 	friend class Cv##name##ArtInfoItem; \
-	DllExport CvArtInfo##name* get##name##ArtInfo(const char *szArtDefineTag) const; \
+	__declspec(dllexport) CvArtInfo##name* get##name##ArtInfo(const char *szArtDefineTag) const; \
 	int getNum##name##ArtInfos() { return (int)m_pa##name##ArtInfo.size(); } \
 	std::vector<CvArtInfo##name*>& get##name##ArtInfo() { return m_pa##name##ArtInfo; } \
 	CvArtInfo##name& get##name##ArtInfo(int i); \
@@ -66,19 +66,19 @@ private:
 	};
 public:
 	// singleton accessor
-	DllExport static CvArtFileMgr& GetInstance();
+	__declspec(dllexport) static CvArtFileMgr& GetInstance();
 
 	CvArtFileMgr() {};
 	virtual ~CvArtFileMgr() {};
 
-	DllExport void Init();
-	DllExport void DeInit();
+	__declspec(dllexport) void Init();
+	__declspec(dllexport) void DeInit();
 
 	// Deletes Maps, Reloads Infos from XML, Rebuilds Maps
-	DllExport void Reset();
+	__declspec(dllexport) void Reset();
 
 	// Builds Maps
-	DllExport void buildArtFileInfoMaps();
+	__declspec(dllexport) void buildArtFileInfoMaps();
 
 	// Adds an Art File List
 	void addArtInfoItem(CvArtFileMgr::ArtInfoItem* item) { m_artInfoItems.push_back(item);	}

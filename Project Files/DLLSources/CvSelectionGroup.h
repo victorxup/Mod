@@ -27,9 +27,9 @@ public:
 	CvSelectionGroup();
 	virtual ~CvSelectionGroup();
 
-	DllExport void init(int iID, PlayerTypes eOwner);
-	DllExport void uninit();
-	DllExport void reset(int iID = 0, PlayerTypes eOwner = NO_PLAYER, bool bConstructorCall = false);
+	__declspec(dllexport) void init(int iID, PlayerTypes eOwner);
+	__declspec(dllexport) void uninit();
+	__declspec(dllexport) void reset(int iID = 0, PlayerTypes eOwner = NO_PLAYER, bool bConstructorCall = false);
 
 	void kill();
 
@@ -41,23 +41,23 @@ public:
 	bool doDelayedDeath();
 
 	void playActionSound();
-	DllExport void pushMission(MissionTypes eMission, int iData1 = -1, int iData2 = -1, int iFlags = 0, bool bAppend = false, bool bManual = false, MissionAITypes eMissionAI = NO_MISSIONAI, CvPlot* pMissionAIPlot = nullptr, CvUnit* pMissionAIUnit = nullptr);
+	__declspec(dllexport) void pushMission(MissionTypes eMission, int iData1 = -1, int iData2 = -1, int iFlags = 0, bool bAppend = false, bool bManual = false, MissionAITypes eMissionAI = NO_MISSIONAI, CvPlot* pMissionAIPlot = nullptr, CvUnit* pMissionAIUnit = nullptr);
 	void popMission();
-	DllExport void autoMission();
+	__declspec(dllexport) void autoMission();
 	void updateMission();
-	DllExport CvPlot* lastMissionPlot();
+	__declspec(dllexport) CvPlot* lastMissionPlot();
 
 	bool canStartMission(int iMission, int iData1, int iData2, CvPlot* pPlot = nullptr, bool bTestVisible = false, bool bUseCache = false);
 	void startMission();
 	void continueMission(int iSteps = 0);
-	DllExport bool canDoInterfaceMode(InterfaceModeTypes eInterfaceMode);
-	DllExport bool canDoInterfaceModeAt(InterfaceModeTypes eInterfaceMode, CvPlot* pPlot);
+	__declspec(dllexport) bool canDoInterfaceMode(InterfaceModeTypes eInterfaceMode);
+	__declspec(dllexport) bool canDoInterfaceModeAt(InterfaceModeTypes eInterfaceMode, CvPlot* pPlot);
 
 	bool canDoCommand(CommandTypes eCommand, int iData1, int iData2, bool bTestVisible = false, bool bUseCache = false);
 	bool canEverDoCommand(CommandTypes eCommand, int iData1, int iData2, bool bTestVisible, bool bUseCache);
 	void setupActionCache();
 	bool isHuman();
-	DllExport bool isBusy();
+	__declspec(dllexport) bool isBusy();
 	bool isCargoBusy();
 	int baseMoves();
 	bool isWaiting() const;
@@ -65,13 +65,13 @@ public:
 	bool hasCargo() const;
 	int getCargo() const;
 	bool buildCargoUnitList(CLinkList<IDInfo>& unitList) const;
-	DllExport bool canAllMove();
+	__declspec(dllexport) bool canAllMove();
 	bool canAnyMove();
 	bool hasMoved();
 	bool canEnterTerritory(PlayerTypes ePlayer, bool bIgnoreRightOfPassage = false) const;
 	bool canEnterArea(PlayerTypes ePlayer, const CvArea* pArea, bool bIgnoreRightOfPassage = false) const;
-	DllExport bool canMoveInto(CvPlot* pPlot, bool bAttack = false);
-	DllExport bool canMoveOrAttackInto(CvPlot* pPlot, bool bDeclareWar = false);
+	__declspec(dllexport) bool canMoveInto(CvPlot* pPlot, bool bAttack = false);
+	__declspec(dllexport) bool canMoveOrAttackInto(CvPlot* pPlot, bool bDeclareWar = false);
 	bool canMoveOrAttackInto(CvPlot const& kPlot, bool bDeclareWar = false, bool bCheckMoves = false, bool bAssumeVisible = true) const;
 	bool canMoveThrough(CvPlot const& kPlot, bool bDeclareWar = false, bool bAssumeVisible = true) const; // Exposed to Python, K-Mod added bDeclareWar and bAssumeVisible; advc: CvPlot const&
 	bool canFight();
@@ -89,13 +89,13 @@ public:
 	bool isInvisible(TeamTypes eTeam) const;
 	int countNumUnitAIType(UnitAITypes eUnitAI);
 	bool IsSelected();
-	DllExport void NotifyEntity(MissionTypes eMission);
+	__declspec(dllexport) void NotifyEntity(MissionTypes eMission);
 
 	int getX() const;
 	int getY() const;
 	bool at(int iX, int iY) const;
 	bool atPlot(const CvPlot* pPlot) const;
-	DllExport CvPlot* plot() const;
+	__declspec(dllexport) CvPlot* plot() const;
 	int getArea() const;
 	CvArea* area() const;
 	DomainTypes getDomainType() const;
@@ -112,7 +112,7 @@ public:
 	void setTransportUnit(CvUnit* pTransportUnit);
 	bool isAmphibPlot(const CvPlot* pPlot) const;
 	bool groupAmphibMove(CvPlot* pPlot, int iFlags);
-	DllExport bool readyToSelect(bool bAny = false);
+	__declspec(dllexport) bool readyToSelect(bool bAny = false);
 	bool readyToMove(bool bAny = false);
 	bool readyToAuto();
 	bool isOnMap() const;
@@ -126,7 +126,7 @@ public:
 
 	bool isForceUpdate();
 	void setForceUpdate(bool bNewValue);
-	DllExport PlayerTypes getOwner() const;
+	__declspec(dllexport) PlayerTypes getOwner() const;
 	inline PlayerTypes getOwnerINLINE() const
 	{
 		return m_eOwner;
@@ -155,14 +155,14 @@ public:
 	bool generatePath(const CvPlot* pFromPlot, const CvPlot* pToPlot, int iFlags = 0, bool bReuse = false, int* piPathTurns = nullptr, int iMaxPath = -1) const; // Exposed to Python (K-mod added iMaxPath)
 	// void resetPath() const; // disabled by K-mod. Use path_finder.Reset instead. (was exposed to Python)
 
-	DllExport void clearUnits();
-	DllExport bool addUnit(CvUnit* pUnit, bool bMinimalChange);
+	__declspec(dllexport) void clearUnits();
+	__declspec(dllexport) bool addUnit(CvUnit* pUnit, bool bMinimalChange);
 	void removeUnit(CvUnit* pUnit);
 	void mergeIntoGroup(CvSelectionGroup* pSelectionGroup);
 	CvSelectionGroup* splitGroup(int iSplitSize, CvUnit* pNewHeadUnit = nullptr);
 
-	DllExport CLLNode<IDInfo>* deleteUnitNode(CLLNode<IDInfo>* pNode);
-	DllExport inline CLLNode<IDInfo>* nextUnitNode(CLLNode<IDInfo>* pNode) const
+	__declspec(dllexport) CLLNode<IDInfo>* deleteUnitNode(CLLNode<IDInfo>* pNode);
+	__declspec(dllexport) inline CLLNode<IDInfo>* nextUnitNode(CLLNode<IDInfo>* pNode) const
 	{
 		return m_units.next(pNode); // advc.inl
 	} // <advc.003s> Safer in 'for' loops
@@ -170,10 +170,10 @@ public:
 	{
 		return m_units.next(pNode);
 	} // </advc.003s>
-	DllExport int getNumUnits() const;
-	DllExport int getUnitIndex(CvUnit* pUnit, int maxIndex = -1) const;
-	DllExport CLLNode<IDInfo>* headUnitNode() const;
-	DllExport CvUnit* getHeadUnit() const;
+	__declspec(dllexport) int getNumUnits() const;
+	__declspec(dllexport) int getUnitIndex(CvUnit* pUnit, int maxIndex = -1) const;
+	__declspec(dllexport) CLLNode<IDInfo>* headUnitNode() const;
+	__declspec(dllexport) CvUnit* getHeadUnit() const;
 	CvUnit* getUnitAt(int index) const;
 	UnitAITypes getHeadUnitAI() const;
 	PlayerTypes getHeadOwner() const;
@@ -183,9 +183,9 @@ public:
 	MissionData* getMissionFromQueue(int iIndex) const;
 	void insertAtEndMissionQueue(MissionData mission, bool bStart = true);
 	CLLNode<MissionData>* deleteMissionQueueNode(CLLNode<MissionData>* pNode);
-	DllExport CLLNode<MissionData>* nextMissionQueueNode(CLLNode<MissionData>* pNode) const;
+	__declspec(dllexport) CLLNode<MissionData>* nextMissionQueueNode(CLLNode<MissionData>* pNode) const;
 	CLLNode<MissionData>* prevMissionQueueNode(CLLNode<MissionData>* pNode) const;
-	DllExport CLLNode<MissionData>* headMissionQueueNode() const;
+	__declspec(dllexport) CLLNode<MissionData>* headMissionQueueNode() const;
 	CLLNode<MissionData>* tailMissionQueueNode() const;
 	int getMissionType(int iNode) const;
 	int getMissionData1(int iNode) const;

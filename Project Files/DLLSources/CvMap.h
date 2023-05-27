@@ -110,9 +110,9 @@ public:
 	CvMap();
 	virtual ~CvMap();
 
-	DllExport void init(CvMapInitData* pInitData = nullptr);
-	DllExport void setupGraphical();
-	DllExport void reset(CvMapInitData* pInitData);
+	__declspec(dllexport) void init(CvMapInitData* pInitData = nullptr);
+	__declspec(dllexport) void setupGraphical();
+	__declspec(dllexport) void reset(CvMapInitData* pInitData);
 
 protected:
 
@@ -120,21 +120,21 @@ protected:
 	void setup();
 
 public:
-	DllExport void erasePlots();
+	__declspec(dllexport) void erasePlots();
 	void setRevealedPlots(TeamTypes eTeam, bool bNewValue, bool bTerrainOnly = false);
 	void setAllPlotTypes(PlotTypes ePlotType);
 
 	void doTurn();
 
-	DllExport void updateFlagSymbols();
+	__declspec(dllexport) void updateFlagSymbols();
 
-	DllExport void updateFog();
+	__declspec(dllexport) void updateFog();
 	void updateVisibility();
-	DllExport void updateSymbolVisibility();
+	__declspec(dllexport) void updateSymbolVisibility();
 	void updateSymbols();
-	DllExport void updateMinimapColor();
+	__declspec(dllexport) void updateMinimapColor();
 	void updateSight(bool bIncrement);
-	DllExport void updateCenterUnit();
+	__declspec(dllexport) void updateCenterUnit();
 	void updateWorkingCity();
 	void updateMinOriginalStartDist(CvArea* pArea);
 	void updateYield();
@@ -144,7 +144,7 @@ public:
 
 	CvPlot* syncRandPlot(int iFlags = 0, int iArea = -1, int iMinUnitDistance = -1, int iTimeout = 100);
 
-	DllExport CvCity* findCity(int iX, int iY, PlayerTypes eOwner = NO_PLAYER, TeamTypes eTeam = NO_TEAM, bool bSameArea = true, bool bCoastalOnly = false, TeamTypes eTeamAtWarWith = NO_TEAM, DirectionTypes eDirection = NO_DIRECTION, CvCity* pSkipCity = nullptr);
+	__declspec(dllexport) CvCity* findCity(int iX, int iY, PlayerTypes eOwner = NO_PLAYER, TeamTypes eTeam = NO_TEAM, bool bSameArea = true, bool bCoastalOnly = false, TeamTypes eTeamAtWarWith = NO_TEAM, DirectionTypes eDirection = NO_DIRECTION, CvCity* pSkipCity = nullptr);
 	CvCity* findCity(Coordinates coord, PlayerTypes eOwner = NO_PLAYER, TeamTypes eTeam = NO_TEAM, bool bSameArea = true, bool bCoastalOnly = false, TeamTypes eTeamAtWarWith = NO_TEAM, DirectionTypes eDirection = NO_DIRECTION, CvCity* pSkipCity = nullptr);
 	CvSelectionGroup* findSelectionGroup(int iX, int iY, PlayerTypes eOwner = NO_PLAYER, bool bReadyToSelect = false);
 
@@ -153,7 +153,7 @@ public:
 	int getMapFractalFlags();
 	bool findWater(CvPlot* pPlot, int iRange, bool bFreshWater);
 
-	DllExport bool isPlot(int iX, int iY) const;
+	__declspec(dllexport) bool isPlot(int iX, int iY) const;
 	inline int isPlotINLINE(int iX, int iY) const
 	{
 		return ((iX >= 0) && (iX < getGridWidthINLINE()) && (iY >= 0) && (iY < getGridHeightINLINE()));
@@ -163,13 +163,13 @@ public:
 		return coord.isOnMap();
 	}
 
-	DllExport int numPlots() const;
+	__declspec(dllexport) int numPlots() const;
 	inline int numPlotsINLINE() const
 	{
 		return getGridWidthINLINE() * getGridHeightINLINE();
 	}
 
-	DllExport int plotNum(int iX, int iY) const;
+	__declspec(dllexport) int plotNum(int iX, int iY) const;
 	inline int plotNumINLINE(int iX, int iY) const
 	{
 		return ((iY * getGridWidthINLINE()) + iX);
@@ -183,23 +183,23 @@ public:
 	int plotY(int iIndex) const;
 
 	int pointXToPlotX(float fX);
-	DllExport float plotXToPointX(int iX);
+	__declspec(dllexport) float plotXToPointX(int iX);
 
 	int pointYToPlotY(float fY);
-	DllExport float plotYToPointY(int iY);
+	__declspec(dllexport) float plotYToPointY(int iY);
 
 	float getWidthCoords();
 	float getHeightCoords();
 	int maxPlotDistance();
 	int maxStepDistance();
 
-	DllExport int getGridWidth() const;
+	__declspec(dllexport) int getGridWidth() const;
 	inline int getGridWidthINLINE() const
 	{
 		return m_iGridWidth;
 	}
 
-	DllExport int getGridHeight() const;
+	__declspec(dllexport) int getGridHeight() const;
 	inline int getGridHeightINLINE() const
 	{
 		return m_iGridHeight;
@@ -215,25 +215,25 @@ public:
 	int getNextRiverID();
 	void incrementNextRiverID();
 
-	DllExport bool isWrapX();
+	__declspec(dllexport) bool isWrapX();
 	inline bool isWrapXINLINE() const
 	{
 		return m_bWrapX;
 	}
 
-	DllExport bool isWrapY();
+	__declspec(dllexport) bool isWrapY();
 	inline bool isWrapYINLINE() const
 	{
 		return m_bWrapY;
 	}
 
-	DllExport bool isWrap();
+	__declspec(dllexport) bool isWrap();
 	inline bool isWrapINLINE() const
 	{
 		return m_bWrapX || m_bWrapY;
 	}
 
-	DllExport WorldSizeTypes getWorldSize();
+	__declspec(dllexport) WorldSizeTypes getWorldSize();
 	ClimateTypes getClimate();
 	SeaLevelTypes getSeaLevel();
 
@@ -244,13 +244,13 @@ public:
 	void changeNumBonuses(BonusTypes eIndex, int iChange);
 	int getNumBonusesOnLand(BonusTypes eIndex);
 	void changeNumBonusesOnLand(BonusTypes eIndex, int iChange);
-	DllExport CvPlot* plotByIndex(int iIndex) const;
+	__declspec(dllexport) CvPlot* plotByIndex(int iIndex) const;
 	inline CvPlot* plotByIndexINLINE(int iIndex) const
 	{
 		return iIndex >= 0 && iIndex < getGridWidthINLINE() * getGridHeightINLINE() ? &m_pMapPlots[iIndex] : nullptr;
 	}
 
-	DllExport CvPlot* plot(int iX, int iY) const;
+	__declspec(dllexport) CvPlot* plot(int iX, int iY) const;
 	__forceinline CvPlot* plotINLINE(int iX, int iY) const
 	{
 		if ((iX == INVALID_PLOT_COORD) || (iY == INVALID_PLOT_COORD))
@@ -299,7 +299,7 @@ public:
 		return m_pMapPlots[plotNumINLINE(coord)];
 	} // </advc.inl>
 
-	DllExport CvPlot* pointToPlot(float fX, float fY);
+	__declspec(dllexport) CvPlot* pointToPlot(float fX, float fY);
 	int getIndexAfterLastArea();
 	int getNumAreas();
 	int getNumLandAreas();

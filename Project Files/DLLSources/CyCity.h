@@ -20,7 +20,7 @@ class CyCity
 {
 public:
 	CyCity();
-	DllExport CyCity(CvCity* pCity);		// Call from C++
+	__declspec(dllexport) CyCity(CvCity* pCity);		// Call from C++
 	CvCity* getCity() { return m_pCity;	}	// Call from C++
 	bool isNone() { return m_pCity == nullptr; }
 	void kill();

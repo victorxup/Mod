@@ -2742,7 +2742,7 @@ void CvXMLLoadUtility::SetVariableListTagPairForAudioScripts(int **ppiList, char
 	}
 }
 
-DllExport bool CvXMLLoadUtility::LoadPlayerOptions()
+__declspec(dllexport) bool CvXMLLoadUtility::LoadPlayerOptions()
 {
 	// load order: 1
 	if (!CreateFXml())
@@ -2822,7 +2822,7 @@ DllExport bool CvXMLLoadUtility::LoadPlayerOptions()
 	return true;
 }
 
-DllExport bool CvXMLLoadUtility::LoadGraphicOptions()
+__declspec(dllexport) bool CvXMLLoadUtility::LoadGraphicOptions()
 {
 	// load order: 2
 	if (!CreateFXml())

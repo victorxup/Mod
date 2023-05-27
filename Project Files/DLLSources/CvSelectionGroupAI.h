@@ -14,8 +14,8 @@ class CvSelectionGroupAI : public CvSelectionGroup
 
 public:
 
-	DllExport CvSelectionGroupAI();
-	DllExport virtual ~CvSelectionGroupAI();
+	__declspec(dllexport) CvSelectionGroupAI();
+	__declspec(dllexport) virtual ~CvSelectionGroupAI();
 
 	void AI_init();
 	void AI_uninit();

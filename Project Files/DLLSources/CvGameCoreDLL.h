@@ -34,8 +34,6 @@
 #include <set>
 #include <deque>
 
-#define DllExport   __declspec( dllexport )
-
 
 //
 // GameBryo

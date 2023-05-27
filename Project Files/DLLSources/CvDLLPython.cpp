@@ -55,7 +55,7 @@ void CyDataPythonInterface(); // WTP
 //
 //
 //
-DllExport void DLLPublishToPython()
+__declspec(dllexport) void DLLPublishToPython()
 {
 	CyDealPythonInterface();
 	CyEnumsPythonInterface();
@@ -80,7 +80,7 @@ DllExport void DLLPublishToPython()
 	//
 	// large interfaces which can be split across files if need be
 	//
-	
+
 	python::class_<CyGame> game ("CyGame");		// define game class
 	CyGamePythonInterface1(game);
 	CyGamePythonInterface2(game);

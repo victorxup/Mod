@@ -16,28 +16,28 @@ class PopupReturn
 {
 
 public:
-	DllExport PopupReturn();
+	__declspec(dllexport) PopupReturn();
 
-	DllExport void setSelectedRadioButton(int iValue, int iGroup = 0);
-	DllExport int getSelectedRadioButton(int iGroup = 0) const;
-	DllExport void setCheckboxBitfield(int iValue, int iGroup = 0);
-	DllExport int getCheckboxBitfield(int iGroup = 0) const;
-	DllExport void setEditBoxString(const wchar* szValue, int iGroup = 0);
-	DllExport const wchar* getEditBoxString(int iGroup = 0) const;
-	DllExport void setSpinnerWidgetValue(int iValue, int iGroup = 0);
-	DllExport int getSpinnerWidgetValue(int iGroup = 0) const;
-	DllExport void setSelectedPulldownValue(int iValue, int iGroup = 0);
-	DllExport int getSelectedPullDownValue(int iGroup = 0) const;
-	DllExport void setSelectedListBoxValue(int iValue, int iGroup = 0);
-	DllExport int getSelectedListBoxValue(int iGroup = 0) const;
-	DllExport void setCurrentSpinBoxValue(int iValue, int iIndex = 0);
-	DllExport int getCurrentSpinBoxValue( int iIndex = 0 ) const;
-	DllExport void setButtonClicked(int iValue, int iGroup = 0);
-	DllExport int getButtonClicked( int iGroup = 0 ) const;
+	__declspec(dllexport) void setSelectedRadioButton(int iValue, int iGroup = 0);
+	__declspec(dllexport) int getSelectedRadioButton(int iGroup = 0) const;
+	__declspec(dllexport) void setCheckboxBitfield(int iValue, int iGroup = 0);
+	__declspec(dllexport) int getCheckboxBitfield(int iGroup = 0) const;
+	__declspec(dllexport) void setEditBoxString(const wchar* szValue, int iGroup = 0);
+	__declspec(dllexport) const wchar* getEditBoxString(int iGroup = 0) const;
+	__declspec(dllexport) void setSpinnerWidgetValue(int iValue, int iGroup = 0);
+	__declspec(dllexport) int getSpinnerWidgetValue(int iGroup = 0) const;
+	__declspec(dllexport) void setSelectedPulldownValue(int iValue, int iGroup = 0);
+	__declspec(dllexport) int getSelectedPullDownValue(int iGroup = 0) const;
+	__declspec(dllexport) void setSelectedListBoxValue(int iValue, int iGroup = 0);
+	__declspec(dllexport) int getSelectedListBoxValue(int iGroup = 0) const;
+	__declspec(dllexport) void setCurrentSpinBoxValue(int iValue, int iIndex = 0);
+	__declspec(dllexport) int getCurrentSpinBoxValue( int iIndex = 0 ) const;
+	__declspec(dllexport) void setButtonClicked(int iValue, int iGroup = 0);
+	__declspec(dllexport) int getButtonClicked( int iGroup = 0 ) const;
 
 	// read and write object to a stream
-	DllExport void read(FDataStreamBase* pStream);
-	DllExport void write(FDataStreamBase* pStream) const;
+	__declspec(dllexport) void read(FDataStreamBase* pStream);
+	__declspec(dllexport) void write(FDataStreamBase* pStream) const;
 
 private:
 	std::map<int, int> m_aiSelectedRadioButton;		//	Selected Radio Button

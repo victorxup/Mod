@@ -10,17 +10,17 @@ class CvDLLWidgetData
 
 public:
 
-	DllExport static CvDLLWidgetData& getInstance();
-	DllExport static void freeInstance();
+	__declspec(dllexport) static CvDLLWidgetData& getInstance();
+	__declspec(dllexport) static void freeInstance();
 
-	DllExport void parseHelp(CvWStringBuffer &szBuffer, CvWidgetDataStruct &widgetDataStruct);
+	__declspec(dllexport) void parseHelp(CvWStringBuffer &szBuffer, CvWidgetDataStruct &widgetDataStruct);
 
-	DllExport bool executeAction( CvWidgetDataStruct &widgetDataStruct );
-	DllExport bool executeAltAction( CvWidgetDataStruct &widgetDataStruct );
-	DllExport bool executeDropOn(const CvWidgetDataStruct& destinationWidgetData, const CvWidgetDataStruct& sourceWidgetData);
-	DllExport bool executeDoubleClick(const CvWidgetDataStruct& destinationWidgetData);
+	__declspec(dllexport) bool executeAction( CvWidgetDataStruct &widgetDataStruct );
+	__declspec(dllexport) bool executeAltAction( CvWidgetDataStruct &widgetDataStruct );
+	__declspec(dllexport) bool executeDropOn(const CvWidgetDataStruct& destinationWidgetData, const CvWidgetDataStruct& sourceWidgetData);
+	__declspec(dllexport) bool executeDoubleClick(const CvWidgetDataStruct& destinationWidgetData);
 
-	DllExport bool isLink(const CvWidgetDataStruct &widgetDataStruct) const;
+	__declspec(dllexport) bool isLink(const CvWidgetDataStruct &widgetDataStruct) const;
 
 protected:
 	//	Actions to be executed

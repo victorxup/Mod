@@ -79,9 +79,9 @@ class CvXMLLoadUtility
 //---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
 	// default constructor
-	DllExport CvXMLLoadUtility();
+	__declspec(dllexport) CvXMLLoadUtility();
 	// default destructor
-	DllExport ~CvXMLLoadUtility(void);
+	__declspec(dllexport) ~CvXMLLoadUtility(void);
 
 	void SetSchemaCache(FXmlSchemaCache* pSchemaCache) { m_pSchemaCache = pSchemaCache; }
 	FXmlSchemaCache* GetSchemaCache() { return m_pSchemaCache; }
@@ -91,36 +91,36 @@ public:
 
 	FXml* GetXML() { return m_pFXml; }
 
-	DllExport bool LoadPostMenuGlobals();
-	DllExport bool LoadPreMenuGlobals();
-	DllExport bool LoadBasicInfos();
-	DllExport bool LoadPlayerOptions();
-	DllExport bool LoadGraphicOptions();
+	__declspec(dllexport) bool LoadPostMenuGlobals();
+	__declspec(dllexport) bool LoadPreMenuGlobals();
+	__declspec(dllexport) bool LoadBasicInfos();
+	__declspec(dllexport) bool LoadPlayerOptions();
+	__declspec(dllexport) bool LoadGraphicOptions();
 
 	// read the global defines from a specific file
 	bool ReadGlobalDefines(char const* szXMLFileName, CvCacheObject* cache);
 	// loads globaldefines.xml and calls various other functions to load relevant global variables
-	DllExport bool SetGlobalDefines();
+	__declspec(dllexport) bool SetGlobalDefines();
 	// loads globaltypes.xml and calls various other functions to load relevant global variables
-	DllExport bool SetGlobalTypes();
+	__declspec(dllexport) bool SetGlobalTypes();
 	// loads calls various functions that load xml files that in turn load relevant global variables
 	bool SetGlobals();
 	// loads globaldefines.xml and calls various other functions to load relevant global variables
-	DllExport bool SetPostGlobalsGlobalDefines();
+	__declspec(dllexport) bool SetPostGlobalsGlobalDefines();
 
 	// modded function to load the correct GameFont to match the language in question
 	void CvXMLLoadUtility::SetGameFont();
 
 	// calls various functions to release the memory associated with the global variables
-	DllExport void CleanUpGlobalVariables();
+	__declspec(dllexport) void CleanUpGlobalVariables();
 
 	// releases global variables associated with items that can be reloaded
-	DllExport void ResetLandscapeInfo();
-	DllExport bool SetupGlobalLandscapeInfo();
-	DllExport bool SetGlobalArtDefines();
-	DllExport bool LoadGlobalText();
+	__declspec(dllexport) void ResetLandscapeInfo();
+	__declspec(dllexport) bool SetupGlobalLandscapeInfo();
+	__declspec(dllexport) bool SetGlobalArtDefines();
+	__declspec(dllexport) bool LoadGlobalText();
 	bool SetHelpText();
-	DllExport void ResetGlobalEffectInfo();
+	__declspec(dllexport) void ResetGlobalEffectInfo();
 
 // for progress bars
 	typedef void (*ProgressCB)(int iStepNum, int iTotalSteps, const char* szMessage);

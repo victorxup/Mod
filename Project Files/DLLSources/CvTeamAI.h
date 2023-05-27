@@ -22,7 +22,7 @@ public:
 		FAssertMsg(eTeam < MAX_TEAMS, "eTeam is not assigned a valid value");
 		return m_aTeams[eTeam];
 	}
-	DllExport static CvTeamAI& getTeamNonInl(TeamTypes eTeam);
+	__declspec(dllexport) static CvTeamAI& getTeamNonInl(TeamTypes eTeam);
 
 	static void initStatics();
 	static void freeStatics();
@@ -121,11 +121,11 @@ public:
 	int AI_getEnemyPeacetimeGrantValue(TeamTypes eIndex) const;
 	void AI_setEnemyPeacetimeGrantValue(TeamTypes eIndex, int iNewValue);
 	void AI_changeEnemyPeacetimeGrantValue(TeamTypes eIndex, int iChange);
-	
+
 	int AI_getDamages(TeamTypes eIndex) const;
 	void AI_setDamages(TeamTypes eIndex, int iNewValue);
 	void AI_changeDamages(TeamTypes eIndex, int iChange);
-	
+
 	void AI_doDamages(TeamTypes eTeam, bool bPeace);
 
 	WarPlanTypes AI_getWarPlan(TeamTypes eIndex) const;
@@ -153,7 +153,7 @@ public:
 	int AI_getFear(TeamTypes eTeam) const;
 
 	int AI_warplanStrength(WarPlanTypes eWarplan) const;
-	
+
 	bool AI_isNative() const;
 	bool AI_isKing() const;
 

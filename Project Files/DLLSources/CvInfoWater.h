@@ -35,22 +35,22 @@ class CvWaterPlaneInfo :public CvInfoBase
 {
 public:
 
-	DllExport CvWaterPlaneInfo();
-	DllExport virtual ~CvWaterPlaneInfo();
+	__declspec(dllexport) CvWaterPlaneInfo();
+	__declspec(dllexport) virtual ~CvWaterPlaneInfo();
 
-	DllExport float getMaterialAlpha() const;				// The water plane's material alpha
+	__declspec(dllexport) float getMaterialAlpha() const;				// The water plane's material alpha
 
-	DllExport float getTextureScaling() const;				// The water plane's texture scale
-	DllExport float getTextureScrollRateU() const;			// The water plane's texture scroll rate in U
-	DllExport float getTextureScrollRateV() const;			// The water plane's texture scroll rate in V
+	__declspec(dllexport) float getTextureScaling() const;				// The water plane's texture scale
+	__declspec(dllexport) float getTextureScrollRateU() const;			// The water plane's texture scroll rate in U
+	__declspec(dllexport) float getTextureScrollRateV() const;			// The water plane's texture scroll rate in V
 
-	DllExport char const* getBaseTexture() const;
-	DllExport char const* getNormalTexture() const;
-	DllExport char const* getTransitionTexture() const;
-	DllExport char const* getEnvironmentTexture() const;
-	DllExport char const* getGridTexture() const;
+	__declspec(dllexport) char const* getBaseTexture() const;
+	__declspec(dllexport) char const* getNormalTexture() const;
+	__declspec(dllexport) char const* getTransitionTexture() const;
+	__declspec(dllexport) char const* getEnvironmentTexture() const;
+	__declspec(dllexport) char const* getGridTexture() const;
 
-	DllExport bool read(CvXMLLoadUtility*);
+	__declspec(dllexport) bool read(CvXMLLoadUtility*);
 
 protected:
 
@@ -79,26 +79,26 @@ class CvTerrainPlaneInfo :public CvInfoBase
 {
 public:
 
-	DllExport CvTerrainPlaneInfo();
-	DllExport virtual ~CvTerrainPlaneInfo();
+	__declspec(dllexport) CvTerrainPlaneInfo();
+	__declspec(dllexport) virtual ~CvTerrainPlaneInfo();
 
-	DllExport bool isVisible() const;				// The terrain plane's material alpha
-	DllExport bool isGroundPlane() const;				// The terrain plane's material alpha
-	DllExport bool isCitySelection() const;				// The terrain plane's material alpha
-	DllExport float getMaterialAlpha() const;				// The terrain plane's material alpha
-	DllExport float getCloseAlpha() const;				// The terrain plane's material alpha
+	__declspec(dllexport) bool isVisible() const;				// The terrain plane's material alpha
+	__declspec(dllexport) bool isGroundPlane() const;				// The terrain plane's material alpha
+	__declspec(dllexport) bool isCitySelection() const;				// The terrain plane's material alpha
+	__declspec(dllexport) float getMaterialAlpha() const;				// The terrain plane's material alpha
+	__declspec(dllexport) float getCloseAlpha() const;				// The terrain plane's material alpha
 
-	DllExport float getTextureScalingU() const;				// The terrain plane's texture scale
-	DllExport float getTextureScalingV() const;				// The terrain plane's texture scale
-	DllExport float getTextureScrollRateU() const;			// The terrain plane's texture scroll rate in U
-	DllExport float getTextureScrollRateV() const;			// The terrain plane's texture scroll rate in V
-	DllExport float getZHeight() const;						// The terrain plane's z height in world units
-	DllExport FogTypes getFogType() const;
+	__declspec(dllexport) float getTextureScalingU() const;				// The terrain plane's texture scale
+	__declspec(dllexport) float getTextureScalingV() const;				// The terrain plane's texture scale
+	__declspec(dllexport) float getTextureScrollRateU() const;			// The terrain plane's texture scroll rate in U
+	__declspec(dllexport) float getTextureScrollRateV() const;			// The terrain plane's texture scroll rate in V
+	__declspec(dllexport) float getZHeight() const;						// The terrain plane's z height in world units
+	__declspec(dllexport) FogTypes getFogType() const;
 
-	DllExport char const* getBaseTexture() const;
-	DllExport void setBaseTexture(char const* szVal);		// The filename of the base texture
+	__declspec(dllexport) char const* getBaseTexture() const;
+	__declspec(dllexport) void setBaseTexture(char const* szVal);		// The filename of the base texture
 
-	DllExport bool read(CvXMLLoadUtility*);
+	__declspec(dllexport) bool read(CvXMLLoadUtility*);
 
 protected:
 
@@ -130,16 +130,16 @@ class CvCameraOverlayInfo :public CvInfoBase
 {
 public:
 
-	DllExport CvCameraOverlayInfo();
-	DllExport virtual ~CvCameraOverlayInfo();
+	__declspec(dllexport) CvCameraOverlayInfo();
+	__declspec(dllexport) virtual ~CvCameraOverlayInfo();
 
-	DllExport bool isVisible() const;				// The terrain plane's material alpha
-	DllExport CameraOverlayTypes getCameraOverlayType() const;
+	__declspec(dllexport) bool isVisible() const;				// The terrain plane's material alpha
+	__declspec(dllexport) CameraOverlayTypes getCameraOverlayType() const;
 
-	DllExport char const* getBaseTexture() const;
-	DllExport void setBaseTexture(char const* szVal);		// The filename of the base texture
+	__declspec(dllexport) char const* getBaseTexture() const;
+	__declspec(dllexport) void setBaseTexture(char const* szVal);		// The filename of the base texture
 
-	DllExport bool read(CvXMLLoadUtility*);
+	__declspec(dllexport) bool read(CvXMLLoadUtility*);
 
 protected:
 

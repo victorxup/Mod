@@ -161,9 +161,9 @@ public:
 
 	void toggleMultiRowPlotList(); // TAC - TAC Interface - koma13 - START
 
-	DllExport void init(PlayerTypes eID);
-	DllExport void setupGraphical();
-	DllExport void reset(PlayerTypes eID = NO_PLAYER, bool bConstructorCall = false);
+	__declspec(dllexport) void init(PlayerTypes eID);
+	__declspec(dllexport) void setupGraphical();
+	__declspec(dllexport) void reset(PlayerTypes eID = NO_PLAYER, bool bConstructorCall = false);
 
 protected:
 
@@ -218,7 +218,7 @@ public:
 	const CvWString& addNewCityName();
 	void getCivilizationCityName(CvWString& szBuffer, CivilizationTypes eCivilization) const;
 	bool isCityNameValid(const CvWString& szName, bool bTestDestroyed = true) const;
-	DllExport CvUnit* initUnit(UnitTypes eUnit, ProfessionTypes eProfession, int iX, int iY, UnitAITypes eUnitAI = NO_UNITAI, DirectionTypes eFacingDirection = NO_DIRECTION, int iYieldStored = 0);
+	__declspec(dllexport) CvUnit* initUnit(UnitTypes eUnit, ProfessionTypes eProfession, int iX, int iY, UnitAITypes eUnitAI = NO_UNITAI, DirectionTypes eFacingDirection = NO_DIRECTION, int iYieldStored = 0);
 	CvUnit* initUnit(UnitTypes eUnit, ProfessionTypes eProfession, Coordinates initCoord, UnitAITypes eUnitAI = NO_UNITAI, DirectionTypes eFacingDirection = NO_DIRECTION, int iYieldStored = 0);
 	CvUnit* initEuropeUnit(UnitTypes eUnit, UnitAITypes eUnitAI = NO_UNITAI, DirectionTypes eFacingDirection = NO_DIRECTION);
 	bool initEuropeSettler(bool bPayEquipment);
@@ -237,25 +237,25 @@ public:
 	int getTotalPlayerAfricaSellProfitModifierInPercent() const; // WTP, Africa and Port Royal Profit Modifiers - START
 	int getTotalPlayerPortRoyalSellProfitModifierInPercent() const; // WTP, Africa and Port Royal Profit Modifiers - START
 	int getTotalPlayerDomesticMarketProfitModifierInPercent() const; // WTP, ray, Domestic Market Profit Modifier -START
-	DllExport bool isHuman() const;
-	DllExport void updateHuman();
+	__declspec(dllexport) bool isHuman() const;
+	__declspec(dllexport) void updateHuman();
 	bool isNative() const;
 	bool isColonialNation() const;
 	CivCategoryTypes getCivCategoryTypes() const;
 	bool isAlwaysOpenBorders() const;
-	DllExport const wchar* getName(uint uiForm = 0) const;
-	DllExport const wchar* getNameKey() const;
-	DllExport const wchar* getCivilizationDescription(uint uiForm = 0) const;
+	__declspec(dllexport) const wchar* getName(uint uiForm = 0) const;
+	__declspec(dllexport) const wchar* getNameKey() const;
+	__declspec(dllexport) const wchar* getCivilizationDescription(uint uiForm = 0) const;
 	const wchar* getCivilizationDescriptionKey() const;
-	DllExport const wchar* getCivilizationShortDescription(uint uiForm = 0) const;
+	__declspec(dllexport) const wchar* getCivilizationShortDescription(uint uiForm = 0) const;
 	const wchar* getCivilizationShortDescriptionKey() const;
-	DllExport const wchar* getCivilizationAdjective(uint uiForm = 0) const;
+	__declspec(dllexport) const wchar* getCivilizationAdjective(uint uiForm = 0) const;
 	const wchar* getCivilizationAdjectiveKey() const;
-	DllExport const char* getFlagDecal() const;
-	DllExport bool isWhiteFlag() const;
-	DllExport bool isInvertFlag() const;
-	DllExport const CvWString getWorstEnemyName() const;
-	DllExport ArtStyleTypes getArtStyleType() const;
+	__declspec(dllexport) const char* getFlagDecal() const;
+	__declspec(dllexport) bool isWhiteFlag() const;
+	__declspec(dllexport) bool isInvertFlag() const;
+	__declspec(dllexport) const CvWString getWorstEnemyName() const;
+	__declspec(dllexport) ArtStyleTypes getArtStyleType() const;
 	const TCHAR* getUnitButton(UnitTypes eUnit) const;
 	void doTurn();
 	void doTurnUnits();
@@ -271,7 +271,7 @@ public:
 
 	bool hasReadyUnit(bool bAny = false) const;
 	bool hasAutoUnit() const;
-	DllExport bool hasBusyUnit() const;
+	__declspec(dllexport) bool hasBusyUnit() const;
 	int calculateScore(bool bFinal = false, bool bVictory = false) const;
 	int getScoreTaxFactor() const;
 	int findBestFoundValue() const;
@@ -282,13 +282,13 @@ public:
 	int countTotalYieldStored(YieldTypes eYield) const;
 	int countCityFeatures(FeatureTypes eFeature) const;
 	int countNumBuildings(BuildingTypes eBuilding) const;
-	DllExport bool canContact(PlayerTypes ePlayer) const;
+	__declspec(dllexport) bool canContact(PlayerTypes ePlayer) const;
 	void contact(PlayerTypes ePlayer);
-	DllExport void handleDiploEvent(DiploEventTypes eDiploEvent, PlayerTypes ePlayer, int iData1, int iData2);
+	__declspec(dllexport) void handleDiploEvent(DiploEventTypes eDiploEvent, PlayerTypes ePlayer, int iData1, int iData2);
 	bool canTradeWith(PlayerTypes eWhoTo) const;
 	bool canReceiveTradeCity(PlayerTypes eFromPlayer) const;
-	DllExport bool canTradeItem(PlayerTypes eWhoTo, TradeData item, bool bTestDenial = false) const;
-	DllExport DenialTypes getTradeDenial(PlayerTypes eWhoTo, TradeData item) const;
+	__declspec(dllexport) bool canTradeItem(PlayerTypes eWhoTo, TradeData item, bool bTestDenial = false) const;
+	__declspec(dllexport) DenialTypes getTradeDenial(PlayerTypes eWhoTo, TradeData item) const;
 	bool isTradingWithTeam(TeamTypes eTeam, bool bIncludeCancelable) const;
 	bool canStopTradingWithTeam(TeamTypes eTeam, bool bContinueNotTrading = false) const;
 	void stopTradingWithTeam(TeamTypes eTeam);
@@ -339,23 +339,23 @@ public:
 	void changeTotalLand(int iChange);
 	int getTotalLandScored() const;
 	void changeTotalLandScored(int iChange);
-	DllExport int getGold() const;
-	DllExport void setGold(int iNewValue);
-	DllExport void changeGold(int iChange);
+	__declspec(dllexport) int getGold() const;
+	__declspec(dllexport) void setGold(int iNewValue);
+	__declspec(dllexport) void changeGold(int iChange);
 	int getExtraTradeMultiplier(PlayerTypes eOtherPlayer) const;
-	DllExport int getAdvancedStartPoints() const;
+	__declspec(dllexport) int getAdvancedStartPoints() const;
 	void setAdvancedStartPoints(int iNewValue);
 	void changeAdvancedStartPoints(int iChange);
-	DllExport void doAdvancedStartAction(AdvancedStartActionTypes eAction, int iX, int iY, int iData, bool bAdd);
+	__declspec(dllexport) void doAdvancedStartAction(AdvancedStartActionTypes eAction, int iX, int iY, int iData, bool bAdd);
 	void doAdvancedStartAction(AdvancedStartActionTypes eAction, Coordinates coord, int iData, bool bAdd);
-	DllExport int getAdvancedStartUnitCost(UnitTypes eUnit, bool bAdd, CvPlot* pPlot = nullptr);
-	DllExport int getAdvancedStartCityCost(bool bAdd, CvPlot* pPlot = nullptr);
-	DllExport int getAdvancedStartPopCost(bool bAdd, CvCity* pCity = nullptr);
-	DllExport int getAdvancedStartCultureCost(bool bAdd, CvCity* pCity = nullptr);
-	DllExport int getAdvancedStartBuildingCost(BuildingTypes eBuilding, bool bAdd, CvCity* pCity = nullptr);
-	DllExport int getAdvancedStartImprovementCost(ImprovementTypes eImprovement, bool bAdd, CvPlot* pPlot = nullptr);
-	DllExport int getAdvancedStartRouteCost(RouteTypes eRoute, bool bAdd, CvPlot* pPlot = nullptr);
-	DllExport int getAdvancedStartVisibilityCost(bool bAdd, CvPlot* pPlot = nullptr);
+	__declspec(dllexport) int getAdvancedStartUnitCost(UnitTypes eUnit, bool bAdd, CvPlot* pPlot = nullptr);
+	__declspec(dllexport) int getAdvancedStartCityCost(bool bAdd, CvPlot* pPlot = nullptr);
+	__declspec(dllexport) int getAdvancedStartPopCost(bool bAdd, CvCity* pCity = nullptr);
+	__declspec(dllexport) int getAdvancedStartCultureCost(bool bAdd, CvCity* pCity = nullptr);
+	__declspec(dllexport) int getAdvancedStartBuildingCost(BuildingTypes eBuilding, bool bAdd, CvCity* pCity = nullptr);
+	__declspec(dllexport) int getAdvancedStartImprovementCost(ImprovementTypes eImprovement, bool bAdd, CvPlot* pPlot = nullptr);
+	__declspec(dllexport) int getAdvancedStartRouteCost(RouteTypes eRoute, bool bAdd, CvPlot* pPlot = nullptr);
+	__declspec(dllexport) int getAdvancedStartVisibilityCost(bool bAdd, CvPlot* pPlot = nullptr);
 
 	void createGreatGeneral(UnitTypes eGreatGeneralUnit, bool bIncrementExperience, const Coordinates coord);
 	int getGreatGeneralsCreated() const;
@@ -408,7 +408,7 @@ public:
 	void changeLevelExperienceModifier(int iChange);
 	CvCity* getCapitalCity() const;
 	void setCapitalCity(CvCity* pNewCapitalCity);
-	DllExport CvCity* getPrimaryCity() const;
+	__declspec(dllexport) CvCity* getPrimaryCity() const;
 	int getCitiesLost() const;
 	void changeCitiesLost(int iChange);
 	int getAssets() const;
@@ -430,16 +430,16 @@ public:
 	void changeSeaCombatExperience(int iChange);
 	// R&R, ray, Great Admirals - END
 	bool isConnected() const;
-	DllExport int getNetID() const;
-	DllExport void setNetID(int iNetID);
+	__declspec(dllexport) int getNetID() const;
+	__declspec(dllexport) void setNetID(int iNetID);
 	void sendReminder();
 
 	uint getStartTime() const;
-	DllExport void setStartTime(uint uiStartTime);
-	DllExport uint getTotalTimePlayed() const;
-	DllExport bool isAlive() const;
+	__declspec(dllexport) void setStartTime(uint uiStartTime);
+	__declspec(dllexport) uint getTotalTimePlayed() const;
+	__declspec(dllexport) bool isAlive() const;
 
-	DllExport bool isEverAlive() const;
+	__declspec(dllexport) bool isEverAlive() const;
 	void setAlive(bool bNewValue);
 
 	// R&R, ray, Bargaining - Start
@@ -451,43 +451,43 @@ public:
 	// R&R, ray, Bargaining - End
 
 	void verifyAlive();
-	DllExport bool isTurnActive() const;
-	DllExport void setTurnActive(bool bNewValue, bool bDoTurn = true);
+	__declspec(dllexport) bool isTurnActive() const;
+	__declspec(dllexport) void setTurnActive(bool bNewValue, bool bDoTurn = true);
 
 	bool isAutoMoves() const;
 	void setAutoMoves(bool bNewValue);
-	DllExport void setTurnActiveForPbem(bool bActive);
+	__declspec(dllexport) void setTurnActiveForPbem(bool bActive);
 
-	DllExport bool isPbemNewTurn() const;
-	DllExport void setPbemNewTurn(bool bNew);
+	__declspec(dllexport) bool isPbemNewTurn() const;
+	__declspec(dllexport) void setPbemNewTurn(bool bNew);
 
 	bool isEndTurn() const;
-	DllExport void setEndTurn(bool bNewValue);
+	__declspec(dllexport) void setEndTurn(bool bNewValue);
 
-	DllExport bool isTurnDone() const;
+	__declspec(dllexport) bool isTurnDone() const;
 	bool isExtendedGame() const;
-	DllExport void makeExtendedGame();
+	__declspec(dllexport) void makeExtendedGame();
 	bool isFoundedFirstCity() const;
 	void setFoundedFirstCity(bool bNewValue);
-	DllExport PlayerTypes getID() const;
-	DllExport HandicapTypes getHandicapType() const;
-	DllExport CivilizationTypes getCivilizationType() const;
-	DllExport LeaderHeadTypes getLeaderType() const;
+	__declspec(dllexport) PlayerTypes getID() const;
+	__declspec(dllexport) HandicapTypes getHandicapType() const;
+	__declspec(dllexport) CivilizationTypes getCivilizationType() const;
+	__declspec(dllexport) LeaderHeadTypes getLeaderType() const;
 	LeaderHeadTypes getPersonalityType() const;
 	void setPersonalityType(LeaderHeadTypes eNewValue);
-	DllExport EraTypes getCurrentEra() const;
+	__declspec(dllexport) EraTypes getCurrentEra() const;
 	void setCurrentEra(EraTypes eNewValue);
 	PlayerTypes getParent() const;
 	void setParent(PlayerTypes eParent);
-	DllExport TeamTypes getTeam() const;
+	__declspec(dllexport) TeamTypes getTeam() const;
 	void setTeam(TeamTypes eTeam);
 	void updateTeamType();
 	YieldTypes getImmigrationConversion() const;
 	void setImmigrationConversion(YieldTypes eConversion);
-	DllExport PlayerColorTypes getPlayerColor() const;
-	DllExport int getPlayerTextColorR() const;
-	DllExport int getPlayerTextColorG() const;
-	DllExport int getPlayerTextColorB() const;
+	__declspec(dllexport) PlayerColorTypes getPlayerColor() const;
+	__declspec(dllexport) int getPlayerTextColorR() const;
+	__declspec(dllexport) int getPlayerTextColorG() const;
+	__declspec(dllexport) int getPlayerTextColorB() const;
 	int getPlayerTextColorA() const;
 	int getSeaPlotYield(YieldTypes eIndex) const;
 	void changeSeaPlotYield(YieldTypes eIndex, int iChange);
@@ -513,7 +513,7 @@ public:
 	bool isFeatAccomplished(FeatTypes eIndex) const;
 	void setFeatAccomplished(FeatTypes eIndex, bool bNewValue);
 	bool shouldDisplayFeatPopup(FeatTypes eIndex) const;
-	DllExport bool isOption(PlayerOptionTypes eIndex) const;
+	__declspec(dllexport) bool isOption(PlayerOptionTypes eIndex) const;
 	void setOption(PlayerOptionTypes eIndex, bool bNewValue);
 	bool isPlayable() const;
 	void setPlayable(bool bNewValue);
@@ -530,7 +530,7 @@ public:
 	void changeUnitClassImmigrated(UnitClassTypes eIndex, int iChange);
 	int getUnitClassCountPlusMaking(UnitClassTypes eIndex) const;
 	int getUnitMoveChange(UnitClassTypes eIndex) const;
-	DllExport void changeUnitMoveChange(UnitClassTypes eIndex, int iChange);
+	__declspec(dllexport) void changeUnitMoveChange(UnitClassTypes eIndex, int iChange);
 	int getUnitStrengthModifier(UnitClassTypes eIndex) const;
 	void changeUnitStrengthModifier(UnitClassTypes eIndex, int iChange);
 	int getProfessionCombatChange(ProfessionTypes eIndex) const;
@@ -550,7 +550,7 @@ public:
 	bool isSpecialBuildingNotRequired(SpecialBuildingTypes eIndex) const;
 	void changeSpecialBuildingNotRequiredCount(SpecialBuildingTypes eIndex, int iChange);
 	CivicTypes getCivic(CivicOptionTypes eIndex) const;
-	DllExport void setCivic(CivicOptionTypes eIndex, CivicTypes eNewValue);
+	__declspec(dllexport) void setCivic(CivicOptionTypes eIndex, CivicTypes eNewValue);
 	int getImprovementYieldChange(ImprovementTypes eIndex1, YieldTypes eIndex2) const;
 	void changeImprovementYieldChange(ImprovementTypes eIndex1, YieldTypes eIndex2, int iChange);
 	int getBuildingYieldChange(BuildingClassTypes eBuildingClass, YieldTypes eYield) const;
@@ -571,20 +571,20 @@ public:
 	const CvWString& getCityName(int iIndex) const;
 
 	// city iteration
-	DllExport CvCity* firstCity(int *pIterIdx, bool bRev=false) const;
+	__declspec(dllexport) CvCity* firstCity(int *pIterIdx, bool bRev=false) const;
 	CvCity* firstCity() const;
-	DllExport CvCity* nextCity(int *pIterIdx, bool bRev=false) const;
-	DllExport int getNumCities() const;
-	DllExport CvCity* getCity(int iID) const;
+	__declspec(dllexport) CvCity* nextCity(int *pIterIdx, bool bRev=false) const;
+	__declspec(dllexport) int getNumCities() const;
+	__declspec(dllexport) CvCity* getCity(int iID) const;
 	CvCity* addCity();
 	void deleteCity(int iID);
 
 	// unit iteration
-	DllExport CvUnit* firstUnit(int *pIterIdx) const;
-	DllExport CvUnit* nextUnit(int *pIterIdx) const;
-	DllExport int getNumUnits() const;
+	__declspec(dllexport) CvUnit* firstUnit(int *pIterIdx) const;
+	__declspec(dllexport) CvUnit* nextUnit(int *pIterIdx) const;
+	__declspec(dllexport) int getNumUnits() const;
 	int getNumShips() const;// WTP, ray, easily counting Ships - START
-	DllExport CvUnit* getUnit(int iID) const;
+	__declspec(dllexport) CvUnit* getUnit(int iID) const;
 	CvUnit* addUnit();
 	void addExistingUnit(CvUnit *pUnit);
 	void deleteUnit(int iID);
@@ -592,7 +592,7 @@ public:
 
 	int getNumEuropeUnits() const;
 	CvUnit* getEuropeUnit(int iIndex) const;
-	DllExport CvUnit* getEuropeUnitById(int iId) const;
+	__declspec(dllexport) CvUnit* getEuropeUnitById(int iId) const;
 	void loadUnitFromEurope(CvUnit* pUnit, CvUnit* pTransport);
 	void unloadUnitToEurope(CvUnit* pUnit);
 	void transferUnitInEurope(CvUnit* pUnit, CvUnit* pTransport);
@@ -632,19 +632,19 @@ public:
 	void deleteEventTriggered(int iID);
 	EventTriggeredData* initTriggeredData(EventTriggerTypes eEventTrigger, bool bFire = false, int iCityId = -1, int iPlotX = INVALID_PLOT_COORD, int iPlotY = INVALID_PLOT_COORD, PlayerTypes eOtherPlayer = NO_PLAYER, int iOtherPlayerCityId = -1, int iUnitId = -1, BuildingTypes eBuilding = NO_BUILDING);
 	int getEventTriggerWeight(EventTriggerTypes eTrigger) const;
-	DllExport void addMessage(const CvTalkingHeadMessage& message);
+	__declspec(dllexport) void addMessage(const CvTalkingHeadMessage& message);
 	void showMissedMessages();
 	void clearMessages();
-	DllExport const CvMessageQueue& getGameMessages() const;
+	__declspec(dllexport) const CvMessageQueue& getGameMessages() const;
 	void expireMessages();
-	DllExport void addPopup(CvPopupInfo* pInfo, bool bFront = false);
+	__declspec(dllexport) void addPopup(CvPopupInfo* pInfo, bool bFront = false);
 	void clearPopups();
-	DllExport CvPopupInfo* popFrontPopup();
-	DllExport const CvPopupQueue& getPopups() const;
-	DllExport void addDiplomacy(CvDiploParameters* pDiplo);
+	__declspec(dllexport) CvPopupInfo* popFrontPopup();
+	__declspec(dllexport) const CvPopupQueue& getPopups() const;
+	__declspec(dllexport) void addDiplomacy(CvDiploParameters* pDiplo);
 	void clearDiplomacy();
-	DllExport const CvDiploQueue& getDiplomacy() const;
-	DllExport CvDiploParameters* popFrontDiplomacy();
+	__declspec(dllexport) const CvDiploQueue& getDiplomacy() const;
+	__declspec(dllexport) CvDiploParameters* popFrontDiplomacy();
 
 	int getScoreHistory(int iTurn) const;
 	void updateScoreHistory(int iTurn, int iBestScore);
@@ -674,9 +674,9 @@ public:
 	// Script data needs to be a narrow string for pickling in Python
 	std::string getScriptData() const;
 	void setScriptData(std::string szNewValue);
-	DllExport const CvString& getPbemEmailAddress() const;
-	DllExport void setPbemEmailAddress(const char* szAddress);
-	DllExport const CvString& getSmtpHost() const;
+	__declspec(dllexport) const CvString& getPbemEmailAddress() const;
+	__declspec(dllexport) void setPbemEmailAddress(const char* szAddress);
+	__declspec(dllexport) const CvString& getSmtpHost() const;
 	void setSmtpHost(const char* szHost);
 	const EventTriggeredData* getEventOccured(EventTypes eEvent) const;
 	bool isTriggerFired(EventTriggerTypes eEventTrigger) const;
@@ -711,11 +711,11 @@ public:
 
 	void verifyUnitStacksValid();
 
-	DllExport void buildTradeTable(PlayerTypes eOtherPlayer, CLinkList<TradeData>& ourList, const IDInfo& kTransport) const;
-	DllExport bool getHeadingTradeString(PlayerTypes eOtherPlayer, TradeableItems eItem, CvWString& szString, CvString& szIcon) const;
-	DllExport bool getItemTradeString(PlayerTypes eOtherPlayer, bool bOffer, bool bShowingCurrent, const TradeData& zTradeData, const IDInfo& kTransport, CvWString& szString, CvString& szIcon) const;
-	DllExport void updateTradeList(PlayerTypes eOtherPlayer, CLinkList<TradeData>& ourInventory, const CLinkList<TradeData>& ourOffer, const CLinkList<TradeData>& theirOffer, const IDInfo& kTransport) const;
-	DllExport int getMaxGoldTrade(PlayerTypes eOtherPlayer, const IDInfo& kTransport) const;
+	__declspec(dllexport) void buildTradeTable(PlayerTypes eOtherPlayer, CLinkList<TradeData>& ourList, const IDInfo& kTransport) const;
+	__declspec(dllexport) bool getHeadingTradeString(PlayerTypes eOtherPlayer, TradeableItems eItem, CvWString& szString, CvString& szIcon) const;
+	__declspec(dllexport) bool getItemTradeString(PlayerTypes eOtherPlayer, bool bOffer, bool bShowingCurrent, const TradeData& zTradeData, const IDInfo& kTransport, CvWString& szString, CvString& szIcon) const;
+	__declspec(dllexport) void updateTradeList(PlayerTypes eOtherPlayer, CLinkList<TradeData>& ourInventory, const CLinkList<TradeData>& ourOffer, const CLinkList<TradeData>& theirOffer, const IDInfo& kTransport) const;
+	__declspec(dllexport) int getMaxGoldTrade(PlayerTypes eOtherPlayer, const IDInfo& kTransport) const;
 
 	CvCity* getPopulationUnitCity(int iUnitId) const;
 	int getCrossesStored() const;
@@ -804,7 +804,7 @@ public:
 	YieldTypes getHighestTradedYield() const;
 	int getHighestStoredYieldCityId(YieldTypes eYield) const;
 
-	DllExport void doAction(PlayerActionTypes eAction, int iData1, int iData2, int iData3);
+	__declspec(dllexport) void doAction(PlayerActionTypes eAction, int iData1, int iData2, int iData3);
 	int getTradeYieldAmount(YieldTypes eYield, CvUnit* pTransport) const;
 	void setCityBillboardDirty(bool bNewValue);
 	bool isEurope() const;

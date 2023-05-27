@@ -11,7 +11,7 @@ class CvFractal
 
 public:
 
-	enum DllExport FracVals
+	enum __declspec(dllexport) FracVals
 	{
 		FRAC_WRAP_X					= (0x0001),
 		FRAC_WRAP_Y					= (0x0002),
@@ -30,16 +30,16 @@ public:
 	// iFracXExp should be 8 or less
 	// iFracYExp should be one less than iFracXExp for Civ3 worlds
 
-	DllExport void fracInit(int iNewXs, int iNewYs, int iGrain, CvRandom& random, int iFlags, CvFractal* pRifts = nullptr, int iFracXExp = DEFAULT_FRAC_X_EXP, int iFracYExp = DEFAULT_FRAC_Y_EXP);
-	DllExport void fracInitHinted(int iNewXs, int iNewYs, int iGrain, CvRandom& random, byte* pbyHints, int iHintsLength, int iFlags, CvFractal* pRifts, int iFracXExp=DEFAULT_FRAC_X_EXP, int iFracYExp=DEFAULT_FRAC_Y_EXP);
+	__declspec(dllexport) void fracInit(int iNewXs, int iNewYs, int iGrain, CvRandom& random, int iFlags, CvFractal* pRifts = nullptr, int iFracXExp = DEFAULT_FRAC_X_EXP, int iFracYExp = DEFAULT_FRAC_Y_EXP);
+	__declspec(dllexport) void fracInitHinted(int iNewXs, int iNewYs, int iGrain, CvRandom& random, byte* pbyHints, int iHintsLength, int iFlags, CvFractal* pRifts, int iFracXExp=DEFAULT_FRAC_X_EXP, int iFracYExp=DEFAULT_FRAC_Y_EXP);
 
-	DllExport int getHeight(int x, int y);
-	DllExport int getHeightFromPercent(int iPercent);
+	__declspec(dllexport) int getHeight(int x, int y);
+	__declspec(dllexport) int getHeightFromPercent(int iPercent);
 
-	DllExport void reset();
-	DllExport CvFractal();
-	DllExport virtual ~CvFractal();
-	DllExport void uninit();
+	__declspec(dllexport) void reset();
+	__declspec(dllexport) CvFractal();
+	__declspec(dllexport) virtual ~CvFractal();
+	__declspec(dllexport) void uninit();
 
 protected:
 

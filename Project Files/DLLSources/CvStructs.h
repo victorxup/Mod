@@ -27,7 +27,7 @@
  */
 
 
-struct DllExport XYCoords
+struct __declspec(dllexport) XYCoords
 {
 	XYCoords(int x=0, int y=0) : iX(x), iY(y) {}
 	int iX;
@@ -41,7 +41,7 @@ struct DllExport XYCoords
 	bool operator>  (const XYCoords xy) const { return ((iY > xy.iY) || (iY == xy.iY && iX > xy.iX)); }
 };
 
-struct DllExport IDInfo
+struct __declspec(dllexport) IDInfo
 {
 
 	IDInfo(PlayerTypes eOwner = NO_PLAYER, int iID = -1) : eOwner(eOwner), iID(iID) {}
@@ -65,13 +65,13 @@ struct DllExport IDInfo
 	void write(CvSavegameWriter& writer) const;
 };
 
-struct DllExport GameTurnInfo
+struct __declspec(dllexport) GameTurnInfo
 {
 	int iMonthIncrement;
 	int iNumGameTurnsPerIncrement;
 };
 
-struct DllExport OrderData
+struct __declspec(dllexport) OrderData
 {
 	friend void CyStructsPythonInterface1();
 private:
@@ -109,7 +109,7 @@ public:
 };
 static_assert(sizeof(OrderData) == 16);
 
-struct DllExport MissionData
+struct __declspec(dllexport) MissionData
 {
 	MissionTypes eMissionType;
 	int iData1;
@@ -121,7 +121,7 @@ struct DllExport MissionData
 	void write(CvSavegameWriter& writer) const;
 };
 
-struct DllExport TradeData
+struct __declspec(dllexport) TradeData
 {
 	TradeableItems m_eItemType;				//	What type of item is this
 	int m_iData1;											//	Any additional data?
@@ -200,7 +200,7 @@ struct BuildingYieldChange
 	void write(CvSavegameWriter& writer) const;
 };
 
-struct DllExport FOWVis
+struct __declspec(dllexport) FOWVis
 {
 	uint uiCount;
 	POINT* pOffsets;  // array of "Offset" points
@@ -209,7 +209,7 @@ struct DllExport FOWVis
 	POINT getOffsets(int i) const { return pOffsets[i]; }
 };
 
-struct DllExport PBGameSetupData
+struct __declspec(dllexport) PBGameSetupData
 {
 	PBGameSetupData();
 
@@ -242,7 +242,7 @@ struct DllExport PBGameSetupData
 	bool getMPOptionAt(int iOption) {return abMPOptions[iOption];}
 };
 
-struct DllExport PBPlayerSetupData
+struct __declspec(dllexport) PBPlayerSetupData
 {
 	int iWho;
 	int iCiv;
@@ -254,7 +254,7 @@ struct DllExport PBPlayerSetupData
 	std::wstring getStatusText() {return szStatusText;}
 };
 
-struct DllExport PBPlayerAdminData
+struct __declspec(dllexport) PBPlayerAdminData
 {
 	std::wstring szName;
 	std::wstring getName() {return szName;}
@@ -293,7 +293,7 @@ enum BattleTimeTypes
 //  STRUCT:      CvBattleRound
 //!  \brief		Represents a single round within a battle.
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-class DllExport CvBattleRound
+class __declspec(dllexport) CvBattleRound
 {
 public:
 	CvBattleRound();
@@ -327,7 +327,7 @@ typedef std::vector<CvBattleRound> CvBattleRoundVector;		//!< Type declaration f
 //  CLASS:      CvMissionDefinition
 //!  \brief		Base mission definition struct
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-class DllExport CvMissionDefinition
+class __declspec(dllexport) CvMissionDefinition
 {
 public:
 	CvMissionDefinition();
@@ -355,7 +355,7 @@ protected:
 //  STRUCT:     CvBattleDefinition
 //!  \brief		A definition passed to CvBattleManager to start a battle between units
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-class DllExport CvBattleDefinition : public CvMissionDefinition
+class __declspec(dllexport) CvBattleDefinition : public CvMissionDefinition
 {
 public:
 	CvBattleDefinition();
@@ -396,7 +396,7 @@ private:
 	CvBattleRoundVector	m_aBattleRounds;					//!< The rounds that define the battle plan
 };
 
-struct DllExport CvWidgetDataStruct
+struct __declspec(dllexport) CvWidgetDataStruct
 {
 	int m_iData1;										//	The first bit of data
 	int m_iData2;										//	The second piece of data

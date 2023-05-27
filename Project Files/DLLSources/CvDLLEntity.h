@@ -22,7 +22,7 @@ class CvCity;
 class CvUnit;
 class CvPlot;
 
-class DllExport CvDLLEntity
+class __declspec(dllexport) CvDLLEntity
 {
 public:
 	CvDLLEntity();

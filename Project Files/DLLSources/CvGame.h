@@ -27,8 +27,8 @@ public:
 	// PatchMod: Victorys START
 	int iVictoriesSet;
 	// PatchMod: Victorys END
-	DllExport void init(HandicapTypes eHandicap);
-	DllExport void reset(HandicapTypes eHandicap = NO_HANDICAP, bool bConstructorCall = false);
+	__declspec(dllexport) void init(HandicapTypes eHandicap);
+	__declspec(dllexport) void reset(HandicapTypes eHandicap = NO_HANDICAP, bool bConstructorCall = false);
 
 protected:
 
@@ -36,10 +36,10 @@ protected:
 
 public:
 
-	DllExport void setInitialItems(bool bScenario);
-	DllExport void regenerateMap();
+	__declspec(dllexport) void setInitialItems(bool bScenario);
+	__declspec(dllexport) void regenerateMap();
 
-	DllExport void initDiplomacy();
+	__declspec(dllexport) void initDiplomacy();
 	void initFreeState();
 	void initFreeUnits();
 	void initImmigration();
@@ -49,44 +49,44 @@ public:
 
 	void assignNativeTerritory();
 
-	DllExport void update();
+	__declspec(dllexport) void update();
 	void updateScore(bool bForce = false);
 
-	DllExport void updateColoredPlots();
+	__declspec(dllexport) void updateColoredPlots();
 
 	void updateCitySight(bool bIncrement);
 
-	DllExport void updateSelectionList();
-	DllExport void updateTestEndTurn();
+	__declspec(dllexport) void updateSelectionList();
+	__declspec(dllexport) void updateTestEndTurn();
 
-	DllExport void testExtendedGame();
+	__declspec(dllexport) void testExtendedGame();
 
-	DllExport CvUnit* getPlotUnit(const CvPlot* pPlot, int iIndex);
-	DllExport void getPlotUnits(const CvPlot *pPlot, std::vector<CvUnit *> &plotUnits);
-	DllExport void cycleCities(bool bForward = true, bool bAdd = false);
+	__declspec(dllexport) CvUnit* getPlotUnit(const CvPlot* pPlot, int iIndex);
+	__declspec(dllexport) void getPlotUnits(const CvPlot *pPlot, std::vector<CvUnit *> &plotUnits);
+	__declspec(dllexport) void cycleCities(bool bForward = true, bool bAdd = false);
 	void cycleSelectionGroups(bool bClear, bool bForward = true);
-	DllExport bool cyclePlotUnits(CvPlot* pPlot, bool bForward = true, bool bAuto = false, int iCount = -1);
+	__declspec(dllexport) bool cyclePlotUnits(CvPlot* pPlot, bool bForward = true, bool bAuto = false, int iCount = -1);
 
-	DllExport void selectionListMove(CvPlot* pPlot, bool bAlt, bool bShift, bool bCtrl);
-	DllExport void selectionListGameNetMessage(int eMessage, int iData2 = -1, int iData3 = -1, int iData4 = -1, int iFlags = 0, bool bAlt = false, bool bShift = false);
-	DllExport void selectedCitiesGameNetMessage(int eMessage, int iData2 = -1, int iData3 = -1, int iData4 = -1, bool bOption = false, bool bAlt = false, bool bShift = false, bool bCtrl = false);
-	DllExport void cityPushOrder(CvCity* pCity, OrderTypes eOrder, int iData, bool bAlt = false, bool bShift = false, bool bCtrl = false);
+	__declspec(dllexport) void selectionListMove(CvPlot* pPlot, bool bAlt, bool bShift, bool bCtrl);
+	__declspec(dllexport) void selectionListGameNetMessage(int eMessage, int iData2 = -1, int iData3 = -1, int iData4 = -1, int iFlags = 0, bool bAlt = false, bool bShift = false);
+	__declspec(dllexport) void selectedCitiesGameNetMessage(int eMessage, int iData2 = -1, int iData3 = -1, int iData4 = -1, bool bOption = false, bool bAlt = false, bool bShift = false, bool bCtrl = false);
+	__declspec(dllexport) void cityPushOrder(CvCity* pCity, OrderTypes eOrder, int iData, bool bAlt = false, bool bShift = false, bool bCtrl = false);
 
-	DllExport void selectUnit(CvUnit* pUnit, bool bClear, bool bToggle = false, bool bSound = false);
-	DllExport void selectGroup(CvUnit* pUnit, bool bShift, bool bCtrl, bool bAlt);
-	DllExport void selectAll(CvPlot* pPlot);
+	__declspec(dllexport) void selectUnit(CvUnit* pUnit, bool bClear, bool bToggle = false, bool bSound = false);
+	__declspec(dllexport) void selectGroup(CvUnit* pUnit, bool bShift, bool bCtrl, bool bAlt);
+	__declspec(dllexport) void selectAll(CvPlot* pPlot);
 
-	DllExport bool canHandleAction(int iAction, CvPlot* pPlot = nullptr, bool bTestVisible = false, bool bUseCache = false);
-	DllExport void setupActionCache();
-	DllExport void handleAction(int iAction);
+	__declspec(dllexport) bool canHandleAction(int iAction, CvPlot* pPlot = nullptr, bool bTestVisible = false, bool bUseCache = false);
+	__declspec(dllexport) void setupActionCache();
+	__declspec(dllexport) void handleAction(int iAction);
 
 	bool canDoControl(ControlTypes eControl);
-	DllExport void doControl(ControlTypes eControl);
+	__declspec(dllexport) void doControl(ControlTypes eControl);
 
-	DllExport void implementDeal(PlayerTypes eWho, PlayerTypes eOtherWho, CLinkList<TradeData>* pOurList, CLinkList<TradeData>* pTheirList, bool bForce = false);
+	__declspec(dllexport) void implementDeal(PlayerTypes eWho, PlayerTypes eOtherWho, CLinkList<TradeData>* pOurList, CLinkList<TradeData>* pTheirList, bool bForce = false);
 	void verifyDeals();
 
-	DllExport void getGlobeviewConfigurationParameters(TeamTypes eTeam, bool& bStarsVisible, bool& bWorldIsRound);
+	__declspec(dllexport) void getGlobeviewConfigurationParameters(TeamTypes eTeam, bool& bStarsVisible, bool& bWorldIsRound);
 
 	int getProductionPerPopulation(HurryTypes eHurry);
 
@@ -108,24 +108,24 @@ public:
 
 	EraTypes getCurrentEra() const;
 
-	DllExport TeamTypes getActiveTeam();
-	DllExport CivilizationTypes getActiveCivilizationType();
+	__declspec(dllexport) TeamTypes getActiveTeam();
+	__declspec(dllexport) CivilizationTypes getActiveCivilizationType();
 
 	unsigned int getLastEndTurnMessageSentTime();
-	DllExport bool isNetworkMultiPlayer() const;
-	DllExport bool isGameMultiPlayer() const;
-	DllExport bool isTeamGame() const;
+	__declspec(dllexport) bool isNetworkMultiPlayer() const;
+	__declspec(dllexport) bool isGameMultiPlayer() const;
+	__declspec(dllexport) bool isTeamGame() const;
 
 	bool isModem();
 	void setModem(bool bModem);
-	DllExport void reviveActivePlayer();
+	__declspec(dllexport) void reviveActivePlayer();
 
-	DllExport int getNumHumanPlayers();
+	__declspec(dllexport) int getNumHumanPlayers();
 
 	int getEndTurnMessagesSent();
-	DllExport void incrementEndTurnMessagesSent();
+	__declspec(dllexport) void incrementEndTurnMessagesSent();
 
-	DllExport int getGameTurn();
+	__declspec(dllexport) int getGameTurn();
 	void setGameTurn(int iNewValue);
 	void incrementGameTurn();
 	int getTurnYear(int iGameTurn);
@@ -139,7 +139,7 @@ public:
 	void setMaxTurns(int iNewValue);
 	void changeMaxTurns(int iChange);
 
-	DllExport void getTurnTimerText(CvWString& szBuffer) const;
+	__declspec(dllexport) void getTurnTimerText(CvWString& szBuffer) const;
 
 	int getMaxCityElimination() const;
 	void setMaxCityElimination(int iNewValue);
@@ -155,7 +155,7 @@ public:
 	int getEstimateEndTurn() const;
 	void setEstimateEndTurn(int iNewValue);
 
-	DllExport int getTurnSlice() const;
+	__declspec(dllexport) int getTurnSlice() const;
 	int getMinutesPlayed() const;
 	void setTurnSlice(int iNewValue);
 	void changeTurnSlice(int iChange);
@@ -164,7 +164,7 @@ public:
 	void setCutoffSlice(int iNewValue);
 	void changeCutoffSlice(int iChange);
 
-	DllExport int getTurnSlicesRemaining() const;
+	__declspec(dllexport) int getTurnSlicesRemaining() const;
 	void resetTurnTimer();
 	void incrementTurnTimer(int iNumTurnSlices);
 	TurnTimerTypes getTurnTimerType() const;
@@ -172,7 +172,7 @@ public:
 	int getTargetScore() const;
 
 	int getNumGameTurnActive();
-	DllExport int countNumHumanGameTurnActive();
+	__declspec(dllexport) int countNumHumanGameTurnActive();
 	void changeNumGameTurnActive(int iChange);
 	int getNumCities() const;
 	void changeNumCities(int iChange);
@@ -183,55 +183,55 @@ public:
 	int getInitPopulation() const;
 	int getInitLand() const;
 	int getInitFather() const;
-	DllExport void initScoreCalculation();
+	__declspec(dllexport) void initScoreCalculation();
 	int getAIAutoPlay();
-	DllExport void setAIAutoPlay(int iNewValue);
+	__declspec(dllexport) void setAIAutoPlay(int iNewValue);
 	void changeAIAutoPlay(int iChange);
 	unsigned int getInitialTime();
-	DllExport void setInitialTime(unsigned int uiNewValue);
+	__declspec(dllexport) void setInitialTime(unsigned int uiNewValue);
 	bool isScoreDirty() const;
 	void setScoreDirty(bool bNewValue);
 
-	DllExport bool isDebugMode() const;
-	DllExport void toggleDebugMode();
-	DllExport void updateDebugModeCache();
+	__declspec(dllexport) bool isDebugMode() const;
+	__declspec(dllexport) void toggleDebugMode();
+	__declspec(dllexport) void updateDebugModeCache();
 	int getPitbossTurnTime() const;
 	void setPitbossTurnTime(int iHours);
 
-	DllExport bool isHotSeat() const;
-	DllExport bool isPbem() const;
-	DllExport bool isPitboss() const;
-	DllExport bool isSimultaneousTeamTurns() const;
+	__declspec(dllexport) bool isHotSeat() const;
+	__declspec(dllexport) bool isPbem() const;
+	__declspec(dllexport) bool isPitboss() const;
+	__declspec(dllexport) bool isSimultaneousTeamTurns() const;
 
-	DllExport bool isFinalInitialized() const;
-	DllExport void setFinalInitialized(bool bNewValue);
+	__declspec(dllexport) bool isFinalInitialized() const;
+	__declspec(dllexport) void setFinalInitialized(bool bNewValue);
 
 	bool getPbemTurnSent() const;
-	DllExport void setPbemTurnSent(bool bNewValue);
+	__declspec(dllexport) void setPbemTurnSent(bool bNewValue);
 
-	DllExport bool getHotPbemBetweenTurns() const;
+	__declspec(dllexport) bool getHotPbemBetweenTurns() const;
 	void setHotPbemBetweenTurns(bool bNewValue);
 
 	bool isPlayerOptionsSent() const;
 	void sendPlayerOptions(bool bForce = false);
-	DllExport PlayerTypes getActivePlayer() const;
-	DllExport void setActivePlayer(PlayerTypes eNewValue, bool bForceHotSeat = false);
-	DllExport void updateUnitEnemyGlow();
+	__declspec(dllexport) PlayerTypes getActivePlayer() const;
+	__declspec(dllexport) void setActivePlayer(PlayerTypes eNewValue, bool bForceHotSeat = false);
+	__declspec(dllexport) void updateUnitEnemyGlow();
 
 	HandicapTypes getHandicapType() const;
 	void setHandicapType(HandicapTypes eHandicap);
-	DllExport PlayerTypes getPausePlayer();
-	DllExport bool isPaused();
-	DllExport void setPausePlayer(PlayerTypes eNewValue);
-	DllExport int getBestLandUnitCombat();
+	__declspec(dllexport) PlayerTypes getPausePlayer();
+	__declspec(dllexport) bool isPaused();
+	__declspec(dllexport) void setPausePlayer(PlayerTypes eNewValue);
+	__declspec(dllexport) int getBestLandUnitCombat();
 	void setBestLandUnitCombat(int iNewValue);
-	DllExport TeamTypes getWinner() const;
-	DllExport VictoryTypes getVictory() const;
+	__declspec(dllexport) TeamTypes getWinner() const;
+	__declspec(dllexport) VictoryTypes getVictory() const;
 	void setWinner(TeamTypes eNewWinner, VictoryTypes eNewVictory);
 
-	DllExport GameStateTypes getGameState() const;
-	DllExport void setGameState(GameStateTypes eNewValue);
-	DllExport EraTypes getStartEra() const;
+	__declspec(dllexport) GameStateTypes getGameState() const;
+	__declspec(dllexport) void setGameState(GameStateTypes eNewValue);
+	__declspec(dllexport) EraTypes getStartEra() const;
 
 	CalendarTypes getCalendar() const;
 
@@ -241,7 +241,7 @@ public:
 
 	PlayerTypes getRankPlayer(int iRank);
 	void setRankPlayer(int iRank, PlayerTypes ePlayer);
-	DllExport int getPlayerScore(PlayerTypes ePlayer);
+	__declspec(dllexport) int getPlayerScore(PlayerTypes ePlayer);
 	void setPlayerScore(PlayerTypes ePlayer, int iScore);
 	TeamTypes getRankTeam(int iRank);
 	void setRankTeam(int iRank, TeamTypes eTeam);
@@ -251,7 +251,7 @@ public:
 	void setTeamScore(TeamTypes eTeam, int iScore);
 	bool isOption(GameOptionTypes eIndex) const;
 	void setOption(GameOptionTypes eIndex, bool bEnabled);
-	DllExport bool isMPOption(MultiplayerOptionTypes eIndex) const;
+	__declspec(dllexport) bool isMPOption(MultiplayerOptionTypes eIndex) const;
 	void setMPOption(MultiplayerOptionTypes eIndex, bool bEnabled);
 	bool isForcedControl(ForceControlTypes eIndex) const;
 	void setForceControl(ForceControlTypes eIndex, bool bEnabled);
@@ -273,7 +273,7 @@ public:
 
 	bool isInAdvancedStart() const;
 
-	DllExport const CvWString & getName();
+	__declspec(dllexport) const CvWString & getName();
 	void setName(char const* szName);
 
 	// Script data needs to be a narrow string for pickling in Python
@@ -296,9 +296,9 @@ public:
 	void addShipName(const CvWString& szName);
 	// TAC - Ship Names - Ray - END
 
-	DllExport int getIndexAfterLastDeal();
+	__declspec(dllexport) int getIndexAfterLastDeal();
 	int getNumDeals();
-	DllExport CvDeal* getDeal(int iID);
+	__declspec(dllexport) CvDeal* getDeal(int iID);
 	CvDeal* addDeal();
 	void deleteDeal(int iID);
 	// iteration
@@ -313,8 +313,8 @@ public:
 	const CvRandom& getSorenRand() const;
 	int getSorenRandNum(int iNum, const char* pszLog);
 
-	DllExport int calculateSyncChecksum(CvString* pLogString);
-	DllExport int calculateOptionsChecksum();
+	__declspec(dllexport) int calculateSyncChecksum(CvString* pLogString);
+	__declspec(dllexport) int calculateOptionsChecksum();
 
 	void addReplayMessage(ReplayMessageTypes eType = NO_REPLAY_MESSAGE, PlayerTypes ePlayer = NO_PLAYER, CvWString pszText = L"",
 		int iPlotX = -1, int iPlotY = -1, ColorTypes eColor = NO_COLOR)
@@ -349,7 +349,7 @@ public:
 	virtual int AI_combatValue(UnitTypes eUnit) = 0;
 
 	CvReplayInfo* getReplayInfo() const;
-	DllExport void setReplayInfo(CvReplayInfo* pReplay);
+	__declspec(dllexport) void setReplayInfo(CvReplayInfo* pReplay);
 	void saveReplay(PlayerTypes ePlayer);
 
 	void addPlayer(PlayerTypes eNewPlayer, LeaderHeadTypes eLeader, CivilizationTypes eCiv);
@@ -364,7 +364,7 @@ public:
 	void setPlotExtraYield(int iX, int iY, YieldTypes eYield, int iCost);
 	void removePlotExtraYield(int iX, int iY);
 	bool isEventActive(EventTriggerTypes eTrigger) const;
-	DllExport void initEvents();
+	__declspec(dllexport) void initEvents();
 	bool isCivEverActive(CivilizationTypes eCivilization) const;
 	bool isLeaderEverActive(LeaderHeadTypes eLeader) const;
 	bool isUnitEverActive(UnitTypes eUnit) const;

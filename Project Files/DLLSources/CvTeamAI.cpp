@@ -38,7 +38,7 @@ void CvTeamAI::freeStatics()
 }
 
 // inlined for performance reasons
-DllExport CvTeamAI& CvTeamAI::getTeamNonInl(TeamTypes eTeam)
+__declspec(dllexport) CvTeamAI& CvTeamAI::getTeamNonInl(TeamTypes eTeam)
 {
 	return getTeam(eTeam);
 }

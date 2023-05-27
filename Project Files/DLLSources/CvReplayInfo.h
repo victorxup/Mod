@@ -11,7 +11,7 @@ class CvReplayMessage;
 class CvReplayInfo
 {
 public:
-	DllExport CvReplayInfo();
+	__declspec(dllexport) CvReplayInfo();
 	virtual ~CvReplayInfo();
 
 	void createInfo(PlayerTypes ePlayer);
@@ -62,14 +62,14 @@ public:
 	int getFinalAgriculture() const;
 	int getNormalizedScore() const;
 
-	DllExport int getMapHeight() const;
-	DllExport int getMapWidth() const;
-	DllExport const unsigned char* getMinimapPixels() const;
+	__declspec(dllexport) int getMapHeight() const;
+	__declspec(dllexport) int getMapWidth() const;
+	__declspec(dllexport) const unsigned char* getMinimapPixels() const;
 	int getMinimapSizeInBytes() const;
 
-	DllExport const char* getModName() const;
+	__declspec(dllexport) const char* getModName() const;
 
-	DllExport bool read(FDataStreamBase& stream);
+	__declspec(dllexport) bool read(FDataStreamBase& stream);
 	void write(FDataStreamBase& stream);
 
 protected:

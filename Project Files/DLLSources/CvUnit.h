@@ -104,7 +104,7 @@ public:
 	void addToMap(CvPlot *targetPlot);
 	void updateOwnerCache(int iChange);
 
-	DllExport void NotifyEntity(MissionTypes eMission);
+	__declspec(dllexport) void NotifyEntity(MissionTypes eMission);
 
 	void doTurn();
 
@@ -114,7 +114,7 @@ public:
 	bool isBetterDefenderThan(const CvUnit* pDefender, const CvUnit* pAttacker, bool bBreakTies) const;
 
 	bool canDoCommand(CommandTypes eCommand, int iData1, int iData2, bool bTestVisible = false, bool bTestBusy = true);
-	DllExport void doCommand(CommandTypes eCommand, int iData1, int iData2);
+	__declspec(dllexport) void doCommand(CommandTypes eCommand, int iData1, int iData2);
 
 	//FAStarNode* getPathLastNode() const; // disabled by K-Mod
 	CvPlot* getPathEndTurnPlot() const;
@@ -231,8 +231,8 @@ public:
 	bool canSpeakWithChief(CvPlot* pPlot) const;
 	void speakWithChief();
 	bool canHold(const CvPlot* pPlot) const;
-	DllExport bool canSleep(const CvPlot* pPlot) const;
-	DllExport bool canFortify(const CvPlot* pPlot) const;
+	__declspec(dllexport) bool canSleep(const CvPlot* pPlot) const;
+	__declspec(dllexport) bool canFortify(const CvPlot* pPlot) const;
 
 	bool canHeal(const CvPlot* pPlot) const;
 	bool canSentry(const CvPlot* pPlot) const;
@@ -284,12 +284,12 @@ public:
 	CvCity* getUpgradeCity(UnitTypes eUnit, bool bSearch = false, int* iSearchValue = nullptr) const;
 	void upgrade(UnitTypes eUnit);
 	HandicapTypes getHandicapType() const;
-	DllExport CivilizationTypes getCivilizationType() const;
+	__declspec(dllexport) CivilizationTypes getCivilizationType() const;
 	const wchar* getVisualCivAdjective(TeamTypes eForTeam) const;
 	SpecialUnitTypes getSpecialUnitType() const;
 	UnitTypes getCaptureUnitType(CivilizationTypes eCivilization) const;
 	UnitCombatTypes getUnitCombatType() const;
-	DllExport DomainTypes getDomainType() const;
+	__declspec(dllexport) DomainTypes getDomainType() const;
 	InvisibleTypes getInvisibleType() const;
 	int getNumSeeInvisibleTypes() const;
 	InvisibleTypes getSeeInvisibleType(int i) const;
@@ -303,11 +303,11 @@ public:
 	int baseMoves() const;
 	int maxMoves() const;
 	int movesLeft() const;
-	DllExport bool canMove() const;
-	DllExport bool hasMoved() const;
+	__declspec(dllexport) bool canMove() const;
+	__declspec(dllexport) bool hasMoved() const;
 
 	bool canBuildRoute(RouteTypes ePreferredRoute = NO_ROUTE) const;
-	DllExport BuildTypes getBuildType() const;
+	__declspec(dllexport) BuildTypes getBuildType() const;
 	int workRate(bool bMax) const;
 	void changeExtraWorkRate(int iChange);
 	int getExtraWorkRate() const;
@@ -318,15 +318,15 @@ public:
 	bool isRivalTerritory() const;
 	bool canCoexistWithEnemyUnit(TeamTypes eTeam) const;
 
-	DllExport bool isFighting() const;
-	DllExport bool isAttacking() const;
-	DllExport bool isDefending() const;
+	__declspec(dllexport) bool isFighting() const;
+	__declspec(dllexport) bool isAttacking() const;
+	__declspec(dllexport) bool isDefending() const;
 	bool isCombat() const;
 
-	DllExport int maxHitPoints() const;
+	__declspec(dllexport) int maxHitPoints() const;
 	int currHitPoints() const;
 	bool isHurt() const;
-	DllExport bool isDead() const;
+	__declspec(dllexport) bool isDead() const;
 
 	void setBaseCombatStr(int iCombat);
 	int baseCombatStr() const;
@@ -335,20 +335,20 @@ public:
 	int currCombatStr(const CvPlot* pPlot, const CvUnit* pAttacker, CombatDetails* pCombatDetails = nullptr) const;
 	int currFirepower(const CvPlot* pPlot, const CvUnit* pAttacker) const;
 	int currEffectiveStr(const CvPlot* pPlot, const CvUnit* pAttacker, CombatDetails* pCombatDetails = nullptr) const;
-	DllExport float maxCombatStrFloat(const CvPlot* pPlot, const CvUnit* pAttacker) const;
-	DllExport float currCombatStrFloat(const CvPlot* pPlot, const CvUnit* pAttacker) const;
+	__declspec(dllexport) float maxCombatStrFloat(const CvPlot* pPlot, const CvUnit* pAttacker) const;
+	__declspec(dllexport) float currCombatStrFloat(const CvPlot* pPlot, const CvUnit* pAttacker) const;
 	bool isUnarmed() const;
 	int getPower() const;
 	int getAsset() const;
 
-	DllExport bool canFight() const;
+	__declspec(dllexport) bool canFight() const;
 	bool canAttack() const;
 	bool canDefend(const CvPlot* pPlot = nullptr) const;
 	bool canSiege(TeamTypes eTeam) const;
 
 	bool isAutomated() const;
-	DllExport bool isWaiting() const;
-	DllExport bool isFortifyable() const;
+	__declspec(dllexport) bool isWaiting() const;
+	__declspec(dllexport) bool isFortifyable() const;
 	int fortifyModifier() const;
 
 	int experienceNeeded() const;
@@ -356,7 +356,7 @@ public:
 	int defenseXPValue() const;
 	int maxXPValue() const;
 
-	DllExport bool isRanged() const;
+	__declspec(dllexport) bool isRanged() const;
 
 	bool alwaysInvisible() const;
 	bool noDefensiveBonus() const;
@@ -364,7 +364,7 @@ public:
 	bool flatMovementCost() const;
 	bool ignoreTerrainCost() const;
 	bool isNeverInvisible() const;
-	DllExport bool isInvisible(TeamTypes eTeam, bool bDebug, bool bCheckCargo = true) const;
+	__declspec(dllexport) bool isInvisible(TeamTypes eTeam, bool bDebug, bool bCheckCargo = true) const;
 
 	int withdrawalProbability() const;
 	int getEvasionProbability(const CvUnit& kAttacker) const;
@@ -398,17 +398,17 @@ public:
 	int getUnitAICargo(UnitAITypes eUnitAI) const;
 	bool canAssignTradeRoute(int iRouteId, bool bReusePath = false) const;
 
-	DllExport int getID() const;
+	__declspec(dllexport) int getID() const;
 	int getIndex() const;
-	DllExport IDInfo getIDInfo() const;
+	__declspec(dllexport) IDInfo getIDInfo() const;
 	void setID(int iID);
 	int getGroupID() const;
 	bool isInGroup() const;
-	DllExport bool isGroupHead() const;
-	DllExport CvSelectionGroup* getGroup() const;
+	__declspec(dllexport) bool isGroupHead() const;
+	__declspec(dllexport) CvSelectionGroup* getGroup() const;
 	bool canJoinGroup(const CvPlot* pPlot, CvSelectionGroup* pSelectionGroup) const;
-	DllExport void joinGroup(CvSelectionGroup* pSelectionGroup, bool bRemoveSelected = false, bool bRejoin = true);
-	DllExport int getHotKeyNumber();
+	__declspec(dllexport) void joinGroup(CvSelectionGroup* pSelectionGroup, bool bRemoveSelected = false, bool bRejoin = true);
+	__declspec(dllexport) int getHotKeyNumber();
 	void setHotKeyNumber(int iNewValue);
 	//TAC Whaling, ray
 	bool isFullToBrim() const;
@@ -426,12 +426,12 @@ public:
 	YieldTypes getYieldForNativeTrade() const;
 	int getAmountForNativeTrade() const;
 	// R&R, ray, Natives Trading - END
-	DllExport int getX() const;
+	__declspec(dllexport) int getX() const;
 	inline int getX_INLINE() const
 	{
 		return m_coord.x();
 	}
-	DllExport int getY() const;
+	__declspec(dllexport) int getY() const;
 	inline int getY_INLINE() const
 	{
 		return m_coord.y();
@@ -445,8 +445,8 @@ public:
 	void jumpTo(CvPlot *plot, bool bGroup = false, bool bUpdate = true, bool bShow = false, bool bCheckPlotVisible = false);
 	bool at(int iX, int iY) const;
 	bool at(Coordinates testCoord) const;
-	DllExport bool atPlot(const CvPlot* pPlot) const;
-	DllExport CvPlot* plot() const;
+	__declspec(dllexport) bool atPlot(const CvPlot* pPlot) const;
+	__declspec(dllexport) CvPlot* plot() const;
 	CvCity* getCity() const;
 	int getArea() const;
 	int getLandArea() const;
@@ -455,7 +455,7 @@ public:
 	void setLastMoveTurn(int iNewValue);
 	int getGameTurnCreated() const;
 	void setGameTurnCreated(int iNewValue);
-	DllExport int getDamage() const;
+	__declspec(dllexport) int getDamage() const;
 	void setDamage(int iNewValue, CvUnit* pAttacker = nullptr, bool bNotifyEntity = true);
 	void changeDamage(int iChange, CvUnit* pAttacker = nullptr);
 	void addDamageRandom(int iMinDamage, int iMaxDamage, int iMinHealthPercentageRemaining = 0);
@@ -478,7 +478,7 @@ public:
 	CvPlot* getAttackPlot() const;
 	void setAttackPlot(const CvPlot* pNewValue);
 
-	DllExport int getCombatTimer() const;
+	__declspec(dllexport) int getCombatTimer() const;
 	void setCombatTimer(int iNewValue);
 	void changeCombatTimer(int iChange);
 
@@ -563,11 +563,11 @@ public:
 	void changeUpgradeDiscount(int iChange);
 	int getExperiencePercent() const;
 	void changeExperiencePercent(int iChange);
-	DllExport DirectionTypes getFacingDirection(bool checkLineOfSightProperty) const;
+	__declspec(dllexport) DirectionTypes getFacingDirection(bool checkLineOfSightProperty) const;
 	void setFacingDirection(DirectionTypes facingDirection);
 	void rotateFacingDirectionClockwise();
 	void rotateFacingDirectionCounterClockwise();
-	DllExport ProfessionTypes getProfession() const;
+	__declspec(dllexport) ProfessionTypes getProfession() const;
 
 	// TAC - LbD - Ray - START
 	int getLbDrounds() const;
@@ -598,8 +598,8 @@ public:
 	bool isMadeAttack() const;
 	void setMadeAttack(bool bNewValue);
 
-	DllExport bool isPromotionReady() const;
-	DllExport void setPromotionReady(bool bNewValue);
+	__declspec(dllexport) bool isPromotionReady() const;
+	__declspec(dllexport) void setPromotionReady(bool bNewValue);
 	void testPromotionReady();
 
 	bool isDelayedDeath() const;
@@ -608,42 +608,42 @@ public:
 
 	bool isCombatFocus() const;
 
-	DllExport bool isInfoBarDirty() const;
-	DllExport void setInfoBarDirty(bool bNewValue);
+	__declspec(dllexport) bool isInfoBarDirty() const;
+	__declspec(dllexport) void setInfoBarDirty(bool bNewValue);
 
-	DllExport PlayerTypes getOwner() const;
+	__declspec(dllexport) PlayerTypes getOwner() const;
 	inline PlayerTypes getOwnerINLINE() const
 	{
 		return m_eOwner;
 	}
 	CvPlayer &getOwnerR() const;
-	DllExport PlayerTypes getVisualOwner(TeamTypes eForTeam = NO_TEAM) const;
+	__declspec(dllexport) PlayerTypes getVisualOwner(TeamTypes eForTeam = NO_TEAM) const;
 	PlayerTypes getCombatOwner(TeamTypes eForTeam, const CvPlot* pPlot) const;
-	DllExport TeamTypes getTeam() const;
-	DllExport PlayerColorTypes getPlayerColor(TeamTypes eForTeam = NO_TEAM) const;
-	DllExport CivilizationTypes getVisualCiv(TeamTypes eForTeam = NO_TEAM) const;
+	__declspec(dllexport) TeamTypes getTeam() const;
+	__declspec(dllexport) PlayerColorTypes getPlayerColor(TeamTypes eForTeam = NO_TEAM) const;
+	__declspec(dllexport) CivilizationTypes getVisualCiv(TeamTypes eForTeam = NO_TEAM) const;
 	TeamTypes getCombatTeam(TeamTypes eForTeam, const CvPlot* pPlot) const;
 
 	PlayerTypes getCapturingPlayer() const;
 	void setCapturingPlayer(PlayerTypes eNewValue);
 	bool isCapturableLandUnit() const;
-	DllExport UnitTypes getUnitType() const;
-	DllExport CvUnitInfo &getUnitInfo() const;
+	__declspec(dllexport) UnitTypes getUnitType() const;
+	__declspec(dllexport) CvUnitInfo &getUnitInfo() const;
 	UnitClassTypes getUnitClassType() const;
 
-	DllExport UnitTypes getLeaderUnitType() const;
+	__declspec(dllexport) UnitTypes getLeaderUnitType() const;
 	void setLeaderUnitType(UnitTypes leaderUnitType);
 
-	DllExport CvUnit* getCombatUnit() const;
+	__declspec(dllexport) CvUnit* getCombatUnit() const;
 	void setCombatUnit(CvUnit* pUnit, bool bAttacking = false);
-	DllExport CvPlot* getPostCombatPlot() const;
+	__declspec(dllexport) CvPlot* getPostCombatPlot() const;
 	void setPostCombatPlot(Coordinates coord);
-	DllExport CvUnit* getTransportUnit() const;
+	__declspec(dllexport) CvUnit* getTransportUnit() const;
 	bool isCargo() const;
 	bool setTransportUnit(CvUnit* pTransportUnit, bool bUnload = true);
 	int getExtraDomainModifier(DomainTypes eIndex) const;
 	void changeExtraDomainModifier(DomainTypes eIndex, int iChange);
-	DllExport const CvWString getName(uint uiForm = 0) const;
+	__declspec(dllexport) const CvWString getName(uint uiForm = 0) const;
 	const wchar* getNameKey() const;
 	const CvWString getNameNoDesc() const;
 	void setName(const CvWString szNewValue);
@@ -694,10 +694,10 @@ public:
 	int getFreePromotionCount(PromotionTypes eIndex) const;
 
 	int getSubUnitCount() const;
-	DllExport int getSubUnitsAlive() const;
+	__declspec(dllexport) int getSubUnitsAlive() const;
 	int getSubUnitsAlive(int iDamage) const;
 
-	DllExport bool isEnemy(TeamTypes eTeam, const CvPlot* pPlot = nullptr) const;
+	__declspec(dllexport) bool isEnemy(TeamTypes eTeam, const CvPlot* pPlot = nullptr) const;
 	bool isPotentialEnemy(TeamTypes eTeam, const CvPlot* pPlot = nullptr) const;
 
 	int getTriggerValue(EventTriggerTypes eTrigger, const CvPlot* pPlot, bool bCheckPlot) const;
@@ -737,9 +737,9 @@ public:
 	void setHomeCity(CvCity* pNewValue);
 	CvCity* getHomeCity() const;
 
-	DllExport bool isOnMap() const;
+	__declspec(dllexport) bool isOnMap() const;
 	const CvArtInfoUnit* getArtInfo(int i) const;
-	DllExport char const* getButton() const;
+	__declspec(dllexport) char const* getButton() const;
 	char const* getFullLengthIcon() const;
 
 	bool isColonistLocked();

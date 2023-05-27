@@ -8,8 +8,8 @@ class CvSavegameWriter;
 class CvTalkingHeadMessage
 {
 public:
-	DllExport CvTalkingHeadMessage(int iMessageTurn = 0, int iLen = 0, LPCWSTR pszDesc = nullptr, LPCTSTR pszSound = nullptr, InterfaceMessageTypes eType = MESSAGE_TYPE_INFO, LPCTSTR icon = nullptr, ColorTypes eColor = NO_COLOR, int iX = -1, int iY = -1, bool bShowOffScreenArrows = false, bool bShowOnScreenArrows = false);
-	DllExport virtual ~CvTalkingHeadMessage(void);
+	__declspec(dllexport) CvTalkingHeadMessage(int iMessageTurn = 0, int iLen = 0, LPCWSTR pszDesc = nullptr, LPCTSTR pszSound = nullptr, InterfaceMessageTypes eType = MESSAGE_TYPE_INFO, LPCTSTR icon = nullptr, ColorTypes eColor = NO_COLOR, int iX = -1, int iY = -1, bool bShowOffScreenArrows = false, bool bShowOnScreenArrows = false);
+	__declspec(dllexport) virtual ~CvTalkingHeadMessage(void);
 
 	void read(CvSavegameReader& reader);
 	void write(CvSavegameWriter& writer) const;
@@ -17,34 +17,34 @@ public:
 	void resetSavedData();
 
 	// Accessors
-	DllExport const wchar* getDescription() const;
+	__declspec(dllexport) const wchar* getDescription() const;
 	void setDescription(CvWString pszDescription);
-	DllExport const CvString& getSound() const;
+	__declspec(dllexport) const CvString& getSound() const;
 	void setSound(LPCTSTR pszSound);
-	DllExport const CvString& getIcon() const;
+	__declspec(dllexport) const CvString& getIcon() const;
 	void setIcon(LPCTSTR pszIcon);
-	DllExport int getLength() const;
-	DllExport void setLength(int iLength);
-	DllExport ColorTypes getFlashColor() const;
+	__declspec(dllexport) int getLength() const;
+	__declspec(dllexport) void setLength(int iLength);
+	__declspec(dllexport) ColorTypes getFlashColor() const;
 	void setFlashColor(ColorTypes eColor);
-	DllExport int getX() const;
+	__declspec(dllexport) int getX() const;
 	void setX(int i);
-	DllExport int getY() const;
+	__declspec(dllexport) int getY() const;
 	void setY(int i);
-	DllExport bool getOffScreenArrows() const;
+	__declspec(dllexport) bool getOffScreenArrows() const;
 	void setOffScreenArrows(bool bArrows);
-	DllExport bool getOnScreenArrows() const;
+	__declspec(dllexport) bool getOnScreenArrows() const;
 	void setOnScreenArrows(bool bArrows);
-	DllExport int getTurn() const;
+	__declspec(dllexport) int getTurn() const;
 	void setTurn(int iTurn);
-	DllExport InterfaceMessageTypes getMessageType() const;
+	__declspec(dllexport) InterfaceMessageTypes getMessageType() const;
 	void setMessageType(InterfaceMessageTypes eType);
-	DllExport ChatTargetTypes getTarget() const;
-	DllExport void setTarget(ChatTargetTypes eType);
-	DllExport PlayerTypes getFromPlayer() const;
-	DllExport void setFromPlayer(PlayerTypes eFromPlayer);
-	DllExport bool getShown() const;
-	DllExport void setShown(bool bShown);
+	__declspec(dllexport) ChatTargetTypes getTarget() const;
+	__declspec(dllexport) void setTarget(ChatTargetTypes eType);
+	__declspec(dllexport) PlayerTypes getFromPlayer() const;
+	__declspec(dllexport) void setFromPlayer(PlayerTypes eFromPlayer);
+	__declspec(dllexport) bool getShown() const;
+	__declspec(dllexport) void setShown(bool bShown);
 
 	int getExpireTurn();
 
