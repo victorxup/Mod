@@ -8,16 +8,18 @@ pub fn main() !void {
 
     const writer = std.io.getStdOut().writer();
 
-    var args_iter = try std.process.argsWithAllocator(gpa);
-    defer args_iter.deinit();
-    _ = args_iter.next(); // argv[0] is the executable
-
-    try writer.writeAll("[");
-    while (args_iter.next()) |arg| {
+    var args = try std.process.argsAlloc(gpa);
+    defer std.process.argsFree(gpa, args);
+    try writer.writeAll("[\n");
+    for (args[1..], 1..) |arg, i| {
         const comp_db = try std.fs.cwd().readFileAlloc(gpa, arg, std.math.maxInt(usize));
         defer gpa.free(comp_db);
-        try writer.writeAll(comp_db);
-        try writer.writeAll(",");
+        if (i == args.len - 1) {
+            try writer.writeAll(comp_db[0 .. comp_db.len - 2]);
+            try writer.writeByte('\n');
+        } else {
+            try writer.writeAll(comp_db);
+        }
     }
     try writer.writeAll("]\n");
 }
